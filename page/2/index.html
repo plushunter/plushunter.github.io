@@ -283,364 +283,177 @@ actor:11,AS:12,restOfLine:13,signal:14,activate:15,deactivate:16,note_statement:
 
 
   
-    <article id="post-asset/mermaid" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-asset/style" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
-        /* Flowchart variables */
-/* Sequence Diagram variables */
-/* Gantt chart variables */
-.mermaid .label {
-  font-family: 'trebuchet ms', verdana, arial;
-  color: #333;
+        html,body{ font-family: "SF UI Display", ".PingFang SC","PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
+  font-size: 16px;
+  color:#222
+  -webkit-text-size-adjust:none;  min-width: 200px;
+  max-width: 760px;
+  margin: 0 auto; padding: 1rem;
+  line-height: 1.5rem;
+
 }
-.node rect,
-.node circle,
-.node ellipse,
-.node polygon {
-  fill: #cde498;
-  stroke: #13540c;
-  stroke-width: 1px;
+h1,h2,h3,h4,h5,h6{font-family: "PT Sans","SF UI Display", ".PingFang SC","PingFang SC", "Neue Haas Grotesk Text Pro", "Arial Nova", "Segoe UI", "Microsoft YaHei", "Microsoft JhengHei", "Helvetica Neue", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "Hiragino Sans GB", sans-serif;
+text-rendering:optimizelegibility;margin-bottom:1em;font-weight:bold; line-height: 1.8rem;
+
 }
-.edgePath .path {
-  stroke: green;
-  stroke-width: 1.5px;
+h1,h2{position:relative;padding-top:1rem;padding-bottom:0.2rem;margin-bottom:1rem;background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAABCAYAAACsXeyTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAFUlEQVQIHWNIS0sr/v//PwMMDzY+ADqMahlW4J91AAAAAElFTkSuQmCC') bottom left repeat-x;}
+h2{padding-top:0.8rem;padding-bottom:0.2rem;}
+h1{ font-size: 1.6rem;}
+h2{ font-size: 1.4rem;}
+h3{ font-size: 1.2rem;}
+h4{ font-size: 1.1rem;}
+h5{ font-size: 1.0rem;}
+h6{ font-size: 0.9rem;}
+
+table{border-collapse:collapse;border-spacing:0;
+  margin-top: 0.8rem;
+  margin-bottom: 1.4rem;
 }
-.edgeLabel {
-  background-color: #e8e8e8;
+tr{  background-color: #fff;
+  border-top: 1px solid #ccc;}
+th,td{padding: 5px 14px;
+  border: 1px solid #ddd;}
+
+blockquote{font-style:italic;font-size:1.1em;line-height:1.5em;padding-left:1em; border-left:4px solid #D5D5D5;    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 1.5rem; }
+
+a{color:#1863a1}
+
+pre,code,p code,li code{font-family:Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace}
+
+pre{-webkit-border-radius:0.4em;-moz-border-radius:0.4em;-ms-border-radius:0.4em;-o-border-radius:0.4em;border-radius:0.4em;border:1px solid #e7dec3;line-height:1.45em;font-size:0.9rem;margin-bottom:2.1em;padding:.8em 1em;color:#586e75;overflow:auto; background-color:#fdf6e3;}
+
+p code,li code{display:inline-block;white-space:no-wrap;background:#fff;font-size:0.9rem;line-height:1.5em;color:#555;border:1px solid #ddd;-webkit-border-radius:0.4em;-moz-border-radius:0.4em;-ms-border-radius:0.4em;-o-border-radius:0.4em;border-radius:0.4em;padding:0 .3em;margin:-1px 4px;}
+p pre code,li pre code{font-size:1em !important;background:none;border:none}
+
+img{max-width:100%;-webkit-border-radius:0.3em;-moz-border-radius:0.3em;-ms-border-radius:0.3em;-o-border-radius:0.3em;border-radius:0.3em;-webkit-box-shadow:rgba(0,0,0,0.15) 0 1px 4px;-moz-box-shadow:rgba(0,0,0,0.15) 0 1px 4px;box-shadow:rgba(0,0,0,0.15) 0 1px 4px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border:#fff 0.5em solid}
+
+
+hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
 }
-.cluster rect {
-  fill: #cdffb2 !important;
-  rx: 4  !important;
-  stroke: #6eaa49 !important;
-  stroke-width: 1px !important;
-}
-.cluster text {
-  fill: #333;
-}
-.actor {
-  stroke: #13540c;
-  fill: #cde498;
-}
-text.actor {
-  fill: black;
-  stroke: none;
-}
-.actor-line {
-  stroke: grey;
-}
-.messageLine0 {
-  stroke-width: 1.5;
-  stroke-dasharray: "2 2";
-  marker-end: "url(#arrowhead)";
-  stroke: #333;
-}
-.messageLine1 {
-  stroke-width: 1.5;
-  stroke-dasharray: "2 2";
-  stroke: #333;
-}
-#arrowhead {
-  fill: #333;
-}
-#crosshead path {
-  fill: #333 !important;
-  stroke: #333 !important;
-}
-.messageText {
-  fill: #333;
-  stroke: none;
-}
-.labelBox {
-  stroke: #326932;
-  fill: #cde498;
-}
-.labelText {
-  fill: black;
-  stroke: none;
-}
-.loopText {
-  fill: black;
-  stroke: none;
-}
-.loopLine {
-  stroke-width: 2;
-  stroke-dasharray: "2 2";
-  marker-end: "url(#arrowhead)";
-  stroke: #326932;
-}
-.note {
-  stroke: #6eaa49;
-  fill: #fff5ad;
-}
-.noteText {
-  fill: black;
-  stroke: none;
-  font-family: 'trebuchet ms', verdana, arial;
-  font-size: 14px;
-}
-/** Section styling */
-.section {
-  stroke: none;
-  opacity: 0.2;
-}
-.section0 {
-  fill: #6eaa49;
-}
-.section2 {
-  fill: #6eaa49;
-}
-.section1,
-.section3 {
-  fill: white;
-  opacity: 0.2;
-}
-.sectionTitle0 {
-  fill: #333;
-}
-.sectionTitle1 {
-  fill: #333;
-}
-.sectionTitle2 {
-  fill: #333;
-}
-.sectionTitle3 {
-  fill: #333;
-}
-.sectionTitle {
-  text-anchor: start;
-  font-size: 11px;
-  text-height: 14px;
-}
-/* Grid and axis */
-.grid .tick {
-  stroke: lightgrey;
-  opacity: 0.3;
-  shape-rendering: crispEdges;
-}
-.grid path {
-  stroke-width: 0;
-}
-/* Today line */
-.today {
-  fill: none;
-  stroke: red;
-  stroke-width: 2px;
-}
-/* Task styling */
-/* Default task */
-.task {
-  stroke-width: 2;
-}
-.taskText {
-  text-anchor: middle;
-  font-size: 11px;
-}
-.taskTextOutsideRight {
-  fill: black;
-  text-anchor: start;
-  font-size: 11px;
-}
-.taskTextOutsideLeft {
-  fill: black;
-  text-anchor: end;
-  font-size: 11px;
-}
-/* Specific task settings for the sections*/
-.taskText0,
-.taskText1,
-.taskText2,
-.taskText3 {
-  fill: white;
-}
-.task0,
-.task1,
-.task2,
-.task3 {
-  fill: #487e3a;
-  stroke: #13540c;
-}
-.taskTextOutside0,
-.taskTextOutside2 {
-  fill: black;
-}
-.taskTextOutside1,
-.taskTextOutside3 {
-  fill: black;
-}
-/* Active task */
-.active0,
-.active1,
-.active2,
-.active3 {
-  fill: #cde498;
-  stroke: #13540c;
-}
-.activeText0,
-.activeText1,
-.activeText2,
-.activeText3 {
-  fill: black !important;
-}
-/* Completed task */
-.done0,
-.done1,
-.done2,
-.done3 {
-  stroke: grey;
-  fill: lightgrey;
-  stroke-width: 2;
-}
-.doneText0,
-.doneText1,
-.doneText2,
-.doneText3 {
-  fill: black !important;
-}
-/* Tasks on the critical line */
-.crit0,
-.crit1,
-.crit2,
-.crit3 {
-  stroke: #ff8888;
-  fill: red;
-  stroke-width: 2;
-}
-.activeCrit0,
-.activeCrit1,
-.activeCrit2,
-.activeCrit3 {
-  stroke: #ff8888;
-  fill: #cde498;
-  stroke-width: 2;
-}
-.doneCrit0,
-.doneCrit1,
-.doneCrit2,
-.doneCrit3 {
-  stroke: #ff8888;
-  fill: lightgrey;
-  stroke-width: 2;
-  cursor: pointer;
-  shape-rendering: crispEdges;
-}
-.doneCritText0,
-.doneCritText1,
-.doneCritText2,
-.doneCritText3 {
-  fill: black !important;
-}
-.activeCritText0,
-.activeCritText1,
-.activeCritText2,
-.activeCritText3 {
-  fill: black !important;
-}
-.titleText {
-  text-anchor: middle;
-  font-size: 18px;
-  fill: black;
-}
+
+
 /*
 
+Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmail.com>
 
 */
-g.classGroup text {
-  fill: #13540c;
-  stroke: none;
-  font-family: 'trebuchet ms', verdana, arial;
-  font-size: 14px;
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #fdf6e3;
+  color: #657b83;
+  -webkit-text-size-adjust: none;
 }
-g.classGroup rect {
-  fill: #cde498;
-  stroke: #13540c;
+
+.hljs-comment,
+.diff .hljs-header,
+.hljs-doctype,
+.hljs-pi,
+.lisp .hljs-string {
+  color: #93a1a1;
 }
-g.classGroup line {
-  stroke: #13540c;
-  stroke-width: 1;
+
+/* Solarized Green */
+.hljs-keyword,
+.hljs-winutils,
+.method,
+.hljs-addition,
+.css .hljs-tag,
+.hljs-request,
+.hljs-status,
+.nginx .hljs-title {
+  color: #859900;
 }
-svg .classLabel .box {
-  stroke: none;
-  stroke-width: 0;
-  fill: #cde498;
-  opacity: 0.5;
+
+/* Solarized Cyan */
+.hljs-number,
+.hljs-command,
+.hljs-string,
+.hljs-tag .hljs-value,
+.hljs-rule .hljs-value,
+.hljs-doctag,
+.tex .hljs-formula,
+.hljs-regexp,
+.hljs-hexcolor,
+.hljs-link_url {
+  color: #2aa198;
 }
-svg .classLabel .label {
-  fill: #13540c;
+
+/* Solarized Blue */
+.hljs-title,
+.hljs-localvars,
+.hljs-chunk,
+.hljs-decorator,
+.hljs-built_in,
+.hljs-identifier,
+.vhdl .hljs-literal,
+.hljs-id,
+.css .hljs-function,
+.hljs-name {
+  color: #268bd2;
 }
-.relation {
-  stroke: #13540c;
-  stroke-width: 1;
-  fill: none;
+
+/* Solarized Yellow */
+.hljs-attribute,
+.hljs-variable,
+.lisp .hljs-body,
+.smalltalk .hljs-number,
+.hljs-constant,
+.hljs-class .hljs-title,
+.hljs-parent,
+.hljs-type,
+.hljs-link_reference {
+  color: #b58900;
 }
-.composition {
-  fill: #13540c;
-  stroke: #13540c;
-  stroke-width: 1;
+
+/* Solarized Orange */
+.hljs-preprocessor,
+.hljs-preprocessor .hljs-keyword,
+.hljs-pragma,
+.hljs-shebang,
+.hljs-symbol,
+.hljs-symbol .hljs-string,
+.diff .hljs-change,
+.hljs-special,
+.hljs-attr_selector,
+.hljs-subst,
+.hljs-cdata,
+.css .hljs-pseudo,
+.hljs-header {
+  color: #cb4b16;
 }
-#compositionStart {
-  fill: #13540c;
-  stroke: #13540c;
-  stroke-width: 1;
+
+/* Solarized Red */
+.hljs-deletion,
+.hljs-important {
+  color: #dc322f;
 }
-#compositionEnd {
-  fill: #13540c;
-  stroke: #13540c;
-  stroke-width: 1;
+
+/* Solarized Violet */
+.hljs-link_label {
+  color: #6c71c4;
 }
-.aggregation {
-  fill: #cde498;
-  stroke: #13540c;
-  stroke-width: 1;
+
+.tex .hljs-formula {
+  background: #eee8d5;
 }
-#aggregationStart {
-  fill: #cde498;
-  stroke: #13540c;
-  stroke-width: 1;
-}
-#aggregationEnd {
-  fill: #cde498;
-  stroke: #13540c;
-  stroke-width: 1;
-}
-#dependencyStart {
-  fill: #13540c;
-  stroke: #13540c;
-  stroke-width: 1;
-}
-#dependencyEnd {
-  fill: #13540c;
-  stroke: #13540c;
-  stroke-width: 1;
-}
-#extensionStart {
-  fill: #13540c;
-  stroke: #13540c;
-  stroke-width: 1;
-}
-#extensionEnd {
-  fill: #13540c;
-  stroke: #13540c;
-  stroke-width: 1;
-}
-.node text {
-  font-family: 'trebuchet ms', verdana, arial;
-  font-size: 14px;
-}
-div.mermaidTooltip {
-  position: absolute;
-  text-align: center;
-  max-width: 200px;
-  padding: 2px;
-  font-family: 'trebuchet ms', verdana, arial;
-  font-size: 12px;
-  background: #cdffb2;
-  border: 1px solid #6eaa49;
-  border-radius: 2px;
-  pointer-events: none;
-  z-index: 100;
-}
+
+</sourdrums@gmail.com>
       
 
       
