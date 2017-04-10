@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="//litten.me">
+  <title>Litten的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="$(document).ready(function(){    plantuml_runonce(); });    function encode64(data) {  r = &quot;&quot;;  for (i=0; i&amp;gt; 2; c2 = ((b1 &amp; 0x3) &amp;gt; 4); c3 = ((b2 &amp; 0xF) &amp;gt; 6); c4 = b3 &amp; 0x3F; r = &quot;&quot;; r += encode6bit(c1">
+<meta name="keywords">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Litten的博客">
+<meta property="og:url" content="//litten.me/2016/10/06/asset/jquery_plantuml/jquery_plantuml/index.html">
+<meta property="og:site_name" content="Litten的博客">
+<meta property="og:description" content="$(document).ready(function(){    plantuml_runonce(); });    function encode64(data) {  r = &quot;&quot;;  for (i=0; i&amp;gt; 2; c2 = ((b1 &amp; 0x3) &amp;gt; 4); c3 = ((b2 &amp; 0xF) &amp;gt; 6); c4 = b3 &amp; 0x3F; r = &quot;&quot;; r += encode6bit(c1">
+<meta property="og:updated_time" content="2016-10-06T09:02:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Litten的博客">
+<meta name="twitter:description" content="$(document).ready(function(){    plantuml_runonce(); });    function encode64(data) {  r = &quot;&quot;;  for (i=0; i&amp;gt; 2; c2 = ((b1 &amp; 0x3) &amp;gt; 4); c3 = ((b2 &amp; 0xF) &amp;gt; 6); c4 = b3 &amp; 0x3F; r = &quot;&quot;; r += encode6bit(c1">
+  
+    <link rel="alternative" href="/atom.xml" title="Litten的博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/main.css?v=4.0.0">
+  
+
+</head>
+
+<body>
+  <div id="container" q-class="show:isCtnShow">
+    <canvas id="anm-canvas" class="anm-canvas"></canvas>
+    <div class="left-col" q-class="show:isShow">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			<img src="/img/v.png" class="js-avatar">
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Litten</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">胆小认生，不易相处</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/photos">相册</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a data-idx="0" q-on="click: openSlider(e, 'innerArchive')" href="javascript:void(0)">文</a>
+    			
+    			
+            
+    			
+            
+    			
+    			<a data-idx="1" q-on="click: openSlider(e, 'aboutme')" href="javascript:void(0)">我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhang-hua-28-4/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+		        
+					<a class="mail" target="_blank" href="mailto:zhanghua0124@ruc.edu.cn" title="mail"><i class="icon-mail"></i></a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-sort"></i></div>
+  		<h1 class="header-author js-mobile-header hide">Litten</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img src="/img/v.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Litten</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">胆小认生，不易相处</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/photos">相册</a></li>
+		        
+		        
+		        	<li><a href="/archives/">文</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/zhang-hua-28-4/activities" title="zhihu"><i class="icon-zhihu"></i></a>
+			        
+						<a class="mail" target="_blank" href="mailto:zhanghua0124@ruc.edu.cn" title="mail"><i class="icon-mail"></i></a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div id="wrapper" class="body-wrap">
+        <div class="menu-l">
+          <div class="canvas-wrap">
+            <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
+          </div>
+          <div id="js-content" class="content-ll">
+            <article id="post-asset/jquery_plantuml/jquery_plantuml" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        $(document).ready(function(){
+   plantuml_runonce();
+});
+
+<!--  taken from https://github.com/johan/js-deflate -->
+
+function encode64(data) {
+ r = "";
+ for (i=0; i<data.length; i+="3)" {="" if="" (i+2="=data.length)" r="" +="append3bytes(data.charCodeAt(i)," data.charcodeat(i+1),="" 0);="" }="" else="" (i+1="=data.length)" 0,="" data.charcodeat(i+2));="" return="" r;="" function="" append3bytes(b1,="" b2,="" b3)="" c1="b1">> 2;
+c2 = ((b1 & 0x3) << 4) | (b2 >> 4);
+c3 = ((b2 & 0xF) << 2) | (b3 >> 6);
+c4 = b3 & 0x3F;
+r = "";
+r += encode6bit(c1 & 0x3F);
+r += encode6bit(c2 & 0x3F);
+r += encode6bit(c3 & 0x3F);
+r += encode6bit(c4 & 0x3F);
+return r;
+}
+
+function encode6bit(b) {
+if (b < 10) {
+ return String.fromCharCode(48 + b);
+}
+b -= 10;
+if (b < 26) {
+ return String.fromCharCode(65 + b);
+}
+b -= 26;
+if (b < 26) {
+ return String.fromCharCode(97 + b);
+}
+b -= 26;
+if (b == 0) {
+ return '-';
+}
+if (b == 1) {
+ return '_';
+}
+return '?';
+}
+
+var deflater = window.SharedWorker && new SharedWorker('rawdeflate.js');
+if (deflater) {
+  deflater.port.addEventListener('message', done_deflating, false);
+  deflater.port.start();
+} else if (window.Worker) {
+  deflater = new Worker('rawdeflate.js');
+  deflater.onmessage = done_deflating;
+}
+
+function done_deflating(e) {
+var done = 0;
+$("img").each(function () {
+  if (done==1) return;
+  var u1 = $(this).attr("src");
+  if (u1!=null) return;
+  var u2 = $(this).attr("uml");
+  if (u2=="") return;
+  $(this).attr("src", "http://www.plantuml.com/plantuml/img/"+encode64(e.data));
+  $(this).attr("uml", "");
+  done = 1;
+});
+plantuml_runonce();
+}
+
+function plantuml_runonce() {
+var done = 0;
+$("img").each(function () {
+  if (done==1) return;
+  var u1 = $(this).attr("src");
+  if (u1!=null) return;
+  var u2 = $(this).attr("uml");
+  if (u2=="") return;
+  var s = unescape(encodeURIComponent(u2));
+  if (deflater) {
+    if (deflater.port && deflater.port.postMessage) {
+      deflater.port.postMessage(s);
+    } else {
+      deflater.postMessage(s);
+    }
+  } else {
+    setTimeout(function() {
+      done_deflating({ data: deflate(s) });
+    }, 100);
+  }
+  done = 1;
+});
+}
+</data.length;>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2016/10/06/asset/jquery_plantuml/encode64/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/10/06/asset/jquery_plantuml/example/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="asset/jquery_plantuml/jquery_plantuml" data-title="" data-url="//litten.me/2016/10/06/asset/jquery_plantuml/jquery_plantuml/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"plushuner"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+          </div>
+        </div>
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 Litten
+    	</div>
+      	<div class="footer-right">
+      		 Stay Hungry, Stay Foolish.
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		mathjax: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js?v=4.0.0"></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+    
+<div class="tools-col" q-class="show:isShow,hide:isShow|isFalse" q-on="click:stop(e)">
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all" q-show="innerArchive">
+        <div class="search-wrap">
+          <input class="search-ipt" q-model="search" type="text" placeholder="find something…">
+          <i class="icon-search icon" q-show="search|isEmptyStr"></i>
+          <i class="icon-close icon" q-show="search|isNotEmptyStr" q-on="click:clearChose(e)"></i>
+        </div>
+        <div class="widget tagcloud search-tag">
+          <p class="search-tag-wording">tag:</p>
+          <label class="search-switch">
+            <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
+          </label>
+          <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)">红楼记事</a>
+              </li>
+            
+            <div class="clearfix"></div>
+          </ul>
+        </div>
+        <ul class="search-ul">
+          <p q-show="jsonFail" style="padding: 20px; font-size: 12px;">
+            缺失模块。<br/>1、在博客根目录（注意不是yilia根目录）执行以下命令：<br/> npm i hexo-generator-json-content --save<br/><br/>
+            2、在根目录_config.yml里添加配置：
+<pre style="font-size: 12px;" q-show="jsonFail">
+  jsonContent:
+    meta: false
+    pages: false
+    posts:
+      title: true
+      date: true
+      path: true
+      text: true
+      raw: false
+      content: false
+      slug: false
+      updated: false
+      comments: false
+      link: false
+      permalink: false
+      excerpt: false
+      categories: false
+      tags: true
+</pre>
+          </p>
+          <li class="search-li" q-repeat="items" q-show="isShow">
+            <a q-attr="href:path|urlformat" class="search-title"><i class="icon-quo-left icon"></i><span q-text="title"></span></a>
+            <p class="search-time">
+              <i class="icon-calendar icon"></i>
+              <span q-text="date|dateformat"></span>
+            </p>
+            <p class="search-tag">
+              <i class="icon-price-tags icon"></i>
+              <span q-repeat="tags" q-on="click:choseTag(e, name)" q-text="name|tagformat"></span>
+            </p>
+          </li>
+        </ul>
+    	</section>
+    
+
+    
+
+    
+    	<section class="tools-section tools-section-me" q-show="aboutme">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">花旗先生&lt;br&gt;RUC就读 | 机器学习&lt;br&gt;&lt;br&gt;我的灵魂躺在书页里&lt;br&gt;等待着随便哪种未来&lt;br/&gt;&lt;br/&gt;她的灵魂立在舞台旁边&lt;br&gt;光线黯淡处愈发闪亮</div>
+  	  	
+    	</section>
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
