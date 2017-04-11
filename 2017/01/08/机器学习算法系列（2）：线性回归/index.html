@@ -1,0 +1,742 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习,线性回归," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、线性回归模型线性回归假设特征和结果满足线性关系。其实线性关系的表达能力非常强大，每个特征对结果的影响强弱可以由前面的参数体现，而且每个特征变量可以首先映射到一个函数，然后再参与线性计算。这样就可以表达特征与结果之间的非线性关系。">
+<meta name="keywords" content="机器学习,线性回归">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法系列（2）：线性回归">
+<meta property="og:url" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="一、线性回归模型线性回归假设特征和结果满足线性关系。其实线性关系的表达能力非常强大，每个特征对结果的影响强弱可以由前面的参数体现，而且每个特征变量可以首先映射到一个函数，然后再参与线性计算。这样就可以表达特征与结果之间的非线性关系。">
+<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.02.35.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.03.23.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.36.09.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.40.55.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.43.06.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.51.43.png">
+<meta property="og:updated_time" content="2017-04-11T10:40:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习算法系列（2）：线性回归">
+<meta name="twitter:description" content="一、线性回归模型线性回归假设特征和结果满足线性关系。其实线性关系的表达能力非常强大，每个特征对结果的影响强弱可以由前面的参数体现，而且每个特征变量可以首先映射到一个函数，然后再参与线性计算。这样就可以表达特征与结果之间的非线性关系。">
+<meta name="twitter:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.02.35.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 机器学习算法系列（2）：线性回归 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习算法系列（2）：线性回归
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-08T23:14:45+08:00">
+                2017-01-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、线性回归模型"><a href="#一、线性回归模型" class="headerlink" title="一、线性回归模型"></a>一、线性回归模型</h2><p>线性回归假设特征和结果满足线性关系。其实线性关系的表达能力非常强大，每个特征对结果的影响强弱可以由前面的参数体现，而且每个特征变量可以首先映射到一个函数，然后再参与线性计算。这样就可以表达特征与结果之间的非线性关系。</p>
+<a id="more"></a>
+<p>我们可以有这样的模型表达：<br>$$y=\theta_0+\theta_1x_1+\theta_2x_2+···+\theta_nx_n$$<br>其中，$x_1,x_2,···,x_n$表示自变量（特征分量），$y$表示因变量，$\theta_i$表示对应自变量（特征）的权重，$\theta_0$是偏倚项（又称为截距）。</p>
+<p>对于参数$\theta$，在物理上可以解释为：在自变量（特征）之间相互独立的前提下，$\theta_i$反映自变量$x_i$对因变量$y$的影响程度，$\theta_i$越大，说明$x_i$对结果$y$的影响越大。因此，我们可以通过每个自变量（特征）前面的参数，可以很直观的看出那些特征分量对结果的影响比较大。</p>
+<p>如果令$x_0=1,y=h_\theta{(x)}$，可以将上述模型写成向量形式，即：<br>$$<br>h_\theta\left(x\right)=\sum_{i=0}^n{\theta_ix_i}=\theta^Tx<br>$$其中$\theta=(\theta_0,\theta_1,···,\theta_n)，x=(1,x_1,x_2,···,x_n)$均为向量，$\theta^T$为$\theta$的转置。</p>
+<p>在上述公式中，假设特征空间与输入空间$x$相同。准确地讲，模型表达式要建立的是特征空间与结果之间的关系。在一些应用场合中，需要将输入空间映射到特征空间中，然后建模，定义映射函数为$\varPhi\left(x\right)$，因此我们可以把公式写成更通用的表达公式：$$<br>h_\theta\left(x\right)=\theta^T\varPhi\left(x\right)<br>$$特征映射相关技术，包括特征哈希、特征学习、$Kernel$等。</p>
+<h2 id="二、目标函数"><a href="#二、目标函数" class="headerlink" title="二、目标函数"></a>二、目标函数</h2><h4 id="2-1-目标函数"><a href="#2-1-目标函数" class="headerlink" title="2.1 目标函数"></a>2.1 目标函数</h4><p>上面的公式的参数向量$\theta$是$n+1$维的，每个参数的取值是实数集合，也就是说参数向量$\theta$在$n+1$维实数空间中取值结果有无穷种可能。</p>
+<p>那么，如何利用一个规则或机制帮助我们评估求得的参数$\theta$，并且使得线性模型效果最佳呢？直观地认为，如果求得参数$\theta$线性求和后，得到的结果$h_\theta{(x)}$与真实值$y$之差越小越好。</p>
+<p>这时我们需要映入一个函数来衡量$h_\theta{(x)}$表示真实值$y$好坏的程度，该函数称为损失函数（loss function，也称为错误函数）。数学表示如下：$$<br>J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^n{\left(\left(h_\theta\left(x^{\left(i\right)}\right)-y^{\left(i\right)}\right)\right)^2}<br>$$$$<br>\min_\theta J\left(\theta\right)<br>$$这个损失函数用的是$x^{(i)}$的预测值$h_\theta{(x^{(i)})}$与真实值$y^{(i)}$之差的平方和。如果不考虑诸如过拟合等其他问题，这就是我们需要优化的目标函数。</p>
+<h4 id="2-2-目标函数的概率解释"><a href="#2-2-目标函数的概率解释" class="headerlink" title="2.2 目标函数的概率解释"></a>2.2 目标函数的概率解释</h4><p>一般地，机器学习中不同的模型会有相应的目标函数。而回归模型（尤其是线性回归类）的目标函数通常用平方损失函数来作为优化的目标函数（即真实值与预测值之差的平方和）。为什么要选用误差平方和作为目标函数呢？答案可以从概率论中的中心极限定理、高斯分布等知识中找到。</p>
+<h5 id="2-2-1-中心极限定理"><a href="#2-2-1-中心极限定理" class="headerlink" title="2.2.1 中心极限定理"></a>2.2.1 中心极限定理</h5><p>目标函数的概率解释需要用到中心极限定理。中心极限定理本身就是研究独立随机变量和的极限分布为正态分布的问题。</p>
+<p><strong>中心极限定理的公式表示为：</strong><br>设$n$个随机变量$X_1,X_2,···,X_n$相互独立，均具有相同的数学期望与方差，即$E(X_i)=\mu ;D(X_i)=\sigma^2$，令$Y_n$为随机变量之和，有<br>$$Y_n=X_1+X_2+···+X_n$$$$<br>Z_n=\frac{Y_n-E\left(Y_n\right)}{\sqrt{D\left(Y_n\right)}}=\frac{Y_n-n\mu}{\sqrt{n}\sigma}\rightarrow N\left(0,1\right)<br>$$称随机变量$Z_n$为$n$个随机变量$X_1,X_2,···,X_n$的规范和。</p>
+<p><strong>它的定义为：</strong><br>设从均值为$\mu$、方差为$\sigma^2$（有限）的任意一个总体中抽取样本量为$n$的样本，当$n$充分大时，样本均值的抽样分布$\frac{Y_n}{n}$近似服从于均值为$\mu$、方差为$\sigma^2$的正态分布。</p>
+<h5 id="2-2-2-高斯分布"><a href="#2-2-2-高斯分布" class="headerlink" title="2.2.2 高斯分布"></a>2.2.2 高斯分布</h5><p>假设给定一个输入样例$x^{(i)}$根据公式得到预测值$\theta^Tx^{(i)}$与真实值$y^{(i)}$之间存在误差，即为$\varepsilon^{\left(i\right)}$。那么，它们之间的关系表示如下：$$<br>y^{\left(i\right)}=\theta^Tx^{\left(i\right)}+\varepsilon^{\left(i\right)}<br>$$而这里假设误差$\varepsilon^{\left(i\right)}$服从标准高斯分布是合理的。</p>
+<p><strong>解释如下：</strong></p>
+<p>回归模型的最终目标是通过函数表达式建立自变量$x$与结果$y$之间的关系，希望通过$x$能较为准确地表示结果$y$。而在实际的应用场合中，很难甚至不可能把导致$y$的所有变量（特征）都找出来，并放到回归模型中。那么模型中存在的$x$通常认为是影响结果$y$最主要的变量集合（又称为因子，在ML中称为特征集）。根据中心极限定理，把那些对结果影响比较小的变量（假设独立同分布）之和认为服从正态分布是合理的。</p>
+<p>可以用一个示例来说明误差服从高斯分布是合理的：</p>
+<p>$Andrew Ng$的课程中第一节线性回归的例子中，根据训练数据建立房屋的面积$x$与房屋的售价$y$之间的函数表达。<br>它的数据集把房屋面积作为最为主要的变量。除此之外我们还知道房屋所在的地段（地铁、学区、城区、郊区），周边交通状况，当地房价、楼层、采光、绿化面积等等诸多因素会影响房价。</p>
+<p>实际上，因数据收集问题可能拿不到所有影响房屋售价的变量，可以假设多个因素变量相互独立，根据中心极限定理，认为变量之和服从高斯分布。即：$$<br>\epsilon^{\left(i\right)}=y^{\left(i\right)}-\theta^Tx^{\left(i\right)}<br>$$<br>那么$x$和$y$的条件概率可表示为：$$<br>p\left(y^{\left(i\right)}|x^{\left(i\right)};\theta\right)=\frac{1}{\sqrt{2\pi}\sigma}\exp\left(-\frac{\left(y^{\left(i\right)}-\theta^Tx^{\left(i\right)}\right)^2}{2\sigma^2}\right)<br>$$</p>
+<h5 id="2-2-3-极大似然估计与损失函数极小化等价"><a href="#2-2-3-极大似然估计与损失函数极小化等价" class="headerlink" title="2.2.3 极大似然估计与损失函数极小化等价"></a>2.2.3 极大似然估计与损失函数极小化等价</h5><p>根据上述公式估计得到一条样本的结果概率，模型的最终目标是希望在全部样本上预测最准，也就是概率积最大，这个概率积就是似然函数。优化的目标函数即为似然函数，表示如下：$$<br>\max_\theta L\left(\theta\right)=\prod_{i=1}^m{\frac{1}{\sqrt{2\pi}\sigma}}\exp\left(-\frac{\left(y^{\left(i\right)}-\theta^Tx^{\left(i\right)}\right)^2}{2\sigma^2}\right)<br>$$对$L(x)$取对数，可得对数似然函数：$$<br>\max_\theta l\left(\theta\right)=-m\log\sqrt{2\pi}\sigma -\frac{1}{2\sigma^2}\sum_{i=1}^m{\left(y^{\left(i\right)}-\theta^Tx^{\left(i\right)}\right)^2}<br>$$由于$n,\sigma$都为常数，因此上式等价于$$<br>\min_\theta\frac{1}{2}\sum_{i=1}^m{\left(y^{\left(i\right)}-\theta^Tx^{\left(i\right)}\right)^2}<br>$$我们可以发现，经过最大似然估计推导出来的待优化的目标函数与平方损失函数是等价的。因此可以得出结论：</p>
+<p>线性回归误差平方损失极小化与极大似然估计等价。其实在概率模型中，目标函数的原函数（或对偶函数）极小化（或极大化）与极大似然估计等价，这是一个带有普遍性的结论。比如在最大熵模型中，有对偶函数极大化与极大似然估计等价的结论。</p>
+<p>那上面为什么是条件概率$p(y|x;\theta)$呢？因为我们希望预测值与真实值更接近，这就意味着希望求出来的参数$\theta$，在给定输入$x$的情况下，得到的预测值等于真实值得可能性越大越好。而$\theta$，$x$均为前提条件，因此用条件概率$p(y|x;\theta)$表示。即$p(y|x;\theta)$越大，越能说明估计的越准确。当然也不能一味地只有该条件函数，还要考虑拟合过度以及模型的泛化能力问题。</p>
+<h2 id="三、参数估计"><a href="#三、参数估计" class="headerlink" title="三、参数估计"></a>三、参数估计</h2><p>如何调整参数$\theta$使得$J(\theta)$取得最小值？方法有很多，这里介绍几种比较经典的方法，即最小二乘法、梯度下降法以及牛顿法。</p>
+<h4 id="3-1-最小二乘法"><a href="#3-1-最小二乘法" class="headerlink" title="3.1 最小二乘法"></a>3.1 最小二乘法</h4><h5 id="3-1-1-目标函数的矩阵形式"><a href="#3-1-1-目标函数的矩阵形式" class="headerlink" title="3.1.1 目标函数的矩阵形式"></a>3.1.1 目标函数的矩阵形式</h5><p>将$m$个$n$维样本组成矩阵$X$：$$<br>\left(\begin{matrix}<br>    1&amp;        x_{1}^{\left(1\right)}&amp;        x_{1}^{\left(2\right)}&amp;        ···&amp;        x_{1}^{\left(n\right)}\\<br>    1&amp;        x_{2}^{\left(1\right)}&amp;        x_{2}^{\left(2\right)}&amp;        ···&amp;        x_{2}^{\left(n\right)}\\<br>    ···&amp;        ···&amp;        ···&amp;        &amp;        \\<br>    1&amp;        x_{m}^{\left(1\right)}&amp;        x_{m}^{\left(2\right)}&amp;        ···&amp;        x_{m}^{\left(n\right)}\\<br>\end{matrix}\right)<br>$$则目标函数的矩阵形式为$$<br>J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\right)}\right)-y^{\left(i\right)}\right)^2}=\frac{1}{2}\left(X\theta -y\right)^T\left(X\theta -y\right)<br>$$</p>
+<h5 id="3-1-2-最小二乘法求解"><a href="#3-1-2-最小二乘法求解" class="headerlink" title="3.1.2 最小二乘法求解"></a>3.1.2 最小二乘法求解</h5><p>对$\theta$求导，梯度（矩阵求导）：$$<br>\nabla_\theta J\left(\theta\right)=\nabla_\theta\left(\frac{1}{2}\left(X\theta-y\right)^T\left(X\theta-y\right)\right)<br>$$$$<br>=\nabla_\theta\left(\frac{1}{2}\left(\theta^TX^TX\theta-\theta^TX^Ty-y^Ty\right)\right)<br>$$$$<br>=\frac{1}{2}\left(2X^TX\theta-X^Ty-\left(y^TX\right)^T\right)<br>$$$$<br>=X^TX\theta-X^Ty<br>$$令其为零，求得驻点：$$<br>\theta=\left(X^TX\right)^{-1}X^Ty<br>$$</p>
+<h4 id="3-2-梯度下降法"><a href="#3-2-梯度下降法" class="headerlink" title="3.2 梯度下降法"></a>3.2 梯度下降法</h4><p>梯度下降法是按下面的流程进行的：</p>
+<ul>
+<li>1）首先对$\theta$赋值，这个值可以是随机的，也可是让$\theta$是一个全零的向量；</li>
+<li>2）改变$\theta$的值，使得$J(\theta)$按梯度下降的方向进行减少。</li>
+</ul>
+<p>为了更清楚，给出下面的图：</p>
+<center><img src="media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.02.35.png" alt="屏幕快照 2017-04-04 下午6.02.35"></center>
+
+<p>这是一个表示参数$\theta$与目标函数$J(\theta)$的关系图，红色的部分是表示$J(\theta)$有比较高的取值，我们需要的是，能够让$J(\theta)$的值尽量的低。也就是深蓝色的部分。$\theta_0$和$\theta_1$表示$\theta$向量的两个维度。</p>
+<p>在上面提到梯度下降法的第一步是给$\theta$一个初值，假设随机给的初值是在图上的十字点。然后我们将$\theta$按照梯度下降的方向进行调整，就会使得$J(\theta)$往更低的方向进行变化，如图所示，算法的结束将是在$\theta$下降到无法继续下降为止。</p>
+<p>当然，可能梯度下降的最终点并非是全局最小点，可能是一个局部最小点，比如下面这张图中描述的就是一个局部最小点，这是我们重新选择了一个初始点得到的，看来我们这个算法会在很大程度上被初始点的选择影响而陷入局部最小点。</p>
+<center><img src="media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.03.23.png" alt="屏幕快照 2017-04-04 下午6.03.23"></center>
+
+
+<p>下面对于目标函数$J(\theta)$求偏导数：$$<br>\frac{\partial}{\partial\theta_j}J\left(\theta\right)=\frac{\partial}{\partial\theta_j}\frac{1}{2}\left(h_{\theta}\left(x\right)-y\right)^2<br>$$$$<br>=2·\frac{1}{2}\left(h_{\theta}\left(x\right)-y\right)\frac{\partial}{\partial\theta_j}\left(h_{\theta}\left(x\right)-y\right)<br>$$$$<br>=\left(h_{\theta}\left(x\right)-y\right)x_j<br>$$</p>
+<p>下面是更新的过程，也就是$\theta_i$会向着梯度最小的方向进行减少。$\theta$表示更新之前的值，$a$表示步长，也就是每次按照梯度减少的方向变化多少，由于求得是极小值，因此梯度方向是偏导数的反方向，结果为$$<br>\theta :=\theta_j+a\left(h_{\theta}\left(x\right)-y\right)x_j<br>$$一个很重要的地方值得注意的是，梯度是有方向的，对于一个向量$\theta$，每一维分量$\theta_i$都可以求出一个梯度的方向，我们就可以找到一个整体的方向，在变化的时候，我们就朝着下降最多的方向进行变化就可以达到一个最小点，不管他是全局的还是局部的。</p>
+<p>在对目标函数$J(\theta)$求偏导时，可以用更简单的数学语言（倒三角表示梯度）进行描述：$$<br>\nabla_{\theta}J=\left[\begin{array}{c}<br>    \frac{\partial}{\partial\theta_0}J\\<br>    ···\\<br>    ···\\<br>    \frac{\partial}{\partial\theta_n}J\\<br>\end{array}\right]<br>$$$$<br>\theta :=\theta +a\nabla_{\theta}J<br>$$<br>将梯度下降法应用到线性回归有三种方式：批处理梯度下降法、随机梯度下降法。</p>
+<h5 id="3-2-1-批量梯度下降法（BGD）"><a href="#3-2-1-批量梯度下降法（BGD）" class="headerlink" title="3.2.1 批量梯度下降法（BGD）"></a>3.2.1 批量梯度下降法（BGD）</h5><center><img src="media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.36.09.png" alt="屏幕快照 2017-04-04 下午6.36.09"></center><br>可以看出，参数$\theta$的值每更新一次都要遍历样本集中的所有的样本，得到新的$\theta_j$，看是否满足阈值要求，若满足，则迭代结束，根据此值就可以得到；否则继续迭代。注意到，虽然梯度下降法易受到极小值的影响，但是一般的线性规划问题只有一个极小值，所以梯度下降法一般可以收敛到全局的最小值。例如，$J$是二次凸函数，则梯度下降法的示意图为：<center><img src="media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.40.55.png" alt="屏幕快照 2017-04-04 下午6.40.55"></center><br>图中，一圈上表示目标函数的函数值类似于地理上的等高线，从外圈开始逐渐迭代，最终收敛全局最小值。<br>##### 3.2.2 随机梯度下降算法（SGD）<br><img src="media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.43.06.png" alt="屏幕快照 2017-04-04 下午6.43.06"><br>在这个算法中，我们每次更新只用到一个训练样本，若根据当前严格不能进行迭代得到一个，此时会得到一个，有新样本进来之后，在此基础上继续迭代，又得到一组新的和，以此类推。<br><center><img src="media/14912746290596/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.51.43.png" alt="屏幕快照 2017-04-04 下午6.51.43"></center>
+
+
+<p>批量梯度下降法，每更新一次，需要用到样本集中的所有样本；随机梯度下降法，每更新一次，只用到训练集中的一个训练样本，所以一般来说，随机梯度下降法能更快地使目标函数达到最小值（新样本的加入，随机梯度下降法有可能会使目标函数突然变大，迭代过程中在变小。所以是在全局最小值附近徘徊，但对于实际应用俩说，误差完全能满足要求）。另外，对于批量梯度下降法，如果样本集增加了一些训练样本，就要重新开始迭代。由于以上原因，当训练样本集较大时，一般使用随机梯度下降法。</p>
+<h2 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h2><p><a href="http://www.cnblogs.com/jerrylead/archive/2011/03/05/1971867.html" target="_blank" rel="external"><code>对线性回归，logistic回归和一般回归的认识</code></a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/线性回归/" rel="tag"># 线性回归</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/10/离别/" rel="next" title="离别记">
+                <i class="fa fa-chevron-left"></i> 离别记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/05/机器学习算法系列（1）：K近邻/" rel="prev" title="机器学习算法系列（1）：K近邻">
+                机器学习算法系列（1）：K近邻 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、线性回归模型"><span class="nav-text">一、线性回归模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、目标函数"><span class="nav-text">二、目标函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-目标函数"><span class="nav-text">2.1 目标函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-目标函数的概率解释"><span class="nav-text">2.2 目标函数的概率解释</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-中心极限定理"><span class="nav-text">2.2.1 中心极限定理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-高斯分布"><span class="nav-text">2.2.2 高斯分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-极大似然估计与损失函数极小化等价"><span class="nav-text">2.2.3 极大似然估计与损失函数极小化等价</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、参数估计"><span class="nav-text">三、参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-最小二乘法"><span class="nav-text">3.1 最小二乘法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-目标函数的矩阵形式"><span class="nav-text">3.1.1 目标函数的矩阵形式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-最小二乘法求解"><span class="nav-text">3.1.2 最小二乘法求解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-梯度下降法"><span class="nav-text">3.2 梯度下降法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-批量梯度下降法（BGD）"><span class="nav-text">3.2.1 批量梯度下降法（BGD）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、参考资料"><span class="nav-text">四、参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,799 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习,统计学习概论," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="统计学习1.1 特点统计学习是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测与分析的一门学科。赫尔伯特·西蒙曾对学习定义为：“如果一个系统能够执行某个过程改进它的性能，这就是学习。”按照这一观点，统计学习就是计算机系统通过数据及统计方法提高系统性能的机器学习。">
+<meta name="keywords" content="机器学习,统计学习概论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法系列（16）：统计学习概论">
+<meta property="og:url" content="http://yoursite.com/2017/03/20/机器学习算法系列（16）：统计学习概论/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="统计学习1.1 特点统计学习是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测与分析的一门学科。赫尔伯特·西蒙曾对学习定义为：“如果一个系统能够执行某个过程改进它的性能，这就是学习。”按照这一观点，统计学习就是计算机系统通过数据及统计方法提高系统性能的机器学习。">
+<meta property="og:image" content="http://yoursite.com/2017/03/20/机器学习算法系列（16）：统计学习概论/media/14906850445161/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%883.21.31.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/20/机器学习算法系列（16）：统计学习概论/media/14906850445161/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%884.50.21.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/20/机器学习算法系列（16）：统计学习概论/media/14906850445161/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%885.10.54.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/20/机器学习算法系列（16）：统计学习概论/media/14906850445161/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%885.35.56.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/20/机器学习算法系列（16）：统计学习概论/media/14906850445161/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%885.25.58.png">
+<meta property="og:updated_time" content="2017-04-11T10:38:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习算法系列（16）：统计学习概论">
+<meta name="twitter:description" content="统计学习1.1 特点统计学习是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测与分析的一门学科。赫尔伯特·西蒙曾对学习定义为：“如果一个系统能够执行某个过程改进它的性能，这就是学习。”按照这一观点，统计学习就是计算机系统通过数据及统计方法提高系统性能的机器学习。">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/20/机器学习算法系列（16）：统计学习概论/media/14906850445161/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%883.21.31.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 机器学习算法系列（16）：统计学习概论 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/20/机器学习算法系列（16）：统计学习概论/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习算法系列（16）：统计学习概论
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-20T23:14:45+08:00">
+                2017-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="统计学习"><a href="#统计学习" class="headerlink" title="统计学习"></a>统计学习</h2><h4 id="1-1-特点"><a href="#1-1-特点" class="headerlink" title="1.1 特点"></a>1.1 特点</h4><p>统计学习是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测与分析的一门学科。赫尔伯特·西蒙曾对学习定义为：“如果一个系统能够执行某个过程改进它的性能，这就是学习。”按照这一观点，统计学习就是计算机系统通过数据及统计方法提高系统性能的机器学习。</p>
+<a id="more"></a>
+<h4 id="1-2-对象"><a href="#1-2-对象" class="headerlink" title="1.2 对象"></a>1.2 对象</h4><p>统计学习的对象是数据，从数据出发，提取数据的特征，抽象出数据的模型，发现数据中的知识，又回到对数据的分析与预测中去。数据包括存在于计算机及网络上的各种数字、文字、图像、视频、音频及它们的组合。统计学习对于数据的基本假设是同类数据具有一定的统计规律性。</p>
+<h4 id="1-3-目的"><a href="#1-3-目的" class="headerlink" title="1.3 目的"></a>1.3 目的</h4><p>考虑学习什么样的模型和如何学习模型，以使模型能对数据进行准确的预测与分析，同时也要尽可能地提高学习效率。</p>
+<h4 id="1-4-方法"><a href="#1-4-方法" class="headerlink" title="1.4 方法"></a>1.4 方法</h4><p>统计学习由监督学习（supervised learning）、非监督学习（unsupervised learning）、半监督学习（semi-supervised learning）、强化学习（reinforcement learning）等组成</p>
+<ul>
+<li><p>监督学习：从给定的、有限的、用于学习的训练数据（training data）集合出发，假设数据独立同分布，并且假设要学习的模型属于某个函数的集合，称为假设空间（hypothesis space），应用某个评价准则（evaluation criterion），从假设空间中选取一个最优的模型，使它对已知训练数据及未知测试数据在给定的评价准则下有最优的预测；最优模型的选取由算法实现。</p>
+</li>
+<li><p>三要素：模型的假设空间（模型）、模型选择的准则（策略）、模型学习的算法（算法）</p>
+</li>
+<li>步骤：<ul>
+<li>1）得到一个有限的训练数据集合</li>
+<li>2）确定包含所有可能的模型的假设空间，即学习模型的集合</li>
+<li>3）确定模型选择的准则，即学习的策略</li>
+<li>4）实现求解最优模型的算法，即学习的算法</li>
+<li>5）通过学习方法选择最优模型</li>
+<li>6）利用学习的最优模型对新数据进行预测或分析</li>
+</ul>
+</li>
+</ul>
+<h2 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h2><h4 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h4><p>监督学习的任务是学习一个模型，使模型能够对任意给定的输入，对其相应的输出做一个好的预测。它从训练数据（training data）集合中学习模型，对测试数据（test data）进行预测。</p>
+<h4 id="2-2-基本概念"><a href="#2-2-基本概念" class="headerlink" title="2.2 基本概念"></a>2.2 基本概念</h4><h5 id="2-2-1-输入空间、特征空间与输出空间"><a href="#2-2-1-输入空间、特征空间与输出空间" class="headerlink" title="2.2.1 输入空间、特征空间与输出空间"></a>2.2.1 输入空间、特征空间与输出空间</h5><ul>
+<li>输入空间与输出空间：输出与输出所有可能值的集合。通常输出空间远远小于输入空间</li>
+<li>特征空间：所有特征向量存在的空间。特征空间的每一维对应于一个特征。模型都定义在特征空间上。</li>
+<li>输入实例$x$的特征向量：$$<br>x=\left(x^{\left(1\right)},x^{\left(2\right)},···,x^{\left(i\right)},···,x^{\left(n\right)}\right)^T<br>$$其中$x^{(i)}$表示$x$的第$i$个特征，$x_i$表示多个输入向量的第$i$个，即$$<br>x_i=\left(x_i^{\left(1\right)},x_i^{\left(2\right)},···,x_i^{\left(n\right)}\right)^T<br>$$</li>
+<li>训练数据和测试数据由输入输出对（即样本）组成，通常表示为：$$<br>T=\left\{\left(x_1,y_1\right),\left(x_2,y_2\right),···,\left(x_N,y_N\right)\right\}<br>$$</li>
+<li>回归问题：输入变量与输出变量均为连续变量的预测问题。</li>
+<li>分类问题：输出变量为有限个离散变量的预测问题。</li>
+<li>标注问题：输入变量与输出变量均为变量序列的预测问题。</li>
+</ul>
+<h5 id="2-2-2-联合概率分布"><a href="#2-2-2-联合概率分布" class="headerlink" title="2.2.2 联合概率分布"></a>2.2.2 联合概率分布</h5><p>统计学习假设数据存在一定的统计规律，监督学习的基本假设为$X$和$Y$具有联合概率分布的假设，我们把训练数据与测试数据看作是依联合概率分布$P(X,Y)$独立同分布产生的。</p>
+<h5 id="2-2-3-假设空间"><a href="#2-2-3-假设空间" class="headerlink" title="2.2.3 假设空间"></a>2.2.3 假设空间</h5><p>监督学习的目的在于找到由输入到输出的映射模型集合中最好的一个。这个集合即假设空间。模型可以是概率模型或非概率模型，由条件概率分布$P(Y|X)$或决策函数$Y=f(X)$表示。</p>
+<h2 id="统计学习三要素"><a href="#统计学习三要素" class="headerlink" title="统计学习三要素"></a>统计学习三要素</h2><h4 id="3-1-模型"><a href="#3-1-模型" class="headerlink" title="3.1 模型"></a>3.1 模型</h4><p>模型就是所要学习的条件概率分布或决策函数。模型的假设空间包含所有可能的条件概率分布（概率模型）或决策函数（非概率模型）。假设空间用$\mathscr{F}$表示，它是由一个参数向量决定的决策函数族：$$<br>\mathscr{F}=\left\{f | Y=f_{\theta}\left(X\right),\theta\in R^n\right\}<br>$$参数向量$\theta$取值于$n$维欧式空间$R^n$，称为参数空间。<br>也可以是一个参数向量决定的条件概率分布族：$$<br>\mathscr{F}=\left\{P | P_{\theta}\left(Y|X\right),\theta\in R^n\right\}<br>$$</p>
+<h4 id="3-2-策略"><a href="#3-2-策略" class="headerlink" title="3.2 策略"></a>3.2 策略</h4><p>有了模型的假设空间，接下来需要考虑按照什么样的准则学习或选择最优的模型。</p>
+<h5 id="3-2-1-损失函数和风险函数"><a href="#3-2-1-损失函数和风险函数" class="headerlink" title="3.2.1 损失函数和风险函数"></a>3.2.1 损失函数和风险函数</h5><p><strong>损失函数（loss function）</strong>度量一次预测的好坏。损失函数越小，模型就越好常用的损失函数有：</p>
+<ul>
+<li>0-1损失函数（0-1 loss function）：$$<br>L=\left\{\begin{matrix}{}<br>  1&amp;        Y\ne f\left(X\right)\\<br>  0&amp;        Y=f\left(X\right)\\<br>\end{matrix}\right.<br>$$</li>
+<li><p>平方损失函数（quadratic loss function）:$$<br>L=\left(Y-f\left(X\right)\right)^2<br>$$</p>
+</li>
+<li><p>绝对损失函数（absolute loss function）：$$<br>L=|Y-f\left(X\right)|<br>$$</p>
+</li>
+<li>对数损失函数（logarithmic loss function）：$$<br>L=-\log P\left(Y|X\right)<br>$$</li>
+</ul>
+<p><strong>风险函数（risk function）或期望损失（expected loss）</strong>是理论上模型$f(X)$关于联合分布$P(X,Y)$的平均意义下的损失。$$<br>R_{\exp}\left(f\right)=E_p\left[L\left(Y,f\left(X\right)\right)\right]=\int_{}{L\left(y,f\left(x\right)\right)P\left(x,y\right)dxdy}<br>$$我们学习的目标就是选择期望风险最小的模型。由于联合分布$P(X,Y)$未知，风险函数不能直接计算。这样，一方面根据期望风险最小学习模型要用到联合分布，另一方面联合分布又是未知的，所以监督学习就沦为病态问题。<br>但我们可以计算训练数据集的平均损失，即<strong>经验风险（empirical risk）或经验损失（empirical loss）</strong>：$$<br>\textrm{R}_{emp}\left(f\right)=\frac{1}{N}\sum_{i=1}^N{L\left(y_i,f\left(x_i\right)\right)}<br>$$根据大数定理，当样本容量$N$趋于无穷时，经验风险趋于期望风险。自然而然想到可以使用经验风险来估计期望风险。但现实中训练样本数目很小，这种估计往往不理想，需要矫正，以此引出经验风险最小化和结构风险最小化。</p>
+<h5 id="3-2-2-经验风险最小化和结构风险最小化"><a href="#3-2-2-经验风险最小化和结构风险最小化" class="headerlink" title="3.2.2 经验风险最小化和结构风险最小化"></a>3.2.2 经验风险最小化和结构风险最小化</h5><p><strong>经验风险最小化（empirical risk minimization）</strong>认为经验风险最小的模型是最优的模型，即求解最优化问题：$$<br>\underset{f\in\mathscr{F}}{\min}\frac{1}{N}\sum_{i=1}^N{L\left(y_i,f\left(x_i\right)\right)}<br>$$当样本容量足够大的时候，经验风险最小化学习效果良好。比如极大似然估计，当模型是条件概率分布，损失函数是对数损失函数时，经验风险最小化就等价于极大似然估计。</p>
+<p>但是当样本容量很小时，经验风险最小化学习会产生过拟合（over-fitting）的现象。这就引出了<strong>结构风险最小化</strong>，它等价于正则化（regularization）。结构风险在经验风险上加上表示模型复杂度的正则化项（regularizer）或罚项（penalty term），它的定义为：$$<br>R_{srm}\left(f\right)=\frac{1}{N}\sum_{i=1}^N{L\left(y_i,f\left(x_i\right)\right)}+\lambda J\left(f\right)<br>$$其中$J(f)$为模型的复杂度，模型$f$越复杂，复杂度$J(f)$就越大；反之，模型越简单，复杂度$J(f)$就越小，即复杂度表示了对复杂模型的惩罚。$\lambda≥0$是系数，用以权衡经验风险和模型复杂度。结构风险小需要经验风险和模型复杂度同时小。结构风险小的模型往往对训练数据以及未知的测试数据都有较好的预测。比如贝叶斯估计中的最大后验概率估计就是结构风险最小化的一个例子。当模型是条件概率分布、损失函数是对数损失函数、模型复杂度由模型的先验概率表示时，结构风险最小化就等价于最大后验概率估计。<br>结构风险最小化的策略认为结构风险最小的模型是最优的模型，求解最优模型即求解最优化问题：$$<br>\min_{f\in\mathscr{F}}\frac{1}{N}\sum_{i=1}^N{L\left(y_i,f\left(x_i\right)\right)}+\lambda J\left(f\right)<br>$$</p>
+<p>这样，监督学习问题变成了经验风险或结构风险函数的最优化问题。</p>
+<h4 id="3-3-算法"><a href="#3-3-算法" class="headerlink" title="3.3 算法"></a>3.3 算法</h4><p>学习模型的具体计算方法。统计学习基于训练数据集，根据学习策略，从假设空间中选择最优模型，最后需要考虑用什么样的计算方法求解最优化。如何用数值计算求解，如何保证找到全局最优化，并使求解过程高效，是一个重要的问题。</p>
+<h2 id="模型评估与模型选择"><a href="#模型评估与模型选择" class="headerlink" title="模型评估与模型选择"></a>模型评估与模型选择</h2><h4 id="4-1-训练误差与测试误差"><a href="#4-1-训练误差与测试误差" class="headerlink" title="4.1 训练误差与测试误差"></a>4.1 训练误差与测试误差</h4><p>训练误差（training error）是模型关于训练数据集的平均损失：$$<br>R_{emp}\left(\hat{f}\right)=\frac{1}{N_1}\sum_{i=1}^{N_1}{L\left(y_i,\hat{f}\left(x_i\right)\right)}<br>$$<br>测试误差(test error)是模型关于测试数据集的平均损失：$$<br>R_{emp}\left(\hat{f}\right)=\frac{1}{N_2}\sum_{i=1}^{N_2}{L\left(y_i,\hat{f}\left(x_i\right)\right)}<br>$$测试误差反映了学习方法对未知的测试数据集的预测能力，即泛化能力。</p>
+<h4 id="4-2-过拟合与模型选择"><a href="#4-2-过拟合与模型选择" class="headerlink" title="4.2 过拟合与模型选择"></a>4.2 过拟合与模型选择</h4><p>我们希望选择或学习一个合适的模型。若在空间中存在“真模型”，那我们所选择的模型要与真模型的参数个数相同，所选择的模型的参数向量与真模型的参数向量相近。<br><strong>过拟合</strong>指的是我们以为追求提高模型对训练数据的预测能力，所选模型的复杂度往往会比真模型更高。即学习时选择的模型所包含的参数过多，以致于出现这一模型对已知数据预测得很好，但对未知数据预测得很差的现象。</p>
+<p><strong>模型选择</strong>旨在避免过拟合并提高模型的预测能力，模型选择时，不仅要考虑对已知数据的预测能力，而且还要考虑对未知数据的预测能力。下图描述了训练误差和测试误差与模型的复杂度之间的关系：<center><img src="media/14906850445161/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%883.21.31.png" alt="屏幕快照 2017-03-29 下午3.21.31"></center><br>当模型复杂度增大时，训练误差会逐渐减小并趋于0；而测试误差会先减小，达到最小值后又增大。当选择的模型复杂度过大时，过拟合现象就会发生。所以要选择复杂度适当的模型，已达到测试误差最小的目的。以此引出正则化与交叉验证。</p>
+<h2 id="正则化与交叉验证"><a href="#正则化与交叉验证" class="headerlink" title="正则化与交叉验证"></a>正则化与交叉验证</h2><h4 id="5-1-正则化"><a href="#5-1-正则化" class="headerlink" title="5.1 正则化"></a>5.1 正则化</h4><h5 id="5-1-1-定义"><a href="#5-1-1-定义" class="headerlink" title="5.1.1 定义"></a>5.1.1 定义</h5><p>模型选择的典型方法是正则化（regularzation）。正则化是结构风险最小化策略的实现，是在经验风险上加一个正则化项或罚项。正则化项一般是模型复杂度的单调递增函数，模型越复杂，正则化值就越大。比如，正则化项可以是模型参数向量的范数。它的一般形式如下：$$<br>\min_{f\in\mathscr{F}}\frac{1}{N}\sum_{i=1}^N{L\left(y_i,f\left(x_i\right)\right)}+\lambda J\left(f\right)<br>$$第一项是经验风险，第二项是正则化项，$\lambda≥0$为调整两者之间关系的系数。</p>
+<h5 id="5-1-2-不同形式"><a href="#5-1-2-不同形式" class="headerlink" title="5.1.2 不同形式"></a>5.1.2 不同形式</h5><p>正则化项可以取不同的形式。例如，回归问题中，损失函数是平方误差，正则化项可以是参数向量的$L_2$范数:$$<br>L\left(w\right)=\frac{1}{N}\sum_{i=1}^N{\left(f\left(x_i;w\right)-y_i\right)^2}+\frac{\lambda}{2}||w||^2<br>$$也可以是参数向量的$L_1$范数：$$<br>L\left(w\right)=\frac{1}{N}\sum_{i=1}^N{\left(f\left(x_i;w\right)-y_i\right)^2}+\lambda ||w||_1<br>$$第一项的经验风险较小的模型可能较复杂（有多个非零参数），这时第二项的模型复杂度会较大。正则化的作用是选择经验风险与模型复杂度同时较小的模型。</p>
+<h5 id="5-1-3-奥卡姆剃刀"><a href="#5-1-3-奥卡姆剃刀" class="headerlink" title="5.1.3 奥卡姆剃刀"></a>5.1.3 奥卡姆剃刀</h5><p>正则化符合奥卡姆剃刀原理，应用于模型选择时变为：在所有可能选择的模型中，能够很好地解释已知数据并且十分简单才是最好的模型。从贝叶斯估计的角度来看，正则化项对应于模型的先验概率。可以假设复杂的模型有很小的先验概率，简单的模型有较大的先验概率。</p>
+<h4 id="5-2-交叉验证"><a href="#5-2-交叉验证" class="headerlink" title="5.2 交叉验证"></a>5.2 交叉验证</h4><h5 id="5-2-1-定义"><a href="#5-2-1-定义" class="headerlink" title="5.2.1 定义"></a>5.2.1 定义</h5><p>如果给定的样本数据充足，进行模型选择的一种简单方法是随机地将数据集切分成三部分，分别是训练集（training set）用来训练模型、验证集（validation set）用于模型的选择、测试集（test set）用于最终对学习方法的评估，最终选择对验证集有最小预测误差的模型。</p>
+<p>但是实际应用中数据不充足，所以我们采用交叉验证，它的基本思想是重复的使用数据，把给定的数据进行切分，将切分的数据集组合为训练集与测试集，在此基础上反复地进行训练、测试和模型选择。</p>
+<h5 id="5-2-2-方法"><a href="#5-2-2-方法" class="headerlink" title="5.2.2 方法"></a>5.2.2 方法</h5><ul>
+<li>简单交叉验证：首先随机地将已给数据分为两个部分，一部分作为训练集（70%），另一部分作为测试集（30%）；然后用训练集在各种条件下（如不同的参数个数）训练模型，从而得到不同的模型；在测试机上评价各个模型的测试误差，选出测试误差最小的模型。</li>
+<li>S折交叉验证（S-fold cross validation）：应用最广泛。首先随即将已给数据切分为S个互不相交的大小相同的子集；然后利用S-1个子集的数据训练模型，利用余下的子集测试模型；将这一过程对可能的S种选择重复进行；最后选出S次评测中平均测试误差最小的模型。</li>
+<li>留一交叉验证leave-one-out cross validation）：S折交叉验证的特殊情形是S=N（N为给定数据集的容量），往往在数据缺乏的情况下使用</li>
+</ul>
+<h2 id="泛化能力"><a href="#泛化能力" class="headerlink" title="泛化能力"></a>泛化能力</h2><h4 id="6-1-泛化误差"><a href="#6-1-泛化误差" class="headerlink" title="6.1 泛化误差"></a>6.1 泛化误差</h4><p>泛化能力是指由该方法学习到的模型对未知数据的预测能力。现实中常常通过测试误差来评价学习方法的泛化能力，但因为测试数据及有限，评价结果不一定可靠。</p>
+<p>理论上，通过泛化误差来反映学习方法的泛化能力，泛化误差即用学习到的模型对未知数据预测的误差：$$<br>R_{\exp}\left(f\right)=E_p\left[L\left(Y,f\left(X\right)\right)\right]=\int_{}{L\left(y,f\left(x\right)\right)P\left(x,y\right)dxdy}<br>$$泛化误差越小，模型效果就好。泛化误差就是所学习到的模型的期望风险。</p>
+<h2 id="生成模型与判别模型"><a href="#生成模型与判别模型" class="headerlink" title="生成模型与判别模型"></a>生成模型与判别模型</h2><h4 id="7-1-判别模型"><a href="#7-1-判别模型" class="headerlink" title="7.1 判别模型"></a>7.1 判别模型</h4><p>判别模型由数据直接学习决策函数$f(X)$或者条件概率分布$P(Y|X)$作为预测的模型。它关心的是对给定的输入$X$，应该预测什么样的输出$Y$。典型的判别模型包括：K近邻法、感知机、决策树、逻辑斯谛回归、最大熵模型、支持向量机、提升方法、条件随机场。</p>
+<p>判别方法的特点：</p>
+<ul>
+<li>直接学习的是条件概率$P(Y|X)$或决策函数$f(X)$，直接面对预测，往往学习的准确率很高；</li>
+<li>由于直接学习$P(Y|X)$或$f(X)$，可以对数据进行各种程度上的抽象、定义特征并使用特征，因此可以简化学习问题。</li>
+</ul>
+<h4 id="7-2-生成模型"><a href="#7-2-生成模型" class="headerlink" title="7.2 生成模型"></a>7.2 生成模型</h4><p>生成模型由数据学习联合概率分布$P(X,Y)$，然后求出条件概率分布$P(Y|X)$作为预测的模型：$$<br>P\left(Y|X\right)=\frac{P\left(X,Y\right)}{P\left(X\right)}<br>$$因为模型表示了给定输入$X$产生输出$Y$的生成关系，所以被称为生成模型。典型的生成模型有：朴素贝叶斯、隐马尔科夫模型</p>
+<p>生成方法的特点：</p>
+<ul>
+<li>生成方法可以还原出联合概率分布$P(X,Y)$，而判别方法不能；</li>
+<li>生成方法的学习收敛速度快，即当样本容量增加时，学到的模型可以很快收敛于真实模型；</li>
+<li>当存在隐变量时，仍可以用生成方法学习，此时判别方法不能用。</li>
+</ul>
+<h2 id="分类问题"><a href="#分类问题" class="headerlink" title="分类问题"></a>分类问题</h2><h4 id="8-1-定义"><a href="#8-1-定义" class="headerlink" title="8.1 定义"></a>8.1 定义</h4><p>在监督学习中，当输出变量$Y$取有限个离散值时，预测问题便成为分类问题。它从数据中学习一个分类模型或分类决策函数，即学习一个分类器，然后对新的输入进行输出的预测，即进行分类。分为多类分类和二类分类问题。</p>
+<h4 id="8-2-学习过程"><a href="#8-2-学习过程" class="headerlink" title="8.2 学习过程"></a>8.2 学习过程</h4><p>如图所示，分类问题包括学习和分类两个过程。在学习过程中，根据已知的训练数据集利用有效的学习方法学习一个分类器；在分类过程中，利用学习的分类器对新的输入实例进行分类。</p>
+<center><img src="media/14906850445161/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%884.50.21.png" alt="屏幕快照 2017-03-29 下午4.50.21"></center>
+
+<h4 id="8-3-分类准确率"><a href="#8-3-分类准确率" class="headerlink" title="8.3 分类准确率"></a>8.3 分类准确率</h4><h5 id="8-3-1-定义"><a href="#8-3-1-定义" class="headerlink" title="8.3.1 定义"></a>8.3.1 定义</h5><p>评价分类器性能的指标一般是分类准确率（accuracy）,即对于给定的测试数据集，分类器正确分类的样本数与总样本数之比。也即损失函数是0-1损失时测试数据集上的准确率。</p>
+<h5 id="8-3-2-常用指标"><a href="#8-3-2-常用指标" class="headerlink" title="8.3.2 常用指标"></a>8.3.2 常用指标</h5><p>通常将关注的类为正类，其他类为负类，分类器在测试数据集上的预测或正确或不正确，4种情况出现的总数分别记作：TP（正类预测为正类数）、FN（正类预测为负类书）、FP（负类预测为正类数）、TN（负类预测为负类数）</p>
+<center><img src="media/14906850445161/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%885.10.54.png" alt="屏幕快照 2017-03-29 下午5.10.54"></center>
+
+<ul>
+<li>精确率：$$<br>P=\frac{TP}{TP+FP}<br>$$<ul>
+<li>召回率：$$<br>R=\frac{TP}{TP+FN}<br>$$</li>
+<li>$F_1$值，是精确率和召回率的调和均值，即$$<br>\frac{2}{F_1}=\frac{1}{P}+\frac{1}{R}<br>$$$$<br>F_1=\frac{2TP}{2TP+FP+FN}<br>$$精确率与召回率都很高时，$F_1$值也会很高。</li>
+</ul>
+</li>
+</ul>
+<h4 id="8-3-3-分类方法与应用"><a href="#8-3-3-分类方法与应用" class="headerlink" title="8.3.3 分类方法与应用"></a>8.3.3 分类方法与应用</h4><ul>
+<li>常见分类统计方法：K近邻、感知机、朴素贝叶斯、决策树、决策列表、逻辑斯谛回归、支持向量机、提升、贝叶斯网络、神经网络Winnow</li>
+<li>应用：银行业务构建客户分类模型，对客户按照贷款风险大小分类；网络非法入侵检测；人脸是否出现的检测；网页分类；文本分类等。</li>
+</ul>
+<h2 id="标注问题"><a href="#标注问题" class="headerlink" title="标注问题"></a>标注问题</h2><h4 id="9-1-定义"><a href="#9-1-定义" class="headerlink" title="9.1 定义"></a>9.1 定义</h4><p>标注问题的输入是一个观测序列，输出是一个标记序列或状态序列。它的目的在于学习一个模型，使它能够对观测序列给出标记序列作为预测。标注问题分为学习和标注两个过程：<center><img src="media/14906850445161/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%885.35.56.png" alt="屏幕快照 2017-03-29 下午5.35.56"></center></p>
+<h4 id="9-2-应用"><a href="#9-2-应用" class="headerlink" title="9.2 应用"></a>9.2 应用</h4><p>标注常用的统计学习方法有：隐马尔科夫模型、条件随机场</p>
+<p>它在信息抽取、自然语言处理领域被广泛应用。</p>
+<ul>
+<li>自然语言处理的词性标注：给定一个由单词组成的句子，对这个句子中的每一个单词进行词性标注，即对一个单词序列预测其对应的词性标记序列。</li>
+</ul>
+<h2 id="回归问题"><a href="#回归问题" class="headerlink" title="回归问题"></a>回归问题</h2><h4 id="10-1-定义"><a href="#10-1-定义" class="headerlink" title="10.1 定义"></a>10.1 定义</h4><p>回归模型表示输入变量和输出变量之间映射的函数，等价于函数拟合：选择一条函数曲线使其很好地拟合已知数据且很好地预测未知数据。可分为一元回归和多元回归，线性回归和非线性回归。它最常用的损失函数为平方损失函数，可以用最小二乘法求解。回归问题分为学习和标注两个过程：</p>
+<center><img src="media/14906850445161/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%885.25.58.png" alt="屏幕快照 2017-03-29 下午5.25.58"></center>
+
+<h4 id="10-2-应用"><a href="#10-2-应用" class="headerlink" title="10.2 应用"></a>10.2 应用</h4><p>股价预测：将影响股价的信息视作自变量，将股价视为因变量，将过去的数据作为训练数据，学习一个回归模型，并对未来的股价进行预测。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/统计学习概论/" rel="tag"># 统计学习概论</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/04/人大应统学长倾心经验贴/" rel="next" title="人大应统学长倾心经验贴">
+                <i class="fa fa-chevron-left"></i> 人大应统学长倾心经验贴
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/15/机器学习算法系列（15）：EM算法/" rel="prev" title="机器学习算法系列（15）：EM算法">
+                机器学习算法系列（15）：EM算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#统计学习"><span class="nav-text">统计学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-特点"><span class="nav-text">1.1 特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-对象"><span class="nav-text">1.2 对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-目的"><span class="nav-text">1.3 目的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-方法"><span class="nav-text">1.4 方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监督学习"><span class="nav-text">监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-定义"><span class="nav-text">2.1 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-基本概念"><span class="nav-text">2.2 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-输入空间、特征空间与输出空间"><span class="nav-text">2.2.1 输入空间、特征空间与输出空间</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-联合概率分布"><span class="nav-text">2.2.2 联合概率分布</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-假设空间"><span class="nav-text">2.2.3 假设空间</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#统计学习三要素"><span class="nav-text">统计学习三要素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-模型"><span class="nav-text">3.1 模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-策略"><span class="nav-text">3.2 策略</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-损失函数和风险函数"><span class="nav-text">3.2.1 损失函数和风险函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-2-经验风险最小化和结构风险最小化"><span class="nav-text">3.2.2 经验风险最小化和结构风险最小化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-算法"><span class="nav-text">3.3 算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型评估与模型选择"><span class="nav-text">模型评估与模型选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-训练误差与测试误差"><span class="nav-text">4.1 训练误差与测试误差</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-过拟合与模型选择"><span class="nav-text">4.2 过拟合与模型选择</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则化与交叉验证"><span class="nav-text">正则化与交叉验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-正则化"><span class="nav-text">5.1 正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-1-定义"><span class="nav-text">5.1.1 定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-2-不同形式"><span class="nav-text">5.1.2 不同形式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-3-奥卡姆剃刀"><span class="nav-text">5.1.3 奥卡姆剃刀</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-交叉验证"><span class="nav-text">5.2 交叉验证</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-1-定义"><span class="nav-text">5.2.1 定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-2-方法"><span class="nav-text">5.2.2 方法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泛化能力"><span class="nav-text">泛化能力</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-泛化误差"><span class="nav-text">6.1 泛化误差</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成模型与判别模型"><span class="nav-text">生成模型与判别模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-判别模型"><span class="nav-text">7.1 判别模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-生成模型"><span class="nav-text">7.2 生成模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分类问题"><span class="nav-text">分类问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-定义"><span class="nav-text">8.1 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-学习过程"><span class="nav-text">8.2 学习过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-3-分类准确率"><span class="nav-text">8.3 分类准确率</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#8-3-1-定义"><span class="nav-text">8.3.1 定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-3-2-常用指标"><span class="nav-text">8.3.2 常用指标</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-3-3-分类方法与应用"><span class="nav-text">8.3.3 分类方法与应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标注问题"><span class="nav-text">标注问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#9-1-定义"><span class="nav-text">9.1 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-2-应用"><span class="nav-text">9.2 应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回归问题"><span class="nav-text">回归问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#10-1-定义"><span class="nav-text">10.1 定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-2-应用"><span class="nav-text">10.2 应用</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

@@ -1,0 +1,763 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习,XgBoost," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、XGBoost简介在数据建模中，经常采用Boosting方法通过将成百上千个分类准确率较低的树模型组合起来，成为一个准确率很高的预测模型。这个模型会不断地迭代，每次迭代就生成一颗新的树。但在数据集较复杂的时候，可能需要几千次迭代运算，这将造成巨大的计算瓶颈。">
+<meta name="keywords" content="机器学习,XgBoost">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法系列（8）：XgBoost">
+<meta property="og:url" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="一、XGBoost简介在数据建模中，经常采用Boosting方法通过将成百上千个分类准确率较低的树模型组合起来，成为一个准确率很高的预测模型。这个模型会不断地迭代，每次迭代就生成一颗新的树。但在数据集较复杂的时候，可能需要几千次迭代运算，这将造成巨大的计算瓶颈。">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%886.12.45.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%888.50.53.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%888.58.46.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%889.34.49.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%889.38.47.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%889.52.21.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%8810.55.53.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%8811.01.22.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.17.42.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.34.04.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.39.10.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.42.51.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.46.44.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.48.38.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.51.56.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.55.23.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%881.18.47.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%881.25.44.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%881.31.20.png">
+<meta property="og:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8810.11.21.png">
+<meta property="og:updated_time" content="2017-04-11T10:39:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习算法系列（8）：XgBoost">
+<meta name="twitter:description" content="一、XGBoost简介在数据建模中，经常采用Boosting方法通过将成百上千个分类准确率较低的树模型组合起来，成为一个准确率很高的预测模型。这个模型会不断地迭代，每次迭代就生成一颗新的树。但在数据集较复杂的时候，可能需要几千次迭代运算，这将造成巨大的计算瓶颈。">
+<meta name="twitter:image" content="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%886.12.45.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 机器学习算法系列（8）：XgBoost | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/26/机器学习算法系列（8）：XgBoost/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习算法系列（8）：XgBoost
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-26T23:14:45+08:00">
+                2017-01-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、XGBoost简介"><a href="#一、XGBoost简介" class="headerlink" title="一、XGBoost简介"></a>一、XGBoost简介</h2><p>在数据建模中，经常采用Boosting方法通过将成百上千个分类准确率较低的树模型组合起来，成为一个准确率很高的预测模型。这个模型会不断地迭代，每次迭代就生成一颗新的树。但在数据集较复杂的时候，可能需要几千次迭代运算，这将造成巨大的计算瓶颈。</p>
+<a id="more"></a>
+<p>针对这个问题。华盛顿大学的陈天奇博士开发的XGBoost（eXtreme Gradient Boosting）基于C++通过多线程实现了回归树的并行构建，并在原有Gradient Boosting算法基础上加以改进，从而极大地提升了模型训练速度和预测精度。</p>
+<p>在Kaggle的希格斯子信号识别竞赛，XGBoost因为出众的效率与较高的预测准确度在比赛论坛中引起了参赛选手的广泛关注，在1700多支队伍的激烈竞争中占有一席之地。随着它在Kaggle社区知名度的提高，最近也有队伍借助XGBoost在比赛中夺得第一。其次，因为它的效果好，计算复杂度不高，也在工业界中有大量的应用。</p>
+<h2 id="二、监督学习的三要素"><a href="#二、监督学习的三要素" class="headerlink" title="二、监督学习的三要素"></a>二、监督学习的三要素</h2><p>因为Boosting Tree本身是一种有监督学习算法，要讲Boosting Tree，先从监督学习讲起。在监督学习中有几个逻辑上的重要组成部件，粗略地可以分为：模型、参数、目标函数和优化算法。</p>
+<h4 id="2-1-模型"><a href="#2-1-模型" class="headerlink" title="2.1 模型"></a>2.1 模型</h4><p>模型指的是给定输入$x_i$如何去预测输出$y_i$。我们比较常见的模型如线性模型（包括线性回归和Logistic Regression）采用线性加和的方式进行预测$$<br>\hat{y}_i=\sum_j{w_jx_{ij}}<br>$$这里的预测值$y$可以由不同的解释，比如我们可以把它作为回归目标的输出，或者进行$sigmoid$变换得到概率（即用$\frac{1}{1+e^{-\hat{y}_i}}$来预测正例的概率），或者作为排序的指标等。而一个线性模型根据$y$的解释不通（以及设计对应的目标函数）用到回归、分类或者排序等场景。</p>
+<h4 id="2-2-参数"><a href="#2-2-参数" class="headerlink" title="2.2 参数"></a>2.2 参数</h4><p>参数就是我们根据模型要从数据里头学习的东西，比如线性模型中的线性系数：$$<br>\varTheta =\left\{w_j|j=1,2,···,d\right\}<br>$$</p>
+<h4 id="2-3-目标函数：误差函数-正则化项"><a href="#2-3-目标函数：误差函数-正则化项" class="headerlink" title="2.3 目标函数：误差函数+正则化项"></a>2.3 目标函数：误差函数+正则化项</h4><p>模型和参数本身指定了给定输入我们如何预测，但是没有告诉我们如何去寻找一个比较好的参数，这个时候就需要目标函数函数登场了。一般地目标函数包含两项：一项是损失函数，它说明了我们的模型有多拟合数据；另一项是正则化项，它惩罚了复杂模型。<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%886.12.45.png" alt="屏幕快照 2017-04-01 下午6.12.45"></center></p>
+<ul>
+<li>1）$L(\varTheta)$：损失函数$L=\sum_{i=1}^n{l\left(y_i,\hat{y}_i\right)}$，常见的损失函数有：<ul>
+<li>平方损失：$<br>l\left(y_i,\hat{y}_i\right)=\left(y_i-\hat{y}_i\right)^2<br>$</li>
+<li>Logistic损失：$<br>l\left(y_i,\hat{y}_i\right)=y_i\ln\left(1+e^{-y_i}\right)+\left(1-y_i\right)\ln\left(1+e^{y_i}\right)<br>$</li>
+</ul>
+</li>
+<li>2）$\varOmega\left(\varTheta\right)$：正则化项，之所以要引入它是因为我们的目标是希望生成的模型能准确地预测新的样本（即应用于测试数据集），而不是简单地拟合训练集的结果（这样会导致过拟合）。所以需要在保证模型“简单”的基础上最小化训练误差，这样得到的参数才具有好的泛化性能。而正则化项就是用于惩罚复杂模型，避免模型过分拟合训练数据。常用的正则有$L1$正则与$L2$正则<ul>
+<li>$L1$正则（lasso）：$\varOmega\left(w\right)=\lambda ||w||_1$ </li>
+<li>$L2$正则：$\varOmega\left(w\right)=\lambda ||w||^2$</li>
+</ul>
+</li>
+</ul>
+<p>这样目标函数的设计来自于统计学习里面的一个重要概念叫做Bias-variance tradeoff（偏差-方差权衡），比较感性的理解，$Bias$可以理解为假设我们有无限多数据的时候，可以训练出最好的模型所拿到的误差。而$Variance$是因为我们只有有限数据，其中随机性带来的误差。目标中误差函数鼓励我们的模型尽量去拟合训练数据，这样相对来说最后的模型会有比较少的$Bias$。而正则化项则鼓励更加简单的模型。因为当模型简单之后，有限数据拟合出来结果的随机性比较小，不容易过拟合，使得最后模型的预测更加稳定。</p>
+<h4 id="2-4-优化算法"><a href="#2-4-优化算法" class="headerlink" title="2.4 优化算法"></a>2.4 优化算法</h4><p>上面三个部分包含了机器学习的主要成分，也是机器学习工具划分模型比较有效的办法。其实这几部分之外，还有一个优化算法，就是给定目标函数之后怎么学的问题。有时候我们往往只知道“优化算法”，而没有仔细考虑目标函数的设计问题，比如常见的例子如决策树的学习算法的每一步去优化基尼系数，然后剪枝，但是没有考虑到后面的目标是什么。而这些启发式优化方法背后往往隐含了一个目标函数，理解了目标函数本身也有利于我们设计相应的学习算法。</p>
+<h2 id="三、回归树与树集成"><a href="#三、回归树与树集成" class="headerlink" title="三、回归树与树集成"></a>三、回归树与树集成</h2><h4 id="3-1-回归树"><a href="#3-1-回归树" class="headerlink" title="3.1 回归树"></a>3.1 回归树</h4><p>在介绍$XGBoost$之前，首先得了解一下回归树和树集成的概念，其实在$AdaBoost$算法中已经详细讲述过这一部分了。Boosting Tree最基本的组成部分叫做回归树（regression tree），下面就是一个回归树的例子。它把输入根据输入的属性分配到各个叶子节点，而每个叶子节点上面都会有一个实数分数。具体地，下图给出了一个判断用户是否会喜欢电脑游戏的回归树模型，每个树叶的得分对应了该用户有多可能喜欢电脑游戏（分值越大可能性越大）。<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%888.50.53.png" alt="屏幕快照 2017-04-01 下午8.50.53"></center></p>
+<h4 id="3-2-树集成"><a href="#3-2-树集成" class="headerlink" title="3.2 树集成"></a>3.2 树集成</h4><p>上图中的回归树只用到了用户年龄和性别两个信息，过于简单，预测的准确性自然有限。一个回归树往往过于简单无法有效地预测，因此一个更加强有力的模型叫做tree ensemble。<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%888.58.46.png" alt="屏幕快照 2017-04-01 下午8.58.46"></center><br>在上图中使用两个回归树对用户是否喜欢电脑游戏进行了预测，并将两个回归树的预测结果加和得到单个用户的预测结果。在实际的预测模型建立过程中，我们通过不断地增加新的回归树，并给每个回归树赋予合适的权重，在此基础上综合不同的回归树得分获得更为准确的预测结果，这也就是树集成的基本思路。在预测算法中，随机森林和提升树都采用了树集成的方法，但是在具体地模型构造和参数调整的方法有所差别。</p>
+<p>在这个树集成模型中，我们可以认为参数对应了树的结构，以及每个叶子节点上面的预测分数。</p>
+<p>那么我们如何来学习这些参数。在这一部分，答案可能千奇百怪，但是最标准的答案始终是一个：定义合理的目标函数，然后去尝试优化这个目标函数。决策树学习往往充满了启发式算法，如先优化基尼系数，然后再剪枝，限制最大深度等等。其实这些启发式算法背后往往隐含了一个目标函数，而理解目标函数本身也有利于我们设计学习算法。</p>
+<h2 id="四、XGBoost的推导过程"><a href="#四、XGBoost的推导过程" class="headerlink" title="四、XGBoost的推导过程"></a>四、XGBoost的推导过程</h2><h4 id="4-1-XGBoost的目标函数与泰勒展开"><a href="#4-1-XGBoost的目标函数与泰勒展开" class="headerlink" title="4.1 XGBoost的目标函数与泰勒展开"></a>4.1 XGBoost的目标函数与泰勒展开</h4><p>对于tree ensemble，我们可以把某一个迭代后集成的模型写成为：$$\hat{y}_i=\sum_{k=1}^K{f_k\left(x_i\right)}, f_k\in\mathscr{F}$$其中每个$f$是一个在函数空间($\mathscr{F}$)里面的函数，而$\mathscr{F}$对应了所有regression tree的集合。<br>我们设计的目标函数也需要遵循前面的主要原则，包含两部分$$<br>Obj\left(\varTheta\right)=\sum_{i=1}^n{l\left(y_i,\hat{y}_i\right)}+\sum_{k=1}^K{\varOmega\left(f_k\right)}<br>$$其中第一部分是训练损失，如上面所述的平方损失或者Logistic Loss等，第二部分是每棵树的复杂度的和。因为现在我们的参数可以认为是在一个函数空间里面，我们不能采用传统的如SGD之类的算法来学习我们的模型，因此我们会采用一种叫做additive training的方式。即每次迭代生成一棵新的回归树，从而使预测值不断逼近真实值（即进一步最小化目标函数）。每一次保留原来的模型不变，加入一个新的函数$f$到模型里面：</p>
+<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%889.34.49.png" alt="屏幕快照 2017-04-01 下午9.34.49"></center><br>其中$\hat{y}_i\left(t-1\right)$就是前$t-1$轮的模型预测，$f_t{(x_i)}$为新$t$轮加入的预测函数。<br>这里自然就涉及一个问题：如何选择在每一轮中加入的$f(x_i)$呢？答案很直接，选取的$f(x_i)$必须使得我们的目标函数尽量最大地降低（这里应用到了Boosting的基本思想，即当前的基学习器重点关注以前所有学习器犯错误的那些数据样本，以此来达到提升的效果）。先对目标函数进行改写，表示如下：<br><center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%889.38.47.png" alt="屏幕快照 2017-04-01 下午9.38.47"></center><br>如果我们考虑平方误差作为损失函数，公式可改写为：<br><center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%889.52.21.png" alt="屏幕快照 2017-04-01 下午9.52.21"></center><br>更加一般的，对于不是平方误差的情况，我们可以采用如下的泰勒展开近似来定义一个近似的目标函数，方便我们进行下一步的计算。<br><br>泰勒展开一般表达式为：<br><center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%8810.55.53.png" alt="屏幕快照 2017-04-01 下午10.55.53"></center><br>用泰勒展开来近似我们原来的目标：首先定义<br><center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-01%20%E4%B8%8B%E5%8D%8811.01.22.png" alt="屏幕快照 2017-04-01 下午11.01.22"></center><br>得到<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.17.42.png" alt="屏幕快照 2017-04-02 上午12.17.42"></center><br>如果移除掉常数项，我们会发现这个目标函数有一个非常明显的特点，它只依赖于每个数据点的在误差函数上的一阶导数和二阶导数。可能有人会问，这个方式似乎比我们之前学过的决策树学习难懂。为什么要花这么多力气来做推导呢？<br><br>这是因为，这样做首先有理论上的好处，它会使我们可以很清楚地理解整个目标是什么，并且一步一步推导出如何进行树的学习。然后这一个抽象的形式对于工程商实现机器学习工具也是非常有帮助的。因为它包含所有可以求到的目标函数，也就是说有了这个形式，我们写出来的代码可以用来求解包括回归、分类和排序的各种问题，正式的推导可以使得机器学习的工具更加一般化。<br><br>#### 4.2 决策树的复杂度<br>到目前为止我们讨论了目标函数中训练误差的部分。接下来我们讨论如何定义树的复杂度。<br>我们先对于$f$的定义做一下细化，把树拆分成结构部分$q$和叶子权重部分$w$。其中结构部分$q$把输入映射到叶子的索引号上面去，而$w$给定了每个索引号对应的叶子分数是什么。<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.34.04.png" alt="屏幕快照 2017-04-02 上午12.34.04"></center>当我们给定了如上定义之后，我们可以定义一棵树的复杂度如下。这个复杂度包含了一棵树里面节点的个数，以及每个树叶子节点上面输出分数的$L2$范数平方。当然这不是唯一的一种定义方式，不过这一定义方式学习出的树效果一般都比较不错。下图给出了复杂度计算的一个例子。<br><center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.39.10.png" alt="屏幕快照 2017-04-02 上午12.39.10"></center>
+
+<h4 id="4-3-目标函数的最小化"><a href="#4-3-目标函数的最小化" class="headerlink" title="4.3 目标函数的最小化"></a>4.3 目标函数的最小化</h4><p>接下来是最关键的一步，在这种新的顶一下，我们可以把目标函数进行如下改写，其中$I$被定义为每个叶子上面样本集合$I_j=\{i| q(x_i)=j\}$</p>
+<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.42.51.png" alt="屏幕快照 2017-04-02 上午12.42.51"></center>这一目标包含了$T$个互相独立的单变量二次函数<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.46.44.png" alt="屏幕快照 2017-04-02 上午12.46.44"></center><br>我们可以定义<br><center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.48.38.png" alt="屏幕快照 2017-04-02 上午12.48.38"></center><br>那么这个目标函数可以进一步改写成如下的形式，假设我们已经知道树的结构$q$，我们可以通过这个目标函数来求解出最好的$w$，以及最好的$w$对应的目标函数最大的增益<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.51.56.png" alt="屏幕快照 2017-04-02 上午12.51.56"></center>可以观察到上式是由$T$个相互独立的单变量二次函数再加上$L1$范数构成。这样的特性意味着单个树叶的权重计算与其他树叶的权重无关，所以我们可以非常方便计算第$j$个树叶的权重，以及目标函数。由此，我们将目标函数转换为一个一元二次方程求最小值的问题（在此式中，变量为$w_j$，函数本质上是关于$w_j$的二次函数），略去求解步骤，最终结果如下所示：<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8812.55.23.png" alt="屏幕快照 2017-04-02 上午12.55.23"></center><br>乍一看目标函数的计算与回归树的结构$q$函数没有什么关系，但是如果我们仔细回看目标函数的构成，就会发现其中$G_j$和$H_j$的取值是由第$j$个树叶上数据样本所决定的。而第$j$个树上所具有的数据样本则是由树结构$q$函数决定的。也就是说，一旦回归树的结构$q$确定，那么相应的目标函数就能够根据上式计算出来。那么回归树的生成问题也就转换为找到一个最优的树结构$q$，使得它具有最小的目标函数。<br><br>计算求得的$Obj$代表了当指定一个树的结构的时候，目标函数上面最多减少多少。我们可以把它叫做结构分数（structure score）。可以把它认为是类似于基尼系数一样更加一般的对于树结构进行打分的函数。下面是一个具体的打分函数计算的例子，它根据决策树的预测结果得到各样本的梯度数据，然后计算出实际的结构分数。这个分数越小，代表这个树的结构越好：<br><center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%881.18.47.png" alt="屏幕快照 2017-04-02 上午1.18.47"></center>
+
+<h4 id="4-4-枚举树的结果——贪心法"><a href="#4-4-枚举树的结果——贪心法" class="headerlink" title="4.4 枚举树的结果——贪心法"></a>4.4 枚举树的结果——贪心法</h4><p>在前面分析的基础上，当寻找到最优的树结构时，我们可以不断地枚举不同树的结构，利用这个打分函数来寻找一个最优结构的树，加入到我们的模型中，然后再重复这样的操作。不过枚举所有树结构这个操作不太可行，在这里XGBoost采用了常用的贪心法，即每一次尝试区队已有的叶子加入一个分割。对于一个剧透的分割方案，我们可以获得的增益可以由如下公式计算得到：<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%881.25.44.png" alt="屏幕快照 2017-04-02 上午1.25.44"></center></p>
+<p>这个公式形式上跟ID3算法（采用信息熵计算增益）或者CART算法（采用基尼指数计算增益） 是一致的，都是用分裂后的某种值减去分裂前的某种值，从而得到增益。为了限制树的生长，我们可以加入阈值，当增益大于阈值时才让节点分裂，上式中的$\gamma$即阈值，它是正则项里叶子节点数T的系数，所以xgboost在优化目标函数的同时相当于做了预剪枝。另外，上式中还有一个系数$\lambda$，是正则项里leaf score的$L2$模平方的系数，对leaf score做了平滑，也起到了防止过拟合的作用，这个是传统GBDT里不具备的特性。</p>
+<p>对于每次扩展，我们还是要枚举所有可能的分割方案，那么如何高效地枚举所有的分割呢？假设需要枚举所有$x<a$这样的条件，那么对于某个特定的分割$a$我们要计算$a$左边和右边的导数和，在实际应用中如下图所示：<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%881.31.20.png" alt="屏幕快照 2017-04-02 上午1.31.20"><br>我们可以发现对于所有的$a$，我们只要做一遍从左到右的扫描就可以枚举出所有分割的梯度与$G_L$和$G_R$。然后用上面的公式计算每个分割方案的分数就可以了。</a$这样的条件，那么对于某个特定的分割$a$我们要计算$a$左边和右边的导数和，在实际应用中如下图所示：<center></p>
+<p>但需要注意是：引入的分割不一定会使得情况变好，因为在引入分割的同时也引入新叶子的惩罚项。所以通常需要设定一个阈值，如果引入的分割带来的增益小于一个阀值的时候，我们可以剪掉这个分割。此外在XGBoost的具体实践中，通常会设置树的深度来控制树的复杂度，避免单个树过于复杂带来的过拟合问题。</p>
+<p>以上介绍了如何通过目标函数优化的方法比较严格地推导出boosted tree的学习的整个过程。因为有这样一般的推导，得到的算法可以直接应用到回归，分类排序等各个应用场景中去。</p>
+<h2 id="五、QA"><a href="#五、QA" class="headerlink" title="五、QA"></a>五、QA</h2><h4 id="5-1-机器学习算法中GBDT和XGBOOST的区别有哪些？"><a href="#5-1-机器学习算法中GBDT和XGBOOST的区别有哪些？" class="headerlink" title="5.1 机器学习算法中GBDT和XGBOOST的区别有哪些？"></a>5.1 机器学习算法中GBDT和XGBOOST的区别有哪些？</h4><ul>
+<li><p><strong>基分类器的选择：</strong>传统GBDT以CART作为基分类器，XGBoost还支持线性分类器，这个时候XGBoost相当于带L1和L2正则化项的逻辑斯蒂回归（分类问题）或者线性回归（回归问题）。</p>
+</li>
+<li><p><strong>二阶泰勒展开：</strong>传统GBDT在优化时只用到一阶导数信息，XGBoost则对代价函数进行了二阶泰勒展开，同时用到了一阶和二阶导数。顺便提一下，XGBoost工具支持自定义损失函数，只要函数可一阶和二阶求导。</p>
+</li>
+<li><p><strong>方差-方差权衡：</strong>XGBoost在目标函数里加入了正则项，用于控制模型的复杂度。正则项里包含了树的叶子节点个数$T$、每个叶子节点上输出分数的L2模的平方和。从Bias-variance tradeoff角度来讲，正则项降低了模型的variance，使学习出来的模型更加简单，防止过拟合，这也是XGBoost优于传统GBDT的一个特性。</p>
+</li>
+<li><p><strong>Shrinkage（缩减）：</strong>相当于学习速率（xgboost中的$\epsilon$）。XGBoost在进行完一次迭代后，会将叶子节点的权重乘上该系数，主要是为了削弱每棵树的影响，让后面有更大的学习空间。实际应用中，一般把eta设置得小一点，然后迭代次数设置得大一点。（补充：传统GBDT的实现也有学习速率）<center><img src="media/14910388536205/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8A%E5%8D%8810.11.21.png" alt="屏幕快照 2017-04-02 上午10.11.21"></center></p>
+</li>
+</ul>
+<ul>
+<li><strong>列抽样（column subsampling）：</strong>XGBoost借鉴了随机森林的做法，支持列抽样，不仅能降低过拟合，还能减少计算，这也是XGBoost异于传统GBDT的一个特性。</li>
+<li><strong>缺失值处理：</strong>XGBoost考虑了训练数据为稀疏值的情况，可以为缺失值或者指定的值指定分支的默认方向，这能大大提升算法的效率，paper提到50倍。即对于特征的值有缺失的样本，XGBoost可以自动学习出它的分裂方向。</li>
+<li><strong>XGBoost工具支持并行：</strong>Boosting不是一种串行的结构吗?怎么并行的？注意XGBoost的并行不是tree粒度的并行，XGBoost也是一次迭代完才能进行下一次迭代的（第$t$次迭代的损失函数里包含了前面$t-1$次迭代的预测值）。XGBoost的并行是在特征粒度上的。我们知道，决策树的学习最耗时的一个步骤就是对特征的值进行排序（因为要确定最佳分割点），XGBoost在训练之前，预先对数据进行了排序，然后保存为block(块)结构，后面的迭代中重复地使用这个结构，大大减小计算量。这个block结构也使得并行成为了可能，在进行节点的分裂时，需要计算每个特征的增益，最终选增益最大的那个特征去做分裂，那么各个特征的增益计算就可以开多线程进行。</li>
+<li><strong>线程缓冲区存储：</strong>按照特征列方式存储能优化寻找最佳的分割点，但是当以行计算梯度数据时会导致内存的不连续访问，严重时会导致cache miss，降低算法效率。paper中提到，可先将数据收集到线程内部的buffer（缓冲区），主要是结合多线程、数据压缩、分片的方法，然后再计算，提高算法的效率。</li>
+<li><strong>可并行的近似直方图算法：</strong>树节点在进行分裂时，我们需要计算每个特征的每个分割点对应的增益，即用贪心法枚举所有可能的分割点。当数据无法一次载入内存或者在分布式情况下，贪心算法效率就会变得很低，所以xgboost还提出了一种可并行的近似直方图算法，用于高效地生成候选的分割点。大致的思想是根据百分位法列举几个可能成为分割点的候选者，然后从候选者中根据上面求分割点的公式计算找出最佳的分割点。</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/XgBoost/" rel="tag"># XgBoost</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/10/机器学习算法系列（9）：感知机/" rel="next" title="机器学习算法系列（9）：感知机">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（9）：感知机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/23/以赛亚·伯林 谈话录 摘/" rel="prev" title="以赛亚·伯林 谈话录 摘">
+                以赛亚·伯林 谈话录 摘 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、XGBoost简介"><span class="nav-text">一、XGBoost简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、监督学习的三要素"><span class="nav-text">二、监督学习的三要素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-模型"><span class="nav-text">2.1 模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-参数"><span class="nav-text">2.2 参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-目标函数：误差函数-正则化项"><span class="nav-text">2.3 目标函数：误差函数+正则化项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-优化算法"><span class="nav-text">2.4 优化算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、回归树与树集成"><span class="nav-text">三、回归树与树集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-回归树"><span class="nav-text">3.1 回归树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-树集成"><span class="nav-text">3.2 树集成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、XGBoost的推导过程"><span class="nav-text">四、XGBoost的推导过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-XGBoost的目标函数与泰勒展开"><span class="nav-text">4.1 XGBoost的目标函数与泰勒展开</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3-目标函数的最小化"><span class="nav-text">4.3 目标函数的最小化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-枚举树的结果——贪心法"><span class="nav-text">4.4 枚举树的结果——贪心法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、QA"><span class="nav-text">五、QA</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-机器学习算法中GBDT和XGBOOST的区别有哪些？"><span class="nav-text">5.1 机器学习算法中GBDT和XGBOOST的区别有哪些？</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
