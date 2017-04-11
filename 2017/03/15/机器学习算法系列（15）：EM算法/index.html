@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/03/15/机器学习算法系列（15）：EM算法/media/14902651119566/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-24%20%E4%B8%8A%E5%8D%8811.55.29.png">
 <meta property="og:image" content="http://yoursite.com/2017/03/15/机器学习算法系列（15）：EM算法/media/14902651119566/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-24%20%E4%B8%8B%E5%8D%882.53.51.png">
 <meta property="og:image" content="http://yoursite.com/2017/03/15/机器学习算法系列（15）：EM算法/media/14902651119566/EM_Clustering_of_Old_Faithful_data.gif">
-<meta property="og:updated_time" content="2017-04-11T10:39:06.000Z">
+<meta property="og:updated_time" content="2017-04-11T10:57:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（15）：EM算法">
 <meta name="twitter:description" content="期望最大值（Expectation Maximization，简称EM算法）是在概率模型中寻找参数最大似然估计或者最大后验估计的算法，其中概率模型依赖于无法观测的隐藏变量。其主要思想就是通过迭代来建立完整数据的对数似然函数的期望界限，然后最大化不完整数据的对数似然函数。本文将尽可能详尽地描述EM算法的原理。并结合高斯混合模型介绍EM算法是如何求解的。">
@@ -365,7 +365,7 @@
 <center><br><img src="media/14902651119566/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-24%20%E4%B8%8A%E5%8D%8812.11.32.png" alt="屏幕快照 2017-03-24 上午12.11.32"></center>
 
 <p>上图中，函数$f$是凸函数，$X$是随机变量，有0.5的概率为$a$，有0.5的概率是b（就像抛硬币一样）。$X$的期望值就是a和b的中值了，图中可以看到$E[f(x)]≥f(E[x])$成立。</p>
-<h2 id="三、EM思想"><a href="#三、EM思想" class="headerlink" title="三、EM思想"></a>三、EM思想</h2><h4 id="3-1-极大似然估计"><a href="#3-1-极大似然估计" class="headerlink" title="3.1 极大似然估计"></a>3.1 极大似然估计</h4><p>EM算法推导过程中，会使用到极大似然估计参数。</p>
+<h2 id="三、EM思想"><a href="#三、EM思想" class="headerlink" title="三、EM思想"></a>三、EM思想</h2><h3 id="3-1-极大似然估计"><a href="#3-1-极大似然估计" class="headerlink" title="3.1 极大似然估计"></a>3.1 极大似然估计</h3><p>EM算法推导过程中，会使用到极大似然估计参数。</p>
 <p>极大似然估计是一种概率论在统计学的应用。已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚，参数估计就是通过若干次试验，观察结果，利用结果推出参数的大概值。极大似然估计建立在这样的思想上：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。</p>
 <p>这里再给出求极大似然估计值的一般步骤：</p>
 <ul>
@@ -375,7 +375,7 @@
 <li>4）解似然方程，得到的参数即为所求；</li>
 </ul>
 <p>关于极大似然估计的实例，可以参考<a href="https://zh.wikipedia.org/wiki/最大似然估计" target="_blank" rel="external"><code>wikipedia最大似然估计条目</code></a></p>
-<h4 id="3-2-EM算法思想"><a href="#3-2-EM算法思想" class="headerlink" title="3.2 EM算法思想"></a>3.2 EM算法思想</h4><p>下面介绍EM算法的思想：</p>
+<h3 id="3-2-EM算法思想"><a href="#3-2-EM算法思想" class="headerlink" title="3.2 EM算法思想"></a>3.2 EM算法思想</h3><p>下面介绍EM算法的思想：</p>
 <p>给定的训练样本是$x^{(1)}，x^{(2)}，···，x^{(m)}$，样例间相互独立，但每个样本对应的类别$z^{(i)}$是未知的，也即隐含变量。我们想找到每个样例隐含的类别$z$，能使得$P(x,z)$最大。$P(x,z)$的最大似然估计如下：$$<br>l\left(\theta\right)=\sum_{i=1}^m{\log p\left(x;\theta\right)}=\sum_{i=1}^m{\log\sum_z{}p\left(x,z;\theta\right)}<br>$$</p>
 <p>第一步是对极大似然函数取对数，第二步是对每个样本实例的每个可能的类别$z$求联合分布概率之和。但是直接求$\theta$一般比较困难，因为有隐藏变量$z$存在，如果$z$是一个已知的数，那么使用极大似然估计来估算会很容易。在这种$z$不确定的情形下，EM算法就派上用场了。</p>
 <p>EM算法是一种解决存在隐变量优化问题的有效方法。对于上述情况，由于存在隐变量，不能直接最大化$l(\theta)$，我们可以不断地建立$l$的下界（E步），然后优化下界（M步），依次迭代，直至算法收敛到局部最优。这就是EM算法的核心思想，简单的归纳一下：</p>
@@ -420,9 +420,7 @@
 <h2 id="五、EM的应用：混合高斯模型"><a href="#五、EM的应用：混合高斯模型" class="headerlink" title="五、EM的应用：混合高斯模型"></a>五、EM的应用：混合高斯模型</h2><p>待补充</p>
 <h2 id="六、EM的应用：EM聚类"><a href="#六、EM的应用：EM聚类" class="headerlink" title="六、EM的应用：EM聚类"></a>六、EM的应用：EM聚类</h2><p>以下的聚类图来自维基百科，可以生动的看出<br><img src="media/14902651119566/EM_Clustering_of_Old_Faithful_data.gif" alt="EM_Clustering_of_Old_Faithful_data"></p>
 <p>待补充</p>
-<h2 id="七、参考资料"><a href="#七、参考资料" class="headerlink" title="七、参考资料"></a>七、参考资料</h2><p><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006936.html" target="_blank" rel="external"><code>The EM Algorithm</code></a></p>
-<p><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006924.html" target="_blank" rel="external"><code>混合高斯模型和EM算法</code></a></p>
-<p><a href="http://cs229.stanford.edu/notes/cs229-notes8.pdf" target="_blank" rel="external"><code>cs229-notes8</code></a></p>
+<h2 id="七、参考资料"><a href="#七、参考资料" class="headerlink" title="七、参考资料"></a>七、参考资料</h2><p><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006936.html" target="_blank" rel="external"><code>The EM Algorithm</code></a><br><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006924.html" target="_blank" rel="external"><code>混合高斯模型和EM算法</code></a><br><a href="http://cs229.stanford.edu/notes/cs229-notes8.pdf" target="_blank" rel="external"><code>cs229-notes8</code></a></p>
 
       
     </div>
@@ -596,7 +594,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、定义"><span class="nav-text">一、定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Jensen不等式"><span class="nav-text">二、Jensen不等式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、EM思想"><span class="nav-text">三、EM思想</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-极大似然估计"><span class="nav-text">3.1 极大似然估计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-EM算法思想"><span class="nav-text">3.2 EM算法思想</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、EM推导"><span class="nav-text">四、EM推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、EM的应用：混合高斯模型"><span class="nav-text">五、EM的应用：混合高斯模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、EM的应用：EM聚类"><span class="nav-text">六、EM的应用：EM聚类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、参考资料"><span class="nav-text">七、参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、定义"><span class="nav-text">一、定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Jensen不等式"><span class="nav-text">二、Jensen不等式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、EM思想"><span class="nav-text">三、EM思想</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-极大似然估计"><span class="nav-text">3.1 极大似然估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-EM算法思想"><span class="nav-text">3.2 EM算法思想</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、EM推导"><span class="nav-text">四、EM推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、EM的应用：混合高斯模型"><span class="nav-text">五、EM的应用：混合高斯模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、EM的应用：EM聚类"><span class="nav-text">六、EM的应用：EM聚类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、参考资料"><span class="nav-text">七、参考资料</span></a></li></ol></div>
             
 
           </div>

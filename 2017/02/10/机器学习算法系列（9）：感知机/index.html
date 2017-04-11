@@ -94,7 +94,7 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="Introduction感知机（perceptron）是二类分类的线性分类模型，输入为实例的特征向量，输出为实例的类别，取+1和-1二值。 感知机对应于输入空间（特征空间）中将实例划分为正负两类的分离超平面，导入基于误分类的损失函数，利用梯度下降对损失函数进行极小化，求得感知机模型，属于判别模型 感知机学习算法简单易于实现，分为原始形式和对偶形式。1957年由Rosenblatt提出，是神经网络和">
 <meta property="og:image" content="http://img.blog.csdn.net/20161128125137360">
-<meta property="og:updated_time" content="2017-04-11T10:39:35.000Z">
+<meta property="og:updated_time" content="2017-04-11T11:01:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（9）：感知机">
 <meta name="twitter:description" content="Introduction感知机（perceptron）是二类分类的线性分类模型，输入为实例的特征向量，输出为实例的类别，取+1和-1二值。 感知机对应于输入空间（特征空间）中将实例划分为正负两类的分离超平面，导入基于误分类的损失函数，利用梯度下降对损失函数进行极小化，求得感知机模型，属于判别模型 感知机学习算法简单易于实现，分为原始形式和对偶形式。1957年由Rosenblatt提出，是神经网络和">
@@ -347,7 +347,7 @@
       
 
       
-        <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>感知机（perceptron）是二类分类的线性分类模型，输入为实例的特征向量，输出为实例的类别，取+1和-1二值。</p>
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>感知机（perceptron）是二类分类的线性分类模型，输入为实例的特征向量，输出为实例的类别，取+1和-1二值。</p>
 <p>感知机对应于输入空间（特征空间）中将实例划分为正负两类的分离超平面，导入基于误分类的损失函数，利用梯度下降对损失函数进行极小化，求得感知机模型，属于判别模型</p>
 <p>感知机学习算法简单易于实现，分为原始形式和对偶形式。1957年由Rosenblatt提出，是神经网络和支持向量机的基础</p>
 <a id="more"></a>
@@ -357,17 +357,17 @@
 <li>感知机的学习策略（损失函数）</li>
 <li>感知机学习算法（原始形式与对偶形式），并证明算法的收敛性</li>
 </ul>
-<h2 id="一、-感知机模型"><a href="#一、-感知机模型" class="headerlink" title="一、 感知机模型"></a>一、 感知机模型</h2><h4 id="1-1-感知机模型"><a href="#1-1-感知机模型" class="headerlink" title="1.1 感知机模型"></a>1.1 感知机模型</h4><p>感知机是一种线性分类器，属于判别模型。</p>
+<h2 id="一、-感知机模型"><a href="#一、-感知机模型" class="headerlink" title="一、 感知机模型"></a>一、 感知机模型</h2><h3 id="1-1-感知机模型"><a href="#1-1-感知机模型" class="headerlink" title="1.1 感知机模型"></a>1.1 感知机模型</h3><p>感知机是一种线性分类器，属于判别模型。</p>
 <p>假设我们的输入空间（特征空间）是$\chi \subseteq R^{\boldsymbol{n}}$，输出空间是$\boldsymbol{y}=\left\{ +1,-1 \right\}$。输入$\boldsymbol{x}\in \boldsymbol{\chi }$表示实例的特征向量，对应于输入空间（特征空间）的点；输出$y\in \boldsymbol{y}$表示实例的类别。由输入空间到输出空间的函数$$<br>f\left( x \right) =\mathrm{sign}\left( \boldsymbol{w}·x+\boldsymbol{b}\right)<br>$$其中，$\boldsymbol{w}\in \boldsymbol{R}^{\boldsymbol{n}}$为权值或权值向量，$\boldsymbol{b}\in \boldsymbol{R}^{\boldsymbol{n}}$叫做偏置，$\mathrm{sign}$是符号函数，即$$<br>\mathrm{sign}\left( \mathrm{x} \right) =\left\{ \begin{array}{l}<br>    +1\mathrm{， x}\geqslant 0\\<br>    -1\mathrm{， x}&lt;0\\<br>\end{array} \right.<br>$$<br>它的假设空间为：函数集合$$<br>\left\{ f|f\left( x \right) =w·x+b \right\}<br>$$</p>
 <p>感知机学习就是由训练数据集（实例的特征向量及类别）求得感知机模型，即求得模型参数$w,b$。<br> 感知机预测即为通过学习得到的感知机模型，对新的输入实例给出其对应的输出类别。</p>
-<h4 id="1-2-感知机的几何解释"><a href="#1-2-感知机的几何解释" class="headerlink" title="1.2 感知机的几何解释"></a>1.2 感知机的几何解释</h4><p>线性方程$w·x+b=0$对应于特征空间$R^{\boldsymbol{n}}$中的一个超平面$S$，其中$w$是超平面的法向量，$b$是超平面的截距，超平面将特征空间划分为两个部分。两部分的特征向量被分为正、负两类，超平面$S$也称为分离超平面。</p>
+<h3 id="1-2-感知机的几何解释"><a href="#1-2-感知机的几何解释" class="headerlink" title="1.2 感知机的几何解释"></a>1.2 感知机的几何解释</h3><p>线性方程$w·x+b=0$对应于特征空间$R^{\boldsymbol{n}}$中的一个超平面$S$，其中$w$是超平面的法向量，$b$是超平面的截距，超平面将特征空间划分为两个部分。两部分的特征向量被分为正、负两类，超平面$S$也称为分离超平面。</p>
 <center><img src="http://img.blog.csdn.net/20161128125137360" alt="感知机模型"></center>
 
 <h2 id="二、感知机学习策略"><a href="#二、感知机学习策略" class="headerlink" title="二、感知机学习策略"></a>二、感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>给定一个数据集$$<br>T=\left\{ \left( x_1,y_1 \right) ,\left( x_2,y_2 \right) ,···,\left( x_N,y_N \right) \right\} $$若存在某个超平面$S$$$<br>w·x+b=0<br>$$能够将数据集的正实例点和负实例点完全正确的划分到超平面的两侧，即对所有的$y_i=+1$的实例，有$w·x+b&gt;0$；对所有的$y_i=-1$的实例，有$w·x+b&lt;0$。则数据集$T$为线性可分数据集；否则称数据集线性不可分。</p>
-<h4 id="2-2-感知机学习策略"><a href="#2-2-感知机学习策略" class="headerlink" title="2.2 感知机学习策略"></a>2.2 感知机学习策略</h4><p>我们选择将误分类点到超平面$S$的总距离作为感知机模型的损失函数</p>
+<h3 id="2-2-感知机学习策略"><a href="#2-2-感知机学习策略" class="headerlink" title="2.2 感知机学习策略"></a>2.2 感知机学习策略</h3><p>我们选择将误分类点到超平面$S$的总距离作为感知机模型的损失函数</p>
 <p>由几何解释可以清楚地看到，任一点到超平面$S$的距离为:$$<br>\frac{1}{||w||}|w·x_0+b|<br>$$而我们对于误分类点的定义为：$$<br>-y_i\left( w·x_0+b \right) &gt;0<br>$$误分类点到超平面的距离：$$<br>-\frac{1}{||w||}y_i\left( w·x+b \right)<br>$$则误分类点到超平面的总距离：$$<br>-\frac{1}{||w||}\sum_{x_i\in M}{y_i\left( w·x_i+b \right)}<br>$$<br>据上述我们定义损失函数为:$$<br>L\left( w,b \right) =-\sum_{x_i\in M}{y_i\left( w·x_i+b \right)}<br>$$其中$M$为误分类点的集合，此即为感知机学习的经验风险函数。一个特定样本点的损失函数，在误分类时是参数$w,b$的线性函数，在正确分类时是0.因此，给定训练数据集$T$，损失函数$L(w,b)$是$w,b$的连续可导函数。感知机学习的策略就是在假设空间中选取使损失函数最小的模型参数，即感知机模型。</p>
 <h2 id="三、感知机学习算法"><a href="#三、感知机学习算法" class="headerlink" title="三、感知机学习算法"></a>三、感知机学习算法</h2><p>这样我们就把感知机的学习问题转化为求解损失函数的最优化问题，最优化的方法是随机梯度下降法。</p>
-<h4 id="3-1-感知机学习算法"><a href="#3-1-感知机学习算法" class="headerlink" title="3.1 感知机学习算法"></a>3.1 感知机学习算法</h4><p>首先我们确定要求解的最优化问题是：$$\min_{w,b}L\left( w,b \right) =-\sum_{x_i\in M}{y_i\left( w·x_i+b \right)}$$<br>通过随机梯度下降法来求解最优化问题。首先，任意选择一个超平面$w_0,b_0$，然后用梯度下降法不断地极小化目标函数，一次随机选取一个误分类点使其梯度下降，而不是一次使$M$中所有误分类点的梯度下降。</p>
+<h3 id="3-1-感知机学习算法"><a href="#3-1-感知机学习算法" class="headerlink" title="3.1 感知机学习算法"></a>3.1 感知机学习算法</h3><p>首先我们确定要求解的最优化问题是：$$\min_{w,b}L\left( w,b \right) =-\sum_{x_i\in M}{y_i\left( w·x_i+b \right)}$$<br>通过随机梯度下降法来求解最优化问题。首先，任意选择一个超平面$w_0,b_0$，然后用梯度下降法不断地极小化目标函数，一次随机选取一个误分类点使其梯度下降，而不是一次使$M$中所有误分类点的梯度下降。</p>
 <p>计算得到梯度为：$$<br>\nabla _wL\left( w,b \right) =-\sum_{x_i\in M}{y_ix_i}<br>$$$$<br>\nabla _bL\left( w,b \right) =-\sum_{x_i\in M}{y_i}<br>$$对权值进行更新：$$<br>w\gets w+\eta y_ix_i<br>$$$$<br>b\gets b+\eta y_i<br>$$其中$\eta$称为学习率，通过迭代可以期待损失函数不断减小，直到为0.</p>
 <p>对于上述算法过程，我们可以有一个直观的解释：当一个实例点被误分类，则调整$w,b$的值，使分离超平面向该误分类点的一侧移动，以较少该误分类点与超平面的距离，直至超平面越过该误分类点使其被正确分类。当然感知机学习算法由于采用不同的初值或选取不同的误分类点，解可以不同。</p>
 <h3 id="3-2-对偶形式"><a href="#3-2-对偶形式" class="headerlink" title="3.2 对偶形式"></a>3.2 对偶形式</h3><p>对偶形式的基本想法是，将$w$和$b$表示为实例$x_i$和标记$y_i$的线性组合的形式，通过求解其系数而求得$w$和$b$，我们假设初始值$w_0$和$b_0$均为0。对误分类点($x_i$,$y_i$)通过$$<br>w\gets w+\eta y_ix_i<br>$$$$<br>b\gets b+\eta y_i<br>$$逐步修改$w,b$,设修改$n$次，则最后学习到的$w,b$可以分别表示为$$<br>w=\sum_{i=1}^N{n_i\eta y_ix_i}=\sum_{i=1}^N{a_iy_ix_i}<br>$$$$<br>b=\sum_{i=1}^N{a_iy_i}<br>$$当$\eta =1$时，表示第$i$个实例点由于误分而进行更新的次数。实例点更新次数越多，意味着它距离分离超平面越近，也就越难正确分类、换句话说，这样的实例对学习结果影响最大。</p>
@@ -555,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、-感知机模型"><span class="nav-text">一、 感知机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-感知机模型"><span class="nav-text">1.1 感知机模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-感知机的几何解释"><span class="nav-text">1.2 感知机的几何解释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、感知机学习策略"><span class="nav-text">二、感知机学习策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-数据集的线性可分性"><span class="nav-text">2.1 数据集的线性可分性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-感知机学习策略"><span class="nav-text">2.2 感知机学习策略</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、感知机学习算法"><span class="nav-text">三、感知机学习算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-感知机学习算法"><span class="nav-text">3.1 感知机学习算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-对偶形式"><span class="nav-text">3.2 对偶形式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、参考资料"><span class="nav-text">四、参考资料</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、-感知机模型"><span class="nav-text">一、 感知机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-感知机模型"><span class="nav-text">1.1 感知机模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-感知机的几何解释"><span class="nav-text">1.2 感知机的几何解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、感知机学习策略"><span class="nav-text">二、感知机学习策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-数据集的线性可分性"><span class="nav-text">2.1 数据集的线性可分性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-感知机学习策略"><span class="nav-text">2.2 感知机学习策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、感知机学习算法"><span class="nav-text">三、感知机学习算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-感知机学习算法"><span class="nav-text">3.1 感知机学习算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-对偶形式"><span class="nav-text">3.2 对偶形式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、参考资料"><span class="nav-text">四、参考资料</span></a></li></ol></div>
             
 
           </div>

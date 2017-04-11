@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://yoursite.com/2017/02/20/机器学习算法系列（11）：聚类/media/14844862016675/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8B%E5%8D%886.00.14.png">
 <meta property="og:image" content="http://yoursite.com/2017/02/20/机器学习算法系列（11）：聚类/media/14844862016675/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8B%E5%8D%885.04.17.png">
 <meta property="og:image" content="http://yoursite.com/2017/02/20/机器学习算法系列（11）：聚类/media/14844862016675/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8B%E5%8D%884.11.42.png">
-<meta property="og:updated_time" content="2017-04-11T10:39:26.000Z">
+<meta property="og:updated_time" content="2017-04-11T10:59:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（11）：聚类">
 <meta name="twitter:description" content="一、引言聚类（Clustering）算法就是对大量未知标注的数据集，按照数据的内在相似性将数据集划分为多个类别，使类别内的数据相似度较大而类别间的数据相似度较小。聚类是一种无监督算法。给定一个有$N$个对象的数据集，构造数据的$K$个簇，$k≤n$，同时满足，每个簇至少包含一个对象，每一个对象属于且仅属于一个簇，将满足上述条件的$K$个簇称作一个合理划分。它的主要思想是对于给定的类别数目$K$，首">
@@ -407,29 +407,29 @@
 </ul>
 <p>$n$维向量$x$和$y$的夹角记作$\theta$，根据余弦定理，其余弦值为：<br>$$<br>\cos\left(\theta\right)=\frac{x^Ty}{|x|·|y|}=\frac{\sum_{i=1}^n{x_iy_i}}{\sqrt{\sum_{i=1}^n{x_{i}^{2}}}·\sqrt{\sum_{i=1}^n{y_{i}^{2}}}}<br>$$</p>
 <p>这两个向量的相关系数是：$$<br>\rho_{XY}=\frac{cov\left(X,Y\right)}{\sigma_x\sigma_y}=\frac{E\left[\left(x-u_x\right)\left(y-u_y\right)\right]}{\sigma_x\sigma_y}<br>$$$$<br>=\frac{\sum_{i=1}^n{\left(x_i-\mu_x\right)\left(y_i-\mu_y\right)}}{\sqrt{\sum_{i=1}^n{\left(x_i-\mu_x\right)^2}}\sqrt{\sum_{i=1}^n{\left(y_i-\mu_y\right)^2}}}<br>$$<br>相关系数即将$x,y$坐标向量各自平移到原点后的夹角余弦。这即揭示了为何文档间求距离使用夹角余弦，因为这个物理量表征了文档去均值化后的随机向量间的相关系数。</p>
-<h2 id="三、K-Means算法"><a href="#三、K-Means算法" class="headerlink" title="三、K-Means算法"></a>三、K-Means算法</h2><h4 id="3-1-原理"><a href="#3-1-原理" class="headerlink" title="3.1 原理"></a>3.1 原理</h4><p>K-Means算法属于基于划分的聚类算法，对N 维欧氏空间中的点进行聚类，是一种最简单的无监督学习方法。它通过迭代来实现，其基本思想是：每次确定K个类别中心，然后将各个结点归属到与之距离最近的中心点所在的Cluster，然后将类别中心更新为属于各Cluster的所有样本的均值，反复迭代，直至类别中心不再发生变化或变化小于某阈值。</p>
-<h4 id="3-2-基本假设"><a href="#3-2-基本假设" class="headerlink" title="3.2 基本假设"></a>3.2 基本假设</h4><p>K-Means聚类需要对数据进行一个基本假设：对于每一个 cluster ，我们可以选出一个中心点 (center) ，使得该 cluster 中的所有的点到该中心点的距离小于到其他 cluster 的中心的距离。虽然实际情况中得到的数据并不能保证总是满足这样的约束，但这通常已经是我们所能达到的最好的结果，而那些误差通常是固有存在的或者问题本身的不可分性造成的。例如下图所示的两个高斯分布，从两个分布中随机地抽取一些数据点出来，混杂到一起，现在要让你将这些混杂在一起的数据点按照它们被生成的那个分布分开来：<img src="media/14844862016675/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8A%E5%8D%889.30.11.png" alt="屏幕快照 2017-03-25 上午9.30.11"><br>由于这两个分布本身有很大一部分重叠在一起了，例如，对于数据点 2.5 来说，它由两个分布产生的概率都是相等的，你所做的只能是一个猜测；稍微好一点的情况是 2 ，通常我们会将它归类为左边的那个分布，因为概率大一些，然而此时它由右边的分布生成的概率仍然是比较大的，我们仍然有不小的几率会猜错。而整个阴影部分是我们所能达到的最小的猜错的概率，这来自于问题本身的不可分性，无法避免。因此，我们将 k-means 所依赖的这个假设看作是合理的。</p>
-<h4 id="3-3-算法步骤"><a href="#3-3-算法步骤" class="headerlink" title="3.3 算法步骤"></a>3.3 算法步骤</h4><p>假定输入样本为$S=x_1,x_2,···,x_n$，则算法步骤为：</p>
+<h2 id="三、K-Means算法"><a href="#三、K-Means算法" class="headerlink" title="三、K-Means算法"></a>三、K-Means算法</h2><h3 id="3-1-原理"><a href="#3-1-原理" class="headerlink" title="3.1 原理"></a>3.1 原理</h3><p>K-Means算法属于基于划分的聚类算法，对N 维欧氏空间中的点进行聚类，是一种最简单的无监督学习方法。它通过迭代来实现，其基本思想是：每次确定K个类别中心，然后将各个结点归属到与之距离最近的中心点所在的Cluster，然后将类别中心更新为属于各Cluster的所有样本的均值，反复迭代，直至类别中心不再发生变化或变化小于某阈值。</p>
+<h3 id="3-2-基本假设"><a href="#3-2-基本假设" class="headerlink" title="3.2 基本假设"></a>3.2 基本假设</h3><p>K-Means聚类需要对数据进行一个基本假设：对于每一个 cluster ，我们可以选出一个中心点 (center) ，使得该 cluster 中的所有的点到该中心点的距离小于到其他 cluster 的中心的距离。虽然实际情况中得到的数据并不能保证总是满足这样的约束，但这通常已经是我们所能达到的最好的结果，而那些误差通常是固有存在的或者问题本身的不可分性造成的。例如下图所示的两个高斯分布，从两个分布中随机地抽取一些数据点出来，混杂到一起，现在要让你将这些混杂在一起的数据点按照它们被生成的那个分布分开来：<img src="media/14844862016675/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8A%E5%8D%889.30.11.png" alt="屏幕快照 2017-03-25 上午9.30.11"><br>由于这两个分布本身有很大一部分重叠在一起了，例如，对于数据点 2.5 来说，它由两个分布产生的概率都是相等的，你所做的只能是一个猜测；稍微好一点的情况是 2 ，通常我们会将它归类为左边的那个分布，因为概率大一些，然而此时它由右边的分布生成的概率仍然是比较大的，我们仍然有不小的几率会猜错。而整个阴影部分是我们所能达到的最小的猜错的概率，这来自于问题本身的不可分性，无法避免。因此，我们将 k-means 所依赖的这个假设看作是合理的。</p>
+<h3 id="3-3-算法步骤"><a href="#3-3-算法步骤" class="headerlink" title="3.3 算法步骤"></a>3.3 算法步骤</h3><p>假定输入样本为$S=x_1,x_2,···,x_n$，则算法步骤为：</p>
 <ul>
 <li>1、选择初始的K个类别中心$\mu_1,\mu_2,···,\mu_k$。这个过程通常是针对具体地问题有一些启发式的选取方法，或者大多数情况下采用随机选取的办法。因为K-Means并不能保证全局最优，而是否能收敛到全局最优解其实和初值的选取有很大的关系，所以有时候我们会多次选取初值跑一个K-Means，并取其中最好的一次结果。</li>
 <li>2、对于每个样本$x_i$，将其标记为距离类别中心最近的类别，即：$$label_i=arg\underset{1\le j\le k}{\min}||x_i-\mu_j||$$</li>
 <li>3、将每个类别中心更新为隶属于该类别的所有样本的均值$$<br>\mu_j=\frac{1}{|c_j|}\sum_{i\in c_j}{x_i}<br>$$</li>
 <li>4、重复前两步，直到类别中心的变化小于某阈值或者达到最大迭代次数</li>
 </ul>
-<h4 id="3-4-理论分析"><a href="#3-4-理论分析" class="headerlink" title="3.4 理论分析"></a>3.4 理论分析</h4><p>基于上述的假设，我们导出K-Means所要优化的目标函数：设我们一共有N个数据点需要分为K个Cluster，K-Means需要最小化的损失函数为：<br>$$<br>J=\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^K{r_{ij}||x_i-\mu_j||^2}}<br>$$<br>这个函数，其中$r_{ij}$在数据点$n$被归类到$Cluster(j) $的时候为1，否则为0.直接寻找$r_{ij}$和$\mu_j$来最小化$J$并不容易，不过我们可以通过反复迭代以下两步的方法来进行：</p>
+<h3 id="3-4-理论分析"><a href="#3-4-理论分析" class="headerlink" title="3.4 理论分析"></a>3.4 理论分析</h3><p>基于上述的假设，我们导出K-Means所要优化的目标函数：设我们一共有N个数据点需要分为K个Cluster，K-Means需要最小化的损失函数为：<br>$$<br>J=\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^K{r_{ij}||x_i-\mu_j||^2}}<br>$$<br>这个函数，其中$r_{ij}$在数据点$n$被归类到$Cluster(j) $的时候为1，否则为0.直接寻找$r_{ij}$和$\mu_j$来最小化$J$并不容易，不过我们可以通过反复迭代以下两步的方法来进行：</p>
 <ul>
 <li>1、先固定$\mu_j$，选择最优的$r_{ij}$，很容易看出，只要将数据点归类到离它最近的那个中心就能保证$J$最小，通俗来讲，因为每个样本点都有一个$r_{ij}$，不是0就是1，那么我们要想让$J$最小，就要保证当一个样本的$r_{ij=1}$时，与类别中心距离的平方和达到最小。这一步即</li>
 <li>2、然后固定$r_{ij}$，再求最优的$\mu_j$。将$J$对$\mu_k$求导并令导数等于零，即令 $$<br>\frac{\partial J}{\partial\mu_j}=\sum_{i=1}^{N_j}{r_{ij}\left(x_i-\mu_j\right)}=0<br>$$<br>很容易得到$J$最小的时候$\mu_j$应该满足$$<br>\mu_j=\frac{\sum_i{r_{ij}x_i}}{\sum_i{r_{ij}}}<br>$$</li>
 </ul>
 <p>$\mu_j$的值是所有$Cluster(j)$中的数据点的平均值。由于每一次迭代都是取到$J$的最小值，因此$J$智慧不断地减小或者保持不变，而不会增加，这保证了K-Means最终或到达一个极小值。虽然K-Means并不能保证总是得到全局最优解，但是对于这样的问题，像K-Means这样复杂度的算法，这样的结果已经是很不错了。</p>
-<h4 id="3-5-算法演练"><a href="#3-5-算法演练" class="headerlink" title="3.5 算法演练"></a>3.5 算法演练</h4><p>下面看一个来自WIKI的实例<br><img src="media/14844862016675/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8A%E5%8D%8810.29.32.png" alt="屏幕快照 2017-03-25 上午10.29.32"></p>
+<h3 id="3-5-算法演练"><a href="#3-5-算法演练" class="headerlink" title="3.5 算法演练"></a>3.5 算法演练</h3><p>下面看一个来自WIKI的实例<br><img src="media/14844862016675/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8A%E5%8D%8810.29.32.png" alt="屏幕快照 2017-03-25 上午10.29.32"></p>
 <ul>
 <li>1、随机生成三个初始的中心点（这个中心点不一定是样本点），即图中红、绿、蓝三个小圈；</li>
 <li>2、计算每个样本点与这三个中心店的距离，并将它们归属到离得最近的中心点对应的Cluster。此时图中分成了三个簇，分别是红色、绿色、蓝色部分；</li>
 <li>3、重新分别计算三个簇中所有样本点的类别中心，指定为新的类别中心。此时红色、绿色、蓝色类的中点都发生了迁移。</li>
 <li>4、反复迭代第2步和第3步，直至收敛。</li>
 </ul>
-<h4 id="3-6-总结"><a href="#3-6-总结" class="headerlink" title="3.6 总结"></a>3.6 总结</h4><ul>
+<h3 id="3-6-总结"><a href="#3-6-总结" class="headerlink" title="3.6 总结"></a>3.6 总结</h3><ul>
 <li>优点：<ul>
 <li>是解决聚类问题的一种经典算法，简单、快速</li>
 <li>对处理大数据集，该算法保持可伸缩性和高效率 </li>
@@ -444,10 +444,10 @@
 </ul>
 </li>
 </ul>
-<h4 id="3-7-Canopy算法"><a href="#3-7-Canopy算法" class="headerlink" title="3.7 Canopy算法"></a>3.7 Canopy算法</h4><h2 id="四、K-Mediods算法"><a href="#四、K-Mediods算法" class="headerlink" title="四、K-Mediods算法"></a>四、K-Mediods算法</h2><h2 id="五、层次聚类（Hierarchical-Clustering"><a href="#五、层次聚类（Hierarchical-Clustering" class="headerlink" title="五、层次聚类（Hierarchical Clustering"></a>五、层次聚类（Hierarchical Clustering</h2><p>）</p>
-<h2 id="六、DBSCAN算法"><a href="#六、DBSCAN算法" class="headerlink" title="六、DBSCAN算法"></a>六、DBSCAN算法</h2><h4 id="6-1-密度聚类方法"><a href="#6-1-密度聚类方法" class="headerlink" title="6.1 密度聚类方法"></a>6.1 密度聚类方法</h4><p>密度聚类方法的指导思想是，只要样本点的密度大于某阈值，则将该样本添加到最近的簇中。这类算法能克服基于距离的算法只能发现“类圆”（凸）的聚类的缺点，可发现任意形状的聚类，且对噪声数据不敏感。但计算密度单元的计算复杂度大，需要建立空间索引来降低计算量。<br>其代表算法为DBSCAN算法和密度最大值算法。</p>
-<h4 id="6-2-DBSCAN算法原理"><a href="#6-2-DBSCAN算法原理" class="headerlink" title="6.2 DBSCAN算法原理"></a>6.2 DBSCAN算法原理</h4><p>DBCSAN（Density-Based Spatial Clustering of Applications with Noise）是一个比较有代表性的基于密度的聚类算法。与划分和层次聚类方法不同，它将簇定义为密度相连的点的最大集合，能够把具有足够高密度的区域划分为簇，并可在有“噪声”的数据中发现任意形状的聚类。</p>
-<h4 id="6-3-若干概念"><a href="#6-3-若干概念" class="headerlink" title="6.3 若干概念"></a>6.3 若干概念</h4><ul>
+<h3 id="3-7-Canopy算法"><a href="#3-7-Canopy算法" class="headerlink" title="3.7 Canopy算法"></a>3.7 Canopy算法</h3><h2 id="四、K-Mediods算法"><a href="#四、K-Mediods算法" class="headerlink" title="四、K-Mediods算法"></a>四、K-Mediods算法</h2><h2 id="五、层次聚类（Hierarchical-Clustering"><a href="#五、层次聚类（Hierarchical-Clustering" class="headerlink" title="五、层次聚类（Hierarchical Clustering"></a>五、层次聚类（Hierarchical Clustering</h2><p>）</p>
+<h2 id="六、DBSCAN算法"><a href="#六、DBSCAN算法" class="headerlink" title="六、DBSCAN算法"></a>六、DBSCAN算法</h2><h3 id="6-1-密度聚类方法"><a href="#6-1-密度聚类方法" class="headerlink" title="6.1 密度聚类方法"></a>6.1 密度聚类方法</h3><p>密度聚类方法的指导思想是，只要样本点的密度大于某阈值，则将该样本添加到最近的簇中。这类算法能克服基于距离的算法只能发现“类圆”（凸）的聚类的缺点，可发现任意形状的聚类，且对噪声数据不敏感。但计算密度单元的计算复杂度大，需要建立空间索引来降低计算量。<br>其代表算法为DBSCAN算法和密度最大值算法。</p>
+<h3 id="6-2-DBSCAN算法原理"><a href="#6-2-DBSCAN算法原理" class="headerlink" title="6.2 DBSCAN算法原理"></a>6.2 DBSCAN算法原理</h3><p>DBCSAN（Density-Based Spatial Clustering of Applications with Noise）是一个比较有代表性的基于密度的聚类算法。与划分和层次聚类方法不同，它将簇定义为密度相连的点的最大集合，能够把具有足够高密度的区域划分为簇，并可在有“噪声”的数据中发现任意形状的聚类。</p>
+<h3 id="6-3-若干概念"><a href="#6-3-若干概念" class="headerlink" title="6.3 若干概念"></a>6.3 若干概念</h3><ul>
 <li>对象的$\varepsilon -$领域：给定对象在半径$\varepsilon$内的区域</li>
 <li>核心对象：对于给定的数目$m$，如果一个对象的$\varepsilon -$领域至少包含$m$个对象，则称该对象为核心对象。</li>
 <li><p>直接密度可达：给定一个对象集合$D$，如果p是在q的$\varepsilon -$领域内，而q是一个核心对象，我们说对象p从对象q出发时直接密度可达的。<br>如图$\varepsilon =1,m=5$，q是一个核心对象，从对象q出发到对象p是直接密度可达的。</p>
@@ -464,7 +464,7 @@
 
 </li>
 </ul>
-<h4 id="6-4-算法步骤"><a href="#6-4-算法步骤" class="headerlink" title="6.4 算法步骤"></a>6.4 算法步骤</h4><p>下面这张图来自WIKI，图上有若干个点，其中标出了A、B、C、N这四个点，据此来说明这个算法的步骤：</p>
+<h3 id="6-4-算法步骤"><a href="#6-4-算法步骤" class="headerlink" title="6.4 算法步骤"></a>6.4 算法步骤</h3><p>下面这张图来自WIKI，图上有若干个点，其中标出了A、B、C、N这四个点，据此来说明这个算法的步骤：</p>
 <center><img src="media/14844862016675/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8A%E5%8D%8811.39.21.png" alt="屏幕快照 2017-03-25 上午11.39.21"></center>
 
 <ul>
@@ -478,7 +478,7 @@
 <li>非核心对象可以是簇的一部分，构成了簇的边缘（edge）；</li>
 <li>包含过少对象的簇被认为是噪声；</li>
 </ul>
-<h5 id="6-5-总结"><a href="#6-5-总结" class="headerlink" title="6.5 总结"></a>6.5 总结</h5><ul>
+<h3 id="6-5-总结"><a href="#6-5-总结" class="headerlink" title="6.5 总结"></a>6.5 总结</h3><ul>
 <li><p>优点</p>
 <ul>
 <li>无需确定聚类个数：DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means. </li>
@@ -498,12 +498,12 @@
 </ul>
 </li>
 </ul>
-<h2 id="七、OPTICS算法"><a href="#七、OPTICS算法" class="headerlink" title="七、OPTICS算法"></a>七、OPTICS算法</h2><h2 id="八、密度最大值聚类"><a href="#八、密度最大值聚类" class="headerlink" title="八、密度最大值聚类"></a>八、密度最大值聚类</h2><h4 id="8-1-引言"><a href="#8-1-引言" class="headerlink" title="8.1 引言"></a>8.1 引言</h4><p>2014年6月，Alex Rodriguez和Alessandro Laio在$Science$上发表了一篇名为《Clustering by fast search and find of density peaks》的文章，提供了一种简洁而优美的聚类算法，是一种基于密度的聚类方法，可以识别各种形状的类簇，并且参数很容易确定。它克服了DBSCAN中不同类的密度差别大、邻域范围难以设定的问题，鲁棒性强。<br>在文章中提出的聚类方法DPCA算法（Desity Peaks Clustering Algorithm）基于这样一种假设：对于一个数据集，聚类中心被一些低局部密度的数据点包围，而且这些低局部密度点距离其他有高局部密度的点的距离都比较大。</p>
-<h4 id="8-2-若干概念"><a href="#8-2-若干概念" class="headerlink" title="8.2 若干概念"></a>8.2 若干概念</h4><ul>
+<h2 id="七、OPTICS算法"><a href="#七、OPTICS算法" class="headerlink" title="七、OPTICS算法"></a>七、OPTICS算法</h2><h2 id="八、密度最大值聚类"><a href="#八、密度最大值聚类" class="headerlink" title="八、密度最大值聚类"></a>八、密度最大值聚类</h2><h3 id="8-1-引言"><a href="#8-1-引言" class="headerlink" title="8.1 引言"></a>8.1 引言</h3><p>2014年6月，Alex Rodriguez和Alessandro Laio在$Science$上发表了一篇名为《Clustering by fast search and find of density peaks》的文章，提供了一种简洁而优美的聚类算法，是一种基于密度的聚类方法，可以识别各种形状的类簇，并且参数很容易确定。它克服了DBSCAN中不同类的密度差别大、邻域范围难以设定的问题，鲁棒性强。<br>在文章中提出的聚类方法DPCA算法（Desity Peaks Clustering Algorithm）基于这样一种假设：对于一个数据集，聚类中心被一些低局部密度的数据点包围，而且这些低局部密度点距离其他有高局部密度的点的距离都比较大。</p>
+<h3 id="8-2-若干概念"><a href="#8-2-若干概念" class="headerlink" title="8.2 若干概念"></a>8.2 若干概念</h3><ul>
 <li>局部密度$\rho_i$的定义为：$$\rho_i=\sum_j{\chi\left(d_{ij}-d_c\right)}$$，其中，$$<br>\chi\left(x\right)=\left\{\begin{array}{l}<br>  1 if x&lt;0\\<br>  0 if otherwise\\<br>\end{array}\right.<br>$$<br>其中$d_c$是一个截断距离，$\rho_i$即到对象$i$的距离小于$d_c$的对象的个数。由于该算法只对$\rho_i$的相对值敏感，所以对$d_c$的选择是比较稳健的。</li>
 <li>高局部密度点距离$\delta_i$，其定义为：$$<br>\delta_i=\underset{j:\rho_j&gt;\rho_i}{\min}\left(d_{ij}\right)<br>$$<br>即在局部密度高于对象$i$的所有对象中，到对象$i$最近的距离。<br>而极端地，对于密度最大的那个对象，我们设置$\delta=max(d_{ij})$；<br>只有那些密度是局部或者全局最大的点才会有远大于正常值的高局部密度点距离。</li>
 </ul>
-<h4 id="8-3-聚类过程"><a href="#8-3-聚类过程" class="headerlink" title="8.3 聚类过程"></a>8.3 聚类过程</h4><p>这个聚类实例摘自作者的PPT讲演，在一个二维空间中对数据进行聚类，具体步骤如下：</p>
+<h3 id="8-3-聚类过程"><a href="#8-3-聚类过程" class="headerlink" title="8.3 聚类过程"></a>8.3 聚类过程</h3><p>这个聚类实例摘自作者的PPT讲演，在一个二维空间中对数据进行聚类，具体步骤如下：</p>
 <ul>
 <li><p>1、首先计算每一个点的局部密度$\rho_i$，如图中，$\rho_1=7,\rho_8=5,\rho_{10}=4$<img src="media/14844862016675/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8B%E5%8D%885.46.16.png" alt="屏幕快照 2017-03-25 下午5.46.16"></p>
 </li>
@@ -514,7 +514,7 @@
 <li>5、将其他的点分配给距离其最近的有着更高的局部密度的簇。（Assign each point to the same cluster of its nearest neighbor of higher density）<img src="media/14844862016675/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8B%E5%8D%886.00.14.png" alt="屏幕快照 2017-03-25 下午6.00.14"></li>
 </ul>
 <p>左图是所有点在二维空间的分布，右图是以$\rho$为横坐标，以$\delta$为纵坐标绘制的决策图。容易发现，1和10两个点的$\rho_i$和$\delta_i$都比较大，作为簇的中心点。26、27、28三个点的$\delta$也比较大，但是$\rho比较小$，所以是异常点。</p>
-<h4 id="8-4-一些关键点"><a href="#8-4-一些关键点" class="headerlink" title="8.4 一些关键点"></a>8.4 一些关键点</h4><ul>
+<h3 id="8-4-一些关键点"><a href="#8-4-一些关键点" class="headerlink" title="8.4 一些关键点"></a>8.4 一些关键点</h3><ul>
 <li><p>簇中心的识别</p>
 <ul>
 <li>那些有着比较大的局部密度$\rho_i$和很大的高局部密度$\delta_i$的点被认为是簇的中心；<br>而高局部密度距离$\delta_i$较大但局部密度$\rho_i$较小的点是异常点；<br>确定簇中心之后，其他点按照距离已知簇的中心最近进行分类，也可以按照密度可达的方法进行分类。<br>但是，这里我们在确定聚类中心时，没有定量地分析，而是通过肉眼观察，包含很多的主观因素。在上图中可以分明地用肉眼判断聚类中心，但是有些情况下无法用肉眼来判断。不过，对于那些在决策图中无法用肉眼判断出聚类中心的情形，作者在文中给出了一种确定聚类中心个数的提醒：计算一个将$\rho$值和$\delta$值综合考虑的量$$<br>\gamma_i=\rho_i\delta_i<br>$$，显然$\gamma$值越大，越有可能是聚类中心。因此，只需对其降序排列，然后从前往后截取若干个数据点作为聚类中心就可以了。<br>我们把排序后的$\gamma$在坐标平面（下标为横轴，$\gamma$值为纵轴）画出来，由图可见，非聚类中心的$gamma$值比较平滑，而从非聚类中心过渡到聚类中心时$\gamma$有一个明显的跳跃，这个跳跃用肉眼或数值检测应该可以判断出来。作者在文末还提到，对于人工随机生成的数据集，$\gamma$的分布还满足幂次定律，即$log\gamma$，且斜率依赖于数据维度。<center><img src="media/14844862016675/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8B%E5%8D%885.04.17.png" alt="屏幕快照 2017-03-25 下午5.04.17"></center></li>
@@ -531,7 +531,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="九、谱聚类（Spectral-Clustering）"><a href="#九、谱聚类（Spectral-Clustering）" class="headerlink" title="九、谱聚类（Spectral Clustering）"></a>九、谱聚类（Spectral Clustering）</h2><h2 id="十、降维（Dimensionality-Reduction）"><a href="#十、降维（Dimensionality-Reduction）" class="headerlink" title="十、降维（Dimensionality Reduction）"></a>十、降维（Dimensionality Reduction）</h2><h2 id="十一、聚类数目的选择（Deciding-the-Number-of-Clusterings）"><a href="#十一、聚类数目的选择（Deciding-the-Number-of-Clusterings）" class="headerlink" title="十一、聚类数目的选择（Deciding the Number of Clusterings）"></a>十一、聚类数目的选择（Deciding the Number of Clusterings）</h2><h2 id="高斯混合模型、EM"><a href="#高斯混合模型、EM" class="headerlink" title="高斯混合模型、EM"></a>高斯混合模型、EM</h2><h2 id="矢量量化（Vector-Quantization）"><a href="#矢量量化（Vector-Quantization）" class="headerlink" title="矢量量化（Vector Quantization）"></a>矢量量化（Vector Quantization）</h2>
+<h2 id="九、谱聚类（Spectral-Clustering）"><a href="#九、谱聚类（Spectral-Clustering）" class="headerlink" title="九、谱聚类（Spectral Clustering）"></a>九、谱聚类（Spectral Clustering）</h2><h2 id="十、降维（Dimensionality-Reduction）"><a href="#十、降维（Dimensionality-Reduction）" class="headerlink" title="十、降维（Dimensionality Reduction）"></a>十、降维（Dimensionality Reduction）</h2><h2 id="十一、聚类数目的选择（Deciding-the-Number-of-Clusterings）"><a href="#十一、聚类数目的选择（Deciding-the-Number-of-Clusterings）" class="headerlink" title="十一、聚类数目的选择（Deciding the Number of Clusterings）"></a>十一、聚类数目的选择（Deciding the Number of Clusterings）</h2><h2 id="十二、高斯混合模型、EM"><a href="#十二、高斯混合模型、EM" class="headerlink" title="十二、高斯混合模型、EM"></a>十二、高斯混合模型、EM</h2><h2 id="十三、矢量量化（Vector-Quantization）"><a href="#十三、矢量量化（Vector-Quantization）" class="headerlink" title="十三、矢量量化（Vector Quantization）"></a>十三、矢量量化（Vector Quantization）</h2>
       
     </div>
 
@@ -704,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、引言"><span class="nav-text">一、引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、相似度、距离计算方法"><span class="nav-text">二、相似度、距离计算方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、K-Means算法"><span class="nav-text">三、K-Means算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-原理"><span class="nav-text">3.1 原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-基本假设"><span class="nav-text">3.2 基本假设</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-算法步骤"><span class="nav-text">3.3 算法步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-理论分析"><span class="nav-text">3.4 理论分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-5-算法演练"><span class="nav-text">3.5 算法演练</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-6-总结"><span class="nav-text">3.6 总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-7-Canopy算法"><span class="nav-text">3.7 Canopy算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、K-Mediods算法"><span class="nav-text">四、K-Mediods算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、层次聚类（Hierarchical-Clustering"><span class="nav-text">五、层次聚类（Hierarchical Clustering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、DBSCAN算法"><span class="nav-text">六、DBSCAN算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-密度聚类方法"><span class="nav-text">6.1 密度聚类方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-DBSCAN算法原理"><span class="nav-text">6.2 DBSCAN算法原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-若干概念"><span class="nav-text">6.3 若干概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-4-算法步骤"><span class="nav-text">6.4 算法步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-5-总结"><span class="nav-text">6.5 总结</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、OPTICS算法"><span class="nav-text">七、OPTICS算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、密度最大值聚类"><span class="nav-text">八、密度最大值聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-1-引言"><span class="nav-text">8.1 引言</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-若干概念"><span class="nav-text">8.2 若干概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-3-聚类过程"><span class="nav-text">8.3 聚类过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-4-一些关键点"><span class="nav-text">8.4 一些关键点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、谱聚类（Spectral-Clustering）"><span class="nav-text">九、谱聚类（Spectral Clustering）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十、降维（Dimensionality-Reduction）"><span class="nav-text">十、降维（Dimensionality Reduction）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十一、聚类数目的选择（Deciding-the-Number-of-Clusterings）"><span class="nav-text">十一、聚类数目的选择（Deciding the Number of Clusterings）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高斯混合模型、EM"><span class="nav-text">高斯混合模型、EM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矢量量化（Vector-Quantization）"><span class="nav-text">矢量量化（Vector Quantization）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、引言"><span class="nav-text">一、引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、相似度、距离计算方法"><span class="nav-text">二、相似度、距离计算方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、K-Means算法"><span class="nav-text">三、K-Means算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-原理"><span class="nav-text">3.1 原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-基本假设"><span class="nav-text">3.2 基本假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-算法步骤"><span class="nav-text">3.3 算法步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-理论分析"><span class="nav-text">3.4 理论分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-算法演练"><span class="nav-text">3.5 算法演练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-总结"><span class="nav-text">3.6 总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-Canopy算法"><span class="nav-text">3.7 Canopy算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、K-Mediods算法"><span class="nav-text">四、K-Mediods算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、层次聚类（Hierarchical-Clustering"><span class="nav-text">五、层次聚类（Hierarchical Clustering</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、DBSCAN算法"><span class="nav-text">六、DBSCAN算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-密度聚类方法"><span class="nav-text">6.1 密度聚类方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-DBSCAN算法原理"><span class="nav-text">6.2 DBSCAN算法原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-3-若干概念"><span class="nav-text">6.3 若干概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-4-算法步骤"><span class="nav-text">6.4 算法步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-5-总结"><span class="nav-text">6.5 总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、OPTICS算法"><span class="nav-text">七、OPTICS算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、密度最大值聚类"><span class="nav-text">八、密度最大值聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-引言"><span class="nav-text">8.1 引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-若干概念"><span class="nav-text">8.2 若干概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-聚类过程"><span class="nav-text">8.3 聚类过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-一些关键点"><span class="nav-text">8.4 一些关键点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、谱聚类（Spectral-Clustering）"><span class="nav-text">九、谱聚类（Spectral Clustering）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十、降维（Dimensionality-Reduction）"><span class="nav-text">十、降维（Dimensionality Reduction）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十一、聚类数目的选择（Deciding-the-Number-of-Clusterings）"><span class="nav-text">十一、聚类数目的选择（Deciding the Number of Clusterings）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二、高斯混合模型、EM"><span class="nav-text">十二、高斯混合模型、EM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三、矢量量化（Vector-Quantization）"><span class="nav-text">十三、矢量量化（Vector Quantization）</span></a></li></ol></div>
             
 
           </div>

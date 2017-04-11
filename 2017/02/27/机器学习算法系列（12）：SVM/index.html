@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-19%20%E4%B8%8B%E5%8D%882.15.14.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8810.22.45.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8811.03.17.png">
-<meta property="og:updated_time" content="2017-04-11T10:39:21.000Z">
+<meta property="og:updated_time" content="2017-04-11T10:58:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（12）：SVM">
 <meta name="twitter:description" content="线性可分支持向量机：硬间隔支持向量机 线性支持向量机：软间隔支持向量机学习一个线性分类器 非线性支持向量机：当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。">
@@ -353,16 +353,16 @@
 <p><strong>线性支持向量机：</strong>软间隔支持向量机学习一个线性分类器</p>
 <p><strong>非线性支持向量机：</strong>当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。</p>
 <a id="more"></a>
-<h2 id="一、线性可分支持向量机与硬间隔最大化"><a href="#一、线性可分支持向量机与硬间隔最大化" class="headerlink" title="一、线性可分支持向量机与硬间隔最大化"></a>一、线性可分支持向量机与硬间隔最大化</h2><h4 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h4><p>假设给定一个特征空间上的训练数据集<br>$$<br>T=\left\{ \left( x_1,y_1 \right) ,\left( x_2,y_2 \right) ,···,\left( x_N,y_N \right) \right\}<br>$$<br>其中$<br>x_i\in R^n,y_i\in \left\{ +1,-1 \right\} ,i=1,2,···,N<br>$，$x_i$为第$i$个特征向量，也称为实例，$y_i$为$x_i$的类标记，当$y_i=+1$时，称$x_i$为正例；当$y_i=-1$时，称$x_i$为负例，$(x_i,y_i)$称为样本点。再假设训练数据集是线性可分的。</p>
+<h2 id="一、线性可分支持向量机与硬间隔最大化"><a href="#一、线性可分支持向量机与硬间隔最大化" class="headerlink" title="一、线性可分支持向量机与硬间隔最大化"></a>一、线性可分支持向量机与硬间隔最大化</h2><h3 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h3><p>假设给定一个特征空间上的训练数据集<br>$$<br>T=\left\{ \left( x_1,y_1 \right) ,\left( x_2,y_2 \right) ,···,\left( x_N,y_N \right) \right\}<br>$$<br>其中$<br>x_i\in R^n,y_i\in \left\{ +1,-1 \right\} ,i=1,2,···,N<br>$，$x_i$为第$i$个特征向量，也称为实例，$y_i$为$x_i$的类标记，当$y_i=+1$时，称$x_i$为正例；当$y_i=-1$时，称$x_i$为负例，$(x_i,y_i)$称为样本点。再假设训练数据集是线性可分的。</p>
 <p>给定线性可分训练数据集，通过<strong>间隔最大化</strong>得到的<strong>分离超平面</strong>为$$<br>w^T·x+b=0<br>$$<br>以及相应的<strong>分类决策函数</strong>$$<br>f\left( x \right) =sign\left( w^T·x+b \right)<br>$$</p>
 <p>该决策函数称为线性可分支持向量机</p>
-<h4 id="1-2-函数间隔与几何间隔"><a href="#1-2-函数间隔与几何间隔" class="headerlink" title="1.2 函数间隔与几何间隔"></a>1.2 函数间隔与几何间隔</h4><p>一般来说，一个点距离分离超平面的远近可以表示分类预测的确信程度。在超平面确定的情况下$|w^T·x+b|$能够相对地表示点$x$距离超平面的远近。而$w^T·x+b$的符号与类标记的符号是否一致能够表示分类是否正确，所以可用$y(w^T·x+b)$来表示分类的正确性与确信度，这就是<strong>函数间隔</strong><code>functional margin</code>的概念</p>
+<h3 id="1-2-函数间隔与几何间隔"><a href="#1-2-函数间隔与几何间隔" class="headerlink" title="1.2 函数间隔与几何间隔"></a>1.2 函数间隔与几何间隔</h3><p>一般来说，一个点距离分离超平面的远近可以表示分类预测的确信程度。在超平面确定的情况下$|w^T·x+b|$能够相对地表示点$x$距离超平面的远近。而$w^T·x+b$的符号与类标记的符号是否一致能够表示分类是否正确，所以可用$y(w^T·x+b)$来表示分类的正确性与确信度，这就是<strong>函数间隔</strong><code>functional margin</code>的概念</p>
 <p>但是，函数间隔有一个不足之处，就是在选择分离超平面时，只要成比例地改变$w$和$b$，超平面并没有变化，而函数间隔却以同样比例变化了。因此，我们可以对分离超平面的法向量$w$加上某些约束，使得间隔确定，此时函数间隔成为<strong>几何间隔</strong><code>geometric margin</code>。</p>
 <p>对于给定的训练数据集$T$和超平面$(w,b)$，定义超平面$w,b$关于样本点$(x_i,y_i)$的几何间隔为$$<br>\gamma _i=y_i\left( \frac{w}{||w||}·x_i+\frac{b}{||w||} \right)<br>$$</p>
 <p>定义超平面$(w,b)$关于训练数据集$T$的几何间隔为超平面$(w,b)$关于$T$中所有样本点$(x_i,y_i)$的几何间隔之最小值，即<br>$$<br>\gamma =\underset{i=1,···,N}{\min}\gamma _i<br>$$</p>
 <p>超平面$(w,b)$关于样本点$(x_i,y_i)$的几何间隔一般是实例点到超平面的带符号的距离，当样本点被超平面正确分类时就是实例点到超平面的距离。</p>
 <p>函数间隔与几何间隔的关系为$$<br>\gamma =\frac{\hat{\gamma}}{||w||}<br>$$若$||w||=1$，那么函数间隔和几何间隔相等。如果超平面参数$w$和$b$成比例地改变（超平面没有改变），函数间隔也按此比例改变，而几何间隔不变。</p>
-<h4 id="1-3-间隔最大化"><a href="#1-3-间隔最大化" class="headerlink" title="1.3 间隔最大化"></a>1.3 间隔最大化</h4><p>支持向量机学习的基本想法是求解能够正确划分训练数据集并且几何间隔最大的分离超平面。几何间隔最大的分离超平面是唯一的。</p>
+<h3 id="1-3-间隔最大化"><a href="#1-3-间隔最大化" class="headerlink" title="1.3 间隔最大化"></a>1.3 间隔最大化</h3><p>支持向量机学习的基本想法是求解能够正确划分训练数据集并且几何间隔最大的分离超平面。几何间隔最大的分离超平面是唯一的。</p>
 <p><strong>间隔最大化</strong>的直观解释是：对训练数据集找到几何间隔最大的超平面意味着以充分大的确信度对训练数据记性分类。即，不仅将正负实例点分开，而且对最难分的实例点（离超平面最近的点）也有足够大的确信度将它们分开。这样的超平面应该对未知的新实例有很好的分类预测能力。</p>
 <p><strong>最大间隔分离超平面</strong></p>
 <p>接下来求一个几何间隔最大的分离超平面，即最大间隔分离超平面。具体地，可以表示为下面的约束最优化问题：$$<br>\underset{w,b}{\max}\,\,\gamma<br>$$$$<br>s.t\,\,\,\,y_i\left( \frac{w}{||w||}·x_i+\frac{b}{||w||} \right) \geqslant \gamma \,\,,\,\,i=1,2,···,N<br>$$<br>即最大化超平面$(w,b)$关于训练数据集的几何间隔$\gamma $，约束条件表示的是超平面$w,b$关于每个训练样本点的几何间隔至少是$\gamma $</p>
@@ -384,7 +384,7 @@
 
 <p>注意到$H_1$和$H_2$平行，并且没有实例点落在他们中间。在$H_1$和$H_2$之间形成一条长带，分离超平面与他们平行且位于他们中间。长带的宽度，即$H_1$与$H_2$之间的距离成为间隔<code>margin</code>，间隔依赖于分离超平面的法向量$w$，等于$<br>\frac{2}{||w||}<br>$。$H_1$和$H_2$称为间隔边界。</p>
 <p>在决定分离超平面时只有支持向量起作用，而其他实例点并不起作用。如果移动支持向量将改变所求的解；但是如果在将俄边界以外移动其他实例点，甚至去掉这些点，则解是不会改变的。由于支持向量在确定分离超平面中起着决定性作用，所以将这种分类模型称为支持向量机。支持向量机的个数一般都很少，所以支持向量机由很少的“重要的”训练样本确定。</p>
-<h4 id="1-4-学习的对偶算法"><a href="#1-4-学习的对偶算法" class="headerlink" title="1.4 学习的对偶算法"></a>1.4 学习的对偶算法</h4><p>为了求解线性可分支持向量机的最优化问题，将它作为原始最优化问题，应用拉格朗日对偶性，通过求解对偶问题得到原始问题的最优解，这就是线性可分支持向量机的对偶算法<code>dual algorithm</code>。</p>
+<h3 id="1-4-学习的对偶算法"><a href="#1-4-学习的对偶算法" class="headerlink" title="1.4 学习的对偶算法"></a>1.4 学习的对偶算法</h3><p>为了求解线性可分支持向量机的最优化问题，将它作为原始最优化问题，应用拉格朗日对偶性，通过求解对偶问题得到原始问题的最优解，这就是线性可分支持向量机的对偶算法<code>dual algorithm</code>。</p>
 <p>这样做的优点是，一是对偶问题往往更容易求解；二是引入核函数，进而推广到非线性分类问题。</p>
 <p>首先构建拉格朗日函数，为此，对每一个不等式约束引进拉格朗日乘子$a_i≥0，i=1,2,···,N$定义拉格朗日函数：<br>$$<br>L\left( w,b,a \right) =\frac{1}{2}||w||^2-\sum_{i=1}^N{a_iy_i\left( w·x_i+b \right) +\sum_{i=1}^N{a_i}}<br>$$其中，$<br>a=\left( a_1,a_2,···,a_N \right) ^T<br>$<br>原问题是极小极大问题：<br>$$<br>\underset{w,b}{\min}\underset{a}{\max}L\left( w,b,a \right)<br>$$<br>根据拉格朗日对偶性，原始问题的对偶问题是极大极小问题：<br>$$<br>\underset{a}{\max}\underset{w,b}{\min}L\left( w,b,a \right)<br>$$</p>
 <p>为了得到对偶问题的解，需要先求$L(w,b,a)$对$w,b$的极小，再求对$a$的极大。</p>
@@ -419,14 +419,14 @@
 </ul>
 <p>在线性可分支持向量机中，$w^<em>和b^</em>$只依赖于训练数据中对应于$a_i^<em>&gt;0$的样本点$x_i,y_i$,而其他样本点对$w^</em>和b^<em>$没有影响。我们将训练数据中对应于$a_i^</em>&gt;0$的实例点$<br>x_i\in R^n<br>$称为<strong>支持向量</strong>。</p>
 <p>对于线性可分问题，上述线性可分支持向量机的学习（硬间隔最大化）算法是完美的。但是，训练数据集线性可分是理想的情形。在现实问题中，训练数据集往往是线性不可分的，即在样本中出现噪声或特异点。此时，有更一般的学习算法。</p>
-<h2 id="二、线性支持向量机与软间隔最大化"><a href="#二、线性支持向量机与软间隔最大化" class="headerlink" title="二、线性支持向量机与软间隔最大化"></a>二、线性支持向量机与软间隔最大化</h2><h4 id="2-1-线性支持向量机"><a href="#2-1-线性支持向量机" class="headerlink" title="2.1 线性支持向量机"></a>2.1 线性支持向量机</h4><p>通常情况是，训练数据中有一些特异点<code>outlier</code>，将这些特异点除去后，剩下大部分的样本点组成的集合是线性可分的。</p>
+<h2 id="二、线性支持向量机与软间隔最大化"><a href="#二、线性支持向量机与软间隔最大化" class="headerlink" title="二、线性支持向量机与软间隔最大化"></a>二、线性支持向量机与软间隔最大化</h2><h3 id="2-1-线性支持向量机"><a href="#2-1-线性支持向量机" class="headerlink" title="2.1 线性支持向量机"></a>2.1 线性支持向量机</h3><p>通常情况是，训练数据中有一些特异点<code>outlier</code>，将这些特异点除去后，剩下大部分的样本点组成的集合是线性可分的。</p>
 <p>线性不可分意味着某些样本点不能满足函数间隔大于等于1的约束条件。为了解决这个问题，可以对每个样本点引进一个松弛变量$<br>\xi \geqslant 0<br>$，使函数间隔加上松弛变量大于等于1.这样，约束条件变成$$<br>y_i\left( w·x_i+b \right) \geqslant 1-\xi _i<br>$$同时，对每个松弛变量$<br>\xi \geqslant 0<br>$，支付一个代价$<br>\xi \geqslant 0<br>$。当然，如果我们允许$<br>\xi \geqslant 0<br>$任意大的话，那任意的超平面都是符合条件的了。所以，我们在原来的目标函数后面加上一项，使得这些 $<br>\xi \geqslant 0<br>$的总和也要最小：目标函数由原来的$<br>\frac{1}{2}||w||^2<br>$变成$$<br>\frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i}<br>$$<br>这里，$C&gt;0$称为惩罚参数，一般事先由应用问题决定，控制目标函数中两项（“寻找 $margin$ 最大的超平面”和“保证数据点偏差量最小”）之间的权重，$C$越大时对误分类的惩罚增大，$C$值小时对误分类的惩罚减小。最小化目标函数包含两层含义：使$<br>\frac{1}{2}||w||^2<br>$尽量小即间隔尽量大，同时使误分类点的个数尽量小，C是调和二者的系数。</p>
 <p><code>线性支持向量机</code><br>对于给定的线性不可分的训练数据集，通过求解凸二次规划问题：<br>$$<br>\underset{w,b,\xi}{\min} \frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i}<br>$$$$<br>s.t.  y_i\left( w·x_i+b \right) \geqslant 1-\xi _i , i=1,2,···,N<br>$$$$<br>\xi _i\geqslant 0, i=1,2,···\mathrm{，}N<br>$$<br>可证明$w$的解是唯一的，但$b$的解不唯一，$b$的解存在于一个区间。</p>
 <p>用之前的方法将限制加入到目标函数中，得到如下原始最优化问题的拉格朗日函数：<br>$$<br>L\left( w,b,\xi ,a,u \right) =\frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i-\sum_{i=1}^N{a_i\left( y_i\left( w·x_i+b \right) -1+\xi _i \right) -\sum_{i=1}^N{u_i\xi _i}}}<br>$$</p>
 <p>首先求拉格朗日函数针对$<br>w,b,\xi<br>$的极小。$$<br>\frac{\partial L}{\partial w}=0\Rightarrow w=\sum_{i=1}^N{a_iy_ix_i}<br>$$$$<br>\frac{\partial L}{\partial b}=0\Rightarrow \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>\frac{\partial L}{\partial \xi _i}=0\Rightarrow C-a_i-u_i=0，i=1,2,3···,N<br>$$<br>将它们代入拉格朗日函数，得到和原来一样的目标函数。<br>$$<br>\underset{a}{\max}  -\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) +\sum_{i=1}^N{a_i}}}<br>$$$$<br>s.t. \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>C-a_i-u_i=0<br>$$$$<br>a_i\geqslant 0<br>$$$$<br>u_i\geqslant 0<br>$$</p>
 <p>不过，由于我们得到$C-a_i-u_i=0$，而又有$u_i&gt;0$（作为拉格朗日乘子的条件）,因此有$a_i≤C$,所以整个<code>dual</code>问题现在写作：<br>$$<br>\underset{a}{\max}  -\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) +\sum_{i=1}^N{a_i}}}<br>$$$$<br>s.t. \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>0\le a_i\le C ,  i=1,2,···,N<br>$$<br>和之前的结果对比一下，可以看到唯一的区别就是现在拉格朗日乘子$a$多了一个上限$C$。</p>
 <p>构造并求解上述二次规划问题后求得最优解<br>$$<br>a^<em>=\left( a_{1}^{</em>},a_{2}^{<em>},···,a_{N}^{</em>} \right) ^T<br>$$<br>然后计算$$<br>w^<em>=\sum_{i=1}^N{a_{i}^{</em>}y_ix_i}<br>$$<br>选择$a^<em>$的一个分量$a_i^</em>$适合约束条件$0&lt;a_i&lt;C$,计算$$<br>b^<em>=y_j-\sum_{i=1}^N{y_ia_{i}^{</em>}\left( x_i·x_j \right)}<br>$$<br>对任一适合条件都可求得一个$b^*$，但是由于原始问题对$b$的求解并不唯一，所以实际计算时可以取在所有符合条件的样本点上的平均值。</p>
-<h4 id="2-2-支持向量"><a href="#2-2-支持向量" class="headerlink" title="2.2 支持向量"></a>2.2 支持向量</h4><p>再现性不可分的情况下，将对偶问题的解中对应于$a_i^*&gt;0$的样本点$(x_i,y_i)$的实例$x_i$称为支持向量（软间隔的支持向量）。如图所示，这时的支持向量要比线性可分时的情况复杂一些。</p>
+<h3 id="2-2-支持向量"><a href="#2-2-支持向量" class="headerlink" title="2.2 支持向量"></a>2.2 支持向量</h3><p>再现性不可分的情况下，将对偶问题的解中对应于$a_i^*&gt;0$的样本点$(x_i,y_i)$的实例$x_i$称为支持向量（软间隔的支持向量）。如图所示，这时的支持向量要比线性可分时的情况复杂一些。</p>
 <center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8810.22.45.png" alt="屏幕快照 2017-03-20 上午10.22.45"></center>
 
 <p>图中，分离超平面由实线表示，间隔边界由虚线表示。正例点由$。$表示，负例点由$×$表示。图中还标出了实例$x_i$到间隔边界的距离$<br>\frac{\xi _i}{||w||}<br>$。</p>
@@ -435,7 +435,7 @@
 <p>若$a_i^*=C,0&lt;<br>\xi _i&lt;1<br>$，则分类正确，$x_i$在间隔边界与分离超平面之间；</p>
 <p>若$a_i^*=C，\xi _i=1$则$x_i$在分隔超平面上；</p>
 <p>若$a_i^*=C,\xi _i&gt;1$，则$x_i$位于分离超平面误分一侧。</p>
-<h2 id="三、非线性支持向量机与核函数"><a href="#三、非线性支持向量机与核函数" class="headerlink" title="三、非线性支持向量机与核函数"></a>三、非线性支持向量机与核函数</h2><h4 id="3-1-核技巧"><a href="#3-1-核技巧" class="headerlink" title="3.1 核技巧"></a>3.1 核技巧</h4><p>前面我们介绍了线性情况下的支持向量机，他通过寻找一个现行的超平面来达到对数据线性分类的目的。不过，由于是线性方法，所以对非线性的数据就没有办法处理了。</p>
+<h2 id="三、非线性支持向量机与核函数"><a href="#三、非线性支持向量机与核函数" class="headerlink" title="三、非线性支持向量机与核函数"></a>三、非线性支持向量机与核函数</h2><h3 id="3-1-核技巧"><a href="#3-1-核技巧" class="headerlink" title="3.1 核技巧"></a>3.1 核技巧</h3><p>前面我们介绍了线性情况下的支持向量机，他通过寻找一个现行的超平面来达到对数据线性分类的目的。不过，由于是线性方法，所以对非线性的数据就没有办法处理了。</p>
 <p>例如图中的两类数据，分别分布为两个圆圈的形状，不论是任何高级的分类器，只要他是线性的，就没有办法处理，SVM也不行。因为这样的数据本身就是线性不可分的。</p>
 <center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8811.03.17.png" alt="屏幕快照 2017-03-20 上午11.03.17"></center>
 
@@ -452,7 +452,7 @@
 <p>我们注意到在线性支持向量机的对偶问题中，无论是目标函数还是决策函数（分离超平面）都只涉及输入实例与实例之间的内积。在对偶问题的目标函数中的内积$x_i·x_j$可以用核函数$K(x_i·x_j)=\phi \left( x_i \right) ·\phi \left( x_j \right) $来代替，此时对偶问题的目标函数成为：<br>$$<br>\underset{a}{\max}    \sum_{i=1}^N{a_i-\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_jK\left( x_i,x_j \right)}}}<br>$$</p>
 <p>同样，分类决策函数中的内积也可以用核函数代替，而分类决策函数式成为$$<br>sign\left( \sum_{i=1}^N{a_{i}^{*}y_iK\left( x_i,x \right)}+b \right)<br>$$</p>
 <p>在核函数$K(x,z)$给定的条件下，可以利用解线性分类问题的方法求解非线性分类问题的支持向量机。学习是隐性地在特征空间进行的，不需要显式地定义特征空间和映射函数。这样的技巧称为核技巧，它是巧妙地利用线性分类学习方法与核函数解决非线性问题的奇数。在实际应用中，往往依赖领域知识直接选择核函数，核函数选择的有效性需要通过实验验证。</p>
-<h4 id="3-2-常用核函数"><a href="#3-2-常用核函数" class="headerlink" title="3.2 常用核函数"></a>3.2 常用核函数</h4><p>通常人们会从一些常用的核函数中选择，根据问题和数据的不同，选择不同的参数，实际上就是得到了不同的核函数。</p>
+<h3 id="3-2-常用核函数"><a href="#3-2-常用核函数" class="headerlink" title="3.2 常用核函数"></a>3.2 常用核函数</h3><p>通常人们会从一些常用的核函数中选择，根据问题和数据的不同，选择不同的参数，实际上就是得到了不同的核函数。</p>
 <ul>
 <li><p>多项式核函数<code>polynomial kernel function</code><br>$$<br>K\left( x,z \right) =\left( x·z+1 \right) ^p<br>$$对应的支持向量机是一个p次多项式分类器。在此情形下，分类决策函数成为$$<br>f\left( x \right) =sign\left( \sum_{i=1}^N{a_iy_i\left( x_i·x+1 \right) ^p+b} \right)<br>$$</p>
 </li>
@@ -657,7 +657,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、线性可分支持向量机与硬间隔最大化"><span class="nav-text">一、线性可分支持向量机与硬间隔最大化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-线性可分支持向量机"><span class="nav-text">1.1 线性可分支持向量机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-函数间隔与几何间隔"><span class="nav-text">1.2 函数间隔与几何间隔</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-间隔最大化"><span class="nav-text">1.3 间隔最大化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-学习的对偶算法"><span class="nav-text">1.4 学习的对偶算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、线性支持向量机与软间隔最大化"><span class="nav-text">二、线性支持向量机与软间隔最大化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-线性支持向量机"><span class="nav-text">2.1 线性支持向量机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-支持向量"><span class="nav-text">2.2 支持向量</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、非线性支持向量机与核函数"><span class="nav-text">三、非线性支持向量机与核函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-核技巧"><span class="nav-text">3.1 核技巧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-常用核函数"><span class="nav-text">3.2 常用核函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、序列最小最优化算法（SMO）"><span class="nav-text">四、序列最小最优化算法（SMO）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、线性可分支持向量机与硬间隔最大化"><span class="nav-text">一、线性可分支持向量机与硬间隔最大化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-线性可分支持向量机"><span class="nav-text">1.1 线性可分支持向量机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-函数间隔与几何间隔"><span class="nav-text">1.2 函数间隔与几何间隔</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-间隔最大化"><span class="nav-text">1.3 间隔最大化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-学习的对偶算法"><span class="nav-text">1.4 学习的对偶算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、线性支持向量机与软间隔最大化"><span class="nav-text">二、线性支持向量机与软间隔最大化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-线性支持向量机"><span class="nav-text">2.1 线性支持向量机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-支持向量"><span class="nav-text">2.2 支持向量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、非线性支持向量机与核函数"><span class="nav-text">三、非线性支持向量机与核函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-核技巧"><span class="nav-text">3.1 核技巧</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-常用核函数"><span class="nav-text">3.2 常用核函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、序列最小最优化算法（SMO）"><span class="nav-text">四、序列最小最优化算法（SMO）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
