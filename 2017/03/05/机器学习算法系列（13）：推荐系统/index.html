@@ -112,7 +112,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"right","display":"always"},
+    sidebar: {"position":"left","display":"always"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -156,7 +156,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right page-post-detail ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -298,6 +298,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2017/03/05/机器学习算法系列（13）：推荐系统/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/05/机器学习算法系列（13）：推荐系统/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -460,6 +467,25 @@
 
     <div class="post-spread">
       
+        <div class="ds-share flat" data-thread-key="2017/03/05/机器学习算法系列（13）：推荐系统/"
+     data-title="机器学习算法系列（13）：推荐系统"
+     data-content=""
+     data-url="http://yoursite.com/2017/03/05/机器学习算法系列（13）：推荐系统/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
     </div>
   </div>
 
@@ -470,6 +496,10 @@
 
           
   <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/05/机器学习算法系列（13）：推荐系统/"
+           data-title="机器学习算法系列（13）：推荐系统" data-url="http://yoursite.com/2017/03/05/机器学习算法系列（13）：推荐系统/">
+      </div>
     
   </div>
 
@@ -508,7 +538,7 @@
                src="/img/v.png"
                alt="狗皮膏药" />
           <p class="site-author-name" itemprop="name">狗皮膏药</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+          <p class="site-description motion-element" itemprop="description">RUC机器学习在读 | 整理癖 |</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
@@ -576,7 +606,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、定义"><span class="nav-number">1.</span> <span class="nav-text">一、定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-从搜索引擎说起"><span class="nav-number">1.0.1.</span> <span class="nav-text">1.1 从搜索引擎说起</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-推荐系统的具体应用"><span class="nav-number">1.0.2.</span> <span class="nav-text">1.2 推荐系统的具体应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、推荐系统评测"><span class="nav-number">2.</span> <span class="nav-text">二、推荐系统评测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-推荐系统实验方法"><span class="nav-number">2.0.1.</span> <span class="nav-text">2.1 推荐系统实验方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-离线实验"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">2.1.1 离线实验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-2-用户调查"><span class="nav-number">2.0.1.2.</span> <span class="nav-text">2.1.2 用户调查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-3-在线实验"><span class="nav-number">2.0.1.3.</span> <span class="nav-text">2.1.3 在线实验</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-离线评测指标"><span class="nav-number">2.0.2.</span> <span class="nav-text">2.2 离线评测指标</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、基于邻域的算法"><span class="nav-number">3.</span> <span class="nav-text">三、基于邻域的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-基于用户的协同过滤算法（user-based-collaborative-filtering）"><span class="nav-number">3.0.1.</span> <span class="nav-text">3.1 基于用户的协同过滤算法（user-based collaborative filtering）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-基础算法"><span class="nav-number">3.0.1.1.</span> <span class="nav-text">3.1.1 基础算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-离线算法评测"><span class="nav-number">3.0.1.2.</span> <span class="nav-text">3.1.2 离线算法评测</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-用户相似度计算的改进"><span class="nav-number">3.0.1.3.</span> <span class="nav-text">3.1.3 用户相似度计算的改进</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-4-实际应用"><span class="nav-number">3.0.1.4.</span> <span class="nav-text">3.1.4 实际应用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-基于物品的协同过滤算法（item-based-collaborative-filtering）"><span class="nav-number">3.0.2.</span> <span class="nav-text">3.2 基于物品的协同过滤算法（item-based collaborative filtering）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-基础算法"><span class="nav-number">3.0.2.1.</span> <span class="nav-text">3.2.1 基础算法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-UserCF和itemCF的综合比较"><span class="nav-number">3.0.3.</span> <span class="nav-text">3.3 UserCF和itemCF的综合比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、隐语义模型（矩阵分解模型）"><span class="nav-number">4.</span> <span class="nav-text">四、隐语义模型（矩阵分解模型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、基于图的模型"><span class="nav-number">5.</span> <span class="nav-text">五、基于图的模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、冷启动问题"><span class="nav-number">6.</span> <span class="nav-text">六、冷启动问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA"><span class="nav-number">7.</span> <span class="nav-text">PCA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVD"><span class="nav-number">8.</span> <span class="nav-text">SVD</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、定义"><span class="nav-text">一、定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-从搜索引擎说起"><span class="nav-text">1.1 从搜索引擎说起</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-推荐系统的具体应用"><span class="nav-text">1.2 推荐系统的具体应用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、推荐系统评测"><span class="nav-text">二、推荐系统评测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-推荐系统实验方法"><span class="nav-text">2.1 推荐系统实验方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-离线实验"><span class="nav-text">2.1.1 离线实验</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-2-用户调查"><span class="nav-text">2.1.2 用户调查</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-3-在线实验"><span class="nav-text">2.1.3 在线实验</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-离线评测指标"><span class="nav-text">2.2 离线评测指标</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、基于邻域的算法"><span class="nav-text">三、基于邻域的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-基于用户的协同过滤算法（user-based-collaborative-filtering）"><span class="nav-text">3.1 基于用户的协同过滤算法（user-based collaborative filtering）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-基础算法"><span class="nav-text">3.1.1 基础算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-离线算法评测"><span class="nav-text">3.1.2 离线算法评测</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-3-用户相似度计算的改进"><span class="nav-text">3.1.3 用户相似度计算的改进</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-4-实际应用"><span class="nav-text">3.1.4 实际应用</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-基于物品的协同过滤算法（item-based-collaborative-filtering）"><span class="nav-text">3.2 基于物品的协同过滤算法（item-based collaborative filtering）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-基础算法"><span class="nav-text">3.2.1 基础算法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-UserCF和itemCF的综合比较"><span class="nav-text">3.3 UserCF和itemCF的综合比较</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、隐语义模型（矩阵分解模型）"><span class="nav-text">四、隐语义模型（矩阵分解模型）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、基于图的模型"><span class="nav-text">五、基于图的模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、冷启动问题"><span class="nav-text">六、冷启动问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA"><span class="nav-text">PCA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SVD"><span class="nav-text">SVD</span></a></li></ol></div>
             
 
           </div>
@@ -683,14 +713,33 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"plushunter"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
 
-	
 
 
 
@@ -699,26 +748,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
