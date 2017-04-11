@@ -93,14 +93,14 @@
 <meta property="og:url" content="http://yoursite.com/2017/01/15/机器学习算法系列（4）：决策树/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="本文结合李航博士的《统计学习方法》与周志华老师的《机器学习》决策树部分，《统计学习方法》重理论的证明推导，《机器学习》注重讲解算法的特点与扩展。">
-<meta property="og:image" content="http://yoursite.com/2017/01/15/机器学习算法系列（4）：决策树/media/14806108454477/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.43.24.png">
-<meta property="og:image" content="http://yoursite.com/2017/01/15/机器学习算法系列（4）：决策树/media/14806108454477/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-12%20%E4%B8%8B%E5%8D%889.39.47.png">
-<meta property="og:image" content="http://yoursite.com/2017/01/15/机器学习算法系列（4）：决策树/media/14909319730132/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%882.32.52.png">
-<meta property="og:updated_time" content="2017-04-11T11:28:56.000Z">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.43.24.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-12%20%E4%B8%8B%E5%8D%889.39.47.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%882.32.52.png">
+<meta property="og:updated_time" content="2017-04-11T15:11:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（4）：决策树">
 <meta name="twitter:description" content="本文结合李航博士的《统计学习方法》与周志华老师的《机器学习》决策树部分，《统计学习方法》重理论的证明推导，《机器学习》注重讲解算法的特点与扩展。">
-<meta name="twitter:image" content="http://yoursite.com/2017/01/15/机器学习算法系列（4）：决策树/media/14806108454477/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.43.24.png">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.43.24.png">
 
 
 
@@ -351,7 +351,7 @@
       
         <p>本文结合李航博士的《统计学习方法》与周志华老师的《机器学习》决策树部分，《统计学习方法》重理论的证明推导，《机器学习》注重讲解算法的特点与扩展。</p>
 <a id="more"></a>
-<h2 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h2><p>决策树（Decision Tree）是数据挖掘中一种基本的分类和回归方法，它呈树形结构，在分类问题中，表示基于特征对实例进行分类的过程，可以认为是$if-then$规则的集合，也可认为是定义在特征空间与类空间上的条件概率分布。下图是一个简单的决策树示例：<center><img src="media/14806108454477/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.43.24.png" alt="屏幕快照 2017-04-10 下午7.43.24"></center></p>
+<h2 id="INTRODUCTION"><a href="#INTRODUCTION" class="headerlink" title="INTRODUCTION"></a>INTRODUCTION</h2><p>决策树（Decision Tree）是数据挖掘中一种基本的分类和回归方法，它呈树形结构，在分类问题中，表示基于特征对实例进行分类的过程，可以认为是$if-then$规则的集合，也可认为是定义在特征空间与类空间上的条件概率分布。下图是一个简单的决策树示例：<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.43.24.png" alt="屏幕快照 2017-04-10 下午7.43.24"></center></p>
 <p>决策树模型的主要优点是模型具有可读性，分类速度快。在学习时，利用训练数据，根据损失函数最小化原则建立决策树模型；而在预测时，对新的数据，利用决策树模型进行分类。主要的决策树算法有ID3算法、C4.5算法和CART算法。</p>
 <p>一个性能良好的决策树，是一个与训练数据矛盾较小的决策树，同时又具有很好地泛化能力。言外之意就是说，好的决策树不仅对训练样本有很好的分类效果，对于测试集也有较低的误差率。一个决策树的学习过程包括三个步骤：特征选择、决策树的生成以及决策树的修剪。</p>
 <h2 id="一、决策树模型的两种解释"><a href="#一、决策树模型的两种解释" class="headerlink" title="一、决策树模型的两种解释"></a>一、决策树模型的两种解释</h2><h3 id="1-1-决策树模型"><a href="#1-1-决策树模型" class="headerlink" title="1.1 决策树模型"></a>1.1 决策树模型</h3><p>分类决策树模型是一种描述对实例进行分类的树形结构。决策树由结点和有向边组成。结点有两种类型：内部结点和叶节点。内部结点表示一个特征或属性，叶节点表示一个类。</p>
@@ -369,16 +369,18 @@
 <p>具体算法步骤如下：</p>
 <ul>
 <li>1）计算数据集$D$的经验熵$H(D)$<br>$$<br>H\left( D \right) =-\sum_{k=1}^K{\frac{|C_k|}{|D|}\log _2\frac{|C_k|}{|D|}}<br>$$</li>
-<li>2）计算特征$A$对数据集$D$的经验条件熵$H(D|A)$<pre><code>$$
-</code></pre>H\left( D|A \right) =\sum_{i=1}^n{\frac{|D_i|}{|D|}H\left( D_i \right)}=-\sum_{i=1}^n{\frac{|D_i|}{|D|}\sum_{k=1}^K{\frac{|D_{ik}|}{|D_i|}\log _2\frac{|D_{ik}|}{|D_i|}}}<br>$$</li>
-<li>3）计算信息增益<pre><code>$$
-</code></pre>g\left( D,A \right) =H\left( D \right) -H\left( D|A \right)<br>$$</li>
+<li>2）计算特征$A$对数据集$D$的经验条件熵$H(D|A)$<pre><code>$$H\left( D|A \right) =\sum_{i=1}^n{\frac{|D_i|}{|D|}H\left( D_i \right)}=-\sum_{i=1}^n{\frac{|D_i|}{|D|}\sum_{k=1}^K{\frac{|D_{ik}|}{|D_i|}\log _2\frac{|D_{ik}|}{|D_i|}}}
+</code></pre>$$</li>
+<li>3）计算信息增益<pre><code>$$g\left( D,A \right) =H\left( D \right) -H\left( D|A \right) $$
+</code></pre></li>
 </ul>
 <h3 id="2-3-信息增益比"><a href="#2-3-信息增益比" class="headerlink" title="2.3 信息增益比"></a>2.3 信息增益比</h3><p>以信息增益作为划分训练数据集的特征，存在偏向于选择取值较多的特征的问题。使用信息增益比可以对这一问题进行校正。</p>
 <p>信息增益比表示特征$A$对训练数据集$D$的信息增益比。$g_R(D,A)$定义为其信息增益$g(D,A)$与训练数据集$D$关于特征$A$的值的熵$H_A(D)$之比，即$$<br>g_R\left( D,A \right) =\frac{g\left( D,A \right)}{H_A\left( D \right)}<br>$$</p>
 <h3 id="2-4-基尼系数"><a href="#2-4-基尼系数" class="headerlink" title="2.4 基尼系数"></a>2.4 基尼系数</h3><p>分类问题中，假设有K个类，样本点属于第k类的概率为$p_k$，则概率分布的基尼系数定义为$$<br>Gini\left( p \right) =\sum_{k=1}^K{p_k\left( 1-p_k \right) =1-\sum_{k=1}^K{p_k^2}}<br>$$若样本集合$D$根据特征$A$是否取某一可能值$a$被分割成$D_1$和$D_2$两部分，即$$<br>D_1=\left\{ \left( x,y \right) \in D|A\left( x \right) =0 \right\} \mathrm{，}D_2=D-D_1<br>$$则在特征A的条件下，集合$D$的基尼指数定义为$$<br>Gini\left( D,A \right) =\frac{|D_1|}{|D|}Gini\left( D_1 \right) +\frac{|D_2|}{|D|}Gini\left( D_2 \right)<br>$$</p>
 <p>基尼系数Gini(D)表示集合$D$的不确定性，表示经A=a分割后集合D的不确定性。基尼系数越大，样本集合的不确定性越大，与熵类似。</p>
-<p>从下图可以看出基尼指数和熵之半的曲线很接近，都可以近似地代表分类误差率。<br><img src="media/14806108454477/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-12%20%E4%B8%8B%E5%8D%889.39.47.png" alt="屏幕快照 2016-12-12 下午9.39.47"></p>
+<p>从下图可以看出基尼指数和熵之半的曲线很接近，都可以近似地代表分类误差率。</p>
+<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-12%20%E4%B8%8B%E5%8D%889.39.47.png" alt="屏幕快照 2016-12-12 下午9.39.47"></center>
+
 <h2 id="三、决策树的生成"><a href="#三、决策树的生成" class="headerlink" title="三、决策树的生成"></a>三、决策树的生成</h2><h3 id="3-1-ID3算法"><a href="#3-1-ID3算法" class="headerlink" title="3.1 ID3算法"></a>3.1 ID3算法</h3><p>ID3算法的核心是在决策树各个结点上应用信息增益准则选择特征，递归地建构决策树。</p>
 <p>其具体方法为：从根结点开始，对结点计算所有可能的特征的信息增益，选择信息增益最大的特征作为结点的特征，由该特征的不同取值建立子结点；再对子结点递归地调用以上方法，构建决策树；直到所有特征的信息增益均很小或没有特征可以选择为止。最后得到一个决策树。ID3相当于用极大似然法进行概率模型的选择。但是ID3算法只有树的生成，所以该算法生成的树容易产生过拟合。</p>
 <p>其算法步骤如下：</p>
@@ -405,7 +407,7 @@
 <li>4）生成CART决策树</li>
 </ul>
 <h4 id="3-3-2-回归树"><a href="#3-3-2-回归树" class="headerlink" title="3.3.2 回归树"></a>3.3.2 回归树</h4><p>首先看一个简单的回归树生成实例：</p>
-<center><img src="media/14909319730132/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%882.32.52.png" alt="屏幕快照 2017-03-31 下午2.32.52"></center>
+<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%882.32.52.png" alt="屏幕快照 2017-03-31 下午2.32.52"></center>
 
 <p>接下来具体说说回归树是如何进行特征选择生成二叉回归树的。<br>假设$X$与$Y$分别为输入和输出变量，并且$Y$是连续变量，给定训练数据集$$D=\{(x_1,y_1),(x_2,y_2),···,(x_N,y_N)\}$$我们利用最小二乘回归树生成算法来生成回归树$f(x)$，即在训练数据集所在的输入空间中，递归地将每个区域分为两个子区域并决定每个子区域上的输出值，构建二叉决策树，步骤如下：</p>
 <ul>

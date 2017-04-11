@@ -86,21 +86,21 @@
 
 
 
-<meta name="description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布：">
+<meta name="description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：">
 <meta name="keywords" content="机器学习,逻辑斯谛回归">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习算法系列（3）：逻辑斯谛回归">
 <meta property="og:url" content="http://yoursite.com/2017/01/12/机器学习算法系列（3）：逻辑斯谛回归/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布：">
-<meta property="og:image" content="http://yoursite.com/2017/01/12/机器学习算法系列（3）：逻辑斯谛回归/media/14913037975246/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%888.55.00.png">
-<meta property="og:image" content="http://yoursite.com/2017/01/12/机器学习算法系列（3）：逻辑斯谛回归/media/14913037975246/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%20%E4%B8%8B%E5%8D%8811.55.11.png">
-<meta property="og:image" content="http://yoursite.com/2017/01/12/机器学习算法系列（3）：逻辑斯谛回归/media/14913037975246/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-07%20%E4%B8%8A%E5%8D%8812.00.18.png">
-<meta property="og:updated_time" content="2017-04-11T11:04:30.000Z">
+<meta property="og:description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%888.55.00.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%20%E4%B8%8B%E5%8D%8811.55.11.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-07%20%E4%B8%8A%E5%8D%8812.00.18.png">
+<meta property="og:updated_time" content="2017-04-11T15:46:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（3）：逻辑斯谛回归">
-<meta name="twitter:description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布：">
-<meta name="twitter:image" content="http://yoursite.com/2017/01/12/机器学习算法系列（3）：逻辑斯谛回归/media/14913037975246/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%888.55.00.png">
+<meta name="twitter:description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%888.55.00.png">
 
 
 
@@ -349,9 +349,11 @@
       
 
       
-        <h2 id="一、逻辑斯谛分布"><a href="#一、逻辑斯谛分布" class="headerlink" title="一、逻辑斯谛分布"></a>一、逻辑斯谛分布</h2><p>介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布：</p>
+        <h2 id="一、逻辑斯谛分布"><a href="#一、逻辑斯谛分布" class="headerlink" title="一、逻辑斯谛分布"></a>一、逻辑斯谛分布</h2><p>介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：</p>
 <a id="more"></a>
-<p>设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：$$<br>F\left(x\right)=P\left(X\le x\right)=\frac{1}{1+e^{-\left(x-\mu\right)/\gamma}}<br>$$$$<br>f\left(x\right)=F^,\left(x\right)=\frac{e^{-\left(x-\mu\right)/\gamma}}{\gamma\left(1+e^{-\left(x-\mu\right)/\gamma}\right)^2}<br>$$<br>式中，$\mu$为位置参数，$\gamma&gt;0 $为形状参数。<br>逻辑斯谛的分布的密度函数$f(x)$和分布函数$F(x)$的图形如下图所示。其中分布函数属于逻辑斯谛函数，其图形为一条$S$形曲线。该曲线以点$(\mu,\frac{1}{2})$为中心对称，即满足$$<br>F\left(-x+\mu\right)-\frac{1}{2}=-F\left(x+\mu\right)+\frac{1}{2}<br>$$曲线在中心附近增长较快，在两端增长速度较慢。形状参数$\gamma$的值越小，曲线在中心附近增长得越快。<br><img src="media/14913037975246/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%888.55.00.png" alt="屏幕快照 2017-04-04 下午8.55.00"></p>
+<p>$$<br>F\left(x\right)=P\left(X\le x\right)=\frac{1}{1+e^{-\left(x-\mu\right)/\gamma}}<br>$$$$<br>f\left(x\right)=F^,\left(x\right)=\frac{e^{-\left(x-\mu\right)/\gamma}}{\gamma\left(1+e^{-\left(x-\mu\right)/\gamma}\right)^2}<br>$$<br>式中，$\mu$为位置参数，$\gamma&gt;0 $为形状参数。<br>逻辑斯谛的分布的密度函数$f(x)$和分布函数$F(x)$的图形如下图所示。其中分布函数属于逻辑斯谛函数，其图形为一条$S$形曲线。该曲线以点$(\mu,\frac{1}{2})$为中心对称，即满足$$<br>F\left(-x+\mu\right)-\frac{1}{2}=-F\left(x+\mu\right)+\frac{1}{2}<br>$$曲线在中心附近增长较快，在两端增长速度较慢。形状参数$\gamma$的值越小，曲线在中心附近增长得越快。</p>
+<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%888.55.00.png" alt="屏幕快照 2017-04-04 下午8.55.00"></center>
+
 <h2 id="二、逻辑斯谛回归模型"><a href="#二、逻辑斯谛回归模型" class="headerlink" title="二、逻辑斯谛回归模型"></a>二、逻辑斯谛回归模型</h2><p>线性回归的应用场合大多是回归分析，一般不用在分类问题上。原因可以概括为以下两个：</p>
 <ul>
 <li>1）回归模型是连续型模型，即预测出的值都是连续值（实数值），非离散值；</li>
@@ -365,9 +367,11 @@
 <p>我们所能拿到的训练数据统称为观测样本。问题：样本是如何生成的？</p>
 <p>一个样本可以理解为发生的一次事件，样本生成的过程即事件发生的过程。对于0/1分类问题来讲，产生的结果有两种可能，符合伯努利试验的概率假设。因此，我们可以说样本的生成过程即为伯努利试验过程，产生的结果（0/1）服从伯努利分布。这里我们假设结果为1的概率为$h_\theta{(x)}$，结果为0的概率为$1-h_\theta{(x)}$。</p>
 <p>那么对于第$i$个样本，概率公式表示如下：<br>$$P(y^{(i)}=1|x^{(i)};\theta )=h_\theta{(x^{(i)})}$$$$P(y^{(i)}=0  |x^{(i)};\theta )=1- h_\theta{(x^{(i)})}$$<br>将上面两个公式合并在一起，可得到第$i$个样本正确预测的概率：<br>$$P(y^{(i)}|x^{(i)};\theta)=(h_\theta(x^{(i)})^{y(i)})·（1-h_\theta(x^{(i)})^{y(i)}）$$<br>上式是对一个样本进行建模的数据表达。对于所有的样本，假设每条样本生成过程独立，在整个样本空间中（N个样本）的概率分布（即似然函数）为：$$<br>P\left(Y|X;\theta\right)=\prod_{i=1}^N{\left(h_{\theta}\left(x^{\left(i\right)}\right)^{y^{\left(i\right)}}\left(1-h_{\theta}\left(x^{\left(i\right)}\right)^{1-y^{\left(i\right)}}\right)\right)}<br>$$通过极大似然估计（Maximum Likelihood Evaluation，简称MLE）方法求概率参数。具体地，第三节给出了通过随机梯度下降法（SGD）求参数。</p>
-<h2 id="三、模型参数估计"><a href="#三、模型参数估计" class="headerlink" title="三、模型参数估计"></a>三、模型参数估计</h2><h3 id="3-1-Sigmoid函数"><a href="#3-1-Sigmoid函数" class="headerlink" title="3.1 Sigmoid函数"></a>3.1 Sigmoid函数</h3><p><img src="media/14913037975246/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%20%E4%B8%8B%E5%8D%8811.55.11.png" alt="屏幕快照 2017-04-06 下午11.55.11"></p>
+<h2 id="三、模型参数估计"><a href="#三、模型参数估计" class="headerlink" title="三、模型参数估计"></a>三、模型参数估计</h2><h3 id="3-1-Sigmoid函数"><a href="#3-1-Sigmoid函数" class="headerlink" title="3.1 Sigmoid函数"></a>3.1 Sigmoid函数</h3><center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%20%E4%B8%8B%E5%8D%8811.55.11.png" alt="屏幕快照 2017-04-06 下午11.55.11"></center>
+
 <p>上图所示即为sigmoid函数，它的输入范围为$-\infty\rightarrow +\infty$，而值域刚好为$(0,1)$，正好满足概率分布为$(0,1)$的要求。用概率去描述分类器，自然要比阈值要来的方便。而且它是一个单调上升的函数，具有良好的连续性，不存在不连续点。</p>
-<p>此外非常重要的，sigmoid函数求导后为：<img src="media/14913037975246/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-07%20%E4%B8%8A%E5%8D%8812.00.18.png" alt="屏幕快照 2017-04-07 上午12.00.18"><br>以下的推导中会用到，带来了很大的便利。</p>
+<p>此外非常重要的，sigmoid函数求导后为：</p>
+<p><center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-07%20%E4%B8%8A%E5%8D%8812.00.18.png" alt="屏幕快照 2017-04-07 上午12.00.18"></center><br>以下的推导中会用到，带来了很大的便利。</p>
 <h3 id="3-2-参数估计推导"><a href="#3-2-参数估计推导" class="headerlink" title="3.2 参数估计推导"></a>3.2 参数估计推导</h3><p>上一节的公式不仅可以理解为在已观测的样本空间中的概率分布表达式。如果从统计学的角度可以理解为参数$\theta$似然性的函数表达式（即似然函数表达式）。参数在整个样本空间的似然函数可表示为：$$<br>L\left(\theta\right)=P\left(\overrightarrow{Y}|X;\theta\right)<br>$$$$<br>=\prod_{i=1}^N{P\left(y^{\left(i\right)}\parallel x^{\left(i\right)};\theta\right)}<br>$$$$<br>=\prod_{i=1}^N{\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)^{y\left(i\right)}\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)^{1-y^{\left(i\right)}}}<br>$$为了方便参数求解，对这个公式取对数，可得对数似然函数：$$<br>l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}<br>$$$$<br>=\sum_{i=1}^N{y^{\left(i\right)}\log\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)+\left(1-y^{\left(i\right)}\right)\log\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)}<br>$$最大化对数似然函数其实就是最小化交叉熵误差（Cross Entropy Error）。<br>先不考虑累加和，我们针对每一个参数$w_j$求偏导：$$<br>\frac{\partial}{\partial\theta_j}l\left(\theta\right)=\left(y\frac{1}{h_{\theta}\left(x\right)}-\left(1-y\right)\frac{1}{1-h_{\theta}\left(x\right)}\right)\frac{\partial}{\partial\theta_j}h_{\theta}\left(x\right)<br>$$$$<br>=\left(\frac{y\left(1-h_{\theta}\left(x\right)\right)-\left(1-y\right)h_{\theta}\left(x\right)}{h_{\theta}\left(x\right)\left(1-h_{\theta}\left(x\right)\right)}\right)h_{\theta}\left(x\right)\left(1-h_{\theta}\left(x\right)\right)\frac{\partial}{\partial\theta_j}\theta^Tx<br>$$$$<br>=\left(y-h_{\theta}\left(x\right)\right)x_j<br>$$最后，通过扫描样本，迭代下述公式可求得参数：$$<br>\theta_j:=\theta_j+a\left(y^{\left(i\right)}-h_{\theta}\left(x^{\left(i\right)}\right)\right)x_{j}^{\left(i\right)}<br>$$其中$a$表示学习率，又称学习步长。此外还有Batch GD，共轭梯度，拟牛顿法（LBFGS），ADMM分布学习算法等都可以用来求解参数。另作优化算法一章进行补充。</p>
 <p>以上的推导是LR模型的核心部分，在机器学习相关面试中，LR模型公式推导可能是考察频次最高的一个点。要将其熟练推导。</p>
 <h2 id="四、Softmax回归"><a href="#四、Softmax回归" class="headerlink" title="四、Softmax回归"></a>四、Softmax回归</h2><p><code>待补充</code></p>

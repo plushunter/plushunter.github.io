@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-19%20%E4%B8%8B%E5%8D%882.15.14.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8810.22.45.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8811.03.17.png">
-<meta property="og:updated_time" content="2017-04-11T11:21:14.000Z">
+<meta property="og:updated_time" content="2017-04-11T16:27:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（12）：SVM">
 <meta name="twitter:description" content="线性可分支持向量机：硬间隔支持向量机 线性支持向量机：软间隔支持向量机学习一个线性分类器 非线性支持向量机：当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。">
@@ -375,7 +375,7 @@
 <p>步骤如下：</p>
 <ul>
 <li>1）构造并求解约束最优化问题：$$<br>\underset{w,b}{\min}\frac{1}{2}||w||^2<br>$$<br>$$<br>                s.t  y_i\left( w·x_i+b \right) -1\geqslant 0, i=1,2,···,N<br>$$求得最优解$w^<em>$,$b^</em>$</li>
-<li>2）由此得到分割超平面：$$<br>w^<em>·x+b^</em>=0<br>$$<br>分类决策函数<br>$$<br>f\left( x \right) =sign\left( w^*·x+b \right)<br>$$</li>
+<li>2）由此得到分割超平面：$$w·x+b=0<br>$$<br>分类决策函数<br>$$f\left( x \right) =sign\left( w·x+b \right)<br>$$</li>
 </ul>
 <p>这其实是一个凸二次规划<code>convex quadratic programming</code> 问题，凸优化问题是指约束最优化问题$$<br>\underset{w}{\min}   f\left( w \right)<br>$$$$<br>                 s.t   s_i\left( w \right) \le 0 , i=1,2,···,k<br>$$$$<br>             h_i\left( w \right) =0 , i=1,2,···,l <br>$$<br>其中，目标函数$f(w)$和约束函数$g_i(w)$都是$R^n$上的连续可微的凸函数，约束函数$h_i(w)$是$R^n$上的仿射函数。当目标函数$f(w)$是二次函数且约束函数$g_i(w)$是仿射函数时，上述凸优化问题成为凸二次规划问题。</p>
 <p><strong>支持向量和间隔边界</strong></p>
@@ -395,11 +395,11 @@
 <ul>
 <li>2)求$<br>\underset{w,b}{\min}L\left( w,b,a \right)<br>$对$a$的极大，即是对偶问题<br>$$<br>\underset{a}{\max} \sum_{i=1}^N{a_i}-\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right)}}<br>$$$$<br>s.t. \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>a_i\geqslant 0,  i=1,2,···,N<br>$$</li>
 </ul>
-<p>将目标函数由求极大转换为极小，就得到下面与之等价的对偶最优化问题。<br>$$<br>\underset{a}{\min}   \frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right)}}-\sum_{i=1}^N{a_i}<br>$$$$<br>s.t. \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>a_i\geqslant 0,  i=1,2,···,N<br>$$<br>考虑原始最优化问题和对偶最优化问题，原始问题满足定理C.2的条件，所以存在$w^<em>,α^</em>,β^<em>$,使$w^</em>$是原始问题的解，$α^<em>,β^</em>$是对偶问题的解。这意味着求解原始问题可以转换为求解对偶问题。</p>
-<p>对线性可分训练数据集，假设对偶最优化问题对$a$的解为$a^<em>=(a_1^</em>,a_2^<em>,···,a_N^</em>)$，可以由$a^<em>$求得原始最优化问题对$(w,b)$的解$w^</em>,b^*$。得到下面的定理。</p>
-<p>设$a^<em>=(a_1^</em>,a_2^<em>,···,a_l^</em>)^T$是对偶最优化问题的解，则存在下标$j$，使得$a_j^<em>&gt;0$，并可按下式求得原始最优化问题的解$w^</em>,b^<em>$:<br>$$<br>w^</em>=\sum_{i=1}^N{a_{i}^{<em>}y_ix_i}<br>$$$$<br>b^</em>=y_i-\sum_i^N{a_{i}^{*}y_i\left( x_i·x_j \right)}<br>$$</p>
-<p>证明  根据定理C.3,KKT条件成立，即得<br>$$<br>\nabla _wL\left( w^<em>,b^</em>,a^<em> \right) =w^</em>-\sum_{i=1}^N{a_iy_ix_i=0}<br>$$$$<br>\nabla _bL\left( w^<em>,b^</em>,a^<em> \right) =-\sum_{i=1}^N{a_{i}^{</em>}y_i=0}<br>$$$$<br>a_{i}^{<em>}\left( y_i\left( w^</em>·x_i+b^<em> \right) -1 \right) =0 , i=1,2,···,N<br>$$$$<br>y_i\left( w^</em>·x_i+b^<em> \right) -1\geqslant 0 , 1,2,···,N<br>$$$$<br>a_{i}^{</em>}\geqslant 0 , i=1,2,···,N<br>$$<br>由此得<br>$$<br>w^<em>=\sum_i^{}{a_{i}^{</em>}y_ix_i}<br>$$<br>其中至少有一个$a_j^<em>&gt;0$(反证法，假设$a^</em>=0$，由上可知$w^<em>=0$，而$w^</em>=0$不是原始最优化问题的解，产生矛盾)，对此$j$有<br>$$<br>y_j\left( w^<em>·x_j+b^</em> \right) -1=0<br>$$$$<br>a_{j}^{<em>}y_jx_j·x_i+b^</em>=1/y_j=y_j<br>$$$$<br>b^<em>=y_j-\sum_{i=1}^N{a_{i}^{</em>}y_i\left( x_i·x_j \right)}<br>$$</p>
-<p>综上所述，对于给定的线性可分训练数据集，可以首先求对偶问题的解$a^<em>$;再利用求得原始问题的解$w^</em>,b^*$,从而得到分离超平面及分类决策函数。这种算法称为线性可分支持向量机的对偶学习算法，是线性可分支持向量机学习的基本算法。</p>
+<p>将目标函数由求极大转换为极小，就得到下面与之等价的对偶最优化问题。<br>$$<br>\underset{a}{\min}   \frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right)}}-\sum_{i=1}^N{a_i}<br>$$$$<br>s.t. \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>a_i\geqslant 0,  i=1,2,···,N<br>$$<br>考虑原始最优化问题和对偶最优化问题，原始问题满足定理C.2的条件，所以存在$w,α,β$,使$w$是原始问题的解，$α,β$是对偶问题的解。这意味着求解原始问题可以转换为求解对偶问题。</p>
+<p>对线性可分训练数据集，假设对偶最优化问题对$a$的解为$a=(a_1,a_2,···,a_N)$，可以由$a$求得原始最优化问题对$(w,b)$的解$w,b$。得到下面的定理。</p>
+<p>设$a=(a_1,a_2,···,a_l)^T$是对偶最优化问题的解，则存在下标$j$，使得$a_j&gt;0$，并可按下式求得原始最优化问题的解$w,b$:<br>$$<br>w=\sum_{i=1}^N{a_{i} y_ix_i}<br>$$$$<br>b=y_i-\sum_i^N{a_{i} y_i\left( x_i·x_j \right)}<br>$$</p>
+<p>证明  根据定理C.3,KKT条件成立，即得<br>$$\nabla _wL\left( w,b,a \right) =w-\sum_{i=1}^N{a_iy_ix_i=0}<br>$$$$<br>\nabla _bL\left( w,b,a \right) =-\sum_{i=1}^N{a_{i} y_i=0}<br>$$$$<br>a_{i} \left( y_i\left( w·x_i+b \right) -1 \right) =0 , i=1,2,···,N<br>$$$$<br>y_i\left( w·x_i+b \right) -1\geqslant 0 , 1,2,···,N<br>$$$$<br>a_{i} \geqslant 0 , i=1,2,···,N<br>$$<br>由此得<br>$$<br>w=\sum_i^{}{a_{i} y_ix_i}<br>$$<br>其中至少有一个$a_j&gt;0$(反证法，假设$a^*=0$，由上可知$w=0$，而$w=0$不是原始最优化问题的解，产生矛盾)，对此$j$有<br>$$<br>y_j\left( w·x_j+b \right) -1=0<br>$$$$<br>a_{j} y_jx_j·x_i+b=1/y_j=y_j<br>$$$$<br>b=y_j-\sum_{i=1}^N{a_{i} y_i\left( x_i·x_j \right)}<br>$$</p>
+<p>综上所述，对于给定的线性可分训练数据集，可以首先求对偶问题的解$a$;再利用求得原始问题的解$w^<em>,b^</em>$,从而得到分离超平面及分类决策函数。这种算法称为线性可分支持向量机的对偶学习算法，是线性可分支持向量机学习的基本算法。</p>
 <p><code>线性可分支持向量机学习算法</code></p>
 <ul>
 <li>输入：线性可分训练数据集$<br>T=\left\{ \left( x_1,y_1 \right) ,\left( x_2,y_2 \right) ,···,\left( x_N,y_N \right) \right\}<br>$,其中,$<br>x_i\in R^n,y_i\in \left\{ +1,-1 \right\} ,i=1,2,···,N$</li>
@@ -410,14 +410,14 @@
 <li>1）构造并求解约束最优化问题</li>
 </ul>
 <p>$$<br>\underset{a}{\min}\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) -\sum_{i=1}^N{a_i}}}<br>$$$$<br>s.t.    \sum_{i=1}^N{a_iy_j=0}<br>$$$$<br>a_i\geqslant 0, i=1,2,···,N<br>$$</p>
-<p>求得最优解$a^<em>=(a_1^</em>,a_2^<em>,···,a_N^</em>)$</p>
+<p>求得最优解$a=(a_1,a_2,···,a_N)$</p>
 <ul>
-<li><p>2）计算<br>$$<br>w^<em>=\sum_i^{}{a_{i}^{</em>}y_ix_i}<br>$$并选择$a^<em>$的一个正分量$a_j^</em>&gt;0$，计算<br>$$<br>b^<em>=y_j-\sum_{i=1}^N{a_{i}^{</em>}y_i\left( x_i·x_j \right)}<br>$$</p>
+<li><p>2）计算<br>$$<br>w =\sum_i^{}{a_{i} y_ix_i}<br>$$并选择$a$的一个正分量$a_j&gt;0$，计算<br>$$b=y_j-\sum_{i=1}^N{a_{i} y_i\left( x_i·x_j \right)}<br>$$</p>
 </li>
-<li><p>3） 求得分离超平面<br>$$w^<em>·x+b^</em>=0<br>$$分类决策函数：<br>$$f(x)=sign(w^<em>·x+b^</em>)$$</p>
+<li><p>3） 求得分离超平面<br>$$w·x+b=0<br>$$分类决策函数：<br>$$f(x)=sign(w·x+b)$$</p>
 </li>
 </ul>
-<p>在线性可分支持向量机中，$w^<em>和b^</em>$只依赖于训练数据中对应于$a_i^<em>&gt;0$的样本点$x_i,y_i$,而其他样本点对$w^</em>和b^<em>$没有影响。我们将训练数据中对应于$a_i^</em>&gt;0$的实例点$<br>x_i\in R^n<br>$称为<strong>支持向量</strong>。</p>
+<p>在线性可分支持向量机中，$w和b$只依赖于训练数据中对应于$a_i&gt;0$的样本点$x_i,y_i$,而其他样本点对$w和b$没有影响。我们将训练数据中对应于$a_i&gt;0$的实例点$x_i\in R^n$称为<strong>支持向量</strong>。</p>
 <p>对于线性可分问题，上述线性可分支持向量机的学习（硬间隔最大化）算法是完美的。但是，训练数据集线性可分是理想的情形。在现实问题中，训练数据集往往是线性不可分的，即在样本中出现噪声或特异点。此时，有更一般的学习算法。</p>
 <h2 id="二、线性支持向量机与软间隔最大化"><a href="#二、线性支持向量机与软间隔最大化" class="headerlink" title="二、线性支持向量机与软间隔最大化"></a>二、线性支持向量机与软间隔最大化</h2><h3 id="2-1-线性支持向量机"><a href="#2-1-线性支持向量机" class="headerlink" title="2.1 线性支持向量机"></a>2.1 线性支持向量机</h3><p>通常情况是，训练数据中有一些特异点<code>outlier</code>，将这些特异点除去后，剩下大部分的样本点组成的集合是线性可分的。</p>
 <p>线性不可分意味着某些样本点不能满足函数间隔大于等于1的约束条件。为了解决这个问题，可以对每个样本点引进一个松弛变量$<br>\xi \geqslant 0<br>$，使函数间隔加上松弛变量大于等于1.这样，约束条件变成$$<br>y_i\left( w·x_i+b \right) \geqslant 1-\xi _i<br>$$同时，对每个松弛变量$<br>\xi \geqslant 0<br>$，支付一个代价$<br>\xi \geqslant 0<br>$。当然，如果我们允许$<br>\xi \geqslant 0<br>$任意大的话，那任意的超平面都是符合条件的了。所以，我们在原来的目标函数后面加上一项，使得这些 $<br>\xi \geqslant 0<br>$的总和也要最小：目标函数由原来的$<br>\frac{1}{2}||w||^2<br>$变成$$<br>\frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i}<br>$$<br>这里，$C&gt;0$称为惩罚参数，一般事先由应用问题决定，控制目标函数中两项（“寻找 $margin$ 最大的超平面”和“保证数据点偏差量最小”）之间的权重，$C$越大时对误分类的惩罚增大，$C$值小时对误分类的惩罚减小。最小化目标函数包含两层含义：使$<br>\frac{1}{2}||w||^2<br>$尽量小即间隔尽量大，同时使误分类点的个数尽量小，C是调和二者的系数。</p>
@@ -425,7 +425,7 @@
 <p>用之前的方法将限制加入到目标函数中，得到如下原始最优化问题的拉格朗日函数：<br>$$<br>L\left( w,b,\xi ,a,u \right) =\frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i-\sum_{i=1}^N{a_i\left( y_i\left( w·x_i+b \right) -1+\xi _i \right) -\sum_{i=1}^N{u_i\xi _i}}}<br>$$</p>
 <p>首先求拉格朗日函数针对$<br>w,b,\xi<br>$的极小。$$<br>\frac{\partial L}{\partial w}=0\Rightarrow w=\sum_{i=1}^N{a_iy_ix_i}<br>$$$$<br>\frac{\partial L}{\partial b}=0\Rightarrow \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>\frac{\partial L}{\partial \xi _i}=0\Rightarrow C-a_i-u_i=0，i=1,2,3···,N<br>$$<br>将它们代入拉格朗日函数，得到和原来一样的目标函数。<br>$$<br>\underset{a}{\max}  -\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) +\sum_{i=1}^N{a_i}}}<br>$$$$<br>s.t. \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>C-a_i-u_i=0<br>$$$$<br>a_i\geqslant 0<br>$$$$<br>u_i\geqslant 0<br>$$</p>
 <p>不过，由于我们得到$C-a_i-u_i=0$，而又有$u_i&gt;0$（作为拉格朗日乘子的条件）,因此有$a_i≤C$,所以整个<code>dual</code>问题现在写作：<br>$$<br>\underset{a}{\max}  -\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) +\sum_{i=1}^N{a_i}}}<br>$$$$<br>s.t. \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>0\le a_i\le C ,  i=1,2,···,N<br>$$<br>和之前的结果对比一下，可以看到唯一的区别就是现在拉格朗日乘子$a$多了一个上限$C$。</p>
-<p>构造并求解上述二次规划问题后求得最优解<br>$$<br>a^<em>=\left( a_{1}^{</em>},a_{2}^{<em>},···,a_{N}^{</em>} \right) ^T<br>$$<br>然后计算$$<br>w^<em>=\sum_{i=1}^N{a_{i}^{</em>}y_ix_i}<br>$$<br>选择$a^<em>$的一个分量$a_i^</em>$适合约束条件$0&lt;a_i&lt;C$,计算$$<br>b^<em>=y_j-\sum_{i=1}^N{y_ia_{i}^{</em>}\left( x_i·x_j \right)}<br>$$<br>对任一适合条件都可求得一个$b^*$，但是由于原始问题对$b$的求解并不唯一，所以实际计算时可以取在所有符合条件的样本点上的平均值。</p>
+<p>构造并求解上述二次规划问题后求得最优解<br>$$<br>a=\left( a_{1},a_{2},···,a_{N} \right) ^T<br>$$<br>然后计算$$<br>w=\sum_{i=1}^N{a_{i}y_ix_i}<br>$$<br>选择$a$的一个分量$a_i$适合约束条件$0&lt;a_i&lt;C$,计算$$<br>b=y_j-\sum_{i=1}^N{y_ia_{i} \left( x_i·x_j \right)}<br>$$<br>对任一适合条件都可求得一个$b$，但是由于原始问题对$b$的求解并不唯一，所以实际计算时可以取在所有符合条件的样本点上的平均值。</p>
 <h3 id="2-2-支持向量"><a href="#2-2-支持向量" class="headerlink" title="2.2 支持向量"></a>2.2 支持向量</h3><p>再现性不可分的情况下，将对偶问题的解中对应于$a_i^*&gt;0$的样本点$(x_i,y_i)$的实例$x_i$称为支持向量（软间隔的支持向量）。如图所示，这时的支持向量要比线性可分时的情况复杂一些。</p>
 <center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8810.22.45.png" alt="屏幕快照 2017-03-20 上午10.22.45"></center>
 
