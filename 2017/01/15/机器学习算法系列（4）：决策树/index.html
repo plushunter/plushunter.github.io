@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-10%20%E4%B8%8B%E5%8D%887.43.24.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-12-12%20%E4%B8%8B%E5%8D%889.39.47.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%882.32.52.png">
-<meta property="og:updated_time" content="2017-04-11T15:11:04.000Z">
+<meta property="og:updated_time" content="2017-04-11T16:42:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（4）：决策树">
 <meta name="twitter:description" content="本文结合李航博士的《统计学习方法》与周志华老师的《机器学习》决策树部分，《统计学习方法》重理论的证明推导，《机器学习》注重讲解算法的特点与扩展。">
@@ -368,11 +368,9 @@
 <p>在描述算法前，先对符号进行说明：<br>设训练数据集为$D$，$|D|$表示其样本容量，即样本个数。设有$K$个类$C_k$,$k=1,2,···,K$,$|C_k|$为属于类$C_k$的样本个数，$\sum_{k=1}^K{|C_k|=|D|}$。设特征$A$有$n$个不同的取值${a_1,a_2,···,a_n}$,根据特征$A$的取值将$D$划分为$n$个子集$D_1,D_2,···,D_n$,$|D_i|$为$D_i$的样本个数，$\sum_{i=1}^n{|D_i|=|D|}$。记子集$D_i$中属于类$C_k$的样本的集合为$D_{ik}$,即$D_{ik}=D_i\cap{C_k}$,$D_{ik}$为$D_{ik}$的样本个数。</p>
 <p>具体算法步骤如下：</p>
 <ul>
-<li>1）计算数据集$D$的经验熵$H(D)$<br>$$<br>H\left( D \right) =-\sum_{k=1}^K{\frac{|C_k|}{|D|}\log _2\frac{|C_k|}{|D|}}<br>$$</li>
-<li>2）计算特征$A$对数据集$D$的经验条件熵$H(D|A)$<pre><code>$$H\left( D|A \right) =\sum_{i=1}^n{\frac{|D_i|}{|D|}H\left( D_i \right)}=-\sum_{i=1}^n{\frac{|D_i|}{|D|}\sum_{k=1}^K{\frac{|D_{ik}|}{|D_i|}\log _2\frac{|D_{ik}|}{|D_i|}}}
-</code></pre>$$</li>
-<li>3）计算信息增益<pre><code>$$g\left( D,A \right) =H\left( D \right) -H\left( D|A \right) $$
-</code></pre></li>
+<li>1）计算数据集$D$的经验熵$H(D)$$$H\left( D \right) =-\sum_{k=1}^K{\frac{|C_k|}{|D|}\log _2\frac{|C_k|}{|D|}}<br>$$</li>
+<li>2）计算特征$A$对数据集$D$的经验条件熵$H(D|A)$$$H\left( D|A \right) =\sum_{i=1}^n{\frac{|D_i|}{|D|}H\left( D_i \right)}=-\sum_{i=1}^n{\frac{|D_i|}{|D|}\sum_{k=1}^K{\frac{|D_{ik}|}{|D_i|}\log _2\frac{|D_{ik}|}{|D_i|}}}<br>$$</li>
+<li>3）计算信息增益$$g\left( D,A \right) =H\left( D \right) -H\left( D|A \right) $$</li>
 </ul>
 <h3 id="2-3-信息增益比"><a href="#2-3-信息增益比" class="headerlink" title="2.3 信息增益比"></a>2.3 信息增益比</h3><p>以信息增益作为划分训练数据集的特征，存在偏向于选择取值较多的特征的问题。使用信息增益比可以对这一问题进行校正。</p>
 <p>信息增益比表示特征$A$对训练数据集$D$的信息增益比。$g_R(D,A)$定义为其信息增益$g(D,A)$与训练数据集$D$关于特征$A$的值的熵$H_A(D)$之比，即$$<br>g_R\left( D,A \right) =\frac{g\left( D,A \right)}{H_A\left( D \right)}<br>$$</p>

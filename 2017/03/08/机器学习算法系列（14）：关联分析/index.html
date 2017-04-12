@@ -95,7 +95,7 @@
 <meta property="og:description" content="一、关联分析1.1 引言在数据挖掘与机器学习中，关联规则（Association Rules）是一种较为常用的无监督学习算法，与分类、聚类等算法不同的是，这一类算法的主要目的在于发掘数据内在结构特征之间的关联性。 简单一点来说，就是在大规模的数据集中寻找一些有意义有价值的关系。有了这些关系，一方面，可以帮助我们拓宽对数据及其特征的理解；另一方面，则可以实现推荐系统的构建与应用（例如购物篮分析等）。">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8B%E5%8D%886.27.11.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-02%20%E4%B8%8B%E5%8D%8810.31.15.png">
-<meta property="og:updated_time" content="2017-04-11T16:33:52.000Z">
+<meta property="og:updated_time" content="2017-04-12T06:04:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（14）：关联分析">
 <meta name="twitter:description" content="一、关联分析1.1 引言在数据挖掘与机器学习中，关联规则（Association Rules）是一种较为常用的无监督学习算法，与分类、聚类等算法不同的是，这一类算法的主要目的在于发掘数据内在结构特征之间的关联性。 简单一点来说，就是在大规模的数据集中寻找一些有意义有价值的关系。有了这些关系，一方面，可以帮助我们拓宽对数据及其特征的理解；另一方面，则可以实现推荐系统的构建与应用（例如购物篮分析等）。">
@@ -403,7 +403,7 @@
 </ul>
 <p>由于$L_3$不能继续构成候选集$C_4$，所以迭代结束，得到的最大频繁项集为$L_3\{B,C,E\}$。</p>
 <h3 id="2-4-在最大频繁项集的基础上产生简单关联规则"><a href="#2-4-在最大频繁项集的基础上产生简单关联规则" class="headerlink" title="2.4 在最大频繁项集的基础上产生简单关联规则"></a>2.4 在最大频繁项集的基础上产生简单关联规则</h3><p>得到最大频繁项集并不是最终的目的。之前在判断关联规则的有效性时，我们学习了置信度与支持度两个指标。其中，支持度已经在寻找最大频繁项集的过程中发挥了作用，那么，在接下来关联规则的产生上，就轮到置信度大显身手了。</p>
-<p>首先，每个频繁项集都需要计算所有非空子集$L^<em>$的置信度，公式为$$<br>C_{L^</em>\rightarrow\left\{L-L^<em>\right\}}=\frac{P\left(L\right)}{P\left(L^</em>\right)}<br>$$如果所求得的$C_{L^<em>\rightarrow\left\{L-L^</em>\right\}}$大于我们自行指定的$C_{min}$，则生成相应的关联规则${L^<em>\rightarrow\left\{L-L^</em>\right\}}$</p>
+<p>首先，每个频繁项集都需要计算所有非空子集$L^*$的置信度，公式为$$<br>C_{L’\rightarrow\left\{L-L’\right\}}=\frac{P\left(L\right)}{P\left(L’\right)}<br>$$如果所求得的$C_{L’\rightarrow\left\{L-L’\right\}}$大于我们自行指定的$C_{min}$，则生成相应的关联规则${L’\rightarrow\left\{L-L’\right\}}$</p>
 <p>在上面的例子中，$L_3{\{B,C,E\}}$的非空子集就包括$\{B\}$，$\{C\}$，$\{E\}$，$\{B,C\}$，$\{B,E\}$，$\{C,E\}$，举例来说，根据公式可计算得到$$<br>C_{C\rightarrow\left\{B,E\right\}}=\frac{P\left(B,C,E\right)}{P\left(C\right)}=\frac{2}{3}=66.7\%<br>$$其余置信度依次为：$C_{B\rightarrow\left\{C,E\right\}}=66.7\%$，$C_{E\rightarrow\left\{B,C\right\}}=66.7\%$，$C_{\left\{B,C\right\}\rightarrow E}=100\%$，$C_{\left\{B,E\right\}\rightarrow C}=66.7\%$，$C_{\left\{C,E\right\}\rightarrow B}=100\%$</p>
 <p>如果我么设定$C_{min}=80\%$的话，只有$C_{\left\{C,E\right\}\rightarrow B}$和$C_{\left\{B,C\right\}\rightarrow E}$可以入围，如果设定为$50\%$，那么六条规则就都是有效规则了。置信度的选取和支持度一样，只有结合具体应用情况，算法才能给到我们切合实际的结论。</p>
 
