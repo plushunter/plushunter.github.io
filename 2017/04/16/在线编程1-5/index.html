@@ -1,0 +1,749 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Python,数据结构," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、二维数组中的查找1.1 题目描述：在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。">
+<meta name="keywords" content="Python,数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在线编程系列：剑指offer（1-5）">
+<meta property="og:url" content="http://yoursite.com/2017/04/16/在线编程1-5/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="一、二维数组中的查找1.1 题目描述：在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-20%20%E4%B8%8A%E5%8D%8812.09.24.png">
+<meta property="og:updated_time" content="2017-04-22T16:14:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在线编程系列：剑指offer（1-5）">
+<meta name="twitter:description" content="一、二维数组中的查找1.1 题目描述：在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-20%20%E4%B8%8A%E5%8D%8812.09.24.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 在线编程系列：剑指offer（1-5） | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/16/在线编程1-5/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                在线编程系列：剑指offer（1-5）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-16T23:14:45+08:00">
+                2017-04-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、二维数组中的查找"><a href="#一、二维数组中的查找" class="headerlink" title="一、二维数组中的查找"></a>一、二维数组中的查找</h2><h3 id="1-1-题目描述："><a href="#1-1-题目描述：" class="headerlink" title="1.1 题目描述："></a>1.1 题目描述：</h3><p>在一个二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
+<a id="more"></a>
+<h3 id="1-2-思路："><a href="#1-2-思路：" class="headerlink" title="1.2 思路："></a>1.2 思路：</h3><ul>
+<li>利用二维数组由上到下，由左到右递增的规律，<br>那么选取右上角或者左下角的元素a[row][col]与target进行比较，</li>
+<li>当target小于元素array[row][col]时，那么target必定在元素a所在行的左边,即col-=1；</li>
+<li>当target大于元素a[row][col]时，那么target必定在元素a所在列的下边,即row+=1；</li>
+</ul>
+<h3 id="1-3-代码实现"><a href="#1-3-代码实现" class="headerlink" title="1.3 代码实现"></a>1.3 代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># array 二维列表</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">Find</span><span class="params">(self, target, array)</span>:</span></div><div class="line">        <span class="comment"># write code here</span></div><div class="line">        row_0 = len(array)</div><div class="line">        col_0 = len(array[<span class="number">0</span>])</div><div class="line">        row = <span class="number">0</span></div><div class="line">        col = col_0<span class="number">-1</span></div><div class="line">        <span class="keyword">while</span> row &lt; row_0 <span class="keyword">and</span> col &gt;=<span class="number">0</span>:</div><div class="line">            <span class="keyword">if</span> target == array[row][col]:</div><div class="line">                <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">            <span class="keyword">elif</span> target &gt; array[row][col]:</div><div class="line">                row +=<span class="number">1</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                col -=<span class="number">1</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">False</span></div></pre></td></tr></table></figure>
+<h2 id="二、替换空格"><a href="#二、替换空格" class="headerlink" title="二、替换空格"></a>二、替换空格</h2><h3 id="2-1-题目描述"><a href="#2-1-题目描述" class="headerlink" title="2.1 题目描述"></a>2.1 题目描述</h3><p>请实现一个函数，将一个字符串中的空格替换成“%20”。例如，当字符串为We Are Happy.则经过替换之后的字符串为We%20Are%20Happy。</p>
+<h3 id="2-2-思路"><a href="#2-2-思路" class="headerlink" title="2.2 思路"></a>2.2 思路</h3><ul>
+<li>Python replace() 方法把字符串中的 old（旧字符串） 替换成 new(新字符串)，如果指定第三个参数max，则替换不超过 max 次。</li>
+<li>replace()方法语法：str.replace(old, new[, max])</li>
+<li><p>参数<br>old – 将被替换的子字符串。<br>new – 新字符串，用于替换old子字符串。<br>max – 可选字符串, 替换不超过 max 次</p>
+<h3 id="2-3-代码实现"><a href="#2-3-代码实现" class="headerlink" title="2.3 代码实现"></a>2.3 代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> -*- coding:utf<span class="number">-8</span> -*-</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># s 源字符串</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">replaceSpace</span><span class="params">(self, s)</span>:</span></div><div class="line">        <span class="comment"># write code here</span></div><div class="line">        s = s.replace(<span class="string">' '</span>,<span class="string">'%20'</span>)</div><div class="line">        <span class="keyword">return</span> s</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="三、从头到尾打印链表"><a href="#三、从头到尾打印链表" class="headerlink" title="三、从头到尾打印链表"></a>三、从头到尾打印链表</h2><h3 id="3-1-题目描述"><a href="#3-1-题目描述" class="headerlink" title="3.1 题目描述"></a>3.1 题目描述</h3><p>输入一个链表，从尾到头打印链表每个节点的值。</p>
+<h3 id="3-2-思路"><a href="#3-2-思路" class="headerlink" title="3.2 思路"></a>3.2 思路</h3><p>Python 中的 list 并不是我们传统（计算机科学）意义上的列表，这也是其 append 操作会比 insert 操作效率高的原因。传统列表——通常也叫作链表（linked list）——通常是由一系列节点（node）来实现的，其每一个节点（尾节点除外）都持有一个指向下一个节点的引用。</p>
+<p>其简单实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(value, next=None)</span>:</span></div><div class="line">        self.value = value</div><div class="line">        self.next = next</div></pre></td></tr></table></figure>
+<p>接下来，我们就可使用链表的结构来组织所有节点了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>L = <span class="keyword">None</span>(<span class="string">'a'</span>, Node(<span class="string">'b'</span>, Node(<span class="string">'c'</span>, Node(<span class="string">'d'</span>))))</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>L.next.next.value</div><div class="line"><span class="string">'c'</span></div></pre></td></tr></table></figure>
+<p>这是所谓的单向链表，双向链表的各节点还需要持有一个指向前一节点的引用。</p>
+<h3 id="3-3-代码实现"><a href="#3-3-代码实现" class="headerlink" title="3.3 代码实现"></a>3.3 代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="comment"># class ListNode:</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.next = None</span></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># 返回从尾部到头部的列表值序列，例如[1,2,3]</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">printListFromTailToHead</span><span class="params">(self, listNode)</span>:</span></div><div class="line">        <span class="comment"># write code here</span></div><div class="line">        list = []</div><div class="line">        <span class="keyword">while</span> listNode:</div><div class="line">            list.append(listNode.val)</div><div class="line">            listNode = listNode.next</div><div class="line">        <span class="keyword">return</span> list[::<span class="number">-1</span>]</div></pre></td></tr></table></figure>
+<h2 id="四、重建二叉树"><a href="#四、重建二叉树" class="headerlink" title="四、重建二叉树"></a>四、重建二叉树</h2><h3 id="4-1-题目描述"><a href="#4-1-题目描述" class="headerlink" title="4.1 题目描述"></a>4.1 题目描述</h3><p>输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。</p>
+<h3 id="4-2-解题思路"><a href="#4-2-解题思路" class="headerlink" title="4.2 解题思路"></a>4.2 解题思路</h3><p>已知前序、中序、求后序遍历<br>例如：<br>前序遍历:         GDAFEMHZ</p>
+<p>中序遍历:         ADEFGHMZ</p>
+<p>画树求法：</p>
+<ul>
+<li><p>1）根据前序遍历的特点，我们知道根结点为G</p>
+</li>
+<li><p>2）观察中序遍历ADEFGHMZ。其中root节点G左侧的ADEF必然是root的左子树，G右侧的HMZ必然是root的右子树。</p>
+</li>
+<li><p>3）观察左子树ADEF，左子树的中的根节点必然是大树的root的leftchild。在前序遍历中，大树的root的leftchild位于root之后，所以左子树的根节点为D。</p>
+</li>
+<li><p>4）同样的道理，root的右子树节点HMZ中的根节点也可以通过前序遍历求得。在前序遍历中，一定是先把root和root的所有左子树节点遍历完之后才会遍历右子树，并且遍历的左子树的第一个节点就是左子树的根节点。同理，遍历的右子树的第一个节点就是右子树的根节点。</p>
+</li>
+<li><p>5）观察发现，上面的过程是递归的。先找到当前树的根节点，然后划分为左子树，右子树，然后进入左子树重复上面的过程，然后进入右子树重复上面的过程。最后就可以还原一棵树了。该步递归的过程可以简洁表达如下：</p>
+</li>
+</ul>
+<p>1、确定根,确定左子树，确定右子树。<br>2、在左子树中递归。<br>3、在右子树中递归。<br>4、打印当前根。</p>
+<p>那么，我们可以画出这个二叉树的形状：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-20%20%E4%B8%8A%E5%8D%8812.09.24.png" alt="屏幕快照 2017-04-20 上午12.09.24"><br>那么，根据后序的遍历规则，我们可以知道，后序遍历顺序为：AEFDHZMG</p>
+<h3 id="4-3-代码实现"><a href="#4-3-代码实现" class="headerlink" title="4.3 代码实现"></a>4.3 代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TreeNode</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, x)</span>:</span></div><div class="line">        self.val = x</div><div class="line">        self.left = <span class="keyword">None</span></div><div class="line">        self.right = <span class="keyword">None</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># 返回构造的TreeNode根节点</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">reConstructBinaryTree</span><span class="params">(self, pre, tin)</span>:</span></div><div class="line">        <span class="comment"># write code here</span></div><div class="line">        <span class="keyword">if</span> len(pre) == <span class="number">0</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line">        <span class="keyword">elif</span> len(pre) == <span class="number">1</span>:</div><div class="line">            <span class="keyword">return</span> TreeNode(pre[<span class="number">0</span>])</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            Node = TreeNode(pre[<span class="number">0</span>])</div><div class="line">            index = tin.index(pre[<span class="number">0</span>])</div><div class="line">            Node.left = self.reConstructBinaryTree(pre[<span class="number">1</span>:index+<span class="number">1</span>],tin[:index])</div><div class="line">            Node.right = self.reConstructBinaryTree(pre[index+<span class="number">1</span>:],tin[index+<span class="number">1</span>:])</div><div class="line">        <span class="keyword">return</span> Node</div></pre></td></tr></table></figure>
+<h2 id="五、用两个栈实现队列"><a href="#五、用两个栈实现队列" class="headerlink" title="五、用两个栈实现队列"></a>五、用两个栈实现队列</h2><h3 id="5-1-题目描述"><a href="#5-1-题目描述" class="headerlink" title="5.1 题目描述"></a>5.1 题目描述</h3><p>用两个栈来实现一个队列，完成队列的Push和Pop操作。 队列中的元素为int类型。</p>
+<h3 id="5-2-解题思路"><a href="#5-2-解题思路" class="headerlink" title="5.2 解题思路"></a>5.2 解题思路</h3><p>栈是一个非常常见的数据结构，它在计算机领域中被广泛应用，比如操作系统会给每个线程创建一个栈来存储函数调用时各个函数的参数、返回地址及临时变量等。栈的特点是后进先出，即最后被压入（push）栈的元素会第一个被弹出（pop）。</p>
+<p>队列是另外一种很重要的数据结构。和栈不同的是，队列的特点是先进先出，即第一个进入队列的元素将会第一个出来。</p>
+<p>栈和队列虽然是针锋相对的两个数据结构，但有意思的是他们却相互联系。</p>
+<p>通过一个具体的例子来分析往队列插入和删除元素的过程。首先插入一个元素a，不妨先把它插入到stack1，此时stack1中的元素有{a}，stack2为空，再向stack1压入b和c，此时stack1中的元素有{a,b,c}，其中c处于栈顶，而stack2仍然是空的。</p>
+<p>因为a是最先进的，最先被删除的元素应该是a，但a位于栈低。我们可以把stack1中的元素逐个弹出并压入stack2，元素在stack2的顺序正好和原来在stack1的顺序相反因此经过三次弹出stack1和压入stack2操作之后，stack1为空，而stack2的元素是{c,b,a}，这时就可以弹出stack2的栈顶a了，随后弹出stack2中的b和c，而这个过程中stack1始终为空.</p>
+<p>从上面的分析我们可以总结出删除一个元素的步骤：当stack2中不为空时，在stack2的栈顶元素是最先进入队列的元素，可以弹出。如果stack2为空时，我们把stack1中的元素逐个弹出并压入stack2。由于先进入队列的元素被压到stack1的底端，经过弹出和压入之后就处于stack2的顶端了，又可以直接弹出。</p>
+<h3 id="5-3-代码实现"><a href="#5-3-代码实现" class="headerlink" title="5.3 代码实现"></a>5.3 代码实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.stack1=[]</div><div class="line">        self.stack2=[]</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">push</span><span class="params">(self, node)</span>:</span></div><div class="line">        <span class="comment"># write code here</span></div><div class="line">        self.stack1.append(node)</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pop</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># return xx</span></div><div class="line">        <span class="keyword">if</span> self.stack2==[]:</div><div class="line">            <span class="keyword">while</span> self.stack1:</div><div class="line">                self.stack2.append(self.stack1.pop())</div><div class="line">            <span class="keyword">return</span> self.stack2.pop()</div><div class="line">        <span class="keyword">return</span> self.stack2.pop()</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/18/机器学习算法系列（17）：非平衡数据处理/" rel="next" title="机器学习算法系列（17）：非平衡数据处理">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（17）：非平衡数据处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/14/深度学习系列（2）：神经网络MNIST实战/" rel="prev" title="深度学习系列（2）：神经网络MNIST实战">
+                深度学习系列（2）：神经网络MNIST实战 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、二维数组中的查找"><span class="nav-text">一、二维数组中的查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-题目描述："><span class="nav-text">1.1 题目描述：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-思路："><span class="nav-text">1.2 思路：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-代码实现"><span class="nav-text">1.3 代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、替换空格"><span class="nav-text">二、替换空格</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-题目描述"><span class="nav-text">2.1 题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-思路"><span class="nav-text">2.2 思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-代码实现"><span class="nav-text">2.3 代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、从头到尾打印链表"><span class="nav-text">三、从头到尾打印链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-题目描述"><span class="nav-text">3.1 题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-思路"><span class="nav-text">3.2 思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-代码实现"><span class="nav-text">3.3 代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、重建二叉树"><span class="nav-text">四、重建二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-题目描述"><span class="nav-text">4.1 题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-解题思路"><span class="nav-text">4.2 解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-代码实现"><span class="nav-text">4.3 代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、用两个栈实现队列"><span class="nav-text">五、用两个栈实现队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-题目描述"><span class="nav-text">5.1 题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-解题思路"><span class="nav-text">5.2 解题思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-代码实现"><span class="nav-text">5.3 代码实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
