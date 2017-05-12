@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-11%20%E4%B8%8B%E5%8D%8811.55.37.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/opt1.gif">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/opt2.gif">
-<meta property="og:updated_time" content="2017-05-12T03:10:00.000Z">
+<meta property="og:updated_time" content="2017-05-12T03:12:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（七）：神经网络的优化方法">
 <meta name="twitter:description" content="一、Gradient Descent [Robbins and Monro, 1951, Kiefer et al., 1952]机器学习中，梯度下降法常用来对相应的算法进行训练。常用的梯度下降法包含三种不同的形式，分别是BGD、SGD和MBGD，它们的不同之处在于我们在对目标函数进行梯度更新时所使用的样本量的多少。">
@@ -375,8 +375,9 @@
 <p>从上面的公式可以看到，它得到的是全局最优解，但是每迭代一步，都要用到训练集所有的数据，若样本数目$m$很大，那么迭代速度会大大降低。<br>其优缺点如下：</p>
 <ul>
 <li>优点：全局最优解；易于并行实现；</li>
-<li>缺点：当样本量很大时，训练过程会很慢<h3 id="1-2-SGD（Stochastic-Gradient-Descent）"><a href="#1-2-SGD（Stochastic-Gradient-Descent）" class="headerlink" title="1.2 SGD（Stochastic Gradient Descent）"></a>1.2 SGD（Stochastic Gradient Descent）</h3>由于批量梯度下降法在更新每一个参数时，都需要所有的训练样本，所以训练过程会随着样本数量的加大而变得异常缓慢。随机梯度下降法（Stochastic Gradient Descent，简称SGD）正是为了解决批量梯度下降法这一弊端而提出的。<br>对每个样本的损失函数对$\theta$求偏导得到对应的梯度，来更新$\theta$：$$<br>\theta_{j}^{‘}=\theta_j+\left(y^{\left(i\right)}-h_{\theta}\left(x^{\left(i\right)}\right)\right)x_{j}^{\left(i\right)}<br>$$具体的伪代码形式为</li>
+<li>缺点：当样本量很大时，训练过程会很慢</li>
 </ul>
+<h3 id="1-2-SGD（Stochastic-Gradient-Descent）"><a href="#1-2-SGD（Stochastic-Gradient-Descent）" class="headerlink" title="1.2 SGD（Stochastic Gradient Descent）"></a>1.2 SGD（Stochastic Gradient Descent）</h3><p>由于批量梯度下降法在更新每一个参数时，都需要所有的训练样本，所以训练过程会随着样本数量的加大而变得异常缓慢。随机梯度下降法（Stochastic Gradient Descent，简称SGD）正是为了解决批量梯度下降法这一弊端而提出的。<br>对每个样本的损失函数对$\theta$求偏导得到对应的梯度，来更新$\theta$：$$<br>\theta_{j}^{‘}=\theta_j+\left(y^{\left(i\right)}-h_{\theta}\left(x^{\left(i\right)}\right)\right)x_{j}^{\left(i\right)}<br>$$具体的伪代码形式为</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(nb_epochs):</div><div class="line">  np.random.shuffle(data)</div><div class="line">  <span class="keyword">for</span> example <span class="keyword">in</span> data:</div><div class="line">    params_grad = evaluate_gradient(loss_function, example, params)</div><div class="line">    params = params - learning_rate * params_grad</div></pre></td></tr></table></figure>
 <p>随机梯度下降是通过每个样本来迭代更新一次，如果样本量很大的情况（例如几十万），那么可能只用其中几万条或者几千条的样本，就已将将$\theta$迭代到最优解了，对比上面的批量梯度下降，迭代一次不可能最优，如果迭代十次的话就需要遍历训练样本10次。但是，SGD伴随的一个问题是噪音较BGD要多，使得SGD并不是每次迭代都向着整体最优化方向。<br>其优缺点如下：</p>
 <ul>
