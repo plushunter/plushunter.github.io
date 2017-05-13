@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%889.14.25.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%889.26.38.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%889.28.10.png">
-<meta property="og:updated_time" content="2017-05-13T03:09:25.000Z">
+<meta property="og:updated_time" content="2017-05-13T03:14:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（8）：激活函数">
 <meta name="twitter:description" content="深度学习的基本原理是基于人工神经网络，信号从一个神经元进入，经过非线性的activation function，传入到下一层神经元；再经过该层神经元的activate function，继续往下传递，如此循环往复，直到输出层。其中的激活函数的主要作用是提供网络的非线性建模能力，使得神经网络有足够的capacity来抓取复杂的pattern，在各个领域取得state-of-the-art的结果。">
@@ -382,12 +382,10 @@
 <ul>
 <li><p>1）梯度消失。Sigmoid 的软饱和性，使得深度神经网络在二三十年里一直难以有效的训练，是阻碍神经网络发展的重要原因。具体地，我们知道优化神经网络的方法是Back Propagation，即导数的反向传递：先计算输出层对应的loss，然后将loss以导数的形式不断向上一层网络传递，修正相应的参数，达到降低loss的目的。sigmoid反向传导的梯度包含了一个f’(x) 因子（sigmoid关于输入的导数），因此一旦输入落入饱和区，f’(x) 就会变得接近于0，导致了向底层传递的梯度也变得非常小。此时，网络参数很难得到有效训练。这种现象被称为梯度消失。一般来说， sigmoid 网络在 5 层之内就会产生梯度消失现象。我们也可以在图中看出原因，主要在于两点：(1) 在上图中容易看出，当$\sigma(x)$中x较大或较小时，导数接近0，而后向传递的数学依据是微积分求导的链式法则，当前层的导数需要之前各层导数的乘积，几个小数的相乘，结果会很接近0 (2) Sigmoid导数的最大值是0.25，这意味着导数在每一层至少会被压缩为原来的1/4，通过两层后被变为1/16，…，通过10层后为1/1048576。请注意这里是“至少”，导数达到最大值这种情况还是很少见的。梯度消失问题至今仍然存在，但被新的优化方法有效缓解了，例如DBN中的分层预训练，Batch Normalization的逐层归一化，Xavier和MSRA权重初始化等代表性技术。</p>
 </li>
-<li><p>2）Sigmoid函数的输出不是Zero-centered的。这个性质并不是我们想要的，因为在神经网络后面层中的神经元得到的数据将不是零中心的。这一情况将影响梯度下降的运作，因为如果输入神经元的数据总是正数(比如在$f=w^Tx+b$中每个元素都x&gt;0),那么关于w的梯度在反向传播的过程中，将会要么全部是正数，要么全部是负数（具体依整个表达式f而定）。这将会导致梯度下降权重更新时出现z字型的下降（如下图所示）。然而，可以看到整个批量的数据的梯度被加起来后，对于权重的最终更新将会有不同的正负，这样就从一定程度上减轻了这个问题。因此，该问题相对于上面的神经元饱和问题来说只是个小麻烦，没有那么严重。</p>
+<li><p>2）Sigmoid函数的输出不是Zero-centered的。这个性质并不是我们想要的，因为在神经网络后面层中的神经元得到的数据将不是零中心的。这一情况将影响梯度下降的运作，因为如果输入神经元的数据总是正数(比如在$f=w^Tx+b$中每个元素都x&gt;0),那么关于w的梯度在反向传播的过程中，将会要么全部是正数，要么全部是负数（具体依整个表达式f而定）。这将会导致梯度下降权重更新时出现z字型的下降（如下图所示）。然而，可以看到整个批量的数据的梯度被加起来后，对于权重的最终更新将会有不同的正负，这样就从一定程度上减轻了这个问题。因此，该问题相对于上面的神经元饱和问题来说只是个小麻烦，没有那么严重。<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%885.07.16.png" alt="屏幕快照 2017-05-12 下午5.07.16"></p>
 </li>
-</ul>
-<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%885.07.16.png" alt="屏幕快照 2017-05-12 下午5.07.16"></p>
-<ul>
-<li>3）幂运算相对耗时：相对于前两项，这其实并不是一个大问题，我们目前是具备相应计算能力的，但面对深度学习中庞大的计算量，最好是能省则省。之后我们会看到，在ReLU函数中，需要做的仅仅是一个thresholding，相对于幂运算来讲会快很多。</li>
+<li><p>3）幂运算相对耗时：相对于前两项，这其实并不是一个大问题，我们目前是具备相应计算能力的，但面对深度学习中庞大的计算量，最好是能省则省。之后我们会看到，在ReLU函数中，需要做的仅仅是一个thresholding，相对于幂运算来讲会快很多。</p>
+</li>
 </ul>
 <h2 id="三、tanh"><a href="#三、tanh" class="headerlink" title="三、tanh"></a>三、tanh</h2><p>tanh非线性函数的数学公式为：$$tanh x = \frac{e^x-e^{-x}}{e^x+e^{-x}}$$函数图像及梯度函数图像如下所示：<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%886.07.46.png" alt="屏幕快照 2017-05-12 下午6.07.46"></center><br>如上图所示，计算可以知道：$tanh(x)=2sigmoid(2x)-1$，它其实是一个简单放大的sigmoid神经元，和sigmoid神经元一样，也具有软饱和性。但是和sigmoid神经元不同的是，它解决了zero-centered的输出问题，因此，在实际操作中，tanh非线性函数比sigmoid非线性函数更受欢迎。然而，gradient vanishing的问题和幂运算的问题仍然存在。Xavier在文献[]中分析了sigmoid与tanh的饱和现象及特点，具体见原论文。此外，文献[]中提到了tanh网络的收敛速度要比sigmoid块。因为tanh的输出均值比sigmoid更接近0，SGD会更接近natural gradient（一种二次优化技术），从而降低所需的迭代次数。</p>
 <h2 id="四、ReLU"><a href="#四、ReLU" class="headerlink" title="四、ReLU"></a>四、ReLU</h2><p>ReLU非线性函数的数学公式为：$$ReLU(x)=max(0,x)$$函数图像及梯度函数图像如下所示：<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%886.32.04.png" alt="屏幕快照 2017-05-12 下午6.32.04"></center><br>虽然2006年Hinton教授提出通过分层无监督预训练解决深层网络训练困难的问题，但是深度网络的直接监督式训练的最终突破，最主要的原因是新型激活函数ReLU。它有以下几大优点：</p>
