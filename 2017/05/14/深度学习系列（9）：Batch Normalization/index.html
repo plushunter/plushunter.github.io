@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/beb44145200caafe24fe88e7480e9730_r.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8B%E5%8D%884.03.07.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8B%E5%8D%884.30.25.png">
-<meta property="og:updated_time" content="2017-05-19T12:45:03.000Z">
+<meta property="og:updated_time" content="2017-05-19T15:44:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（9）：Batch Normalization">
 <meta name="twitter:description" content="batch normalization(Ioffe and Szegedy, 2015) 是优化深度神经网络中最激动人心的创新之一。实际上它并不是一个优化算法，而是一个自适应的重新参数化 的方法，试图解决训练非常深层模型的困难。Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate">
@@ -363,7 +363,6 @@
 
       
         <p>batch normalization(Ioffe and Szegedy, 2015) 是优化深度神经网络中最激动人心的创新之一。实际上它并不是一个优化算法，而是一个自适应的重新参数化 的方法，试图解决训练非常深层模型的困难。<br>Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift<br>机器学习领域有一个很重要的假设：iid独立同分布假设，就是假设训练数据和测试数据满足相同分布，这是通过训练数据训练出来的模型能够在测试集上获得好的效果的一个基本保证。Batch Normalization就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布。</p>
-<a id="more"></a>
 <h2 id="一、Internal-covariate-shift"><a href="#一、Internal-covariate-shift" class="headerlink" title="一、Internal covariate shift"></a>一、Internal covariate shift</h2><p>首先给出covariate shift的定义：模型实例集合<x,y>中的输入值X的分布总是变化，违背了idd独立通同布假设。</x,y></p>
 <p>深度学习网络包含很多隐层的网络结构，在训练过程中参数会不断发生改变，导致后续每一层输入的分布也面临着covariate shift，也就是在训练过程中，隐层的输入分布总是发生改变，这就是所谓的Internal covariate shift，Internal指的是深层网络的隐层，covariate shift发生在深度神经网络内部，就被称作Internal covariate shift。</p>
 <p>在DNN的实验中，对数据进行预处理时，例如白化或者zscore，甚至是简单的减均值操作都是可以加速收敛的。为什么减均值、白化可以加快训练，作如下分析：</p>
@@ -384,14 +383,12 @@
 <h3 id="四、算法优势"><a href="#四、算法优势" class="headerlink" title="四、算法优势"></a>四、算法优势</h3><p>论文中罗列了Batch Normalization的很多作用，一一列举如下：</p>
 <ul>
 <li>1）可以使用很高的学习率。如果每层的scale不一致，实际上每层需要的学习率是不一样的，同一层不同维度的scale往往也需要不同大小的学习率，通常需要使用最小的那个学习率才能保证损失函数有效下降，Batch Normalization</li>
-<li><p>2）移除或使用较低的dropout。dropout是常用的防止overfitting的方法，而导致overfitting的位置往往在数据边界处，如果初始化权重就已经落在数据内部，overfitting现象就可以得到一定的缓解。论文中最后的模型分别使用10%、5%和0%的dropout训练模型，与之前的40%~50%相比，可以大大提高训练速度。</p>
-</li>
-<li><p>3） 降低L2权重衰减系数。 还是一样的问题，边界处的局部最优往往有几维的权重（斜率）较大，使用L2衰减可以缓解这一问题，现在用了Batch Normalization，就可以把这个值降低了，论文中降低为原来的5倍。</p>
-</li>
-</ul>
-<ul>
+<li>2）移除或使用较低的dropout。dropout是常用的防止overfitting的方法，而导致overfitting的位置往往在数据边界处，如果初始化权重就已经落在数据内部，overfitting现象就可以得到一定的缓解。论文中最后的模型分别使用10%、5%和0%的dropout训练模型，与之前的40%~50%相比，可以大大提高训练速度。</li>
+<li>3） 降低L2权重衰减系数。 还是一样的问题，边界处的局部最优往往有几维的权重（斜率）较大，使用L2衰减可以缓解这一问题，现在用了Batch Normalization，就可以把这个值降低了，论文中降低为原来的5倍。<ul>
 <li>4）取消Local Response Normalization层。 由于使用了一种Normalization，再使用LRN就显得没那么必要了。而且LRN实际上也没那么work。</li>
 <li>5）减少图像扭曲的使用。 由于现在训练epoch数降低，所以要对输入数据少做一些扭曲，让神经网络多看看真实的数据。</li>
+</ul>
+</li>
 </ul>
 <p>说完BN的优势，自然可以知道什么时候用BN比较好。例如，在神经网络训练时遇到收敛速度很慢，或梯度爆炸等无法训练的状况时可以尝试BN来解决。另外，在一般使用情况下也可以加入BN来加快训练速度，提高模型精度。</p>
 
@@ -427,6 +424,10 @@
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/19/深度学习系列（10）：卷积神经网络分享/" rel="next" title="深度学习系列（10）：DMC—卷积神经网络分享">
+                <i class="fa fa-chevron-left"></i> 深度学习系列（10）：DMC—卷积神经网络分享
+              </a>
             
           </div>
 
@@ -504,7 +505,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-count">40</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -521,7 +522,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">43</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
