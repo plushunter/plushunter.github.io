@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/beb44145200caafe24fe88e7480e9730_r.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8B%E5%8D%884.03.07.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-16%20%E4%B8%8B%E5%8D%884.30.25.png">
-<meta property="og:updated_time" content="2017-05-19T15:44:43.000Z">
+<meta property="og:updated_time" content="2017-05-26T00:54:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（9）：Batch Normalization">
 <meta name="twitter:description" content="batch normalization(Ioffe and Szegedy, 2015) 是优化深度神经网络中最激动人心的创新之一。实际上它并不是一个优化算法，而是一个自适应的重新参数化 的方法，试图解决训练非常深层模型的困难。Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate">
@@ -363,6 +363,7 @@
 
       
         <p>batch normalization(Ioffe and Szegedy, 2015) 是优化深度神经网络中最激动人心的创新之一。实际上它并不是一个优化算法，而是一个自适应的重新参数化 的方法，试图解决训练非常深层模型的困难。<br>Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift<br>机器学习领域有一个很重要的假设：iid独立同分布假设，就是假设训练数据和测试数据满足相同分布，这是通过训练数据训练出来的模型能够在测试集上获得好的效果的一个基本保证。Batch Normalization就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布。</p>
+<a id="more"></a>
 <h2 id="一、Internal-covariate-shift"><a href="#一、Internal-covariate-shift" class="headerlink" title="一、Internal covariate shift"></a>一、Internal covariate shift</h2><p>首先给出covariate shift的定义：模型实例集合<x,y>中的输入值X的分布总是变化，违背了idd独立通同布假设。</x,y></p>
 <p>深度学习网络包含很多隐层的网络结构，在训练过程中参数会不断发生改变，导致后续每一层输入的分布也面临着covariate shift，也就是在训练过程中，隐层的输入分布总是发生改变，这就是所谓的Internal covariate shift，Internal指的是深层网络的隐层，covariate shift发生在深度神经网络内部，就被称作Internal covariate shift。</p>
 <p>在DNN的实验中，对数据进行预处理时，例如白化或者zscore，甚至是简单的减均值操作都是可以加速收敛的。为什么减均值、白化可以加快训练，作如下分析：</p>
