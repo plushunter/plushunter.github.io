@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8811.54.03.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8811.54.13.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8811.54.26.png">
-<meta property="og:updated_time" content="2017-05-30T04:04:54.000Z">
+<meta property="og:updated_time" content="2017-05-30T04:09:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（19）：机器学习性能评价指标">
 <meta name="twitter:description" content="一、分类问题的评价指标1.1 混淆矩阵对一个二分类问题，将实例分成正类（postive）或者负类（negative），但在实际分类中，会出现以下四种情况：  True Positive（真正，TP）：将正类预测为正类数 True Negative（真负，TN）：将负类预测为负类数 False Positive（假正，FP）：将负类预测为正类数 False  Negative（假负，FN）：将正类预">
@@ -351,29 +351,29 @@
 <li>False Positive（假正，FP）：将负类预测为正类数</li>
 <li>False  Negative（假负，FN）：将正类预测为负类数</li>
 </ul>
-<p>从下图可以直观的看出四者的关系：</p>
-<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%885.10.54.png" alt="屏幕快照 2017-03-29 下午5.10.54"></center>
-
-<p>混淆矩阵（Confusion matrix）又被称为错误矩阵，它是一种特定的矩阵来呈现算法性能的可视化呈现。其每一列代表预测值，每一行代表的是实际的类别，这个名字来源于他是否可以非常容易的表明多个类别是否有混淆（也就是一个class被预测为另一个class）混淆矩阵的$i$行$j$列是列别$i$被分为类别$j$的样本个数。<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8810.06.48.png" alt="屏幕快照 2017-05-30 上午10.06.48"></p>
+<a id="more"></a>
+<p>从下图可以直观的看出四者的关系：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%885.10.54.png" alt="屏幕快照 2017-03-29 下午5.10.54"></p>
+<p>混淆矩阵（Confusion matrix）又被称为错误矩阵，它是一种特定的矩阵来呈现算法性能的可视化呈现。其每一列代表预测值，每一行代表的是实际的类别，这个名字来源于他是否可以非常容易的表明多个类别是否有混淆（也就是一个class被预测为另一个class）混淆矩阵的$i$行$j$列是列别$i$被分为类别$j$的样本个数。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8810.06.48.png" alt="屏幕快照 2017-05-30 上午10.06.48"></p>
 <h3 id="1-2-精确率、召回率与F1值"><a href="#1-2-精确率、召回率与F1值" class="headerlink" title="1.2 精确率、召回率与F1值"></a>1.2 精确率、召回率与F1值</h3><p> 精确率（precision rate）定义为：$$P=\frac{TP}{TP+FP}$$这里需要注意的是精确率（precision）和准确率（accuracy）是不一样的$$ACC=\frac{TP+TN}{TP+TN+FP+FN}$$<br> 在非平衡数据的情况下，准确率这个评价指标有很大的缺陷。比如在互联网广告里面，点击的数量是很少的，一般只有千分之几，如果用Accuracy，即使全部预测成负类（不点击），ACC也达到了99%以上，这就没有意义了。</p>
 <p>召回率（Recall rate）定义为：$$<br>R=\frac{TP}{TP+FN}<br>$$</p>
 <p>此外，还有F1值，它是精确率和召回率的调和均值，即$$<br>\frac{2}{F_1}=\frac{1}{P}+\frac{1}{R}<br>$$$$<br>F_1=\frac{2TP}{2TP+FP+FN}<br>$$精确率与召回率都很高时，$F_1$值也会很高。</p>
 <h3 id="1-4-通俗理解"><a href="#1-4-通俗理解" class="headerlink" title="1.4 通俗理解"></a>1.4 通俗理解</h3><p>通俗来讲，精确率是针对我们的预测结果而言的，他表示的是预测为正的样本中有多少是对的，那么预测为正就有两种可能了，一种就是把正类预测为正类（TP），另一种就是把负类预测为正类（FP）。</p>
 <p>而召回率是针对我们原来的样本而言的，它表示的是样本中的正例有多少被预测正确了。那也有两种可能，一种是把原来的正类预测成正类（TP），另一种就是把原来的正类预测为负类（FN）。</p>
-<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-29%20%E4%B8%8B%E5%8D%888.44.11.png" alt="屏幕快照 2017-05-29 下午8.44.11"></center><br>在信息搜索领域，精确率和召回率又被称为查准率和查全率$$查准率=\frac{检索出的相关信息量}{检索出的信息总量}$$$$查全率=\frac{检索出的相关信息量}{系统中的相关信息总量}$$<br>### 1.5 ROC曲线<br>ROC曲线首先是由二战中的电子工程师和雷达工程师发明的，用来侦测战场上的敌军载具（飞机、船舰），也就是信号检测理论。之后很快就被引入了心理学来进行信号的知觉检测。数十年来，ROC分析被用于医学、无线电、生物学、犯罪心理学领域中，而且最近在机器学习（machine learning）和数据挖掘（data mining）领域也得到了很好的发展。<br><br>下图是一个ROC曲线的示例图。<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8811.53.33.png" alt="屏幕快照 2017-05-30 上午11.53.33"></center>
-
-
-
+<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-29%20%E4%B8%8B%E5%8D%888.44.11.png" alt="屏幕快照 2017-05-29 下午8.44.11"></p>
+<p>在信息搜索领域，精确率和召回率又被称为查准率和查全率$$查准率=\frac{检索出的相关信息量}{检索出的信息总量}$$$$查全率=\frac{检索出的相关信息量}{系统中的相关信息总量}$$</p>
+<h3 id="1-5-ROC曲线"><a href="#1-5-ROC曲线" class="headerlink" title="1.5 ROC曲线"></a>1.5 ROC曲线</h3><p>ROC曲线首先是由二战中的电子工程师和雷达工程师发明的，用来侦测战场上的敌军载具（飞机、船舰），也就是信号检测理论。之后很快就被引入了心理学来进行信号的知觉检测。数十年来，ROC分析被用于医学、无线电、生物学、犯罪心理学领域中，而且最近在机器学习（machine learning）和数据挖掘（data mining）领域也得到了很好的发展。</p>
+<p>下图是一个ROC曲线的示例图。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8811.53.33.png" alt="屏幕快照 2017-05-30 上午11.53.33"></p>
 <p>在这个ROC曲线的示例图中，横坐标为false<br> positive rate(FPR)，纵坐标为true positive rate（TPR）。由混淆矩阵可得到横纵轴的计算公式。</p>
 <ul>
 <li>1）$TPR=\frac{TP}{TP+FN}$ 代表分类器预测的正类中实际正实例占所有正实例的比例。直观上代表能将正例分对的概率。</li>
-<li><p>2）$FPR=\frac{FP}{FP+TN}$ 代表分类器预测的正类中实际负实例占所有负实例的比例。直观上代表将负类错分为正例的概率。</p>
+<li>2）$FPR=\frac{FP}{FP+TN}$ 代表分类器预测的正类中实际负实例占所有负实例的比例。直观上代表将负类错分为正例的概率。</li>
+</ul>
 <p>假设采用逻辑回归分类器，其给出针对每个实例为正类的概率，那么通过设定一个阈值如0.6，概率大于等于0.6的为正类，小于0.6的为负类。对应的就可以算出一组(FPR,TPR)，随着阈值的逐渐减小，越来越多的实例被划分为正类，但是这些正类中同样也掺杂着更多的负实例，即TPR和FPR会同时增大。阈值最大时，对应坐标点（0，0），阈值最小时，对应坐标点（1，1）。</p>
 <p>接下来我们考虑ROC曲线图中的四个点和一条线。第一个点，(0,1)，即FPR=0, TPR=1，这意味着FN（false negative）=0，并且FP（false positive）=0。这是一个完美的分类器，它将所有的样本都正确分类。第二个点，(1,0)，即FPR=1，TPR=0，类似地分析可以发现这是一个最糟糕的分类器，因为它成功避开了所有的正确答案。第三个点，(0,0)，即FPR=TPR=0，即FP（false positive）=TP（true positive）=0，可以发现该分类器预测所有的样本都为负样本（negative）。类似的，第四个点（1,1），分类器实际上预测所有的样本都为正样本。经过以上的分析，我们可以断言，ROC曲线越接近左上角，该分类器的性能越好。</p>
 <p>下面考虑ROC曲线图中的虚线y=x上的点。这条对角线上的点其实表示的是一个采用随机猜测策略的分类器的结果，例如(0.5,0.5)，表示该分类器随机对于一半的样本猜测其为正样本，另外一半的样本为负样本。</p>
 <p>如何绘制ROC曲线呢？</p>
-</li>
-</ul>
 <p>假设已经得出一系列样本被划分为正类的概率，然后按照大小排序，下图是一个示例，图中共有20个测试样本，“class”一栏表示每个测试样本真正的标签（P表示正样本，n表示负样本），“Score”表示每个测试样本属于正样本的概率。</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8811.53.51.png" alt="屏幕快照 2017-05-30 上午11.53.51"></p>
 <p>接下来，我们从高到低，依次将“Score”值作为阈值的threshold，当测试样本属于正样本的概率大于或等于这个threshold时，我们认为它为正样本，否则为负样本。举例来说，对于图中的第四个样本，其“Score”值为0.6，那么样本1，2，3，4都被认为是正样本，因为它们的“Score”值都大于等于0.6，而其他样本则都认为是负样本。每次选取一个不同的threshold，我们就可以得到一组FPR和TPR，即ROC曲线上的一点。这样一来，我们一共得到了20组FPR和TPR的值，将它们画在ROC曲线的结果如下图：</p>
@@ -572,7 +572,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、分类问题的评价指标"><span class="nav-text">一、分类问题的评价指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-混淆矩阵"><span class="nav-text">1.1 混淆矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-精确率、召回率与F1值"><span class="nav-text">1.2 精确率、召回率与F1值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-通俗理解"><span class="nav-text">1.4 通俗理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-AUC"><span class="nav-text">1.6 AUC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、回归问题的评价指标"><span class="nav-text">二、回归问题的评价指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-平均绝对误差"><span class="nav-text">2.1 平均绝对误差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-平均平方误差"><span class="nav-text">2.2 平均平方误差</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、分类问题的评价指标"><span class="nav-text">一、分类问题的评价指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-混淆矩阵"><span class="nav-text">1.1 混淆矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-精确率、召回率与F1值"><span class="nav-text">1.2 精确率、召回率与F1值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-通俗理解"><span class="nav-text">1.4 通俗理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-ROC曲线"><span class="nav-text">1.5 ROC曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-AUC"><span class="nav-text">1.6 AUC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、回归问题的评价指标"><span class="nav-text">二、回归问题的评价指标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-平均绝对误差"><span class="nav-text">2.1 平均绝对误差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-平均平方误差"><span class="nav-text">2.2 平均平方误差</span></a></li></ol></li></ol></div>
             
 
           </div>
