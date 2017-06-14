@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%885.17.50.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%885.17.59.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%885.26.44.png">
-<meta property="og:updated_time" content="2017-06-14T10:39:42.000Z">
+<meta property="og:updated_time" content="2017-06-14T10:55:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（20）：Kaggle 数据挖掘比赛经验分享（陈成龙）">
 <meta name="twitter:description" content="简介Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办的比赛，相继获得了 CrowdFlower 搜索相关性比赛第一名（1326支队伍）和 HomeDepot 商品搜索相关性比赛第三名（2125支队伍），曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。笔者目前">
@@ -496,8 +496,8 @@
 </ul>
 <h3 id="3-4-点击率预估I"><a href="#3-4-点击率预估I" class="headerlink" title="3.4 点击率预估I"></a>3.4 点击率预估I</h3><h4 id="3-4-1-任务名称"><a href="#3-4-1-任务名称" class="headerlink" title="3.4.1 任务名称"></a>3.4.1 任务名称</h4><p>Criteo Display Advertising Challenge</p>
 <h4 id="3-4-2-任务详情"><a href="#3-4-2-任务详情" class="headerlink" title="3.4.2 任务详情"></a>3.4.2 任务详情</h4><p>经典的点击率预估比赛。该比赛中提供了7天的训练数据，1 天的测试数据。其中有13 个整数特征，26 个类别特征，均脱敏，因此无法知道具体特征含义。</p>
-<h4 id="3-4-3-获奖方案"><a href="#3-4-3-获奖方案" class="headerlink" title="3.4.3 获奖方案"></a>3.4.3 获奖方案</h4><p><strong>1st place：</strong>GBDT 特征编码 + FFM。台大的队伍，借鉴了Facebook的方案 [6]，使用 GBDT 对特征进行编码，然后将编码后的特征以及其他特征输入到 Field-aware Factorization Machine（FFM） 中进行建模。方案链接：Display Advertising Challenge | Kaggle</p>
-<p><strong>3rd place：</strong>Quadratic Feature Generation + FTRL。传统特征工程和 FTRL 线性模型的结合。方案链接：Display Advertising Challenge | Kaggle</p>
+<h4 id="3-4-3-获奖方案"><a href="#3-4-3-获奖方案" class="headerlink" title="3.4.3 获奖方案"></a>3.4.3 获奖方案</h4><p><strong>1st place：</strong>GBDT 特征编码 + FFM。台大的队伍，借鉴了Facebook的方案 [6]，使用 GBDT 对特征进行编码，然后将编码后的特征以及其他特征输入到 Field-aware Factorization Machine（FFM） 中进行建模。方案链接：<a href="https://www.kaggle.com/c/criteo-display-ad-challenge/discussion/10555" target="_blank" rel="external">Display Advertising Challenge | Kaggle</a></p>
+<p><strong>3rd place：</strong>Quadratic Feature Generation + FTRL。传统特征工程和 FTRL 线性模型的结合。方案链接：<a href="https://www.kaggle.com/c/criteo-display-ad-challenge/discussion/10534" target="_blank" rel="external">Display Advertising Challenge | Kaggle</a></p>
 <p><strong>4th place：</strong>Feature Engineering + Sparse DNN</p>
 <h4 id="3-4-4-常用工具"><a href="#3-4-4-常用工具" class="headerlink" title="3.4.4 常用工具"></a>3.4.4 常用工具</h4><ul>
 <li>Vowpal Wabbit: <a href="https://github.com/JohnLangford/vowpal_wabbit" target="_blank" rel="external">JohnLangford/vowpal_wabbit</a></li>
@@ -506,8 +506,8 @@
 </ul>
 <h3 id="3-5-点击率预估II"><a href="#3-5-点击率预估II" class="headerlink" title="3.5 点击率预估II"></a>3.5 点击率预估II</h3><h4 id="3-5-1-任务名称"><a href="#3-5-1-任务名称" class="headerlink" title="3.5.1 任务名称"></a>3.5.1 任务名称</h4><p>Avazu Click-Through Rate Prediction</p>
 <h4 id="3-5-2-任务详情"><a href="#3-5-2-任务详情" class="headerlink" title="3.5.2 任务详情"></a>3.5.2 任务详情</h4><p>点击率预估比赛。提供了 10 天的训练数据，1 天的测试数据，并且提供时间，banner 位置，site, app, device 特征等，8个脱敏类别特征。</p>
-<h4 id="3-5-3-获奖方案"><a href="#3-5-3-获奖方案" class="headerlink" title="3.5.3 获奖方案"></a>3.5.3 获奖方案</h4><p><strong>1st place：</strong>Feature Engineering + FFM + Ensemble。还是台大的队伍，这次比赛，他们大量使用了 FFM，并只基于 FFM 进行集成。方案链接：Click-Through Rate Prediction | Kaggle</p>
-<p><strong>2nd place：</strong>Feature Engineering + GBDT 特征编码 + FFM + Blending。Owenzhang（曾经长时间雄霸 Kaggle 排行榜第一）的竞赛方案。Owenzhang 的特征工程做得非常有参考价值。方案链接：owenzhang/kaggle-avazu</p>
+<h4 id="3-5-3-获奖方案"><a href="#3-5-3-获奖方案" class="headerlink" title="3.5.3 获奖方案"></a>3.5.3 获奖方案</h4><p><strong>1st place：</strong>Feature Engineering + FFM + Ensemble。还是台大的队伍，这次比赛，他们大量使用了 FFM，并只基于 FFM 进行集成。方案链接：<a href="https://www.kaggle.com/c/avazu-ctr-prediction/discussion/12608" target="_blank" rel="external">Click-Through Rate Prediction | Kaggle</a></p>
+<p><strong>2nd place：</strong>Feature Engineering + GBDT 特征编码 + FFM + Blending。Owenzhang（曾经长时间雄霸 Kaggle 排行榜第一）的竞赛方案。Owenzhang 的特征工程做得非常有参考价值。方案链接：<a href="https://github.com/owenzhang/kaggle-avazu" target="_blank" rel="external">owenzhang/kaggle-avazu</a></p>
 <h4 id="3-5-4-常用工具"><a href="#3-5-4-常用工具" class="headerlink" title="3.5.4 常用工具"></a>3.5.4 常用工具</h4><ul>
 <li>LIBFFM: LIBFFM: A Library for Field-aware Factorization Machines</li>
 <li>XGBoost: dmlc/xgboost</li>
