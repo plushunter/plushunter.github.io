@@ -978,7 +978,8 @@ pre .javascript .function {
   bottom: 19px;
 }
 .header {
-  background: #fff;
+  background-image: url("../images/background.jpg");
+  background-size: 100% 100%;
 }
 .header-inner {
   position: relative;
@@ -1073,7 +1074,7 @@ pre .javascript .function {
   }
 }
 .menu {
-  margin-top: 20px;
+  margin-top: 25px;
   padding-left: 0;
   text-align: center;
 }
@@ -1088,7 +1089,7 @@ pre .javascript .function {
 }
 .menu .menu-item a {
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   text-transform: capitalize;
   line-height: inherit;
   border-bottom: 1px solid transparent;
@@ -1680,7 +1681,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #49b9e7;
+  background: #6fd6f0;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -1792,13 +1793,12 @@ pre .javascript .function {
 }
 .footer {
   font-size: 14px;
-  color: #999;
 }
 .footer img {
-  border: none;
+  border: url("../images/background.jpg");
 }
 .footer-inner {
-  text-align: center;
+  text-align: left;
 }
 .with-love {
   display: inline-block;
@@ -1827,7 +1827,7 @@ pre .javascript .function {
   opacity: 0.9;
 }
 .cc-license img {
-  display: inline-block;
+  display: url("../images/background.jpg");
 }
 .theme-next #ds-thread #ds-reset {
   color: #555;
@@ -2730,4 +2730,13 @@ hr {
     width: auto;
     text-align: center;
   }
+}
+.header {
+  background-image: url("../images/background.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-height: 30px;
+}
+.sidebar {
+  background: url("/images/sidebar.jpg");
 }
