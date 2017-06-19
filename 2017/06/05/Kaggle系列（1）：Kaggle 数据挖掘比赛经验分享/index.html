@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Kaggle," />
+  <meta name="keywords" content="Kaggle,EDA,特征工程,Voting,Stacking,Blending," />
 
 
 
@@ -87,10 +87,10 @@
 
 
 <meta name="description" content="简介Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办的比赛，相继获得了 CrowdFlower 搜索相关性比赛第一名（1326支队伍）和 HomeDepot 商品搜索相关性比赛第三名（2125支队伍），曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。笔者目前">
-<meta name="keywords" content="Kaggle">
+<meta name="keywords" content="Kaggle,EDA,特征工程,Voting,Stacking,Blending">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习算法系列（20）：Kaggle 数据挖掘比赛经验分享（陈成龙）">
-<meta property="og:url" content="http://yoursite.com/2017/06/05/机器学习算法系列（20）：Kaggle 数据挖掘比赛经验分享/index.html">
+<meta property="og:title" content="Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享（陈成龙）">
+<meta property="og:url" content="http://yoursite.com/2017/06/05/Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="简介Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办的比赛，相继获得了 CrowdFlower 搜索相关性比赛第一名（1326支队伍）和 HomeDepot 商品搜索相关性比赛第三名（2125支队伍），曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。笔者目前">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%884.28.58.png">
@@ -98,9 +98,9 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%885.17.50.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%885.17.59.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%885.26.44.png">
-<meta property="og:updated_time" content="2017-06-14T10:55:09.000Z">
+<meta property="og:updated_time" content="2017-06-19T15:52:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习算法系列（20）：Kaggle 数据挖掘比赛经验分享（陈成龙）">
+<meta name="twitter:title" content="Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享（陈成龙）">
 <meta name="twitter:description" content="简介Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办的比赛，相继获得了 CrowdFlower 搜索相关性比赛第一名（1326支队伍）和 HomeDepot 商品搜索相关性比赛第三名（2125支队伍），曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。笔者目前">
 <meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%884.28.58.png">
 
@@ -134,7 +134,7 @@
 
 
 
-  <title> 机器学习算法系列（20）：Kaggle 数据挖掘比赛经验分享（陈成龙） | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享（陈成龙） | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -263,7 +263,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/05/机器学习算法系列（20）：Kaggle 数据挖掘比赛经验分享/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/05/Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -287,7 +287,7 @@
             
             
               
-                机器学习算法系列（20）：Kaggle 数据挖掘比赛经验分享（陈成龙）
+                Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享（陈成龙）
               
             
           </h1>
@@ -310,6 +310,24 @@
             
           </span>
 
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kaggle/" itemprop="url" rel="index">
+                    <span itemprop="name">Kaggle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -545,12 +563,26 @@
           
             <a href="/tags/Kaggle/" rel="tag"># Kaggle</a>
           
+            <a href="/tags/EDA/" rel="tag"># EDA</a>
+          
+            <a href="/tags/特征工程/" rel="tag"># 特征工程</a>
+          
+            <a href="/tags/Voting/" rel="tag"># Voting</a>
+          
+            <a href="/tags/Stacking/" rel="tag"># Stacking</a>
+          
+            <a href="/tags/Blending/" rel="tag"># Blending</a>
+          
         </div>
       
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/13/kaggle系列（2）：Two Sigma Connect：Rental Listing Inquiries（一）：EDA/" rel="next" title="kaggle系列（2）：Rental Listing Inquiries（一）：EDA">
+                <i class="fa fa-chevron-left"></i> kaggle系列（2）：Rental Listing Inquiries（一）：EDA
+              </a>
             
           </div>
 
@@ -636,7 +668,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -645,7 +677,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-count">56</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
