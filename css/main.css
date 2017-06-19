@@ -985,7 +985,7 @@ pre .javascript .function {
   position: relative;
 }
 .headband {
-  height: 6px;
+  height: 3px;
   background: #222;
 }
 .site-meta {
@@ -1681,7 +1681,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #6fd6f0;
+  background: #ab2e79;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2735,8 +2735,8 @@ hr {
   background-image: url("../images/background.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-height: 30px;
 }
-.sidebar {
-  background: url("/images/sidebar.jpg");
+.footer {
+  background: url("../images/footer.jpg");
+  background-repeat: no-repeat;
 }
