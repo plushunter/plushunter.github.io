@@ -1,0 +1,752 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="业务,特征,数据,模型," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文转载自美团点评技术团队博客，该文以业界视角介绍了机器学习如何发挥其实际价值。作者胡淏，目前是美团算法工程师，毕业于哥伦比亚大学。先后在携程、支付宝、美团从事算法开发工作。了解风控、基因、旅游、即时物流相关问题的行业领先算法方案与流程。">
+<meta name="keywords" content="业务,特征,数据,模型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法系列（20）：机器学习模型优化四要素">
+<meta property="og:url" content="http://yoursite.com/2017/06/16/机器学习算法系列（20）：项目模型优化四要素/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="本文转载自美团点评技术团队博客，该文以业界视角介绍了机器学习如何发挥其实际价值。作者胡淏，目前是美团算法工程师，毕业于哥伦比亚大学。先后在携程、支付宝、美团从事算法开发工作。了解风控、基因、旅游、即时物流相关问题的行业领先算法方案与流程。">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/image_1bgvc1hi3led5tl1hb0n1i1hhm9.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/image_1bgvc94uuh0c1o0sj9d1urb19d2m.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/image_1bgvcqct213oq6ingm1v1c1eti13.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/image_1bgvcvkkqo0q1kgt15qjdv54jm1g.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/image_1bgvd7gs41k9e1g0s1d016dmdq1t.png">
+<meta property="og:updated_time" content="2017-06-20T08:25:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习算法系列（20）：机器学习模型优化四要素">
+<meta name="twitter:description" content="本文转载自美团点评技术团队博客，该文以业界视角介绍了机器学习如何发挥其实际价值。作者胡淏，目前是美团算法工程师，毕业于哥伦比亚大学。先后在携程、支付宝、美团从事算法开发工作。了解风控、基因、旅游、即时物流相关问题的行业领先算法方案与流程。">
+<meta name="twitter:image" content="http://orsw4brg1.bkt.clouddn.com/image_1bgvc1hi3led5tl1hb0n1i1hhm9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 机器学习算法系列（20）：机器学习模型优化四要素 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/16/机器学习算法系列（20）：项目模型优化四要素/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习算法系列（20）：机器学习模型优化四要素
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-16T23:14:45+08:00">
+                2017-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文转载自<a href="http://tech.meituan.com/machine-learning-model-optimization.html" target="_blank" rel="external">美团点评技术团队博客</a>，该文以业界视角介绍了机器学习如何发挥其实际价值。作者胡淏，目前是美团算法工程师，毕业于哥伦比亚大学。先后在携程、支付宝、美团从事算法开发工作。了解风控、基因、旅游、即时物流相关问题的行业领先算法方案与流程。</p>
+<a id="more"></a>
+<h2 id="一、机器学习工程师的知识图谱"><a href="#一、机器学习工程师的知识图谱" class="headerlink" title="一、机器学习工程师的知识图谱"></a>一、机器学习工程师的知识图谱</h2><p><img src="http://orsw4brg1.bkt.clouddn.com/image_1bgvc1hi3led5tl1hb0n1i1hhm9.png" alt="image_1bgvc1hi3led5tl1hb0n1i1hh"><br>图1 机器学习工程师的知识图谱</p>
+<p>上图列出了我认为一个成功的机器学习工程师需要关注和积累的点。机器学习实践中，我们平时都在积累自己的“弹药库”：分类、回归、无监督模型、Kaggle上特征变换的黑魔法、样本失衡的处理办法、缺失值填充……这些大概可以归类成模型和特征两个点。我们需要参考成熟的做法、论文，并自己实现，此外还需要多反思自己方法上是否还可以改进。如果模型和特征这俩个点都已经做的很好了，你就拥有了一张绿卡，能跨过在数据相关行业发挥模型技术价值的准入门槛。</p>
+<p>在这个时候，比较关键的一步，就是搞笑的技术变现能力。</p>
+<p>所谓高效，就是解决业务核心问题的专业能力。本文将描述这些专业能力，也就是模型优化的四个要素：模型、数据、特征、业务，还有更重要的，就是他们在模型项目中的优先级。</p>
+<h2 id="二、模型项目推进的四要素"><a href="#二、模型项目推进的四要素" class="headerlink" title="二、模型项目推进的四要素"></a>二、模型项目推进的四要素</h2><p>项目推进过程中，四个要素相互之间的优先级大致是：业务&gt;特征&gt;数据&gt;模型。<br><img src="http://orsw4brg1.bkt.clouddn.com/image_1bgvc94uuh0c1o0sj9d1urb19d2m.png" alt="image_1bgvc94uuh0c1o0sj9d1urb19d2"><br>图2 四要素解决问题细分+优先级</p>
+<h3 id="2-1-业务"><a href="#2-1-业务" class="headerlink" title="2.1 业务"></a>2.1 业务</h3><p>一个模型项目有好的技术选型、完备的特征体系、高质量的数据一定是很加分的，不过真正决定项目好与坏还有一个大前提，就是在这个项目的技术目标是否在解决当下核心业务问题。</p>
+<p>业务问题包含两个方面：业务KPI和Deadline。举个例子，业务问题在两周之内降低目前手机丢失带来的支付宝销赃风险。这时如果你的方案是研发手机丢失的核心特征，比如改密是否合理，基本上就死的很惨，因为两周根本完不成，改密合理性也未必是模型优化好的切入点；反之，如果你的方案是和运营同学看bad case，梳理现阶段的作案通用手段，并通过分析上线一个简单模型或者业务规则的补丁，就明智很多。如果上线之后，案件量真掉下来了，就算你的方案准确率很糟糕、方法很low，但你解决了业务问题，这才是最重要的。</p>
+<p>虽然业务目标很关键，不过一般讲，业务运营同学真的不太懂得如何和技术有效的沟通业务目标，比如：</p>
+<ul>
+<li>我们想做一个线下门店风险评级的项目，希望运营通过反作弊模型角度帮我们给门店打个分，这个分数包含的问题有：风险是怎么定义的、为什么要做风险评级、更大的业务目标是什么、怎么排期的、这个风险和我们反作弊模型之间的腋窝你是怎么看的？</li>
+<li>做一个区域未来10min的配送时间预估模型。我们想通过运营的模型衡量在恶劣天气的时候每个区域的运力是否被击穿（业务现状和排期？运力被击穿可以扫下盲吗？运力击穿和配送时间之间是个什么业务逻辑、时间预估是刻画运力紧张度的最有效手段么？业务的关键场景是恶劣天气的话，我们仅仅训练恶劣天气场景的时间预估模型是否就好了？）</li>
+</ul>
+<p>为了保证整个技术项目没有做偏，项目一开始一定要和业务聊清楚三件事情：</p>
+<ul>
+<li><p><strong>业务核心问题、关键场景是什么。</strong></p>
+</li>
+<li><p><strong>如何评估该项目的成功，指标是什么。</strong></p>
+</li>
+<li><p><strong>通过项目输出什么关键信息给到业务，业务如何运营这个信息从而达到业务目标。</strong></p>
+</li>
+</ul>
+<p>项目过程中，也要时刻回到业务，检查项目的健康度。</p>
+<h3 id="2-2-数据与特征"><a href="#2-2-数据与特征" class="headerlink" title="2.2 数据与特征"></a>2.2 数据与特征</h3><p>要说正确的业务理解和切入，在为技术项目保驾护航，数据、特征便是一个模型项目性能方面的天花板。garbage in， garbage out 就在说这个问题。</p>
+<p>这两天有位听众微信问我一个很难回答的问题，大概意思是，数据是特征拼起来构成的集合嘛，所以这不是两个要素。从逻辑上面讲，数据的确是一列一列的特征，不过数据与特征在概念层面是不同的：数据是已经采集的信息，特征是以兼容模型、最优化为目标对数据进行加工。就比如通过word2vec将非结构化数据结构化，就是将数据转化为特征的过程。</p>
+<p>所以，我更认为特征工程是基于数据的一个非常精细、刻意的加工过程。从传统的特征转换、交互，到embedding、word2vec、高维分类变量数值化，最终目的都是更好的去利用现有的数据。之前有聊到的将推荐算法引入有监督学习模型优化中的做法，就是在把两个本不可用的高维ID类变量变成可用的数值变量。</p>
+<p>观察到自己和童鞋们在特征工程中会遇到一些普遍问题，比如，特征设计不全面，没有耐心把现有特征做得细致……也整理出来一套方法论，仅供参考：</p>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/image_1bgvcqct213oq6ingm1v1c1eti13.png" alt="image_1bgvcqct213oq6ingm1v1c1eti13"><br>图3 变量体系、研发流程</p>
+<p>在特征设计的时候，有两个点可以帮助我们把特征想的更全面：</p>
+<ul>
+<li><p><strong>现有的基础数据</strong></p>
+</li>
+<li><p><strong>业务“二维图”</strong></p>
+</li>
+</ul>
+<p>这两个方面的整合，就是一个变量的体系。变量（特征），从技术层面是加工数据，而从业务层面实际在反应RD的业务理解和数据刻画业务能力。“二维图”，实际上未必是二维的，更重要的是我们需要把业务整个流程抽象成几个核心的维度，举几个例子：</p>
+<p>这两个方面的整合，就是一个变量的体系。变量（特征），从技术层面是加工数据，而从业务层面实际在反应RD的业务理解和数据刻画业务能力。“二维图”，实际上未必是二维的，更重要的是我们需要把业务整个流程抽象成几个核心的维度，举几个例子：</p>
+<p>外卖配送时间业务（维度甲：配送的环节，骑手到点、商家出餐、骑手配送、交付用户；维度乙：颗粒度，订单粒度、商家粒度、区域城市粒度；维度丙：配送类型，众包、自营……）。</p>
+<p>反作弊变量体系（维度甲：作弊环节，登录、注册、实名、转账、交易、参与营销活动、改密……；维度乙：作弊介质，账户、设备、IP、WiFi、银行卡……）。</p>
+<p>通过这些维度，你就可以展开一个“二维图”，把现有你可以想到的特征填上去，你一定会发现很多空白，比如下图，那么哪里还是特征设计的盲点就一目了然：</p>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/image_1bgvcvkkqo0q1kgt15qjdv54jm1g.png" alt="image_1bgvcvkkqo0q1kgt15qjdv54jm1g"><br>图4 账户维度在转账、红包方面的特征很少；没有考虑WiFi这个媒介；客满与事件数据没考虑</p>
+<p>数据和特征决定了模型性能的天花板。deep learning当下在图像、语音、机器翻译、自动驾驶等领域非常火，但是 deep learning在生物信息、基因学这个领域就不是热词：这背后是因为在前者，我们已经知道数据从哪里来，怎么采集，这些数据带来的信息基本满足了模型做非常准确的识别；而后者，即便有了上亿个人体碱基构成的基因编码，技术选型还是不能长驱直入——超高的数据采集成本，人后天的行为数据的获取壁垒等一系列的问题，注定当下这个阶段在生物信息领域，人工智能能发出的声音很微弱，更大的舞台留给了生物学、临床医学、统计学。</p>
+<h3 id="2-3-模型"><a href="#2-3-模型" class="headerlink" title="2.3 模型"></a>2.3 模型</h3><p><img src="http://orsw4brg1.bkt.clouddn.com/image_1bgvd7gs41k9e1g0s1d016dmdq1t.png" alt="image_1bgvd7gs41k9e1g0s1d016dmdq1t"><br>图5 满房开房的技术选型、特征工程roadmap</p>
+<p>模型这件事儿，许多时候追求的不仅仅是准确率，通常还有业务这一层更大的约束。如果你在做一些需要强业务可解释的模型，比如定价和反作弊，那实在没必要上一个黑箱模型来为难业务。这时候，统计学习模型就很有用。</p>
+<p>这种情况下，比拼性能的话，我觉得下面这个不等式通常成立：<code>Glmnet&gt;LASSO&gt;=Ridge&gt;LR/Logistic</code>。相比最基本的LR/Logistic，ridge通过正则化约束缓解了LR在过拟合方面的问题，lasso更是通过L1约束做类似变量选择的工作。</p>
+<p>不过两个算法的痛点是很难决定最优的约束强度，Glmnet是Stanford给出的一套非常高效的解决方案。所以目前，我认为线性结构的模型，Glmnet的痛点是最少的，而且在R、Python、Spark上面都开源了。</p>
+<p>如果我们开发复杂模型，通常成立第二个不等式 <code>RF（Random Forest，随机森林）&lt;= GBDT &lt;= XGBoost</code> 。拿数据说话，29个Kaggle公开的winner solution里面，17个使用了类似GBDT这样的Boosting框架，其次是 DNN（Deep Neural Network，深度神经网络），RF的做法在Kaggle里面非常少见。</p>
+<p>RF和GBDT两个算法的雏形是CART（Classification And Regression Trees），由L Breiman和J Friedman两位作者在1984年合作推出。但是在90年代在发展模型集成思想the ensemble的时候，两位作者代表着两个至今也很主流的派系：stacking/ Bagging &amp; Boosting。</p>
+<p>一种是把相互独立的CART（randomized variables，bootstrap samples）水平铺开，一种是深耕的Boosting，在拟合完整体后更有在局部长尾精细刻画的能力。同时，GBDT模型相比RF更加简单，内存占用小，这都是业界喜欢的性质。XGBoost在模型的轻量化和快速训练上又做了进一步的工作，也是目前我们比较喜欢尝试的模型。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/业务/" rel="tag"># 业务</a>
+          
+            <a href="/tags/特征/" rel="tag"># 特征</a>
+          
+            <a href="/tags/数据/" rel="tag"># 数据</a>
+          
+            <a href="/tags/模型/" rel="tag"># 模型</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/13/kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost/" rel="prev" title="kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost">
+                kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">61</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、机器学习工程师的知识图谱"><span class="nav-text">一、机器学习工程师的知识图谱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、模型项目推进的四要素"><span class="nav-text">二、模型项目推进的四要素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-业务"><span class="nav-text">2.1 业务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-数据与特征"><span class="nav-text">2.2 数据与特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-模型"><span class="nav-text">2.3 模型</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

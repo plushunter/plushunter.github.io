@@ -86,22 +86,22 @@
 
 
 
-<meta name="description" content="简介Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办的比赛，相继获得了 CrowdFlower 搜索相关性比赛第一名（1326支队伍）和 HomeDepot 商品搜索相关性比赛第三名（2125支队伍），曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。笔者目前">
+<meta name="description" content="转载自知乎：Kaggle 数据挖掘比赛经验分享 作者是陈成龙，目前在腾讯社交与效果广告部任职数据挖掘工程师，负责 Lookalike 相似人群扩展相关工作。曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。 简介Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办">
 <meta name="keywords" content="Kaggle,EDA,特征工程,Voting,Stacking,Blending">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享（陈成龙）">
+<meta property="og:title" content="Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享">
 <meta property="og:url" content="http://yoursite.com/2017/06/05/Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="简介Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办的比赛，相继获得了 CrowdFlower 搜索相关性比赛第一名（1326支队伍）和 HomeDepot 商品搜索相关性比赛第三名（2125支队伍），曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。笔者目前">
+<meta property="og:description" content="转载自知乎：Kaggle 数据挖掘比赛经验分享 作者是陈成龙，目前在腾讯社交与效果广告部任职数据挖掘工程师，负责 Lookalike 相似人群扩展相关工作。曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。 简介Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%884.28.58.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%884.30.58.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%885.17.50.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%885.17.59.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%885.26.44.png">
-<meta property="og:updated_time" content="2017-06-19T15:52:22.000Z">
+<meta property="og:updated_time" content="2017-06-20T07:22:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享（陈成龙）">
-<meta name="twitter:description" content="简介Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办的比赛，相继获得了 CrowdFlower 搜索相关性比赛第一名（1326支队伍）和 HomeDepot 商品搜索相关性比赛第三名（2125支队伍），曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。笔者目前">
+<meta name="twitter:title" content="Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享">
+<meta name="twitter:description" content="转载自知乎：Kaggle 数据挖掘比赛经验分享 作者是陈成龙，目前在腾讯社交与效果广告部任职数据挖掘工程师，负责 Lookalike 相似人群扩展相关工作。曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。 简介Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办">
 <meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-14%20%E4%B8%8B%E5%8D%884.28.58.png">
 
 
@@ -134,7 +134,7 @@
 
 
 
-  <title> Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享（陈成龙） | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -287,7 +287,7 @@
             
             
               
-                Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享（陈成龙）
+                Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享
               
             
           </h1>
@@ -359,7 +359,8 @@
       
 
       
-        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办的比赛，相继获得了 CrowdFlower 搜索相关性比赛第一名（1326支队伍）和 HomeDepot 商品搜索相关性比赛第三名（2125支队伍），曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。笔者目前在腾讯社交与效果广告部任职数据挖掘工程师，负责 Lookalike 相似人群扩展相关工作。此文分享笔者在参加数据挖掘比赛过程中的一点心得体会。</p>
+        <p>转载自知乎：<a href="https://zhuanlan.zhihu.com/p/26820998" target="_blank" rel="external">Kaggle 数据挖掘比赛经验分享</a> 作者是陈成龙，目前在腾讯社交与效果广告部任职数据挖掘工程师，负责 Lookalike 相似人群扩展相关工作。曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。笔者从 2013 年开始，陆续参加了多场 Kaggle上面举办的比赛，相继获得了 CrowdFlower 搜索相关性比赛第一名（1326支队伍）和 HomeDepot 商品搜索相关性比赛第三名（2125支队伍），曾在 Kaggle 数据科学家排行榜排名全球第十，国内第一。笔者目前在腾讯社交与效果广告部任职数据挖掘工程师，负责 Lookalike 相似人群扩展相关工作。此文分享笔者在参加数据挖掘比赛过程中的一点心得体会。</p>
 <a id="more"></a>
 <h2 id="一、Kaggle基本介绍"><a href="#一、Kaggle基本介绍" class="headerlink" title="一、Kaggle基本介绍"></a>一、Kaggle基本介绍</h2><p>Kaggle 于 2010 年创立，专注于开展数据科学、机器学习相关的竞赛，是全球最大的数据科学社区和数据竞赛平台。在 Kaggle 上，企业或者研究机构发布商业和科研难题，悬赏吸引全球的数据科学家，通过众包的方式解决建模问题。而参赛者可以接触到丰富的真实数据，解决实际问题，角逐名次，赢取奖金。诸如 Google，Facebook，Microsoft 等知名科技公司均在 Kaggle 上面举办过数据挖掘比赛。2017年3月，Kaggle 被 Google CloudNext 收购。</p>
 <h3 id="1-1-参赛方式"><a href="#1-1-参赛方式" class="headerlink" title="1.1 参赛方式"></a>1.1 参赛方式</h3><p>可以以个人或者组队的形式参加比赛。组队人数一般没有限制，但需要在 Merger Deadline 前完成组队。为了能参与到比赛中，需要在 Entry Deadline 前进行至少一次有效提交。最简单地，可以直接提交官方提供的 Sample Submission。关于组队，建议先单独个人进行数据探索和模型构建，以个人身份进行比赛，在比赛后期（譬如离比赛结束还有 2~3 周）再进行组队，以充分发挥组队的效果（类似于模型集成，模型差异性越大，越有可能有助于效果的提升，超越单模型的效果）。当然也可以一开始就组好队，方便分工协作，讨论问题和碰撞火花。</p>
@@ -660,7 +661,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-count">45</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -677,7 +678,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">61</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
