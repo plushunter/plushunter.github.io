@@ -90,7 +90,7 @@
 <meta name="keywords" content="kaggle,EDA,特征工程,可视化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kaggle系列（2）：Rental Listing Inquiries（一）：EDA">
-<meta property="og:url" content="http://yoursite.com/2017/06/13/kaggle系列（2）：Two Sigma Connect：Rental Listing Inquiries（一）：EDA/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/06/13/kaggle系列（2）：Rental Listing Inquiries（一）：EDA/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、比赛简介1.1 比赛目的这个kaggle比赛是由Sigma和RentHop两家公司共同推出的比赛。比赛的数据来自于RentHop的租房信息，大概的思路就是根据出租房的一系列特征，比如地理位置（经纬度、街道地址）、发布时间、房间设施（浴室、卧室数量）、描述信息、发布的图片信息、价格等来预测消费者对出租房的喜好程度。 这样可以帮助RentHop公司更好地处理欺诈事件，让房主和中介更加理解租客的需求">
 <meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%884.48.02.png">
@@ -115,7 +115,7 @@
 <meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.57.13.png">
 <meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.59.05.png">
 <meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%8810.00.21.png">
-<meta property="og:updated_time" content="2017-06-19T16:00:40.000Z">
+<meta property="og:updated_time" content="2017-06-20T01:33:03.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kaggle系列（2）：Rental Listing Inquiries（一）：EDA">
 <meta name="twitter:description" content="一、比赛简介1.1 比赛目的这个kaggle比赛是由Sigma和RentHop两家公司共同推出的比赛。比赛的数据来自于RentHop的租房信息，大概的思路就是根据出租房的一系列特征，比如地理位置（经纬度、街道地址）、发布时间、房间设施（浴室、卧室数量）、描述信息、发布的图片信息、价格等来预测消费者对出租房的喜好程度。 这样可以帮助RentHop公司更好地处理欺诈事件，让房主和中介更加理解租客的需求">
@@ -280,7 +280,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/kaggle系列（2）：Two Sigma Connect：Rental Listing Inquiries（一）：EDA/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/kaggle系列（2）：Rental Listing Inquiries（一）：EDA/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -406,7 +406,6 @@
 <li>street_address：街道地址</li>
 <li>interest_level: 目标变量，受欢迎程度. 有三个类: ‘high’, ‘medium’, ‘low’</li>
 </ul>
-<p>查看一下前几列，如下：</p>
 <h3 id="1-3-提交要求"><a href="#1-3-提交要求" class="headerlink" title="1.3 提交要求"></a>1.3 提交要求</h3><p>这个比赛使用的是多分类对数似然损失函数来评价模型。因为每一个房源都有一个对应的最准确的类别，对每一个房源，需要提交它属于每一类的概率值，它的计算公式如下：<br>$$<br>\log loss=-\frac{1}{N}\sum_{i=1}^N{\sum_{j=1}^M{y_{ij}\log\left(p_{ij}\right)}}<br>$$其中$N$是测试集中的样本数量，$M$是类别的数量（3类：high、medium、low）,$log$是自然对数，$y_{ij}$表示样本$i$属于$j$类则为1，否则为0.$p_{ij}$表示样本$i$属于类别$j$的预测概率值。</p>
 <p>一个样本的属于三个类别的预测可能性不需要加和为1，因为已经预先归一化了。为避免对数函数的极端情况，预测概率被替代为$max(min(p,1-10^{-15}),10^{-15})$</p>
 <p>最后提交的文件为csv格式，它包含对每一类的预测概率值，行的顺序没有要求，文件必须要有一个表头，看起来像下面的示例：</p>
@@ -593,6 +592,10 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/06/13/kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost/" rel="next" title="kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost">
+                <i class="fa fa-chevron-left"></i> kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
@@ -669,7 +672,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -686,7 +689,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">56</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
