@@ -90,11 +90,11 @@
 <meta name="keywords" content="机器学习,推荐系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习算法系列（13）：推荐系统（矩阵分解技术）">
-<meta property="og:url" content="http://yoursite.com/2017/07/05/2017-07-13/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/07/05/机器学习算法系列（13）：推荐系统（矩阵分解技术）/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="随着Netflix Prize推荐比赛的成功举办，近年来隐语义模型（Latent Factor MOdel，LFM）受到越来越多的关注。隐语义模型最早在文本挖掘领域被提出，用于寻找文本的隐含语义，相关的模型常见的有潜在语义分析（Latent Semantic Analysis,LSA）、LDA（Latent Dirichlet Allocation）的主题模型（Topic Model）、矩阵分解（">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14999362159467.jpg">
-<meta property="og:updated_time" content="2017-07-13T11:03:32.000Z">
+<meta property="og:updated_time" content="2017-07-13T11:06:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（13）：推荐系统（矩阵分解技术）">
 <meta name="twitter:description" content="随着Netflix Prize推荐比赛的成功举办，近年来隐语义模型（Latent Factor MOdel，LFM）受到越来越多的关注。隐语义模型最早在文本挖掘领域被提出，用于寻找文本的隐含语义，相关的模型常见的有潜在语义分析（Latent Semantic Analysis,LSA）、LDA（Latent Dirichlet Allocation）的主题模型（Topic Model）、矩阵分解（">
@@ -270,7 +270,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/05/2017-07-13/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/05/机器学习算法系列（13）：推荐系统（矩阵分解技术）/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -382,7 +382,7 @@ var _hmt = _hmt || [];
 <p>对于某一个用户评分$m_{ij}$如果用Funk-SVD进行矩阵分解，则对应的表示为$q_j^Tp_i$，采用均方差作为损失函数，则我们期望$(m_{ij}-q_j^Tp_i)^2$尽可能的小，如果考虑所有的物品和样本的组合，则我们期望最小化下式：$$\sum_{i，j}(m_{ij}-q^T_jp_i)^2$$只要我们能够最小化上面的式子，并求出极值所对应的$p_i,q_j$，则我们最终可以得到矩阵P和Q，那么对于任意矩阵M任意一个空白评分的位置，我们可以通过$q_j^Tp_i$计算预测评分，很漂亮的方法！</p>
 <p>当然，在实际应用中，为了防止过拟合，会加入一个$L_2$的正则化项，因此正是的Funk-SVD的优化目标函数$J(p,q)$是这样的：$$arg \underset {p_jq_j}{min}\sum_{(i,j)\in K}(m_{ij}-q_j^Tp_i)^2+\lambda (||p_i||^2_2+||q_j||^2_2)$$其中$K$为已有评分记录的$(i,j)$对集合，$m_{ij}$为用户$i$对物品$$j$的真实评分，$\lambda$是正则化系数，需要调参。假设输入评分矩阵为M，它是$M \times N$维矩阵，通过直接优化以上损失函数得到用户特征矩阵$P(M\times N)$和物品特征矩阵$Q(K\times N)$,其中$K&lt;&lt;M，N$。对于这个优化问题，一般通过梯度下降法来进行优化得到结果。</p>
 <p>将上式分别对$p_i,q_j$求导我们得到：$$\frac{∂J}{∂p_i}=-2(m_{ij}-q_j^Tp_i)q_j+2\lambda p_i$$$$\frac{∂J}{∂q_j}=-2(m_{ij}-q_j^Tp_i)p_i+2\lambda q_j$$在梯度下降法迭代时，$p_i,q_j$的迭代公式为：$$p_i=p_i=\alpha [(m_{ij}-q_j^Tp_i)q_j-\lambda p_i]$$$$q_j=q_j+\alpha [(m_{ij}-q_j^Tp_i)p_i-\lambda q_j ]$$<br>通过迭代我们最终可以得到P和Q，进而用于推荐。Funk-SVD算法虽然思想很简单，但在实际应用中效果非常好，这真是验证了大道至简。</p>
-<h2 id="二、Bias-SVD"><a href="#二、Bias-SVD" class="headerlink" title="二、Bias-SVD"></a>二、Bias-SVD</h2><p>在Funk-SVD算法火爆之后，出现了很多Funk-SVD的改进版算法。其中Bias算是改进的比较成功的一种算法。</p>
+<h2 id="三、Bias-SVD"><a href="#三、Bias-SVD" class="headerlink" title="三、Bias-SVD"></a>三、Bias-SVD</h2><p>在Funk-SVD算法火爆之后，出现了很多Funk-SVD的改进版算法。其中Bias算是改进的比较成功的一种算法。</p>
 <p>Funk-SVD方法通过学习用户和物品的特征向量进行预测，即用户和物品的交互信息。用户的特征向量代表了用户的兴趣，物品的特征向量代表了物品的特点，且每一个维度相互对应，两个向量的内积表示用户对该物品的喜好程度。但是我们观测到的评分数据大部分都是都是和用户或物品无关的因素产生的效果，即有很大一部分因素是和用户对物品的喜好无关而只取决于用户或物品本身特性的。例如，对于乐观的用户来说，它的评分行为普遍偏高，而对批判性用户来说，他的评分记录普遍偏低，即使他们对同一物品的评分相同，但是他们对该物品的喜好程度却并不一样。同理，对物品来说，以电影为例，受大众欢迎的电影得到的评分普遍偏高，而一些烂片的评分普遍偏低，这些因素都是独立于用户或产品的因素，而和用户对产品的的喜好无关。</p>
 <p>我们把这些独立于用户或独立于物品的因素称为偏置(Bias)部分，将用户和物品的交互即用户对物品的喜好部分称为个性化部分。事实上，在矩阵分解模型中偏好部分对提高评分预测准确率起的作用要大大高于个性化部分所起的作用，以Netflix Prize推荐比赛数据集为例为例，Yehuda Koren仅使用偏置部分可以将评分误差降低32%，而加入个性化部分能降低42%，也就是说只有10%是个性化部分起到的作用，这也充分说明了偏置部分所起的重要性，剩下的58%的误差Yehuda Koren将称之为模型不可解释部分，包括数据噪音等因素。</p>
 <p>偏置部分主要由三个子部分组成，分别是</p>
@@ -392,9 +392,9 @@ var _hmt = _hmt || [];
 <li>物品偏置$b_j$，特立于用户兴趣的因素，表示某一特定物品得到的打分情况。以电影为例，好片获得的总体评分偏高，而烂片获得的评分普遍偏低，物品偏置捕获的就是这样的特征。</li>
 </ul>
 <p>则偏置部分表示为$$b_{ij}=\mu+b_i+b_j$$则加入了偏置项以后的优化目标函数$J(p,q)$是这样$$arg \underset {p_jq_j}{min}\sum_{(i,j)\in K}(m_{ij}-\mu-b_i-b_j-q_j^Tp_i)^2+\lambda (||p_i||^2_2+||q_j||^2_2+||b_i||_2^2+||b_j||_2^2)$$这个优化目标也可以采用梯度下降法求解。和Funk-SVD不同的是，此时我们多了两个偏置项$b_i,b_j$,$p_i,p_j$的迭代公式和$Funk-SVD$类似，只是每一步的梯度导数稍有不同而已。而$b_i,b_j$一般可以初始设置为0向量，然后参与迭代。$$b_i=b_i+α(m_{ij}−μ−b_i−b_j−q^T_jp_i−λb_i)$$$$b_j=b_j+α(m_{ij}−μ−b_i−b_j−q^T_jp_i−λb_j)$$通过迭代我们最终可以得到$P$和$Q$，进而用于推荐。Bias-SVD增加了一些额外因素的考虑，因此在某些场景会比FunkSVD表现好。</p>
-<h2 id="三、SVD"><a href="#三、SVD" class="headerlink" title="三、SVD++"></a>三、SVD++</h2><p>SVD++算法在Bias-SVD算法上进一步做了增强，这里它增加考虑用户的隐式反馈。</p>
+<h2 id="四、SVD"><a href="#四、SVD" class="headerlink" title="四、SVD++"></a>四、SVD++</h2><p>SVD++算法在Bias-SVD算法上进一步做了增强，这里它增加考虑用户的隐式反馈。</p>
 <p>对于某一个用户$i$，它提供了隐式反馈的物品集合定义为$N(i)$，这个用户对某个物品$j$对应的隐式反馈修正的评分值为$c_{ij}$，那么该用户所有的评分修正值为$\sum_{s\in N(i)} c_{sj}$，一般我们将它们表示为用$q_j^Ty_s$形式，则加入了隐式反馈以后的优化目标函数$J(p,q)$是这样的：$$arg \underset {p_jq_j}{min}\sum_{(i,j)\in K}(m_{ij}-\mu-b_i-b_j-q_j^Tp_i-q_j^T|N(i)|^{-1/2}\Sigma_{s\in N(i)} y_s)^2+\lambda (||p_i||^2_2+||q_j||^2_2+||b_i||_2^2+||b_j||_2^2+\Sigma_{s\in N(i)}||y_s||^2)$$其中，引入$|N(i)|^{-1/2}$是为了消除不同$|N(i)|$个数引起的差异。如果需要考虑用户的隐式反馈时，使用SVD++是个不错的选择。</p>
-<h2 id="四、矩阵分解的优缺点"><a href="#四、矩阵分解的优缺点" class="headerlink" title="四、矩阵分解的优缺点"></a>四、矩阵分解的优缺点</h2><p>矩阵分解方法将高维User-Item评分矩阵映射为两个低维用户和物品矩阵，解决了数据稀疏性问题。</p>
+<h2 id="五、矩阵分解的优缺点"><a href="#五、矩阵分解的优缺点" class="headerlink" title="五、矩阵分解的优缺点"></a>五、矩阵分解的优缺点</h2><p>矩阵分解方法将高维User-Item评分矩阵映射为两个低维用户和物品矩阵，解决了数据稀疏性问题。</p>
 <p>使用矩阵分解具有以下优点：</p>
 <ul>
 <li>比较容易编程实现，随机梯度下降方法依次迭代即可训练出模型。比较低的时间和空间复杂度，高维矩阵映射为两个低维矩阵节省了存储空间，训练过程比较费时，但是可以离线完成；评分预测一般在线计算，直接使用离线训练得到的参数，可以实时推荐。</li>
@@ -579,7 +579,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、传统的SVD算法"><span class="nav-text">一、传统的SVD算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Funk-SVD算法"><span class="nav-text">二、Funk-SVD算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本思想"><span class="nav-text">2.1 基本思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Funk-SVD"><span class="nav-text">2.2 Funk-SVD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Bias-SVD"><span class="nav-text">二、Bias-SVD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、SVD"><span class="nav-text">三、SVD++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、矩阵分解的优缺点"><span class="nav-text">四、矩阵分解的优缺点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、传统的SVD算法"><span class="nav-text">一、传统的SVD算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Funk-SVD算法"><span class="nav-text">二、Funk-SVD算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-基本思想"><span class="nav-text">2.1 基本思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Funk-SVD"><span class="nav-text">2.2 Funk-SVD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Bias-SVD"><span class="nav-text">三、Bias-SVD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、SVD"><span class="nav-text">四、SVD++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、矩阵分解的优缺点"><span class="nav-text">五、矩阵分解的优缺点</span></a></li></ol></div>
             
 
           </div>
