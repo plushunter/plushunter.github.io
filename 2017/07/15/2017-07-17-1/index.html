@@ -1,0 +1,768 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="CTR," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="转载自CSDN 互联网广告是互联网行业最主要的盈利模式，流量变现成为互联网商业产品非常重要的评价标准。随着互联网的发展，互联网的流量也是越来越大，互联网广告的投放达到千亿级的量级。 如此一个巨大的市场，自然能吸引众多的资本家向往，从而产生了一个互联网广告产业。随着互联网人群定向技术的发展，互联网广告也开始摆脱单一、古板的交易模式，转而向更精确 高效的交易模式转变。">
+<meta name="keywords" content="CTR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="广告点击率预估互联网广告生态圈">
+<meta property="og:url" content="http://yoursite.com/2017/07/15/2017-07-17-1/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="转载自CSDN 互联网广告是互联网行业最主要的盈利模式，流量变现成为互联网商业产品非常重要的评价标准。随着互联网的发展，互联网的流量也是越来越大，互联网广告的投放达到千亿级的量级。 如此一个巨大的市场，自然能吸引众多的资本家向往，从而产生了一个互联网广告产业。随着互联网人群定向技术的发展，互联网广告也开始摆脱单一、古板的交易模式，转而向更精确 高效的交易模式转变。">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15000938311752.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15002133619201.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15002151932895.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15002154714796.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15002155149434.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15002208969379.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15002209213305.jpg">
+<meta property="og:updated_time" content="2017-07-17T03:45:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="广告点击率预估互联网广告生态圈">
+<meta name="twitter:description" content="转载自CSDN 互联网广告是互联网行业最主要的盈利模式，流量变现成为互联网商业产品非常重要的评价标准。随着互联网的发展，互联网的流量也是越来越大，互联网广告的投放达到千亿级的量级。 如此一个巨大的市场，自然能吸引众多的资本家向往，从而产生了一个互联网广告产业。随着互联网人群定向技术的发展，互联网广告也开始摆脱单一、古板的交易模式，转而向更精确 高效的交易模式转变。">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15000938311752.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 广告点击率预估互联网广告生态圈 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/15/2017-07-17-1/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                广告点击率预估互联网广告生态圈
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-15T23:14:45+08:00">
+                2017-07-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>转载自<a href="http://blog.csdn.net/mytestmy/article/details/18987247" target="_blank" rel="external">CSDN</a></p>
+<p>互联网广告是互联网行业最主要的盈利模式，流量变现成为互联网商业产品非常重要的评价标准。随着互联网的发展，互联网的流量也是越来越大，互联网广告的投放达到千亿级的量级。</p>
+<p>如此一个巨大的市场，自然能吸引众多的资本家向往，从而产生了一个互联网广告产业。随着互联网人群定向技术的发展，互联网广告也开始摆脱单一、古板的交易模式，转而向更精确 高效的交易模式转变。</p>
+<a id="more"></a>
+<h2 id="一、互联网广告生态圈发展过程"><a href="#一、互联网广告生态圈发展过程" class="headerlink" title="一、互联网广告生态圈发展过程"></a>一、互联网广告生态圈发展过程</h2><h3 id="1-1-基本情况"><a href="#1-1-基本情况" class="headerlink" title="1.1 基本情况"></a>1.1 基本情况</h3><p>从互联网广告业的发展过程说起<br><img src="http://omu7tit09.bkt.clouddn.com/15000938311752.jpg" alt=""><br>上图展示了互联网广告的三个发展阶段。</p>
+<ol>
+<li>“媒体”购买阶段：广告主（广告投放需求方）直接和媒体（各大门户网站、论坛等）谈判，购买流量，但程序繁杂，媒体数量堆积，广告主需要跟很多类型的媒体谈判；另一方面，媒体也要和多个广告主谈判，这样一来一往，成本颇高。</li>
+<li>“人群”购买阶段：出现类似于广告中介的皮包公司，承包广告主的广告投放项目。后来又出现了类似广告联盟（Ad Networks）的公司，广告主向联盟提出投放需求，媒体方将流量承包给联盟，然后广告联盟吧媒体的人群分类后，根据广告主的需求匹配相应的用户群体。但这样的模式对广告联盟的挑战很大，要与媒体、广告主接洽，同时还要兼顾广告的售卖方式。随着广告联盟增多，业务难免会出现供需不对称或者不均衡的问题。比如广告联盟A又很多广告主是旅游相关的，但是它得到的媒体有很多是关于体育的，它自己的供需不对称；但是广告联盟2，刚好相反，有大量的体育广告和旅游的流量。为了资源的有效利用，这两家联盟就会寻求合作。若广告联盟的话，这个合作交易的成本也很好，所以又诞生了新的广告置换平台（Ad Exchange），专门负责协调广告联盟。当然Ad exchange多了也很麻烦，这是另外一个层次的问题了。</li>
+<li>“用户”购买阶段，随着Ad Exchange增多，广告的交易成本也在提升。为了解决这种情况，各个公司的功能就开始拆分出来了，形成了两个平台。一个是需求方平台（DSP）。另一个是供应方平台（SSP）。这样就形成了图片中的第三个阶段的情况，其中Ad Exchange通过实时竞价（RTB）进行流量的分配。</li>
+</ol>
+<h3 id="1-2-产业情况"><a href="#1-2-产业情况" class="headerlink" title="1.2 产业情况"></a>1.2 产业情况</h3><p>先对上面的名词做一下解释。<br><strong>Ad Exchange</strong>是互联网广告交易平台，像股票交易平台一样，Ad Echange联系的是广告交易的买方和卖方，也就是广告主方和广告位拥有方。说到买卖双方，就要引出两个为买卖双方服务的平台——DSP平台和SSP平台</p>
+<p>DSP：互联网里有成千上万的广告主，他们急需推广自己的产品，寻求优质的媒介和精准的目标用户，优化广告投放政策，提高投入产出比。简单地讲，DSP就是广告主服务平台，广告主可以在平台上设置广告的目标受众、投放地域、广告出价等等。</p>
+<p>SSP：互联网也有成千上万拥有丰富媒体资源和用户流量的网站，它们急需把庞大的流量变现来发展壮大，同时还希望每一个流量都能够达到最大的收益。简单地讲，SSP就是一个媒体服务平台，站长们可以在SSP上管理自己的广告位，控制广告的展现，设置补余等等。</p>
+<p>RTB：Real Time Bidding的简称，就是实时竞价。跟传统购买形式相比，RTB是在每一个广告展示曝光的基础上进行竞价，就是每一个PV都会进行一次展现竞价，谁出价高，谁的广告就会被这个PV看到。</p>
+<p>目前国内的互联网广告的产业已经发展地相对成熟了，如下图所示：<img src="http://omu7tit09.bkt.clouddn.com/15002133619201.jpg" alt=""></p>
+<p>有一个问题出现了，为什么广告主即买方会为了一个广告PV而竞相出价呢，这个广告位有什么了不起的，会让广告主心甘情愿出最高价来竞标。秘密就在于，Ad Exchange广告平台售卖的不是传统意义上的广告位了，而是访问这个广告位的具体用户，这个用户会有自己的兴趣爱好，广告如果能够投其所好，就能产生最大的收益。这样的用户在互联网海洋里可是稀缺资源，他完全有魅力让广告主来竞相竞价获得在用户面前展现自己的机会。那么，Ad Exchange是怎么知道这个访问用户是谁，他会对什么更感兴趣呢？这就要引出互联网数据平台DMP了。DMP（Data-Management Platform）是数据管理平台，是把分散的第一、第三方数据进行整个纳入统一的技术平台，对这些数据进行标准化和细分，从而把这些细分结果推向现有的互动营销环境里。</p>
+<p>有了DMP，Ad Exchange就可以知道访问广告位的用户是对什么感兴趣的用户了，这样RTB模式就有了运营的资本，广告主也乐于出较高的价钱来买这个用户。</p>
+<p>介绍了买卖双方和交易方式，下面就来看看Ad Exchange广告交易平台的运行方式吧。当一个用户访问广告位页面时，ssp端向Ad Exchange发出访问讯号，告知有一个访问请求，ssp把广告位的具体信息，例如所属站点、最低出价以及以及通过DMP分析匹配后的用户属性信息打包发送给各个DSP，DSP端开始对这个广告位展现进行竞价，竞价获胜者就能够让自己的广告展示在这个广告位上，进而让用户看到。下图描述的例子是一个对汽车感兴趣的用户访问站点，DSP端各个汽车厂家对这个用户展开争夺的过程。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15002151932895.jpg" alt=""><br>针对具体用户的广告投放方式相较于传统的买固定广告位包天或者包月展现，优势还是很明显的，既能够有效的提高广告主的ROI，也能够让广告位的收益最大化。假设一个汽车广告主按cpm方式花50块买了10个PV的展现，10个PV里有5个人对汽车感兴趣，另外5个人对美食感兴趣，那么汽车广告主覆盖有效用户的成本是50块，站长的收益也只有是50块，而那些美食广告主无法覆盖目标用户，没有展现机会；而如果按照Ad Exchange模式购买广告，广告主只需要针对5个目标用户竞价展现就好，即时每个目标用户的出价会高于CPM方式下的平均出价，但是由于精准，广告主的成本不但没有增加反而有所下降，花更少的钱覆盖更多的用户，这样就有效的提高了广告主的ROI，同样，美食广告主也可以通过Ad Exchange来覆盖到另外5个对美食感兴趣的用户，获得广告展示机会。对站长而言，一个广告位不再被某一个单一广告主购买后独占，而是对每一个流量都竞价获利，这样就能够保证广告主的流量获得最大的收益，流量越大，收益越高。所以Ad Exchange更容易获得高质量的广告位资源。如下图所示<img src="http://omu7tit09.bkt.clouddn.com/15002154714796.jpg" alt=""></p>
+<h3 id="1-3-工业情况"><a href="#1-3-工业情况" class="headerlink" title="1.3 工业情况"></a>1.3 工业情况</h3><p>下图列举了一下产业内的公司<br><img src="http://omu7tit09.bkt.clouddn.com/15002155149434.jpg" alt=""><br>其中可以看到不少国内外的巨头，可以看到，互联网广告的生态是很繁华的。</p>
+<h2 id="二、互联网广告生态网的一些解读"><a href="#二、互联网广告生态网的一些解读" class="headerlink" title="二、互联网广告生态网的一些解读"></a>二、互联网广告生态网的一些解读</h2><p>目前，国内网络广告行业基于RTB协议构建广告生态圈的发展方向越来清晰，DSP、Trading Desk、Exchange、SSP等平台在数量上增加迅速，国内从事广告网络的广告公司、4A公司、第三方监测公司以及各大巨头纷纷参与进来，基于RTB进行交易的广告质量也越来越高。总的说来，广告生态圈的发展越来越好。</p>
+<p>但是，在快速发展的同时，很多人也会有这样的疑问：为什么要基于RTB进行交易？相比之前的交易模式，RTB交易模式中的参与者更多，是否效率更低？为什么巨头不将各个环节通吃？在RTB交易模式中，各个平台存在的意义是什么，为什么DSP是必须的？SSP的数量为什么没有像DSP一样多？</p>
+<p>对于这样的问题，每个从业人员肯定也在深深思考，试图解释这种快速的变化。以下是一些人的思考。</p>
+<blockquote>
+<p>1）为什么要基于RTB进行交易，或者说为什么RTB会出现？</p>
+</blockquote>
+<p>根本原因：广告主需要提高ROI，越来越关注效果（注：这不意味着RTB只能是效果广告，而只是表明一种发展趋势，可以理解为广告主越来越关注网络广告的可衡量性，不简单的满足于曝光、点击与点击率的衡量。所以，一个好的DSP必须具有从广告曝光开始到用户点击广告进入广告目标页、产生交互到最终离开的全过程检测能力以及基于这种监测数据进行投放优化的能力）</p>
+<p>互联网上存在大量未售出的广告流量，但广告主或者代表广告主利益的代理及广告网络不愿或者根本没有资本进行购买，两种力量推动了新的模式的诞生。</p>
+<p>网站主需要每个广告流量的变现最大化（最大化意味着对流量的识别粒度要更小。价值要更准，并且能在更准的基础上将流量分配给更合适的广告主）</p>
+<p>一些重要原因：</p>
+<p>广告主逐渐认可从媒体购买向人群购买转变，广告主和网站主都想基于自己的利益对整个交易流程有更多了解和控制。购买浪费较少、购买效率提高的要求产生的购买粒度变小的强烈需求，海量数据、处理分析能力以及新技术的出现，要求加入产业链。</p>
+<blockquote>
+<p>2）RTB交易模式中的参与者更多，是否效率更低？</p>
+</blockquote>
+<p>答案当然是否定的。从上面的第二个图可以明显的看出来，参与交易的环节越来越多，但随之而来的却是广告行业规模的越来越大，难以说明是因为规模增大促进了更多环节的加入，还是更多环节的参与使得广告行业的规模越来越大，我们可以认为应该是互相促进和影响，互为因果的。我认为越来越多环节的进入使得广告行业的商业运作更高效，并且使得各个环节分工合理，更有特点。</p>
+<p>那么巨头公司为什么没有将或者说不将各个环节通吃，一统天下呢？在我看来，非不愿，实不能！我们都清楚公司的准确定位是公司发展的第一要务，巨头公司正是靠定位准确，并且在其所擅长的领域做的比别人更好、更精、更具规模所壮大的。但任何一种定位均是基于市场的细分，而不可能是针对整体市场。因此定位也会使得公司不具备其他能力，甚至不具备快速进入属于自己定位范围内的新兴市场的能力。巨头公司也是如此。这也是为什么我们看到腾讯、阿里不断调整公司结构，不断分拆架构的原因。</p>
+<p>广告生态圈中各个环节对其参与者都有其独特的要求，需要参与者具备不同的能力以及核心价值，这些能力及价值甚至可能是两个完全不同的方向，这也决定了各个环节的不可替代性，也是难以有公司一统天下的原因。不考虑自身定位及优势，强行进入不同领域，妄图一统天下的做法，都会以失败而告终（当然，难以全产业链发展不能于不可以全产业链投资）。那么目前广告生态圈中各环节的价值都是什么呢？</p>
+<blockquote>
+<p>3）在RTB交易模式中，各个平台存在的意义是什么，为什么DSP是必须的？SSP平台相比DSP平台为什么少？总的来说，RTB模式中新增的DSP、Exchange、SSP、DMP等平台有着不同的目标用户，因此也有着不同的功能以及平台的目标。简述如下：</p>
+</blockquote>
+<p>Exchange：流量交易平台，面向DSP、SSP，专注于流量交易，平台完善和生态系统的构建；提高流量交换效率，定价机制，信息聚合。以技术为驱动。</p>
+<p>DSP：需求方平台，面向广告主、广告代理，专注于定向技术、自动优化、动态出价及创意优化。以服务为驱动。</p>
+<p>SSP：供应方平台，面向网站主、网站代理，专注于广告位优化、展示有效性优化、展示竞价优化。以服务为驱动。</p>
+<p>DMP：数据管理平台，面向广告交易中的各方，专注于数据管理、数据分析、数据调用。以技术为驱动。</p>
+<p>从不同的驱动方式来讲，Exchange平台和DMP平台更可能出现在同一家公司，而一家公司同时做DSP和SSP平台也有很大机会获得成功。但是试图跨越不同驱动模式、各个平台都进入的公司几乎都会失败。</p>
+<p>目前来看，巨型的互联网公司会处在Exchange平台的环节，这些公司基本是以技术为驱动的，服务代理公司及广告主是其劣势，所以在Exchange平台及广告主、代理公司之间必须有一个中间环节，这个环节必须具备和Exchange平台进行沟通的技术能力，但更重要的，是要具备对广告主、代理公司的服务能力，这个环节就是DSP平台。技术是理性的东西，不难跨越，而服务能力则要复杂得多，因此对DSP来讲，服务能力是其核心的竞争力。这就是DSP平台存在的价值！</p>
+<p>相比较需求段的发展，国内的供应端发展比较缓慢。国内的主流媒体在广告溢价权上还是比较有优势，因此对于流量的变现优化的需求，还比较缺少，因此专注于流量变现优化的SSP平台发展缓慢，从数量以及已有平台的实际效果上都落后于DSP平台的发展。</p>
+<h2 id="三、-大数据下的互联网广告新发展"><a href="#三、-大数据下的互联网广告新发展" class="headerlink" title="三、 大数据下的互联网广告新发展"></a>三、 大数据下的互联网广告新发展</h2><p>在互联网的大数据时代，大数据的概念持续升温，数据的重要性正日趋为人们所强调。通过汇聚多渠道、多维度的原始数据，以及标准化数据格式存储，我们能将互联网大数据分为三个模块，即媒体数据、人群数据、广告数据。媒体数据是指广告在不同媒体环境所产生的效果差异对比，人群数据则是对互联网网民全面而又深度的了解，再加上对于广告投放策略、广告本身属性等广告数据的统计分析，真正的将大数据的价值发挥的淋漓尽致。这三个数据模块相辅相成而又各自为阵，衍生出不同的数据应用产品，从而适应不同的应用场景，帮助广告主在正确的媒体，找到正确的受众，投放正确的广告。媒体会越来越体会到受众数据信息的重要性。合理利用受众数据，并将其打包成可以进行广告投放的数据包。这样的受众购买方式可以为广告主提供卓越的广告投放效果，同时也能够向消费者投放更加适合其胃口的的有针对性的广告。<br>网络广告数据管理将是大的广告主和媒体主进军的下一个领域。数据管理平台可以帮助他们更好地管理好第一方数据，然后通过第三方数据来放大受众数据的规模。<br>以上内容具体参看参考文献【4】的易传媒的一个评论。</p>
+<h3 id="3-1-广告技术生态及-DMP-所处位置"><a href="#3-1-广告技术生态及-DMP-所处位置" class="headerlink" title="3.1 广告技术生态及 DMP 所处位置"></a>3.1 广告技术生态及 DMP 所处位置</h3><p>下图是广告技术的生态以及DMP所处位置。<br><img src="http://omu7tit09.bkt.clouddn.com/15002208969379.jpg" alt=""><br>其中各个平台的功能解释如下。<br>DSP：收集广告主的需求，DSP向Ad exchange获取流量，并且向DMP获取该流量的数据以及广告的数据。DSP根据获取到的数据进行ctr预估，决定出价并向Ad exchange竞价获取流量。<br>DMP：向DSP收集每个广告的点击数据，向媒体收集用户的数据，进行数据管理、数据分析，获取用户的兴趣，同时通过数据调用向DSP，SSP和媒体提供数据服务。DMP可以帮助DSP优化出价策略，也可以帮助SSP优化流量的售卖方式，还可以帮助媒体提高他们的内容质量。DMP还可以打穿广告行业，在其他方面获取应用，如通过数据确定一类产品的需求，帮助生产商控制他们的产量。<br>SSP：负责收集各个媒体的广告位，进行售卖。<br>下面可以看看淘宝共享的一个DMP为核心的广告生态圈。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15002209213305.jpg" alt=""></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] <a href="http://www.iamniu.com/2013/01/26/the-interpretation-of-advertising-ecosystem/" target="_blank" rel="external">http://www.iamniu.com/2013/01/26/the-interpretation-of-advertising-ecosystem/</a>   @牛国柱的博客</p>
+<p>[2] <a href="http://www.zhihu.com/question/20320181/answer/16624803@秦杰的知乎问答" target="_blank" rel="external">http://www.zhihu.com/question/20320181/answer/16624803@秦杰的知乎问答</a></p>
+<p>[3] <a href="http://www.alibuybuy.com/posts/73635.html" target="_blank" rel="external">http://www.alibuybuy.com/posts/73635.html</a>  互联网的那点事的评论</p>
+<p>[4] <a href="http://www.meijiezazhi.com/zt/yx/2012-11-01/11307.html易传媒2012年9月刊" target="_blank" rel="external">http://www.meijiezazhi.com/zt/yx/2012-11-01/11307.html易传媒2012年9月刊</a></p>
+<p>[5] 淘宝DMP平台.pdf 许成</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CTR/" rel="tag"># CTR</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/17/2017-07-17/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/14/机器学习算法系列（27）：word2vec(词向量与统计语言模型)/" rel="prev" title="机器学习算法系列（27）：word2vec（词向量与统计语言模型）">
+                机器学习算法系列（27）：word2vec（词向量与统计语言模型） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、互联网广告生态圈发展过程"><span class="nav-text">一、互联网广告生态圈发展过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-基本情况"><span class="nav-text">1.1 基本情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-产业情况"><span class="nav-text">1.2 产业情况</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-工业情况"><span class="nav-text">1.3 工业情况</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、互联网广告生态网的一些解读"><span class="nav-text">二、互联网广告生态网的一些解读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、-大数据下的互联网广告新发展"><span class="nav-text">三、 大数据下的互联网广告新发展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-广告技术生态及-DMP-所处位置"><span class="nav-text">3.1 广告技术生态及 DMP 所处位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

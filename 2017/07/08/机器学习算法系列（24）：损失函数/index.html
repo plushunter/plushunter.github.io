@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14995092441592.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14995093179927.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14995093274307.png">
-<meta property="og:updated_time" content="2017-07-08T10:35:19.000Z">
+<meta property="og:updated_time" content="2017-07-17T02:18:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（24）：机器学习中的损失函数">
 <meta name="twitter:description" content="损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：$$\theta^* = argmin_\theta \frac{1}{">
@@ -371,11 +371,10 @@ var _hmt = _hmt || [];
       
         <p>损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：$$\theta^* = argmin_\theta \frac{1}{N}\sum_{i=1}^NL(y_i,f(x_i;\theta))+\lambda Φ(θ)$$</p>
 <a id="more"></a>
-<p>前面的均值函数表示的是经验风险函数，$L$代表的是损失函数，后面的$Φ$是正则化项（regularizer）或者叫惩罚项（penalty term）,它可以是$L_1$，也可以是$L_2$忙活着其他的正则函数。整个式子表示的意思是找到使目标函数最小时的$\theta$值。下面列出集中常见的损失函数。</p>
+<p>前面的均值函数表示的是经验风险函数，$L$代表的是损失函数，后面的$Φ$是正则化项（regularizer）或者叫惩罚项（penalty term）,它可以是$L_1$，也可以是$L_2$等其他的正则函数。整个式子表示的意思是找到使目标函数最小时的$\theta$值。下面列出集中常见的损失函数。</p>
 <h2 id="一、对数损失函数（逻辑回归）"><a href="#一、对数损失函数（逻辑回归）" class="headerlink" title="一、对数损失函数（逻辑回归）"></a>一、对数损失函数（逻辑回归）</h2><p>有些人可能觉得逻辑回归的损失函数就是平方损失，其实并不是。平方损失函数可以通过线性回归在假设样本是高斯分布的条件下推导得到，而逻辑回归得到的并不是平方损失。在逻辑回归的推导中，它假设样本服从伯努利分布（0-1分布），然后求得满足该分布的似然函数，接着取对数求极值等等。而逻辑回归并没有求似然函数的极值，而是把极大化当做是一种思想，进而推导出它的经验风险函数为：最小化负的似然函数（即max F(y, f(x)) —-&gt; min -F(y, f(x)))。从损失函数的视角来看，它就成了log损失函数了。</p>
 <p>Log损失函数的标准形式：$$L(Y,P(Y|X))=-logP(Y|X)$$刚刚说到，取对数是为了方便计算极大似然估计，因为在MLE中，直接求导比较困难，所以通常都是先取对数再求导找极值点。损失函数$L(Y.P(Y|X))$表达的是样本在分类$Y$的情况下，使概率$P(Y|X)$达到最大值（换言之，就是利用已知的样本分布，找到最有可能（即最大概率）导致这种分布的参数值；或者什么样的参数才能使我们观测到目前这组数据的概率最大）。因为log函数是单调递增的，所以$logP(Y|X)$也会达到最大值，因此在前面加上负号之后，最大化$P(Y|X)$就等价于最小化$L$了。</p>
-<p>逻辑回归的$P(y|x)$表达式如下（为了将类别标签y统一为1和0，下面将表达式分开表示）：$$<br>P\left(Y=y^{\left(i\right)}|x^{\left(i\right)};\theta\right)=\left\{\begin{array}{l}<br>    h_{\theta}\left(x^{\left(i\right)}\right),\,\,y^{\left(i\right)}=1\\<br>    1-h_{\theta}\left(x^{\left(i\right)}\right),\,\,y^{\left(i\right)}=0\\<br>\end{array}\right.<br>$$将上面的公式合并在一起，可得到第$i$个样本正确预测的概率：。将它代入到log损失函数的标准形式，通过推导logistic的损失函数表达式，如下：$$P(y^{(i)}|x^{(i)};\theta)=(h_\theta(x^{(i)}))^{y(i)}·(1-h_\theta(x^{(i)}))^{1-y(i)}$$<br>上式是对一个样本进行建模的数据表达。对于所有的样本，假设每条样本生成过程独立，在整个样本空间中（N个样本）的概率分布为：$$<br>P\left(Y |  X;\theta\right)=\prod_{i=1}^N{\left(\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)^{y^{\left(i\right)}}\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)^{1-y^{\left(i\right)}}\right)}<br>$$将上式代入到对数损失函数中，得到最终的损失函数为：$$J(\theta) = -\frac{1}{N}\sum_{i=1}^N{y^{\left(i\right)}\log\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)+\left(1-y^{\left(i\right)}\right)\log\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)}<br>$$</p>
-<p>之所以有人认为逻辑回归是平方损失，是因为在使用梯度下降来求最优解的时候，它的迭代式子与平方损失求导后的式子非常相似，从而给人一种直观上的错觉。</p>
+<p>logistic回归的$P(y|x)$表达式如下（为了将类别标签y统一为1和0，下面将表达式分开表示）：$$<br>P\left(Y=y^{\left(i\right)}|x^{\left(i\right)};\theta\right)=\left\{\begin{array}{l}<br>    h_{\theta}\left(x^{\left(i\right)}\right)=\frac{1}{1+e^{-\theta^Tx}},\,\,y^{\left(i\right)}=1\\<br>    1-h_{\theta}\left(x^{\left(i\right)}\right)=\frac{e^{-\theta^Tx}}{1+e^{-\theta^Tx}},\,\,y^{\left(i\right)}=0\\<br>\end{array}\right.<br>$$将上面的公式合并在一起，可得到第$i$个样本正确预测的概率：$$P(y^{(i)}|x^{(i)};\theta)=(h_\theta(x^{(i)}))^{y(i)}·(1-h_\theta(x^{(i)}))^{1-y(i)}$$<br>上式是对一个样本进行建模的数据表达。对于所有的样本，假设每条样本生成过程独立，在整个样本空间中（N个样本）的概率分布为：$$<br>P\left(Y |  X;\theta\right)=\prod_{i=1}^N{\left(\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)^{y^{\left(i\right)}}\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)^{1-y^{\left(i\right)}}\right)}<br>$$将上式代入到对数损失函数中，得到最终的损失函数为：$$J(\theta) = -\frac{1}{N}\sum_{i=1}^N{y^{\left(i\right)}\log\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)+\left(1-y^{\left(i\right)}\right)\log\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)}<br>$$<br>之所以有人认为逻辑回归是平方损失，是因为在使用梯度下降来求最优解的时候，它的迭代式子与平方损失求导后的式子非常相似，从而给人一种直观上的错觉。</p>
 <h2 id="二、平方损失函数（最小二乘法，Ordinary-Least-Squares）"><a href="#二、平方损失函数（最小二乘法，Ordinary-Least-Squares）" class="headerlink" title="二、平方损失函数（最小二乘法，Ordinary Least Squares）"></a>二、平方损失函数（最小二乘法，Ordinary Least Squares）</h2><p>最小二乘法是线性回归的一种，OLS将问题转化成了一个凸优化问题。在线性回归中，它假设样本和噪声都服从高斯分布（为什么假设成高斯分布呢？其实这里隐藏了一个小知识点，就是中心极限定理，可以参考【central limit theorem】），最后通过极大似然估计（MLE）可以推导出最小二乘式子。最小二乘的基本原则是：最优拟合直线应该是使各点到回归直线的距离和最小的直线，即平方和最小。换言之，OLS是基于距离的，而这个距离就是我们用的最多的欧几里得距离。为什么它会选择使用欧式距离作为误差度量呢（即Mean squared error， MSE），主要有以下几个原因：</p>
 <ul>
 <li>简单，计算方便；</li>
@@ -524,7 +523,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">61</span>
+              <span class="site-state-item-count">63</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -541,7 +540,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">81</span>
+                <span class="site-state-item-count">82</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
