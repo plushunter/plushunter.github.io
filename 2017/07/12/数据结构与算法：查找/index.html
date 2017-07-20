@@ -1,0 +1,939 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构,算法,查找算法," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、基本概念查找（Search）就是根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素（或记录）。在计算机应用中，查找是常用的基本运算，例如编译程序中符号表的查找。先说明几个概念：">
+<meta name="keywords" content="数据结构,算法,查找算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法：查找">
+<meta property="og:url" content="http://yoursite.com/2017/07/12/数据结构与算法：查找/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="一、基本概念查找（Search）就是根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素（或记录）。在计算机应用中，查找是常用的基本运算，例如编译程序中符号表的查找。先说明几个概念：">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15003947614841.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15004257295693.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15004259399950.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15004286381290.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15004265816210.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15004290403634.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005205553707.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005207292560.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005207359778.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005207400396.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005207454726.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005207493083.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005207531838.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005207574693.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005208454145.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005208580694.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005209604669.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005209650012.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005209726786.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005210203919.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005210280125.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005210718072.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005210927113.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005211157669.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005211206056.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005211242898.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005209823614.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005211925933.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005212064887.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005212418043.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005213208144.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005213251657.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005213544094.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005228099157.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005228566431.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005228676672.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005233364103.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005233651325.png">
+<meta property="og:updated_time" content="2017-07-20T04:20:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法：查找">
+<meta name="twitter:description" content="一、基本概念查找（Search）就是根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素（或记录）。在计算机应用中，查找是常用的基本运算，例如编译程序中符号表的查找。先说明几个概念：">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15003947614841.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 数据结构与算法：查找 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/数据结构与算法：查找/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构与算法：查找
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T22:14:45+08:00">
+                2017-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h2><p>查找（Search）就是根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素（或记录）。在计算机应用中，查找是常用的基本运算，例如编译程序中符号表的查找。先说明几个概念：</p>
+<a id="more"></a>
+<p>查找表（Search Table）：由同一类型的数据元素（或记录）构成的集合<br>关键字（Key）：数据元素中某个数据项的值，又称为键值。<br>主键（Primary Key）：可唯一地标识某个数据元素或记录的关键字。</p>
+<p>平均查找长度（Average Search Length，ASL）：需和指定key进行比较的关键字的个数的期望值，称为查找算法在查找成功时的平均查找长度。</p>
+<p>对于含有n个数据元素的查找表，查找成功的平均查找长度为：$ASL = P_i*C_i$的和。</p>
+<ul>
+<li>$P_i$：查找表中第i个数据元素的概率。</li>
+<li>$C_i$：找到第i个数据元素时已经比较过的次数。</li>
+</ul>
+<p>查找表按照操作方式可分为：</p>
+<ol>
+<li>静态查找表（Static Search Table）:只做查找操作的查找表。它的主要操作是：</li>
+</ol>
+<ul>
+<li>查询某个“特定的”数据元素是否在表中</li>
+<li>检索某个“特定的”数据元素和各种属性</li>
+</ul>
+<ol>
+<li>动态查找表（Dynamic Search Table）：在查找的同时进行插入或删除等操作：</li>
+</ol>
+<ul>
+<li>查找时插入数据</li>
+<li>查找时删除数据</li>
+</ul>
+<p>按照查找表是否有序分为无序查找和有序查找：</p>
+<ul>
+<li>无序查找：被查找数列有序无序均可；</li>
+<li>有序查找：被查找数列必须为有序数列。</li>
+</ul>
+<h2 id="二、无序表查找"><a href="#二、无序表查找" class="headerlink" title="二、无序表查找"></a>二、无序表查找</h2><p><strong>说明：</strong>顺序查找适合于存储结构为顺序存储或链接存储的线性表。</p>
+<p><strong>基本思想：</strong>顺序查找也称为线形查找，属于无序查找算法。从数据结构线形表的一端开始，顺序扫描，依次将扫描到的结点关键字与给定值k相比较，若相等则表示查找成功；若扫描结束仍没有找到关键字等于k的结点，表示查找失败。</p>
+<p><strong>算法分析：</strong>最好情况是在第一个位置就找到了，此为O(1)；最坏情况是在最后一个位置才找到，此为O(n)；所以平均查找次数为$(n+1)/2$，最终时间复杂度为$O(n)$</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 最基础的遍历无序列表的查找算法</span></div><div class="line"><span class="comment"># 时间复杂度O(n)</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sequential_search</span><span class="params">(lis, key)</span>:</span></div><div class="line">    length = len(lis)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(length):</div><div class="line">        <span class="keyword">if</span> lis[i] == key:</div><div class="line">            <span class="keyword">return</span> i</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    LIST = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">123</span>, <span class="number">22</span>, <span class="number">54</span>, <span class="number">7</span>, <span class="number">99</span>, <span class="number">300</span>, <span class="number">222</span>]</div><div class="line">    result = sequential_search(LIST, <span class="number">123</span>)</div><div class="line">    print(result)</div></pre></td></tr></table></figure>
+<h2 id="三、有序表查找"><a href="#三、有序表查找" class="headerlink" title="三、有序表查找"></a>三、有序表查找</h2><p>查找表中的数据必须按照某个主键进行某种排序！</p>
+<h3 id="3-1-二分查找"><a href="#3-1-二分查找" class="headerlink" title="3.1 二分查找"></a>3.1 二分查找</h3><p><strong>说明：</strong>元素必须是有序的，如果是无序的则要先进行排序操作。<br><strong>基本思想：</strong>也称为折半查找，属于有序查找算法。用给定值k先与中间结点的关键字比较，中间结点把线性表分成两个子表，若相等则查找成功；若不相等，再根据k与该中间节点关键字的比较结果确定下一步查找哪个字表，这样递归进行，知道查找到或查找结束发现表中没有这样的结点。</p>
+<p><strong>复杂度分析：</strong>最坏情况下,关键字比较次数为$log_2(n+1)$，且期望时间复杂度为$O(log_2n)$</p>
+<p><strong>注意：</strong>折半查找的前提条件是需要有序表顺序存储，对于静态查找表，一次排序后不再发生变化，折半查找能得到不错的效率。但对于需要频繁执行插入或删除操作的数据集来说，维护有序的排序会带来不小的工作量，那就不建议使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 针对有序查找表的二分查找算法</span></div><div class="line"><span class="comment"># 时间复杂度O(log(n))</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_search</span><span class="params">(list, key)</span>:</span></div><div class="line">    low = <span class="number">0</span></div><div class="line">    high = len(list) - <span class="number">1</span></div><div class="line">    time = <span class="number">0</span></div><div class="line">    <span class="keyword">while</span> low &lt;= high:</div><div class="line">        time += <span class="number">1</span></div><div class="line">        mid = int((low + high) / <span class="number">2</span>)</div><div class="line">        <span class="keyword">if</span> key &lt; list[mid]:</div><div class="line">            high = mid - <span class="number">1</span></div><div class="line">        <span class="keyword">elif</span> key &gt; list[mid]:</div><div class="line">            low = mid + <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># 打印折半的次数</span></div><div class="line">            print(<span class="string">"times: %s"</span> % time)</div><div class="line">            <span class="keyword">return</span> mid</div><div class="line">    print(<span class="string">"times: %s"</span> % time)</div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    LIST = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">22</span>, <span class="number">54</span>, <span class="number">99</span>, <span class="number">123</span>, <span class="number">200</span>, <span class="number">222</span>, <span class="number">444</span>]</div><div class="line">    result = binary_search(LIST, <span class="number">99</span>)</div><div class="line">    print(result)</div></pre></td></tr></table></figure>
+<h3 id="3-2-插值查找"><a href="#3-2-插值查找" class="headerlink" title="3.2 插值查找"></a>3.2 插值查找</h3><p>在介绍插值查找之前，首先考虑一个新问题，为什么上述算法一定要是折半，而不是折四分之一或者折更多呢？</p>
+<p>打个比方，在英文字典里面查“apple”，你下意识翻开字典是翻前面的书页还是后面的书页呢？如果再让你查“zoo”，你又怎么查？很显然，这里绝对不会是从中农间开始查起，而是有一定目的的往前或往后翻。</p>
+<p>同样的，比如要在取值范围1~10000之间100个元素从小到大均匀分布的数组中查找5，我们自然会从数组下标较小的开始查找。</p>
+<p>经过上面的分析，折半查找这种查找方式，不是自适应的（也就是说是傻瓜式的）。二分查找中查找点计算如下：$$mid=(low+high)/2$$，即$$mid=low+(high-low)/2$$通过类比，我们可以将查找的点改进为如下：$$mid=low+\frac{key -list[low]}{list[high]-list [low]}\times (high-low)$$也就是将上述的比例参数1/2改进为自适应的，根据关键字在整个有序表中所处的位置，让mid值的变化更靠近关键字key，这样也就间接地减少了比较次数。</p>
+<p><strong>基本思想：</strong>基于二分查找算法，将查找点的选择改进为自适应选择，可以提高查找效率。当然，插值查找也属于有序查找。</p>
+<p><strong>注意：</strong>对于表长较大，而关键字分布又比较均匀的查找表来说，插值查找算法的平均性能比折半查找要好的多。反之，数组中如果分布非常不均匀，那么插值查找未必是很合适的选择。</p>
+<p><strong>复杂度分析：</strong>查找成功或者失败的时间复杂度均为$O(log2(log2n))$。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 插值查找算法</span></div><div class="line"><span class="comment"># 时间复杂度O(log(n))</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_search</span><span class="params">(lis, key)</span>:</span></div><div class="line">    low = <span class="number">0</span></div><div class="line">    high = len(lis) - <span class="number">1</span></div><div class="line">    time = <span class="number">0</span></div><div class="line">    <span class="keyword">while</span> low &lt;= high:</div><div class="line">        time += <span class="number">1</span></div><div class="line">        <span class="comment"># 计算mid值是插值算法的核心代码</span></div><div class="line">        mid = low + int((high - low) * (key - lis[low])/(lis[high] - lis[low]))</div><div class="line">        print(<span class="string">"mid=%s, low=%s, high=%s"</span> % (mid, low, high))</div><div class="line">        <span class="keyword">if</span> key &lt; lis[mid]:</div><div class="line">            high = mid - <span class="number">1</span></div><div class="line">        <span class="keyword">elif</span> key &gt; lis[mid]:</div><div class="line">            low = mid + <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment"># 打印查找的次数</span></div><div class="line">            print(<span class="string">"times: %s"</span> % time)</div><div class="line">            <span class="keyword">return</span> mid</div><div class="line">    print(<span class="string">"times: %s"</span> % time)</div><div class="line">    <span class="keyword">return</span> <span class="number">-1</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    LIST = [<span class="number">1</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">22</span>, <span class="number">54</span>, <span class="number">99</span>, <span class="number">123</span>, <span class="number">200</span>, <span class="number">222</span>, <span class="number">444</span>]</div><div class="line">    result = binary_search(LIST, <span class="number">444</span>)</div><div class="line">    print(result)</div></pre></td></tr></table></figure>
+<h3 id="3-3-斐波那契查找"><a href="#3-3-斐波那契查找" class="headerlink" title="3.3 斐波那契查找"></a>3.3 斐波那契查找</h3><p>在介绍斐波那契查找算法之前，我们先介绍一下和它很紧密相连并且大家都熟知的一个概念——黄金分割。</p>
+<p>黄金比例又称为黄金分割，是指事物各部分间一定的数学比例关系，即将整体一分为二，较大部分与较小部分之比等于整体与较大部分之比，其比值约为1：0.618。</p>
+<p>0.618倍公认为是最具有审美意义的比例数字，这个数值的作用不仅仅体现在诸如绘画、雕塑、音乐、建筑等艺术领域，而且在管理、工程设计等方面有着不可忽视的作用。因此被称为黄金分割。</p>
+<p>大家记不记得斐波那契数列：1，1，2，3，5，8，13，21，34，55，89……（从第三个数开始，后面每一个数都是前两个数的和）。然后我们会发现，随着斐波那契数列的递增，前后两个数的比值会越来越接近0.618，利用这个特性，我们就可以将黄金比例运用到查找技术中。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15003947614841.jpg" alt=""></p>
+<p><strong>基本思想：</strong>也是二分查找的一种提升算法，通过运用黄金比例的概念在数列中选择查找点进行查找，提高查找效率。同样地，斐波那契查找也属于一种有序查找算法。</p>
+<p>相对于折半查找，一般将待比较的key值与第mid=（low+high）/2位置的元素进行比较，比较结果分为三种情况：</p>
+<ol>
+<li>相等，mid位置的元素即为所求</li>
+<li><blockquote>
+<p>,low=mid+1</p>
+</blockquote>
+</li>
+<li>&lt;,high=mid-1</li>
+</ol>
+<p>斐波那契查找和折半查找很相似，它是根据斐波那契序列的特点对有序表进行分割的。他要求开始表中记录的个数为某个斐波那契小1，即$n=F(k)-1$</p>
+<p>开始将k值与第F(k-1)位置的记录进行比较（即mid=low+F(k-1)-1），比较结果也分为三种</p>
+<ol>
+<li>相等，mid位置的元素即为所求</li>
+<li><blockquote>
+<p>,low=mid+1,k-=2：说明，low=high+1说明待查找的元素在[mid+1,high]范围内，k-=2说明范围[mid,high]内的元素个数为$n-(F(k-1))=Fk-1-F(k-1)=Fk-F(k-1)-1=f(k-2)-1$个，所以可以递归地应用斐波那契查找。</p>
+</blockquote>
+</li>
+<li>&lt;,high=mid-1,k-=1:说明，low=mid+1，说明待查找的元素在[mid+1,high]范围内，k-=1说明范围[low,mid-1]内的元素个数为F(k-1)-1个，所以可以递归的应用斐波那契查找</li>
+</ol>
+<p><strong>复杂度分析：</strong>最坏情况下，时间复杂度为$O(log_2n)$，且其期望复杂度也为$O(log_2n)$。就平均性能，要优于二分查找。但是在最坏情况下，比如这里如果key为1，则始终处于左侧半区查找，此时其效率要低于二分查找。</p>
+<p>总结：二分查找的mid运算是加法与除法，插值查找则是复杂的四则运算，而斐波那契查找只是最简单的加减运算。在海量数据的查找中，这种细微的差别可能会影响最终的查找效率。因此，三种有序表的查找方法本质上是分割点的选择不同，各有优劣，应根据实际情况进行选择。</p>
+<h2 id="四、线性索引查找"><a href="#四、线性索引查找" class="headerlink" title="四、线性索引查找"></a>四、线性索引查找</h2><p>对于海量的无序数据，为了提高查找速度，一般会为其构造索引表。索引就是把一个关键字与他相对应的记录进行关联的过程。</p>
+<p>一个索引由若干个索引项构成，每个索引项至少包含关键字和其对应的记录在存储器中的位置等信息。</p>
+<p>索引按照结构可以分为：线性索引、树形索引和多级索引。<br>线性索引：将索引项的集合通过线性结构来组织，也叫索引表</p>
+<p>线性索引可分为：稠密索引、分块索引和倒排索引。</p>
+<ul>
+<li>稠密索引：</li>
+</ul>
+<p>指的是在线性索引中，为数据集合中的每个记录都建立一个索引项。<img src="http://omu7tit09.bkt.clouddn.com/15004257295693.png" alt="">这其实就相当于给无序的集合，建立了一张有序的线性表，其索引项一定是按照关键码进行有序的排列。这也相当于把查找过程中需要的排序工作给提前做了。</p>
+<ul>
+<li>分块索引：</li>
+</ul>
+<p>分块查找又称索引顺序查找，是顺序查找的一种改进方法。</p>
+<p>算法思想：将n个数据元素“按块有序”划分为m块（m&lt;n）。每一块中的结点不必有序，但块与块之间必须“按块有序”；即第一块中人艺元素的关键字都必须小于第2块中任一元素的关键字；而第二块中任一元素又都必须小于第三块中的任一元素，……</p>
+<p>算法流程：<br>首先选取各块中的最大关键字构成一个索引表；查找分为两个部分：先对索引表进行二分查找或顺序查找，以确定待查记录在哪一块中；然后，在已确定的块中用顺序法进行查找。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15004259399950.png" alt="">这其实是有序查找和无序查找的一种中间状态或者说妥协状态。因为数据量过大，建立完整的稠密索引耗时耗力，占用资源过多；但如果不做任何排序或索引，那么遍历的查找也无法接受，只能这种，做一定程度的排序或索引。分块索引的效率比遍历查找的$O(n)$要高一些，但与二分查找的$O(logn)$还是要差不少。</p>
+<ul>
+<li>倒排索引：<br>不是由记录来确定属性值，而是由属性值来确定记录的位置，这种被称为倒排索引。其中记录号表存储具有相同关键字的所有记录的地址或引用（可以是指向记录的指针或该记录的主关键字）。倒排索引是最基础的搜索引擎技术。</li>
+</ul>
+<h2 id="五、二叉查找树"><a href="#五、二叉查找树" class="headerlink" title="五、二叉查找树"></a>五、二叉查找树</h2><p><strong>基本思想：</strong>二叉查找树是先对待查找的数据进行生成树，确保树的左分支的值小于右分支的值，然后再就行和每个节点的父节点比较大小，查找最合适的范围。这个算法的效率查找效率很高，但是如果使用这种查找方法要首先创建树。</p>
+<p>二叉排序树（Binary Sort Tree）又称为二叉查找树（Binary Search Tree）、二叉搜索树。它或者是一颗空树，或者是具有下列性质的二叉树：</p>
+<ol>
+<li>若任意节点的左子树不为空，则左子树上的所有节点的值均小于它的根结点的值；</li>
+<li>若任意节点的右子树不为空，则左子树上所有节点的值均小于它的根结点的值；</li>
+<li>任意节点的左、右子树也分别为二叉查找树。</li>
+</ol>
+<p>二叉查找树性质：对二叉查找树进行中序遍历，即可得到有序的数列。</p>
+<p>不同形态的二叉查找树如下图所示：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15004286381290.png" alt=""></p>
+<p>复杂度分析：它和二分查找一样，插入和查找的时间复杂度均为O(logn)，但是在最坏的情况下仍然会有O(n)的时间复杂度。原因在于插入和删除元素的时候，树没有保持平衡（比如，我们查找上图（b）中的“93”，我们需要进行n次查找操作）。我们追求的是在最坏的情况下仍然有较好的时间复杂度，这就是平衡查找树设计的初衷。</p>
+<p>二叉查找树的操作：</p>
+<ol>
+<li>查找：对比节点的值和关键字，相等则表明找到了；小了则往节点的左子树去找，大了则往右子树去找，这么递归下去，最后返回布尔值或找到的节点。</li>
+<li>插入：从根结点开始逐个与关键字进行对比，小了去左边，大了去右边，碰到子树为空的情况就将新的节点连接。</li>
+<li>删除：如果要删除的节点是叶子，直接删；如果只有左子树或只有右子树，则删除节点后，将子树连接到父节点即可；如果同时有左右子树，则可以将二叉排序树进行中序遍历，取将要被删除的节点的前驱或者后继节点替代这个被删除的节点的位置。</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BSTNode</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    定义一个二叉树节点类。</div><div class="line">    以讨论算法为主，忽略了一些诸如对数据类型进行判断的问题。</div><div class="line">    """</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, data, left=None, right=None)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        初始化</div><div class="line">        :param data: 节点储存的数据</div><div class="line">        :param left: 节点左子树</div><div class="line">        :param right: 节点右子树</div><div class="line">        """</div><div class="line">        self.data = data</div><div class="line">        self.left = left</div><div class="line">        self.right = right</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BinarySortTree</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    基于BSTNode类的二叉排序树。维护一个根节点的指针。</div><div class="line">    """</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._root = <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_empty</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="keyword">return</span> self._root <span class="keyword">is</span> <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        关键码检索</div><div class="line">        :param key: 关键码</div><div class="line">        :return: 查询节点或None</div><div class="line">        """</div><div class="line">        bt = self._root</div><div class="line">        <span class="keyword">while</span> bt:</div><div class="line">            entry = bt.data</div><div class="line">            <span class="keyword">if</span> key &lt; entry:</div><div class="line">                bt = bt.left</div><div class="line">            <span class="keyword">elif</span> key &gt; entry:</div><div class="line">                bt = bt.right</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                <span class="keyword">return</span> entry</div><div class="line">        <span class="keyword">return</span> <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        插入操作</div><div class="line">        :param key:关键码 </div><div class="line">        :return: 布尔值</div><div class="line">        """</div><div class="line">        bt = self._root</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> bt:</div><div class="line">            self._root = BSTNode(key)</div><div class="line">            <span class="keyword">return</span></div><div class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">            entry = bt.data</div><div class="line">            <span class="keyword">if</span> key &lt; entry:</div><div class="line">                <span class="keyword">if</span> bt.left <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">                    bt.left = BSTNode(key)</div><div class="line">                    <span class="keyword">return</span></div><div class="line">                bt = bt.left</div><div class="line">            <span class="keyword">elif</span> key &gt; entry:</div><div class="line">                <span class="keyword">if</span> bt.right <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">                    bt.right = BSTNode(key)</div><div class="line">                    <span class="keyword">return</span></div><div class="line">                bt = bt.right</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                bt.data = key</div><div class="line">                <span class="keyword">return</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        二叉排序树最复杂的方法</div><div class="line">        :param key: 关键码</div><div class="line">        :return: 布尔值</div><div class="line">        """</div><div class="line">        p, q = <span class="keyword">None</span>, self._root     <span class="comment"># 维持p为q的父节点，用于后面的链接操作</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> q:</div><div class="line">            print(<span class="string">"空树！"</span>)</div><div class="line">            <span class="keyword">return</span></div><div class="line">        <span class="keyword">while</span> q <span class="keyword">and</span> q.data != key:</div><div class="line">            p = q</div><div class="line">            <span class="keyword">if</span> key &lt; q.data:</div><div class="line">                q = q.left</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                q = q.right</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> q:               <span class="comment"># 当树中没有关键码key时，结束退出。</span></div><div class="line">                <span class="keyword">return</span></div><div class="line">        <span class="comment"># 上面已将找到了要删除的节点，用q引用。而p则是q的父节点或者None（q为根节点时）。</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> q.left:</div><div class="line">            <span class="keyword">if</span> p <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">                self._root = q.right</div><div class="line">            <span class="keyword">elif</span> q <span class="keyword">is</span> p.left:</div><div class="line">                p.left = q.right</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                p.right = q.right</div><div class="line">            <span class="keyword">return</span></div><div class="line">        <span class="comment"># 查找节点q的左子树的最右节点，将q的右子树链接为该节点的右子树</span></div><div class="line">        <span class="comment"># 该方法可能会增大树的深度，效率并不算高。可以设计其它的方法。</span></div><div class="line">        r = q.left</div><div class="line">        <span class="keyword">while</span> r.right:</div><div class="line">            r = r.right</div><div class="line">        r.right = q.right</div><div class="line">        <span class="keyword">if</span> p <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            self._root = q.left</div><div class="line">        <span class="keyword">elif</span> p.left <span class="keyword">is</span> q:</div><div class="line">            p.left = q.left</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            p.right = q.left</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__iter__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        实现二叉树的中序遍历算法,</div><div class="line">        展示我们创建的二叉排序树.</div><div class="line">        直接使用python内置的列表作为一个栈。</div><div class="line">        :return: data</div><div class="line">        """</div><div class="line">        stack = []</div><div class="line">        node = self._root</div><div class="line">        <span class="keyword">while</span> node <span class="keyword">or</span> stack:</div><div class="line">            <span class="keyword">while</span> node:</div><div class="line">                stack.append(node)</div><div class="line">                node = node.left</div><div class="line">            node = stack.pop()</div><div class="line">            <span class="keyword">yield</span> node.data</div><div class="line">            node = node.right</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    lis = [<span class="number">62</span>, <span class="number">58</span>, <span class="number">88</span>, <span class="number">48</span>, <span class="number">73</span>, <span class="number">99</span>, <span class="number">35</span>, <span class="number">51</span>, <span class="number">93</span>, <span class="number">29</span>, <span class="number">37</span>, <span class="number">49</span>, <span class="number">56</span>, <span class="number">36</span>, <span class="number">50</span>]</div><div class="line">    bs_tree = BinarySortTree()</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(lis)):</div><div class="line">        bs_tree.insert(lis[i])</div><div class="line">    <span class="comment"># bs_tree.insert(100)</span></div><div class="line">    bs_tree.delete(<span class="number">58</span>)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> bs_tree:</div><div class="line">        print(i, end=<span class="string">" "</span>)</div><div class="line">    <span class="comment"># print("\n", bs_tree.search(4))</span></div></pre></td></tr></table></figure>
+<p>二叉排序树总结：</p>
+<ul>
+<li>二叉排序树以链式进行存储，保持了链式结构在插入和删除操作上的优点。</li>
+<li>在极端情况下，查询次数为1，但最大操作次数不会超过树的深度。也就是说，二叉排序树的查找性能取决于二叉排序书的形状，也就引申除了后面的平衡二叉树。</li>
+<li>给定一个元素集合，可以构造不同的二叉排序树，当它同时是一个完全二叉树的时候，查找的时间复杂度为$O(log(n))$，近似于二分查找。</li>
+<li>当出现最极端的斜树时，时间复杂度为$O(n)$，等同于顺序查找，效果最差。<br><img src="http://omu7tit09.bkt.clouddn.com/15004265816210.jpg" alt=""><br>下图为二叉树查找和顺序查找以及二分查找性能的对比图：</li>
+</ul>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15004290403634.png" alt=""><br>基于二叉查找树进行优化，进而可以得到其他的树表查找算法，比如平衡树、红黑树等高效算法。</p>
+<h2 id="六、平衡二叉树"><a href="#六、平衡二叉树" class="headerlink" title="六、平衡二叉树"></a>六、平衡二叉树</h2><p>平衡二叉树（AVL树，发明者的姓名缩写）：一种高度平衡的排序二叉树，其每一个节点的左子树和右子树的高度差最多等于1。平衡二叉树首先必须是一棵二叉排序树！</p>
+<p>平衡因子（Balance Factor）：将二叉树上节点的左子树深度减去右子树深度的值。对于平衡二叉树所有包括分支节点和叶节点的平衡因子只可能是-1,0和1，只要有一个节点的因子不在这三个值之内，该二叉树就是不平衡的。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15005205553707.png" alt=""><br>最小不平衡子树：距离插入结点最近的，且平衡因子的绝对值大于1的节点为根的子树。</p>
+<p>平衡二叉树的构建思想：每当插入一个新结点时，先检查是否破坏了树的平衡性，若有，找出最小不平衡子树。在保持二叉排序树特性的前提下，调整最小不平衡子树中各结点之间的连接关系，进行相应的旋转，成为新的平衡子树。</p>
+<p>下面是由[1,2,3,4,5,6,7,10,9]构建平衡二叉树<br><img src="http://omu7tit09.bkt.clouddn.com/15005207292560.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005207359778.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005207400396.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005207454726.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005207493083.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005207531838.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005207574693.png" alt=""></p>
+<h2 id="七、多路查找树"><a href="#七、多路查找树" class="headerlink" title="七、多路查找树"></a>七、多路查找树</h2><p>多路查找树（muitl-way search tree）：其每一个节点的孩子可以多于两个，且每一个结点处可以存储多个元素。<br>对于多路查找树，每个节点可以存储多少个元素，以及它的孩子数的多少是关键，常用的有这4种形式：2-3树、2-3-4树、B树和B+树。</p>
+<h3 id="7-1-2-3树"><a href="#7-1-2-3树" class="headerlink" title="7.1 2-3树"></a>7.1 2-3树</h3><p>2-3树：每个结点都具有2个孩子，或者3个孩子，或者没有孩子。</p>
+<p>一个2结点包含一个元素和两个孩子（或者没有孩子，不能只有一个孩子）。与二叉排序树类似，其左子树包含的元素都小于该元素，右子树包含的元素都大于该元素。<br>一个3结点包含两个元素和三个孩子（或者没有孩子，不能只有一个或两个孩子）。</p>
+<p>2-3树中所有的叶子都必须在同一层次上。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15005208454145.png" alt=""><br>其插入操作如下：<br><img src="http://omu7tit09.bkt.clouddn.com/15005208580694.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005209604669.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005209650012.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005209726786.png" alt=""><br>其删除操作如下：<br><img src="http://omu7tit09.bkt.clouddn.com/15005210203919.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005210280125.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005210718072.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005210927113.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005211157669.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005211206056.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005211242898.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005209823614.png" alt=""></p>
+<h3 id="7-2-2-3-4树"><a href="#7-2-2-3-4树" class="headerlink" title="7.2 2-3-4树"></a>7.2 2-3-4树</h3><p>其实就是2-3树的扩展，包括了4结点的使用。一个4结点包含小中大三个元素和四个孩子（或没有孩子）。<br>其插入操作:<br><img src="http://omu7tit09.bkt.clouddn.com/15005211925933.png" alt=""><br>其删除操作：<br><img src="http://omu7tit09.bkt.clouddn.com/15005212064887.png" alt=""></p>
+<h3 id="7-3-B树"><a href="#7-3-B树" class="headerlink" title="7.3 B树"></a>7.3 B树</h3><p>B树是一种平衡的多路查找树。节点最大的孩子数目称为B树的阶（order）。2-3树是3阶B树，2-3-4是4阶B树。<br><img src="http://omu7tit09.bkt.clouddn.com/15005212418043.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005213208144.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15005213251657.png" alt=""></p>
+<h3 id="7-4-B-树"><a href="#7-4-B-树" class="headerlink" title="7.4 B+树"></a>7.4 B+树</h3><p>为了解决B树的所有元素遍历等基本问题，在原有的结构基础上，加入新的元素组织方式后，形成了B+树。</p>
+<p>B+树是应文件系统所需而出现的一种B树的变形树，严格意义上将，它已经不是最基本的树了。<br>B+树中，出现在分支节点中的元素会被当做他们在该分支节点位置的中序后继者（叶子节点）中再次列出。另外，每一个叶子节点都会保存一个指向后一叶子节点的指针。<br><img src="http://omu7tit09.bkt.clouddn.com/15005213544094.png" alt=""><br>所有的叶子节点包含全部的关键字的信息，及相关指针，叶子节点本身依关键字的大小自小到大顺序链接。<br>B+树的结构特别适合带有范围的查找。比如查找年龄在20~30岁之间的人。</p>
+<h2 id="八、散列表（哈希表）"><a href="#八、散列表（哈希表）" class="headerlink" title="八、散列表（哈希表）"></a>八、散列表（哈希表）</h2><p>哈希表（Hash Table）是一种特殊的数据结构，它最大的特点就是可以快速实现查找、插入和删除。因为它独有的特点，Hash表经常被用来解决大数据问题，也因此被广大的程序员所青睐。</p>
+<h3 id="8-1-哈希表的基本思想"><a href="#8-1-哈希表的基本思想" class="headerlink" title="8.1 哈希表的基本思想"></a>8.1 哈希表的基本思想</h3><p>我们知道，数组的最大特点就是：寻址容易，插入和删除困难；而链表正好相反，寻址困难，而插入和删除操作容易。那么如果能够结合两者的优点，做出一种寻址、插入和删除操作同样快速容易的数据结构，那该有多好。这就是哈希表创建的基本思想，而实际上哈希表也实现了这样的一个“夙愿”，哈希表就是这样一个集查找、插入和删除操作于一身的数据结构。</p>
+<h3 id="8-2-哈希表的基本概念"><a href="#8-2-哈希表的基本概念" class="headerlink" title="8.2 哈希表的基本概念"></a>8.2 哈希表的基本概念</h3><p>哈希表（Hash Table）：也叫散列表，是根据关键码值（key-value）而直接进行访问的数据结构，也就是我们常用到的map。</p>
+<p>哈希函数：也称为是散列函数，是Hash表的映射函数，它可以把任意长度的输入变换成固定长度的输出，该输出就是哈希值。哈希函数能使对一个数据序列的访问过程变得更加迅速有效，通过哈希函数，数据元素能够被很快的进行定位。</p>
+<p>哈希表和哈希函数的标准定义：若关键字为k，则其值存放在h(k)的存储位置上。由此，不需比较便可直接取得所查记录。称这个对应关系f为哈希函数，按这个思想建立的表为哈希表。</p>
+<p>设所有可能出现的关键字集合记为U(简称全集)。实际发生(即实际存储)的关键字集合记为K（|K|比|U|小得多）。</p>
+<p>散列方法是使用函数h将U映射到表T[0..m-1]的下标上（m=O(|U|)）。这样以U中关键字为自变量，以h为函数的运算结果就是相应结点的存储地址。从而达到在O(1)时间内就可完成查找。<br>其中：</p>
+<ol>
+<li>h：U→{0，1，2，…，m-1} ，通常称h为哈希函数(Hash Function)。哈希函数h的作用是压缩待处理的下标范围，使待处理的|U|个值减少到m个值，从而降低空间开销。</li>
+<li>T为哈希表(Hash Table)。</li>
+<li>$h(K_i)(K_i∈U)$是关键字为Ki结点存储地址(亦称散列值或散列地址)。</li>
+<li>将结点按其关键字的哈希地址存储到哈希表中的过程称为散列(Hashing)</li>
+</ol>
+<p>设计出一个简单、均匀、存储利用率高的散列函数是散列技术中最关键的问题。<br>但是，一般散列函数都面临着冲突的问题。两个不同的关键字，由于散列函数值相同，因而被映射到同一表位置上。该现象称为冲突(Collision)或碰撞。发生冲突的两个关键字称为该散列函数的同义词(Synonym)。</p>
+<p>最理想的解决冲突的方法是安全避免冲突。要做到这一点必须满足两个条件：其一是$|U|≤m$，其二是选择合适的散列函数。这只适用于|U|较小，且关键字均事先已知的情况，此时经过精心设计散列函数h有可能完全避免冲突。</p>
+<p>但通常情况下，h是一个压缩映像。虽然$|K|≤m$，但$|U|&gt;m$，故无论怎样设计h，也不可能完全避免冲突。因此，只能在设计h时尽可能使冲突最少。同时还需要确定解决冲突的方法，使发生冲突的同义词能够存储到表中。</p>
+<p>冲突的频繁程度除了与h相关外，还与表的填满程度相关。设m和n分别表示表长和表中填入的结点数，则将α=n/m定义为散列表的装填因子(Load Factor)。α越大，表越满，冲突的机会也越大。通常取α≤1。 </p>
+<h3 id="8-3-哈希表的实现方法"><a href="#8-3-哈希表的实现方法" class="headerlink" title="8.3 哈希表的实现方法"></a>8.3 哈希表的实现方法</h3><p>我们之前说了，哈希表是一个集查找、插入和删除操作于一身的数据结构。那这么完美的数据结构到底是怎么实现的呢？哈希表有很多种不同的实现方法，为了实现哈希表的创建，这些所有的方法都离不开两个问题——“定址”和“解决冲突”。</p>
+<p>在这里，我们通过详细地介绍哈希表最常用的方法——取余法（定值）+拉链法（解决冲突），来一起窥探一下哈希表强大的优点。</p>
+<p>取余法大家一定不会感觉陌生，就是我们经常说的取余数的操作。</p>
+<p>拉链法是什么，“拉链”说白了就是“链表数组”。我这么一解释，大家更晕了，啥是“链表数组”啊？为了更好地解释“链表数组”，我们用下图进行解释：图中的主干部分是一个顺序存储结构数组，但是有的数组元素为空，有的对应一个值，有的对应的是一个链表，这就是“链表数组”。比如数组0的位置对应一个链表，链表有两个元素“496”和“896”，这说明元素“496”和“896”有着同样的Hash地址，这就是我们上边介绍的“冲突”或者“碰撞”。但是“链表数组”的存储方式很好地解决了Hash表中的冲突问题，发生冲突的元素会被存在一个对应Hash地址指向的链表中。实际上，“链表数组”就是一个指针数组，每一个指针指向一个链表的头结点，链表可能为空，也可能不为空。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15005228099157.png" alt=""></p>
+<p>说完这些，大家肯定已经理解了“链表数组”的概念，那我们就一起看看Hash表是如何根据“取余法+拉链法”构建的吧。</p>
+<p>将所有关键字为同义词的结点链接在同一个链表中。若选定的散列表长度为m，则可将散列表定义为一个由m个头指针组成的指针数组$T[0..m-1]$。凡是散列地址为i的结点，均插入到以$T[i]$为头指针的单链表中。T中各分量的初值均应为空指针。在拉链法中，装填因子$α$可以大于1，但一般均取$α≤1$。</p>
+<p>举例说明拉链法的执行过程，设有一组关键字为(26，36，41，38，44，15，68，12，6，51)，用取余法构造散列函数，初始情况如下图所示：<br><img src="http://omu7tit09.bkt.clouddn.com/15005228566431.png" alt=""><br>最终结果如下图所示：<br><img src="http://omu7tit09.bkt.clouddn.com/15005228676672.png" alt=""><br>理解了Hash表的创建，那根据建立的Hash表进行查找就很容易被理解了。</p>
+<p>查找操作，如果理解了插入和删除，查找操作就比较简单了，令待查找的关键字是x，也可分为几种情况：</p>
+<ul>
+<li>1）x所属的Hash地址未被占用，即不存在与x相同的Hash地址关键字，当然也不存在x了；</li>
+<li>2）x所属的Hash地址被占用了，但它所存的关键不属于这个Hash地址，与1）相同，不存在与x相同Hash地址的关键字；</li>
+<li>3）x所属的Hash地址被占用了，且它所存的关键属于这个Hash地址，即存在与x相同sHash地址的关键字，只是不知这个关键字是不是x，需要进一步查找。</li>
+</ul>
+<p>由此可见，Hash表插入、删除和插入操作的效率都相当的高。</p>
+<p>思考一个问题：如果关键字是字符串怎么办？我们怎么根据字符串建立Hash表？</p>
+<p>通常都是将元素的key转换为数字进行散列，如果key本身就是整数，那么散列函数可以采用keymod tablesize（要保证tablesize是质数）。而在实际工作中经常用字符串作为关键字，例如身姓名、职位等等。这个时候需要设计一个好的散列函数进程处理关键字为字符串的元素。参考《数据结构与算法分析》第5章，有以下几种处理方法：</p>
+<ul>
+<li>方法1：将字符串的所有的字符的ASCII码值进行相加，将所得和作为元素的关键字。此方法的缺点是不能有效的分布元素，例如假设关键字是有8个字母构成的字符串，散列表的长度为10007。字母最大的ASCII码为127，按照方法1可得到关键字对应的最大数值为127×8=1016，也就是说通过散列函数映射时只能映射到散列表的槽0-1016之间，这样导致大部分槽没有用到，分布不均匀，从而效率低下。</li>
+<li>方法2：假设关键字至少有三个字母构成，散列函数只是取前三个字母进行散列。该方法只是取字符串的前三个字符的ASCII码进行散列，最大的得到的数值是2851，如果散列的长度为10007，那么只有28%的空间被用到，大部分空间没有用到。因此如果散列表太大，就不太适用。</li>
+<li>方法3：借助Horner’s 规则，构造一个质数（通常是37）的多项式，（非常的巧妙，不知道为何是37）。计算公式为:$key[keysize-i-1]*37^i, 0≤i&lt;keysize$求和。该方法存在的问题是如果字符串关键字比较长，散列函数的计算过程就变长，有可能导致计算的hashVal溢出。针对这种情况可以采取字符串的部分字符进行计算，例如计算偶数或者奇数位的字符。</li>
+</ul>
+<h3 id="8-4-哈希表“定址的方法”"><a href="#8-4-哈希表“定址的方法”" class="headerlink" title="8.4 哈希表“定址的方法”"></a>8.4 哈希表“定址的方法”</h3><p>其实常用的“定址”的手法有“五种”：</p>
+<ol>
+<li>直接定址法：很容易理解，key=Value+C；这个“C”是常量。Value+C其实就是一个简单的哈希函数。</li>
+<li>除法取余法：key=value%C</li>
+<li>数字分析法：这种蛮有意思，比如有一组value1=112233，value2=112633，value3=119033，针对这样的数我们分析数中间两个数比较波动，其他数不变。那么我们取key的值就可以是key1=22,key2=26,key3=90。</li>
+<li>平方取中法</li>
+<li>折叠法：举个例子，比如value=135790，要求key是2位数的散列值。那么我们将value变为13+57+90=160，然后去掉高位“1”,此时key=60，哈哈，这就是他们的哈希关系，这样做的目的就是key与每一位value都相关，来做到“散列地址”尽可能分散的目地。</li>
+</ol>
+<p>影响哈希查找效率的一个重要因素是哈希函数本身。当两个不同的数据元素的哈希值相同时，就会发生冲突。为减少发生冲突的可能性，哈希函数应该将数据尽可能分散地映射到哈希表的每一个表项中。</p>
+<h3 id="8-5-哈希表“解决冲突”的方法"><a href="#8-5-哈希表“解决冲突”的方法" class="headerlink" title="8.5 哈希表“解决冲突”的方法"></a>8.5 哈希表“解决冲突”的方法</h3><p>Hash表解决冲突的方法主要有以下几种：</p>
+<p>链接地址法：<br>将哈希值相同的数据元素存放在一个链表中，在查找哈希表的过程中，当查找到这个链表时，必须采用线性查找方法。</p>
+<p>开放定址法：<br>如果两个数据元素的哈希值相同，则在哈希表中为后插入的数据元素另外选择一个表项。当程序查找哈希表时，如果没有在第一个对应的哈希表项中找到符合查找要求的数据元素，程序就会继续往后查找，直到找到一个符合查找要求的数据元素，或者遇到一个空的表项。线性探测带来的最大问题就是冲突的堆积，你把别人预定的坑占了，别人也就要像你一样去找坑。改进的办法有二次方探测法和随机数探测法。开放地址法包括线性探测、二次探测以及双重散列等方法。其中线性探测法示意图如下：<br><img src="http://omu7tit09.bkt.clouddn.com/15005233364103.png" alt="">散列过程如下图所示：<img src="http://omu7tit09.bkt.clouddn.com/15005233651325.png" alt=""></p>
+<p>再散列函数法：<br>发生冲突时就换一个散列函数计算，总会有一个可以把冲突解决掉，它能够使得关键字不产生聚集，但相应地增加了计算的时间。</p>
+<p>公共溢出区法：<br>其实就是为所有的冲突，额外开辟一块存储空间。如果相对基本表而言，冲突的数据很少的时候，使用这种方法比较合适。</p>
+<h3 id="8-6-哈希表“定址”和“解决冲突”之间的权衡"><a href="#8-6-哈希表“定址”和“解决冲突”之间的权衡" class="headerlink" title="8.6 哈希表“定址”和“解决冲突”之间的权衡"></a>8.6 哈希表“定址”和“解决冲突”之间的权衡</h3><p>虽然哈希表是在关键字和存储位置之间建立了对应关系，但是由于冲突的发生，哈希表的查找仍然是一个和关键字比较的过程，不过哈希表平均查找长度比顺序查找要小得多，比二分查找也小。</p>
+<p>查找过程中需和给定值进行比较的关键字个数取决于下列三个因素：哈希函数、处理冲突的方法和哈希表的装填因子。</p>
+<p>哈希函数的”好坏”首先影响出现冲突的频繁程度，但如果哈希函数是均匀的，则一般不考虑它对平均查找长度的影响。</p>
+<p>对同一组关键字，设定相同的哈希函数，但使用不同的冲突处理方法，会得到不同的哈希表，它们的平均查找长度也不同。</p>
+<p>一般情况下，处理冲突方法相同的哈希表，其平均查找长度依赖于哈希表的装填因子α。显然，α越小，产生冲突的机会就越大；但α过小，空间的浪费就过多。通过选择一个合适的装填因子α，可以将平均查找长度限定在一个范围内。</p>
+<p>总而言之，哈希表“定址”和“解决冲突”之间的权衡决定了哈希表的性能。</p>
+<h3 id="8-7-哈希表查找实现"><a href="#8-7-哈希表查找实现" class="headerlink" title="8.7  哈希表查找实现"></a>8.7  哈希表查找实现</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HashTable</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, size)</span>:</span></div><div class="line">        self.elem = [<span class="keyword">None</span> <span class="keyword">for</span> i <span class="keyword">in</span> range(size)]  <span class="comment"># 使用list数据结构作为哈希表元素保存方法</span></div><div class="line">        self.count = size  <span class="comment"># 最大表长</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hash</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="keyword">return</span> key % self.count  <span class="comment"># 散列函数采用除留余数法</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">insert_hash</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="string">"""插入关键字到哈希表内"""</span></div><div class="line">        address = self.hash(key)  <span class="comment"># 求散列地址</span></div><div class="line">        <span class="keyword">while</span> self.elem[address]:  <span class="comment"># 当前位置已经有数据了，发生冲突。</span></div><div class="line">            address = (address+<span class="number">1</span>) % self.count  <span class="comment"># 线性探测下一地址是否可用</span></div><div class="line">        self.elem[address] = key  <span class="comment"># 没有冲突则直接保存。</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">search_hash</span><span class="params">(self, key)</span>:</span></div><div class="line">        <span class="string">"""查找关键字，返回布尔值"""</span></div><div class="line">        star = address = self.hash(key)</div><div class="line">        <span class="keyword">while</span> self.elem[address] != key:</div><div class="line">            address = (address + <span class="number">1</span>) % self.count</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> self.elem[address] <span class="keyword">or</span> address == star:  <span class="comment"># 说明没找到或者循环到了开始的位置</span></div><div class="line">                <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    list_a = [<span class="number">12</span>, <span class="number">67</span>, <span class="number">56</span>, <span class="number">16</span>, <span class="number">25</span>, <span class="number">37</span>, <span class="number">22</span>, <span class="number">29</span>, <span class="number">15</span>, <span class="number">47</span>, <span class="number">48</span>, <span class="number">34</span>]</div><div class="line">    hash_table = HashTable(<span class="number">12</span>)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> list_a:</div><div class="line">        hash_table.insert_hash(i)</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> hash_table.elem:</div><div class="line">        <span class="keyword">if</span> i:</div><div class="line">            print((i, hash_table.elem.index(i)), end=<span class="string">" "</span>)</div><div class="line">    print(<span class="string">"\n"</span>)</div><div class="line"></div><div class="line">    print(hash_table.search_hash(<span class="number">15</span>))</div><div class="line">    print(hash_table.search_hash(<span class="number">33</span>))</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/查找算法/" rel="tag"># 查找算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/12/数据结构与算法：排序/" rel="next" title="数据结构与算法：排序">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法：排序
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/12/数据结构与算法：海量数据处理/" rel="prev" title="数据结构与算法：海量数据处理">
+                数据结构与算法：海量数据处理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">68</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基本概念"><span class="nav-text">一、基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、无序表查找"><span class="nav-text">二、无序表查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、有序表查找"><span class="nav-text">三、有序表查找</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-二分查找"><span class="nav-text">3.1 二分查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-插值查找"><span class="nav-text">3.2 插值查找</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-斐波那契查找"><span class="nav-text">3.3 斐波那契查找</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、线性索引查找"><span class="nav-text">四、线性索引查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、二叉查找树"><span class="nav-text">五、二叉查找树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、平衡二叉树"><span class="nav-text">六、平衡二叉树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、多路查找树"><span class="nav-text">七、多路查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-2-3树"><span class="nav-text">7.1 2-3树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-2-3-4树"><span class="nav-text">7.2 2-3-4树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-B树"><span class="nav-text">7.3 B树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-B-树"><span class="nav-text">7.4 B+树</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、散列表（哈希表）"><span class="nav-text">八、散列表（哈希表）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-哈希表的基本思想"><span class="nav-text">8.1 哈希表的基本思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-哈希表的基本概念"><span class="nav-text">8.2 哈希表的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-3-哈希表的实现方法"><span class="nav-text">8.3 哈希表的实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-4-哈希表“定址的方法”"><span class="nav-text">8.4 哈希表“定址的方法”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-5-哈希表“解决冲突”的方法"><span class="nav-text">8.5 哈希表“解决冲突”的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-6-哈希表“定址”和“解决冲突”之间的权衡"><span class="nav-text">8.6 哈希表“定址”和“解决冲突”之间的权衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-7-哈希表查找实现"><span class="nav-text">8.7  哈希表查找实现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
