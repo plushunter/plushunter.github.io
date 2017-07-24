@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="数据结构,算法,栈,队列," />
+  <meta name="keywords" content="数据结构,算法,树,B树,B+树," />
 
 
 
@@ -86,24 +86,23 @@
 
 
 
-<meta name="description" content="一、栈1.1 栈的定义栈（stack）是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶（top），另一端称为栈底，不含任何数据元素的栈称为空栈。它有以下几个特点：  栈中的数据是按照“后进先出（LIFO，Last In First Out）”方式进出栈的。 向栈中添加、删除数据时，只能从栈顶进行操作  栈通常包括的三种操作：push、peek、pop  push：向栈中添加元">
-<meta name="keywords" content="数据结构,算法,栈,队列">
+<meta name="description" content="具体讲解之前，有一点，再次强调下：B-树，即为B树。因为B树的原英文名称为B-tree，而国内很多人喜欢把B-tree译作B-树，其实，这是个非常不好的直译，很容易让人产生误解。如人们可能会以为B-树是一种树，而B树又是一种一种树。而事实上是，B-tree就是指的B树。特此说明。">
+<meta name="keywords" content="数据结构,算法,树,B树,B+树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构与算法：栈与队列">
-<meta property="og:url" content="http://yoursite.com/2017/07/12/数据结构与算法：栈与队列/index.html">
+<meta property="og:title" content="数据结构与算法（3）：树（5）——B树、B+树">
+<meta property="og:url" content="http://yoursite.com/2017/07/20/数据结构与算法（3）：树（5）——B树、B+树/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="一、栈1.1 栈的定义栈（stack）是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶（top），另一端称为栈底，不含任何数据元素的栈称为空栈。它有以下几个特点：  栈中的数据是按照“后进先出（LIFO，Last In First Out）”方式进出栈的。 向栈中添加、删除数据时，只能从栈顶进行操作  栈通常包括的三种操作：push、peek、pop  push：向栈中添加元">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006162493543.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006162992929.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006163920060.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006168233543.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006168586219.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006168910576.jpg">
-<meta property="og:updated_time" content="2017-07-21T06:07:43.000Z">
+<meta property="og:description" content="具体讲解之前，有一点，再次强调下：B-树，即为B树。因为B树的原英文名称为B-tree，而国内很多人喜欢把B-tree译作B-树，其实，这是个非常不好的直译，很容易让人产生误解。如人们可能会以为B-树是一种树，而B树又是一种一种树。而事实上是，B-tree就是指的B树。特此说明。">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005176551496.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005176765359.gif">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005180938867.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005181702417.gif">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005182105086.jpg">
+<meta property="og:updated_time" content="2017-07-24T11:27:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构与算法：栈与队列">
-<meta name="twitter:description" content="一、栈1.1 栈的定义栈（stack）是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶（top），另一端称为栈底，不含任何数据元素的栈称为空栈。它有以下几个特点：  栈中的数据是按照“后进先出（LIFO，Last In First Out）”方式进出栈的。 向栈中添加、删除数据时，只能从栈顶进行操作  栈通常包括的三种操作：push、peek、pop  push：向栈中添加元">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15006162493543.jpg">
+<meta name="twitter:title" content="数据结构与算法（3）：树（5）——B树、B+树">
+<meta name="twitter:description" content="具体讲解之前，有一点，再次强调下：B-树，即为B树。因为B树的原英文名称为B-tree，而国内很多人喜欢把B-tree译作B-树，其实，这是个非常不好的直译，很容易让人产生误解。如人们可能会以为B-树是一种树，而B树又是一种一种树。而事实上是，B-tree就是指的B树。特此说明。">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15005176551496.jpg">
 
 
 
@@ -135,7 +134,7 @@
 
 
 
-  <title> 数据结构与算法：栈与队列 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 数据结构与算法（3）：树（5）——B树、B+树 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +274,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/数据结构与算法：栈与队列/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/20/数据结构与算法（3）：树（5）——B树、B+树/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -299,7 +298,7 @@ var _hmt = _hmt || [];
             
             
               
-                数据结构与算法：栈与队列
+                数据结构与算法（3）：树（5）——B树、B+树
               
             
           </h1>
@@ -312,8 +311,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T22:14:45+08:00">
-                2017-07-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-20T22:14:45+08:00">
+                2017-07-20
               </time>
             
 
@@ -371,45 +370,65 @@ var _hmt = _hmt || [];
       
 
       
-        <h2 id="一、栈"><a href="#一、栈" class="headerlink" title="一、栈"></a>一、栈</h2><h3 id="1-1-栈的定义"><a href="#1-1-栈的定义" class="headerlink" title="1.1 栈的定义"></a>1.1 栈的定义</h3><p>栈（stack）是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶（top），另一端称为栈底，不含任何数据元素的栈称为空栈。它有以下几个特点：</p>
+        <p>具体讲解之前，有一点，再次强调下：B-树，即为B树。因为B树的原英文名称为B-tree，而国内很多人喜欢把B-tree译作B-树，其实，这是个非常不好的直译，很容易让人产生误解。如人们可能会以为B-树是一种树，而B树又是一种一种树。而事实上是，B-tree就是指的B树。特此说明。</p>
+<a id="more"></a>
+<h3 id="4-1-B树的定义"><a href="#4-1-B树的定义" class="headerlink" title="4.1 B树的定义"></a>4.1 B树的定义</h3><p>B树（B-tree）是一种树状数据结构，能够用来存储排序后的数据。这种数据结构能够让查找数据、循序存取、插入数据及删除的动作，都在对数时间内完成。B树，概括来说是一个一般化的二叉查找树，可以拥有多于2个子节点。与自平衡二叉查找树不同，B-树为系统最优化大块数据的读和写操作。B-tree算法减少定位记录时所经历的中间过程，从而加快存取速度。这种数据结构常被应用在数据库和文件系统的实作上。</p>
+<p>在B树中查找给定关键字的方法是，首先把根结点取来，在根结点所包含的关键字K1,…,Kn查找给定的关键字（可用顺序查找或二分查找法），若找到等于给定值的关键字，则查找成功；否则，一定可以确定要查找的关键字在Ki与Ki+1之间，Pi为指向子树根节点的指针，此时取指针Pi所指的结点继续查找，直至找到，或指针Pi为空时查找失败。</p>
+<p>B树作为一种多路搜索树（并不是二叉的）：</p>
 <ul>
-<li>栈中的数据是按照“后进先出（LIFO，Last In First Out）”方式进出栈的。</li>
-<li>向栈中添加、删除数据时，只能从栈顶进行操作</li>
+<li>定义任意非叶子结点最多只有M个儿子；且M&gt;2；</li>
+<li>根结点的儿子数为[2, M]；</li>
+<li>除根结点以外的非叶子结点的儿子数为[M/2, M]；</li>
+<li>每个结点存放至少M/2-1（取上整）和至多M-1个关键字；(至少2个关键字）</li>
+<li>非叶子结点的关键字个数=指向儿子的指针个数-1；</li>
+<li>非叶子结点的关键字：K[1], K[2], …, K[M-1]；且K[i] &lt; K[i+1]；</li>
+<li>非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；</li>
+<li>所有叶子结点位于同一层；</li>
 </ul>
-<p>栈通常包括的三种操作：push、peek、pop</p>
+<p>如下图为一个M=3的B树示例：<img src="http://omu7tit09.bkt.clouddn.com/15005176551496.jpg" alt=""><br>B树创建的示意图：<img src="http://omu7tit09.bkt.clouddn.com/15005176765359.gif" alt=""></p>
+<h2 id="五、B-树"><a href="#五、B-树" class="headerlink" title="五、B+树"></a>五、B+树</h2><p>B+树是B树的变体，也是一种多路搜索树，其定义基本与B-树相同，除了：</p>
 <ul>
-<li>push：向栈中添加元素</li>
-<li>peek：返回栈顶元素</li>
-<li>pop：返回并删除栈顶元素的操作。</li>
+<li>1）非叶子结点的子树指针与关键字个数相同；</li>
+<li>2）非叶子结点的子树指针P[i]，指向关键字值属于[K[i], K[i+1])的子树（B-树是开区间）；</li>
+<li>3）为所有叶子结点增加一个链指针；</li>
+<li>4）所有关键字都在叶子结点出现；</li>
 </ul>
-<h3 id="1-2-进栈与出栈"><a href="#1-2-进栈与出栈" class="headerlink" title="1.2 进栈与出栈"></a>1.2 进栈与出栈</h3><p>下图为栈的示例图，栈中的数据依次为：$30=&gt;20=&gt;10$<br><img src="http://omu7tit09.bkt.clouddn.com/15006162493543.jpg" alt=""></p>
-<p>下图为出栈的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15006162992929.jpg" alt=""></p>
+<p>下图为M=3的B+树的示意图：<img src="http://omu7tit09.bkt.clouddn.com/15005180938867.jpg" alt=""></p>
+<p>B+树的搜索与B树也基本相同，区别是B+树只有达到叶子结点才命中（B树可以在非叶子结点命中），其性能也等价于在关键字全集做一次二分查找；</p>
+<p>B+树的性质：</p>
 <ul>
-<li>出栈前：栈顶元素是30。此时，栈中的元素依次是$30 = &gt; 20 =&gt; 10 $</li>
-<li>出栈后：30出栈之后，栈顶元素变成20。此时，栈中的元素依次是 $20 =&gt; 10$</li>
+<li>1.所有关键字都出现在叶子结点的链表中（稠密索引），且链表中的关键字恰好是有序的；</li>
+<li>2.不可能在非叶子结点命中；</li>
+<li>3.非叶子结点相当于是叶子结点的索引（稀疏索引），叶子结点相当于是存储（关键字）数据的数据层；</li>
+<li>4.更适合文件索引系统。</li>
 </ul>
-<p>下图为入栈的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15006163920060.jpg" alt=""></p>
+<p>下面为一个B+树创建的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15005181702417.gif" alt=""></p>
+<h2 id="六、B-树"><a href="#六、B-树" class="headerlink" title="六、B*树"></a>六、B*树</h2><p>$B^*$树是B+树的变体，在B+树的非根和非叶子结点再增加指向兄弟的指针，将结点的最低利用率从1/2提高到2/3。</p>
+<p>$B^*$树如下图所示：<img src="http://omu7tit09.bkt.clouddn.com/15005182105086.jpg" alt=""></p>
+<p>$B^*$树定义了非叶子结点关键字个数至少为$\frac{2}{3}M$，即块的最低使用率为2/3（代替B+树的1/2）；</p>
+<p>B+树的分裂：当一个结点满时，分配一个新的结点，并将原结点中1/2的数据复制到新结点，最后在父结点中增加新结点的指针；B+树的分裂只影响原结点和父结点，而不会影响兄弟结点，所以它不需要指向兄弟的指针；</p>
+<p>$B^*$树的分裂：当一个结点满时，如果它的下一个兄弟结点未满，那么将一部分数据移到兄弟结点中，再在原结点插入关键字，最后修改父结点中兄弟结点的关键字（因为兄弟结点的关键字范围改变了）；如果兄弟也满了，则在原结点与兄弟结点之间增加新结点，并各复制1/3的数据到新结点，最后在父结点增加新结点的指针；</p>
+<p>所以，$B^*$树分配新结点的概率比B+树要低，空间使用率更高。</p>
+<h2 id="七、Trie树"><a href="#七、Trie树" class="headerlink" title="七、Trie树"></a>七、Trie树</h2><p>Trie树称为字典树，又称单词查找树，Trie树，是一种树形结构，是一种哈希树的变种。典型应用是用于统计，排序和保存大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。它的优点是：利用字符串的公共前缀来减少查询时间，最大限度地减少无谓的字符串比较，查询效果比哈希树高。</p>
+<p>Trie树的三个基本性质：</p>
 <ul>
-<li>入栈前：栈顶元素是20。此时，栈中的元素依次是$20 =&gt; 10 $</li>
-<li>入栈后：40入栈之后，栈顶元素变成40。此时，栈中的元素依次是 $40 =&gt; 20 =&gt; 10$</li>
+<li>根结点不包含字符，除根结点外每个节点都只包含一个字符；</li>
+<li>从根节点到某一节点，路径上经过的字符串连接起来，为该节点对应的字符串；</li>
+<li>每个节点的所有子节点包含的字符都不相同。</li>
 </ul>
-<h2 id="二、队列"><a href="#二、队列" class="headerlink" title="二、队列"></a>二、队列</h2><h3 id="2-1-队列的定义"><a href="#2-1-队列的定义" class="headerlink" title="2.1 队列的定义"></a>2.1 队列的定义</h3><p>队列（queue）是只允许在一段进行插入操作，而在另一端进行删除操作的线性表。允许插入的一段称为队尾，允许删除的一端称为队头。它有以下几个特点：</p>
+<p>Tire树的应用：</p>
 <ul>
-<li>队列中数据是按照“先进先出（FIFO，First-In-First-Out）”方式进出队列的。</li>
-<li>队列只允许在“队首”进行删除操作，而在“队尾”进行插入操作。</li>
+<li><p>串的快速检索：给出N个单词组成的熟词表，以及一篇全用小写英文书写的文章，请你按最早出现的顺序写出所有不在熟词表中的生词。<br>在这道题中，我们可以用数组枚举，用哈希，用字典树，先把熟词建一棵树，然后读入文章进行比较，这种方法效率是比较高的。</p>
+</li>
+<li><p>“串”排序</p>
+</li>
 </ul>
-<h3 id="2-2-出队列和入队列"><a href="#2-2-出队列和入队列" class="headerlink" title="2.2 出队列和入队列"></a>2.2 出队列和入队列</h3><p>下图为队列的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15006168233543.jpg" alt=""><br>队列中有10，20，30共3个数据。</p>
-<p>下图为出队列的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15006168586219.jpg" alt=""></p>
+<p>给定N个互不相同的仅由一个单词构成的英文名，让你将他们按字典序从小到大输出。用字典树进行排序，采用数组的方式创建字典树，这棵树的每个结点的所有儿子很显然地按照其字母大小排序。对这棵树进行先序遍历即可。</p>
 <ul>
-<li>出队列前：队首是10，队尾是30。</li>
-<li>出队列后：出队列(队首)之后。队首是20，队尾是30。</li>
+<li>最长公共前缀</li>
 </ul>
-<p>下图为入队列的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15006168910576.jpg" alt=""></p>
-<ul>
-<li>入队列前：队首是20，队尾是30。</li>
-<li>入队列后：40入队列(队尾)之后。队首是20，队尾是40。</li>
-</ul>
-<h2 id="三、栈与队列编程题"><a href="#三、栈与队列编程题" class="headerlink" title="三、栈与队列编程题"></a>三、栈与队列编程题</h2><h3 id="3-1-用两个栈实现队列（剑7）"><a href="#3-1-用两个栈实现队列（剑7）" class="headerlink" title="3.1 用两个栈实现队列（剑7）"></a>3.1 用两个栈实现队列（剑7）</h3><h3 id="3-2-包含min函数的栈（剑21）"><a href="#3-2-包含min函数的栈（剑21）" class="headerlink" title="3.2 包含min函数的栈（剑21）"></a>3.2 包含min函数的栈（剑21）</h3><h3 id="3-3-栈的压入、弹出序列（剑22）"><a href="#3-3-栈的压入、弹出序列（剑22）" class="headerlink" title="3.3 栈的压入、弹出序列（剑22）"></a>3.3 栈的压入、弹出序列（剑22）</h3><h3 id="3-4-滑动窗口的最大值（剑65）"><a href="#3-4-滑动窗口的最大值（剑65）" class="headerlink" title="3.4 滑动窗口的最大值（剑65）"></a>3.4 滑动窗口的最大值（剑65）</h3>
+<p>对所有串建立字典树，对于两个串的最长公共前缀的长度即他们所在的结点的公共祖先个数，于是，问题就转化为求公共祖先的问题。</p>
+
       
     </div>
 
@@ -436,9 +455,11 @@ var _hmt = _hmt || [];
           
             <a href="/tags/算法/" rel="tag"># 算法</a>
           
-            <a href="/tags/栈/" rel="tag"># 栈</a>
+            <a href="/tags/树/" rel="tag"># 树</a>
           
-            <a href="/tags/队列/" rel="tag"># 队列</a>
+            <a href="/tags/B树/" rel="tag"># B树</a>
+          
+            <a href="/tags/B-树/" rel="tag"># B+树</a>
           
         </div>
       
@@ -447,8 +468,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/12/数据结构与算法：树（1）——二叉树/" rel="next" title="数据结构与算法：树（1）——二叉树">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法：树（1）——二叉树
+              <a href="/2017/07/20/数据结构与算法（5）：查找/" rel="next" title="数据结构与算法（5）：查找">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（5）：查找
               </a>
             
           </div>
@@ -457,8 +478,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/12/数据结构与算法：海量数据处理/" rel="prev" title="数据结构与算法：海量数据处理">
-                数据结构与算法：海量数据处理 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/20/数据结构与算法（4）：图（1）——深度优先搜索和广度优先搜索/" rel="prev" title="数据结构与算法（4）：图（1）——深度优先搜索和广度优先搜索">
+                数据结构与算法（4）：图（1）——深度优先搜索和广度优先搜索 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -527,7 +548,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-count">77</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -586,7 +607,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、栈"><span class="nav-text">一、栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-栈的定义"><span class="nav-text">1.1 栈的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-进栈与出栈"><span class="nav-text">1.2 进栈与出栈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、队列"><span class="nav-text">二、队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-队列的定义"><span class="nav-text">2.1 队列的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-出队列和入队列"><span class="nav-text">2.2 出队列和入队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、栈与队列编程题"><span class="nav-text">三、栈与队列编程题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-用两个栈实现队列（剑7）"><span class="nav-text">3.1 用两个栈实现队列（剑7）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-包含min函数的栈（剑21）"><span class="nav-text">3.2 包含min函数的栈（剑21）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-栈的压入、弹出序列（剑22）"><span class="nav-text">3.3 栈的压入、弹出序列（剑22）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-滑动窗口的最大值（剑65）"><span class="nav-text">3.4 滑动窗口的最大值（剑65）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-B树的定义"><span class="nav-text">4.1 B树的定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、B-树"><span class="nav-text">五、B+树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、B-树"><span class="nav-text">六、B*树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、Trie树"><span class="nav-text">七、Trie树</span></a></div>
             
 
           </div>

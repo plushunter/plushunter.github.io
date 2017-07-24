@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="数据结构,算法,图,DFS,BFS," />
+  <meta name="keywords" content="数据结构,算法,栈,队列," />
 
 
 
@@ -86,24 +86,24 @@
 
 
 
-<meta name="description" content="BFS和DFS是两种十分重要的搜索算法，BFS适合查找最优解，DFS适合查找是否存在解(或者说能找到任意一个可行解)。用这两种算法即可以解决大部分树和图的问题。">
-<meta name="keywords" content="数据结构,算法,图,DFS,BFS">
+<meta name="description" content="一、栈1.1 栈的定义栈（stack）是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶（top），另一端称为栈底，不含任何数据元素的栈称为空栈。它有以下几个特点：">
+<meta name="keywords" content="数据结构,算法,栈,队列">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构与算法：深度优先搜索和广度优先搜索">
-<meta property="og:url" content="http://yoursite.com/2017/07/12/数据结构与算法：深度优先搜索和广度优先搜索/index.html">
+<meta property="og:title" content="数据结构与算法（2）：栈与队列">
+<meta property="og:url" content="http://yoursite.com/2017/07/18/数据结构与算法（2）：栈与队列/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="BFS和DFS是两种十分重要的搜索算法，BFS适合查找最优解，DFS适合查找是否存在解(或者说能找到任意一个可行解)。用这两种算法即可以解决大部分树和图的问题。">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006043606972.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006043873870.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006046826509.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006047122696.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006052024122.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006053431729.jpg">
-<meta property="og:updated_time" content="2017-07-21T04:53:03.000Z">
+<meta property="og:description" content="一、栈1.1 栈的定义栈（stack）是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶（top），另一端称为栈底，不含任何数据元素的栈称为空栈。它有以下几个特点：">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006162493543.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006162992929.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006163920060.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006168233543.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006168586219.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006168910576.jpg">
+<meta property="og:updated_time" content="2017-07-24T11:34:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构与算法：深度优先搜索和广度优先搜索">
-<meta name="twitter:description" content="BFS和DFS是两种十分重要的搜索算法，BFS适合查找最优解，DFS适合查找是否存在解(或者说能找到任意一个可行解)。用这两种算法即可以解决大部分树和图的问题。">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15006043606972.jpg">
+<meta name="twitter:title" content="数据结构与算法（2）：栈与队列">
+<meta name="twitter:description" content="一、栈1.1 栈的定义栈（stack）是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶（top），另一端称为栈底，不含任何数据元素的栈称为空栈。它有以下几个特点：">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15006162493543.jpg">
 
 
 
@@ -135,7 +135,7 @@
 
 
 
-  <title> 数据结构与算法：深度优先搜索和广度优先搜索 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 数据结构与算法（2）：栈与队列 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -275,7 +275,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/数据结构与算法：深度优先搜索和广度优先搜索/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/数据结构与算法（2）：栈与队列/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -299,7 +299,7 @@ var _hmt = _hmt || [];
             
             
               
-                数据结构与算法：深度优先搜索和广度优先搜索
+                数据结构与算法（2）：栈与队列
               
             
           </h1>
@@ -312,8 +312,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T22:14:45+08:00">
-                2017-07-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T23:14:44+08:00">
+                2017-07-18
               </time>
             
 
@@ -371,52 +371,46 @@ var _hmt = _hmt || [];
       
 
       
-        <p>BFS和DFS是两种十分重要的搜索算法，BFS适合查找最优解，DFS适合查找是否存在解(或者说能找到任意一个可行解)。用这两种算法即可以解决大部分树和图的问题。</p>
+        <h2 id="一、栈"><a href="#一、栈" class="headerlink" title="一、栈"></a>一、栈</h2><h3 id="1-1-栈的定义"><a href="#1-1-栈的定义" class="headerlink" title="1.1 栈的定义"></a>1.1 栈的定义</h3><p>栈（stack）是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶（top），另一端称为栈底，不含任何数据元素的栈称为空栈。它有以下几个特点：</p>
 <a id="more"></a>
-<h2 id="一、深度优先搜索（DFS）"><a href="#一、深度优先搜索（DFS）" class="headerlink" title="一、深度优先搜索（DFS）"></a>一、深度优先搜索（DFS）</h2><h3 id="1-1-介绍"><a href="#1-1-介绍" class="headerlink" title="1.1 介绍"></a>1.1 介绍</h3><p>图的深度优先搜索（Depth First Search），和树的先序遍历比较类似。<br>它的思想：假设初始状态是图中所有顶点均未被访问，则从某个顶点V出发，首先访问该顶点，然后依次从它的各个未被访问的邻接点出发深度优先搜索遍历图，直至图中所有和V有路径相通的顶点都被访问到。若此时尚有其他顶点未被访问到，则另选一个未被访问的顶点作起始点，重复上述过程，直至图中所有顶点都被访问到为止。</p>
-<p>显然，深度优先搜索是一个递归的过程。</p>
-<h3 id="1-2-图解"><a href="#1-2-图解" class="headerlink" title="1.2 图解"></a>1.2 图解</h3><h4 id="1-2-1-无向图的深度优先搜索"><a href="#1-2-1-无向图的深度优先搜索" class="headerlink" title="1.2.1 无向图的深度优先搜索"></a>1.2.1 无向图的深度优先搜索</h4><p>下面以“无向图”为例，来对深度优先搜索进行演示。<br><img src="http://omu7tit09.bkt.clouddn.com/15006043606972.jpg" alt=""><br>对上面的图G1进行深度优先遍历，从顶点A开始。<br><img src="http://omu7tit09.bkt.clouddn.com/15006043873870.jpg" alt=""></p>
 <ul>
-<li>第1步：访问A</li>
-<li>第2步：访问（A的邻接点）C。在第一步访问A之后，接下来应该访问的是A的邻接点，即“C/D/F”中的一个。但在本文的实现中，顶点ABCDEFG是按照顺序存储，C在“D和F的前面，因此，先访问C。”</li>
-<li>第3步：访问（C的邻接点）B。在第2步访问C之后，接下来应该访问C的邻接点，即”B和D”中一个(A已经被访问过，就不算在内)。而由于B在D之前，先访问B。 </li>
-<li>第4步：访问(C的邻接点)D。 在第3步访问了C的邻接点B之后，B没有未被访问的邻接点；因此，返回到访问C的另一个邻接点D。 </li>
-<li>第5步：访问(A的邻接点)F。  前面已经访问了A，并且访问完了”A的邻接点B的所有邻接点(包括递归的邻接点在内)”；因此，此时返回到访问A的另一个邻接点F。 </li>
-<li>第6步：访问(F的邻接点)G。 </li>
-<li>第7步：访问(G的邻接点)E。</li>
+<li>栈中的数据是按照“后进先出（LIFO，Last In First Out）”方式进出栈的。</li>
+<li>向栈中添加、删除数据时，只能从栈顶进行操作</li>
 </ul>
-<p>因此访问顺序是：$A=&gt;C=&gt;=&gt;B=&gt;D=&gt;F=&gt;G=&gt;E$</p>
-<h4 id="1-2-2-有向图的深度优先搜索"><a href="#1-2-2-有向图的深度优先搜索" class="headerlink" title="1.2.2 有向图的深度优先搜索"></a>1.2.2 有向图的深度优先搜索</h4><p>下面以“有向图”为例，来对深度优先搜索进行演示。<br><img src="http://omu7tit09.bkt.clouddn.com/15006046826509.jpg" alt=""><br>对上面的图G2进行深度优先遍历，从顶点A开始。<br><img src="http://omu7tit09.bkt.clouddn.com/15006047122696.jpg" alt=""></p>
+<p>栈通常包括的三种操作：push、peek、pop</p>
 <ul>
-<li>第1步：访问A。 </li>
-<li>第2步：访问B。在访问了A之后，接下来应该访问的是A的出边的另一个顶点，即顶点B。 </li>
-<li>第3步：访问C。在访问了B之后，接下来应该访问的是B的出边的另一个顶点，即顶点C,E,F。在本文实现的图中，顶点ABCDEFG按照顺序存储，因此先访问C。 </li>
-<li>第4步：访问E。接下来访问C的出边的另一个顶点，即顶点E。 </li>
-<li>第5步：访问D。接下来访问E的出边的另一个顶点，即顶点B,D。顶点B已经被访问过，因此访问顶点D。 </li>
-<li>第6步：访问F。 接下应该回溯”访问A的出边的另一个顶点F”。 </li>
-<li>第7步：访问G。</li>
+<li>push：向栈中添加元素</li>
+<li>peek：返回栈顶元素</li>
+<li>pop：返回并删除栈顶元素的操作。</li>
 </ul>
-<p>因此访问顺序是：$A =&gt; B =&gt; C =&gt; E =&gt; D =&gt; F =&gt; G$</p>
-<h3 id="1-3-python代码实现"><a href="#1-3-python代码实现" class="headerlink" title="1.3 python代码实现"></a>1.3 python代码实现</h3><h2 id="二、广度优先搜索（BFS）"><a href="#二、广度优先搜索（BFS）" class="headerlink" title="二、广度优先搜索（BFS）"></a>二、广度优先搜索（BFS）</h2><h3 id="1-1-介绍-1"><a href="#1-1-介绍-1" class="headerlink" title="1.1 介绍"></a>1.1 介绍</h3><p>广度优先搜索算法（Breadth First Search），又称为“宽度优先搜索”或“横向优先搜索”，简称BFS。</p>
-<p>它的思想是：从图中某顶点V出发，在访问了V之后依次访问V的各个未曾访问过的邻接点，然后分别从这些邻接点出发依次访问他们的邻接点，并使得“先被访问的顶点的邻接点先于后被访问的顶点的邻接点被访问”，直至图中所有已被访问的顶点的邻接点都被访问到。如果此时图中尚有顶点未被访问，则需要另选一个未曾被访问的顶点作为新的起始点，重复上述过程，知道图中所有顶点都被访问到为止。</p>
-<p>换句话说，广度优先搜索遍历图的过程是以V为起点，由近至远，依次访问和V有路径相同且路径长度为1、2、3……的顶点。</p>
-<h3 id="1-2-图解-1"><a href="#1-2-图解-1" class="headerlink" title="1.2 图解"></a>1.2 图解</h3><h4 id="1-2-1-无向图的广度优先搜索"><a href="#1-2-1-无向图的广度优先搜索" class="headerlink" title="1.2.1 无向图的广度优先搜索"></a>1.2.1 无向图的广度优先搜索</h4><p>下面以“无向图”为例，来对广度优先搜索进行演示。还是以上面的图G1为例进行说明。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15006052024122.jpg" alt=""></p>
+<h3 id="1-2-进栈与出栈"><a href="#1-2-进栈与出栈" class="headerlink" title="1.2 进栈与出栈"></a>1.2 进栈与出栈</h3><p>下图为栈的示例图，栈中的数据依次为：$30=&gt;20=&gt;10$<br><img src="http://omu7tit09.bkt.clouddn.com/15006162493543.jpg" alt=""></p>
+<p>下图为出栈的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15006162992929.jpg" alt=""></p>
 <ul>
-<li>第1步：访问A。 </li>
-<li>第2步：依次访问C,D,F。在访问了A之后，接下来访问A的邻接点。前面已经说过，在本文实现中，顶点ABCDEFG按照顺序存储的，C在”D和F”的前面，因此，先访问C。再访问完C之后，再依次访问D,F。 </li>
-<li>第3步：依次访问B,G。 在第2步访问完C,D,F之后，再依次访问它们的邻接点。首先访问C的邻接点B，再访问F的邻接点G。 </li>
-<li>第4步：访问E。在第3步访问完B,G之后，再依次访问它们的邻接点。只有G有邻接点E，因此访问G的邻接点E。</li>
+<li>出栈前：栈顶元素是30。此时，栈中的元素依次是$30 = &gt; 20 =&gt; 10 $</li>
+<li>出栈后：30出栈之后，栈顶元素变成20。此时，栈中的元素依次是 $20 =&gt; 10$</li>
 </ul>
-<p>因此访问顺序是：$A =&gt; C =&gt; D =&gt; F =&gt; B =&gt; G =&gt; E$</p>
-<h4 id="1-2-2-有向图的广度优先搜索"><a href="#1-2-2-有向图的广度优先搜索" class="headerlink" title="1.2.2 有向图的广度优先搜索"></a>1.2.2 有向图的广度优先搜索</h4><p>下面以“有向图”为例，来对广度优先搜索进行演示。还是以上面的图G2为例进行说明。<br><img src="http://omu7tit09.bkt.clouddn.com/15006053431729.jpg" alt=""></p>
+<p>下图为入栈的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15006163920060.jpg" alt=""></p>
 <ul>
-<li>第1步：访问A。 </li>
-<li>第2步：访问B。 </li>
-<li>第3步：依次访问C,E,F。 在访问了B之后，接下来访问B的出边的另一个顶点，即C,E,F。前面已经说过，在本文实现中，顶点ABCDEFG按照顺序存储的，因此会先访问C，再依次访问E,F。 </li>
-<li>第4步：依次访问D,G。 在访问完C,E,F之后，再依次访问它们的出边的另一个顶点。还是按照C,E,F的顺序访问，C的已经全部访问过了，那么就只剩下E,F；先访问E的邻接点D，再访问F的邻接点G。<h3 id="1-3-python代码实现-1"><a href="#1-3-python代码实现-1" class="headerlink" title="1.3 python代码实现"></a>1.3 python代码实现</h3></li>
+<li>入栈前：栈顶元素是20。此时，栈中的元素依次是$20 =&gt; 10 $</li>
+<li>入栈后：40入栈之后，栈顶元素变成40。此时，栈中的元素依次是 $40 =&gt; 20 =&gt; 10$</li>
 </ul>
-
+<h2 id="二、队列"><a href="#二、队列" class="headerlink" title="二、队列"></a>二、队列</h2><h3 id="2-1-队列的定义"><a href="#2-1-队列的定义" class="headerlink" title="2.1 队列的定义"></a>2.1 队列的定义</h3><p>队列（queue）是只允许在一段进行插入操作，而在另一端进行删除操作的线性表。允许插入的一段称为队尾，允许删除的一端称为队头。它有以下几个特点：</p>
+<ul>
+<li>队列中数据是按照“先进先出（FIFO，First-In-First-Out）”方式进出队列的。</li>
+<li>队列只允许在“队首”进行删除操作，而在“队尾”进行插入操作。</li>
+</ul>
+<h3 id="2-2-出队列和入队列"><a href="#2-2-出队列和入队列" class="headerlink" title="2.2 出队列和入队列"></a>2.2 出队列和入队列</h3><p>下图为队列的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15006168233543.jpg" alt=""><br>队列中有10，20，30共3个数据。</p>
+<p>下图为出队列的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15006168586219.jpg" alt=""></p>
+<ul>
+<li>出队列前：队首是10，队尾是30。</li>
+<li>出队列后：出队列(队首)之后。队首是20，队尾是30。</li>
+</ul>
+<p>下图为入队列的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15006168910576.jpg" alt=""></p>
+<ul>
+<li>入队列前：队首是20，队尾是30。</li>
+<li>入队列后：40入队列(队尾)之后。队首是20，队尾是40。</li>
+</ul>
+<h2 id="三、栈与队列编程题"><a href="#三、栈与队列编程题" class="headerlink" title="三、栈与队列编程题"></a>三、栈与队列编程题</h2><h3 id="3-1-用两个栈实现队列（剑7）"><a href="#3-1-用两个栈实现队列（剑7）" class="headerlink" title="3.1 用两个栈实现队列（剑7）"></a>3.1 用两个栈实现队列（剑7）</h3><h3 id="3-2-包含min函数的栈（剑21）"><a href="#3-2-包含min函数的栈（剑21）" class="headerlink" title="3.2 包含min函数的栈（剑21）"></a>3.2 包含min函数的栈（剑21）</h3><h3 id="3-3-栈的压入、弹出序列（剑22）"><a href="#3-3-栈的压入、弹出序列（剑22）" class="headerlink" title="3.3 栈的压入、弹出序列（剑22）"></a>3.3 栈的压入、弹出序列（剑22）</h3><h3 id="3-4-滑动窗口的最大值（剑65）"><a href="#3-4-滑动窗口的最大值（剑65）" class="headerlink" title="3.4 滑动窗口的最大值（剑65）"></a>3.4 滑动窗口的最大值（剑65）</h3>
       
     </div>
 
@@ -443,11 +437,9 @@ var _hmt = _hmt || [];
           
             <a href="/tags/算法/" rel="tag"># 算法</a>
           
-            <a href="/tags/图/" rel="tag"># 图</a>
+            <a href="/tags/栈/" rel="tag"># 栈</a>
           
-            <a href="/tags/DFS/" rel="tag"># DFS</a>
-          
-            <a href="/tags/BFS/" rel="tag"># BFS</a>
+            <a href="/tags/队列/" rel="tag"># 队列</a>
           
         </div>
       
@@ -456,8 +448,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/12/数据结构与算法：树（2）——二叉查找树/" rel="next" title="数据结构与算法：树（2）——二叉查找树">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法：树（2）——二叉查找树
+              <a href="/2017/07/19/数据结构与算法（3）：树（1）——二叉树/" rel="next" title="数据结构与算法（3）：树（1）——二叉树">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（3）：树（1）——二叉树
               </a>
             
           </div>
@@ -466,8 +458,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/12/数据结构与算法：链表/" rel="prev" title="数据结构与算法：链表">
-                数据结构与算法：链表 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/18/数据结构与算法（1）：链表/" rel="prev" title="数据结构与算法（1）：链表">
+                数据结构与算法（1）：链表 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -536,7 +528,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-count">77</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -595,7 +587,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、深度优先搜索（DFS）"><span class="nav-text">一、深度优先搜索（DFS）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-介绍"><span class="nav-text">1.1 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-图解"><span class="nav-text">1.2 图解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-无向图的深度优先搜索"><span class="nav-text">1.2.1 无向图的深度优先搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-有向图的深度优先搜索"><span class="nav-text">1.2.2 有向图的深度优先搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-python代码实现"><span class="nav-text">1.3 python代码实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、广度优先搜索（BFS）"><span class="nav-text">二、广度优先搜索（BFS）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-介绍-1"><span class="nav-text">1.1 介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-图解-1"><span class="nav-text">1.2 图解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-无向图的广度优先搜索"><span class="nav-text">1.2.1 无向图的广度优先搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-有向图的广度优先搜索"><span class="nav-text">1.2.2 有向图的广度优先搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-python代码实现-1"><span class="nav-text">1.3 python代码实现</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、栈"><span class="nav-text">一、栈</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-栈的定义"><span class="nav-text">1.1 栈的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-进栈与出栈"><span class="nav-text">1.2 进栈与出栈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、队列"><span class="nav-text">二、队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-队列的定义"><span class="nav-text">2.1 队列的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-出队列和入队列"><span class="nav-text">2.2 出队列和入队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、栈与队列编程题"><span class="nav-text">三、栈与队列编程题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-用两个栈实现队列（剑7）"><span class="nav-text">3.1 用两个栈实现队列（剑7）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-包含min函数的栈（剑21）"><span class="nav-text">3.2 包含min函数的栈（剑21）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-栈的压入、弹出序列（剑22）"><span class="nav-text">3.3 栈的压入、弹出序列（剑22）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-滑动窗口的最大值（剑65）"><span class="nav-text">3.4 滑动窗口的最大值（剑65）</span></a></li></ol></li></ol></div>
             
 
           </div>

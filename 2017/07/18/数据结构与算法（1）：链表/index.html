@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现 一、数组数组有上界和下界，数组的元素在上下界内是连续的。 存储10，20，30，40，50的数组的示意图如下：数组的特点是：数据是连续的；随机访问速度块。 数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维">
+<meta name="description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现">
 <meta name="keywords" content="数据结构,算法,数组,双向链表,单向链表">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构与算法：链表">
-<meta property="og:url" content="http://yoursite.com/2017/07/12/数据结构与算法：链表/index.html">
+<meta property="og:title" content="数据结构与算法（1）：链表">
+<meta property="og:url" content="http://yoursite.com/2017/07/18/数据结构与算法（1）：链表/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现 一、数组数组有上界和下界，数组的元素在上下界内是连续的。 存储10，20，30，40，50的数组的示意图如下：数组的特点是：数据是连续的；随机访问速度块。 数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维">
+<meta property="og:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006132398847.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006133555450.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006134720249.jpg">
@@ -100,10 +100,10 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006137887925.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006139529251.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006140850713.jpg">
-<meta property="og:updated_time" content="2017-07-21T11:26:37.000Z">
+<meta property="og:updated_time" content="2017-07-24T11:27:14.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构与算法：链表">
-<meta name="twitter:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现 一、数组数组有上界和下界，数组的元素在上下界内是连续的。 存储10，20，30，40，50的数组的示意图如下：数组的特点是：数据是连续的；随机访问速度块。 数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维">
+<meta name="twitter:title" content="数据结构与算法（1）：链表">
+<meta name="twitter:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现">
 <meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15006132398847.jpg">
 
 
@@ -136,7 +136,7 @@
 
 
 
-  <title> 数据结构与算法：链表 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 数据结构与算法（1）：链表 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -276,7 +276,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/数据结构与算法：链表/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/数据结构与算法（1）：链表/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -300,7 +300,7 @@ var _hmt = _hmt || [];
             
             
               
-                数据结构与算法：链表
+                数据结构与算法（1）：链表
               
             
           </h1>
@@ -313,8 +313,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T22:14:45+08:00">
-                2017-07-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T22:14:45+08:00">
+                2017-07-18
               </time>
             
 
@@ -373,6 +373,7 @@ var _hmt = _hmt || [];
 
       
         <p>线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现</p>
+<a id="more"></a>
 <h2 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h2><p>数组有上界和下界，数组的元素在上下界内是连续的。</p>
 <p>存储10，20，30，40，50的数组的示意图如下：<br><img src="http://omu7tit09.bkt.clouddn.com/15006132398847.jpg" alt=""><br>数组的特点是：数据是连续的；随机访问速度块。</p>
 <p>数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维数组实现的。至于动态数组，是指数组的容量能动态增长的数组；对于C语言而言，若要提供动态数组，需要手动实现；而对于C++而言，STL提供了Vector；对于Java而言，Collection集合中提供了ArrayList和Vector。</p>
@@ -433,8 +434,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/12/数据结构与算法：深度优先搜索和广度优先搜索/" rel="next" title="数据结构与算法：深度优先搜索和广度优先搜索">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法：深度优先搜索和广度优先搜索
+              <a href="/2017/07/18/数据结构与算法（2）：栈与队列/" rel="next" title="数据结构与算法（2）：栈与队列">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（2）：栈与队列
               </a>
             
           </div>
@@ -443,8 +444,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/09/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/" rel="prev" title="机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法">
-                机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/17/广告点击率预估（3）：GBDT与LR融合方案/" rel="prev" title="广告点击率预估（3）：GBDT与LR融合方案">
+                广告点击率预估（3）：GBDT与LR融合方案 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -513,7 +514,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-count">77</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

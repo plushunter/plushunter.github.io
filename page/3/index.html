@@ -268,7 +268,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/数据结构与算法：链表/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/14/机器学习算法系列（27）：word2vec(词向量与统计语言模型)/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -293,8 +293,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/07/12/数据结构与算法：链表/" itemprop="url">
-                  数据结构与算法：链表
+                <a class="post-title-link" href="/2017/07/14/机器学习算法系列（27）：word2vec(词向量与统计语言模型)/" itemprop="url">
+                  机器学习算法系列（27）：word2vec（词向量与统计语言模型）
                 </a>
               
             
@@ -308,8 +308,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T22:14:45+08:00">
-                2017-07-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-14T23:14:45+08:00">
+                2017-07-14
               </time>
             
 
@@ -327,8 +327,8 @@ var _hmt = _hmt || [];
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -363,165 +363,10 @@ var _hmt = _hmt || [];
 
       
         
-          
-            <p>线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现</p>
-<h2 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h2><p>数组有上界和下界，数组的元素在上下界内是连续的。</p>
-<p>存储10，20，30，40，50的数组的示意图如下：<br><img src="http://omu7tit09.bkt.clouddn.com/15006132398847.jpg" alt=""><br>数组的特点是：数据是连续的；随机访问速度块。</p>
-<p>数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维数组实现的。至于动态数组，是指数组的容量能动态增长的数组；对于C语言而言，若要提供动态数组，需要手动实现；而对于C++而言，STL提供了Vector；对于Java而言，Collection集合中提供了ArrayList和Vector。</p>
-<h2 id="二、单向链表"><a href="#二、单向链表" class="headerlink" title="二、单向链表"></a>二、单向链表</h2><h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><p>单向链表（单链表）是链表的一种，它由节点组成，每个节点都包含下一个节点的指针。</p>
-<p>单链表的示意图如下：</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15006133555450.jpg" alt=""><br>表头为空，表头的后继节点是“节点10”（数据为10的节点），“节点10”的后继节点是“节点20”（数据为20的结点）……</p>
-<h3 id="2-2-单链表删除节点"><a href="#2-2-单链表删除节点" class="headerlink" title="2.2 单链表删除节点"></a>2.2 单链表删除节点</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006134720249.jpg" alt=""><br>删除“节点30”<br>删除之前：“节点20”的后继节点为“节点30”，而“节点30”的后继节点为“节点40”<br>删除之后：“节点20”的后继节点为“节点40”</p>
-<h3 id="2-3-单链表添加节点"><a href="#2-3-单链表添加节点" class="headerlink" title="2.3 单链表添加节点"></a>2.3 单链表添加节点</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006135467317.jpg" alt=""><br>在“节点10 ”与“节点20”之间添加“节点15”</p>
-<p>添加之前：“节点10”的后继节点为“节点20”<br>添加之后：“节点10”的后继节点为“节点15”，而“节点15”的后继节点为“节点20”。</p>
-<p>单链表的特点是：节点的链接方向是单向的；相对于数组来说，单链表的随机访问速度较慢，但是单链表删除、添加数据的效率很高。</p>
-<h2 id="三、双向链表"><a href="#三、双向链表" class="headerlink" title="三、双向链表"></a>三、双向链表</h2><h3 id="3-1-定义"><a href="#3-1-定义" class="headerlink" title="3.1 定义"></a>3.1 定义</h3><p>双向链表（双链表）是链表的一种。和单链表一样，双链表也是由节点组成，它的每一个数据节点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表的任意一个节点开始，都可以很方便地访问它的前驱结点和后继节点。一般我们都构造双向循环链表。</p>
-<p>双链表的示意图如下：<br><img src="http://omu7tit09.bkt.clouddn.com/15006137887925.jpg" alt=""><br>表头为空，表头的后继节点为“节点10”（数据为10的结点）；“节点10”的后继节点是“节点20”（数据为10的节点），“节点20”的前继节点是“节点10”；“节点20”的后继节点是“节点30”，“节点30”的前继节点是“节点20”;……；末尾节点的后继节点是表头。</p>
-<h3 id="3-2-双链表删除节点"><a href="#3-2-双链表删除节点" class="headerlink" title="3.2 双链表删除节点"></a>3.2 双链表删除节点</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006139529251.jpg" alt=""><br>删除“节点30”</p>
-<p>删除之前：“节点20”的后继节点为“节点30”，“节点30”的前继节点为“节点20”。“节点30”的后继节点为“节点40”，“节点40”的前继节点为“节点30”<br>删除之后：“节点20”的后继节点为“节点40”，“节点40”的前继节点为“节点20”</p>
-<h3 id="3-3-双链表添加节点"><a href="#3-3-双链表添加节点" class="headerlink" title="3.3 双链表添加节点"></a>3.3 双链表添加节点</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006140850713.jpg" alt=""><br>在”节点10”与”节点20”之间添加”节点15”<br>添加之前：”节点10”的后继节点为”节点20”，”节点20” 的前继节点为”节点10”。<br>添加之后：”节点10”的后继节点为”节点15”，”节点15” 的前继节点为”节点10”。”节点15”的后继节点为”节点20”，”节点20” 的前继节点为”节点15”。</p>
-<h2 id="四、链表编程题"><a href="#四、链表编程题" class="headerlink" title="四、链表编程题"></a>四、链表编程题</h2><h3 id="4-1-从尾到头打印链表（剑5）"><a href="#4-1-从尾到头打印链表（剑5）" class="headerlink" title="4.1 从尾到头打印链表（剑5）"></a>4.1 从尾到头打印链表（剑5）</h3><p>输入一个链表的头结点，从尾到头反过来打印每个结点的值（注意不能改变链表的结构）。<br>链表结点定义如下：</p>
-<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> </span>&#123;</div><div class="line">        int val;</div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> *next;</span></div><div class="line">        ListNode(int x) :</div><div class="line">              val(x), next(NULL) &#123;</div><div class="line">        &#125;</div><div class="line">  &#125;;</div></pre></td></tr></table></figure>
-<p>解决这个问题肯定要遍历链表。遍历的顺序是从头到尾的顺序，可输出的顺序却是从尾到头。也就是说第一个遍历到的结点最后一个输出，而最后一个遍历到的结点第一个输出。这就是典型的“后进先出”，我们可以用栈实现这种顺序。没经过一个节点的时候，把该结点放到一个栈中。当遍历完整个链表后，再从栈顶开始逐个输出结点的值，此时输出的结点的顺序就翻转过来了。实现代码如下：</p>
-<p>既然想到了用栈来实现这个函数，而递归在本质上就是一个栈结构，因此可用递归来实现。要实现反过来输出链表，我们每访问到一个节点的时候，先递归输出它后面的结点，再输出该结点自身，这样链表的输出结果就反过来了。实现代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; printListFromTailToHead(ListNode* head) &#123;</div><div class="line">        <span class="keyword">if</span>(head==<span class="literal">NULL</span>) <span class="keyword">return</span> &#123;&#125;;</div><div class="line">        <span class="keyword">if</span>(head-&gt;next==<span class="literal">NULL</span>) <span class="keyword">return</span> &#123;head-&gt;val&#125;;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result = printListFromTailToHead(head-&gt;next);</div><div class="line">        result.push_back(head-&gt;val);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="4-2-在O-1-时间删除链表结点（剑13）"><a href="#4-2-在O-1-时间删除链表结点（剑13）" class="headerlink" title="4.2 在O(1)时间删除链表结点（剑13）"></a>4.2 在O(1)时间删除链表结点（剑13）</h3><h3 id="4-3-链表中倒数第K个结点（剑15）"><a href="#4-3-链表中倒数第K个结点（剑15）" class="headerlink" title="4.3 链表中倒数第K个结点（剑15）"></a>4.3 链表中倒数第K个结点（剑15）</h3><h3 id="4-4-反转链表（剑16）"><a href="#4-4-反转链表（剑16）" class="headerlink" title="4.4 反转链表（剑16）"></a>4.4 反转链表（剑16）</h3><h3 id="4-5-合并两个排序的链表（剑17）"><a href="#4-5-合并两个排序的链表（剑17）" class="headerlink" title="4.5 合并两个排序的链表（剑17）"></a>4.5 合并两个排序的链表（剑17）</h3><h3 id="4-6-复杂链表的赋值（剑26）"><a href="#4-6-复杂链表的赋值（剑26）" class="headerlink" title="4.6 复杂链表的赋值（剑26）"></a>4.6 复杂链表的赋值（剑26）</h3><h3 id="4-7-双向链表（剑27）"><a href="#4-7-双向链表（剑27）" class="headerlink" title="4.7 双向链表（剑27）"></a>4.7 双向链表（剑27）</h3><h3 id="4-8-两个链表的第一个公共结点（剑37）"><a href="#4-8-两个链表的第一个公共结点（剑37）" class="headerlink" title="4.8 两个链表的第一个公共结点（剑37）"></a>4.8 两个链表的第一个公共结点（剑37）</h3><h3 id="4-9-圆圈中最后剩下的的数字（剑45）"><a href="#4-9-圆圈中最后剩下的的数字（剑45）" class="headerlink" title="4.9 圆圈中最后剩下的的数字（剑45）"></a>4.9 圆圈中最后剩下的的数字（剑45）</h3><h3 id="4-10-链表中环的入口结点（剑56）"><a href="#4-10-链表中环的入口结点（剑56）" class="headerlink" title="4.10 链表中环的入口结点（剑56）"></a>4.10 链表中环的入口结点（剑56）</h3><h3 id="4-11-删除链表中重复的结点（剑57）"><a href="#4-11-删除链表中重复的结点（剑57）" class="headerlink" title="4.11 删除链表中重复的结点（剑57）"></a>4.11 删除链表中重复的结点（剑57）</h3><h2 id="五、数组编程题"><a href="#五、数组编程题" class="headerlink" title="五、数组编程题"></a>五、数组编程题</h2><h3 id="5-1-二维数组中的查找（剑3）"><a href="#5-1-二维数组中的查找（剑3）" class="headerlink" title="5.1 二维数组中的查找（剑3）"></a>5.1 二维数组中的查找（剑3）</h3><h3 id="5-2-调整数组顺序使奇数位于偶数前面（剑14）"><a href="#5-2-调整数组顺序使奇数位于偶数前面（剑14）" class="headerlink" title="5.2 调整数组顺序使奇数位于偶数前面（剑14）"></a>5.2 调整数组顺序使奇数位于偶数前面（剑14）</h3><h3 id="5-3-数组中出现次数超过一半的数字（剑29）"><a href="#5-3-数组中出现次数超过一半的数字（剑29）" class="headerlink" title="5.3 数组中出现次数超过一半的数字（剑29）"></a>5.3 数组中出现次数超过一半的数字（剑29）</h3><h3 id="5-4-连续子数组的最大和（剑31）"><a href="#5-4-连续子数组的最大和（剑31）" class="headerlink" title="5.4 连续子数组的最大和（剑31）"></a>5.4 连续子数组的最大和（剑31）</h3><h3 id="5-5-从1到n整数中1出现的次数（剑32）"><a href="#5-5-从1到n整数中1出现的次数（剑32）" class="headerlink" title="5.5 从1到n整数中1出现的次数（剑32）"></a>5.5 从1到n整数中1出现的次数（剑32）</h3><h3 id="5-6-把数组排成最小的数（剑33）"><a href="#5-6-把数组排成最小的数（剑33）" class="headerlink" title="5.6 把数组排成最小的数（剑33）"></a>5.6 把数组排成最小的数（剑33）</h3><h3 id="5-7-丑数（剑34）"><a href="#5-7-丑数（剑34）" class="headerlink" title="5.7 丑数（剑34）"></a>5.7 丑数（剑34）</h3><h3 id="5-8-数组中的逆序对（剑36）"><a href="#5-8-数组中的逆序对（剑36）" class="headerlink" title="5.8 数组中的逆序对（剑36）"></a>5.8 数组中的逆序对（剑36）</h3><h3 id="5-9-数组中重复的数字（剑51）"><a href="#5-9-数组中重复的数字（剑51）" class="headerlink" title="5.9 数组中重复的数字（剑51）"></a>5.9 数组中重复的数字（剑51）</h3><h3 id="5-10-构建乘积数组（剑52）"><a href="#5-10-构建乘积数组（剑52）" class="headerlink" title="5.10 构建乘积数组（剑52）"></a>5.10 构建乘积数组（剑52）</h3>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/数据结构与算法：排序/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="狗皮膏药">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/img/v.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Free Will">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/12/数据结构与算法：排序/" itemprop="url">
-                  数据结构与算法：排序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T22:14:45+08:00">
-                2017-07-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>经典排序算法在面试中占有很大的比重，也是基础，在这里整理并用Python实现了七大经典排序算法，包括冒泡排序、插入排序、选择排序、希尔排序、归并排序、快速排序、堆排序。我们默认将一个无序数列排序成由小到大。</p>
+          <p>Word2Vec是Google在2013年年中开源的一款将词表征为实数值向量的高效工具，采用的模型有CBOW（Continuous Bag-Of-Words，即连续的词袋模型）和Skip-Gram两种。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/12/数据结构与算法：排序/#more" rel="contents">
+            <a class="btn" href="/2017/07/14/机器学习算法系列（27）：word2vec(词向量与统计语言模型)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -562,7 +407,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/数据结构与算法：深度优先搜索和广度优先搜索/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/13/机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -587,8 +432,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/07/12/数据结构与算法：深度优先搜索和广度优先搜索/" itemprop="url">
-                  数据结构与算法：深度优先搜索和广度优先搜索
+                <a class="post-title-link" href="/2017/07/13/机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）/" itemprop="url">
+                  机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）
                 </a>
               
             
@@ -602,8 +447,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T22:14:45+08:00">
-                2017-07-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-13T23:14:45+08:00">
+                2017-07-13
               </time>
             
 
@@ -621,8 +466,8 @@ var _hmt = _hmt || [];
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -657,10 +502,11 @@ var _hmt = _hmt || [];
 
       
         
-          <p>BFS和DFS是两种十分重要的搜索算法，BFS适合查找最优解，DFS适合查找是否存在解(或者说能找到任意一个可行解)。用这两种算法即可以解决大部分树和图的问题。</p>
+          <p>本文转载自<a href="https://tech.meituan.com/deep-understanding-of-ffm-principles-and-practices.html">美团点评技术团队</a></p>
+<p>FM和FFM模型是最近几年提出的模型，凭借其在数据量比较打并且特征稀疏的情况下，忍让能够得到优秀的性能和效果，屡次在各大公司举办的CTR预估比赛中获得不错的战绩。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/12/数据结构与算法：深度优先搜索和广度优先搜索/#more" rel="contents">
+            <a class="btn" href="/2017/07/13/机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1387,6 +1233,145 @@ var _hmt = _hmt || [];
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/01/机器学习算法系列（21）：SVD奇异值分解及其意义/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/01/机器学习算法系列（21）：SVD奇异值分解及其意义/" itemprop="url">
+                  机器学习算法系列（21）：SVD
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-01T23:14:45+08:00">
+                2017-07-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="一、简介"><a href="#一、简介" class="headerlink" title="一、简介"></a>一、简介</h2><p>SVD实际上是数学专业内容，但它现在已经深入到不同的领域中。SVD的过程不是很好理解，因为它不够直观，但它对矩阵分解的效果却非常好。比如，Netflix（一个提供在线电影租赁的公司）曾经就悬赏100万美金，如果谁能提高他的电影推荐系统评分预测率10%的话。令人惊讶的是，这个目标充满了挑战，来自世界各地的团队运用了各种不同的技术。最终的获胜队伍“BellKor’s Pragmatic Chaos”采用的核心算法就是基于SVD。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/07/01/机器学习算法系列（21）：SVD奇异值分解及其意义/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -1432,7 +1417,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-count">77</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
