@@ -1,0 +1,797 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构,算法,树,红黑树," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="红黑树，即R-B Tree，本文的主要内容包括：红黑树的特性、红黑树的时间复杂度和它的证明，红黑树的时间复杂度和它的证明，红黑树的左旋、右旋、插入、删除等操作">
+<meta name="keywords" content="数据结构,算法,树,红黑树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法：树（4）——红黑树">
+<meta property="og:url" content="http://yoursite.com/2017/07/12/数据结构与算法：树（4）——红黑树/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="红黑树，即R-B Tree，本文的主要内容包括：红黑树的特性、红黑树的时间复杂度和它的证明，红黑树的时间复杂度和它的证明，红黑树的左旋、右旋、插入、删除等操作">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005162551705.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006239185477.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006241308266.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006241686012.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006242377514.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006243056330.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005170450352.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005172050947.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005172205491.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005173756216.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005173956782.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005174131538.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005174317329.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005174688118.png">
+<meta property="og:updated_time" content="2017-07-21T08:12:46.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法：树（4）——红黑树">
+<meta name="twitter:description" content="红黑树，即R-B Tree，本文的主要内容包括：红黑树的特性、红黑树的时间复杂度和它的证明，红黑树的时间复杂度和它的证明，红黑树的左旋、右旋、插入、删除等操作">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15005162551705.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 数据结构与算法：树（4）——红黑树 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/数据结构与算法：树（4）——红黑树/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构与算法：树（4）——红黑树
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T22:14:45+08:00">
+                2017-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>红黑树，即R-B Tree，本文的主要内容包括：红黑树的特性、红黑树的时间复杂度和它的证明，红黑树的时间复杂度和它的证明，红黑树的左旋、右旋、插入、删除等操作</p>
+<a id="more"></a>
+<h2 id="一、红黑树的定义"><a href="#一、红黑树的定义" class="headerlink" title="一、红黑树的定义"></a>一、红黑树的定义</h2><h3 id="1-1-红黑树的定义"><a href="#1-1-红黑树的定义" class="headerlink" title="1.1 红黑树的定义"></a>1.1 红黑树的定义</h3><p>R-B Tree，全称是Red-black Tree，又称为“红黑树”，它是一种特殊的二叉查找树。红黑树的每个节点上都有存储位表示节点的颜色，可以是红（Red）或黑（Black）</p>
+<p>红黑树是一种自平衡二叉查找树，是在计算机科学在用到的一种数据结构，典型的用途是实现关联数组。它是在1972年由鲁道夫.贝尔发明的，称之为“对称二叉B树”，它的现代名字是在 Leo J. Guibas 和 Robert Sedgewick 于1978年写的一篇论文中获得的。它是复杂的，但它的操作有着良好的最坏情况运行时间，并且在实践中是高效的：他可以在$O(logn)$的时间内做查找、插入和删除，这里的n是树中元素的数目。</p>
+<p>红黑树和AVL树一样都对插入时间、删除时间和查找时间提供了最好可能的最坏情况担保。这不只是使它们在时间敏感的应用如实时应用（real time application）中有价值，而且使它们有在提供最坏情况担保的其他数据结构中作为建造板块的价值；例如，在计算几何中使用的很多数据结构都可以基于红黑树。此外，红黑树还是2-3-4树的一种等同，它们的思想是一样的，只不过红黑树是2-3-4树用二叉树的形式表示的。</p>
+<p>红黑树是每个节点都带有颜色属性的二叉查找树，颜色为红色或黑色。在二叉查找树强制的一般要求以外，对于任何有效的红黑树我们增加了如下的额外要求:</p>
+<ul>
+<li>性质1：节点是红色或黑色</li>
+<li>性质2：根节点是黑色</li>
+<li>性质3：所有叶子节点都是黑色（叶子是NIL节点）</li>
+<li>性质4：每个红色节点必须有两个黑色的子节点。(从每个叶子到根的所有路径上不能有两个连续的红色节点。)</li>
+<li>性质5.：从任一节点到其每个叶子的所有简单路径都包含相同数目的黑色节点。</li>
+</ul>
+<p>性质5，确保从根到叶子的最长的可能路径不多于最短的可能路径的两倍长，因而，红黑树是相对是接近平衡的二叉树。因为操作比如插入、删除和查找某个值的最坏情况时间都要求与树的高度成比例，这个在高度上的理论上限允许红黑树在最坏情况下都是高效的，而不同于普通的二叉查找树。</p>
+<p>要知道为什么这些性质确保了这个结果，注意到性质4导致了路径不能有两个毗连的红色节点就足够了。最短的可能路径都是黑色节点，最长的可能路径有交替的红色和黑色节点。因为根据性质5所有最长的路径都有相同数目的黑色节点，这就表明了没有路径能多于任何其他路径的两倍长。</p>
+<p>下面是一个具体的红黑树的图例：<br><img src="http://omu7tit09.bkt.clouddn.com/15005162551705.png" alt=""></p>
+<h3 id="1-2-红黑树的应用"><a href="#1-2-红黑树的应用" class="headerlink" title="1.2 红黑树的应用"></a>1.2 红黑树的应用</h3><p>红黑树的应用比较广泛，主要是用它来存储有序的数据，它的时间复杂度是$O(lgn)$，效率非常之高。</p>
+<p>例如，Java集合中的$TreeSet$和$TreeMap$，C++的STL中的Set、Map，以及Linux虚拟内存的管理，都是通过红黑树去实现的。</p>
+<h3 id="1-3-红黑树的时间复杂度和相关证明"><a href="#1-3-红黑树的时间复杂度和相关证明" class="headerlink" title="1.3 红黑树的时间复杂度和相关证明"></a>1.3 红黑树的时间复杂度和相关证明</h3><p>红黑树的时间复杂度为：$O(lgn)$<br>下面通过“数学归纳法”对红黑树的时间复杂度进行证明。</p>
+<h2 id="二、红黑树的基本操作（1）左旋和右旋"><a href="#二、红黑树的基本操作（1）左旋和右旋" class="headerlink" title="二、红黑树的基本操作（1）左旋和右旋"></a>二、红黑树的基本操作（1）左旋和右旋</h2><p>红黑树的基本操作是添加、删除。在对红黑树进行添加或删除之后，都会用到旋转方法。为什么呢？道理很简单，添加或删除红黑树的节点之后，红黑树就发生了变化，可能不满足红黑树的5条性质，也就不再是一颗红黑树了，而是一颗普通的树，而通过旋转，可以使这颗树重新成为红黑树。简单点说，旋转的目的就是让树保持红黑树的特性。</p>
+<p>恢复红黑树的性质需要少量(O(logn))的颜色变更(实际是非常快速的)和不超过三次树旋转(对于插入操作是两次)。虽然插入和删除很复杂，但操作时间仍可以保持为O(logn) 次。</p>
+<h3 id="2-1-左旋"><a href="#2-1-左旋" class="headerlink" title="2.1 左旋"></a>2.1 左旋</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006239185477.jpg" alt=""><br>对X进行左旋，意味着“将X变成一个左节点”。</p>
+<p>左旋的伪代码《算法导论》：参考上面的示意图和下面的伪代码，理解“红黑树T的节点x进行左旋”是如何进行的。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">LEFT-ROTATE</span><span class="params">(T, x)</span></span>  </div><div class="line"><span class="number">01</span>  y ← <span class="attribute">right</span>[x]            // 前提：这里假设x的右孩子为y。下面开始正式操作</div><div class="line"><span class="number">02</span>  <span class="attribute">right</span>[x] ← left[y]      // 将 “y的左孩子” 设为 “x的右孩子”，即 将β设为x的右孩子</div><div class="line"><span class="number">03</span>  <span class="selector-tag">p</span>[<span class="attribute">left</span>[y]] ← x          // 将 “x” 设为 “y的左孩子的父亲”，即 将β的父亲设为x</div><div class="line"><span class="number">04</span>  <span class="selector-tag">p</span>[y] ← <span class="selector-tag">p</span>[x]             <span class="comment">// 将 “x的父亲” 设为 “y的父亲”</span></div><div class="line"><span class="number">05</span>  <span class="keyword">if</span> <span class="selector-tag">p</span>[x] = nil[T]       </div><div class="line"><span class="number">06</span>  then root[T] ← y                 <span class="comment">// 情况1：如果 “x的父亲” 是空节点，则将y设为根节点</span></div><div class="line"><span class="number">07</span>  <span class="keyword">else</span> <span class="keyword">if</span> x = <span class="attribute">left</span>[p[x]]  </div><div class="line"><span class="number">08</span>            then <span class="attribute">left</span>[p[x]] ← y    // 情况<span class="number">2</span>：如果 x是它父节点的左孩子，则将y设为“x的父节点的左孩子”</div><div class="line"><span class="number">09</span>            <span class="keyword">else</span> <span class="attribute">right</span>[p[x]] ← y   // 情况<span class="number">3</span>：(x是它父节点的右孩子) 将y设为“x的父节点的右孩子”</div><div class="line"><span class="number">10</span>  <span class="attribute">left</span>[y] ← x             // 将 “x” 设为 “y的左孩子”</div><div class="line"><span class="number">11</span>  <span class="selector-tag">p</span>[x] ← y                <span class="comment">// 将 “x的父节点” 设为 “y”</span></div></pre></td></tr></table></figure>
+<p>理解左旋之后，看看下面更鲜明的例子。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15006241308266.jpg" alt=""></p>
+<h3 id="2-2-右旋"><a href="#2-2-右旋" class="headerlink" title="2.2 右旋"></a>2.2 右旋</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006241686012.jpg" alt=""><br>对Y进行右旋，意味着“将Y变成一个右节点”</p>
+<p>右旋的伪代码《算法导论》：参考上面的示意图和下面的伪代码，理解“红黑树T的节点y进行右旋”是如何进行的。 </p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="title">RIGHT-ROTATE</span><span class="params">(T, y)</span></span>  </div><div class="line"><span class="number">01</span>  x ← <span class="attribute">left</span>[y]             // 前提：这里假设y的左孩子为x。下面开始正式操作</div><div class="line"><span class="number">02</span>  <span class="attribute">left</span>[y] ← right[x]      // 将 “x的右孩子” 设为 “y的左孩子”，即 将β设为y的左孩子</div><div class="line"><span class="number">03</span>  <span class="selector-tag">p</span>[<span class="attribute">right</span>[x]] ← y         // 将 “y” 设为 “x的右孩子的父亲”，即 将β的父亲设为y</div><div class="line"><span class="number">04</span>  <span class="selector-tag">p</span>[x] ← <span class="selector-tag">p</span>[y]             <span class="comment">// 将 “y的父亲” 设为 “x的父亲”</span></div><div class="line"><span class="number">05</span>  <span class="keyword">if</span> <span class="selector-tag">p</span>[y] = nil[T]       </div><div class="line"><span class="number">06</span>  then root[T] ← x                 <span class="comment">// 情况1：如果 “y的父亲” 是空节点，则将x设为根节点</span></div><div class="line"><span class="number">07</span>  <span class="keyword">else</span> <span class="keyword">if</span> y = <span class="attribute">right</span>[p[y]]  </div><div class="line"><span class="number">08</span>            then <span class="attribute">right</span>[p[y]] ← x   // 情况<span class="number">2</span>：如果 y是它父节点的右孩子，则将x设为“y的父节点的左孩子”</div><div class="line"><span class="number">09</span>            <span class="keyword">else</span> <span class="attribute">left</span>[p[y]] ← x    // 情况<span class="number">3</span>：(y是它父节点的左孩子) 将x设为“y的父节点的左孩子”</div><div class="line"><span class="number">10</span>  <span class="attribute">right</span>[x] ← y            // 将 “y” 设为 “x的右孩子”</div><div class="line"><span class="number">11</span>  <span class="selector-tag">p</span>[y] ← x                <span class="comment">// 将 “y的父节点” 设为 “x”</span></div></pre></td></tr></table></figure>
+<p>理解右旋之后，看看下面一个更鲜明的例子。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15006242377514.jpg" alt=""></p>
+<p>综上，左旋和右旋是相对的两个概念，原理类似。理解一个也就理解了另一个。</p>
+<p>在实际应用中，若没有彻底理解 左旋 和 右旋，可能会将它们混淆。下面谈谈我对如何区分 左旋 和 右旋 的理解。</p>
+<h3 id="2-3-区分左旋和右旋"><a href="#2-3-区分左旋和右旋" class="headerlink" title="2.3 区分左旋和右旋"></a>2.3 区分左旋和右旋</h3><p>仔细观察上面”左旋”和”右旋”的示意图。我们能清晰的发现，它们是对称的。无论是左旋还是右旋，被旋转的树，在旋转前是二叉查找树，并且旋转之后仍然是一颗二叉查找树。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15006243056330.jpg" alt=""></p>
+<p>左旋示例图(以x为节点进行左旋)：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">                              z</div><div class="line">  x                          /                  </div><div class="line"> / <span class="string">\</span>      --<span class="function"><span class="params">(左旋)</span>--&gt;</span>       x</div><div class="line">y   z                      /</div><div class="line">                          y</div></pre></td></tr></table></figure>
+<p>对x进行左旋，意味着，将“x的右孩子”设为“x的父亲节点”；即，将 x变成了一个左节点(x成了为z的左孩子)！。 因此，左旋中的“左”，意味着“被旋转的节点将变成一个左节点”。</p>
+<p>右旋示例图(以x为节点进行右旋)：</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">                              y</div><div class="line">  x                            <span class="string">\</span>                 </div><div class="line"> / <span class="string">\</span>      --<span class="function"><span class="params">(右旋)</span>--&gt;</span>           x</div><div class="line">y   z                            <span class="string">\</span></div><div class="line">                                  z</div></pre></td></tr></table></figure>
+<p>对x进行右旋，意味着，将“x的左孩子”设为“x的父亲节点”；即，将 x变成了一个右节点(x成了为y的右孩子)！ 因此，右旋中的“右”，意味着“被旋转的节点将变成一个右节点”。</p>
+<h2 id="三、红黑树的基本操作（2）添加"><a href="#三、红黑树的基本操作（2）添加" class="headerlink" title="三、红黑树的基本操作（2）添加"></a>三、红黑树的基本操作（2）添加</h2><p>将一个节点插入到红黑树中，需要执行哪些步骤呢？首先，将红黑树当做一颗二叉查找树，将节点插入；然后，将节点着色；最后，通过旋转和重新着色等方法来修正该树，使之重新成为一颗红黑树。详细描述如下：</p>
+<p>第一步：将红黑树当作一颗二叉查找树，将节点插入。</p>
+<p>红黑树本身就是一颗二叉查找树，将节点插入后，该树仍然是一颗二叉查找树。也就意味着，树的键值仍然是有序的。此外，无论是左旋还是右旋，若旋转之前这棵树是二叉查找树，旋转之后它一定还是二叉查找树。这也就意味着，任何的旋转和重新着色操作，都不会改变它仍然是一颗二叉查找树的事实。</p>
+<h4 id="3-2-3-红黑树的插入操作"><a href="#3-2-3-红黑树的插入操作" class="headerlink" title="3.2.3 红黑树的插入操作"></a>3.2.3 红黑树的插入操作</h4><p>假设，将要插入的节点标为N，N的父节点标为P，N的祖父节点标为G，N的叔父节点标为U。在图中展示的任何颜色要么是由它所处情形这些所作的假定，要么是假定所暗含的。</p>
+<ul>
+<li>情形1: 该树为空树，直接插入根结点的位置，违反性质1，把节点颜色有红改为黑即可。</li>
+<li><p>情形2: 插入节点N的父节点P为黑色，不违反任何性质，无需做任何修改。在这种情形下，树仍是有效的。性质5也未受到威胁，尽管新节点N有两个黑色叶子子节点；但由于新节点N是红色，通过它的每个子节点的路径就都有同通过它所取代的黑色的叶子的路径同样数目的黑色节点，所以依然满足这个性质。<br>注： 情形1很简单，情形2中P为黑色，一切安然无事，但P为红就不一样了，下边是P为红的各种情况，也是真正难懂的地方。</p>
+</li>
+<li><p>情形3: 如果父节点P和叔父节点U二者都是红色，(此时新插入节点N做为P的左子节点或右子节点都属于情形3,这里右图仅显示N做为P左子的情形)则我们可以将它们两个重绘为黑色并重绘祖父节点G为红色(用来保持性质4)。现在我们的新节点N有了一个黑色的父节点P。因为通过父节点P或叔父节点U的任何路径都必定通过祖父节点G，在这些路径上的黑节点数目没有改变。但是，红色的祖父节点G的父节点也有可能是红色的，这就违反了性质4。为了解决这个问题，我们在祖父节点G上递归地进行上述情形的整个过程（把G当成是新加入的节点进行各种情形的检查）。比如，G为根节点，那我们就直接将G变为黑色（情形1）；如果G不是根节点，而它的父节点为黑色，那符合所有的性质，直接插入即可（情形2）；如果G不是根节点，而它的父节点为红色，则递归上述过程（情形3）。<br><img src="http://omu7tit09.bkt.clouddn.com/15005170450352.png" alt=""></p>
+</li>
+<li><p>情形4: 父节点P是红色而叔父节点U是黑色或缺少，新节点N是其父节点的左子节点，而父节点P又是其父节点G的左子节点。在这种情形下，我们进行针对祖父节点G的一次右旋转; 在旋转产生的树中，以前的父节点P现在是新节点N和以前的祖父节点G的父节点。我们知道以前的祖父节点G是黑色，否则父节点P就不可能是红色(如果P和G都是红色就违反了性质4，所以G必须是黑色)。我们切换以前的父节点P和祖父节点G的颜色，结果的树满足性质4。性质5也仍然保持满足，因为通过这三个节点中任何一个的所有路径以前都通过祖父节点G，现在它们都通过以前的父节点P。在各自的情形下，这都是三个节点中唯一的黑色节点。<br><img src="http://omu7tit09.bkt.clouddn.com/15005172050947.png" alt=""></p>
+</li>
+<li>情形5: 父节点P是红色而叔父节点U是黑色或缺少，并且新节点N是其父节点P的右子节点而父节点P又是其父节点的左子节点。在这种情形下，我们进行一次左旋转调换新节点和其父节点的角色; 接着，我们按情形4处理以前的父节点P以解决仍然失效的性质4。注意这个改变会导致某些路径通过它们以前不通过的新节点N（比如图中1号叶子节点）或不通过节点P（比如图中3号叶子节点），但由于这两个节点都是红色的，所以性质5仍有效。<br><img src="http://omu7tit09.bkt.clouddn.com/15005172205491.png" alt="">　</li>
+</ul>
+<p>注: 插入实际上是原地算法，因为上述所有调用都使用了尾部递归。</p>
+<h2 id="四、红黑树的基本操作（3）删除"><a href="#四、红黑树的基本操作（3）删除" class="headerlink" title="四、红黑树的基本操作（3）删除"></a>四、红黑树的基本操作（3）删除</h2><h3 id="红黑树的删除操作"><a href="#红黑树的删除操作" class="headerlink" title="红黑树的删除操作"></a>红黑树的删除操作</h3><p>如果需要删除的节点有两个儿子，那么问题可以被转化成删除另一个只有一个儿子的节点的问题。对于二叉查找树，在删除带有两个非叶子儿子的节点的时候，我们找到要么在它的左子树中的最大元素、要么在它的右子树中的最小元素，并把它的值转移到要删除的节点中。我们接着删除我们从中复制出值的那个节点，它必定有少于两个非叶子的儿子。因为只是复制了一个值，不违反任何性质，这就把问题简化为如何删除最多有一个儿子的节点的问题。它不关心这个节点是最初要删除的节点还是我们从中复制出值的那个节点。</p>
+<p>我们只需要讨论删除只有一个儿子的节点(如果它两个儿子都为空，即均为叶子，我们任意将其中一个看作它的儿子)。如果我们删除一个红色节点（此时该节点的儿子将都为叶子节点），它的父亲和儿子一定是黑色的。所以我们可以简单的用它的黑色儿子替换它，并不会破坏性质3和性质4。通过被删除节点的所有路径只是少了一个红色节点，这样可以继续保证性质5。另一种简单情况是在被删除节点是黑色而它的儿子是红色的时候。如果只是去除这个黑色节点，用它的红色儿子顶替上来的话，会破坏性质5，但是如果我们重绘它的儿子为黑色，则曾经通过它的所有路径将通过它的黑色儿子，这样可以继续保持性质5。</p>
+<p>需要进一步讨论的是在要删除的节点和它的儿子二者都是黑色的时候，这是一种复杂的情况。我们首先把要删除的节点替换为它的儿子。出于方便，称呼这个儿子为N(在新的位置上)，称呼它的兄弟(它父亲的另一个儿子)为S。在下面的示意图中，我们还是使用P称呼N的父亲，SL称呼S的左儿子，SR称呼S的右儿子。</p>
+<p>如果N和它初始的父亲是黑色，则删除它的父亲导致通过N的路径都比不通过它的路径少了一个黑色节点。因为这违反了性质5，树需要被重新平衡。有几种情形需要考虑:</p>
+<ul>
+<li><p>情形1: N是新的根。在这种情形下，我们就做完了。我们从所有路径去除了一个黑色节点，而新根是黑色的，所以性质都保持着。<br>注意: 在情形2、5和6下，我们假定N是它父亲的左儿子。如果它是右儿子，则在这些情形下的左和右应当对调。</p>
+</li>
+<li><p>情形2: S是红色。在这种情形下我们在N的父亲上做左旋转，把红色兄弟转换成N的祖父，我们接着对调N的父亲和祖父的颜色。完成这两个操作后，尽管所有路径上黑色节点的数目没有改变，但现在N有了一个黑色的兄弟和一个红色的父亲（它的新兄弟是黑色因为它是红色S的一个儿子），所以我们可以接下去按情形4、情形5或情形6来处理。<br><img src="http://omu7tit09.bkt.clouddn.com/15005173756216.png" alt=""></p>
+</li>
+<li><p>情形3: N的父亲、S和S的儿子都是黑色的。在这种情形下，我们简单的重绘S为红色。结果是通过S的所有路径，它们就是以前不通过N的那些路径，都少了一个黑色节点。因为删除N的初始的父亲使通过N的所有路径少了一个黑色节点，这使事情都平衡了起来。但是，通过P的所有路径现在比不通过P的路径少了一个黑色节点，所以仍然违反性质5。要修正这个问题，我们要从情形1开始，在P上做重新平衡处理。<br><img src="http://omu7tit09.bkt.clouddn.com/15005173956782.png" alt=""></p>
+</li>
+<li>情形4: S和S的儿子都是黑色，但是N的父亲是红色。在这种情形下，我们简单的交换N的兄弟和父亲的颜色。这不影响不通过N的路径的黑色节点的数目，但是它在通过N的路径上对黑色节点数目增加了一，添补了在这些路径上删除的黑色节点。<br><img src="http://omu7tit09.bkt.clouddn.com/15005174131538.png" alt=""></li>
+<li>情形5: S是黑色，S的左儿子是红色，S的右儿子是黑色，而N是它父亲的左儿子。在这种情形下我们在S上做右旋转，这样S的左儿子成为S的父亲和N的新兄弟。我们接着交换S和它的新父亲的颜色。所有路径仍有同样数目的黑色节点，但是现在N有了一个黑色兄弟，他的右儿子是红色的，所以我们进入了情形6。N和它的父亲都不受这个变换的影响。<br><img src="http://omu7tit09.bkt.clouddn.com/15005174317329.png" alt=""></li>
+<li>情形6: S是黑色，S的右儿子是红色，而N是它父亲的左儿子。在这种情形下我们在N的父亲上做左旋转，这样S成为N的父亲（P）和S的右儿子的父亲。我们接着交换N的父亲和S的颜色，并使S的右儿子为黑色。子树在它的根上的仍是同样的颜色，所以性质3没有被违反。但是，N现在增加了一个黑色祖先: 要么N的父亲变成黑色，要么它是黑色而S被增加为一个黑色祖父。所以，通过N的路径都增加了一个黑色节点。此时，如果一个路径不通过N，则有两种可能性:它通过N的新兄弟。那么它以前和现在都必定通过S和N的父亲，而它们只是交换了颜色。所以路径保持了同样数目的黑色节点。它通过N的新叔父，S的右儿子。那么它以前通过S、S的父亲和S的右儿子，但是现在只通过S，它被假定为它以前的父亲的颜色，和S的右儿子，它被从红色改变为黑色。合成效果是这个路径通过了同样数目的黑色节点。在任何情况下，在这些路径上的黑色节点数目都没有改变。所以我们恢复了性质4。在示意图中的白色节点可以是红色或黑色，但是在变换前后都必须指定相同的颜色。<br><img src="http://omu7tit09.bkt.clouddn.com/15005174688118.png" alt=""></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/树/" rel="tag"># 树</a>
+          
+            <a href="/tags/红黑树/" rel="tag"># 红黑树</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/12/数据结构与算法：剑指offer（1-5）/" rel="next" title="数据结构与算法：剑指offer（1-5）">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法：剑指offer（1-5）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/12/数据结构与算法：树（3）——平衡二叉树（AVL树）/" rel="prev" title="数据结构与算法：树（3）——平衡二叉树（AVL树）">
+                数据结构与算法：树（3）——平衡二叉树（AVL树） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、红黑树的定义"><span class="nav-text">一、红黑树的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-红黑树的定义"><span class="nav-text">1.1 红黑树的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-红黑树的应用"><span class="nav-text">1.2 红黑树的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-红黑树的时间复杂度和相关证明"><span class="nav-text">1.3 红黑树的时间复杂度和相关证明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、红黑树的基本操作（1）左旋和右旋"><span class="nav-text">二、红黑树的基本操作（1）左旋和右旋</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-左旋"><span class="nav-text">2.1 左旋</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-右旋"><span class="nav-text">2.2 右旋</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-区分左旋和右旋"><span class="nav-text">2.3 区分左旋和右旋</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、红黑树的基本操作（2）添加"><span class="nav-text">三、红黑树的基本操作（2）添加</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3-红黑树的插入操作"><span class="nav-text">3.2.3 红黑树的插入操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、红黑树的基本操作（3）删除"><span class="nav-text">四、红黑树的基本操作（3）删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#红黑树的删除操作"><span class="nav-text">红黑树的删除操作</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

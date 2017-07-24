@@ -1,0 +1,812 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构,算法,树,先序遍历,中序遍历,后序遍历," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="数据结构中有很多树的结构，这里整理了二叉树、二叉查找树、AVL树、红黑树、B树、B+树、trie树的基本概念与操作。">
+<meta name="keywords" content="数据结构,算法,树,先序遍历,中序遍历,后序遍历">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法：树（1）——二叉树">
+<meta property="og:url" content="http://yoursite.com/2017/07/12/数据结构与算法：树（1）——二叉树/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="数据结构中有很多树的结构，这里整理了二叉树、二叉查找树、AVL树、红黑树、B树、B+树、trie树的基本概念与操作。">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006198825490.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006186299230.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006193058861.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15004334427457.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15004752956438.jpg">
+<meta property="og:updated_time" content="2017-07-21T06:52:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法：树（1）——二叉树">
+<meta name="twitter:description" content="数据结构中有很多树的结构，这里整理了二叉树、二叉查找树、AVL树、红黑树、B树、B+树、trie树的基本概念与操作。">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15006198825490.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 数据结构与算法：树（1）——二叉树 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/数据结构与算法：树（1）——二叉树/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构与算法：树（1）——二叉树
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T22:14:45+08:00">
+                2017-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>数据结构中有很多树的结构，这里整理了二叉树、二叉查找树、AVL树、红黑树、B树、B+树、trie树的基本概念与操作。</p>
+<a id="more"></a>
+<h2 id="一、二叉树的概念"><a href="#一、二叉树的概念" class="headerlink" title="一、二叉树的概念"></a>一、二叉树的概念</h2><h3 id="1-1-树的基本概念"><a href="#1-1-树的基本概念" class="headerlink" title="1.1 树的基本概念"></a>1.1 树的基本概念</h3><p>树是一种数据结构，它是由n（n&gt;=1）个有限节点组成一个具有层次关系的集合。<br><img src="http://omu7tit09.bkt.clouddn.com/15006198825490.jpg" alt=""><br>它具有以下特点：</p>
+<ul>
+<li>每个节点有零个或多个子节点；</li>
+<li>没有父节点的节点称为根节点；</li>
+<li>每一个非根节点有且只有一个父节点；</li>
+<li>除了根节点外，每个子节点可以分为多个不相交的子树。</li>
+</ul>
+<p>若一个结点有子树，那么该结点称为子树根的”双亲”，子树的根是该结点的”孩子”。有相同双亲的结点互为”兄弟”。一个结点的所有子树上的任何结点都是该结点的后裔。从根结点到某个结点的路径上的所有结点都是该结点的祖先。</p>
+<ul>
+<li>结点的度：结点拥有的子树的数目。</li>
+<li>叶子：度为零的结点。</li>
+<li>分支结点：度不为零的结点。</li>
+<li>树的度：树中结点的最大的度。</li>
+<li>层次：根结点的层次为1，其余结点的层次等于该结点的双亲结点的层次加1。</li>
+<li>树的高度：树中结点的最大层次。</li>
+<li>无序树：如果树中结点的各子树之间的次序是不重要的，可以交换位置。</li>
+<li>有序树：如果树中结点的各子树之间的次序是重要的, 不可以交换位置。</li>
+<li>森林：0个或多个不相交的树组成。对森林加上一个根，森林即成为树；删去根，树即成为森林。</li>
+<li><h3 id="1-2-二叉树的定义"><a href="#1-2-二叉树的定义" class="headerlink" title="1.2 二叉树的定义"></a>1.2 二叉树的定义</h3>二叉树是每个节点最多有两个子树（不存在度大于2的结点）的树结构。二叉树的子树有左右之分，次序不能颠倒。它有5种基本形态：二叉树可以是空集；根可以有空的左子树或右子树；或者左右子树皆为空。<br><img src="http://omu7tit09.bkt.clouddn.com/15006186299230.jpg" alt=""></li>
+</ul>
+<h3 id="1-3-二叉树的性质"><a href="#1-3-二叉树的性质" class="headerlink" title="1.3 二叉树的性质"></a>1.3 二叉树的性质</h3><h4 id="1-3-1-性质一"><a href="#1-3-1-性质一" class="headerlink" title="1.3.1 性质一"></a>1.3.1 性质一</h4><p>二叉树的第i层至多有$2^{i-1}$个结点；</p>
+<p>证明：下面用”数学归纳法”进行证明。</p>
+<ul>
+<li>当$i=1$时，第$i$层的节点数目为$2^{i-1}=2^{0}=1$。因为第1层上只有一个根结点，所以命题成立。</li>
+<li>假设当$i&gt;1$，第$i$层的节点数目为$2^{i-1}$。这个是根据(01)推断出来的！</li>
+<li>下面根据这个假设，推断出”第$(i+1)$层的节点数目为$2^{i}$”即可。由于二叉树的每个结点至多有两个孩子，故”第$(i+1)$层上的结点数目” 最多是 “第i层的结点数目的2倍”。即，第$(i+1)$层上的结点数目最大值$=2×2^{i-1}=2^{i}$。</li>
+<li>故假设成立，原命题得证！</li>
+</ul>
+<h4 id="1-3-2-性质二"><a href="#1-3-2-性质二" class="headerlink" title="1.3.2 性质二"></a>1.3.2 性质二</h4><p>深度为k的二叉树至多有$2^{k-1}$个结点；</p>
+<p>证明：在具有相同深度的二叉树中，当每一层都含有最大结点数时，其树中结点数最多。利用”性质1”可知，深度为k的二叉树的结点数至多为: $2^0+2^1+…+2^{k-1}=2^k-1$故原命题得证！</p>
+<h4 id="1-3-3-性质三"><a href="#1-3-3-性质三" class="headerlink" title="1.3.3 性质三"></a>1.3.3 性质三</h4><p>包含n个结点的二叉树的高度至少为$log_2 (n+1)$；</p>
+<p>证明：根据”性质2”可知，高度为h的二叉树最多有2{h}–1个结点。反之，对于包含n个节点的二叉树的高度至少为$log_2(n+1)$。</p>
+<h4 id="1-3-4-性质四"><a href="#1-3-4-性质四" class="headerlink" title="1.3.4 性质四"></a>1.3.4 性质四</h4><p>对任何一颗二叉树T，如果其终端结点数为$n_0$，度为2的结点数为$n_2$，则$n_0=n_2+1$</p>
+<p>证明：因为二叉树中所有结点的度数均不大于2，所以结点总数(记为n)=”0度结点数$(n_0)$” + “1度结点数$(n_1)$” + “2度结点数$(n_2)$”。由此，得到等式一。(等式一) $n=n_0+n_1+n_2$</p>
+<p>另一方面，0度结点没有孩子，1度结点有一个孩子，2度结点有两个孩子，故二叉树中孩子结点总数是：$n_1+2n_2$。</p>
+<p>此外，只有根不是任何结点的孩子。故二叉树中的结点总数又可表示为等式二。 (等式二) $n=n1+2n_2+1$</p>
+<p>由(等式一)和(等式二)计算得到：n0=n2+1。原命题得证！</p>
+<h3 id="1-4-满二叉树和完全二叉树"><a href="#1-4-满二叉树和完全二叉树" class="headerlink" title="1.4 满二叉树和完全二叉树"></a>1.4 满二叉树和完全二叉树</h3><h4 id="1-4-1-满二叉树"><a href="#1-4-1-满二叉树" class="headerlink" title="1.4.1 满二叉树"></a>1.4.1 满二叉树</h4><p>满二叉树的定义：<br>除最后一层无任何子节点外，每一层上的所有结点都有两个子结点。也可以这样理解，除叶子结点外的所有结点均有两个子结点。节点数达到最大值，所有叶子结点必须在同一层上。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15006193058861.jpg" alt=""></p>
+<p>满二叉树的性质：</p>
+<ol>
+<li>一棵树的深度为h，最大层数为k，深度与最大层数相同，k=h；</li>
+<li>叶子数为$2^h$</li>
+<li>第k层的结点数是：$2^{k-1}$；</li>
+<li>总结点数是$2^k-1$，且总节点数一定是奇数。</li>
+</ol>
+<h4 id="1-4-2-完全二叉树"><a href="#1-4-2-完全二叉树" class="headerlink" title="1.4.2 完全二叉树"></a>1.4.2 完全二叉树</h4><p>定义：一颗二叉树中，只有最小面两层结点的度可以小于2，并且最下一层的叶结点集中在靠左的若干位置上。这样的二叉树称为完全二叉树。</p>
+<p>特点：叶子结点只能出现在最下层和次下层，且最小层的叶子结点集中在树的左部。显然，一颗满二叉树必定是一颗完全二叉树，而完全二叉树未必是满二叉树。</p>
+<p>注意：完全二叉树是效率很高的数据结构，堆是一种完全二叉树或者近似完全二叉树，所以效率极高，像十分常用的排序算法、Dijkstra算法、Prim算法等都要用堆才能优化，二叉排序树的效率也要借助平衡树来提高，而平衡性基于完全二叉树。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15004334427457.png" alt=""></p>
+<h2 id="二、二叉树的遍历"><a href="#二、二叉树的遍历" class="headerlink" title="二、二叉树的遍历"></a>二、二叉树的遍历</h2><h3 id="2-1-二叉树的遍历"><a href="#2-1-二叉树的遍历" class="headerlink" title="2.1 二叉树的遍历"></a>2.1 二叉树的遍历</h3><p>二叉树的遍历主要分为四种：前序遍历、中序遍历、后序遍历、层序遍历。</p>
+<p>前中后三种遍历方式的不同就在于根结点的访问时间是在左右子树之前、中间或者之后。层序遍历就是从根结点开始从上至下、从左到右地依次访问。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15004752956438.jpg" alt=""></p>
+<p>实现遍历可以简介明了地采用递归方法。也可以用非递归的方式实现，需要用到辅助栈，算法也很巧妙。</p>
+<p>这里先定义的二叉树的节点类和树类如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""节点类"""</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, elem=<span class="number">-1</span>, lchild=None, rchild=None)</span>:</span></div><div class="line">        self.elem = elem</div><div class="line">        self.lchild = lchild</div><div class="line">        self.rchild = rchild</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tree</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="string">"""树类"""</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.root = Node()</div><div class="line">        self.myQueue = []</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self, elem)</span>:</span></div><div class="line">        <span class="string">"""为树添加节点"""</span></div><div class="line">        node = Node(elem)</div><div class="line">        <span class="keyword">if</span> self.root.elem == <span class="number">-1</span>:  <span class="comment"># 如果树是空的，则对根节点赋值</span></div><div class="line">            self.root = node</div><div class="line">            self.myQueue.append(self.root)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            treeNode = self.myQueue[<span class="number">0</span>]  <span class="comment"># 此结点的子树还没有齐。</span></div><div class="line">            <span class="keyword">if</span> treeNode.lchild == <span class="keyword">None</span>:</div><div class="line">                treeNode.lchild = node</div><div class="line">                self.myQueue.append(treeNode.lchild)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                treeNode.rchild = node</div><div class="line">                self.myQueue.append(treeNode.rchild)</div><div class="line">                self.myQueue.pop(<span class="number">0</span>)  <span class="comment"># 如果该结点存在右子树，将此结点丢弃。</span></div></pre></td></tr></table></figure>
+<h3 id="2-2-先序遍历"><a href="#2-2-先序遍历" class="headerlink" title="2.2 先序遍历"></a>2.2 先序遍历</h3><ul>
+<li>递归写法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">front_digui</span><span class="params">(self, root)</span>:</span></div><div class="line">   <span class="string">"""利用递归实现树的先序遍历"""</span></div><div class="line">   <span class="keyword">if</span> root == <span class="keyword">None</span>:</div><div class="line">       <span class="keyword">return</span></div><div class="line">   <span class="keyword">print</span> root.elem,</div><div class="line">   self.front_digui(root.lchild)</div><div class="line">   self.front_digui(root.rchild)</div></pre></td></tr></table></figure>
+<ul>
+<li>非递归写法</li>
+</ul>
+<p>preOrder每次都将遇到的节点压入栈，当左子树遍历完毕后才从栈中弹出最后一个访问的节点，访问其右子树。在同一层中，不可能同时有两个节点压入栈，因此栈的大小空间为O(h)，h为二叉树高度。时间方面，每个节点都被压入栈一次，弹出栈一次，访问一次，复杂度为O(n)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">front_stack</span><span class="params">(self, root)</span>:</span></div><div class="line">   <span class="string">"""利用堆栈实现树的先序遍历"""</span></div><div class="line">   <span class="keyword">if</span> root == <span class="keyword">None</span>:</div><div class="line">       <span class="keyword">return</span></div><div class="line">   myStack = []</div><div class="line">   node = root</div><div class="line">   <span class="keyword">while</span> node <span class="keyword">or</span> myStack:</div><div class="line">       <span class="keyword">while</span> node:                     <span class="comment">#从根节点开始，一直找它的左子树</span></div><div class="line">           <span class="keyword">print</span> node.elem,</div><div class="line">           myStack.append(node)</div><div class="line">           node = node.lchild</div><div class="line">       node = myStack.pop()            <span class="comment">#while结束表示当前节点node为空，即前一个节点没有左子树了</span></div><div class="line">       node = node.rchild                  <span class="comment">#开始查看它的右子树</span></div></pre></td></tr></table></figure>
+<h3 id="2-3-中序遍历"><a href="#2-3-中序遍历" class="headerlink" title="2.3 中序遍历"></a>2.3 中序遍历</h3><ul>
+<li>递归写法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">middle_digui</span><span class="params">(self, root)</span>:</span></div><div class="line">   <span class="string">"""利用递归实现树的中序遍历"""</span></div><div class="line">   <span class="keyword">if</span> root == <span class="keyword">None</span>:</div><div class="line">       <span class="keyword">return</span></div><div class="line">   self.middle_digui(root.lchild)</div><div class="line">   <span class="keyword">print</span> root.elem,</div><div class="line">   self.middle_digui(root.rchild)</div></pre></td></tr></table></figure>
+<ul>
+<li>非递归写法</li>
+</ul>
+<p>根据上面的先序遍历，可以类似的构造出中序遍历。仔细想一下，只有第一种方法改过来时最方便的。需要的改动仅仅调换一下节点访问的次序，先序是先访问，再入栈；而中序则是先入栈，弹栈后再访问。代码如下。时间复杂度与空间复杂度同先序一致。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">middle_stack</span><span class="params">(self, root)</span>:</span></div><div class="line">   <span class="string">"""利用堆栈实现树的中序遍历"""</span></div><div class="line">   <span class="keyword">if</span> root == <span class="keyword">None</span>:</div><div class="line">       <span class="keyword">return</span></div><div class="line">   myStack = []</div><div class="line">   node = root</div><div class="line">   <span class="keyword">while</span> node <span class="keyword">or</span> myStack:</div><div class="line">       <span class="keyword">while</span> node:                     <span class="comment">#从根节点开始，一直找它的左子树</span></div><div class="line">           myStack.append(node)</div><div class="line">           node = node.lchild</div><div class="line">       node = myStack.pop()            <span class="comment">#while结束表示当前节点node为空，即前一个节点没有左子树了</span></div><div class="line">       <span class="keyword">print</span> node.elem,</div><div class="line">       node = node.rchild                  <span class="comment">#开始查看它的右子树</span></div></pre></td></tr></table></figure>
+<h3 id="2-4-后序遍历"><a href="#2-4-后序遍历" class="headerlink" title="2.4 后序遍历"></a>2.4 后序遍历</h3><ul>
+<li>递归写法</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">later_digui</span><span class="params">(self, root)</span>:</span></div><div class="line">   <span class="string">"""利用递归实现树的后序遍历"""</span></div><div class="line">   <span class="keyword">if</span> root == <span class="keyword">None</span>:</div><div class="line">       <span class="keyword">return</span></div><div class="line">   self.later_digui(root.lchild)</div><div class="line">   self.later_digui(root.rchild)</div><div class="line">   <span class="keyword">print</span> root.elem,</div></pre></td></tr></table></figure>
+<ul>
+<li>非递归写法</li>
+</ul>
+<p>从直觉上来说，后序遍历对比中序遍历难度要增大很多。因为中序遍历节点序列有一点的连续性，而后续遍历则感觉有一定的跳跃性。先左，再右，最后才中间节点；访问左子树后，需要跳转到右子树，右子树访问完毕了再回溯至根节点并访问之，代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">later_stack</span><span class="params">(self, root)</span>:</span></div><div class="line">   <span class="string">"""利用堆栈实现树的后序遍历"""</span></div><div class="line">   <span class="keyword">if</span> root == <span class="keyword">None</span>:</div><div class="line">       <span class="keyword">return</span></div><div class="line">   myStack1 = []</div><div class="line">   myStack2 = []</div><div class="line">   node = root</div><div class="line">   myStack1.append(node)</div><div class="line">   <span class="keyword">while</span> myStack1:                   <span class="comment">#这个while循环的功能是找出后序遍历的逆序，存在myStack2里面</span></div><div class="line">       node = myStack1.pop()</div><div class="line">       <span class="keyword">if</span> node.lchild:</div><div class="line">           myStack1.append(node.lchild)</div><div class="line">       <span class="keyword">if</span> node.rchild:</div><div class="line">           myStack1.append(node.rchild)</div><div class="line">       myStack2.append(node)</div><div class="line">   <span class="keyword">while</span> myStack2:                         <span class="comment">#将myStack2中的元素出栈，即为后序遍历次序</span></div><div class="line">       <span class="keyword">print</span> myStack2.pop().elem,</div></pre></td></tr></table></figure>
+<h3 id="2-5-层序遍历"><a href="#2-5-层序遍历" class="headerlink" title="2.5 层序遍历"></a>2.5 层序遍历</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">level_queue</span><span class="params">(self, root)</span>:</span></div><div class="line">   <span class="string">"""利用队列实现树的层次遍历"""</span></div><div class="line">   <span class="keyword">if</span> root == <span class="keyword">None</span>:</div><div class="line">       <span class="keyword">return</span></div><div class="line">   myQueue = []</div><div class="line">   node = root</div><div class="line">   myQueue.append(node)</div><div class="line">   <span class="keyword">while</span> myQueue:</div><div class="line">       node = myQueue.pop(<span class="number">0</span>)</div><div class="line">       <span class="keyword">print</span> node.elem,</div><div class="line">       <span class="keyword">if</span> node.lchild != <span class="keyword">None</span>:</div><div class="line">           myQueue.append(node.lchild)</div><div class="line">       <span class="keyword">if</span> node.rchild != <span class="keyword">None</span>:</div><div class="line">           myQueue.append(node.rchild)</div></pre></td></tr></table></figure>
+<p>对以上七种遍历方法分别打印：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="string">"""主函数"""</span></div><div class="line">    elems = range(<span class="number">10</span>)           <span class="comment">#生成十个数据作为树节点</span></div><div class="line">    tree = Tree()          <span class="comment">#新建一个树对象</span></div><div class="line">    <span class="keyword">for</span> elem <span class="keyword">in</span> elems:                  </div><div class="line">        tree.add(elem)           <span class="comment">#逐个添加树的节点</span></div><div class="line"></div><div class="line">    <span class="keyword">print</span> <span class="string">'队列实现层次遍历:'</span></div><div class="line">    tree.level_queue(tree.root)</div><div class="line"></div><div class="line">    <span class="keyword">print</span> <span class="string">'\n\n递归实现先序遍历:'</span></div><div class="line">    tree.front_digui(tree.root)</div><div class="line">    <span class="keyword">print</span> <span class="string">'\n递归实现中序遍历:'</span> </div><div class="line">    tree.middle_digui(tree.root)</div><div class="line">    <span class="keyword">print</span> <span class="string">'\n递归实现后序遍历:'</span></div><div class="line">    tree.later_digui(tree.root)</div><div class="line"></div><div class="line">    <span class="keyword">print</span> <span class="string">'\n\n堆栈实现先序遍历:'</span></div><div class="line">    tree.front_stack(tree.root)</div><div class="line">    <span class="keyword">print</span> <span class="string">'\n堆栈实现中序遍历:'</span></div><div class="line">    tree.middle_stack(tree.root)</div><div class="line">    <span class="keyword">print</span> <span class="string">'\n堆栈实现后序遍历:'</span></div><div class="line">    tree.later_stack(tree.root)</div></pre></td></tr></table></figure>
+<p>得到的结果为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">队列实现层次遍历:</div><div class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> </div><div class="line"></div><div class="line">递归实现先序遍历:</div><div class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">3</span> <span class="number">7</span> <span class="number">8</span> <span class="number">4</span> <span class="number">9</span> <span class="number">2</span> <span class="number">5</span> <span class="number">6</span> </div><div class="line">递归实现中序遍历:</div><div class="line"><span class="number">7</span> <span class="number">3</span> <span class="number">8</span> <span class="number">1</span> <span class="number">9</span> <span class="number">4</span> <span class="number">0</span> <span class="number">5</span> <span class="number">2</span> <span class="number">6</span> </div><div class="line">递归实现后序遍历:</div><div class="line"><span class="number">7</span> <span class="number">8</span> <span class="number">3</span> <span class="number">9</span> <span class="number">4</span> <span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">2</span> <span class="number">0</span> </div><div class="line"></div><div class="line">堆栈实现先序遍历:</div><div class="line"><span class="number">0</span> <span class="number">1</span> <span class="number">3</span> <span class="number">7</span> <span class="number">8</span> <span class="number">4</span> <span class="number">9</span> <span class="number">2</span> <span class="number">5</span> <span class="number">6</span> </div><div class="line">堆栈实现中序遍历:</div><div class="line"><span class="number">7</span> <span class="number">3</span> <span class="number">8</span> <span class="number">1</span> <span class="number">9</span> <span class="number">4</span> <span class="number">0</span> <span class="number">5</span> <span class="number">2</span> <span class="number">6</span> </div><div class="line">堆栈实现后序遍历:</div><div class="line"><span class="number">7</span> <span class="number">8</span> <span class="number">3</span> <span class="number">9</span> <span class="number">4</span> <span class="number">1</span> <span class="number">5</span> <span class="number">6</span> <span class="number">2</span> <span class="number">0</span></div></pre></td></tr></table></figure>
+<p>总结一下：树的遍历主要有两种，一种是深度优先遍历，像前序、中序、后序；另一种是广度优先遍历，像层次遍历。在树结构中两者的区别还不是非常明显，但从树扩展到有向图，到无向图的时候，深度优先搜索和广度优先搜索的效率和作用还是有很大不同的。<br>深度优先一般用递归，广度优先一般用队列。一般情况下能用递归实现的算法大部分也能用堆栈来实现。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/树/" rel="tag"># 树</a>
+          
+            <a href="/tags/先序遍历/" rel="tag"># 先序遍历</a>
+          
+            <a href="/tags/中序遍历/" rel="tag"># 中序遍历</a>
+          
+            <a href="/tags/后序遍历/" rel="tag"># 后序遍历</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/12/数据结构与算法：树（3）——平衡二叉树（AVL树）/" rel="next" title="数据结构与算法：树（3）——平衡二叉树（AVL树）">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法：树（3）——平衡二叉树（AVL树）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/12/数据结构与算法：栈与队列/" rel="prev" title="数据结构与算法：栈与队列">
+                数据结构与算法：栈与队列 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、二叉树的概念"><span class="nav-text">一、二叉树的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-树的基本概念"><span class="nav-text">1.1 树的基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-二叉树的定义"><span class="nav-text">1.2 二叉树的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-二叉树的性质"><span class="nav-text">1.3 二叉树的性质</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-性质一"><span class="nav-text">1.3.1 性质一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-性质二"><span class="nav-text">1.3.2 性质二</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-3-性质三"><span class="nav-text">1.3.3 性质三</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-4-性质四"><span class="nav-text">1.3.4 性质四</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-满二叉树和完全二叉树"><span class="nav-text">1.4 满二叉树和完全二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1-满二叉树"><span class="nav-text">1.4.1 满二叉树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-2-完全二叉树"><span class="nav-text">1.4.2 完全二叉树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、二叉树的遍历"><span class="nav-text">二、二叉树的遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-二叉树的遍历"><span class="nav-text">2.1 二叉树的遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-先序遍历"><span class="nav-text">2.2 先序遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-中序遍历"><span class="nav-text">2.3 中序遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-后序遍历"><span class="nav-text">2.4 后序遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-层序遍历"><span class="nav-text">2.5 层序遍历</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

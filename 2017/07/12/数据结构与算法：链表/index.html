@@ -1,0 +1,742 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构,算法,数组,双向链表,单向链表," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现 一、数组数组有上界和下界，数组的元素在上下界内是连续的。 存储10，20，30，40，50的数组的示意图如下：数组的特点是：数据是连续的；随机访问速度块。 数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维">
+<meta name="keywords" content="数据结构,算法,数组,双向链表,单向链表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法：链表">
+<meta property="og:url" content="http://yoursite.com/2017/07/12/数据结构与算法：链表/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现 一、数组数组有上界和下界，数组的元素在上下界内是连续的。 存储10，20，30，40，50的数组的示意图如下：数组的特点是：数据是连续的；随机访问速度块。 数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006132398847.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006133555450.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006134720249.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006135467317.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006137887925.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006139529251.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006140850713.jpg">
+<meta property="og:updated_time" content="2017-07-21T11:26:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法：链表">
+<meta name="twitter:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现 一、数组数组有上界和下界，数组的元素在上下界内是连续的。 存储10，20，30，40，50的数组的示意图如下：数组的特点是：数据是连续的；随机访问速度块。 数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15006132398847.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 数据结构与算法：链表 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/12/数据结构与算法：链表/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构与算法：链表
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-12T22:14:45+08:00">
+                2017-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现</p>
+<h2 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h2><p>数组有上界和下界，数组的元素在上下界内是连续的。</p>
+<p>存储10，20，30，40，50的数组的示意图如下：<br><img src="http://omu7tit09.bkt.clouddn.com/15006132398847.jpg" alt=""><br>数组的特点是：数据是连续的；随机访问速度块。</p>
+<p>数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维数组实现的。至于动态数组，是指数组的容量能动态增长的数组；对于C语言而言，若要提供动态数组，需要手动实现；而对于C++而言，STL提供了Vector；对于Java而言，Collection集合中提供了ArrayList和Vector。</p>
+<h2 id="二、单向链表"><a href="#二、单向链表" class="headerlink" title="二、单向链表"></a>二、单向链表</h2><h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><p>单向链表（单链表）是链表的一种，它由节点组成，每个节点都包含下一个节点的指针。</p>
+<p>单链表的示意图如下：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15006133555450.jpg" alt=""><br>表头为空，表头的后继节点是“节点10”（数据为10的节点），“节点10”的后继节点是“节点20”（数据为20的结点）……</p>
+<h3 id="2-2-单链表删除节点"><a href="#2-2-单链表删除节点" class="headerlink" title="2.2 单链表删除节点"></a>2.2 单链表删除节点</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006134720249.jpg" alt=""><br>删除“节点30”<br>删除之前：“节点20”的后继节点为“节点30”，而“节点30”的后继节点为“节点40”<br>删除之后：“节点20”的后继节点为“节点40”</p>
+<h3 id="2-3-单链表添加节点"><a href="#2-3-单链表添加节点" class="headerlink" title="2.3 单链表添加节点"></a>2.3 单链表添加节点</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006135467317.jpg" alt=""><br>在“节点10 ”与“节点20”之间添加“节点15”</p>
+<p>添加之前：“节点10”的后继节点为“节点20”<br>添加之后：“节点10”的后继节点为“节点15”，而“节点15”的后继节点为“节点20”。</p>
+<p>单链表的特点是：节点的链接方向是单向的；相对于数组来说，单链表的随机访问速度较慢，但是单链表删除、添加数据的效率很高。</p>
+<h2 id="三、双向链表"><a href="#三、双向链表" class="headerlink" title="三、双向链表"></a>三、双向链表</h2><h3 id="3-1-定义"><a href="#3-1-定义" class="headerlink" title="3.1 定义"></a>3.1 定义</h3><p>双向链表（双链表）是链表的一种。和单链表一样，双链表也是由节点组成，它的每一个数据节点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表的任意一个节点开始，都可以很方便地访问它的前驱结点和后继节点。一般我们都构造双向循环链表。</p>
+<p>双链表的示意图如下：<br><img src="http://omu7tit09.bkt.clouddn.com/15006137887925.jpg" alt=""><br>表头为空，表头的后继节点为“节点10”（数据为10的结点）；“节点10”的后继节点是“节点20”（数据为10的节点），“节点20”的前继节点是“节点10”；“节点20”的后继节点是“节点30”，“节点30”的前继节点是“节点20”;……；末尾节点的后继节点是表头。</p>
+<h3 id="3-2-双链表删除节点"><a href="#3-2-双链表删除节点" class="headerlink" title="3.2 双链表删除节点"></a>3.2 双链表删除节点</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006139529251.jpg" alt=""><br>删除“节点30”</p>
+<p>删除之前：“节点20”的后继节点为“节点30”，“节点30”的前继节点为“节点20”。“节点30”的后继节点为“节点40”，“节点40”的前继节点为“节点30”<br>删除之后：“节点20”的后继节点为“节点40”，“节点40”的前继节点为“节点20”</p>
+<h3 id="3-3-双链表添加节点"><a href="#3-3-双链表添加节点" class="headerlink" title="3.3 双链表添加节点"></a>3.3 双链表添加节点</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006140850713.jpg" alt=""><br>在”节点10”与”节点20”之间添加”节点15”<br>添加之前：”节点10”的后继节点为”节点20”，”节点20” 的前继节点为”节点10”。<br>添加之后：”节点10”的后继节点为”节点15”，”节点15” 的前继节点为”节点10”。”节点15”的后继节点为”节点20”，”节点20” 的前继节点为”节点15”。</p>
+<h2 id="四、链表编程题"><a href="#四、链表编程题" class="headerlink" title="四、链表编程题"></a>四、链表编程题</h2><h3 id="4-1-从尾到头打印链表（剑5）"><a href="#4-1-从尾到头打印链表（剑5）" class="headerlink" title="4.1 从尾到头打印链表（剑5）"></a>4.1 从尾到头打印链表（剑5）</h3><p>输入一个链表的头结点，从尾到头反过来打印每个结点的值（注意不能改变链表的结构）。<br>链表结点定义如下：</p>
+<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> </span>&#123;</div><div class="line">        int val;</div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> *next;</span></div><div class="line">        ListNode(int x) :</div><div class="line">              val(x), next(NULL) &#123;</div><div class="line">        &#125;</div><div class="line">  &#125;;</div></pre></td></tr></table></figure>
+<p>解决这个问题肯定要遍历链表。遍历的顺序是从头到尾的顺序，可输出的顺序却是从尾到头。也就是说第一个遍历到的结点最后一个输出，而最后一个遍历到的结点第一个输出。这就是典型的“后进先出”，我们可以用栈实现这种顺序。没经过一个节点的时候，把该结点放到一个栈中。当遍历完整个链表后，再从栈顶开始逐个输出结点的值，此时输出的结点的顺序就翻转过来了。实现代码如下：</p>
+<p>既然想到了用栈来实现这个函数，而递归在本质上就是一个栈结构，因此可用递归来实现。要实现反过来输出链表，我们每访问到一个节点的时候，先递归输出它后面的结点，再输出该结点自身，这样链表的输出结果就反过来了。实现代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; printListFromTailToHead(ListNode* head) &#123;</div><div class="line">        <span class="keyword">if</span>(head==<span class="literal">NULL</span>) <span class="keyword">return</span> &#123;&#125;;</div><div class="line">        <span class="keyword">if</span>(head-&gt;next==<span class="literal">NULL</span>) <span class="keyword">return</span> &#123;head-&gt;val&#125;;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result = printListFromTailToHead(head-&gt;next);</div><div class="line">        result.push_back(head-&gt;val);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="4-2-在O-1-时间删除链表结点（剑13）"><a href="#4-2-在O-1-时间删除链表结点（剑13）" class="headerlink" title="4.2 在O(1)时间删除链表结点（剑13）"></a>4.2 在O(1)时间删除链表结点（剑13）</h3><h3 id="4-3-链表中倒数第K个结点（剑15）"><a href="#4-3-链表中倒数第K个结点（剑15）" class="headerlink" title="4.3 链表中倒数第K个结点（剑15）"></a>4.3 链表中倒数第K个结点（剑15）</h3><h3 id="4-4-反转链表（剑16）"><a href="#4-4-反转链表（剑16）" class="headerlink" title="4.4 反转链表（剑16）"></a>4.4 反转链表（剑16）</h3><h3 id="4-5-合并两个排序的链表（剑17）"><a href="#4-5-合并两个排序的链表（剑17）" class="headerlink" title="4.5 合并两个排序的链表（剑17）"></a>4.5 合并两个排序的链表（剑17）</h3><h3 id="4-6-复杂链表的赋值（剑26）"><a href="#4-6-复杂链表的赋值（剑26）" class="headerlink" title="4.6 复杂链表的赋值（剑26）"></a>4.6 复杂链表的赋值（剑26）</h3><h3 id="4-7-双向链表（剑27）"><a href="#4-7-双向链表（剑27）" class="headerlink" title="4.7 双向链表（剑27）"></a>4.7 双向链表（剑27）</h3><h3 id="4-8-两个链表的第一个公共结点（剑37）"><a href="#4-8-两个链表的第一个公共结点（剑37）" class="headerlink" title="4.8 两个链表的第一个公共结点（剑37）"></a>4.8 两个链表的第一个公共结点（剑37）</h3><h3 id="4-9-圆圈中最后剩下的的数字（剑45）"><a href="#4-9-圆圈中最后剩下的的数字（剑45）" class="headerlink" title="4.9 圆圈中最后剩下的的数字（剑45）"></a>4.9 圆圈中最后剩下的的数字（剑45）</h3><h3 id="4-10-链表中环的入口结点（剑56）"><a href="#4-10-链表中环的入口结点（剑56）" class="headerlink" title="4.10 链表中环的入口结点（剑56）"></a>4.10 链表中环的入口结点（剑56）</h3><h3 id="4-11-删除链表中重复的结点（剑57）"><a href="#4-11-删除链表中重复的结点（剑57）" class="headerlink" title="4.11 删除链表中重复的结点（剑57）"></a>4.11 删除链表中重复的结点（剑57）</h3><h2 id="五、数组编程题"><a href="#五、数组编程题" class="headerlink" title="五、数组编程题"></a>五、数组编程题</h2><h3 id="5-1-二维数组中的查找（剑3）"><a href="#5-1-二维数组中的查找（剑3）" class="headerlink" title="5.1 二维数组中的查找（剑3）"></a>5.1 二维数组中的查找（剑3）</h3><h3 id="5-2-调整数组顺序使奇数位于偶数前面（剑14）"><a href="#5-2-调整数组顺序使奇数位于偶数前面（剑14）" class="headerlink" title="5.2 调整数组顺序使奇数位于偶数前面（剑14）"></a>5.2 调整数组顺序使奇数位于偶数前面（剑14）</h3><h3 id="5-3-数组中出现次数超过一半的数字（剑29）"><a href="#5-3-数组中出现次数超过一半的数字（剑29）" class="headerlink" title="5.3 数组中出现次数超过一半的数字（剑29）"></a>5.3 数组中出现次数超过一半的数字（剑29）</h3><h3 id="5-4-连续子数组的最大和（剑31）"><a href="#5-4-连续子数组的最大和（剑31）" class="headerlink" title="5.4 连续子数组的最大和（剑31）"></a>5.4 连续子数组的最大和（剑31）</h3><h3 id="5-5-从1到n整数中1出现的次数（剑32）"><a href="#5-5-从1到n整数中1出现的次数（剑32）" class="headerlink" title="5.5 从1到n整数中1出现的次数（剑32）"></a>5.5 从1到n整数中1出现的次数（剑32）</h3><h3 id="5-6-把数组排成最小的数（剑33）"><a href="#5-6-把数组排成最小的数（剑33）" class="headerlink" title="5.6 把数组排成最小的数（剑33）"></a>5.6 把数组排成最小的数（剑33）</h3><h3 id="5-7-丑数（剑34）"><a href="#5-7-丑数（剑34）" class="headerlink" title="5.7 丑数（剑34）"></a>5.7 丑数（剑34）</h3><h3 id="5-8-数组中的逆序对（剑36）"><a href="#5-8-数组中的逆序对（剑36）" class="headerlink" title="5.8 数组中的逆序对（剑36）"></a>5.8 数组中的逆序对（剑36）</h3><h3 id="5-9-数组中重复的数字（剑51）"><a href="#5-9-数组中重复的数字（剑51）" class="headerlink" title="5.9 数组中重复的数字（剑51）"></a>5.9 数组中重复的数字（剑51）</h3><h3 id="5-10-构建乘积数组（剑52）"><a href="#5-10-构建乘积数组（剑52）" class="headerlink" title="5.10 构建乘积数组（剑52）"></a>5.10 构建乘积数组（剑52）</h3>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/数组/" rel="tag"># 数组</a>
+          
+            <a href="/tags/双向链表/" rel="tag"># 双向链表</a>
+          
+            <a href="/tags/单向链表/" rel="tag"># 单向链表</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/12/数据结构与算法：深度优先搜索和广度优先搜索/" rel="next" title="数据结构与算法：深度优先搜索和广度优先搜索">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法：深度优先搜索和广度优先搜索
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/09/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/" rel="prev" title="机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法">
+                机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、数组"><span class="nav-text">一、数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、单向链表"><span class="nav-text">二、单向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-定义"><span class="nav-text">2.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-单链表删除节点"><span class="nav-text">2.2 单链表删除节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-单链表添加节点"><span class="nav-text">2.3 单链表添加节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、双向链表"><span class="nav-text">三、双向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-定义"><span class="nav-text">3.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-双链表删除节点"><span class="nav-text">3.2 双链表删除节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-双链表添加节点"><span class="nav-text">3.3 双链表添加节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、链表编程题"><span class="nav-text">四、链表编程题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-从尾到头打印链表（剑5）"><span class="nav-text">4.1 从尾到头打印链表（剑5）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-在O-1-时间删除链表结点（剑13）"><span class="nav-text">4.2 在O(1)时间删除链表结点（剑13）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-链表中倒数第K个结点（剑15）"><span class="nav-text">4.3 链表中倒数第K个结点（剑15）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-反转链表（剑16）"><span class="nav-text">4.4 反转链表（剑16）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-合并两个排序的链表（剑17）"><span class="nav-text">4.5 合并两个排序的链表（剑17）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-复杂链表的赋值（剑26）"><span class="nav-text">4.6 复杂链表的赋值（剑26）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-双向链表（剑27）"><span class="nav-text">4.7 双向链表（剑27）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-8-两个链表的第一个公共结点（剑37）"><span class="nav-text">4.8 两个链表的第一个公共结点（剑37）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-9-圆圈中最后剩下的的数字（剑45）"><span class="nav-text">4.9 圆圈中最后剩下的的数字（剑45）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-10-链表中环的入口结点（剑56）"><span class="nav-text">4.10 链表中环的入口结点（剑56）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-11-删除链表中重复的结点（剑57）"><span class="nav-text">4.11 删除链表中重复的结点（剑57）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、数组编程题"><span class="nav-text">五、数组编程题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-二维数组中的查找（剑3）"><span class="nav-text">5.1 二维数组中的查找（剑3）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-调整数组顺序使奇数位于偶数前面（剑14）"><span class="nav-text">5.2 调整数组顺序使奇数位于偶数前面（剑14）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-数组中出现次数超过一半的数字（剑29）"><span class="nav-text">5.3 数组中出现次数超过一半的数字（剑29）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-连续子数组的最大和（剑31）"><span class="nav-text">5.4 连续子数组的最大和（剑31）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-从1到n整数中1出现的次数（剑32）"><span class="nav-text">5.5 从1到n整数中1出现的次数（剑32）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-把数组排成最小的数（剑33）"><span class="nav-text">5.6 把数组排成最小的数（剑33）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7-丑数（剑34）"><span class="nav-text">5.7 丑数（剑34）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-8-数组中的逆序对（剑36）"><span class="nav-text">5.8 数组中的逆序对（剑36）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-9-数组中重复的数字（剑51）"><span class="nav-text">5.9 数组中重复的数字（剑51）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-10-构建乘积数组（剑52）"><span class="nav-text">5.10 构建乘积数组（剑52）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
