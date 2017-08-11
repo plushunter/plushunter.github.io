@@ -111,7 +111,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005389746937.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005389874146.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-10%20%E4%B8%8B%E5%8D%8812.50.56.png">
-<meta property="og:updated_time" content="2017-07-24T11:33:03.000Z">
+<meta property="og:updated_time" content="2017-08-07T13:39:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（6）：排序">
 <meta name="twitter:description" content="经典排序算法在面试中占有很大的比重，也是基础，在这里整理并用Python实现了七大经典排序算法，包括冒泡排序、插入排序、选择排序、希尔排序、归并排序、快速排序、堆排序。我们默认将一个无序数列排序成由小到大。">
@@ -418,10 +418,10 @@ var _hmt = _hmt || [];
 <p>排序之后变为：</p>
 <figure class="highlight basic"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="symbol">10 </span><span class="number">14</span> <span class="number">13</span></div><div class="line"><span class="symbol">25 </span><span class="number">23</span> <span class="number">33</span></div><div class="line"><span class="symbol">27 </span><span class="number">25</span> <span class="number">59</span></div><div class="line"><span class="symbol">39 </span><span class="number">65</span> <span class="number">73</span></div><div class="line"><span class="symbol">45 </span><span class="number">94</span> <span class="number">82</span></div><div class="line"><span class="number">94</span></div></pre></td></tr></table></figure>
 <p>最后以1步长进行排序（此时就是简单的插入排序了）。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">shell_sort</span><span class="params">(ary)</span>:</span></div><div class="line">    n = len(ary)</div><div class="line">    gap = round(n/<span class="number">2</span>)       <span class="comment">#初始步长 , 用round四舍五入取整</span></div><div class="line">    <span class="keyword">while</span> gap &gt; <span class="number">0</span> :</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(gap,n):        <span class="comment">#每一列进行插入排序 , 从gap 到 n-1</span></div><div class="line">            temp = ary[i]</div><div class="line">            j = i</div><div class="line">            <span class="keyword">while</span> ( j &gt;= gap <span class="keyword">and</span> ary[j-gap] &gt; temp ):    <span class="comment">#插入排序</span></div><div class="line">                ary[j] = ary[j-gap]</div><div class="line">                j = j - gap</div><div class="line">            ary[j] = temp</div><div class="line">        gap = round(gap/<span class="number">2</span>)                     <span class="comment">#重新设置步长</span></div><div class="line">    <span class="keyword">return</span> ary</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">shell_sort</span><span class="params">(ary)</span></span>:</div><div class="line">    n = len(ary)</div><div class="line">    gap = round(n/<span class="number">2</span>)       <span class="comment">#初始步长 , 用round四舍五入取整</span></div><div class="line">    <span class="keyword">while</span> gap &gt; <span class="number">0</span> :</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(gap,n):        <span class="comment">#每一列进行插入排序 , 从gap 到 n-1</span></div><div class="line">            temp = ary[i]</div><div class="line">            j = i</div><div class="line">            <span class="keyword">while</span> ( j &gt;= gap <span class="keyword">and</span> ary[j-gap] &gt; temp ):    <span class="comment">#插入排序</span></div><div class="line">                ary[j] = ary[j-gap]</div><div class="line">                j = j - gap</div><div class="line">            ary[j] = temp</div><div class="line">        gap = round(gap/<span class="number">2</span>)                     <span class="comment">#重新设置步长</span></div><div class="line">    <span class="keyword">return</span> ary</div></pre></td></tr></table></figure>
 <p>上面源码的步长的选择是从n/2开始，每次再减半，直至为0。步长的选择直接决定了希尔排序的复杂度。在维基百科上有对于步长串行的详细介绍。</p>
 <h2 id="五、归并排序（Merge-Sort）"><a href="#五、归并排序（Merge-Sort）" class="headerlink" title="五、归并排序（Merge Sort）"></a>五、归并排序（Merge Sort）</h2><p>典型的是二路合并排序，将原始数据集分成两部分(不一定能够均分)，分别对它们进行排序，然后将排序后的子数据集进行合并，这是典型的分治法策略。</p>
-<p>在归并排序中，进行一趟归并需要的关键字比较次数和数据元素移动次数最多为$n$，需要归并的趟数$log_{2}n$，故归并排序的时间复杂度为$O(nlog_{2}n)$。归并排序小长度等于序列长度为$n$的辅助存储单元，故归并排序的空间复杂度为$O(n)$。归并排序是稳定的排序算法。</p>
+<p>在归并排序中，进行一趟归并需要的关键字比较次数和数据元素移动次数最多为$n$，需要归并的趟数$log_{2}n$，故归并排序的时间复杂度为$O(nlog_{2}n)$。归并排序需要长度等于序列长度为$n$的辅助存储单元，故归并排序的空间复杂度为$O(n)$。归并排序是稳定的排序算法。</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-09%20%E4%B8%8B%E5%8D%882.12.47.png" alt="屏幕快照 2017-03-09 下午2.12.47"></p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-09%20%E4%B8%8B%E5%8D%882.12.57.png" alt="屏幕快照 2017-03-09 下午2.12.57"></p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/15003836672934.gif" alt=""></p>
@@ -521,8 +521,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/21/数据结构与算法（7）：海量数据处理/" rel="next" title="数据结构与算法（7）：海量数据处理">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法（7）：海量数据处理
+              <a href="/2017/07/21/数据结构与算法（7）：海量数据处理/" rel="next" title="数据结构与算法：海量数据处理">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法：海量数据处理
               </a>
             
           </div>
@@ -601,7 +601,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">103</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -609,7 +609,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -618,7 +618,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-count">133</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

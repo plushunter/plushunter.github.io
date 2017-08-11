@@ -95,7 +95,7 @@
 <meta property="og:description" content="一、基本原理顾名思义，是用随机的方式建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。在得到森林之后，当有一个新的输入样本进入的时候，就让森林中的每一棵决策树分别进行一下判断，看看这个样本应该属于哪一类（对于分类算法），然后看看哪一类被选择最多，就预测这个样本为那一类。 我们可以这样比喻随机森林算法：每一棵决策树就是一个精通于某一个窄领域的专家（因为我们从M个特征中">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/f69ecd5658ba9557cf97e45f18d19cfd.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-08%20%E4%B8%8B%E5%8D%882.31.19.png">
-<meta property="og:updated_time" content="2017-04-24T10:58:32.000Z">
+<meta property="og:updated_time" content="2017-07-24T13:50:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（5）：随机森林">
 <meta name="twitter:description" content="一、基本原理顾名思义，是用随机的方式建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。在得到森林之后，当有一个新的输入样本进入的时候，就让森林中的每一棵决策树分别进行一下判断，看看这个样本应该属于哪一类（对于分类算法），然后看看哪一类被选择最多，就预测这个样本为那一类。 我们可以这样比喻随机森林算法：每一棵决策树就是一个精通于某一个窄领域的专家（因为我们从M个特征中">
@@ -375,12 +375,12 @@ var _hmt = _hmt || [];
 
 <p>随机森林算法有很多优点：</p>
 <ul>
-<li>在数据集上表现良好</li>
-<li>在当前的很多数据集上，相对其他算法有着很大的优势</li>
-<li>它能够处理很高维度（feature很多）的数据，并且不用做特征选择</li>
-<li>在训练完后，它能够给出哪些feature比较重要</li>
+<li>在数据集上表现良好，两个随机性的引入，使得随机森林不容易陷入过拟合</li>
+<li>在当前的很多数据集上，相对其他算法有着很大的优势，两个随机性的引入，使得随机森林具有很好的抗噪声能力</li>
+<li>它能够处理很高维度（feature很多）的数据，并且不用做特征选择，对数据集的适应能力强：既能处理离散型数据，也能处理连续型数据，数据集无需规范化</li>
+<li>可生成一个$Proximities=（p_{ij}）$矩阵，用于度量样本之间的相似性： $p_{ij}=a_{ij}/N$,$ a_{ij}$表示样本i和j出现在随机森林中同一个叶子结点的次数，N随机森林中树的颗数</li>
 <li>在创建随机森林的时候，对generlization error使用的是无偏估计</li>
-<li>训练速度快</li>
+<li>训练速度快，可以得到变量重要性排序（两种：基于OOB误分率的增加量和基于分裂时的GINI下降量</li>
 <li>在训练过程中，能够检测到feature间的互相影响</li>
 <li>容易做成并行化方法</li>
 <li>实现比较简单</li>
@@ -541,7 +541,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">103</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -549,7 +549,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -558,7 +558,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-count">133</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

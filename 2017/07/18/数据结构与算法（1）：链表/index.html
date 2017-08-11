@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现">
+<meta name="description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。介绍线性表的几个基本组成部分：数组、单向链表、双向链表。">
 <meta name="keywords" content="数据结构,算法,数组,双向链表,单向链表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构与算法（1）：链表">
 <meta property="og:url" content="http://yoursite.com/2017/07/18/数据结构与算法（1）：链表/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现">
+<meta property="og:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。介绍线性表的几个基本组成部分：数组、单向链表、双向链表。">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006132398847.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006133555450.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006134720249.jpg">
@@ -100,10 +100,10 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006137887925.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006139529251.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006140850713.jpg">
-<meta property="og:updated_time" content="2017-07-24T11:27:14.000Z">
+<meta property="og:updated_time" content="2017-08-11T02:56:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（1）：链表">
-<meta name="twitter:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现">
+<meta name="twitter:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。介绍线性表的几个基本组成部分：数组、单向链表、双向链表。">
 <meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15006132398847.jpg">
 
 
@@ -372,7 +372,7 @@ var _hmt = _hmt || [];
       
 
       
-        <p>线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。本章先介绍线性表的几个基本组成部分：数组、单向链表、双向链表。然后给出双向链表的C++实现</p>
+        <p>线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。介绍线性表的几个基本组成部分：数组、单向链表、双向链表。</p>
 <a id="more"></a>
 <h2 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h2><p>数组有上界和下界，数组的元素在上下界内是连续的。</p>
 <p>存储10，20，30，40，50的数组的示意图如下：<br><img src="http://omu7tit09.bkt.clouddn.com/15006132398847.jpg" alt=""><br>数组的特点是：数据是连续的；随机访问速度块。</p>
@@ -389,12 +389,7 @@ var _hmt = _hmt || [];
 <h3 id="3-2-双链表删除节点"><a href="#3-2-双链表删除节点" class="headerlink" title="3.2 双链表删除节点"></a>3.2 双链表删除节点</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006139529251.jpg" alt=""><br>删除“节点30”</p>
 <p>删除之前：“节点20”的后继节点为“节点30”，“节点30”的前继节点为“节点20”。“节点30”的后继节点为“节点40”，“节点40”的前继节点为“节点30”<br>删除之后：“节点20”的后继节点为“节点40”，“节点40”的前继节点为“节点20”</p>
 <h3 id="3-3-双链表添加节点"><a href="#3-3-双链表添加节点" class="headerlink" title="3.3 双链表添加节点"></a>3.3 双链表添加节点</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15006140850713.jpg" alt=""><br>在”节点10”与”节点20”之间添加”节点15”<br>添加之前：”节点10”的后继节点为”节点20”，”节点20” 的前继节点为”节点10”。<br>添加之后：”节点10”的后继节点为”节点15”，”节点15” 的前继节点为”节点10”。”节点15”的后继节点为”节点20”，”节点20” 的前继节点为”节点15”。</p>
-<h2 id="四、链表编程题"><a href="#四、链表编程题" class="headerlink" title="四、链表编程题"></a>四、链表编程题</h2><h3 id="4-1-从尾到头打印链表（剑5）"><a href="#4-1-从尾到头打印链表（剑5）" class="headerlink" title="4.1 从尾到头打印链表（剑5）"></a>4.1 从尾到头打印链表（剑5）</h3><p>输入一个链表的头结点，从尾到头反过来打印每个结点的值（注意不能改变链表的结构）。<br>链表结点定义如下：</p>
-<figure class="highlight capnproto"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> </span>&#123;</div><div class="line">        int val;</div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> *next;</span></div><div class="line">        ListNode(int x) :</div><div class="line">              val(x), next(NULL) &#123;</div><div class="line">        &#125;</div><div class="line">  &#125;;</div></pre></td></tr></table></figure>
-<p>解决这个问题肯定要遍历链表。遍历的顺序是从头到尾的顺序，可输出的顺序却是从尾到头。也就是说第一个遍历到的结点最后一个输出，而最后一个遍历到的结点第一个输出。这就是典型的“后进先出”，我们可以用栈实现这种顺序。没经过一个节点的时候，把该结点放到一个栈中。当遍历完整个链表后，再从栈顶开始逐个输出结点的值，此时输出的结点的顺序就翻转过来了。实现代码如下：</p>
-<p>既然想到了用栈来实现这个函数，而递归在本质上就是一个栈结构，因此可用递归来实现。要实现反过来输出链表，我们每访问到一个节点的时候，先递归输出它后面的结点，再输出该结点自身，这样链表的输出结果就反过来了。实现代码如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; printListFromTailToHead(ListNode* head) &#123;</div><div class="line">        <span class="keyword">if</span>(head==<span class="literal">NULL</span>) <span class="keyword">return</span> &#123;&#125;;</div><div class="line">        <span class="keyword">if</span>(head-&gt;next==<span class="literal">NULL</span>) <span class="keyword">return</span> &#123;head-&gt;val&#125;;</div><div class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; result = printListFromTailToHead(head-&gt;next);</div><div class="line">        result.push_back(head-&gt;val);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="4-2-在O-1-时间删除链表结点（剑13）"><a href="#4-2-在O-1-时间删除链表结点（剑13）" class="headerlink" title="4.2 在O(1)时间删除链表结点（剑13）"></a>4.2 在O(1)时间删除链表结点（剑13）</h3><h3 id="4-3-链表中倒数第K个结点（剑15）"><a href="#4-3-链表中倒数第K个结点（剑15）" class="headerlink" title="4.3 链表中倒数第K个结点（剑15）"></a>4.3 链表中倒数第K个结点（剑15）</h3><h3 id="4-4-反转链表（剑16）"><a href="#4-4-反转链表（剑16）" class="headerlink" title="4.4 反转链表（剑16）"></a>4.4 反转链表（剑16）</h3><h3 id="4-5-合并两个排序的链表（剑17）"><a href="#4-5-合并两个排序的链表（剑17）" class="headerlink" title="4.5 合并两个排序的链表（剑17）"></a>4.5 合并两个排序的链表（剑17）</h3><h3 id="4-6-复杂链表的赋值（剑26）"><a href="#4-6-复杂链表的赋值（剑26）" class="headerlink" title="4.6 复杂链表的赋值（剑26）"></a>4.6 复杂链表的赋值（剑26）</h3><h3 id="4-7-双向链表（剑27）"><a href="#4-7-双向链表（剑27）" class="headerlink" title="4.7 双向链表（剑27）"></a>4.7 双向链表（剑27）</h3><h3 id="4-8-两个链表的第一个公共结点（剑37）"><a href="#4-8-两个链表的第一个公共结点（剑37）" class="headerlink" title="4.8 两个链表的第一个公共结点（剑37）"></a>4.8 两个链表的第一个公共结点（剑37）</h3><h3 id="4-9-圆圈中最后剩下的的数字（剑45）"><a href="#4-9-圆圈中最后剩下的的数字（剑45）" class="headerlink" title="4.9 圆圈中最后剩下的的数字（剑45）"></a>4.9 圆圈中最后剩下的的数字（剑45）</h3><h3 id="4-10-链表中环的入口结点（剑56）"><a href="#4-10-链表中环的入口结点（剑56）" class="headerlink" title="4.10 链表中环的入口结点（剑56）"></a>4.10 链表中环的入口结点（剑56）</h3><h3 id="4-11-删除链表中重复的结点（剑57）"><a href="#4-11-删除链表中重复的结点（剑57）" class="headerlink" title="4.11 删除链表中重复的结点（剑57）"></a>4.11 删除链表中重复的结点（剑57）</h3><h2 id="五、数组编程题"><a href="#五、数组编程题" class="headerlink" title="五、数组编程题"></a>五、数组编程题</h2><h3 id="5-1-二维数组中的查找（剑3）"><a href="#5-1-二维数组中的查找（剑3）" class="headerlink" title="5.1 二维数组中的查找（剑3）"></a>5.1 二维数组中的查找（剑3）</h3><h3 id="5-2-调整数组顺序使奇数位于偶数前面（剑14）"><a href="#5-2-调整数组顺序使奇数位于偶数前面（剑14）" class="headerlink" title="5.2 调整数组顺序使奇数位于偶数前面（剑14）"></a>5.2 调整数组顺序使奇数位于偶数前面（剑14）</h3><h3 id="5-3-数组中出现次数超过一半的数字（剑29）"><a href="#5-3-数组中出现次数超过一半的数字（剑29）" class="headerlink" title="5.3 数组中出现次数超过一半的数字（剑29）"></a>5.3 数组中出现次数超过一半的数字（剑29）</h3><h3 id="5-4-连续子数组的最大和（剑31）"><a href="#5-4-连续子数组的最大和（剑31）" class="headerlink" title="5.4 连续子数组的最大和（剑31）"></a>5.4 连续子数组的最大和（剑31）</h3><h3 id="5-5-从1到n整数中1出现的次数（剑32）"><a href="#5-5-从1到n整数中1出现的次数（剑32）" class="headerlink" title="5.5 从1到n整数中1出现的次数（剑32）"></a>5.5 从1到n整数中1出现的次数（剑32）</h3><h3 id="5-6-把数组排成最小的数（剑33）"><a href="#5-6-把数组排成最小的数（剑33）" class="headerlink" title="5.6 把数组排成最小的数（剑33）"></a>5.6 把数组排成最小的数（剑33）</h3><h3 id="5-7-丑数（剑34）"><a href="#5-7-丑数（剑34）" class="headerlink" title="5.7 丑数（剑34）"></a>5.7 丑数（剑34）</h3><h3 id="5-8-数组中的逆序对（剑36）"><a href="#5-8-数组中的逆序对（剑36）" class="headerlink" title="5.8 数组中的逆序对（剑36）"></a>5.8 数组中的逆序对（剑36）</h3><h3 id="5-9-数组中重复的数字（剑51）"><a href="#5-9-数组中重复的数字（剑51）" class="headerlink" title="5.9 数组中重复的数字（剑51）"></a>5.9 数组中重复的数字（剑51）</h3><h3 id="5-10-构建乘积数组（剑52）"><a href="#5-10-构建乘积数组（剑52）" class="headerlink" title="5.10 构建乘积数组（剑52）"></a>5.10 构建乘积数组（剑52）</h3>
+
       
     </div>
 
@@ -434,8 +429,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/18/数据结构与算法（2）：栈与队列/" rel="next" title="数据结构与算法（2）：栈与队列">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法（2）：栈与队列
+              <a href="/2017/07/18/数据结构与算法题解（2）：数组题解/" rel="next" title="数据结构与算法题解（2）：数组题解">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（2）：数组题解
               </a>
             
           </div>
@@ -444,8 +439,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/17/广告点击率预估（3）：GBDT与LR融合方案/" rel="prev" title="广告点击率预估（3）：GBDT与LR融合方案">
-                广告点击率预估（3）：GBDT与LR融合方案 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/17/计算广告（3）：广告点击率预估中的GBDT与LR融合方案/" rel="prev" title="计算广告（3）：广告点击率预估中的GBDT与LR融合方案">
+                计算广告（3）：广告点击率预估中的GBDT与LR融合方案 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -514,7 +509,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">103</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -522,7 +517,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -531,7 +526,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-count">133</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -573,7 +568,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、数组"><span class="nav-text">一、数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、单向链表"><span class="nav-text">二、单向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-定义"><span class="nav-text">2.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-单链表删除节点"><span class="nav-text">2.2 单链表删除节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-单链表添加节点"><span class="nav-text">2.3 单链表添加节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、双向链表"><span class="nav-text">三、双向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-定义"><span class="nav-text">3.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-双链表删除节点"><span class="nav-text">3.2 双链表删除节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-双链表添加节点"><span class="nav-text">3.3 双链表添加节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、链表编程题"><span class="nav-text">四、链表编程题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-从尾到头打印链表（剑5）"><span class="nav-text">4.1 从尾到头打印链表（剑5）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-在O-1-时间删除链表结点（剑13）"><span class="nav-text">4.2 在O(1)时间删除链表结点（剑13）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-链表中倒数第K个结点（剑15）"><span class="nav-text">4.3 链表中倒数第K个结点（剑15）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-反转链表（剑16）"><span class="nav-text">4.4 反转链表（剑16）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-5-合并两个排序的链表（剑17）"><span class="nav-text">4.5 合并两个排序的链表（剑17）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-6-复杂链表的赋值（剑26）"><span class="nav-text">4.6 复杂链表的赋值（剑26）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-7-双向链表（剑27）"><span class="nav-text">4.7 双向链表（剑27）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-8-两个链表的第一个公共结点（剑37）"><span class="nav-text">4.8 两个链表的第一个公共结点（剑37）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-9-圆圈中最后剩下的的数字（剑45）"><span class="nav-text">4.9 圆圈中最后剩下的的数字（剑45）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-10-链表中环的入口结点（剑56）"><span class="nav-text">4.10 链表中环的入口结点（剑56）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-11-删除链表中重复的结点（剑57）"><span class="nav-text">4.11 删除链表中重复的结点（剑57）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、数组编程题"><span class="nav-text">五、数组编程题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-二维数组中的查找（剑3）"><span class="nav-text">5.1 二维数组中的查找（剑3）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-调整数组顺序使奇数位于偶数前面（剑14）"><span class="nav-text">5.2 调整数组顺序使奇数位于偶数前面（剑14）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-数组中出现次数超过一半的数字（剑29）"><span class="nav-text">5.3 数组中出现次数超过一半的数字（剑29）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-连续子数组的最大和（剑31）"><span class="nav-text">5.4 连续子数组的最大和（剑31）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-从1到n整数中1出现的次数（剑32）"><span class="nav-text">5.5 从1到n整数中1出现的次数（剑32）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-6-把数组排成最小的数（剑33）"><span class="nav-text">5.6 把数组排成最小的数（剑33）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-7-丑数（剑34）"><span class="nav-text">5.7 丑数（剑34）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-8-数组中的逆序对（剑36）"><span class="nav-text">5.8 数组中的逆序对（剑36）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-9-数组中重复的数字（剑51）"><span class="nav-text">5.9 数组中重复的数字（剑51）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-10-构建乘积数组（剑52）"><span class="nav-text">5.10 构建乘积数组（剑52）</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、数组"><span class="nav-text">一、数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、单向链表"><span class="nav-text">二、单向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-定义"><span class="nav-text">2.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-单链表删除节点"><span class="nav-text">2.2 单链表删除节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-单链表添加节点"><span class="nav-text">2.3 单链表添加节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、双向链表"><span class="nav-text">三、双向链表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-定义"><span class="nav-text">3.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-双链表删除节点"><span class="nav-text">3.2 双链表删除节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-双链表添加节点"><span class="nav-text">3.3 双链表添加节点</span></a></li></ol></li></ol></div>
             
 
           </div>

@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15007395063818.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15007401563802.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15007402177979.png">
-<meta property="og:updated_time" content="2017-07-24T11:15:25.000Z">
+<meta property="og:updated_time" content="2017-08-01T03:36:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（11）：神经网络防止过拟合的方法">
 <meta name="twitter:description" content="过拟合（overfitting）是指在模型参数拟合过程中的问题，由于训练数据包含抽样误差，训练时，复杂的模型将抽样误差也考虑在内，将抽样误差也进行了很好的拟合。具体表现就是最终模型在训练集上效果好，而在测试集上的效果很差，模型的泛化能力比较弱。">
@@ -427,6 +427,7 @@ var _hmt = _hmt || [];
 <p><img src="http://omu7tit09.bkt.clouddn.com/15007402177979.png" alt=""></p>
 <p>在训练时，每次随机（如50%概率）忽略隐层的某些节点；这样，我们相当于随机从$2^H$个模型中采样选择模型；同时，由于每个网络只见过一个训练数据（每次都是随机的新网络），所以类似 bagging 的做法，这就是我为什么将它分类到「结合多种模型」中；</p>
 <p>此外，而不同模型之间权值共享（共同使用这 H 个神经元的连接权值），相当于一种权值正则方法，实际效果比 L2 regularization 更好。</p>
+<p><a href="http://blog.csdn.net/u012162613/article/details/44261657" target="_blank" rel="external">正则化方法：L1和L2 regularization、数据集扩增、dropout</a></p>
 
       
     </div>
@@ -543,7 +544,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">103</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -551,7 +552,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -560,7 +561,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-count">133</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

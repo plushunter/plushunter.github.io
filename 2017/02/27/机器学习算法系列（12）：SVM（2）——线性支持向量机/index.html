@@ -1,0 +1,716 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习,SVM,线性支持向量机," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="当训练数据近似线性可分时，通过软间隔最大化学习一个线性的分类器，即线性支持向量机，又称为软间隔支持向量机。">
+<meta name="keywords" content="机器学习,SVM,线性支持向量机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法系列（12）：SVM（2）——线性支持向量机">
+<meta property="og:url" content="http://yoursite.com/2017/02/27/机器学习算法系列（12）：SVM（2）——线性支持向量机/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="当训练数据近似线性可分时，通过软间隔最大化学习一个线性的分类器，即线性支持向量机，又称为软间隔支持向量机。">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8810.22.45.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-08 下午6.11.53.png">
+<meta property="og:updated_time" content="2017-07-31T16:11:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习算法系列（12）：SVM（2）——线性支持向量机">
+<meta name="twitter:description" content="当训练数据近似线性可分时，通过软间隔最大化学习一个线性的分类器，即线性支持向量机，又称为软间隔支持向量机。">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8810.22.45.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 机器学习算法系列（12）：SVM（2）——线性支持向量机 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/27/机器学习算法系列（12）：SVM（2）——线性支持向量机/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习算法系列（12）：SVM（2）——线性支持向量机
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-27T23:14:45+08:00">
+                2017-02-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>当训练数据近似线性可分时，通过软间隔最大化学习一个线性的分类器，即线性支持向量机，又称为软间隔支持向量机。</p>
+<a id="more"></a>
+<h2 id="二、线性支持向量机与软间隔最大化"><a href="#二、线性支持向量机与软间隔最大化" class="headerlink" title="二、线性支持向量机与软间隔最大化"></a>二、线性支持向量机与软间隔最大化</h2><h3 id="2-1-线性支持向量机"><a href="#2-1-线性支持向量机" class="headerlink" title="2.1 线性支持向量机"></a>2.1 线性支持向量机</h3><p>通常情况是，训练数据中有一些特异点<code>outlier</code>，将这些特异点除去后，剩下大部分的样本点组成的集合是线性可分的。</p>
+<p>线性不可分意味着某些样本点不能满足函数间隔大于等于1的约束条件。为了解决这个问题，可以对每个样本点引进一个松弛变量$<br>\xi \geqslant 0<br>$，使函数间隔加上松弛变量大于等于1.这样，约束条件变成$$<br>y_i\left( w·x_i+b \right) \geqslant 1-\xi _i<br>$$同时，对每个松弛变量$<br>\xi \geqslant 0<br>$，支付一个代价$<br>\xi \geqslant 0<br>$。当然，如果我们允许$<br>\xi \geqslant 0<br>$任意大的话，那任意的超平面都是符合条件的了。所以，我们在原来的目标函数后面加上一项，使得这些 $<br>\xi \geqslant 0<br>$的总和也要最小：目标函数由原来的$<br>\frac{1}{2}||w||^2<br>$变成$$<br>\frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i}<br>$$<br>这里，$C&gt;0$称为惩罚参数，一般事先由应用问题决定，控制目标函数中两项（“寻找 $margin$ 最大的超平面”和“保证数据点偏差量最小”）之间的权重，$C$越大时对误分类的惩罚增大，$C$值小时对误分类的惩罚减小。最小化目标函数包含两层含义：使$<br>\frac{1}{2}||w||^2<br>$尽量小即间隔尽量大，同时使误分类点的个数尽量小，C是调和二者的系数。<br>则有以下优化问题：<br>$$<br>\underset{w,b,\xi}{\min} \frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i}<br>$$$$<br>s.t.  y_i\left( w·x_i+b \right) \geqslant 1-\xi _i , i=1,2,···,N<br>$$$$<br>\xi _i\geqslant 0, i=1,2,···\mathrm{，}N<br>$$<br>可证明$w$的解是唯一的，但$b$的解不唯一，$b$的解存在于一个区间。</p>
+<p>用之前的方法将限制加入到目标函数中，得到如下原始最优化问题的拉格朗日函数：<br>$$<br>L\left( w,b,\xi ,a,u \right) =\frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i-\sum_{i=1}^N{a_i\left( y_i\left( w·x_i+b \right) -1+\xi _i \right) -\sum_{i=1}^N{u_i\xi _i}}}<br>$$</p>
+<p>首先求拉格朗日函数针对$<br>w,b,\xi<br>$的极小。$$<br>\frac{\partial L}{\partial w}=0\Rightarrow w=\sum_{i=1}^N{a_iy_ix_i}<br>$$$$<br>\frac{\partial L}{\partial b}=0\Rightarrow \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>\frac{\partial L}{\partial \xi _i}=0\Rightarrow C-a_i-u_i=0，i=1,2,3···,N<br>$$<br>将它们代入拉格朗日函数，得到和原来一样的目标函数。<br>$$<br>\underset{a}{\max}  -\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) +\sum_{i=1}^N{a_i}}}<br>$$$$<br>s.t. \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>C-a_i-u_i=0<br>$$$$<br>a_i\geqslant 0<br>$$$$<br>u_i\geqslant 0<br>$$</p>
+<p>不过，由于我们得到$C-a_i-u_i=0$，而又有$u_i&gt;0$（作为拉格朗日乘子的条件）,因此有$a_i≤C$,所以整个<code>dual</code>问题现在写作：<br>$$<br>\underset{a}{\max}  -\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j⟨x_i·x_j ⟩+\sum_{i=1}^N{a_i}}}<br>$$$$<br>s.t. \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>0\le a_i\le C ,  i=1,2,···,N<br>$$<br>和之前的结果对比一下，可以看到唯一的区别就是现在拉格朗日乘子$a$多了一个上限$C$。而 Kernel 化的非线性形式也是一样的，只要把$⟨x_i,x_j⟩$ 换成 $κ(x_i,x_j)$ 即可。</p>
+<p>构造并求解上述二次规划问题后求得最优解<br>$$<br>a^<em>=\left( a_{1}^{</em>},a_{2}^{<em>},···,a_{N}^{</em>} \right) ^T<br>$$<br>然后计算$$<br>w^<em>=\sum_{i=1}^N{a_{i}^{</em>}y_ix_i}<br>$$<br>选择$a^<em>$的一个分量$a_i^</em>$适合约束条件$0&lt;a_i&lt;C$,计算$$<br>b^<em>=y_j-\sum_{i=1}^N{a_{i}^{</em>}y_i⟨x_i·x_j ⟩}<br>$$<br>对任一适合条件都可求得一个$b^*$，但是由于原始问题对$b$的求解并不唯一，所以实际计算时可以取在所有符合条件的样本点上的平均值。</p>
+<h3 id="2-2-支持向量"><a href="#2-2-支持向量" class="headerlink" title="2.2 支持向量"></a>2.2 支持向量</h3><p>再现性不可分的情况下，将对偶问题的解中对应于$a_i^*&gt;0$的样本点$(x_i,y_i)$的实例$x_i$称为支持向量（软间隔的支持向量）。如图所示，这时的支持向量要比线性可分时的情况复杂一些。</p>
+<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8810.22.45.png" alt="屏幕快照 2017-03-20 上午10.22.45"></center>
+
+<p>图中，分离超平面由实线表示，间隔边界由虚线表示。正例点由$。$表示，负例点由$×$表示。图中还标出了实例$x_i$到间隔边界的距离$<br>\frac{\xi _i}{||w||}<br>$。</p>
+<p>软间隔的支持向量$x_i$要么在间隔边界上，要么在间隔边界与分离超平面之间，要么在分离超平面误分类一侧。</p>
+<p>若$a_i^*&lt;C$，则$<br>\xi _i=0<br>$，支持向量恰好落在间隔边界上；</p>
+<p>若$a_i^*=C,0&lt;<br>\xi _i&lt;1<br>$，则分类正确，$x_i$在间隔边界与分离超平面之间；</p>
+<p>若$a_i^*=C，\xi _i=1$则$x_i$在分隔超平面上；</p>
+<p>若$a_i^*=C,\xi _i&gt;1$，则$x_i$位于分离超平面误分一侧。</p>
+<h3 id="2-3-Hinge损失函数"><a href="#2-3-Hinge损失函数" class="headerlink" title="2.3 Hinge损失函数"></a>2.3 Hinge损失函数</h3><p>线性支持向量机学习除了原始最优化问题，还有另外一种解释，就是最优化以下目标函数：$$\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2$$目标函数的第一项是经验损失或经验风险，函数$$L(y·(w·x+b))=[1-y(w·x+b)]_+$$称为合页损失函数（hinge loss function）。下标”+”表示以下取正值的函数：$$<br>\left[z\right]_+=\left\{\begin{array}{l}<br>    z , z&gt;0\\<br>    0 , z\le 0\\<br>\end{array}\right.<br>$$这就是说，当样本点$(x_i,y_i)$被正确分类且函数间隔（确信度）$y_i(w·x_i+b)$大于1时，损失是0，否则损失是$1-y_i(w·x_i+b)$。目标函数的第二项是系数为$\lambda$的$w$的$L_2$范数，是正则化项。</p>
+<p>接下来证明线性支持向量机原始最优化问题：$$<br>\underset{w,b,\xi}{\min} \frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i}<br>$$$$<br>s.t.  y_i\left( w·x_i+b \right) \geqslant 1-\xi _i , i=1,2,···,N<br>$$$$<br>\xi _i\geqslant 0, i=1,2,···\mathrm{，}N<br>$$等价于最优化问题$$\underset{w,b}{min }\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2$$</p>
+<p>先令$[1-y_i(w·x_i+b)]_+=\xi_i$，则$\xi_i≥0$，第二个约束条件成立；由$[1-y_i(w·x_i+b)]_+=\xi_i$，当$1-y_i(w·x_i+b)&gt;0$时，有$y_i(w·x_i+b)=1-\xi_i$;当$1-y_i(w·x_i+b)≤0$时，$\xi_i=0$，有$y_i(w·x_i+b)≥1-\xi_i$，所以第一个约束条件成立。所以两个约束条件都满足，最优化问题可以写作$$\underset{w,b}{min}\sum_{i=1}^N\xi_i+\lambda||w||^2$$若取$\lambda =\frac{1}{2C}$则$$\underset{w,b}{min} \frac{1}{C}(\frac{1}{2} ||w||^2+C\sum_{i=1}^N \xi_i)$$与原始最优化问题等价。</p>
+<p>合页损失函数图像如图所示，横轴是函数间隔$y(w·x+b)$，纵轴是损失。由于函数形状像一个合页，故名合页损失函数。</p>
+<p>图中还画出了0-1损失函数，可以认为它是一个二类分类问题的真正的损失函数，而合页损失函数是0-1损失函数的上界。由于0-1损失函数不是连续可导的，直接优化其构成的目标函数比较困难，可以认为线性支持向量机是优化由0-1损失函数的上界（合页损失函数）构成的目标函数。这时的上界损失函数又称为代理损失函数（surrogate function）。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-08 下午6.11.53.png" alt="屏幕快照 2017-07-08 下午6.11.53"><br>图中虚线显示的是感知机的损失函数$[-y_i(w·x_i+b)]_+$。这时当样本点$(x_i,y_i)$被正确分类时，损失是0，否则损失是$-y_i(w·x_i+b)$，相比之下，合页损失函数不仅要分类正确，而且确信度足够高时损失才是0，也就是说，合页损失函数对学习有更高的要求</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/SVM/" rel="tag"># SVM</a>
+          
+            <a href="/tags/线性支持向量机/" rel="tag"># 线性支持向量机</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/27/机器学习算法系列（12）：SVM（6）——SVM与LR的异同/" rel="next" title="机器学习算法系列（12）：SVM（6）——SVM与LR的异同">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（12）：SVM（6）——SVM与LR的异同
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/27/机器学习算法系列（12）：SVM（5）——对偶/" rel="prev" title="机器学习算法系列（12）：SVM（5）——对偶">
+                机器学习算法系列（12）：SVM（5）——对偶 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">133</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二、线性支持向量机与软间隔最大化"><span class="nav-text">二、线性支持向量机与软间隔最大化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-线性支持向量机"><span class="nav-text">2.1 线性支持向量机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-支持向量"><span class="nav-text">2.2 支持向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Hinge损失函数"><span class="nav-text">2.3 Hinge损失函数</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

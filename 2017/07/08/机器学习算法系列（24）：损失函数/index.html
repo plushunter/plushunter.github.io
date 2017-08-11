@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14995092441592.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14995093179927.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14995093274307.png">
-<meta property="og:updated_time" content="2017-07-17T04:06:30.000Z">
+<meta property="og:updated_time" content="2017-07-31T16:59:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（24）：机器学习中的损失函数">
 <meta name="twitter:description" content="损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：$$\theta^* = argmin_\theta \frac{1}{">
@@ -399,11 +399,11 @@ var _hmt = _hmt || [];
 <li>LR采用log损失，SVM采用合页损失。</li>
 </ol>
 <ul>
-<li>2、LR对异常值敏感，SVM对异常值不敏感。</li>
-<li>3、在训练集较小时，SVM较适用，而LR需要较多的样本。</li>
-<li>4、LR模型找到的那个超平面，是尽量让所有点都远离他，而SVM寻找的那个超平面，是只让最靠近中间分割线的那些点尽量远离，即只用到那些支持向量的样本。</li>
-<li>5、对非线性问题的处理方式不同，LR主要靠特征构造，必须组合交叉特征，特征离散化。SVM也可以这样，还可以通过kernel。</li>
-<li>6、svm 更多的属于非参数模型，而logistic regression 是参数模型，本质不同。其区别就可以参考参数模型和非参模型的区别</li>
+<li>LR对异常值敏感，SVM对异常值不敏感。</li>
+<li>在训练集较小时，SVM较适用，而LR需要较多的样本。</li>
+<li>LR模型找到的那个超平面，是尽量让所有点都远离他，而SVM寻找的那个超平面，是只让最靠近中间分割线的那些点尽量远离，即只用到那些支持向量的样本。</li>
+<li>对非线性问题的处理方式不同，LR主要靠特征构造，必须组合交叉特征，特征离散化。SVM也可以这样，还可以通过kernel。</li>
+<li>svm 更多的属于非参数模型，而logistic regression 是参数模型，本质不同。其区别就可以参考参数模型和非参模型的区别</li>
 </ul>
 <p>那怎么根据特征数量和样本量来选择SVM和LR模型呢？Andrew NG的课程中给出了以下建议：</p>
 <ol>
@@ -523,7 +523,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">103</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -531,7 +531,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -540,7 +540,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">106</span>
+                <span class="site-state-item-count">133</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

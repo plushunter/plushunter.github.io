@@ -1,0 +1,900 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构,算法,链表," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="链表相关的编程题整理。">
+<meta name="keywords" content="数据结构,算法,链表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法题解（1）：链表题解">
+<meta property="og:url" content="http://yoursite.com/2017/07/18/数据结构与算法题解（1）：链表题解/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="链表相关的编程题整理。">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 上午106.17.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-24 下午113.37.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 上午9.26.52.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 上午9.39.5png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-04 下午7.51.53.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-04 下午7.52.01.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-04 下午7.52.07.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午2.59.56.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午3.420.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午3.46.08.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午5.43.23.png">
+<meta property="og:updated_time" content="2017-08-11T02:55:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法题解（1）：链表题解">
+<meta name="twitter:description" content="链表相关的编程题整理。">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 上午106.17.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 数据结构与算法题解（1）：链表题解 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/数据结构与算法题解（1）：链表题解/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构与算法题解（1）：链表题解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T22:20:45+08:00">
+                2017-07-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>链表相关的编程题整理。</p>
+<a id="more"></a>
+<h2 id="5-从尾到头打印链表"><a href="#5-从尾到头打印链表" class="headerlink" title="5. 从尾到头打印链表"></a>5. 从尾到头打印链表</h2><p>输入一个链表的头结点，从尾到头反过来打印每个结点的值（注意不能改变链表的结构）。</p>
+<p>解决这个问题肯定要遍历链表。遍历的顺序是从头到尾的顺序，可输出的顺序却是从尾到头。也就是说第一个遍历到的结点最后一个输出，而最后一个遍历到的结点第一个输出。这就是典型的“后进先出”，我们可以用栈实现这种顺序。没经过一个节点的时候，把该结点放到一个栈中。当遍历完整个链表后，再从栈顶开始逐个输出结点的值，此时输出的结点的顺序就翻转过来了。实现代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.Stack;</div><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">printListFromTailToHead</span><span class="params">(ListNode listNode)</span> </span>&#123;</div><div class="line">        Stack&lt;Integer&gt; stack = <span class="keyword">new</span> Stack&lt;&gt;();</div><div class="line">        <span class="keyword">while</span> (listNode!=<span class="keyword">null</span>)&#123;</div><div class="line">            stack.push(listNode.val);</div><div class="line">            listNode = listNode.next;</div><div class="line">        &#125;</div><div class="line">        ArrayList&lt;Integer&gt; List = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        <span class="keyword">while</span>(!stack.isEmpty())&#123;</div><div class="line">            List.add(stack.pop());</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> List;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>既然想到了用栈来实现这个函数，而递归在本质上就是一个栈结构，因此可用递归来实现。要实现反过来输出链表，我们每访问到一个节点的时候，先递归输出它后面的结点，再输出该结点自身，这样链表的输出结果就反过来了。实现代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">printListFromTailToHead</span><span class="params">(ListNode listNode)</span> </span>&#123;</div><div class="line">        ArrayList&lt;Integer&gt; list=<span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">        </div><div class="line">        ListNode pNode=listNode;</div><div class="line">        <span class="keyword">if</span>(pNode!=<span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">if</span>(pNode.next!=<span class="keyword">null</span>)&#123;</div><div class="line">                list=printListFromTailToHead(pNode.next);</div><div class="line">            &#125;</div><div class="line">            list.add(pNode.val);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> list;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="13-在O-1-时间删除链表结点"><a href="#13-在O-1-时间删除链表结点" class="headerlink" title="13. 在O(1)时间删除链表结点"></a>13. 在O(1)时间删除链表结点</h2><p>给定单向链表的头指针和一个结点指针，定义一个函数在O(1)时间删除该结点。</p>
+<p>我们要删除结点i，先把i的下一个结点i.next的内容复制到i，然后在把i的指针指向i.next结点的下一个结点即i.next.next，它的效果刚好是把结点i给删除了。</p>
+<p>此外还要考虑删除的结点是头尾结点、链表中只有一个结点、链表为空这几种情况。</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeleteNode</span> </span>&#123;  </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 链表结点 </div><div class="line">     */  </div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ListNode</span> </span>&#123;  </div><div class="line">        <span class="keyword">int</span> value; <span class="comment">// 保存链表的值  </span></div><div class="line">        ListNode next; <span class="comment">// 下一个结点  </span></div><div class="line">    &#125;  </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 给定单向链表的头指针和一个结点指针，定义一个函数在0(1)时间删除该结点, </div><div class="line">     * 【注意1：这个方法和文本上的不一样，书上的没有返回值，这个因为JAVA引用传递的原因， </div><div class="line">     * 如果删除的结点是头结点，如果不采用返回值的方式，那么头结点永远删除不了】 </div><div class="line">     * 【注意2：输入的待删除结点必须是待链表中的结点，否则会引起错误，这个条件由用户进行保证】 </div><div class="line">     * </div><div class="line">     * <span class="doctag">@param</span> head        链表表的头 </div><div class="line">     * <span class="doctag">@param</span> toBeDeleted 待删除的结点 </div><div class="line">     * <span class="doctag">@return</span> 删除后的头结点 </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">deleteNode</span><span class="params">(ListNode head, ListNode toBeDeleted)</span> </span>&#123;  </div><div class="line">        <span class="comment">// 如果输入参数有空值就返回表头结点  </span></div><div class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span> || toBeDeleted == <span class="keyword">null</span>) &#123;  </div><div class="line">            <span class="keyword">return</span> head;  </div><div class="line">        &#125;  </div><div class="line">        <span class="comment">// 如果删除的是头结点，直接返回头结点的下一个结点  </span></div><div class="line">        <span class="keyword">if</span> (head == toBeDeleted) &#123;  </div><div class="line">            <span class="keyword">return</span> head.next;  </div><div class="line">        &#125;  </div><div class="line">          <span class="comment">// 下面的情况链表至少有两个结点  </span></div><div class="line">        <span class="comment">// 在多个节点的情况下，如果删除的是最后一个元素  </span></div><div class="line">        <span class="keyword">if</span> (toBeDeleted.next == <span class="keyword">null</span>) &#123;  </div><div class="line">            <span class="comment">// 找待删除元素的前驱  </span></div><div class="line">            ListNode tmp = head;  </div><div class="line">            <span class="keyword">while</span> (tmp.next != toBeDeleted) &#123;  </div><div class="line">                tmp = tmp.next;  </div><div class="line">            &#125;  </div><div class="line">            <span class="comment">// 删除待结点  </span></div><div class="line">            tmp.next = <span class="keyword">null</span>;  </div><div class="line">        &#125;  </div><div class="line">        <span class="comment">// 在多个节点的情况下，如果删除的是某个中间结点  </span></div><div class="line">        <span class="keyword">else</span> &#123;  </div><div class="line">            <span class="comment">// 将下一个结点的值输入当前待删除的结点  </span></div><div class="line">            toBeDeleted.value = toBeDeleted.next.value;  </div><div class="line">            <span class="comment">// 待删除的结点的下一个指向原先待删除引号的下下个结点，即将待删除的下一个结点删除  </span></div><div class="line">            toBeDeleted.next = toBeDeleted.next.next;  </div><div class="line">        &#125;  </div><div class="line">        <span class="comment">// 返回删除节点后的链表头结点  </span></div><div class="line">        <span class="keyword">return</span> head;  </div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="15-链表中倒数第K个结点"><a href="#15-链表中倒数第K个结点" class="headerlink" title="15. 链表中倒数第K个结点"></a>15. 链表中倒数第K个结点</h2><p>输入一个链表，输出该链表中倒数第k个结点。为了符合大多数人的习惯，本题从1 开始计数，即链表的尾结点是倒数第1个结点。例如一个链表有6个结点，从头结点开始它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个结点的值为4的结点。</p>
+<p>很自然的想法是先走到链表尾端，再从尾端回溯k步。可是我们从链表结点的定义可以看出本题中的链表是单向链表，单向链表的结点只有从前向后的指针而没有从后往前的指针，这种思路行不通。</p>
+<p>既然不能从尾结点开始遍历链表，我们还是把思路回到头结点上来。假设整个链表有n个结点，那么倒数第k个结点就是从头结点开始往后走n-k+1步就可以了。如何得到结点树n？只需要从头开始遍历链表，每经过一个结点，计数器加1就行了。</p>
+<p>也就是说我们需要遍历链表两次，第一次统计出链表中的结点的个数，第二次就能找到倒数第k个结点。但是面试官期待的解法是只需要遍历链表一次。</p>
+<p>为了实现只遍历链表一次就能找到倒数第k个结点，我们可以定义两个指针。第一个指针从链表的头指针开始遍历向前走k-1步，第二个指针保持不动；从第k步开始，第二个指针也开始从链表的头指针开始遍历。由于两个指针的距离保持在k-1，当第一个（走在前面的）指针到达链表的尾结点时，第二个指针（走在后边的）指针正好是倒数第k个结点。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 上午106.17.png" alt="屏幕快照 2017-07-25 上午106.17"></p>
+<p>但是这样写出来的代码不够鲁棒，面试官可以找出三种办法让这段代码崩溃：</p>
+<ul>
+<li>输入的ListHead为空指针。由于代码会试图访问空指针指向的内存，程序崩溃。</li>
+<li><ol>
+<li>输入的以ListHead为头结点的链表的结点总数少于k。由于在for循环中会在链表上向前走k-1步，仍然会由于空指针造成的程序奔溃。</li>
+</ol>
+</li>
+<li><ol>
+<li>输入的参数k为0.由于k是一个无符号整数，那么在for循环中k-1得到的将不是-1，而是4294967295（无符号的0xFFFFFFFFF），因此for循环执行的次数远远超过我们的预计，同样也会造成程序崩溃。</li>
+</ol>
+</li>
+</ul>
+<p>面试过程中写代码特别要注意鲁棒性，若写出的代码存在多处崩溃的风险，那我们很可能和offer失之交臂。针对前面三个问题，分别处理。若输入的链表头指针为null，那么整个链表为空，此时查找倒数第k个结点自然应该返回null。若输入的k为0，也就是试图查找倒数第0个结点，由于我们计数是从1开始的，因此输入0是没有实际意义，也可以返回null。若链表的结点数少于k，在for循环中遍历链表可能会出现指向null的next，因此我们在for循环中应该加一个if循环。</p>
+<p>代码如下：</p>
+<blockquote>
+<p>java版本</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">/*</div><div class="line">public class ListNode &#123;</div><div class="line">    int val;</div><div class="line">    ListNode next = null;</div><div class="line"></div><div class="line">    ListNode(int val) &#123;</div><div class="line">        this.val = val;</div><div class="line">    &#125;</div><div class="line">&#125;*/</div><div class="line">public class Solution &#123;</div><div class="line">    public ListNode FindKthToTail(ListNode head,int k) &#123;</div><div class="line">        if(head==null||k &lt;=0)&#123;return null;&#125;</div><div class="line">        ListNode pAhead = head;</div><div class="line">        ListNode pBehind = head;</div><div class="line">        </div><div class="line">        for(int i=1;i&lt;k;i++)&#123;</div><div class="line">            if(pAhead.next != null)</div><div class="line">           	    &#123;pAhead = pAhead.next;&#125;</div><div class="line">            else</div><div class="line">                &#123;return null;&#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        </div><div class="line">        while(pAhead.next!=null)</div><div class="line">            &#123;</div><div class="line">            pAhead = pAhead.next;</div><div class="line">            pBehind = pBehind.next;        </div><div class="line">        &#125;</div><div class="line">        return pBehind;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>python版本</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># -*- coding:utf-8 -*-</div><div class="line"># class ListNode:</div><div class="line">#     def __init__(self, x):</div><div class="line">#         self.val = x</div><div class="line">#         self.next = None</div><div class="line">class Solution:</div><div class="line">    def FindKthToTail(self, head, k):</div><div class="line">        # write code here</div><div class="line">        if not head or k == 0:</div><div class="line">            return None</div><div class="line">        pAhead = head</div><div class="line">        pBehind = None</div><div class="line">        for i in xrange(0,k-1):</div><div class="line">            if pAhead.next != None:                </div><div class="line">          	    pAhead = pAhead.next</div><div class="line">            else:</div><div class="line">                return None</div><div class="line">        pBehind = head</div><div class="line">        while pAhead.next != None:</div><div class="line">            pAhead = pAhead.next</div><div class="line">            pBehind = pBehind.next</div><div class="line">        return pBehind</div></pre></td></tr></table></figure>
+<h2 id="16-反转链表"><a href="#16-反转链表" class="headerlink" title="16. 反转链表"></a>16. 反转链表</h2><p>定义一个函数，输入一个链表的头结点，反转该链表并输出反转后的头结点。链表结点定义如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class ListNode &#123;</div><div class="line">    int val;</div><div class="line">    ListNode next = null;</div><div class="line"></div><div class="line">    ListNode(int val) &#123;</div><div class="line">        this.val = val;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>解决与链表相关的问题总是有大量的指针操作，而指针操作的代码总是容易出错的。</p>
+<p>为了正确地反转一个链表，需要调整链表中指针的方向。为了将调整指针这个复杂的过程分析清楚，可以借助图形来直观分析。在下图所示的链表中，h、i、j是3个相邻的结点。假设经过若干操作，我们已经把结点h之前的指针调整完毕，这些结点的next指向h，此时链表的结果如下所示：<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-24 下午113.37.png" alt="屏幕快照 2017-07-24 下午113.37"></p>
+<p>其中（a）为一个链表，（b）把i之前的所有结点的next都指向前一个结点，导致链表在结点i、j之间断裂。</p>
+<p>不难注意到，由于结点i的next指向了它的前一个结点，导致我们无法再链表中遍历到结点j。为了避免链表在结点i处断开，我们需要在调整结点i的next之前把结点j保存下来。</p>
+<p>也就是说我们在调整结点i的next指针时，除了需要知道结点i本身之外，还需要前一个结点h，因为我们需要把结点i的next指向结点h。同时，我们还事先需要保存i的一个结点j，以防止链表断开。因此相应地我们需要定义3个指针，分别指向当前遍历到的结点、它的前一个结点及后一个结点。</p>
+<p>最后我们试着找到反转后链表的头结点。不难分析出反转后链表的头结点是原始链表的尾结点。什么结点是尾结点？自然是next为null的结点。</p>
+<p>$$pre\rightarrow head \rightarrow next $$先保存next，即$next = head.next$再反转head的指针$head.next=pre $，链表结构变成$$pre\leftarrow head    next $$接着向后移动结点$pre=head,head=next$</p>
+<p>实现代码如下：</p>
+<blockquote>
+<p>java版本</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">ReverseList</span><span class="params">(ListNode head)</span> </span>&#123;</div><div class="line">       </div><div class="line">        <span class="keyword">if</span>(head==<span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        <span class="comment">//head为当前节点，如果当前节点为空的话，那就什么也不做，直接返回null；</span></div><div class="line">        ListNode pre = <span class="keyword">null</span>;</div><div class="line">        ListNode next = <span class="keyword">null</span>;</div><div class="line">        <span class="comment">//当前节点是head，pre为当前节点的前一节点，next为当前节点的下一节点</span></div><div class="line">        <span class="comment">//需要pre和next的目的是让当前节点从pre-&gt;head-&gt;next1-&gt;next2变成pre&lt;-head next1-&gt;next2</span></div><div class="line">        <span class="comment">//即pre让节点可以反转所指方向，但反转之后如果不用next节点保存next1节点的话，此单链表就此断开了</span></div><div class="line">        <span class="comment">//所以需要用到pre和next两个节点</span></div><div class="line">        <span class="comment">//1-&gt;2-&gt;3-&gt;4-&gt;5</span></div><div class="line">        <span class="comment">//1&lt;-2&lt;-3 4-&gt;5</span></div><div class="line">        <span class="keyword">while</span>(head!=<span class="keyword">null</span>)&#123;</div><div class="line">            <span class="comment">//做循环，如果当前节点不为空的话，始终执行此循环，此循环的目的就是让当前节点从指向next到指向pre</span></div><div class="line">            <span class="comment">//如此就可以做到反转链表的效果</span></div><div class="line">            <span class="comment">//先用next保存head的下一个节点的信息，保证单链表不会因为失去head节点的原next节点而就此断裂</span></div><div class="line">            next = head.next;</div><div class="line">            <span class="comment">//保存完next，就可以让head从指向next变成指向pre了，代码如下</span></div><div class="line">            head.next = pre;</div><div class="line">            <span class="comment">//head指向pre后，就继续依次反转下一个节点</span></div><div class="line">            <span class="comment">//让pre，head，next依次向后移动一个节点，继续下一次的指针反转</span></div><div class="line">            pre = head;</div><div class="line">            head = next;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//如果head为null的时候，pre就为最后一个节点了，但是链表已经反转完毕，pre就是反转后链表的第一个节点</span></div><div class="line">        <span class="comment">//直接输出pre就是我们想要得到的反转后的链表</span></div><div class="line">        <span class="keyword">return</span> pre;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>python版本</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="comment"># class ListNode:</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.next = None</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># 返回ListNode</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">ReverseList</span><span class="params">(self, pHead)</span>:</span></div><div class="line">        <span class="comment"># write code here</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> pHead <span class="keyword">or</span> <span class="keyword">not</span> pHead.next:</div><div class="line">            <span class="keyword">return</span> pHead          </div><div class="line">        pre = <span class="keyword">None</span>        </div><div class="line">        <span class="keyword">while</span> pHead:</div><div class="line">            next1 = pHead.next</div><div class="line">            pHead.next = pre</div><div class="line">            pre = pHead</div><div class="line">            pHead = next1</div><div class="line">        <span class="keyword">return</span> pre</div></pre></td></tr></table></figure>
+<h2 id="17-合并两个排序的链表"><a href="#17-合并两个排序的链表" class="headerlink" title="17. 合并两个排序的链表"></a>17. 合并两个排序的链表</h2><p>输入两个递增排序的链表，合并这两个链表并使新链表中的结点仍然是按照递增排序的。例如下图中的链表1和链表2，则合并之后的升序链表3如下所示：<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 上午9.26.52.png" alt="屏幕快照 2017-07-25 上午9.26.52"></p>
+<p>这是一个经常被各公司采用的面试题。在面试过程中，最容易犯两种错误：一是在写代码之前没有对合并的过程想清楚，最终合并出来的链表要么中间断开了，要么并没有做到递增排序；二是代码在鲁棒性方面存在问题，程序一旦有特殊的输入（如空链表）就会奔溃。<br>首先分析合并两个链表的过程。从合并两个链表的头结点开始。链表1的头结点的值小于链表2的头结点的值，因此链表1的头结点将是合并后链表的头结点。</p>
+<p>继续合并剩余的结点。在两个链表中剩下的结点依然是排序的，因此合并这两个链表的步骤和前面的步骤是一样的。依旧比较两个头结点的值。此时链表2的头结点值小于链表1的头结点的值，因此链表2的头结点的值将是合并剩余结点得到的链表的头结点。把这个结点和前面合并链表时得到的链表的尾结点链接起来。</p>
+<p>当我们得到两个链表中值较小的头结点并把它链接到已经合并的链表之后，两个链表剩余的结点依然是排序的，因此合并的步骤和之前的步骤是一样的。这是典型的递归过程，我们可以定义递归函数完成这一合并过程。（解决这个问题需要大量的指针操作，如没有透彻地分析问题形成清晰的思路，很难写出正确的代码）</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 上午9.39.5png" alt="屏幕快照 2017-07-25 上午9.39.51"></p>
+<p>接下来解决鲁棒性问题，每当代码试图访问空指针指向的内存时程序就会奔溃，从而导致鲁棒性问题。本题中一旦输入空的链表就会引入空的指针，因此我们要对空链表单独处理。当第一个链表是空链表，也就是它的头结点是一个空指针时，和第二个链表合并的结果就是第二个链表。同样，当输入的第二个链表的头结点是空指针的时候，和第一个链表合并得到的结果就是第一个链表。如果两个链表都为空，合并得到的是一个空链表。（由于有大量的指针操作，如果稍有不慎就会在代码中遗留很多与鲁棒性相关的隐患。建议应聘者在写代码之前全面分析哪些情况会引入空指针，并考虑清楚怎么处理这些空指针。）</p>
+<p>代码如下：</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public ListNode Merge(ListNode l1, ListNode l2) &#123;</div><div class="line">    ListNode l = new ListNode(0), p = l;</div><div class="line">    </div><div class="line">    while (l1 != null &amp;&amp; l2 != null) &#123;</div><div class="line">      if (l1.val &lt; l2.val) &#123;</div><div class="line">        p.next = l1;</div><div class="line">        l1 = l1.next;</div><div class="line">      &#125; else &#123;</div><div class="line">        p.next = l2;</div><div class="line">        l2 = l2.next;</div><div class="line">      &#125;</div><div class="line">      p = p.next;</div><div class="line">    &#125;    </div><div class="line">    if (l1 != null)</div><div class="line">      p.next = l1;</div><div class="line">    </div><div class="line">    if (l2 != null)</div><div class="line">      p.next = l2;    </div><div class="line">    return l.next;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>java递归写法</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">Merge</span><span class="params">(ListNode list1,ListNode list2)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (list1==<span class="keyword">null</span>) <span class="keyword">return</span> list2;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (list2==<span class="keyword">null</span>) <span class="keyword">return</span> list1;</div><div class="line">        ListNode MergeHead = <span class="keyword">null</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (list.val&lt;=list2.val)&#123;</div><div class="line">            MergeHead = list1;</div><div class="line">            MergeHead.next = Merge(listnext,list2);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> </div><div class="line">        	&#123;MergeHead = list2;</div><div class="line">             MergeHead.next = Merge(list1,list2.next);</div><div class="line">             &#125;</div><div class="line">        <span class="keyword">return</span> MergeHead;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="26-复杂链表的复制"><a href="#26-复杂链表的复制" class="headerlink" title="26. 复杂链表的复制"></a>26. 复杂链表的复制</h2><p>输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-04 下午7.51.53.png" alt="屏幕快照 2017-08-04 下午7.51.53"><br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-04 下午7.52.01.png" alt="屏幕快照 2017-08-04 下午7.52.01"><br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-04 下午7.52.07.png" alt="屏幕快照 2017-08-04 下午7.52.07"></p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> RandomListNode <span class="title">Clone</span><span class="params">(RandomListNode pHead)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span> (pHead == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">         <span class="comment">//复制next 如原来是A-&gt;B-&gt;C 变成A-&gt;A'-&gt;B-&gt;B'-&gt;C-&gt;C'</span></div><div class="line">        RandomListNode pCur = pHead;</div><div class="line">        <span class="keyword">while</span> (pCur != <span class="keyword">null</span>)</div><div class="line">        &#123;</div><div class="line">            RandomListNode node = <span class="keyword">new</span> RandomListNode(pCur.label);</div><div class="line">            node.next = pCur.next;</div><div class="line">            pCur.next = node;</div><div class="line">            pCur = node.next;</div><div class="line">        &#125;</div><div class="line">         <span class="comment">//复制random pCur是原来链表的结点 pCur.next是复制pCur的结点</span></div><div class="line">        pCur = pHead;</div><div class="line">        <span class="keyword">while</span> (pCur!=<span class="keyword">null</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (pCur.random!=<span class="keyword">null</span>)</div><div class="line">                pCur.next.random = pCur.random.next;</div><div class="line">            pCur = pCur.next.next;</div><div class="line">        &#125;</div><div class="line">         <span class="comment">//拆分链表</span></div><div class="line">        RandomListNode head = pHead.next;</div><div class="line">        RandomListNode tmp = head;</div><div class="line">        pCur = pHead;</div><div class="line">        <span class="keyword">while</span>(pCur.next!=<span class="keyword">null</span>)</div><div class="line">        &#123;</div><div class="line">            tmp = pCur.next;</div><div class="line">            pCur.next = tmp.next;</div><div class="line">            pCur = tmp;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> head;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="27-二叉搜索树与双向链表"><a href="#27-二叉搜索树与双向链表" class="headerlink" title="27. 二叉搜索树与双向链表"></a>27. 二叉搜索树与双向链表</h2><p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的双向链表。要求不能创建任何新的结点，只能调整树中结点指针的指向。</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    TreeNode head = <span class="keyword">null</span>;</div><div class="line">    TreeNode realHead = <span class="keyword">null</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">Convert</span><span class="params">(TreeNode pRootOfTree)</span> </span>&#123;</div><div class="line">        ConvertSub(pRootOfTree);</div><div class="line">        <span class="keyword">return</span> realHead<span class="comment">//realHead是每个子树排序后的第一个结点，head是排序后的最后一个结点;</span></div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ConvertSub</span><span class="params">(TreeNode pRootOfTree)</span> </span>&#123;</div><div class="line">        <span class="comment">//递归中序遍历</span></div><div class="line">        <span class="keyword">if</span>(pRootOfTree==<span class="keyword">null</span>) <span class="keyword">return</span>;</div><div class="line">        ConvertSub(pRootOfTree.left);</div><div class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="comment">//初始处</span></div><div class="line">            head = pRootOfTree;</div><div class="line">            realHead = pRootOfTree;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">//前两句实现双向，第三句跳到下一个节点。</span></div><div class="line">            head.right = pRootOfTree;</div><div class="line">            pRootOfTree.left = head;</div><div class="line">            head = pRootOfTree;</div><div class="line">        &#125;</div><div class="line">        ConvertSub(pRootOfTree.right);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="37-两个链表的第一个公共结点"><a href="#37-两个链表的第一个公共结点" class="headerlink" title="37. 两个链表的第一个公共结点"></a>37. 两个链表的第一个公共结点</h2><p>输入两个链表找出他们的第一个公共结点。</p>
+<p>面试的时候碰到这道题，很多应聘者的第一个想法就是蛮力法：在第一个链表上顺序遍历每个结点，每遍历到一个结点的时候，在第二个链表上顺序遍历每个结点。若第二个链表上有一个结点和第一个链表上的结点一样，说明两个链表在这个结点上重合，于是就找到了它们的公共结点。如果第一个链表的长度为m，第二个链表的长度为n，显然该方法的时间复杂度是O(mn)。</p>
+<p>通常蛮力法不会是最好的办法，我们接下来试着分析有公共结点的两个链表有哪些特点。从链表结构的定义看出，这两个链表是单向链表。如果他们有公共的结点，那么这两个链表从某一结点开始，他们的next指向同一个结点。但由于是单向链表的结点，每个结点只有一个next，因此从第一个公共结点开始，之后的结点都是重合的，不可能再出现分叉。所以两个有公共结点而部分重合的链表，拓扑形状看起来像一个Y，而不是X。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午2.59.56.png" alt="屏幕快照 2017-07-25 下午2.59.56"></p>
+<p>经过我们的分析发现，若两个链表有公共结点，那么公共结点出现在两个链表的尾部。如果我们从两个链表的尾部开始往前比较，最后一个相同的结点就是我们要找的结点。我们想到用栈的特点来解决这个问题：分别把两个链表的结点放入两个栈中，这样两个链表的尾结点就位于两个栈的栈顶，接下来比较两个栈顶的结点是否相同。若果相同，则把栈顶弹出接着比较下一个栈顶，直到找到最后一个相同的结点。</p>
+<p>上面需要用到两个辅助栈。若链表的长度分别为m和n，那么空间复杂度是O(m+n)。这种思路的时间复杂度也是O(m+n)。和最开始的蛮力法相比，时间效率得到了提升，相当于是用空间换取时间效率。</p>
+<p>之所以需要用到栈，是因为我们想同时遍历到达两个栈的尾结点。当两个链表的长度不相同时，如果我们从头开始遍历到达尾结点的时间就不一致。其实解决这个问题还有一个更简单的办法：首先遍历两个链表得到他们的长度，就能知道哪个链表比较长，以及长的链表比短的链表多几个结点。在第二次遍历的时候，在较长的链表上先走若干步，接着再同时在两个链表上遍历，找到的第一个相同的结点就是他们的第一个公共结点。</p>
+<p>第三种思路和第二种思路相比，时间复杂度都是O(m+n)，但我们不再需要辅助的栈，因此提高了空间效率。实现代码如下：</p>
+<blockquote>
+<p>java版本</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">public class ListNode &#123;</div><div class="line">    int val;</div><div class="line">    ListNode next = null;</div><div class="line"></div><div class="line">    ListNode(int val) &#123;</div><div class="line">        this.val = val;</div><div class="line">    &#125;</div><div class="line">&#125;*/</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">FindFirstCommonNode</span><span class="params">(ListNode pHead1, ListNode pHead2)</span> </span>&#123;</div><div class="line">        ListNode current1 = pHead1;<span class="comment">//链表1</span></div><div class="line">        ListNode current2 = pHead2;<span class="comment">//链表2</span></div><div class="line">        <span class="keyword">if</span>(pHead1 ==<span class="keyword">null</span>||pHead2==<span class="keyword">null</span>)&#123;<span class="keyword">return</span> <span class="keyword">null</span>;&#125;<span class="comment">//</span></div><div class="line">        </div><div class="line">        <span class="keyword">int</span> len1 = getlistlength(pHead1);<span class="comment">//链表1的长度</span></div><div class="line">        <span class="keyword">int</span> len2 = getlistlength(pHead2);<span class="comment">//链表2的长度</span></div><div class="line">        </div><div class="line">        <span class="comment">//若链表1长度大于链表2</span></div><div class="line">        <span class="keyword">if</span>(len1&gt;=len2)&#123;</div><div class="line">            <span class="keyword">int</span> len=len1-len2;</div><div class="line">            <span class="comment">//遍历链表1，遍历长度为两链表长度差</span></div><div class="line">            <span class="keyword">while</span> (len&gt;<span class="number">0</span>)&#123;</div><div class="line">                current1 = currentnext;</div><div class="line">                len--;</div><div class="line">                  </div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//若链表2长度大于链表1</span></div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(len1&lt;len2)&#123;</div><div class="line">            <span class="keyword">int</span> len=len2-len1;</div><div class="line">            <span class="comment">//遍历链表2，遍历长度为两链表长度差</span></div><div class="line">            <span class="keyword">while</span> (len&gt;<span class="number">0</span>)&#123;</div><div class="line">                current2=current2.next;</div><div class="line">                len--;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//开始齐头并进，直到找到第一个公共结点</span></div><div class="line">        <span class="keyword">while</span>(current1!=current2)&#123;</div><div class="line">            current1 = currentnext;</div><div class="line">            current2 = current2.next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> current1;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//求指定链表的长度</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getlistlength</span><span class="params">(ListNode pHead)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> length = <span class="number">0</span>;</div><div class="line">        ListNode current = pHead;</div><div class="line">        <span class="keyword">while</span>(current!=<span class="keyword">null</span>)&#123;</div><div class="line">            length++;</div><div class="line">            current = current.next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> length;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>python版本</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="comment"># class ListNode:</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.next = None</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">FindFirstCommonNode</span><span class="params">(self, pHead1, pHead2)</span>:</span></div><div class="line">        <span class="comment"># write code here</span></div><div class="line">        current1=pHead1</div><div class="line">        current2=pHead2</div><div class="line">        len1 = self.getlistlength(current1)</div><div class="line">        len2 = self.getlistlength(current2)        </div><div class="line">        <span class="keyword">if</span> len1&gt;=len2:            </div><div class="line">            length = len1-len2</div><div class="line">            <span class="keyword">while</span> length&gt;<span class="number">0</span>:</div><div class="line">                current1 = currentnext</div><div class="line">                length=length<span class="number">-1</span>                </div><div class="line">        <span class="keyword">elif</span> len1&lt;len2:</div><div class="line">            length = len2-len1</div><div class="line">            <span class="keyword">while</span> length&gt;<span class="number">0</span>:</div><div class="line">                current2 = current2.next</div><div class="line">                length=length<span class="number">-1</span>               </div><div class="line">        <span class="keyword">while</span> current1!=current2:</div><div class="line">            current1=currentnext</div><div class="line">            current2=current2.next</div><div class="line">        <span class="keyword">return</span> current1</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getlistlength</span><span class="params">(self,pHead)</span>:</span></div><div class="line">        length =<span class="number">0</span></div><div class="line">        current =pHead</div><div class="line">        <span class="keyword">while</span> current!=<span class="keyword">None</span>:</div><div class="line">            length=length+<span class="number">1</span></div><div class="line">            current = current.next</div><div class="line">        <span class="keyword">return</span> length</div></pre></td></tr></table></figure>
+<h2 id="45-圆圈中最后剩下的的数字"><a href="#45-圆圈中最后剩下的的数字" class="headerlink" title="45. 圆圈中最后剩下的的数字"></a>45. 圆圈中最后剩下的的数字</h2><p>0、…..，n-1这n个数字排成一个圆圈，从数字0开始每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字。<br>约瑟夫环问题，用环形链表模拟圆圈的经典解法，</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">LastRemaining_Solution</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span>&#123;</div><div class="line">        <span class="keyword">if</span>(m&lt;=<span class="number">0</span>||n&lt;=<span class="number">0</span>)<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">        <span class="comment">//先构造循环链表</span></div><div class="line">        ListNode head= <span class="keyword">new</span> ListNode(<span class="number">0</span>);<span class="comment">//头结点, 值为0</span></div><div class="line">        ListNode pre = head;</div><div class="line">        ListNode temp = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;i++)&#123;</div><div class="line">            temp = <span class="keyword">new</span> ListNode(i);</div><div class="line">            pre.next = temp;</div><div class="line">            pre = temp;</div><div class="line">        &#125;</div><div class="line">        temp.next = head;<span class="comment">//将第n-1个结点(也就是尾结点)指向头结点</span></div><div class="line">        ListNode temp2 = <span class="keyword">null</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span>(n&gt;=<span class="number">1</span>)&#123;</div><div class="line">            <span class="comment">//每次都当前头结点找到第m个结点的前驱</span></div><div class="line">            temp2=head;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">1</span>;i&lt;m-<span class="number">1</span>;i++)&#123;</div><div class="line">                temp2 = temp2.next;</div><div class="line">            &#125;</div><div class="line">            temp2.next = temp2.next.next;</div><div class="line">            head = temp2.next;<span class="comment">//设置当前头结点</span></div><div class="line">            n--;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> head.val;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">LastRemaining_Solution</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>||m==<span class="number">0</span>)<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> last=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</div><div class="line">        &#123;</div><div class="line">            last=(last+m)%i;</div><div class="line">        &#125;   </div><div class="line">       <span class="keyword">return</span> last ;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="56-链表中环的入口结点"><a href="#56-链表中环的入口结点" class="headerlink" title="56. 链表中环的入口结点"></a>56. 链表中环的入口结点</h2><p>一个链表中包含环，如何找到环的入口结点？例如在下图的链表中，环的入口结点是结点3。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午3.420.png" alt="屏幕快照 2017-07-25 下午3.420"></p>
+<p>以3为例分析两个指针的移动规律。指针$P_1$和$P_2$在初始化时都指向链表的头结点。由于环中有4个结点，指针$P_1$先在链表上向前移动4步。接下来两个指针以相同的速度在链表上向前移动，直到它们相遇。它们相遇的结点正好是还的入口结点。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午3.46.08.png" alt="屏幕快照 2017-07-25 下午3.46.08"></p>
+<p>剩下的问题就是如何得到环中结点的数目。我们可以使用一快一慢两个指针。若两个指针相遇，说明链表中有环。两个指针相遇的结点一定是在环中的。可以从这个结点出发，一边继续向前移动一边计数，当再次回到这个结点时，就可以得到环中结点数了<br>实现代码如下：</p>
+<blockquote>
+<p>java版本</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> public class ListNode &#123;</div><div class="line">    int val;</div><div class="line">    ListNode next = null;</div><div class="line"></div><div class="line">    ListNode(int val) &#123;</div><div class="line">        this.val = val;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">*/</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">	<span class="comment">//找到一快一满指针相遇处的节点，相遇的节点一定是在环中</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ListNode <span class="title">meetingNode</span><span class="params">(ListNode pHead)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(pHead == <span class="keyword">null</span>)&#123;<span class="keyword">return</span> <span class="keyword">null</span>;&#125;<span class="comment">//空链表处理</span></div><div class="line">        ListNode pslow = pHead.next;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>(pslow == <span class="keyword">null</span>)&#123;<span class="keyword">return</span> <span class="keyword">null</span>;&#125;<span class="comment">//无环链表处理</span></div><div class="line">        </div><div class="line">        ListNode pfast = pslow.next;</div><div class="line">        <span class="keyword">while</span>(pfast!=<span class="keyword">null</span> &amp;&amp; pslow!=<span class="keyword">null</span>)&#123;</div><div class="line">            <span class="keyword">if</span>(pslow==pfast)&#123;<span class="keyword">return</span> pfast;&#125;</div><div class="line">            </div><div class="line">            pslow = pslow.next;<span class="comment">//慢指针</span></div><div class="line">            </div><div class="line">            pfast = pfast.next;</div><div class="line">            <span class="keyword">if</span>(pfast!=<span class="keyword">null</span>)&#123;</div><div class="line">                pfast = pfast.next;</div><div class="line">            &#125;<span class="comment">//块指针</span></div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">EntryNodeOfLoop</span><span class="params">(ListNode pHead)</span></span>&#123;</div><div class="line">        ListNode meetingNode=meetingNode(pHead);<span class="comment">//相遇结点</span></div><div class="line">        <span class="comment">//环的结点个数</span></div><div class="line">        <span class="keyword">if</span>(meetingNode==<span class="keyword">null</span>)&#123;<span class="keyword">return</span> <span class="keyword">null</span>;&#125;<span class="comment">//是否有环</span></div><div class="line">        <span class="keyword">int</span> nodesInLoop = <span class="number">1</span>;        </div><div class="line">        ListNode p1=meetingNode;</div><div class="line">        <span class="keyword">while</span>(pnext!=meetingNode)&#123;</div><div class="line">            p1=pnext;</div><div class="line">            ++nodesInLoop;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//p1慢指针,先往前走</span></div><div class="line">        p1=pHead;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;nodesInLoop;i++)&#123;</div><div class="line">            p1=pnext;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//p1,p2同步走，相遇的地方即为环入口</span></div><div class="line">        ListNode p2=pHead;</div><div class="line">        <span class="keyword">while</span>(p1!=p2)&#123;</div><div class="line">            p1=pnext;</div><div class="line">            p2=p2.next;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> p1;</div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>python 版本</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"># -*- coding:utf-8 -*-</div><div class="line"># class ListNode:</div><div class="line">#     def __init__(self, x):</div><div class="line">#         self.val = x</div><div class="line">#         self.next = None</div><div class="line">class Solution:</div><div class="line">    def meetingNode(self,pHead):</div><div class="line">        if not pHead:</div><div class="line">            return None</div><div class="line">        pslow =pHead.next        </div><div class="line">        if not pslow:</div><div class="line">            return None</div><div class="line">        pfast = pslow.next</div><div class="line">        while pfast and pslow:</div><div class="line">            if pslow==pfast:</div><div class="line">                return pfast</div><div class="line">            pslow = pslow.next</div><div class="line">            </div><div class="line">            pfast = pfast.next</div><div class="line">            if pfast:</div><div class="line">                pfast=pfast.next</div><div class="line">        return None </div><div class="line">    def EntryNodeOfLoop(self, pHead):</div><div class="line">        meetingNode = self.meetingNode(pHead)</div><div class="line">        if not meetingNode:</div><div class="line">            return None</div><div class="line">        nodesInLoop = 1</div><div class="line">        p1 = meetingNode</div><div class="line">        while pnext!=meetingNode:</div><div class="line">            p1=pnext</div><div class="line">            nodesInLoop +=1</div><div class="line">        p1 = pHead</div><div class="line">        for i in xrange(0,nodesInLoop):</div><div class="line">            p1=pnext</div><div class="line">        p2=pHead</div><div class="line">        while p1!=p2:</div><div class="line">            p1=pnext</div><div class="line">            p2=p2.next</div><div class="line">        return p1</div></pre></td></tr></table></figure>
+<h2 id="57-删除链表中重复的结点"><a href="#57-删除链表中重复的结点" class="headerlink" title="57. 删除链表中重复的结点"></a>57. 删除链表中重复的结点</h2><p>在一个排序的链表中，如何删除重复的结点？如在下图中重复结点被删除之后，链表如下图所示：<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午5.43.23.png" alt="屏幕快照 2017-07-25 下午5.43.23"></p>
+<p>从头遍历整个链表。如果当前结点的值与下一个节点的值相同，那么它们就是重复的结点，都可以被删除。为了保证删除之后的链表仍然是相连的而没有中间断开，我们要把当前结点的前一个结点preNode和后面值比当前结点的值要大的结点相连。要确保preNode要始终与下一个没有重复的结点连接在一起。</p>
+<p>实现代码如下：</p>
+<blockquote>
+<p>java递归版</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> public class ListNode &#123;</div><div class="line">    int val;</div><div class="line">    ListNode next = null;</div><div class="line"></div><div class="line">    ListNode(int val) &#123;</div><div class="line">        this.val = val;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">*/</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">deleteDuplication</span><span class="params">(ListNode pHead)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (pHead == <span class="keyword">null</span> || pHead.next == <span class="keyword">null</span>) &#123; <span class="comment">// 只有0个或1个结点，则返回</span></div><div class="line">            <span class="keyword">return</span> pHead;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (pHead.val == pHead.next.val) &#123; <span class="comment">// 当前结点是重复结点</span></div><div class="line">            ListNode pNode = pHead.next;</div><div class="line">            <span class="keyword">while</span> (pNode != <span class="keyword">null</span> &amp;&amp; pNode.val == pHead.val) &#123;</div><div class="line">                <span class="comment">// 跳过值与当前结点相同的全部结点,找到第一个与当前结点不同的结点</span></div><div class="line">                pNode = pNode.next;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> deleteDuplication(pNode); <span class="comment">// 从第一个与当前结点不同的结点开始递归</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// 当前结点不是重复结点</span></div><div class="line">            pHead.next = deleteDuplication(pHead.next); <span class="comment">// 保留当前结点，从下一个结点开始递归</span></div><div class="line">            <span class="keyword">return</span> pHead;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>python版本</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="comment"># class ListNode:</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.next = None</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">deleteDuplication</span><span class="params">(self, pHead)</span>:</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> pHead <span class="keyword">or</span> <span class="keyword">not</span> pHead.next:</div><div class="line">            <span class="keyword">return</span> pHead</div><div class="line">        <span class="keyword">if</span> pHead.val==pHead.next.val:</div><div class="line">            pNode = pHead.next</div><div class="line">            <span class="keyword">while</span> pNode <span class="keyword">and</span> pNode.val == pHead.val:</div><div class="line">                 pNode = pNode.next</div><div class="line">            <span class="keyword">return</span> self.deleteDuplication(pNode)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            pHead.next = self.deleteDuplication(pHead.next)</div><div class="line">            <span class="keyword">return</span> pHead</div></pre></td></tr></table></figure>
+<blockquote>
+<p>java非递归</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> public class ListNode &#123;</div><div class="line">    int val;</div><div class="line">    ListNode next = null;</div><div class="line"></div><div class="line">    ListNode(int val) &#123;</div><div class="line">        this.val = val;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">*/</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">deleteDuplication</span><span class="params">(ListNode pHead)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(pHead==<span class="keyword">null</span>)<span class="keyword">return</span> <span class="keyword">null</span>;         </div><div class="line">        ListNode preNode = <span class="keyword">null</span>;</div><div class="line">        ListNode node = pHead;</div><div class="line">        <span class="keyword">while</span>(node!=<span class="keyword">null</span>)&#123;</div><div class="line">            ListNode nextNode = node.next;</div><div class="line">            <span class="keyword">boolean</span> needDelete = <span class="keyword">false</span>;</div><div class="line">            <span class="comment">//需要删除重复节点的情况</span></div><div class="line">            <span class="keyword">if</span>(nextNode!=<span class="keyword">null</span>&amp;&amp;nextNode.val==node.val)&#123;</div><div class="line">                needDelete = <span class="keyword">true</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//不重复结点不删除</span></div><div class="line">            <span class="keyword">if</span>(!needDelete)&#123;</div><div class="line">                preNode = node;</div><div class="line">                node = node.next;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//重复节点删除</span></div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                <span class="keyword">int</span> value = node.val;</div><div class="line">                ListNode toBeDel = node;</div><div class="line">                <span class="comment">//连续重复结点</span></div><div class="line">                <span class="keyword">while</span>(toBeDel != <span class="keyword">null</span> &amp;&amp; toBeDel.val == value)&#123;</div><div class="line">                    nextNode = toBeDel.next;</div><div class="line">                    toBeDel = nextNode;</div><div class="line">                    <span class="keyword">if</span>(preNode==<span class="keyword">null</span>)</div><div class="line">                        pHead = nextNode;</div><div class="line">                    <span class="keyword">else</span></div><div class="line">                        preNode.next = nextNode;</div><div class="line">                    node = nextNode;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">         </div><div class="line">        <span class="keyword">return</span> pHead;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="leetcode-92-翻转部分链表-Reverse-Linked-List-II"><a href="#leetcode-92-翻转部分链表-Reverse-Linked-List-II" class="headerlink" title="leetcode 92 翻转部分链表(Reverse Linked List II)"></a>leetcode 92 翻转部分链表(Reverse Linked List II)</h2><p>给了一个链表，第1个结点标号为1，把链表中标号在M到N区间的部分反转  （我写的很慢，面试官看不下去了，让我只说思路）</p>
+<p>这道题是比较常见的链表反转操作，不过不是反转整个链表，而是从m到n的一部分。分为两个步骤，第一步是找到m结点所在位置，第二步就是进行反转直到n结点。反转的方法就是每读到一个结点，把它插入到m结点前面位置，然后m结点接到读到结点的下一个。总共只需要一次扫描，所以时间是O(n)，只需要几个辅助指针，空间是O(1)。代码如下：</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">reverseBetween</span><span class="params">(ListNode head, <span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;  </div><div class="line">        <span class="keyword">if</span>(head == <span class="keyword">null</span>)  </div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;  </div><div class="line">        ListNode dummy = <span class="keyword">new</span> ListNode(<span class="number">0</span>);  </div><div class="line">        dummy.next = head;  </div><div class="line">        ListNode preNode = dummy;  </div><div class="line">        <span class="keyword">int</span> i=<span class="number">1</span>;  </div><div class="line">        <span class="keyword">while</span>(preNode.next!=<span class="keyword">null</span> &amp;&amp; i&lt;m)  </div><div class="line">        &#123;  </div><div class="line">            preNode = preNode.next;  </div><div class="line">            i++;  </div><div class="line">        &#125;  </div><div class="line">        ListNode mNode = preNode.next;  </div><div class="line">        ListNode cur = mNode.next;  </div><div class="line">        <span class="keyword">while</span>(cur!=<span class="keyword">null</span> &amp;&amp; i&lt;n)  </div><div class="line">        &#123;  </div><div class="line">            ListNode next = cur.next;  </div><div class="line">            cur.next = preNode.next;  </div><div class="line">            preNode.next = cur;  </div><div class="line">            mNode.next = next;  </div><div class="line">            cur = next;  </div><div class="line">            i++;  </div><div class="line">        &#125;  </div><div class="line">        <span class="keyword">return</span> dummy.next;  </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="leetcode-147-链表插入排序-Insertion-Sort-List"><a href="#leetcode-147-链表插入排序-Insertion-Sort-List" class="headerlink" title="leetcode 147 链表插入排序(Insertion Sort List)"></a>leetcode 147 链表插入排序(Insertion Sort List)</h2><p>这道题跟Sort List类似，要求在链表上实现一种排序算法，这道题是指定实现插入排序。插入排序是一种O(n^2)复杂度的算法，基本想法相信大家都比较了解，就是每次循环找到一个元素在当前排好的结果中相对应的位置，然后插进去，经过n次迭代之后就得到排好序的结果了。了解了思路之后就是链表的基本操作了，搜索并进行相应的插入。时间复杂度是排序算法的O(n^2)，空间复杂度是O(1)。代码如下： </p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">     <span class="function"><span class="keyword">public</span> ListNode <span class="title">insertionSortList</span><span class="params">(ListNode head)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span>( head == <span class="keyword">null</span> )&#123;</div><div class="line">			<span class="keyword">return</span> head;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		ListNode helper = <span class="keyword">new</span> ListNode(<span class="number">0</span>); <span class="comment">//new starter of the sorted list</span></div><div class="line">		ListNode cur = head; <span class="comment">//the node will be inserted</span></div><div class="line">		ListNode pre = helper; <span class="comment">//insert node between pre and pre.next</span></div><div class="line">		ListNode next = <span class="keyword">null</span>; <span class="comment">//the next node will be inserted</span></div><div class="line">		<span class="comment">//not the end of input list</span></div><div class="line">		<span class="keyword">while</span>( cur != <span class="keyword">null</span> )&#123;</div><div class="line">			next = cur.next;</div><div class="line">			<span class="comment">//find the right place to insert</span></div><div class="line">			<span class="keyword">while</span>( pre.next != <span class="keyword">null</span> &amp;&amp; pre.next.val &lt; cur.val )&#123;</div><div class="line">				pre = pre.next;</div><div class="line">			&#125;</div><div class="line">			<span class="comment">//insert between pre and pre.next</span></div><div class="line">			cur.next = pre.next;</div><div class="line">			pre.next = cur;</div><div class="line">			pre = helper;</div><div class="line">			cur = next;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> helper.next;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="leetcode-148-链表归并排序-Sort-List"><a href="#leetcode-148-链表归并排序-Sort-List" class="headerlink" title="leetcode 148 链表归并排序(Sort List)"></a>leetcode 148 链表归并排序(Sort List)</h2><p>链表排序，不允许直接交换节点的值，敲的有点bug，指针初始化有问题</p>
+<p>这道题跟Insertion Sort List类似，要求我们用O(nlogn)算法对链表进行排序，但是并没有要求用哪一种排序算法，我们可以使用归并排序，快速排序，堆排序等满足要求的方法来实现。对于这道题比较容易想到的是归并排序，因为我们已经做过Merge Two Sorted Lists，这是归并排序的一个subroutine。剩下我们需要做的就是每次找到中点，然后对于左右进行递归，最后用Merge Two Sorted Lists把他们合并起来。代码如下：</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">  </div><div class="line">  <span class="function"><span class="keyword">public</span> ListNode <span class="title">sortList</span><span class="params">(ListNode head)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (head == <span class="keyword">null</span> || head.next == <span class="keyword">null</span>)</div><div class="line">      <span class="keyword">return</span> head;</div><div class="line">        </div><div class="line">    <span class="comment">// step 1. cut the list to two halves</span></div><div class="line">    ListNode prev = <span class="keyword">null</span>, slow = head, fast = head;</div><div class="line">    </div><div class="line">    <span class="keyword">while</span> (fast != <span class="keyword">null</span> &amp;&amp; fast.next != <span class="keyword">null</span>) &#123;</div><div class="line">      prev = slow;</div><div class="line">      slow = slow.next;</div><div class="line">      fast = fast.next.next;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    prev.next = <span class="keyword">null</span>;</div><div class="line">    </div><div class="line">    <span class="comment">// step 2. sort each half</span></div><div class="line">    ListNode l1 = sortList(head);</div><div class="line">    ListNode l2 = sortList(slow);</div><div class="line">    </div><div class="line">    <span class="comment">// step 3. merge l1 and l2</span></div><div class="line">    <span class="keyword">return</span> merge(l1, l2);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="function">ListNode <span class="title">merge</span><span class="params">(ListNode l1, ListNode l2)</span> </span>&#123;</div><div class="line">    ListNode l = <span class="keyword">new</span> ListNode(<span class="number">0</span>), p = l;</div><div class="line">    </div><div class="line">    <span class="keyword">while</span> (l1 != <span class="keyword">null</span> &amp;&amp; l2 != <span class="keyword">null</span>) &#123;</div><div class="line">      <span class="keyword">if</span> (l1.val &lt; l2.val) &#123;</div><div class="line">        p.next = l1;</div><div class="line">        l1 = l1.next;</div><div class="line">      &#125; <span class="keyword">else</span> &#123;</div><div class="line">        p.next = l2;</div><div class="line">        l2 = l2.next;</div><div class="line">      &#125;</div><div class="line">      p = p.next;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (l1 != <span class="keyword">null</span>)</div><div class="line">      p.next = l1;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span> (l2 != <span class="keyword">null</span>)</div><div class="line">      p.next = l2;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> l.next;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="实现稀疏矩阵相乘"><a href="#实现稀疏矩阵相乘" class="headerlink" title="实现稀疏矩阵相乘"></a>实现稀疏矩阵相乘</h2><p>给定两个稀疏矩阵A和B，求AB。A的列数和B的行数相等。</p>
+<p>面经：（链表，即每行的非零值存进单链表里。从面试官表情判断，应该说对了）</p>
+<p><a href="http://www.chongchonggou.com/g_5929864.html" target="_blank" rel="external">http://www.chongchonggou.com/g_5929864.html</a><br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">A = [</div><div class="line">  [ 1, 0, 0],</div><div class="line">  [-1, 0, 3]</div><div class="line">]</div><div class="line"></div><div class="line">B = [</div><div class="line">  [ 7, 0, 0 ],</div><div class="line">  [ 0, 0, 0 ],</div><div class="line">  [ 0, 0, 1 ]</div><div class="line">]</div><div class="line"></div><div class="line">     |  1 0 0 |   | 7 0 0 |   |  7 0 0 |</div><div class="line">AB = | -1 0 3 | x | 0 0 0 | = | -7 0 3 |</div><div class="line">                  | 0 0 1 |</div></pre></td></tr></table></figure></p>
+<p>这道题让我们实现稀疏矩阵相乘，稀疏矩阵的特点是矩阵中绝大多数的元素为0，而相乘的结果是还应该是稀疏矩阵，即还是大多数元素为0，那么我们使用传统的矩阵相乘的算法肯定会处理大量的0乘0的无用功，所以我们需要适当的优化算法，使其可以顺利通过OJ，我们知道一个$ i x k$ 的矩阵A乘以一个 $k x j$ 的矩阵B会得到一个$i x j$ 大小的矩阵C，那么我们来看结果矩阵中的某个元素$C[i][j]$是怎么来的。起始是$A[i][0]<em>B[0][j] + A[i][1]</em>B[1][j] + … + A[i][k]<em>B[k][j]$，那么为了不重复计算0乘0，我们首先遍历A数组，要确保$A[i][k]$不为0，才继续计算，然后我们遍历B矩阵的第k行，如果$B[K][J]$不为0，我们累加结果矩阵$res[i][j] += A[i][k] </em> B[k][j]$; 这样我们就能高效的算出稀疏矩阵的乘法，参见代码如下：</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">int</span>[][] multiply(<span class="keyword">int</span>[][] A, <span class="keyword">int</span>[][] B) &#123;</div><div class="line">    <span class="keyword">int</span> rowA = A.length;</div><div class="line">    <span class="keyword">int</span> colA = A[<span class="number">0</span>].length;</div><div class="line">    <span class="keyword">int</span> colB = B[<span class="number">0</span>].length;</div><div class="line">    <span class="keyword">int</span>[][] res = <span class="keyword">new</span> <span class="keyword">int</span>[rowA][colB];</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rowA; i++) &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; colA; j++) &#123;    </div><div class="line">        	<span class="keyword">if</span> (A[i][k] != <span class="number">0</span>) &#123;<span class="comment">// Check whether A[i][j]==0 to spare much time, because a sparse matrix has more than 95% zero elements </span></div><div class="line">	             <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j&lt; colB; j++) &#123; </div><div class="line">	                <span class="keyword">if</span> (B[k][j] != <span class="number">0</span>) res[i][j] += A[i][k] * B[k][j]; </div><div class="line">	            &#125;</div><div class="line">        	&#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再来看另一种方法，这种方法其实核心思想跟上面那种方法相同，稍有不同的是我们用一个链表来记录每一行中，各个位置中不为0的列数和其对应的值，这样就得到i个链表，然后我们遍历链表，取出每行中不为零的列数和值，然后遍历B中对应行进行累加相乘，参见代码如下：</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">int</span>[][] multiply(<span class="keyword">int</span>[][] A, <span class="keyword">int</span>[][] B) &#123;</div><div class="line">    <span class="keyword">int</span> rowA = A.length;</div><div class="line">    colA = A[<span class="number">0</span>].length;</div><div class="line">    colB = B[<span class="number">0</span>].length;</div><div class="line">    <span class="keyword">int</span>[][] res = <span class="keyword">new</span> <span class="keyword">int</span>[rowA][colB];</div><div class="line">    </div><div class="line">    LinkedList&lt;Point&gt;[] rowsA = <span class="keyword">new</span> LinkedList[rowA];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rowA; i++) &#123;<span class="comment">// Create non-zero array for each row in A</span></div><div class="line">    	rowsA[i] = <span class="keyword">new</span> LinkedList();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; colA; j++) &#123;   </div><div class="line">        	<span class="keyword">if</span> (A[i][j] != <span class="number">0</span>) &#123;</div><div class="line">        		rowsA[i].add(<span class="keyword">new</span> Point(j, A[i][j]));</div><div class="line">        	&#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rowA; i++) &#123;<span class="comment">// Only deal with non-zero elements in the above arrays </span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; rowsA[i].size(); j++) &#123;</div><div class="line">        	<span class="keyword">int</span> col = rowsA[i].get(j).x;</div><div class="line">        	<span class="keyword">int</span> val = rowsA[i].get(j).y;</div><div class="line">	             <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; colB; k++) &#123; </div><div class="line">	                res[i][k] += val * B[col][k]; </div><div class="line">        	&#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> res;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="排序链表中找出和为给定值的一段链表"><a href="#排序链表中找出和为给定值的一段链表" class="headerlink" title="排序链表中找出和为给定值的一段链表"></a>排序链表中找出和为给定值的一段链表</h2><p>上来就给了一个排序的单链表，让找出这个链表中某一段元素，使得这些元素的和 等于某个给定的值，这样的一段元素不一定存在。写完这个题，面试官就笑了，应该是比较满意，直接给我说，写得不错，有的同学写的太差。</p>
+<h2 id="面经中出现过的链表题："><a href="#面经中出现过的链表题：" class="headerlink" title="面经中出现过的链表题："></a>面经中出现过的链表题：</h2><ul>
+<li>（13）如何在O(1)时间删除链表节点；</li>
+<li>（15）第一题是链表倒数第 k 节点；如何找链表倒数第K个结点（联系这个题目，两链表找交点的题就可以在O(1)空间解决了）；单链表如何判断有环；链表中倒数第K个结点</li>
+<li>（16）反转链表递归、非递归；链表反转；链表逆序。。正中我下怀~；写程序 翻转链表；给了个单链表逆置，写代码；用C/C++实现单链表的反转。</li>
+<li>（26）复杂链表的复制</li>
+<li>（27）二叉搜索树转换成一个排好序的双向链表；上网搜搜有怎样将二叉排序树变成双向链表</li>
+<li>（37）两个相交链表如何找交点（我说了用栈保存每个链表节点的方法，他问有没有O(1)空间解法，一时没想到）；判断两条链表是否交叉</li>
+<li>（56）确定链表中环的起始位置</li>
+<li>leetcode 92 翻转部分链表(Reverse Linked List II)</li>
+<li>leetcode 147 链表插入排序(Insertion Sort List)</li>
+<li>leetcode 148 链表归并排序(Sort List)</li>
+<li>排序链表中找出和为给定值的一段链表</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/链表/" rel="tag"># 链表</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/18/数据结构与算法（10）： 数据库索引原理及优化/" rel="next" title="数据结构与算法（10）： 数据库索引原理及优化">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（10）： 数据库索引原理及优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/18/数据结构与算法题解（3）：字符串题解/" rel="prev" title="数据结构与算法题解（3）：字符串题解">
+                数据结构与算法题解（3）：字符串题解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">133</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-从尾到头打印链表"><span class="nav-text">5. 从尾到头打印链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-在O-1-时间删除链表结点"><span class="nav-text">13. 在O(1)时间删除链表结点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-链表中倒数第K个结点"><span class="nav-text">15. 链表中倒数第K个结点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#16-反转链表"><span class="nav-text">16. 反转链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#17-合并两个排序的链表"><span class="nav-text">17. 合并两个排序的链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#26-复杂链表的复制"><span class="nav-text">26. 复杂链表的复制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#27-二叉搜索树与双向链表"><span class="nav-text">27. 二叉搜索树与双向链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#37-两个链表的第一个公共结点"><span class="nav-text">37. 两个链表的第一个公共结点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#45-圆圈中最后剩下的的数字"><span class="nav-text">45. 圆圈中最后剩下的的数字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#56-链表中环的入口结点"><span class="nav-text">56. 链表中环的入口结点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#57-删除链表中重复的结点"><span class="nav-text">57. 删除链表中重复的结点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leetcode-92-翻转部分链表-Reverse-Linked-List-II"><span class="nav-text">leetcode 92 翻转部分链表(Reverse Linked List II)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leetcode-147-链表插入排序-Insertion-Sort-List"><span class="nav-text">leetcode 147 链表插入排序(Insertion Sort List)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#leetcode-148-链表归并排序-Sort-List"><span class="nav-text">leetcode 148 链表归并排序(Sort List)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现稀疏矩阵相乘"><span class="nav-text">实现稀疏矩阵相乘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序链表中找出和为给定值的一段链表"><span class="nav-text">排序链表中找出和为给定值的一段链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面经中出现过的链表题："><span class="nav-text">面经中出现过的链表题：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
