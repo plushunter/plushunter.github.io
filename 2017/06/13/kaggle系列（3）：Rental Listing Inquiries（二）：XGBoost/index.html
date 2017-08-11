@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="特征工程,kaggle,XGBoost," />
+  <meta name="keywords" content="kaggle,特征工程,XGBoost," />
 
 
 
@@ -87,7 +87,7 @@
 
 
 <meta name="description" content="上一节我们对数据集进行了初步的探索，并将其可视化，对数据有了初步的了解。这样我们有了之前数据探索的基础之后，就有了对其建模的基础feature，结合目标变量，即可进行模型训练了。我们使用交叉验证的方法来判断线下的实验结果，也就是把训练集分成两部分，一部分是训练集，用来训练分类器，另一部分是验证集，用来计算损失评估模型的好坏。">
-<meta name="keywords" content="特征工程,kaggle,XGBoost">
+<meta name="keywords" content="kaggle,特征工程,XGBoost">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost">
 <meta property="og:url" content="http://yoursite.com/2017/06/13/kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost/index.html">
@@ -394,11 +394,11 @@ var _hmt = _hmt || [];
 <p>可以对它们分别进行特征编码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">categorical = [<span class="string">"display_address"</span>,<span class="string">"manager_id"</span>,<span class="string">'building_id'</span>,<span class="string">"street_address"</span>]</div><div class="line"><span class="keyword">for</span> f <span class="keyword">in</span> categorical:</div><div class="line">    <span class="keyword">if</span> train_df[f].dtype == <span class="string">'object'</span>:</div><div class="line">        lbl = preprocessing.LabelEncoder()</div><div class="line">        lbl.fit(list(train_df[f].values)+list(test_df[f].values))</div><div class="line">        train_df[f] = lbl.transform(list(train_df[f].values))</div><div class="line">        test_df[f] = lbl.transform(list(test_df[f].values))</div><div class="line">        features_to_use.append(f)</div></pre></td></tr></table></figure>
 <p>还有一些字符串类型的特征，可以先把它们合并起来</p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">train_df[<span class="string">"features"</span>] = train_df[<span class="string">"features"</span>].<span class="built_in">apply</span>(<span class="built_in">lambda</span> x:<span class="string">" "</span>.<span class="built_in">join</span>([<span class="string">"_"</span>.<span class="built_in">join</span>(i.<span class="built_in">split</span>(<span class="string">" "</span>))<span class="keyword">for</span> i <span class="keyword">in</span> x]))</div><div class="line"><span class="built_in">print</span> train_df['<span class="built_in">features</span>'].head(<span class="number">2</span>)</div><div class="line">test_df['<span class="built_in">features</span>'] = test_df[<span class="string">"features"</span>].<span class="built_in">apply</span>(<span class="built_in">lambda</span> x: <span class="string">" "</span>.<span class="built_in">join</span>([<span class="string">"_"</span>.<span class="built_in">join</span>(i.<span class="built_in">split</span>(<span class="string">" "</span>))<span class="keyword">for</span> i <span class="keyword">in</span> x]))</div><div class="line"><span class="built_in">print</span> test_df['<span class="built_in">features</span>'].head(<span class="number">2</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">train_df[&quot;features&quot;] = train_df[&quot;features&quot;].apply(lambda x:&quot; &quot;.join([&quot;_&quot;.join(i.split(&quot; &quot;))for i in x]))</div><div class="line">print train_df[&apos;features&apos;].head(2)</div><div class="line">test_df[&apos;features&apos;] = test_df[&quot;features&quot;].apply(lambda x: &quot; &quot;.join([&quot;_&quot;.join(i.split(&quot; &quot;))for i in x]))</div><div class="line">print test_df[&apos;features&apos;].head(2)</div></pre></td></tr></table></figure>
 <p>得到的字符串结果如下：</p>
 <p>10000     Doorman Elevator Fitness_Center Cats_Allowed D…<br>100004    Laundry_In_Building Dishwasher Hardwood_Floors…</p>
 <p>然后CountVectorizer类来计算TF-IDF权重</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">tfidf</span> = CountVectorizer(stop_words =<span class="string">"english"</span>,max_features=<span class="number">200</span>)</div><div class="line"><span class="attr">tr_sparse</span> = tfidf.fit_transform(train_df[<span class="string">"features"</span>])</div><div class="line"><span class="attr">te_sparse</span> = tfidf.transform(test_df[<span class="string">"features"</span>])</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tfidf = CountVectorizer(stop_words =&quot;english&quot;,max_features=200)</div><div class="line">tr_sparse = tfidf.fit_transform(train_df[&quot;features&quot;])</div><div class="line">te_sparse = tfidf.transform(test_df[&quot;features&quot;])</div></pre></td></tr></table></figure>
 <p>这里我们需要提一点，对数据集进行特征变换时，必须同时对训练集和测试集进行操作。现在把这些处理过的特征放到一个集合中（横向合并）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">train_X = sparse.hstack([train_df[features_to_use],tr_sparse]).tocsr()</div><div class="line">test_X = sparse.hstack([test_df[features_to_use],te_sparse]).tocsr()</div></pre></td></tr></table></figure>
 <p>然后把目标变量转换为0、1、2，如下</p>
@@ -442,9 +442,9 @@ var _hmt = _hmt || [];
       
         <div class="post-tags">
           
-            <a href="/tags/特征工程/" rel="tag"># 特征工程</a>
-          
             <a href="/tags/kaggle/" rel="tag"># kaggle</a>
+          
+            <a href="/tags/特征工程/" rel="tag"># 特征工程</a>
           
             <a href="/tags/XGBoost/" rel="tag"># XGBoost</a>
           
@@ -543,7 +543,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -552,7 +552,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">133</span>
+                <span class="site-state-item-count">129</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
