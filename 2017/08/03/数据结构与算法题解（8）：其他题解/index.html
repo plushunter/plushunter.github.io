@@ -1,0 +1,886 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构,算法," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="其他题解java实现">
+<meta name="keywords" content="数据结构,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法题解（8）：其他题解">
+<meta property="og:url" content="http://yoursite.com/2017/08/03/数据结构与算法题解（8）：其他题解/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="其他题解java实现">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午10.58.44.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-01 下午10.53.41.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-01 下午10.53.48.png">
+<meta property="og:updated_time" content="2017-08-11T03:10:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法题解（8）：其他题解">
+<meta name="twitter:description" content="其他题解java实现">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午10.58.44.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 数据结构与算法题解（8）：其他题解 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/03/数据结构与算法题解（8）：其他题解/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构与算法题解（8）：其他题解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-03T22:20:45+08:00">
+                2017-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>其他题解java实现</p>
+<a id="more"></a>
+<ol>
+<li>掌握常见的数据结构以及操作（线性表，队，列，字符串，树，图等），掌握常见的计算机算法（排序算法，查找算法，动态规划，递归等）；多敲代码，多上 OJ 平台刷题；推荐书籍：《大话数据结构》《剑指 offer 》</li>
+<li>编程基础：需要掌握一大一小两门语言，大的指 C++ 或者 JAVA ，小的指 python 或者 shell 脚本；需要掌握基本的数据库语言；建议： MySQL + python + C++ ；语言只是一种工具，看看语法就好；推荐书籍：《 C++ primer plus 》</li>
+<li>海量数据处理平台：hadoop（mr计算模型， java开发）或者spark（rdd计算模型，scala开发），重点推荐后者；建议：主要是会使用，有精力的话可以看看源码了解集群调度机制之类的；推荐书籍：《大数据spark企业级实战》</li>
+<li>数据结构提问：常见的数据结构一定要掌握，基础的代码一定要会手写（快排，冒泡，堆排，归并排序，二分查找，二叉树的遍历，二叉树增删查改）；剑指offer的题目要会；有精力的话可以刷下leetcode；</li>
+<li>数据结构方面主要了解：链表、二叉树、数组、堆、栈（排名分先后）leetcode，保质保量、持续进行《剑指offer》必看！！！</li>
+<li>经典算法实现题 快速排序、归并排序、堆排序、KMP算法等都是重点，重要的是代码的正确性，其次是复杂度分析，当然，人家也不都是直接问你怎么实现这个具体算法，而是包装到情境里；</li>
+<li>数据结构和算法肯定是必须掌握的。数据结构一般到二叉树就可以了，图等结构掌握遍历、最短路径算法、最小生成树算法的思想、复杂度等即可。算法的话，最常见的就是和数组、链表相关的，难度都不是很大。算法相关的书：《算法导论》（看了部分）、Mark Allen Weiss的《数据结构与算法解析》（强烈推荐，很不错）、《剑指offer》、《编程之美》、《编程珠玑》</li>
+<li>coding：从基本的数据结构、到分治，动态规划这些算法思想需要很熟悉；进阶：实现过机器学习算法；更进一步：能够利用mapreduce | spark | mpi | ps 开发分布式机器学习算法。（github你值得拥有）</li>
+</ol>
+<p><a href="http://frank19900731.github.io/ebook/the-art-of-programming-by-july/index.html" target="_blank" rel="external">程序员编程艺术：面试和算法心得</a></p>
+<p>还是得学一门语言，脑子一热选择了Java，然后就开始了漫长的Java自学之路。很庆幸自己选择了Java head First这本书作为入门书，生动形象易懂，并没有选择Thinking in Java，配合传智播客毕向东的Java基础视频，效果还是挺好的，至少觉得Java还是挺有趣的。在银行实习了一段时间，发现也没啥事可以做，挺水的，也没人管，于是开始抽时间在银行看书。在学Java的同时，开始刷剑指offer，我感觉牛客的在线编程还是挺方便的，我都是在这个上面刷的，不会的就看看大家的讨论，受益匪浅。当然刷题的时候就尝试用Java实现了。刚开始刷题是极其痛苦的过程，因为不了解数据结构，基本都要看答案。刷题的同时开始学习数据结构，数据结构主要就是看视频学习了，重点放在链表和二叉树上。 所有的笔试全部挂了 ，没有面试的机会。感受到了找工作的不容易，于是继续一边投简历，一边看书，一边刷题，奔波于各种招聘会，没有目标的海投。在这里推荐王道的程序员宝典，比那个程序员面试宝典好多了啊，其实面试问来问去也都是上面比较经典的题目，强推强推^ ^美团：其实十月份我就把目标锁定了美团，因为听说技术氛围不错，而且主要是Java，自己还是挺喜欢Java的。。。（找工作找着找着，都快忘了自己当初的目标是银行了，哈哈）期间看了好多美团的面经，感谢在牛客分享的大神们美团参加的第二批笔试，十月20号左右吧，就开始面试了，当时真的很紧张很紧张啊，想着美团不要我，我就开始准备银行了。美团面试官都很好，面试官很专业，问的很深，而且对细节要求特别高，一直被虐，但是每一面都是收获，感激，一路杀到HR面，HR也很nice，一直问我愿不愿意去北京，说北京的互联网氛围更好，可是我还是选择了上海。能进美团，主要是看了好多美团面经，针对性看书，刷题。在面试前，我把二叉树和链表常考的题目，都总结了一遍，剑指offer这个时候，已经刷了50题左右了，也没时间再刷题了，只能这样了。生活就是这么戏剧化啊，刷的题都没考，哈哈哈。。。问了一个我看过，但觉得肯定不会让我当场写的题目，就是那个字符串转换成整数，题目不难，但考虑的细节特别多。。。没写出来，感谢面试官还是让我进了二面。所以让我坚定，努力还是有用的，即使运气再差，总会再别的方面有所体现。至此，校招算是结束了，其中的辛酸也只有自己能体会吧！虽然看上去像是轻描淡写，但是自己也确实也是付出了很多努力，期间都是晚上11点才回寝室，因为准备的时间太短了，六月份才开始从什么都不懂，到后来找到工作。与大家共勉，一切皆有可能，只要努力，找对方向，心态放好，多投，多试，会有好结果的。不要埋怨工作不好找，不要埋怨自己不是科班的！还有工作还是越早准备越好，互联网来的比较早，暑假就有很多内推了，当然我都没参加，因为准备不充分，来不及啊，所以趁早趁早，机会更多！</p>
+<h2 id="一、随机数生成器"><a href="#一、随机数生成器" class="headerlink" title="一、随机数生成器"></a>一、随机数生成器</h2><p>给定一个函数rand5()，该函数可以随机生成1-5的整数，且生成概率一样。现要求使用该函数构造函数rand7()，使函数rand7()可以随机等概率的生成1-7的整数。</p>
+<p>很多人的第一反应是利用rand5() + rand()%3来实现rand7()函数，这个方法确实可以产生1-7之间的随机数，但是仔细想想可以发现数字生成的概率是不相等的。rand()%3 产生0的概率是1/5，而产生1和2的概率都是2/5，所以这个方法产生6和7的概率大于产生5的概率。</p>
+<p>正确的方法是利用rand5()函数生成1-25之间的数字，然后将其中的1-21映射成1-7，丢弃22-25。例如生成(1，1)，(1，2)，(1，3)，则看成rand7()中的1，如果出现剩下的4种，则丢弃重新生成。</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">random</span> </span>&#123;    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rand7</span><span class="params">()</span> </span>&#123;    </div><div class="line">        <span class="keyword">int</span> x = <span class="number">22</span>;    </div><div class="line">        <span class="keyword">while</span>(x &gt; <span class="number">21</span>) &#123;    </div><div class="line">            x = rand5() + (rand5() - <span class="number">1</span>)*<span class="number">5</span>;    </div><div class="line">        &#125;    </div><div class="line">        <span class="keyword">return</span> <span class="number">1</span> + x%<span class="number">7</span>;    </div><div class="line">    &#125;    </div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>随机数的生成算法，比如0~0.6的生成概率是0.7,0.6~1的生成概率是0.3，问怎么实现。</p>
+<ol>
+<li>有一个GOD（）函数，能够以C的概率返回0，以1-C的概率返回1，C未知，让利用GOD（）构造P（x )实现以X的概率返回0,1-X的概率返回1，不能使用随机函数。我说了两个解法，但都是错的，因为还是用了随机函数。最后面试官说了解法，感觉trick痕迹太明显了，正常根本想不出来啊。第二问先用GOD()得到同概率0，1的随机数，用多次调用GOD生成一个0～1之间的无穷小数，判断这个数是否大于X</li>
+</ol>
+<h2 id="分布式相关"><a href="#分布式相关" class="headerlink" title="分布式相关"></a>分布式相关</h2><p>mr 方案解决矩阵相乘的代码；<br>hadoop原理，shuffle如何排序，map如何切割数据，如何处理数据倾斜，join的mr代码</p>
+<p>MR的shuffle过程？内存不够时涉及大文件排序如何处理？ 答：先hash到不同文件中，每个文件排序，然后每个文件读取行，类似归并排序的思路？</p>
+<p>Hadoop,Spark,storm下面的产品，原理，适用场景</p>
+<p>spark跟hadoop的区别答：spark有RDD机制，写内存，相对hadoop适合迭代运算</p>
+<p>如何用hadoop实现k-means<br>简单介绍 MapReduce 原理，有没有看过源码，说说 Map 阶段怎么实现的,<br>MapReduce 实现统计出现次数最多的前 100 个访问 IP.<br>MapReduce 实现统计不重复用户 ID,MapReduce 实现两个数据集求交集。<br>HBase 行健怎么设计,spark 性能一般优化方法,spark streaming 和 storm 区别.给了一张笔试题， 10 道选择，一道大题。选择题是 java 基础知识，大题一个有三问：根据场景写出 Hive 建表语句； Hsql 从表中查询；<br>用MapReduce写好友推荐，在一堆单词里面找出现次数最多的k个<br>用分布式的方法做采样怎么保证采样结果完全符合预期？<br>后面又问了Hadoop,Spark,storm下面的产品，原理，适用场景，<br>写一个 Hadoop 版本的 wordcount。<br>K-means能否分布式实现？ 答：因为本身是迭代式算法，所以只能半分布式实现，即在计算类的均值、每个样本点属于哪个类的时候<br>还有怎么解决mapreduce数据倾斜</p>
+<h2 id="海量数据"><a href="#海量数据" class="headerlink" title="海量数据"></a>海量数据</h2><ol>
+<li><p>如何在海量数据中查找给定部分数据最相似的top200向量，向量的维度也很高因为之前了解过其他面蚂蚁金服的朋友，也有问到这个题目的，所以反应比较快，直接就说可以用KD树，聚类，hash，</p>
+</li>
+<li><p>如何在海量数据中查找给定部分数据最相似的top200向量，向量的维度也很高，实现一个分布式的topN算法</p>
+</li>
+<li>最后是一个海量数据处理题，给了个滴滴打车的背景，实质就是如何在海量数据中找到最大值。我按着分治思想说了一个解法，意思到了，他也就没往深处问。</li>
+<li>要求手写海量数据topK的问题，手写个最小堆，之前没自己写过，幸亏ＴＴＦ同学临时指导了一下，都准备好了也没面到</li>
+<li>海量数据问题，给定１０亿个数，统计出现次数最多的１００个数，如果把数换成字符串呢</li>
+</ol>
+<ol>
+<li><p>给你1000个数，怎样随机抽取10个数</p>
+</li>
+<li><p>之后就是大数据题目，1KW句子算相似度（还是那套分块+hash/建索引，但是因为本人不是做这个的，文本处理根本说一片空白，所以就不误导大家了），之后就是一直围绕大数据的题目不断深化。</p>
+</li>
+<li><p>怎么在2G内存里找100TB数据的中位数，还有怎么解决mapreduce数据倾斜，经常用什么语言工具开发<br>从大数据中找出topk</p>
+</li>
+<li><p>对大小在1-10000的1亿个数进行排序，你会怎么做？（友情提示，不要用基于比较的排序算法哦）</p>
+</li>
+<li><p>怎么在2G内存里找100TB数据的中位数，</p>
+</li>
+</ol>
+<ol>
+<li><p>10亿个整数，1G内存，O(n)算法，统计只出现一次的数。 </p>
+</li>
+<li><p>36.N个数找K大数那个题,堆解释了一遍,比较满意,问还能怎么优化O(Nlogk)的方法，并行方面想</p>
+</li>
+<li><p>给10^10个64位数,100M内存的空间排序,感谢队长刚好在去的前一天教过我一个求中位数的方法.用文件操作来做了,像快排一样,二分选个数统计大于那个数的数量和小于那个数的数量,如果能用100M的空间排序就把那些数排了,如果不能继续.直到能排为止.</p>
+</li>
+<li>第k大之类的套路题</li>
+</ol>
+<h2 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a>最短路</h2><ol>
+<li>最短路算法-dijkstra</li>
+<li>1道dijkstra，1道开放性问题，超大地图的最短路</li>
+<li>最短路径代码；</li>
+<li>dijkstra的改进，如果要求路径上不能超过5个红绿灯怎么做</li>
+<li>首先是最短路径算法你理解哪些？答：floyd, dijkstra, bellman-ford,spfa ，分别适用什么场景？答：除了floyd是计算两两最短路，其它都计算单源最短路径。复杂度各是多少？答：一堆分析。然后让我把笔试中写的复杂度过高的一题再重新优化了一下。</li>
+<li>求两点间的最短路径，图的结构是每个节点跟上下左右相连（显然有比Dij更快的算法）</li>
+</ol>
+<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><ol>
+<li>sql 语句的一些优化技巧；</li>
+<li>sql 各种join很尴尬不记得了…太久没用sql忘得一干二净，面试官人太好了说没事没事这个复习下就知道了 - -</li>
+<li>关于集群调度的一些经验 trick 掌握多少；</li>
+<li>左连接、右连接、全连接的概念</li>
+<li>数据库索引方式：</li>
+<li>网易游戏的一道笔试题是给定一条包含3个join的SQL语句，要求写代码模拟实现SQL的功能</li>
+</ol>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>问归并排序以及快速排序的时间复杂度并分析；</p>
+<p>各种排序算法的时间复杂度和空间复杂度<br>最后写了下归并排序。<br>然后现场撸代码（快排）﻿</p>
+<ol>
+<li>那你对数据结构中排序算法知道多少？我：嗯，常见的方法都知道，比如快排，冒泡等（当时说完就后悔了，说什么快排啊，自己都没复习到位，额）</li>
+<li>介绍各种排序算法，堆和堆排序；59. 桶排序？快速排序？数据结构熟悉程度了解（堆排序等）</li>
+<li>实现快速排序、归并排序、堆排序，各排序算法复杂度分析；</li>
+<li>常用排序算法的时间和空间复杂度</li>
+<li>快排的空间复杂度,答O(n).归并的空间复杂度,答O(n).他让我好好想想,我想了会,难道空间复杂度的常数不能省吗?然后做了修改,快排是O(n)归并是O(2n).<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2></li>
+<li>写程序实现二分查找算法，给出递归和非递归实现，并分析算法的时间复杂度。</li>
+<li>coding：面试官发来google doc白板写代码，第0题：leetcode 153 O(n) bruteforce 解法 follow up:O(lgn) binary search 解法Find Minimum in Rotated Sorted Array<h2 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h2><h2 id="7-用两个栈实现队列（栈与队列）"><a href="#7-用两个栈实现队列（栈与队列）" class="headerlink" title="7. 用两个栈实现队列（栈与队列）"></a>7. 用两个栈实现队列（栈与队列）</h2>栈是一个非常常见的数据结构，它在计算机领域中被广泛应用，比如操作系统会给每个线程创建一个栈来存储函数调用时各个函数的参数、返回地址及临时变量等。栈的特点是后进先出，即最后被压入（push）栈的元素会第一个被弹出（pop）。</li>
+</ol>
+<p>队列是另外一种很重要的数据结构。和栈不同的是，队列的特点是先进先出，即第一个进入队列的元素将会第一个出来。</p>
+<p>栈和队列虽然是针锋相对的两个数据结构，但有意思的是他们却相互联系。</p>
+<p>通过一个具体的例子来分析往队列插入和删除元素的过程。首先插入一个元素a，不妨先把它插入到stack1，此时stack1中的元素有{a}，stack2为空，再向stack1压入b和c，此时stack1中的元素有{a,b,c}，其中c处于栈顶，而stack2仍然是空的。</p>
+<p>因为a是最先进的，最先被删除的元素应该是a，但a位于栈低。我们可以把stack1中的元素逐个弹出并压入stack2，元素在stack2的顺序正好和原来在stack1的顺序相反因此经过三次弹出stack1和压入stack2操作之后，stack1为空，而stack2的元素是{c,b,a}，这时就可以弹出stack2的栈顶a了，随后弹出stack2中的b和c，而这个过程中stack1始终为空.</p>
+<p>从上面的分析我们可以总结出删除一个元素的步骤：<strong>当stack2中不为空时，在stack2的栈顶元素是最先进入队列的元素，可以弹出。如果stack2为空时，我们把stack1中的元素逐个弹出并压入stack2。由于先进入队列的元素被压到stack1的底端，经过弹出和压入之后就处于stack2的顶端了，又可以直接弹出。</strong><br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午10.58.44.png" alt="屏幕快照 2017-07-28 上午10.58.44"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">import java.util.Stack;</div><div class="line">public class Solution &#123;</div><div class="line">    Stack&lt;Integer&gt; stack1 = new Stack&lt;Integer&gt;();</div><div class="line">    Stack&lt;Integer&gt; stack2 = new Stack&lt;Integer&gt;();</div><div class="line">    </div><div class="line">    public void push(int node) &#123;</div><div class="line">        stack1.push(node);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public int pop() &#123;</div><div class="line">        while(!stack2.isEmpty())&#123;</div><div class="line">            return stack2.pop();</div><div class="line">        &#125;</div><div class="line">        while(!stack1.isEmpty())&#123;</div><div class="line">            stack2.push(stack1.pop());</div><div class="line">        &#125;</div><div class="line">        return stack2.pop();</div><div class="line">    </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="21-包含min函数的栈（栈）"><a href="#21-包含min函数的栈（栈）" class="headerlink" title="21.包含min函数的栈（栈）"></a>21.包含min函数的栈（栈）</h2><p>定义栈的数据结构，请在该类型中实现一个能够得到栈最小元素的min函数。在该栈中，调用min、push及pop的时间复杂度都是O(1)。</p>
+<p>可以利用一个辅助栈来存放最小值<br>  <img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-01 下午10.53.41.png" alt="屏幕快照 2017-08-01 下午10.53.41"><br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-01 下午10.53.48.png" alt="屏幕快照 2017-08-01 下午10.53.48"></p>
+<p>  每入栈一次，就与辅助栈顶比较大小，如果小就入栈，如果大就入栈当前的辅助栈顶 。<br>  当出栈时，辅助栈也要出栈<br>  这种做法可以保证辅助栈顶一定都是最小元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">import java.util.Stack;</div><div class="line"></div><div class="line">public class Solution &#123;</div><div class="line">    Stack&lt;Integer&gt; data = new Stack&lt;Integer&gt;();</div><div class="line">    Stack&lt;Integer&gt; min = new Stack&lt;Integer&gt;();</div><div class="line">    </div><div class="line">    public void push(int node) &#123;</div><div class="line">        data.push(node);</div><div class="line">        if(min.empty())&#123;min.push(data.peek());&#125;</div><div class="line">        else if(data.peek()&lt;min.peek())&#123;min.push(data.peek());&#125;</div><div class="line">        else min.push(min.peek());</div><div class="line">        &#125;  </div><div class="line">    public void pop() &#123;</div><div class="line">        data.pop();</div><div class="line">        min.pop();      </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public int top() &#123;</div><div class="line">        return data.peek();</div><div class="line">        </div><div class="line">    &#125;    </div><div class="line">    public int min() &#123;</div><div class="line">        return min.peek();        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="22-栈的压入、弹出序列（栈）"><a href="#22-栈的压入、弹出序列（栈）" class="headerlink" title="22. 栈的压入、弹出序列（栈）"></a>22. 栈的压入、弹出序列（栈）</h2><p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4，5，3，2，1是该压栈序列对应的一个弹出序列，但4，3，5，1，2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）</p>
+<p>借用一个辅助的栈，遍历压栈顺序，先讲第一个放入栈中，这里是1，然后判断栈顶元素是不是出栈顺序的第一个元素，这里是4，很显然1≠4，所以我们继续压栈，直到相等以后开始出栈，出栈一个元素，则将出栈顺序向后移动一位，直到不相等，这样循环等压栈顺序遍历完成，如果辅助栈还不为空，说明弹出序列不是该栈的弹出顺序。<br>举例：<br>入栈1,2,3,4,5<br>出栈4,5,3,2,1<br>首先1入辅助栈，此时栈顶1≠4，继续入栈2<br>此时栈顶2≠4，继续入栈3<br>此时栈顶3≠4，继续入栈4<br>此时栈顶4＝4，出栈4，弹出序列向后一位，此时为5，,辅助栈里面是1,2,3<br>此时栈顶3≠5，继续入栈5<br>此时栈顶5=5，出栈5,弹出序列向后一位，此时为3，,辅助栈里面是1,2,3<br>….<br>依次执行，最后辅助栈为空。如果不为空说明弹出序列不是该栈的弹出顺序。</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.Stack;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">IsPopOrder</span><span class="params">(<span class="keyword">int</span> [] pushA,<span class="keyword">int</span> [] popA)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(pushA.length==<span class="number">0</span>||popA.length==<span class="number">0</span>)<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        Stack&lt;Integer&gt; S=<span class="keyword">new</span> Stack&lt;Integer&gt;();</div><div class="line">        <span class="keyword">int</span> popIndex = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;pushA.length;i++)&#123;</div><div class="line">            S.push(pushA[i]);</div><div class="line">            <span class="keyword">while</span>(!S.empty()&amp;&amp;popA[popIndex]==S.peek())&#123;</div><div class="line">                S.pop();</div><div class="line">                popIndex++;</div><div class="line">            &#125;            </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> S.empty();      </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>写一个栈，添加一个接口，返回当前栈最小值，要求时空都为O(1)，其他代码题基本都能在剑指offer和微软面试100题上找到，题目已经忘了</li>
+</ol>
+<h2 id="46-求1-2-…-n（逻辑）"><a href="#46-求1-2-…-n（逻辑）" class="headerlink" title="46. 求1+2+…..+n（逻辑）"></a>46. 求1+2+…..+n（逻辑）</h2><p>求1+2+3+…+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。</p>
+<ol>
+<li>需利用逻辑与的短路特性实现递归终止。 </li>
+<li>当n==0时，(n&gt;0)&amp;&amp;((sum+=Sum_Solution(n-1))&gt;0)只执行前面的判断，为false，然后直接返回0；</li>
+<li>当n&gt;0时，执行sum+=Sum_Solution(n-1)，实现递归计算Sum_Solution(n)。</li>
+</ol>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">Sum_Solution</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> sum=n;</div><div class="line">        <span class="keyword">boolean</span> ans = (n&gt;<span class="number">0</span>)&amp;&amp;((sum+=Sum_Solution(n-<span class="number">1</span>))&gt;<span class="number">0</span>);</div><div class="line">        <span class="keyword">return</span> sum;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h2><ol>
+<li>在一个n*n的矩阵中填数的问题，那种转圈填数，</li>
+<li>跟异构智能面试1面的第二题一样，都是剑指offer的1道题，是回自型的矩阵找(x,y)位置的数是几</li>
+</ol>
+<p>手写个算法，剑指ｏｆｆｅｒ原题，顺时针打印矩阵，手写比较慢，面试官带了笔记本做自己工作，敲代码呼呼的，感觉都带风，</p>
+<p>一道codeForces原题(我没做过)：从N个数中可放回的抽取B次，问B次取出的数的和被X模余K的方法总数是多少，N&lt;50000,B&lt;10E9,K&lt;X&lt;100，这题我在5分钟内写出了递推式并给出了快速幂优化后的时间复杂度，面试官很满意。</p>
+<ol>
+<li><p>求一个二维矩阵的最大横竖撇三个的最大值，这道题很简单的，只要穷举就可以了，但是我由于C++忘了比较多，导致程序调试出问题，忧伤。后面考完后发现是输入参数不兼容问题。 </p>
+</li>
+<li><p>编程题：实现求正整数平方根整数部分的函数（使用梯度下降）</p>
+</li>
+<li>第三题是矩阵中将 0 元素所在行列全置 0 的最优空间解法,</li>
+<li><ol>
+<li>给定两个黑白图像，即0-1矩阵。四个操作（水平翻转、竖直翻转、90度旋转、黑白翻转），问这个图像能否通过有限步骤操作，最后变成一样的。<h2 id="DFS和BFS"><a href="#DFS和BFS" class="headerlink" title="DFS和BFS"></a>DFS和BFS</h2></li>
+</ol>
+</li>
+</ol>
+<ol>
+<li>迷宫的深度搜索、广度搜索；</li>
+<li>之后他问我DFS和BFS算法，在哪些地方有应用。我说人工智能里面寻路算法有应用，BFS加上个优先队列就成了代价一致搜索，代价一致搜索加上个贪心策略就成了A*算法。他问何时选择DFS呢？我一时语塞，乱七八糟答了一点（心里想着这不是看具体情况么）…这个问题就问到这里了。</li>
+</ol>
+<h2 id="C-、java、python"><a href="#C-、java、python" class="headerlink" title="C++、java、python"></a>C++、java、python</h2><ol>
+<li><p>还问了些C++继承性、多态性、malloc与new区别及优缺点，重载函数与重写函数特点等等</p>
+</li>
+<li><p>struct和class区别，你更倾向用哪个struct比class有更多的限制，详见下面链接<a href="http://angeson1987.blog.163.com/blog/static/1625900902010728035209/" target="_blank" rel="external">http://angeson1987.blog.163.com/blog/static/1625900902010728035209/</a></p>
+</li>
+<li>问了一些C++的基础知识，sizeof啊，多态性啊，熟悉的数据结构（主要问了链表数组和树），，在平时项目中处理的数据类型、如何处理异常啊等等…<br>C++里面static的作用，<br>C++里面const有什么作用，在函数名、参数名不同位置有什么作用、C++ 内存分配、指针与引用、函数传参如何更快、大致写下C++ vector代码、</li>
+<li>然后问C++中STL容器知识，map底层是怎么实现，为什么要用红黑树？我说用散列表也可以，unordered_map底层就是用的散列表。</li>
+<li>main(argc,argv[])里面两个参数什么意思</li>
+<li>用C语言将一个四段的IP地址放到32bit字节里</li>
+</ol>
+<p>java知识考核（和其他公司的有点混淆了，记不清楚哪个是哪个公司考的了）大体是这样子的1.进程与线程的区别，线程的同步问题，两个线程访问一个临界资源该怎么做？线程什么时候终止？（还问到一个daemon函数，我当时完全不知道这是什么）2.hashmap与hashtable区别3.String 与StringBuffer的区别，有什么好处？4.问了用过java的数据挖掘，数据分析包吗？用过哪些？5.还问了一个异常处理机制，，try和finally里面都有return的时候，会不会执行finally的return。6.final的作用。。。1.什么是面向对象？JAVA与C相比有什么区别？JAVA的对象与c的结构体有什么区别？2.JAVA的IO有哪些类？接口？关系是啥？（谁继承谁之类的）3.你用过哪些JAVA的库？（java.io, java.util, 等等）你什么时候开始用JAVA的？（这个问题是最开始问的，我说14年开始的。。后面又问了一遍。。）用过什么数据库？（SQL SERVER, MYSQL）用过No-SQL数据库没？说一个No-SQL的数据库？（我没用过，，听过Redis这个键值对数据库（瞎扯的。。。））会用什么动态语言吗？（js这种？额，不会，，会一些python。）用python作什么？（分类聚类处理，评价之类的）（介于面试官完全不懂数据挖掘好像，没问啥了）操作系统了解吗？（我还以为问理论这些。。还在想，面试官继续问）Linux用过没？（用过。。在上面搭建过java, hadoop等开发环境，）了解shell吗？（不了解，，）那linux常用命令呢？（知道几个，比如cd , ls,  mkdir,  rm,  mv,  vi ,, gedit, sudo ,,）（还问了关于上机题目中岛上建桥费用最小的那个问题），你这个题怎么做错了啊？（哦，那个题没做错，但是有个用例没过，没想到是为什么。。然后开始给他讲解最小生成树。。。）<br>java c++中的sort()是用什么封装的sort(Object)sort(int) 是一种sort分装么，然后引出快排手写快拍中的partition很久前看的算法导论忘的差不多了，在面试官提示下跌跌爬爬的写出来了。(写出来那一瞬间我听到了我自己和电话那头同时一声长叹….<br>然后问了高并发问题，讲讲CurrentHashMap原理，可是我并不了解，就大概说了下自己想法</p>
+<ol>
+<li>如何提高Python的运行效率，写一个简单的正则匹配表达式(将文本中的123.4匹配出来)</li>
+<li>python读取文件，写代码</li>
+<li>python计算一个文件中有N行，每行一列的数的平均值，方差，写代码<br>1.了解python吗？了解一些，平时偶尔看看别人写的程序。2.用过什么python的数据分析包？ 什么panda呀，。。。我说我就用过scikit learn, 还有两个网络图的包networkx, igraph。。。3.基本语法都知道吧？恩都知道。不过不是很熟，要是工作需要的话，可以尽快入门。</li>
+</ol>
+<h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h2><ol>
+<li><p>一个应用题，考察hash算法</p>
+</li>
+<li><p>问我知道倒排索引不 ? (不知道)想考察我学习能力，所以决定教教我倒排索引 ，简单画了个图，问了相关的问题  （答得不好）</p>
+</li>
+<li><ol>
+<li>hash表的数据结构，沟通了很久才知道他想问的是hash表冲突之后的链式表处理。 </li>
+</ol>
+</li>
+</ol>
+<h2 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h2><ol>
+<li>打印组合数；</li>
+<li>第三题，是关于K-means 聚类的，由于时间都花在第一题调bug上了，就没有做这道题。</li>
+</ol>
+<p>4 月19日在华为研究所参加了华为实习生上机考试。三道编程题，难度依次增大，三题分值分别是100、200、300。三个题大意分别是：（1）给出五门课 程的成绩，求成绩的平均值，注意输入的成绩均在0到100分范围内，如果输入的成绩不足五个，按照五个成绩计算；如果输入的成绩多余五个，取前五个成绩。 是不是简单到爆？我竟然测试用例没完全通过，后来面试时才知道该题得了67分。<br>将输入的数字表示为大写形式，例如输入10010，那么转为壹万零一十。三题一共就得了67分，编程能力差加上不练习编程，满满的泪。</p>
+<ol>
+<li>手动实现upper_bound</li>
+<li>手动实现next_premutation，还写了一段python代码</li>
+</ol>
+<p>设计一个斗地主的AI。</p>
+<ol>
+<li>一个运算序列只有+、*、数字，计算运算序列的结果.</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/05/数据结构与算法题解（9）：剑指offer解题报告/" rel="next" title="数据结构与算法题解（9）：剑指offer解题报告">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（9）：剑指offer解题报告
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/02/数据结构与算法题解（7）：重点掌握/" rel="prev" title="数据结构与算法题解（7）：重点掌握">
+                数据结构与算法题解（7）：重点掌握 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">133</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、随机数生成器"><span class="nav-text">一、随机数生成器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式相关"><span class="nav-text">分布式相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#海量数据"><span class="nav-text">海量数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最短路"><span class="nav-text">最短路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL"><span class="nav-text">SQL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-text">排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查找"><span class="nav-text">查找</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈和队列"><span class="nav-text">栈和队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-用两个栈实现队列（栈与队列）"><span class="nav-text">7. 用两个栈实现队列（栈与队列）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#21-包含min函数的栈（栈）"><span class="nav-text">21.包含min函数的栈（栈）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-栈的压入、弹出序列（栈）"><span class="nav-text">22. 栈的压入、弹出序列（栈）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#46-求1-2-…-n（逻辑）"><span class="nav-text">46. 求1+2+…..+n（逻辑）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#矩阵"><span class="nav-text">矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DFS和BFS"><span class="nav-text">DFS和BFS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-、java、python"><span class="nav-text">C++、java、python</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希"><span class="nav-text">哈希</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数学"><span class="nav-text">数学</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

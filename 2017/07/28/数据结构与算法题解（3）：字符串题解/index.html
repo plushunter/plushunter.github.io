@@ -1,0 +1,807 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构,算法,字符串," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="字符串相关题解java实现">
+<meta name="keywords" content="数据结构,算法,字符串">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法题解（3）：字符串题解">
+<meta property="og:url" content="http://yoursite.com/2017/07/28/数据结构与算法题解（3）：字符串题解/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="字符串相关题解java实现">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午9.44.36.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15016515510574.jpg">
+<meta property="og:updated_time" content="2017-08-11T03:07:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法题解（3）：字符串题解">
+<meta name="twitter:description" content="字符串相关题解java实现">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午9.44.36.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 数据结构与算法题解（3）：字符串题解 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/28/数据结构与算法题解（3）：字符串题解/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构与算法题解（3）：字符串题解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-28T22:20:45+08:00">
+                2017-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>字符串相关题解java实现</p>
+<a id="more"></a>
+<h2 id="4-替换空格（字符串）"><a href="#4-替换空格（字符串）" class="headerlink" title="4. 替换空格（字符串）"></a>4. 替换空格（字符串）</h2><p>请实现一个函数，把字符串中的每个空格替换成”%20”。例如输入“We are happy.”，则输出“We%20are20happy”</p>
+<p>网络编程中，要把特殊符号转换成服务器可识别的字符。转换的规则是在“%”后面跟上ASCII码的两位十六进制的表示。比如空格的ASCII码是32，即十六进制的0X20，因此空格被替换成“%20”。</p>
+<p>问题1：替换字符串，是在原来的字符串上做替换，还是新开辟一个字符串做替换！<br>问题2：在当前字符串替换，怎么替换才更有效率（不考虑java里现有的replace方法）。从前往后替换，后面的字符要不断往后移动，要多次移动，所以效率低下；从后往前，先计算需要多少空间，然后从后往前移动，则每个字符只为移动一次，这样效率更高一点。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午9.44.36.png" alt="屏幕快照 2017-07-28 上午9.44.36"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">replaceSpace</span><span class="params">(StringBuffer str)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> spacenum = <span class="number">0</span>;<span class="comment">//spacenum为计算空格数</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length();i++)&#123;</div><div class="line">            <span class="keyword">if</span>(str.charAt(i)==<span class="string">' '</span>)</div><div class="line">                spacenum++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> indexold = str.length()-<span class="number">1</span>;<span class="comment">//indexold为为替换前的str下标</span></div><div class="line">        <span class="keyword">int</span> newlength = str.length()+<span class="number">2</span>*spacenum;<span class="comment">//计算空格转换成%20之后的str长度</span></div><div class="line">        <span class="keyword">int</span> indexnew = newlength-<span class="number">1</span>;<span class="comment">//indexold为为把空格替换为%20后的str下标</span></div><div class="line">        str.setLength(newlength);<span class="comment">//使str的长度扩大到转换成%20之后的长度,防止下标越界,setLength方法</span></div><div class="line">        <span class="keyword">for</span>(;indexold&gt;=<span class="number">0</span>&amp;&amp;indexold&lt;newlength;--indexold)&#123;</div><div class="line">            <span class="keyword">if</span>(str.charAt(indexold)==<span class="string">' '</span>)&#123;<span class="comment">//charAt方法</span></div><div class="line">                str.setCharAt(indexnew--,<span class="string">'0'</span>);</div><div class="line">                str.setCharAt(indexnew--,<span class="string">'2'</span>);</div><div class="line">                str.setCharAt(indexnew--,<span class="string">'%'</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                str.setCharAt(indexnew--,str.charAt(indexold));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> str.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="28-字符串的排列（字符串）"><a href="#28-字符串的排列（字符串）" class="headerlink" title="28. 字符串的排列（字符串）"></a>28. 字符串的排列（字符串）</h2><p>输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。</p>
+<p>首先我要打印abc的全排列，就是第一步把a 和bc交换（得到bac,cab），这需要一个for循环，循环里面有一个swap，交换之后就相当于不管第一步了，进入下一步递归，所以跟一个递归函数， 完成递归之后把交换的换回来，变成原来的字串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">abc 为例子：</div><div class="line">1. 固定a, 求后面bc的全排列： abc, acb。 求完后，a 和 b交换； 得到bac,开始第二轮</div><div class="line">2. 固定b, 求后面ac的全排列： bac, bca。 求完后，b 和 c交换； 得到cab,开始第三轮</div><div class="line">3. 固定c, 求后面ba的全排列： cab, cba</div><div class="line"> 即递归树： </div><div class="line">　　　　　str:　　 a    　　　　 b 　　　　　　  c</div><div class="line">　　　　　　 　　ab ac     　　ba bc  　　　     ca cb</div><div class="line">　   　result:     abc acb    　 bac bca　     　   cab cba</div></pre></td></tr></table></figure>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15016515510574.jpg" alt=""></p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;String&gt; <span class="title">Permutation</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        <span class="keyword">if</span>(str.length()==<span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> list;</div><div class="line">        <span class="keyword">char</span>[] array = str.toCharArray();</div><div class="line">        permutation(array,<span class="number">0</span>,list);</div><div class="line">        Collections.sort(list);</div><div class="line">        <span class="keyword">return</span> list;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">permutation</span><span class="params">(<span class="keyword">char</span>[] array,<span class="keyword">int</span> begin,ArrayList&lt;String&gt; list)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(begin == array.length-<span class="number">1</span>) &#123;</div><div class="line">            list.add(String.valueOf(array));</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=begin;i&lt;array.length;++i) &#123;</div><div class="line">                <span class="keyword">if</span>(i==begin || array[i]!=array[begin]) &#123;</div><div class="line">                    swap(array,begin,i);</div><div class="line">                    permutation(array,begin+<span class="number">1</span>,list);</div><div class="line">                    swap(array,begin,i);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">char</span>[] array,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span> </span>&#123;</div><div class="line">        <span class="keyword">char</span> temp = array[i];</div><div class="line">        array[i] = array[j];</div><div class="line">        array[j] = temp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="35-第一次只出现一次的字符（字符串）"><a href="#35-第一次只出现一次的字符（字符串）" class="headerlink" title="35. 第一次只出现一次的字符（字符串）"></a>35. 第一次只出现一次的字符（字符串）</h2><p>在一个字符串(1&lt;=字符串长度&lt;=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置.</p>
+<p>我们可以使用一个容器来存放每个字符的出现次数。在这个数据容器中可以根据字符来查找出现的次数，也就是这个容器的作用是把一个字符映射成一个数字。在常用的数据容器中，哈希表正是这个用途。</p>
+<p>为了解决这个问题，我们可以定义哈希表的键值（Key）是字符，而值（Value）是该字符出现的次数。同时我们还需要从头开始扫描字符串两次。第一次扫面字符串时，每扫到一个字符就在哈希表的对应项把次数加1.接下来第二次扫描时，每扫描到一个字符就能在哈希表中得到该字符出现的次数，这样第一个只出现一次的字符就是符合要求的输出。</p>
+<p>需要涉及到Java中HashMap工作原理及实现，<a href="http://yikun.github.io/2015/04/01/Java-HashMap工作原理及实现/" target="_blank" rel="external">资料链接</a></p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">FirstNotRepeatingChar</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        HashMap&lt;Character,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;Character,Integer&gt;();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length();i++)&#123;</div><div class="line">            <span class="keyword">char</span> c = str.charAt(i);<span class="comment">//charAt方法，获得位置i的串</span></div><div class="line">                <span class="keyword">if</span>(map.containsKey(c))&#123;<span class="comment">//HashMap的containKey方法；</span></div><div class="line">                    <span class="keyword">int</span> time = map.get(c);<span class="comment">//HashMap的get方法，得到Key c的Value；</span></div><div class="line">                    time++;</div><div class="line">                    map.put(c,time);<span class="comment">//HashMap的put方法，将Key c的Value置为time；</span></div><div class="line">                &#125;<span class="keyword">else</span>&#123;</div><div class="line">                    map.put(c,<span class="number">1</span>);</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length();i++)&#123;</div><div class="line">            <span class="keyword">char</span> c = str.charAt(i);</div><div class="line">            <span class="keyword">if</span>(map.get(c)==<span class="number">1</span>)&#123;</div><div class="line">                <span class="keyword">return</span> i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="42-翻转单词顺序VS左旋转字符串（字符串）"><a href="#42-翻转单词顺序VS左旋转字符串（字符串）" class="headerlink" title="42. 翻转单词顺序VS左旋转字符串（字符串）"></a>42. 翻转单词顺序VS左旋转字符串（字符串）</h2><h3 id="42-1-翻转单词顺序"><a href="#42-1-翻转单词顺序" class="headerlink" title="42.1 翻转单词顺序"></a>42.1 翻转单词顺序</h3><p>输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串“I am a student”，则输出“student. a am I”。<br>可以先翻转整个句子，然后，依次翻转每个单词。依据空格来确定单词的起始和终止位置</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">ReverseSentence</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        <span class="keyword">char</span>[] chars = str.toCharArray();</div><div class="line">        reverse(chars,<span class="number">0</span>,chars.length-<span class="number">1</span>);</div><div class="line">        <span class="keyword">int</span> blank = -<span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;chars.length-<span class="number">1</span>;i++)&#123;</div><div class="line">            <span class="keyword">if</span>(chars[i]==<span class="string">' '</span>)&#123;</div><div class="line">                <span class="keyword">int</span> nextblank = i;</div><div class="line">                reverse(chars,blank+<span class="number">1</span>,nextblank-<span class="number">1</span>);</div><div class="line">                blank = nextblank;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        reverse(chars,blank+<span class="number">1</span>,chars.length-<span class="number">1</span>);<span class="comment">//单独翻转最后一个单词</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String(chars);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">char</span>[] chars,<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>(low&lt;high)&#123;</div><div class="line">            <span class="keyword">char</span> temp = chars[low];</div><div class="line">            chars[low]=chars[high];</div><div class="line">            chars[high]=temp;</div><div class="line">            low++;</div><div class="line">            high--;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="42-2-左旋转字符串"><a href="#42-2-左旋转字符串" class="headerlink" title="42.2 左旋转字符串"></a>42.2 左旋转字符串</h3><p>汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。</p>
+<p>以“abcdefg”为例，我们可以把它分为两部分。由于想把它的前两个字符移到后面，我们就把钱两个字符分到第一部分，把后面的所有字符都分到第二部分。然后先翻转这两部分，于是就得到“bagfedc”。接下来在翻转整个字符串，得到的”cdefgab”刚好就是把原始字符串左旋转2位的结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public String LeftRotateString(String str,int n) &#123;</div><div class="line">        char[] chars = str.toCharArray();        </div><div class="line">        if(chars.length &lt; n) return &quot;&quot;; </div><div class="line">        reverse(chars, 0, n-1);</div><div class="line">        reverse(chars, n, chars.length-1);</div><div class="line">        reverse(chars, 0, chars.length-1);</div><div class="line">        return new String(chars);</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    public void reverse(char[] chars,int low,int high)&#123;</div><div class="line">        char temp;</div><div class="line">        while(low&lt;high)&#123;</div><div class="line">            temp = chars[low];</div><div class="line">            chars[low] = chars[high];</div><div class="line">            chars[high] = temp;</div><div class="line">            low++;</div><div class="line">            high--;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="49-把字符串转换成整数（字符串）"><a href="#49-把字符串转换成整数（字符串）" class="headerlink" title="49. 把字符串转换成整数（字符串）"></a>49. 把字符串转换成整数（字符串）</h2><p>将一个字符串转换成一个整数，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0。<br>问题不难，但是要把很多特殊情况都考虑进去，却并不容易。需要考虑的特殊情况有以下几个：</p>
+<ol>
+<li>空指针null</li>
+<li>字符串为空</li>
+<li>正负号</li>
+<li>上下溢出 Integer.MAX_VALUE (2^31-1)  Integer.MIN_VALUE(-2^31)</li>
+</ol>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">StrToInt</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(str==<span class="keyword">null</span>||str.length()==<span class="number">0</span>)&#123;<span class="keyword">return</span> <span class="number">0</span>;&#125;<span class="comment">//空指针或空字符串</span></div><div class="line">        <span class="keyword">char</span>[] c = str.toCharArray();</div><div class="line">        <span class="keyword">boolean</span> minus=<span class="keyword">false</span>;</div><div class="line">        <span class="keyword">int</span> i=<span class="number">0</span>;</div><div class="line">        <span class="comment">//正负号</span></div><div class="line">        <span class="keyword">if</span>(c[i]==<span class="string">'+'</span>)&#123;</div><div class="line">            i++;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(c[i]==<span class="string">'-'</span>)&#123;</div><div class="line">            i++;</div><div class="line">            minus=<span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> num=<span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>(i&lt;c.length)&#123;</div><div class="line">            num = StrToIntCore(c,minus,i);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">return</span> num;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> num;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">StrToIntCore</span><span class="params">(<span class="keyword">char</span>[] str,<span class="keyword">boolean</span> minus,<span class="keyword">int</span> i)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> num=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;str.length;j++)&#123;</div><div class="line">            <span class="keyword">if</span>(str[j]&gt;=<span class="string">'0'</span>&amp;&amp;str[j]&lt;=<span class="string">'9'</span>)&#123;</div><div class="line">                <span class="keyword">int</span> flag = minus?-<span class="number">1</span>:<span class="number">1</span>;</div><div class="line">                num = num*<span class="number">10</span>+flag*(str[j]-<span class="string">'0'</span>);</div><div class="line">                <span class="keyword">if</span>((!minus&amp;&amp;num&gt;Integer.MAX_VALUE)||minus&amp;&amp;num&lt;Integer.MIN_VALUE)&#123;<span class="comment">//上下溢出</span></div><div class="line">                    num=<span class="number">0</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;<span class="comment">//非法数值</span></div><div class="line">                num=<span class="number">0</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">           </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> num;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="53-正则表达式匹配（字符串）"><a href="#53-正则表达式匹配（字符串）" class="headerlink" title="53. 正则表达式匹配（字符串）"></a>53. 正则表达式匹配（字符串）</h2><p>当模式中的第二个字符不是“*”时：</p>
+<ol>
+<li>如果字符串第一个字符和模式中的第一个字符相匹配，那么字符串和模式都后移一个字符，然后匹配剩余的。 </li>
+<li>如果字符串第一个字符和模式中的第一个字符相不匹配，直接返回false。</li>
+</ol>
+<p>而当模式中的第二个字符是“*”时：</p>
+<p>如果字符串第一个字符跟模式第一个字符不匹配，则模式后移2个字符，继续匹配。如果字符串第一个字符跟模式第一个字符匹配，可以有3种匹配方式： </p>
+<ol>
+<li>模式后移2字符，相当于$x*$被忽略； </li>
+<li>字符串后移1字符，模式后移2字符； </li>
+<li>字符串后移1字符，模式不变，即继续匹配字符下一位，因为*可以匹配多位；</li>
+</ol>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">match</span><span class="params">(<span class="keyword">char</span>[] str, <span class="keyword">char</span>[] pattern)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (str == <span class="keyword">null</span> || pattern == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> strIndex = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> patternIndex = <span class="number">0</span>;</div><div class="line">    <span class="keyword">return</span> matchCore(str, strIndex, pattern, patternIndex);</div><div class="line">&#125;</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matchCore</span><span class="params">(<span class="keyword">char</span>[] str, <span class="keyword">int</span> strIndex, <span class="keyword">char</span>[] pattern, <span class="keyword">int</span> patternIndex)</span> </span>&#123;</div><div class="line">    <span class="comment">//有效性检验：str到尾，pattern到尾，匹配成功</span></div><div class="line">    <span class="keyword">if</span> (strIndex == str.length &amp;&amp; patternIndex == pattern.length) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//pattern先到尾，匹配失败</span></div><div class="line">    <span class="keyword">if</span> (strIndex != str.length &amp;&amp; patternIndex == pattern.length) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//模式第2个是*，且字符串第1个跟模式第1个匹配,分3种匹配模式；如不匹配，模式后移2位</span></div><div class="line">    <span class="keyword">if</span> (patternIndex + <span class="number">1</span> &lt; pattern.length &amp;&amp; pattern[patternIndex + <span class="number">1</span>] == <span class="string">'*'</span>) &#123;</div><div class="line">        <span class="keyword">if</span> ((strIndex != str.length &amp;&amp; pattern[patternIndex] == str[strIndex]) || (pattern[patternIndex] == <span class="string">'.'</span> &amp;&amp; strIndex != str.length)) &#123;</div><div class="line">            <span class="keyword">return</span> matchCore(str, strIndex, pattern, patternIndex + <span class="number">2</span>)<span class="comment">//模式后移2，视为x*匹配0个字符</span></div><div class="line">                    || matchCore(str, strIndex + <span class="number">1</span>, pattern, patternIndex + <span class="number">2</span>)<span class="comment">//视为模式匹配1个字符</span></div><div class="line">                    || matchCore(str, strIndex + <span class="number">1</span>, pattern, patternIndex);<span class="comment">//*匹配1个，再匹配str中的下一个</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> matchCore(str, strIndex, pattern, patternIndex + <span class="number">2</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//模式第2个不是*，且字符串第1个跟模式第1个匹配，则都后移1位，否则直接返回false</span></div><div class="line">    <span class="keyword">if</span> ((strIndex != str.length &amp;&amp; pattern[patternIndex] == str[strIndex]) || (pattern[patternIndex] == <span class="string">'.'</span> &amp;&amp; strIndex != str.length)) &#123;</div><div class="line">        <span class="keyword">return</span> matchCore(str, strIndex + <span class="number">1</span>, pattern, patternIndex + <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="54-表示数值的字符串（字符串）"><a href="#54-表示数值的字符串（字符串）" class="headerlink" title="54. 表示数值的字符串（字符串）"></a>54. 表示数值的字符串（字符串）</h2><p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isNumeric</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(s.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">if</span>((s.length==<span class="number">1</span>)&amp;&amp;(s[<span class="number">0</span>]&lt;<span class="string">'0'</span>||s[<span class="number">0</span>]&gt;<span class="string">'9'</span>)) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">if</span>(s[<span class="number">0</span>]==<span class="string">'+'</span>||s[<span class="number">0</span>]==<span class="string">'-'</span>)&#123;</div><div class="line">            <span class="keyword">if</span>(s.length==<span class="number">2</span>&amp;&amp;(s[<span class="number">1</span>]==<span class="string">'.'</span>)) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>((s[<span class="number">0</span>]&lt;<span class="string">'0'</span>||s[<span class="number">0</span>]&gt;<span class="string">'9'</span>)&amp;&amp;s[<span class="number">0</span>]!=<span class="string">'.'</span>) <span class="keyword">return</span> <span class="keyword">false</span>;<span class="comment">//首位既不是符号也不是数字还不是小数点，当然是false</span></div><div class="line">        <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>((i&lt;s.length)&amp;&amp;(s[i]&gt;=<span class="string">'0'</span>&amp;&amp;s[i]&lt;=<span class="string">'9'</span>)) i++;</div><div class="line">        <span class="keyword">if</span>(i&lt;s.length&amp;&amp;s[i]==<span class="string">'.'</span>)&#123;</div><div class="line">            i++;</div><div class="line">            <span class="comment">//if(i&gt;=s.length) return false;</span></div><div class="line">            <span class="keyword">while</span>((i&lt;s.length)&amp;&amp;(s[i]&gt;=<span class="string">'0'</span>&amp;&amp;s[i]&lt;=<span class="string">'9'</span>)) i++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(i&lt;s.length&amp;&amp;(s[i]==<span class="string">'e'</span>||s[i]==<span class="string">'E'</span>))&#123;</div><div class="line">            i++;</div><div class="line">            <span class="keyword">if</span>((i&lt;s.length)&amp;&amp;(s[i]==<span class="string">'+'</span>||s[i]==<span class="string">'-'</span>))&#123;</div><div class="line">                i++;</div><div class="line">                <span class="keyword">if</span>(i&lt;s.length) <span class="keyword">while</span>((i&lt;s.length)&amp;&amp;(s[i]&gt;=<span class="string">'0'</span>&amp;&amp;s[i]&lt;=<span class="string">'9'</span>)) i++;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(i&lt;s.length)&#123;</div><div class="line">                <span class="keyword">while</span>((i&lt;s.length)&amp;&amp;(s[i]&gt;=<span class="string">'0'</span>&amp;&amp;s[i]&lt;=<span class="string">'9'</span>)) i++;</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(i&lt;s.length) <span class="keyword">return</span> <span class="keyword">false</span>;            </div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="55-字符流中第一个不重复的数组（字符串）"><a href="#55-字符流中第一个不重复的数组（字符串）" class="headerlink" title="55. 字符流中第一个不重复的数组（字符串）"></a>55. 字符流中第一个不重复的数组（字符串）</h2><p>使用一个HashMap来统计字符出现的次数，同时用一个ArrayList来记录输入流，每次返回第一个出现一次的字符都是在这个ArrayList（输入流）中的字符作为key去map中查找。</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">//HashMap来统计字符出现的次数</span></div><div class="line">    HashMap&lt;Character, Integer&gt; map=<span class="keyword">new</span> HashMap();</div><div class="line">    <span class="comment">//ArrayList来记录输入流</span></div><div class="line">    ArrayList&lt;Character&gt; list=<span class="keyword">new</span> ArrayList&lt;Character&gt;();</div><div class="line">    <span class="comment">//Insert one char from stringstream</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">char</span> ch)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(map.containsKey(ch))&#123;</div><div class="line">            <span class="keyword">int</span> time = map.get(ch);</div><div class="line">            time++;</div><div class="line">            map.put(ch,time);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            map.put(ch,<span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">         </div><div class="line">        list.add(ch);</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="comment">//return the first appearence once char in current stringstream</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">FirstAppearingOnce</span><span class="params">()</span></span></div><div class="line">    &#123;   <span class="keyword">char</span> ch=<span class="string">'#'</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> k : list)&#123;<span class="comment">//list迭代</span></div><div class="line">            <span class="keyword">if</span>(map.get(k)==<span class="number">1</span>)&#123;</div><div class="line">                ch=k;</div><div class="line">                <span class="keyword">break</span>;<span class="comment">//得到第一个结果即可break</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">         </div><div class="line">        <span class="keyword">return</span> ch;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="最长无重复字符子串"><a href="#最长无重复字符子串" class="headerlink" title="最长无重复字符子串"></a>最长无重复字符子串</h2><p>给定一个字符串，找字符中的最大非重复子串 </p>
+<p>面试题：字符串最长不重复子串；在一个字符串中，找出最长的无重复字符的字串 （这个问题还是有难度的，我碰巧想到了用hash，但没想到完整解法，用hash的解法复杂度在O(N^2)，在网上查了下，好像还有更快解法）</p>
+<p>用start记录当前处理的开始位置历遍字符串，当当前字符从开始位置start开始已经出现过的时候，子串开始位置+1，否则更新map中的hash值为当前位置 。</p>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="comment">// 字符串输入不合法</span></div><div class="line">        <span class="keyword">if</span> (s == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;        </div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;<span class="comment">// 当前处理的开始位置      </span></div><div class="line">        <span class="keyword">int</span> result = <span class="number">0</span>; <span class="comment">// 记录到的最大非重复子串长度        </span></div><div class="line">        HashMap&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;(s.length());<span class="comment">// 访问标记，记录最新一次访问的字符和位置</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</div><div class="line">            <span class="keyword">char</span> ch = s.charAt(i);</div><div class="line">            <span class="comment">// 如果字符已经出现过(在标记开位置算起)，就重新标记start</span></div><div class="line">            <span class="keyword">if</span> (map.containsKey(ch) &amp;&amp; map.get(ch) &gt;= start) &#123;</div><div class="line">                start = map.get(ch) + <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 如果没有出现过就求最大的非重复子串的长度</span></div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                result = Math.max(result, i - start + <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 更新访问记录</span></div><div class="line">            map.put(ch, i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">       public int lengthOfLongestSubstring(String s) &#123;</div><div class="line">        if (s.length()==0) return 0;</div><div class="line">        HashMap&lt;Character, Integer&gt; map = new HashMap&lt;Character, Integer&gt;();</div><div class="line">        int max=0;</div><div class="line">        for (int i=0, j=0; i&lt;s.length(); ++i)&#123;</div><div class="line">            if (map.containsKey(s.charAt(i)))&#123;</div><div class="line">                j = Math.max(j,map.get(s.charAt(i))+1);</div><div class="line">            &#125;</div><div class="line">            map.put(s.charAt(i),i);</div><div class="line">            max = Math.max(max,i-j+1);</div><div class="line">        &#125;</div><div class="line">        return max;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="最长回文字符串"><a href="#最长回文字符串" class="headerlink" title="最长回文字符串"></a>最长回文字符串</h2><h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h2><h2 id="面经中的字符串题"><a href="#面经中的字符串题" class="headerlink" title="面经中的字符串题"></a>面经中的字符串题</h2><p>（28）给一个字符串，将字符串中的字母按照ASCII顺序排序，其余非字母 的字符位置不变。代码可以参考我的博客： 华为2015实习上机：字符串排序。</p>
+<p>（35）寻找字符串中第一个只出现一次的字符；寻找一个字符串中第一个只出现一次的字符</p>
+<p>（42）左旋转字符串；手写算法:字符串反转；翻转一个英文字符串中的单词位置，单词间以空格分隔，但不改变每个单词本身的顺序。如输入“Ha Mo”，输出“Mo Ha”；字符串反转；请实现一个函数将“I am a student”转为“student a am I”。</p>
+<p>（49）实现atoi函数，即字符串转整型；就是那个字符串转换成整数，题目不难，但考虑的细节特别多。。。没写出来；写程序 str2Int</p>
+<p>（53）写 find 函数，在目标串中匹配模式串（要考虑中文字符的情况）。</p>
+<p>（leetcode 5）最长回文子串<br>判断一个数字是否为回文数（此处需注意，面试官一直问我有没有更优的方法，我当时已经说出了2-3个方法，囧），</p>
+<p>字符串由大小写字母组成，要求去重，只允许使用几个int临时变量，要求时间复杂度尽可能少。</p>
+<p>左右括号组成的字符串，去除最少使得剩余的字符串是合法的</p>
+<p>字符串中字符替换</p>
+<p>统计一个字符串中英文字母、空格、数字的个数，考察代码风格是否规范</p>
+<p>然后要求手写纯C字符串拼接，当时笔者想到了三个细节（1：const char* str 2: 空串判断 3：返回新串还是原有串），写完代码之后面试就结束了。在出门的那一刹那，我想起了代码中一个问题，空间申请啊，内心是崩溃的。。。</p>
+<p>写code去除字符串S1中的字符使得最终的字符串S2不包含’ab’和’c’</p>
+<p>然后做了一个编程题：字符串分割。由于是全白板写代码，所以犯了很多错。</p>
+<p>两个字符串的复制（除了字符串地址重叠的情况，也要注意判断字符串本身的空间足够不足够，对于异常情况要考虑全面）</p>
+<p>问一个字符串怎么判断是邮箱比如:vzcxn@sdf.gre.</p>
+<p>还有float转string,</p>
+<ol>
+<li>kmp算法</li>
+<li>实现KMP，解释原理；</li>
+<li>如何从很多的query中找出一个query （我开始想到hash，后来经提示我想到了前缀树）若允许有错误，可以再怎么解决（不知道，面试官提示了布隆过滤器）百度二面那个query找相似的系统设计题，我先后说了前缀树，kd树等解决方案，虽然不对，但面试至少知道我了解这些东西</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/字符串/" rel="tag"># 字符串</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/29/数据结构与算法题解（4）：二叉树题解/" rel="next" title="数据结构与算法（4）：二叉树题解">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（4）：二叉树题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/27/数据结构与算法题解（2）：数组题解/" rel="prev" title="数据结构与算法题解（2）：数组题解">
+                数据结构与算法题解（2）：数组题解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">133</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-替换空格（字符串）"><span class="nav-text">4. 替换空格（字符串）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28-字符串的排列（字符串）"><span class="nav-text">28. 字符串的排列（字符串）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#35-第一次只出现一次的字符（字符串）"><span class="nav-text">35. 第一次只出现一次的字符（字符串）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#42-翻转单词顺序VS左旋转字符串（字符串）"><span class="nav-text">42. 翻转单词顺序VS左旋转字符串（字符串）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#42-1-翻转单词顺序"><span class="nav-text">42.1 翻转单词顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#42-2-左旋转字符串"><span class="nav-text">42.2 左旋转字符串</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#49-把字符串转换成整数（字符串）"><span class="nav-text">49. 把字符串转换成整数（字符串）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#53-正则表达式匹配（字符串）"><span class="nav-text">53. 正则表达式匹配（字符串）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#54-表示数值的字符串（字符串）"><span class="nav-text">54. 表示数值的字符串（字符串）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#55-字符流中第一个不重复的数组（字符串）"><span class="nav-text">55. 字符流中第一个不重复的数组（字符串）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最长无重复字符子串"><span class="nav-text">最长无重复字符子串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最长回文字符串"><span class="nav-text">最长回文字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KMP算法"><span class="nav-text">KMP算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面经中的字符串题"><span class="nav-text">面经中的字符串题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

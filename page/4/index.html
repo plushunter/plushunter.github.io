@@ -268,7 +268,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/数据结构与算法题解（3）：字符串题解/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/22/数据结构与算法（6）：排序/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -293,8 +293,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/07/18/数据结构与算法题解（3）：字符串题解/" itemprop="url">
-                  数据结构与算法题解（3）：字符串题解
+                <a class="post-title-link" href="/2017/07/22/数据结构与算法（6）：排序/" itemprop="url">
+                  数据结构与算法（6）：排序
                 </a>
               
             
@@ -308,8 +308,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T22:20:45+08:00">
-                2017-07-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-22T21:14:45+08:00">
+                2017-07-22
               </time>
             
 
@@ -363,237 +363,10 @@ var _hmt = _hmt || [];
 
       
         
-          
-            <h2 id="4-替换空格（字符串）"><a href="#4-替换空格（字符串）" class="headerlink" title="4. 替换空格（字符串）"></a>4. 替换空格（字符串）</h2><p>请实现一个函数，把字符串中的每个空格替换成”%20”。例如输入“We are happy.”，则输出“We%20are20happy”</p>
-<p>网络编程中，要把特殊符号转换成服务器可识别的字符。转换的规则是在“%”后面跟上ASCII码的两位十六进制的表示。比如空格的ASCII码是32，即十六进制的0X20，因此空格被替换成“%20”。</p>
-<p>问题1：替换字符串，是在原来的字符串上做替换，还是新开辟一个字符串做替换！<br>问题2：在当前字符串替换，怎么替换才更有效率（不考虑java里现有的replace方法）。从前往后替换，后面的字符要不断往后移动，要多次移动，所以效率低下；从后往前，先计算需要多少空间，然后从后往前移动，则每个字符只为移动一次，这样效率更高一点。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午9.44.36.png" alt="屏幕快照 2017-07-28 上午9.44.36"></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">replaceSpace</span><span class="params">(StringBuffer str)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> spacenum = <span class="number">0</span>;<span class="comment">//spacenum为计算空格数</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length();i++)&#123;</div><div class="line">            <span class="keyword">if</span>(str.charAt(i)==<span class="string">' '</span>)</div><div class="line">                spacenum++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> indexold = str.length()-<span class="number">1</span>;<span class="comment">//indexold为为替换前的str下标</span></div><div class="line">        <span class="keyword">int</span> newlength = str.length()+<span class="number">2</span>*spacenum;<span class="comment">//计算空格转换成%20之后的str长度</span></div><div class="line">        <span class="keyword">int</span> indexnew = newlength-<span class="number">1</span>;<span class="comment">//indexold为为把空格替换为%20后的str下标</span></div><div class="line">        str.setLength(newlength);<span class="comment">//使str的长度扩大到转换成%20之后的长度,防止下标越界,setLength方法</span></div><div class="line">        <span class="keyword">for</span>(;indexold&gt;=<span class="number">0</span>&amp;&amp;indexold&lt;newlength;--indexold)&#123;</div><div class="line">            <span class="keyword">if</span>(str.charAt(indexold)==<span class="string">' '</span>)&#123;<span class="comment">//charAt方法</span></div><div class="line">                str.setCharAt(indexnew--,<span class="string">'0'</span>);</div><div class="line">                str.setCharAt(indexnew--,<span class="string">'2'</span>);</div><div class="line">                str.setCharAt(indexnew--,<span class="string">'%'</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                str.setCharAt(indexnew--,str.charAt(indexold));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> str.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="28-字符串的排列（字符串）"><a href="#28-字符串的排列（字符串）" class="headerlink" title="28. 字符串的排列（字符串）"></a>28. 字符串的排列（字符串）</h2><p>输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。</p>
-<p>首先我要打印abc的全排列，就是第一步把a 和bc交换（得到bac,cab），这需要一个for循环，循环里面有一个swap，交换之后就相当于不管第一步了，进入下一步递归，所以跟一个递归函数， 完成递归之后把交换的换回来，变成原来的字串</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">abc 为例子：</div><div class="line">1. 固定a, 求后面bc的全排列： abc, acb。 求完后，a 和 b交换； 得到bac,开始第二轮</div><div class="line">2. 固定b, 求后面ac的全排列： bac, bca。 求完后，b 和 c交换； 得到cab,开始第三轮</div><div class="line">3. 固定c, 求后面ba的全排列： cab, cba</div><div class="line"> 即递归树： </div><div class="line">　　　　　str:　　 a    　　　　 b 　　　　　　  c</div><div class="line">　　　　　　 　　ab ac     　　ba bc  　　　     ca cb</div><div class="line">　   　result:     abc acb    　 bac bca　     　   cab cba</div></pre></td></tr></table></figure>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15016515510574.jpg" alt=""></p>
-<blockquote>
-<p>java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;String&gt; <span class="title">Permutation</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">        <span class="keyword">if</span>(str.length()==<span class="number">0</span>)</div><div class="line">            <span class="keyword">return</span> list;</div><div class="line">        <span class="keyword">char</span>[] array = str.toCharArray();</div><div class="line">        permutation(array,<span class="number">0</span>,list);</div><div class="line">        Collections.sort(list);</div><div class="line">        <span class="keyword">return</span> list;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">permutation</span><span class="params">(<span class="keyword">char</span>[] array,<span class="keyword">int</span> begin,ArrayList&lt;String&gt; list)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(begin == array.length-<span class="number">1</span>) &#123;</div><div class="line">            list.add(String.valueOf(array));</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=begin;i&lt;array.length;++i) &#123;</div><div class="line">                <span class="keyword">if</span>(i==begin || array[i]!=array[begin]) &#123;</div><div class="line">                    swap(array,begin,i);</div><div class="line">                    permutation(array,begin+<span class="number">1</span>,list);</div><div class="line">                    swap(array,begin,i);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">char</span>[] array,<span class="keyword">int</span> i,<span class="keyword">int</span> j)</span> </span>&#123;</div><div class="line">        <span class="keyword">char</span> temp = array[i];</div><div class="line">        array[i] = array[j];</div><div class="line">        array[j] = temp;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="35-第一次只出现一次的字符（字符串）"><a href="#35-第一次只出现一次的字符（字符串）" class="headerlink" title="35. 第一次只出现一次的字符（字符串）"></a>35. 第一次只出现一次的字符（字符串）</h2><p>在一个字符串(1&lt;=字符串长度&lt;=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置.</p>
-<p>我们可以使用一个容器来存放每个字符的出现次数。在这个数据容器中可以根据字符来查找出现的次数，也就是这个容器的作用是把一个字符映射成一个数字。在常用的数据容器中，哈希表正是这个用途。</p>
-<p>为了解决这个问题，我们可以定义哈希表的键值（Key）是字符，而值（Value）是该字符出现的次数。同时我们还需要从头开始扫描字符串两次。第一次扫面字符串时，每扫到一个字符就在哈希表的对应项把次数加1.接下来第二次扫描时，每扫描到一个字符就能在哈希表中得到该字符出现的次数，这样第一个只出现一次的字符就是符合要求的输出。</p>
-<p>需要涉及到Java中HashMap工作原理及实现，<a href="http://yikun.github.io/2015/04/01/Java-HashMap工作原理及实现/" target="_blank" rel="external">资料链接</a></p>
-<blockquote>
-<p>java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">FirstNotRepeatingChar</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        HashMap&lt;Character,Integer&gt; map = <span class="keyword">new</span> HashMap&lt;Character,Integer&gt;();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length();i++)&#123;</div><div class="line">            <span class="keyword">char</span> c = str.charAt(i);<span class="comment">//charAt方法，获得位置i的串</span></div><div class="line">                <span class="keyword">if</span>(map.containsKey(c))&#123;<span class="comment">//HashMap的containKey方法；</span></div><div class="line">                    <span class="keyword">int</span> time = map.get(c);<span class="comment">//HashMap的get方法，得到Key c的Value；</span></div><div class="line">                    time++;</div><div class="line">                    map.put(c,time);<span class="comment">//HashMap的put方法，将Key c的Value置为time；</span></div><div class="line">                &#125;<span class="keyword">else</span>&#123;</div><div class="line">                    map.put(c,<span class="number">1</span>);</div><div class="line">                &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length();i++)&#123;</div><div class="line">            <span class="keyword">char</span> c = str.charAt(i);</div><div class="line">            <span class="keyword">if</span>(map.get(c)==<span class="number">1</span>)&#123;</div><div class="line">                <span class="keyword">return</span> i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="42-翻转单词顺序VS左旋转字符串（字符串）"><a href="#42-翻转单词顺序VS左旋转字符串（字符串）" class="headerlink" title="42. 翻转单词顺序VS左旋转字符串（字符串）"></a>42. 翻转单词顺序VS左旋转字符串（字符串）</h2><h3 id="42-1-翻转单词顺序"><a href="#42-1-翻转单词顺序" class="headerlink" title="42.1 翻转单词顺序"></a>42.1 翻转单词顺序</h3><p>输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串“I am a student”，则输出“student. a am I”。<br>可以先翻转整个句子，然后，依次翻转每个单词。依据空格来确定单词的起始和终止位置</p>
-<blockquote>
-<p>java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">ReverseSentence</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        <span class="keyword">char</span>[] chars = str.toCharArray();</div><div class="line">        reverse(chars,<span class="number">0</span>,chars.length-<span class="number">1</span>);</div><div class="line">        <span class="keyword">int</span> blank = -<span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;chars.length-<span class="number">1</span>;i++)&#123;</div><div class="line">            <span class="keyword">if</span>(chars[i]==<span class="string">' '</span>)&#123;</div><div class="line">                <span class="keyword">int</span> nextblank = i;</div><div class="line">                reverse(chars,blank+<span class="number">1</span>,nextblank-<span class="number">1</span>);</div><div class="line">                blank = nextblank;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        reverse(chars,blank+<span class="number">1</span>,chars.length-<span class="number">1</span>);<span class="comment">//单独翻转最后一个单词</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> String(chars);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">(<span class="keyword">char</span>[] chars,<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>(low&lt;high)&#123;</div><div class="line">            <span class="keyword">char</span> temp = chars[low];</div><div class="line">            chars[low]=chars[high];</div><div class="line">            chars[high]=temp;</div><div class="line">            low++;</div><div class="line">            high--;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="42-2-左旋转字符串"><a href="#42-2-左旋转字符串" class="headerlink" title="42.2 左旋转字符串"></a>42.2 左旋转字符串</h3><p>汇编语言中有一种移位指令叫做循环左移（ROL），现在有个简单的任务，就是用字符串模拟这个指令的运算结果。对于一个给定的字符序列S，请你把其循环左移K位后的序列输出。例如，字符序列S=”abcXYZdef”,要求输出循环左移3位后的结果，即“XYZdefabc”。</p>
-<p>以“abcdefg”为例，我们可以把它分为两部分。由于想把它的前两个字符移到后面，我们就把钱两个字符分到第一部分，把后面的所有字符都分到第二部分。然后先翻转这两部分，于是就得到“bagfedc”。接下来在翻转整个字符串，得到的”cdefgab”刚好就是把原始字符串左旋转2位的结果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    public String LeftRotateString(String str,int n) &#123;</div><div class="line">        char[] chars = str.toCharArray();        </div><div class="line">        if(chars.length &lt; n) return &quot;&quot;; </div><div class="line">        reverse(chars, 0, n-1);</div><div class="line">        reverse(chars, n, chars.length-1);</div><div class="line">        reverse(chars, 0, chars.length-1);</div><div class="line">        return new String(chars);</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    public void reverse(char[] chars,int low,int high)&#123;</div><div class="line">        char temp;</div><div class="line">        while(low&lt;high)&#123;</div><div class="line">            temp = chars[low];</div><div class="line">            chars[low] = chars[high];</div><div class="line">            chars[high] = temp;</div><div class="line">            low++;</div><div class="line">            high--;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="49-把字符串转换成整数（字符串）"><a href="#49-把字符串转换成整数（字符串）" class="headerlink" title="49. 把字符串转换成整数（字符串）"></a>49. 把字符串转换成整数（字符串）</h2><p>将一个字符串转换成一个整数，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0。<br>问题不难，但是要把很多特殊情况都考虑进去，却并不容易。需要考虑的特殊情况有以下几个：</p>
-<ol>
-<li>空指针null</li>
-<li>字符串为空</li>
-<li>正负号</li>
-<li>上下溢出 Integer.MAX_VALUE (2^31-1)  Integer.MIN_VALUE(-2^31)</li>
-</ol>
-<blockquote>
-<p>java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">StrToInt</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(str==<span class="keyword">null</span>||str.length()==<span class="number">0</span>)&#123;<span class="keyword">return</span> <span class="number">0</span>;&#125;<span class="comment">//空指针或空字符串</span></div><div class="line">        <span class="keyword">char</span>[] c = str.toCharArray();</div><div class="line">        <span class="keyword">boolean</span> minus=<span class="keyword">false</span>;</div><div class="line">        <span class="keyword">int</span> i=<span class="number">0</span>;</div><div class="line">        <span class="comment">//正负号</span></div><div class="line">        <span class="keyword">if</span>(c[i]==<span class="string">'+'</span>)&#123;</div><div class="line">            i++;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(c[i]==<span class="string">'-'</span>)&#123;</div><div class="line">            i++;</div><div class="line">            minus=<span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> num=<span class="number">0</span>;</div><div class="line">        <span class="keyword">if</span>(i&lt;c.length)&#123;</div><div class="line">            num = StrToIntCore(c,minus,i);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">return</span> num;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> num;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">StrToIntCore</span><span class="params">(<span class="keyword">char</span>[] str,<span class="keyword">boolean</span> minus,<span class="keyword">int</span> i)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> num=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i;j&lt;str.length;j++)&#123;</div><div class="line">            <span class="keyword">if</span>(str[j]&gt;=<span class="string">'0'</span>&amp;&amp;str[j]&lt;=<span class="string">'9'</span>)&#123;</div><div class="line">                <span class="keyword">int</span> flag = minus?-<span class="number">1</span>:<span class="number">1</span>;</div><div class="line">                num = num*<span class="number">10</span>+flag*(str[j]-<span class="string">'0'</span>);</div><div class="line">                <span class="keyword">if</span>((!minus&amp;&amp;num&gt;Integer.MAX_VALUE)||minus&amp;&amp;num&lt;Integer.MIN_VALUE)&#123;<span class="comment">//上下溢出</span></div><div class="line">                    num=<span class="number">0</span>;</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;<span class="keyword">else</span>&#123;<span class="comment">//非法数值</span></div><div class="line">                num=<span class="number">0</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">           </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> num;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="53-正则表达式匹配（字符串）"><a href="#53-正则表达式匹配（字符串）" class="headerlink" title="53. 正则表达式匹配（字符串）"></a>53. 正则表达式匹配（字符串）</h2><p>当模式中的第二个字符不是“*”时：</p>
-<ol>
-<li>如果字符串第一个字符和模式中的第一个字符相匹配，那么字符串和模式都后移一个字符，然后匹配剩余的。 </li>
-<li>如果字符串第一个字符和模式中的第一个字符相不匹配，直接返回false。</li>
-</ol>
-<p>而当模式中的第二个字符是“*”时：</p>
-<p>如果字符串第一个字符跟模式第一个字符不匹配，则模式后移2个字符，继续匹配。如果字符串第一个字符跟模式第一个字符匹配，可以有3种匹配方式： </p>
-<ol>
-<li>模式后移2字符，相当于$x*$被忽略； </li>
-<li>字符串后移1字符，模式后移2字符； </li>
-<li>字符串后移1字符，模式不变，即继续匹配字符下一位，因为*可以匹配多位；</li>
-</ol>
-<blockquote>
-<p>java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">match</span><span class="params">(<span class="keyword">char</span>[] str, <span class="keyword">char</span>[] pattern)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (str == <span class="keyword">null</span> || pattern == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">int</span> strIndex = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> patternIndex = <span class="number">0</span>;</div><div class="line">    <span class="keyword">return</span> matchCore(str, strIndex, pattern, patternIndex);</div><div class="line">&#125;</div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">matchCore</span><span class="params">(<span class="keyword">char</span>[] str, <span class="keyword">int</span> strIndex, <span class="keyword">char</span>[] pattern, <span class="keyword">int</span> patternIndex)</span> </span>&#123;</div><div class="line">    <span class="comment">//有效性检验：str到尾，pattern到尾，匹配成功</span></div><div class="line">    <span class="keyword">if</span> (strIndex == str.length &amp;&amp; patternIndex == pattern.length) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//pattern先到尾，匹配失败</span></div><div class="line">    <span class="keyword">if</span> (strIndex != str.length &amp;&amp; patternIndex == pattern.length) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//模式第2个是*，且字符串第1个跟模式第1个匹配,分3种匹配模式；如不匹配，模式后移2位</span></div><div class="line">    <span class="keyword">if</span> (patternIndex + <span class="number">1</span> &lt; pattern.length &amp;&amp; pattern[patternIndex + <span class="number">1</span>] == <span class="string">'*'</span>) &#123;</div><div class="line">        <span class="keyword">if</span> ((strIndex != str.length &amp;&amp; pattern[patternIndex] == str[strIndex]) || (pattern[patternIndex] == <span class="string">'.'</span> &amp;&amp; strIndex != str.length)) &#123;</div><div class="line">            <span class="keyword">return</span> matchCore(str, strIndex, pattern, patternIndex + <span class="number">2</span>)<span class="comment">//模式后移2，视为x*匹配0个字符</span></div><div class="line">                    || matchCore(str, strIndex + <span class="number">1</span>, pattern, patternIndex + <span class="number">2</span>)<span class="comment">//视为模式匹配1个字符</span></div><div class="line">                    || matchCore(str, strIndex + <span class="number">1</span>, pattern, patternIndex);<span class="comment">//*匹配1个，再匹配str中的下一个</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> matchCore(str, strIndex, pattern, patternIndex + <span class="number">2</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//模式第2个不是*，且字符串第1个跟模式第1个匹配，则都后移1位，否则直接返回false</span></div><div class="line">    <span class="keyword">if</span> ((strIndex != str.length &amp;&amp; pattern[patternIndex] == str[strIndex]) || (pattern[patternIndex] == <span class="string">'.'</span> &amp;&amp; strIndex != str.length)) &#123;</div><div class="line">        <span class="keyword">return</span> matchCore(str, strIndex + <span class="number">1</span>, pattern, patternIndex + <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="54-表示数值的字符串（字符串）"><a href="#54-表示数值的字符串（字符串）" class="headerlink" title="54. 表示数值的字符串（字符串）"></a>54. 表示数值的字符串（字符串）</h2><p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串”+100”,”5e2”,”-123”,”3.1416”和”-1E-16”都表示数值。 但是”12e”,”1a3.14”,”1.2.3”,”+-5”和”12e+4.3”都不是。</p>
-<blockquote>
-<p>java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">isNumeric</span><span class="params">(<span class="keyword">char</span>[] s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(s.length==<span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">if</span>((s.length==<span class="number">1</span>)&amp;&amp;(s[<span class="number">0</span>]&lt;<span class="string">'0'</span>||s[<span class="number">0</span>]&gt;<span class="string">'9'</span>)) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">if</span>(s[<span class="number">0</span>]==<span class="string">'+'</span>||s[<span class="number">0</span>]==<span class="string">'-'</span>)&#123;</div><div class="line">            <span class="keyword">if</span>(s.length==<span class="number">2</span>&amp;&amp;(s[<span class="number">1</span>]==<span class="string">'.'</span>)) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>((s[<span class="number">0</span>]&lt;<span class="string">'0'</span>||s[<span class="number">0</span>]&gt;<span class="string">'9'</span>)&amp;&amp;s[<span class="number">0</span>]!=<span class="string">'.'</span>) <span class="keyword">return</span> <span class="keyword">false</span>;<span class="comment">//首位既不是符号也不是数字还不是小数点，当然是false</span></div><div class="line">        <span class="keyword">int</span> i = <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>((i&lt;s.length)&amp;&amp;(s[i]&gt;=<span class="string">'0'</span>&amp;&amp;s[i]&lt;=<span class="string">'9'</span>)) i++;</div><div class="line">        <span class="keyword">if</span>(i&lt;s.length&amp;&amp;s[i]==<span class="string">'.'</span>)&#123;</div><div class="line">            i++;</div><div class="line">            <span class="comment">//if(i&gt;=s.length) return false;</span></div><div class="line">            <span class="keyword">while</span>((i&lt;s.length)&amp;&amp;(s[i]&gt;=<span class="string">'0'</span>&amp;&amp;s[i]&lt;=<span class="string">'9'</span>)) i++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(i&lt;s.length&amp;&amp;(s[i]==<span class="string">'e'</span>||s[i]==<span class="string">'E'</span>))&#123;</div><div class="line">            i++;</div><div class="line">            <span class="keyword">if</span>((i&lt;s.length)&amp;&amp;(s[i]==<span class="string">'+'</span>||s[i]==<span class="string">'-'</span>))&#123;</div><div class="line">                i++;</div><div class="line">                <span class="keyword">if</span>(i&lt;s.length) <span class="keyword">while</span>((i&lt;s.length)&amp;&amp;(s[i]&gt;=<span class="string">'0'</span>&amp;&amp;s[i]&lt;=<span class="string">'9'</span>)) i++;</div><div class="line">                <span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(i&lt;s.length)&#123;</div><div class="line">                <span class="keyword">while</span>((i&lt;s.length)&amp;&amp;(s[i]&gt;=<span class="string">'0'</span>&amp;&amp;s[i]&lt;=<span class="string">'9'</span>)) i++;</div><div class="line">            &#125;<span class="keyword">else</span> <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(i&lt;s.length) <span class="keyword">return</span> <span class="keyword">false</span>;            </div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="55-字符流中第一个不重复的数组（字符串）"><a href="#55-字符流中第一个不重复的数组（字符串）" class="headerlink" title="55. 字符流中第一个不重复的数组（字符串）"></a>55. 字符流中第一个不重复的数组（字符串）</h2><p>使用一个HashMap来统计字符出现的次数，同时用一个ArrayList来记录输入流，每次返回第一个出现一次的字符都是在这个ArrayList（输入流）中的字符作为key去map中查找。</p>
-<blockquote>
-<p>java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="comment">//HashMap来统计字符出现的次数</span></div><div class="line">    HashMap&lt;Character, Integer&gt; map=<span class="keyword">new</span> HashMap();</div><div class="line">    <span class="comment">//ArrayList来记录输入流</span></div><div class="line">    ArrayList&lt;Character&gt; list=<span class="keyword">new</span> ArrayList&lt;Character&gt;();</div><div class="line">    <span class="comment">//Insert one char from stringstream</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">char</span> ch)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(map.containsKey(ch))&#123;</div><div class="line">            <span class="keyword">int</span> time = map.get(ch);</div><div class="line">            time++;</div><div class="line">            map.put(ch,time);</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            map.put(ch,<span class="number">1</span>);</div><div class="line">        &#125;</div><div class="line">         </div><div class="line">        list.add(ch);</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="comment">//return the first appearence once char in current stringstream</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">char</span> <span class="title">FirstAppearingOnce</span><span class="params">()</span></span></div><div class="line">    &#123;   <span class="keyword">char</span> ch=<span class="string">'#'</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">char</span> k : list)&#123;<span class="comment">//list迭代</span></div><div class="line">            <span class="keyword">if</span>(map.get(k)==<span class="number">1</span>)&#123;</div><div class="line">                ch=k;</div><div class="line">                <span class="keyword">break</span>;<span class="comment">//得到第一个结果即可break</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">         </div><div class="line">        <span class="keyword">return</span> ch;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="最长无重复字符子串"><a href="#最长无重复字符子串" class="headerlink" title="最长无重复字符子串"></a>最长无重复字符子串</h2><p>给定一个字符串，找字符中的最大非重复子串 </p>
-<p>面试题：字符串最长不重复子串；在一个字符串中，找出最长的无重复字符的字串 （这个问题还是有难度的，我碰巧想到了用hash，但没想到完整解法，用hash的解法复杂度在O(N^2)，在网上查了下，好像还有更快解法）</p>
-<p>用start记录当前处理的开始位置历遍字符串，当当前字符从开始位置start开始已经出现过的时候，子串开始位置+1，否则更新map中的hash值为当前位置 。</p>
-<blockquote>
-<p>java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.HashMap;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="comment">// 字符串输入不合法</span></div><div class="line">        <span class="keyword">if</span> (s == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;        </div><div class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;<span class="comment">// 当前处理的开始位置      </span></div><div class="line">        <span class="keyword">int</span> result = <span class="number">0</span>; <span class="comment">// 记录到的最大非重复子串长度        </span></div><div class="line">        HashMap&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;(s.length());<span class="comment">// 访问标记，记录最新一次访问的字符和位置</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++) &#123;</div><div class="line">            <span class="keyword">char</span> ch = s.charAt(i);</div><div class="line">            <span class="comment">// 如果字符已经出现过(在标记开位置算起)，就重新标记start</span></div><div class="line">            <span class="keyword">if</span> (map.containsKey(ch) &amp;&amp; map.get(ch) &gt;= start) &#123;</div><div class="line">                start = map.get(ch) + <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 如果没有出现过就求最大的非重复子串的长度</span></div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                result = Math.max(result, i - start + <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 更新访问记录</span></div><div class="line">            map.put(ch, i);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">       public int lengthOfLongestSubstring(String s) &#123;</div><div class="line">        if (s.length()==0) return 0;</div><div class="line">        HashMap&lt;Character, Integer&gt; map = new HashMap&lt;Character, Integer&gt;();</div><div class="line">        int max=0;</div><div class="line">        for (int i=0, j=0; i&lt;s.length(); ++i)&#123;</div><div class="line">            if (map.containsKey(s.charAt(i)))&#123;</div><div class="line">                j = Math.max(j,map.get(s.charAt(i))+1);</div><div class="line">            &#125;</div><div class="line">            map.put(s.charAt(i),i);</div><div class="line">            max = Math.max(max,i-j+1);</div><div class="line">        &#125;</div><div class="line">        return max;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="最长回文字符串"><a href="#最长回文字符串" class="headerlink" title="最长回文字符串"></a>最长回文字符串</h2><h2 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h2><h2 id="面经中的字符串题"><a href="#面经中的字符串题" class="headerlink" title="面经中的字符串题"></a>面经中的字符串题</h2><p>（28）给一个字符串，将字符串中的字母按照ASCII顺序排序，其余非字母 的字符位置不变。代码可以参考我的博客： 华为2015实习上机：字符串排序。</p>
-<p>（35）寻找字符串中第一个只出现一次的字符；寻找一个字符串中第一个只出现一次的字符</p>
-<p>（42）左旋转字符串；手写算法:字符串反转；翻转一个英文字符串中的单词位置，单词间以空格分隔，但不改变每个单词本身的顺序。如输入“Ha Mo”，输出“Mo Ha”；字符串反转；请实现一个函数将“I am a student”转为“student a am I”。</p>
-<p>（49）实现atoi函数，即字符串转整型；就是那个字符串转换成整数，题目不难，但考虑的细节特别多。。。没写出来；写程序 str2Int</p>
-<p>（53）写 find 函数，在目标串中匹配模式串（要考虑中文字符的情况）。</p>
-<p>（leetcode 5）最长回文子串<br>判断一个数字是否为回文数（此处需注意，面试官一直问我有没有更优的方法，我当时已经说出了2-3个方法，囧），</p>
-<p>字符串由大小写字母组成，要求去重，只允许使用几个int临时变量，要求时间复杂度尽可能少。</p>
-<p>左右括号组成的字符串，去除最少使得剩余的字符串是合法的</p>
-<p>字符串中字符替换</p>
-<p>统计一个字符串中英文字母、空格、数字的个数，考察代码风格是否规范</p>
-<p>然后要求手写纯C字符串拼接，当时笔者想到了三个细节（1：const char* str 2: 空串判断 3：返回新串还是原有串），写完代码之后面试就结束了。在出门的那一刹那，我想起了代码中一个问题，空间申请啊，内心是崩溃的。。。</p>
-<p>写code去除字符串S1中的字符使得最终的字符串S2不包含’ab’和’c’</p>
-<p>然后做了一个编程题：字符串分割。由于是全白板写代码，所以犯了很多错。</p>
-<p>两个字符串的复制（除了字符串地址重叠的情况，也要注意判断字符串本身的空间足够不足够，对于异常情况要考虑全面）</p>
-<p>问一个字符串怎么判断是邮箱比如:vzcxn@sdf.gre.</p>
-<p>还有float转string,</p>
-<ol>
-<li>kmp算法</li>
-<li>实现KMP，解释原理；</li>
-<li>如何从很多的query中找出一个query （我开始想到hash，后来经提示我想到了前缀树）若允许有错误，可以再怎么解决（不知道，面试官提示了布隆过滤器）百度二面那个query找相似的系统设计题，我先后说了前缀树，kd树等解决方案，虽然不对，但面试至少知道我了解这些东西</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/数据结构与算法（8）：Trie树/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="狗皮膏药">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/img/v.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Free Will">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/18/数据结构与算法（8）：Trie树/" itemprop="url">
-                  数据结构与算法（8）：Trie树
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T22:20:45+08:00">
-                2017-07-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Trie树是一种非常重要的数据结构，它在信息检索，字符串匹配等领域有广泛的应用，同时，它也是很多算法和复杂数据结构的基础，如后缀树，AC自动机等，因此，掌握Trie树这种数据结构，对于一名IT人员，显得非常基础且必要！</p>
+          <p>经典排序算法在面试中占有很大的比重，也是基础，在这里整理并用Python实现了七大经典排序算法，包括冒泡排序、插入排序、选择排序、希尔排序、归并排序、快速排序、堆排序。我们默认将一个无序数列排序成由小到大。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/18/数据结构与算法（8）：Trie树/#more" rel="contents">
+            <a class="btn" href="/2017/07/22/数据结构与算法（6）：排序/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -634,7 +407,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/数据结构与算法题解（1）：链表题解/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/21/数据结构与算法（5）：查找/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -659,8 +432,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/07/18/数据结构与算法题解（1）：链表题解/" itemprop="url">
-                  数据结构与算法题解（1）：链表题解
+                <a class="post-title-link" href="/2017/07/21/数据结构与算法（5）：查找/" itemprop="url">
+                  数据结构与算法（5）：查找
                 </a>
               
             
@@ -674,8 +447,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T22:20:45+08:00">
-                2017-07-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T23:14:45+08:00">
+                2017-07-21
               </time>
             
 
@@ -729,10 +502,10 @@ var _hmt = _hmt || [];
 
       
         
-          <p>链表相关的编程题整理。</p>
+          <h2 id="一、基本概念"><a href="#一、基本概念" class="headerlink" title="一、基本概念"></a>一、基本概念</h2><p>查找（Search）就是根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素（或记录）。在计算机应用中，查找是常用的基本运算，例如编译程序中符号表的查找。先说明几个概念：</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/18/数据结构与算法题解（1）：链表题解/#more" rel="contents">
+            <a class="btn" href="/2017/07/21/数据结构与算法（5）：查找/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -773,7 +546,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/数据结构与算法（9）：后缀树/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/21/数据结构与算法（4）：图（1）——深度优先搜索和广度优先搜索/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -798,8 +571,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/07/18/数据结构与算法（9）：后缀树/" itemprop="url">
-                  数据结构与算法（9）：后缀树
+                <a class="post-title-link" href="/2017/07/21/数据结构与算法（4）：图（1）——深度优先搜索和广度优先搜索/" itemprop="url">
+                  数据结构与算法（4）：图（1）——深度优先搜索和广度优先搜索
                 </a>
               
             
@@ -813,8 +586,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T22:20:45+08:00">
-                2017-07-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-21T22:14:45+08:00">
+                2017-07-21
               </time>
             
 
@@ -868,10 +641,10 @@ var _hmt = _hmt || [];
 
       
         
-          <p>后缀树（Suffix Tree），说的通俗一点就是将一个字符串所有的后缀按照前缀树的形式组织成一棵树。它首先是一棵压缩字典树，其次，后缀树中存储的关键词为所有的后缀（A suffix tree is a compressed trie for all the suffixes of a text.）。这样，实际上我们就得到了构建后缀树的抽象过程：</p>
+          <p>BFS和DFS是两种十分重要的搜索算法，BFS适合查找最优解，DFS适合查找是否存在解(或者说能找到任意一个可行解)。用这两种算法即可以解决大部分树和图的问题。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/18/数据结构与算法（9）：后缀树/#more" rel="contents">
+            <a class="btn" href="/2017/07/21/数据结构与算法（4）：图（1）——深度优先搜索和广度优先搜索/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -912,7 +685,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/数据结构与算法（10）： 数据库索引原理及优化/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/20/数据结构与算法（3）：树（5）——B树、B+树/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -937,8 +710,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/07/18/数据结构与算法（10）： 数据库索引原理及优化/" itemprop="url">
-                  数据结构与算法（10）： 数据库索引原理及优化
+                <a class="post-title-link" href="/2017/07/20/数据结构与算法（3）：树（5）——B树、B+树/" itemprop="url">
+                  数据结构与算法（3）：树（5）——B树、B+树
                 </a>
               
             
@@ -952,8 +725,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T22:20:45+08:00">
-                2017-07-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-20T22:14:45+08:00">
+                2017-07-20
               </time>
             
 
@@ -1007,10 +780,10 @@ var _hmt = _hmt || [];
 
       
         
-          <p>本文以MySQL数据库为研究对象，讨论与数据库索引相关的一些话题。特别需要说明的是，MySQL支持诸多存储引擎，而各种存储引擎对索引的支持也各不相同，因此MySQL数据库支持多种索引类型，如BTree索引，哈希索引，全文索引等等。为了避免混乱，本文将只关注于BTree索引，因为这是平常使用MySQL时主要打交道的索引，至于哈希索引和全文索引本文暂不讨论。</p>
+          <p>具体讲解之前，有一点，再次强调下：B-树，即为B树。因为B树的原英文名称为B-tree，而国内很多人喜欢把B-tree译作B-树，其实，这是个非常不好的直译，很容易让人产生误解。如人们可能会以为B-树是一种树，而B树又是一种一种树。而事实上是，B-tree就是指的B树。特此说明。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/18/数据结构与算法（10）： 数据库索引原理及优化/#more" rel="contents">
+            <a class="btn" href="/2017/07/20/数据结构与算法（3）：树（5）——B树、B+树/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1051,7 +824,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/数据结构与算法题解（9）：剑指offer解题报告/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/19/数据结构与算法（3）：树（4）——红黑树/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -1076,8 +849,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/07/18/数据结构与算法题解（9）：剑指offer解题报告/" itemprop="url">
-                  数据结构与算法题解（9）：剑指offer解题报告
+                <a class="post-title-link" href="/2017/07/19/数据结构与算法（3）：树（4）——红黑树/" itemprop="url">
+                  数据结构与算法（3）：树（4）——红黑树
                 </a>
               
             
@@ -1091,8 +864,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T22:20:45+08:00">
-                2017-07-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-19T23:14:45+08:00">
+                2017-07-19
               </time>
             
 
@@ -1146,10 +919,10 @@ var _hmt = _hmt || [];
 
       
         
-          <p>剑指offer编程题java实现整理。</p>
+          <p>红黑树，即R-B Tree，本文的主要内容包括：红黑树的特性、红黑树的时间复杂度和它的证明，红黑树的时间复杂度和它的证明，红黑树的左旋、右旋、插入、删除等操作</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/18/数据结构与算法题解（9）：剑指offer解题报告/#more" rel="contents">
+            <a class="btn" href="/2017/07/19/数据结构与算法（3）：树（4）——红黑树/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1190,7 +963,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/数据结构与算法题解（8）：其他题解/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/19/数据结构与算法（3）：树（3）——平衡二叉树（AVL树）/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -1215,8 +988,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/07/18/数据结构与算法题解（8）：其他题解/" itemprop="url">
-                  数据结构与算法题解（8）：其他题解
+                <a class="post-title-link" href="/2017/07/19/数据结构与算法（3）：树（3）——平衡二叉树（AVL树）/" itemprop="url">
+                  数据结构与算法（3）：树（3）——平衡二叉树（AVL树）
                 </a>
               
             
@@ -1230,8 +1003,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T22:20:45+08:00">
-                2017-07-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-19T22:14:45+08:00">
+                2017-07-19
               </time>
             
 
@@ -1285,183 +1058,14 @@ var _hmt = _hmt || [];
 
       
         
-          
-            <a id="more"></a>
-<ol>
-<li>掌握常见的数据结构以及操作（线性表，队，列，字符串，树，图等），掌握常见的计算机算法（排序算法，查找算法，动态规划，递归等）；多敲代码，多上 OJ 平台刷题；推荐书籍：《大话数据结构》《剑指 offer 》</li>
-<li>编程基础：需要掌握一大一小两门语言，大的指 C++ 或者 JAVA ，小的指 python 或者 shell 脚本；需要掌握基本的数据库语言；建议： MySQL + python + C++ ；语言只是一种工具，看看语法就好；推荐书籍：《 C++ primer plus 》</li>
-<li>海量数据处理平台：hadoop（mr计算模型， java开发）或者spark（rdd计算模型，scala开发），重点推荐后者；建议：主要是会使用，有精力的话可以看看源码了解集群调度机制之类的；推荐书籍：《大数据spark企业级实战》</li>
-<li>数据结构提问：常见的数据结构一定要掌握，基础的代码一定要会手写（快排，冒泡，堆排，归并排序，二分查找，二叉树的遍历，二叉树增删查改）；剑指offer的题目要会；有精力的话可以刷下leetcode；</li>
-<li>数据结构方面主要了解：链表、二叉树、数组、堆、栈（排名分先后）leetcode，保质保量、持续进行《剑指offer》必看！！！</li>
-<li>经典算法实现题 快速排序、归并排序、堆排序、KMP算法等都是重点，重要的是代码的正确性，其次是复杂度分析，当然，人家也不都是直接问你怎么实现这个具体算法，而是包装到情境里；</li>
-<li>数据结构和算法肯定是必须掌握的。数据结构一般到二叉树就可以了，图等结构掌握遍历、最短路径算法、最小生成树算法的思想、复杂度等即可。算法的话，最常见的就是和数组、链表相关的，难度都不是很大。算法相关的书：《算法导论》（看了部分）、Mark Allen Weiss的《数据结构与算法解析》（强烈推荐，很不错）、《剑指offer》、《编程之美》、《编程珠玑》</li>
-<li>coding：从基本的数据结构、到分治，动态规划这些算法思想需要很熟悉；进阶：实现过机器学习算法；更进一步：能够利用mapreduce | spark | mpi | ps 开发分布式机器学习算法。（github你值得拥有）</li>
-</ol>
-<p><a href="http://frank19900731.github.io/ebook/the-art-of-programming-by-july/index.html" target="_blank" rel="external">程序员编程艺术：面试和算法心得</a></p>
-<p>还是得学一门语言，脑子一热选择了Java，然后就开始了漫长的Java自学之路。很庆幸自己选择了Java head First这本书作为入门书，生动形象易懂，并没有选择Thinking in Java，配合传智播客毕向东的Java基础视频，效果还是挺好的，至少觉得Java还是挺有趣的。在银行实习了一段时间，发现也没啥事可以做，挺水的，也没人管，于是开始抽时间在银行看书。在学Java的同时，开始刷剑指offer，我感觉牛客的在线编程还是挺方便的，我都是在这个上面刷的，不会的就看看大家的讨论，受益匪浅。当然刷题的时候就尝试用Java实现了。刚开始刷题是极其痛苦的过程，因为不了解数据结构，基本都要看答案。刷题的同时开始学习数据结构，数据结构主要就是看视频学习了，重点放在链表和二叉树上。 所有的笔试全部挂了 ，没有面试的机会。感受到了找工作的不容易，于是继续一边投简历，一边看书，一边刷题，奔波于各种招聘会，没有目标的海投。在这里推荐王道的程序员宝典，比那个程序员面试宝典好多了啊，其实面试问来问去也都是上面比较经典的题目，强推强推^ ^美团：其实十月份我就把目标锁定了美团，因为听说技术氛围不错，而且主要是Java，自己还是挺喜欢Java的。。。（找工作找着找着，都快忘了自己当初的目标是银行了，哈哈）期间看了好多美团的面经，感谢在牛客分享的大神们美团参加的第二批笔试，十月20号左右吧，就开始面试了，当时真的很紧张很紧张啊，想着美团不要我，我就开始准备银行了。美团面试官都很好，面试官很专业，问的很深，而且对细节要求特别高，一直被虐，但是每一面都是收获，感激，一路杀到HR面，HR也很nice，一直问我愿不愿意去北京，说北京的互联网氛围更好，可是我还是选择了上海。能进美团，主要是看了好多美团面经，针对性看书，刷题。在面试前，我把二叉树和链表常考的题目，都总结了一遍，剑指offer这个时候，已经刷了50题左右了，也没时间再刷题了，只能这样了。生活就是这么戏剧化啊，刷的题都没考，哈哈哈。。。问了一个我看过，但觉得肯定不会让我当场写的题目，就是那个字符串转换成整数，题目不难，但考虑的细节特别多。。。没写出来，感谢面试官还是让我进了二面。所以让我坚定，努力还是有用的，即使运气再差，总会再别的方面有所体现。至此，校招算是结束了，其中的辛酸也只有自己能体会吧！虽然看上去像是轻描淡写，但是自己也确实也是付出了很多努力，期间都是晚上11点才回寝室，因为准备的时间太短了，六月份才开始从什么都不懂，到后来找到工作。与大家共勉，一切皆有可能，只要努力，找对方向，心态放好，多投，多试，会有好结果的。不要埋怨工作不好找，不要埋怨自己不是科班的！还有工作还是越早准备越好，互联网来的比较早，暑假就有很多内推了，当然我都没参加，因为准备不充分，来不及啊，所以趁早趁早，机会更多！</p>
-<h2 id="一、随机数生成器"><a href="#一、随机数生成器" class="headerlink" title="一、随机数生成器"></a>一、随机数生成器</h2><p>给定一个函数rand5()，该函数可以随机生成1-5的整数，且生成概率一样。现要求使用该函数构造函数rand7()，使函数rand7()可以随机等概率的生成1-7的整数。</p>
-<p>很多人的第一反应是利用rand5() + rand()%3来实现rand7()函数，这个方法确实可以产生1-7之间的随机数，但是仔细想想可以发现数字生成的概率是不相等的。rand()%3 产生0的概率是1/5，而产生1和2的概率都是2/5，所以这个方法产生6和7的概率大于产生5的概率。</p>
-<p>正确的方法是利用rand5()函数生成1-25之间的数字，然后将其中的1-21映射成1-7，丢弃22-25。例如生成(1，1)，(1，2)，(1，3)，则看成rand7()中的1，如果出现剩下的4种，则丢弃重新生成。</p>
-<blockquote>
-<p>java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">random</span> </span>&#123;    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">rand7</span><span class="params">()</span> </span>&#123;    </div><div class="line">        <span class="keyword">int</span> x = <span class="number">22</span>;    </div><div class="line">        <span class="keyword">while</span>(x &gt; <span class="number">21</span>) &#123;    </div><div class="line">            x = rand5() + (rand5() - <span class="number">1</span>)*<span class="number">5</span>;    </div><div class="line">        &#125;    </div><div class="line">        <span class="keyword">return</span> <span class="number">1</span> + x%<span class="number">7</span>;    </div><div class="line">    &#125;    </div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>随机数的生成算法，比如0~0.6的生成概率是0.7,0.6~1的生成概率是0.3，问怎么实现。</p>
-<ol>
-<li>有一个GOD（）函数，能够以C的概率返回0，以1-C的概率返回1，C未知，让利用GOD（）构造P（x )实现以X的概率返回0,1-X的概率返回1，不能使用随机函数。我说了两个解法，但都是错的，因为还是用了随机函数。最后面试官说了解法，感觉trick痕迹太明显了，正常根本想不出来啊。第二问先用GOD()得到同概率0，1的随机数，用多次调用GOD生成一个0～1之间的无穷小数，判断这个数是否大于X</li>
-</ol>
-<h2 id="分布式相关"><a href="#分布式相关" class="headerlink" title="分布式相关"></a>分布式相关</h2><p>mr 方案解决矩阵相乘的代码；<br>hadoop原理，shuffle如何排序，map如何切割数据，如何处理数据倾斜，join的mr代码</p>
-<p>MR的shuffle过程？内存不够时涉及大文件排序如何处理？ 答：先hash到不同文件中，每个文件排序，然后每个文件读取行，类似归并排序的思路？</p>
-<p>Hadoop,Spark,storm下面的产品，原理，适用场景</p>
-<p>spark跟hadoop的区别答：spark有RDD机制，写内存，相对hadoop适合迭代运算</p>
-<p>如何用hadoop实现k-means<br>简单介绍 MapReduce 原理，有没有看过源码，说说 Map 阶段怎么实现的,<br>MapReduce 实现统计出现次数最多的前 100 个访问 IP.<br>MapReduce 实现统计不重复用户 ID,MapReduce 实现两个数据集求交集。<br>HBase 行健怎么设计,spark 性能一般优化方法,spark streaming 和 storm 区别.给了一张笔试题， 10 道选择，一道大题。选择题是 java 基础知识，大题一个有三问：根据场景写出 Hive 建表语句； Hsql 从表中查询；<br>用MapReduce写好友推荐，在一堆单词里面找出现次数最多的k个<br>用分布式的方法做采样怎么保证采样结果完全符合预期？<br>后面又问了Hadoop,Spark,storm下面的产品，原理，适用场景，<br>写一个 Hadoop 版本的 wordcount。<br>K-means能否分布式实现？ 答：因为本身是迭代式算法，所以只能半分布式实现，即在计算类的均值、每个样本点属于哪个类的时候<br>还有怎么解决mapreduce数据倾斜</p>
-<h2 id="海量数据"><a href="#海量数据" class="headerlink" title="海量数据"></a>海量数据</h2><ol>
-<li><p>如何在海量数据中查找给定部分数据最相似的top200向量，向量的维度也很高因为之前了解过其他面蚂蚁金服的朋友，也有问到这个题目的，所以反应比较快，直接就说可以用KD树，聚类，hash，</p>
-</li>
-<li><p>如何在海量数据中查找给定部分数据最相似的top200向量，向量的维度也很高，实现一个分布式的topN算法</p>
-</li>
-<li>最后是一个海量数据处理题，给了个滴滴打车的背景，实质就是如何在海量数据中找到最大值。我按着分治思想说了一个解法，意思到了，他也就没往深处问。</li>
-<li>要求手写海量数据topK的问题，手写个最小堆，之前没自己写过，幸亏ＴＴＦ同学临时指导了一下，都准备好了也没面到</li>
-<li>海量数据问题，给定１０亿个数，统计出现次数最多的１００个数，如果把数换成字符串呢</li>
-</ol>
-<ol>
-<li><p>给你1000个数，怎样随机抽取10个数</p>
-</li>
-<li><p>之后就是大数据题目，1KW句子算相似度（还是那套分块+hash/建索引，但是因为本人不是做这个的，文本处理根本说一片空白，所以就不误导大家了），之后就是一直围绕大数据的题目不断深化。</p>
-</li>
-<li><p>怎么在2G内存里找100TB数据的中位数，还有怎么解决mapreduce数据倾斜，经常用什么语言工具开发<br>从大数据中找出topk</p>
-</li>
-<li><p>对大小在1-10000的1亿个数进行排序，你会怎么做？（友情提示，不要用基于比较的排序算法哦）</p>
-</li>
-<li><p>怎么在2G内存里找100TB数据的中位数，</p>
-</li>
-</ol>
-<ol>
-<li><p>10亿个整数，1G内存，O(n)算法，统计只出现一次的数。 </p>
-</li>
-<li><p>36.N个数找K大数那个题,堆解释了一遍,比较满意,问还能怎么优化O(Nlogk)的方法，并行方面想</p>
-</li>
-<li><p>给10^10个64位数,100M内存的空间排序,感谢队长刚好在去的前一天教过我一个求中位数的方法.用文件操作来做了,像快排一样,二分选个数统计大于那个数的数量和小于那个数的数量,如果能用100M的空间排序就把那些数排了,如果不能继续.直到能排为止.</p>
-</li>
-<li>第k大之类的套路题</li>
-</ol>
-<h2 id="最短路"><a href="#最短路" class="headerlink" title="最短路"></a>最短路</h2><ol>
-<li>最短路算法-dijkstra</li>
-<li>1道dijkstra，1道开放性问题，超大地图的最短路</li>
-<li>最短路径代码；</li>
-<li>dijkstra的改进，如果要求路径上不能超过5个红绿灯怎么做</li>
-<li>首先是最短路径算法你理解哪些？答：floyd, dijkstra, bellman-ford,spfa ，分别适用什么场景？答：除了floyd是计算两两最短路，其它都计算单源最短路径。复杂度各是多少？答：一堆分析。然后让我把笔试中写的复杂度过高的一题再重新优化了一下。</li>
-<li>求两点间的最短路径，图的结构是每个节点跟上下左右相连（显然有比Dij更快的算法）</li>
-</ol>
-<h2 id="SQL"><a href="#SQL" class="headerlink" title="SQL"></a>SQL</h2><ol>
-<li>sql 语句的一些优化技巧；</li>
-<li>sql 各种join很尴尬不记得了…太久没用sql忘得一干二净，面试官人太好了说没事没事这个复习下就知道了 - -</li>
-<li>关于集群调度的一些经验 trick 掌握多少；</li>
-<li>左连接、右连接、全连接的概念</li>
-<li>数据库索引方式：</li>
-<li>网易游戏的一道笔试题是给定一条包含3个join的SQL语句，要求写代码模拟实现SQL的功能</li>
-</ol>
-<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>问归并排序以及快速排序的时间复杂度并分析；</p>
-<p>各种排序算法的时间复杂度和空间复杂度<br>最后写了下归并排序。<br>然后现场撸代码（快排）﻿</p>
-<ol>
-<li>那你对数据结构中排序算法知道多少？我：嗯，常见的方法都知道，比如快排，冒泡等（当时说完就后悔了，说什么快排啊，自己都没复习到位，额）</li>
-<li>介绍各种排序算法，堆和堆排序；59. 桶排序？快速排序？数据结构熟悉程度了解（堆排序等）</li>
-<li>实现快速排序、归并排序、堆排序，各排序算法复杂度分析；</li>
-<li>常用排序算法的时间和空间复杂度</li>
-<li>快排的空间复杂度,答O(n).归并的空间复杂度,答O(n).他让我好好想想,我想了会,难道空间复杂度的常数不能省吗?然后做了修改,快排是O(n)归并是O(2n).<h2 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h2></li>
-<li>写程序实现二分查找算法，给出递归和非递归实现，并分析算法的时间复杂度。</li>
-<li>coding：面试官发来google doc白板写代码，第0题：leetcode 153 O(n) bruteforce 解法 follow up:O(lgn) binary search 解法Find Minimum in Rotated Sorted Array<h2 id="栈和队列"><a href="#栈和队列" class="headerlink" title="栈和队列"></a>栈和队列</h2><h2 id="7-用两个栈实现队列（栈与队列）"><a href="#7-用两个栈实现队列（栈与队列）" class="headerlink" title="7. 用两个栈实现队列（栈与队列）"></a>7. 用两个栈实现队列（栈与队列）</h2>栈是一个非常常见的数据结构，它在计算机领域中被广泛应用，比如操作系统会给每个线程创建一个栈来存储函数调用时各个函数的参数、返回地址及临时变量等。栈的特点是后进先出，即最后被压入（push）栈的元素会第一个被弹出（pop）。</li>
-</ol>
-<p>队列是另外一种很重要的数据结构。和栈不同的是，队列的特点是先进先出，即第一个进入队列的元素将会第一个出来。</p>
-<p>栈和队列虽然是针锋相对的两个数据结构，但有意思的是他们却相互联系。</p>
-<p>通过一个具体的例子来分析往队列插入和删除元素的过程。首先插入一个元素a，不妨先把它插入到stack1，此时stack1中的元素有{a}，stack2为空，再向stack1压入b和c，此时stack1中的元素有{a,b,c}，其中c处于栈顶，而stack2仍然是空的。</p>
-<p>因为a是最先进的，最先被删除的元素应该是a，但a位于栈低。我们可以把stack1中的元素逐个弹出并压入stack2，元素在stack2的顺序正好和原来在stack1的顺序相反因此经过三次弹出stack1和压入stack2操作之后，stack1为空，而stack2的元素是{c,b,a}，这时就可以弹出stack2的栈顶a了，随后弹出stack2中的b和c，而这个过程中stack1始终为空.</p>
-<p>从上面的分析我们可以总结出删除一个元素的步骤：<strong>当stack2中不为空时，在stack2的栈顶元素是最先进入队列的元素，可以弹出。如果stack2为空时，我们把stack1中的元素逐个弹出并压入stack2。由于先进入队列的元素被压到stack1的底端，经过弹出和压入之后就处于stack2的顶端了，又可以直接弹出。</strong><br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午10.58.44.png" alt="屏幕快照 2017-07-28 上午10.58.44"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">import java.util.Stack;</div><div class="line">public class Solution &#123;</div><div class="line">    Stack&lt;Integer&gt; stack1 = new Stack&lt;Integer&gt;();</div><div class="line">    Stack&lt;Integer&gt; stack2 = new Stack&lt;Integer&gt;();</div><div class="line">    </div><div class="line">    public void push(int node) &#123;</div><div class="line">        stack1.push(node);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public int pop() &#123;</div><div class="line">        while(!stack2.isEmpty())&#123;</div><div class="line">            return stack2.pop();</div><div class="line">        &#125;</div><div class="line">        while(!stack1.isEmpty())&#123;</div><div class="line">            stack2.push(stack1.pop());</div><div class="line">        &#125;</div><div class="line">        return stack2.pop();</div><div class="line">    </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="21-包含min函数的栈（栈）"><a href="#21-包含min函数的栈（栈）" class="headerlink" title="21.包含min函数的栈（栈）"></a>21.包含min函数的栈（栈）</h2><p>定义栈的数据结构，请在该类型中实现一个能够得到栈最小元素的min函数。在该栈中，调用min、push及pop的时间复杂度都是O(1)。</p>
-<p>可以利用一个辅助栈来存放最小值<br>  <img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-01 下午10.53.41.png" alt="屏幕快照 2017-08-01 下午10.53.41"><br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-01 下午10.53.48.png" alt="屏幕快照 2017-08-01 下午10.53.48"></p>
-<p>  每入栈一次，就与辅助栈顶比较大小，如果小就入栈，如果大就入栈当前的辅助栈顶 。<br>  当出栈时，辅助栈也要出栈<br>  这种做法可以保证辅助栈顶一定都是最小元素。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">import java.util.Stack;</div><div class="line"></div><div class="line">public class Solution &#123;</div><div class="line">    Stack&lt;Integer&gt; data = new Stack&lt;Integer&gt;();</div><div class="line">    Stack&lt;Integer&gt; min = new Stack&lt;Integer&gt;();</div><div class="line">    </div><div class="line">    public void push(int node) &#123;</div><div class="line">        data.push(node);</div><div class="line">        if(min.empty())&#123;min.push(data.peek());&#125;</div><div class="line">        else if(data.peek()&lt;min.peek())&#123;min.push(data.peek());&#125;</div><div class="line">        else min.push(min.peek());</div><div class="line">        &#125;  </div><div class="line">    public void pop() &#123;</div><div class="line">        data.pop();</div><div class="line">        min.pop();      </div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    public int top() &#123;</div><div class="line">        return data.peek();</div><div class="line">        </div><div class="line">    &#125;    </div><div class="line">    public int min() &#123;</div><div class="line">        return min.peek();        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="22-栈的压入、弹出序列（栈）"><a href="#22-栈的压入、弹出序列（栈）" class="headerlink" title="22. 栈的压入、弹出序列（栈）"></a>22. 栈的压入、弹出序列（栈）</h2><p>输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。例如序列1,2,3,4,5是某栈的压入顺序，序列4，5，3，2，1是该压栈序列对应的一个弹出序列，但4，3，5，1，2就不可能是该压栈序列的弹出序列。（注意：这两个序列的长度是相等的）</p>
-<p>借用一个辅助的栈，遍历压栈顺序，先讲第一个放入栈中，这里是1，然后判断栈顶元素是不是出栈顺序的第一个元素，这里是4，很显然1≠4，所以我们继续压栈，直到相等以后开始出栈，出栈一个元素，则将出栈顺序向后移动一位，直到不相等，这样循环等压栈顺序遍历完成，如果辅助栈还不为空，说明弹出序列不是该栈的弹出顺序。<br>举例：<br>入栈1,2,3,4,5<br>出栈4,5,3,2,1<br>首先1入辅助栈，此时栈顶1≠4，继续入栈2<br>此时栈顶2≠4，继续入栈3<br>此时栈顶3≠4，继续入栈4<br>此时栈顶4＝4，出栈4，弹出序列向后一位，此时为5，,辅助栈里面是1,2,3<br>此时栈顶3≠5，继续入栈5<br>此时栈顶5=5，出栈5,弹出序列向后一位，此时为3，,辅助栈里面是1,2,3<br>….<br>依次执行，最后辅助栈为空。如果不为空说明弹出序列不是该栈的弹出顺序。</p>
-<blockquote>
-<p>java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.Stack;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">IsPopOrder</span><span class="params">(<span class="keyword">int</span> [] pushA,<span class="keyword">int</span> [] popA)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(pushA.length==<span class="number">0</span>||popA.length==<span class="number">0</span>)<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        Stack&lt;Integer&gt; S=<span class="keyword">new</span> Stack&lt;Integer&gt;();</div><div class="line">        <span class="keyword">int</span> popIndex = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;pushA.length;i++)&#123;</div><div class="line">            S.push(pushA[i]);</div><div class="line">            <span class="keyword">while</span>(!S.empty()&amp;&amp;popA[popIndex]==S.peek())&#123;</div><div class="line">                S.pop();</div><div class="line">                popIndex++;</div><div class="line">            &#125;            </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> S.empty();      </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li>写一个栈，添加一个接口，返回当前栈最小值，要求时空都为O(1)，其他代码题基本都能在剑指offer和微软面试100题上找到，题目已经忘了</li>
-</ol>
-<h2 id="46-求1-2-…-n（逻辑）"><a href="#46-求1-2-…-n（逻辑）" class="headerlink" title="46. 求1+2+…..+n（逻辑）"></a>46. 求1+2+…..+n（逻辑）</h2><p>求1+2+3+…+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。</p>
-<ol>
-<li>需利用逻辑与的短路特性实现递归终止。 </li>
-<li>当n==0时，(n&gt;0)&amp;&amp;((sum+=Sum_Solution(n-1))&gt;0)只执行前面的判断，为false，然后直接返回0；</li>
-<li>当n&gt;0时，执行sum+=Sum_Solution(n-1)，实现递归计算Sum_Solution(n)。</li>
-</ol>
-<blockquote>
-<p>java</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">Sum_Solution</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> sum=n;</div><div class="line">        <span class="keyword">boolean</span> ans = (n&gt;<span class="number">0</span>)&amp;&amp;((sum+=Sum_Solution(n-<span class="number">1</span>))&gt;<span class="number">0</span>);</div><div class="line">        <span class="keyword">return</span> sum;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="矩阵"><a href="#矩阵" class="headerlink" title="矩阵"></a>矩阵</h2><ol>
-<li>在一个n*n的矩阵中填数的问题，那种转圈填数，</li>
-<li>跟异构智能面试1面的第二题一样，都是剑指offer的1道题，是回自型的矩阵找(x,y)位置的数是几</li>
-</ol>
-<p>手写个算法，剑指ｏｆｆｅｒ原题，顺时针打印矩阵，手写比较慢，面试官带了笔记本做自己工作，敲代码呼呼的，感觉都带风，</p>
-<p>一道codeForces原题(我没做过)：从N个数中可放回的抽取B次，问B次取出的数的和被X模余K的方法总数是多少，N&lt;50000,B&lt;10E9,K&lt;X&lt;100，这题我在5分钟内写出了递推式并给出了快速幂优化后的时间复杂度，面试官很满意。</p>
-<ol>
-<li><p>求一个二维矩阵的最大横竖撇三个的最大值，这道题很简单的，只要穷举就可以了，但是我由于C++忘了比较多，导致程序调试出问题，忧伤。后面考完后发现是输入参数不兼容问题。 </p>
-</li>
-<li><p>编程题：实现求正整数平方根整数部分的函数（使用梯度下降）</p>
-</li>
-<li>第三题是矩阵中将 0 元素所在行列全置 0 的最优空间解法,</li>
-<li><ol>
-<li>给定两个黑白图像，即0-1矩阵。四个操作（水平翻转、竖直翻转、90度旋转、黑白翻转），问这个图像能否通过有限步骤操作，最后变成一样的。<h2 id="DFS和BFS"><a href="#DFS和BFS" class="headerlink" title="DFS和BFS"></a>DFS和BFS</h2></li>
-</ol>
-</li>
-</ol>
-<ol>
-<li>迷宫的深度搜索、广度搜索；</li>
-<li>之后他问我DFS和BFS算法，在哪些地方有应用。我说人工智能里面寻路算法有应用，BFS加上个优先队列就成了代价一致搜索，代价一致搜索加上个贪心策略就成了A*算法。他问何时选择DFS呢？我一时语塞，乱七八糟答了一点（心里想着这不是看具体情况么）…这个问题就问到这里了。</li>
-</ol>
-<h2 id="C-、java、python"><a href="#C-、java、python" class="headerlink" title="C++、java、python"></a>C++、java、python</h2><ol>
-<li><p>还问了些C++继承性、多态性、malloc与new区别及优缺点，重载函数与重写函数特点等等</p>
-</li>
-<li><p>struct和class区别，你更倾向用哪个struct比class有更多的限制，详见下面链接<a href="http://angeson1987.blog.163.com/blog/static/1625900902010728035209/" target="_blank" rel="external">http://angeson1987.blog.163.com/blog/static/1625900902010728035209/</a></p>
-</li>
-<li>问了一些C++的基础知识，sizeof啊，多态性啊，熟悉的数据结构（主要问了链表数组和树），，在平时项目中处理的数据类型、如何处理异常啊等等…<br>C++里面static的作用，<br>C++里面const有什么作用，在函数名、参数名不同位置有什么作用、C++ 内存分配、指针与引用、函数传参如何更快、大致写下C++ vector代码、</li>
-<li>然后问C++中STL容器知识，map底层是怎么实现，为什么要用红黑树？我说用散列表也可以，unordered_map底层就是用的散列表。</li>
-<li>main(argc,argv[])里面两个参数什么意思</li>
-<li>用C语言将一个四段的IP地址放到32bit字节里</li>
-</ol>
-<p>java知识考核（和其他公司的有点混淆了，记不清楚哪个是哪个公司考的了）大体是这样子的1.进程与线程的区别，线程的同步问题，两个线程访问一个临界资源该怎么做？线程什么时候终止？（还问到一个daemon函数，我当时完全不知道这是什么）2.hashmap与hashtable区别3.String 与StringBuffer的区别，有什么好处？4.问了用过java的数据挖掘，数据分析包吗？用过哪些？5.还问了一个异常处理机制，，try和finally里面都有return的时候，会不会执行finally的return。6.final的作用。。。1.什么是面向对象？JAVA与C相比有什么区别？JAVA的对象与c的结构体有什么区别？2.JAVA的IO有哪些类？接口？关系是啥？（谁继承谁之类的）3.你用过哪些JAVA的库？（java.io, java.util, 等等）你什么时候开始用JAVA的？（这个问题是最开始问的，我说14年开始的。。后面又问了一遍。。）用过什么数据库？（SQL SERVER, MYSQL）用过No-SQL数据库没？说一个No-SQL的数据库？（我没用过，，听过Redis这个键值对数据库（瞎扯的。。。））会用什么动态语言吗？（js这种？额，不会，，会一些python。）用python作什么？（分类聚类处理，评价之类的）（介于面试官完全不懂数据挖掘好像，没问啥了）操作系统了解吗？（我还以为问理论这些。。还在想，面试官继续问）Linux用过没？（用过。。在上面搭建过java, hadoop等开发环境，）了解shell吗？（不了解，，）那linux常用命令呢？（知道几个，比如cd , ls,  mkdir,  rm,  mv,  vi ,, gedit, sudo ,,）（还问了关于上机题目中岛上建桥费用最小的那个问题），你这个题怎么做错了啊？（哦，那个题没做错，但是有个用例没过，没想到是为什么。。然后开始给他讲解最小生成树。。。）<br>java c++中的sort()是用什么封装的sort(Object)sort(int) 是一种sort分装么，然后引出快排手写快拍中的partition很久前看的算法导论忘的差不多了，在面试官提示下跌跌爬爬的写出来了。(写出来那一瞬间我听到了我自己和电话那头同时一声长叹….<br>然后问了高并发问题，讲讲CurrentHashMap原理，可是我并不了解，就大概说了下自己想法</p>
-<ol>
-<li>如何提高Python的运行效率，写一个简单的正则匹配表达式(将文本中的123.4匹配出来)</li>
-<li>python读取文件，写代码</li>
-<li>python计算一个文件中有N行，每行一列的数的平均值，方差，写代码<br>1.了解python吗？了解一些，平时偶尔看看别人写的程序。2.用过什么python的数据分析包？ 什么panda呀，。。。我说我就用过scikit learn, 还有两个网络图的包networkx, igraph。。。3.基本语法都知道吧？恩都知道。不过不是很熟，要是工作需要的话，可以尽快入门。</li>
-</ol>
-<h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h2><ol>
-<li><p>一个应用题，考察hash算法</p>
-</li>
-<li><p>问我知道倒排索引不 ? (不知道)想考察我学习能力，所以决定教教我倒排索引 ，简单画了个图，问了相关的问题  （答得不好）</p>
-</li>
-<li><ol>
-<li>hash表的数据结构，沟通了很久才知道他想问的是hash表冲突之后的链式表处理。 </li>
-</ol>
-</li>
-</ol>
-<h2 id="数学"><a href="#数学" class="headerlink" title="数学"></a>数学</h2><ol>
-<li>打印组合数；</li>
-<li>第三题，是关于K-means 聚类的，由于时间都花在第一题调bug上了，就没有做这道题。</li>
-</ol>
-<p>4 月19日在华为研究所参加了华为实习生上机考试。三道编程题，难度依次增大，三题分值分别是100、200、300。三个题大意分别是：（1）给出五门课 程的成绩，求成绩的平均值，注意输入的成绩均在0到100分范围内，如果输入的成绩不足五个，按照五个成绩计算；如果输入的成绩多余五个，取前五个成绩。 是不是简单到爆？我竟然测试用例没完全通过，后来面试时才知道该题得了67分。<br>将输入的数字表示为大写形式，例如输入10010，那么转为壹万零一十。三题一共就得了67分，编程能力差加上不练习编程，满满的泪。</p>
-<ol>
-<li>手动实现upper_bound</li>
-<li>手动实现next_premutation，还写了一段python代码</li>
-</ol>
-<p>设计一个斗地主的AI。</p>
-<ol>
-<li>一个运算序列只有+、*、数字，计算运算序列的结果.</li>
-</ol>
-
-          
+          <p>我们知道，对于一般的二叉搜索树（Binary Search Tree），其期望高度（即为一棵平衡树时）为$log_2n$，其各操作的时间复杂度$O(log_2n)$同时也由此而决定。但是，在某些极端的情况下（如在插入的序列是有序的时），二叉搜索树将退化成近似链或链，此时，其操作的时间复杂度将退化成线性的，即O(n)。我们可以通过随机化建立二叉搜索树来尽量的避免这种情况，但是在进行了多次的操作之后，由于在删除时，我们总是选择将待删除节点的后继代替它本身，这样就会造成总是右边的节点数目减少，以至于树向左偏沉。这同时也会造成树的平衡性受到破坏，提高它的操作的时间复杂度。于是就有了我们下边介绍的平衡二叉树。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/07/19/数据结构与算法（3）：树（3）——平衡二叉树（AVL树）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1498,7 +1102,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/18/数据结构与算法题解（7）：重点掌握/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/19/数据结构与算法（3）：树（2）——二叉查找树/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -1523,8 +1127,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/07/18/数据结构与算法题解（7）：重点掌握/" itemprop="url">
-                  数据结构与算法题解（7）：重点掌握
+                <a class="post-title-link" href="/2017/07/19/数据结构与算法（3）：树（2）——二叉查找树/" itemprop="url">
+                  数据结构与算法（3）：树（2）——二叉查找树
                 </a>
               
             
@@ -1538,8 +1142,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-18T22:20:45+08:00">
-                2017-07-18
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-19T21:14:45+08:00">
+                2017-07-19
               </time>
             
 
@@ -1593,10 +1197,149 @@ var _hmt = _hmt || [];
 
       
         
-          <p>最基础的数据结构与算法整理。</p>
+          <h2 id="一、二叉查找树的定义"><a href="#一、二叉查找树的定义" class="headerlink" title="一、二叉查找树的定义"></a>一、二叉查找树的定义</h2><p>二叉查找树定义：<br>又称为是二叉排序树（Binary Sort Tree）或二叉搜索树。它是特殊的二叉树：对于二叉树，假设x为二叉树中的任意一个结点，x节点包含关键字key，节点x的$key$值记为$key[x]$。如果y是x的左子树中的一个结点，则$key[y]&lt;= key[x]$；如果y是x的右子树的一个结点，则$key[y] &gt;= key[x]$。那么，这棵树就是二叉查找树。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/18/数据结构与算法题解（7）：重点掌握/#more" rel="contents">
+            <a class="btn" href="/2017/07/19/数据结构与算法（3）：树（2）——二叉查找树/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/19/数据结构与算法（3）：树（1）——二叉树/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/07/19/数据结构与算法（3）：树（1）——二叉树/" itemprop="url">
+                  数据结构与算法（3）：树（1）——二叉树
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-19T20:14:45+08:00">
+                2017-07-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>数据结构中有很多树的结构，这里整理了二叉树、二叉查找树、AVL树、红黑树、B树、B+树、trie树的基本概念与操作。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/07/19/数据结构与算法（3）：树（1）——二叉树/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
