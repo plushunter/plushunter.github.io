@@ -89,14 +89,14 @@
 <meta name="description" content="SMO算法是一种启发式算法，其基本思想是：如果所有变量的解都满足最优化问题的KKT条件，那么这个优化问题的解就得到了，因为KKT条件是该优化问题的充分必要条件。否则，选择两个变量，固定其他变量，针对这两个变量构建一个二次规划问题。这个二次规划问题关于这两个变量的解应该是更接近原始二次规划问题的解，因为这会使得原始二次规划问题的目标函数值变得更小。重要的是，这时子问题可以通过解析方法求解，这样就可以">
 <meta name="keywords" content="机器学习,SVM,SMO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习算法系列（12）：SVM（4）——SMO">
+<meta property="og:title" content="机器学习算法系列（12）：SVM（4）—SMO">
 <meta property="og:url" content="http://yoursite.com/2017/02/27/机器学习算法系列（12）：SVM（4）——SMO/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="SMO算法是一种启发式算法，其基本思想是：如果所有变量的解都满足最优化问题的KKT条件，那么这个优化问题的解就得到了，因为KKT条件是该优化问题的充分必要条件。否则，选择两个变量，固定其他变量，针对这两个变量构建一个二次规划问题。这个二次规划问题关于这两个变量的解应该是更接近原始二次规划问题的解，因为这会使得原始二次规划问题的目标函数值变得更小。重要的是，这时子问题可以通过解析方法求解，这样就可以">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015197568787.png">
-<meta property="og:updated_time" content="2017-07-31T16:51:32.000Z">
+<meta property="og:updated_time" content="2017-08-20T03:21:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习算法系列（12）：SVM（4）——SMO">
+<meta name="twitter:title" content="机器学习算法系列（12）：SVM（4）—SMO">
 <meta name="twitter:description" content="SMO算法是一种启发式算法，其基本思想是：如果所有变量的解都满足最优化问题的KKT条件，那么这个优化问题的解就得到了，因为KKT条件是该优化问题的充分必要条件。否则，选择两个变量，固定其他变量，针对这两个变量构建一个二次规划问题。这个二次规划问题关于这两个变量的解应该是更接近原始二次规划问题的解，因为这会使得原始二次规划问题的目标函数值变得更小。重要的是，这时子问题可以通过解析方法求解，这样就可以">
 <meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15015197568787.png">
 
@@ -130,7 +130,7 @@
 
 
 
-  <title> 机器学习算法系列（12）：SVM（4）——SMO | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 机器学习算法系列（12）：SVM（4）—SMO | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -310,7 +310,7 @@ var _hmt = _hmt || [];
             
             
               
-                机器学习算法系列（12）：SVM（4）——SMO
+                机器学习算法系列（12）：SVM（4）—SMO
               
             
           </h1>
@@ -408,8 +408,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/05/机器学习算法系列（13）：推荐系统（基于领域的协同过滤）/" rel="next" title="机器学习算法系列（13）：推荐系统（基于领域的协同过滤）">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（13）：推荐系统（基于领域的协同过滤）
+              <a href="/2017/02/27/机器学习算法系列（12）：SVM（3）——非线性支持向量机/" rel="next" title="机器学习算法系列（12）：SVM（3）—非线性支持向量机">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（12）：SVM（3）—非线性支持向量机
               </a>
             
           </div>
@@ -418,8 +418,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/27/机器学习算法系列（12）：SVM（2）——线性支持向量机/" rel="prev" title="机器学习算法系列（12）：SVM（2）——线性支持向量机">
-                机器学习算法系列（12）：SVM（2）——线性支持向量机 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/27/机器学习算法系列（12）：SVM（1）——线性可分支持向量机/" rel="prev" title="机器学习算法系列（12）：SVM（1）—线性可分支持向量机">
+                机器学习算法系列（12）：SVM（1）—线性可分支持向量机 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -488,7 +488,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">123</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -505,7 +505,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">129</span>
+                <span class="site-state-item-count">160</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

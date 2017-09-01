@@ -1,0 +1,798 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构,算法,Dijkstra算法,Floyd算法," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="最短路径问题是图论研究中的一个经典算法问题，旨在寻找图（由结点和路径组成的）中两结点之间的最短路径。算法具体的形式包括：">
+<meta name="keywords" content="数据结构,算法,Dijkstra算法,Floyd算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法（14）：最短路算法">
+<meta property="og:url" content="http://yoursite.com/2017/07/28/数据结构与算法（14）：最短路算法/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="最短路径问题是图论研究中的一个经典算法问题，旨在寻找图（由结点和路径组成的）中两结点之间的最短路径。算法具体的形式包括：">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15034750643056.gif">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15034750948707.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15034751165686.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15034778818372.jpg">
+<meta property="og:updated_time" content="2017-09-01T07:09:01.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法（14）：最短路算法">
+<meta name="twitter:description" content="最短路径问题是图论研究中的一个经典算法问题，旨在寻找图（由结点和路径组成的）中两结点之间的最短路径。算法具体的形式包括：">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15034750643056.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 数据结构与算法（14）：最短路算法 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+            读书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies" rel="section">
+            
+            电影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/28/数据结构与算法（14）：最短路算法/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构与算法（14）：最短路算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-28T22:20:45+08:00">
+                2017-07-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最短路径问题是图论研究中的一个经典算法问题，旨在寻找图（由结点和路径组成的）中两结点之间的最短路径。算法具体的形式包括：</p>
+<a id="more"></a>
+<ul>
+<li>确定起点的最短路径问题 - 即已知起始结点，求最短路径的问题。适合使用Dijkstra算法。</li>
+<li>确定终点的最短路径问题 - 与确定起点的问题相反，该问题是已知终结结点，求最短路径的问题。在无向图中该问题与确定起点的问题完全等同，在有向图中该问题等同于把所有路径方向反转的确定起点的问题。</li>
+<li>确定起点终点的最短路径问题 - 即已知起点和终点，求两结点之间的最短路径。</li>
+<li>全局最短路径问题 - 求图中所有的最短路径。适合使用Floyd-Warshall算法。</li>
+</ul>
+<h2 id="一、Dijkstra算法"><a href="#一、Dijkstra算法" class="headerlink" title="一、Dijkstra算法"></a>一、Dijkstra算法</h2><h3 id="1-1-算法思想"><a href="#1-1-算法思想" class="headerlink" title="1.1 算法思想"></a>1.1 算法思想</h3><p>Dijkstra(迪杰斯特拉)算法是典型的单源最短路径算法，用于计算一个节点到其他所有节点的最短路径。主要特点是以起始点为中心向外层层扩展，直到扩展到终点为止。Dijkstra算法是很有代表性的最短路径算法，在很多专业课程中都作为基本内容有详细的介绍，如数据结构，图论，运筹学等等。注意该算法要求图中不存在负权边。</p>
+<blockquote>
+<p>问题描述：</p>
+</blockquote>
+<p>在无向图 G=(V,E) 中，假设每条边 E[i] 的长度为 w[i]，找到由顶点 V0 到其余各点的最短路径。（单源最短路径）</p>
+<blockquote>
+<p>算法思想：</p>
+</blockquote>
+<p>设G=(V,E)是一个带权有向图，把图中顶点集合V分成两组，第一组为已求出最短路径的顶点集合（用S表示，初始时S中只有一个源点，以后每求得一条最短路径 , 就将加入到集合S中，直到全部顶点都加入到S中，算法就结束了），第二组为其余未确定最短路径的顶点集合（用U表示），按最短路径长度的递增次序依次把第二组的顶点加入S中。在加入的过程中，总保持从源点v到S中各顶点的最短路径长度不大于从源点v到U中任何顶点的最短路径长度。此外，每个顶点对应一个距离，S中的顶点的距离就是从v到此顶点的最短路径长度，U中的顶点的距离，是从v到此顶点只包括S中的顶点为中间顶点的当前最短路径长度。</p>
+<blockquote>
+<p>适用条件与限制</p>
+</blockquote>
+<ul>
+<li>有向图和无向图都可以使用本算法，无向图中的每条边可以看成相反的两条边。</li>
+<li>用来求最短路的图中不能存在负权边。(可以利用拓扑排序检测)</li>
+</ul>
+<h3 id="1-2-算法步骤"><a href="#1-2-算法步骤" class="headerlink" title="1.2 算法步骤"></a>1.2 算法步骤</h3><ol>
+<li>初始时，S只包含源点，即S＝{v}，v的距离为0。U包含除v外的其他顶点，即:U={其余顶点}，若v与U中顶点u有边，则<u,v>正常有权值，若u不是v的出边邻接点，则<u,v>权值为∞。</u,v></u,v></li>
+<li><p>从U中选取一个距离v最小的顶点k，把k，加入S中（该选定的距离就是v到k的最短路径长度）。</p>
+</li>
+<li><p>以k为新考虑的中间点，修改U中各顶点的距离；若从源点v到顶点u的距离（经过顶点k）比原来距离（不经过顶点k）短，则修改顶点u的距离值，修改后的距离值的顶点k的距离加上边上的权。</p>
+</li>
+<li>重复步骤b和c直到所有顶点都包含在S中。</li>
+</ol>
+<blockquote>
+<p>步骤动画如下：</p>
+</blockquote>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15034750643056.gif" alt=""></p>
+<blockquote>
+<p>实例如下</p>
+</blockquote>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15034750948707.jpg" alt=""></p>
+<p>用Dijkstra算法找出以A为起点的单源最短路径步骤如下</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15034751165686.jpg" alt=""></p>
+<h3 id="1-3-代码实现"><a href="#1-3-代码实现" class="headerlink" title="1.3 代码实现"></a>1.3 代码实现</h3><p>以”邻接矩阵”为例对迪杰斯特拉算法进行说明。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public class MatrixUDG &#123;</div><div class="line"></div><div class="line">    private int mEdgNum;        // 边的数量</div><div class="line">    private char[] mVexs;       // 顶点集合</div><div class="line">    private int[][] mMatrix;    // 邻接矩阵</div><div class="line">    private static final int INF = Integer.MAX_VALUE;   // 最大值</div><div class="line"></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>MatrixUDG是邻接矩阵对应的结构体。mVexs用于保存顶点，mEdgNum用于保存边数，mMatrix则是用于保存矩阵信息的二维数组。例如，mMatrix[i][j]=1，则表示”顶点i(即mVexs[i])”和”顶点j(即mVexs[j])”是邻接点；mMatrix[i][j]=0，则表示它们不是邻接点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * Dijkstra最短路径。</div><div class="line"> * 即，统计图中"顶点vs"到其它各个顶点的最短路径。</div><div class="line"> *</div><div class="line"> * 参数说明：</div><div class="line"> *       vs -- 起始顶点(start vertex)。即计算"顶点vs"到其它顶点的最短路径。</div><div class="line"> *     prev -- 前驱顶点数组。即，prev[i]的值是"顶点vs"到"顶点i"的最短路径所经历的全部顶点中，位于"顶点i"之前的那个顶点。</div><div class="line"> *     dist -- 长度数组。即，dist[i]是"顶点vs"到"顶点i"的最短路径的长度。</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> vs, <span class="keyword">int</span>[] prev, <span class="keyword">int</span>[] dist)</span> </span>&#123;</div><div class="line">    <span class="comment">// flag[i]=true表示"顶点vs"到"顶点i"的最短路径已成功获取</span></div><div class="line">    <span class="keyword">boolean</span>[] flag = <span class="keyword">new</span> <span class="keyword">boolean</span>[mVexs.length];</div><div class="line"></div><div class="line">    <span class="comment">// 初始化</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mVexs.length; i++) &#123;</div><div class="line">        flag[i] = <span class="keyword">false</span>;          <span class="comment">// 顶点i的最短路径还没获取到。</span></div><div class="line">        prev[i] = <span class="number">0</span>;              <span class="comment">// 顶点i的前驱顶点为0。</span></div><div class="line">        dist[i] = mMatrix[vs][i];  <span class="comment">// 顶点i的最短路径为"顶点vs"到"顶点i"的权。</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 对"顶点vs"自身进行初始化</span></div><div class="line">    flag[vs] = <span class="keyword">true</span>;</div><div class="line">    dist[vs] = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 遍历mVexs.length-1次；每次找出一个顶点的最短路径。</span></div><div class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; mVexs.length; i++) &#123;</div><div class="line">        <span class="comment">// 寻找当前最小的路径；</span></div><div class="line">        <span class="comment">// 即，在未获取最短路径的顶点中，找到离vs最近的顶点(k)。</span></div><div class="line">        <span class="keyword">int</span> min = INF;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mVexs.length; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (flag[j]==<span class="keyword">false</span> &amp;&amp; dist[j]&lt;min) &#123;</div><div class="line">                min = dist[j];</div><div class="line">                k = j;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 标记"顶点k"为已经获取到最短路径</span></div><div class="line">        flag[k] = <span class="keyword">true</span>;</div><div class="line"></div><div class="line">        <span class="comment">// 修正当前最短路径和前驱顶点</span></div><div class="line">        <span class="comment">// 即，当已经"顶点k的最短路径"之后，更新"未获取最短路径的顶点的最短路径和前驱顶点"。</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mVexs.length; j++) &#123;</div><div class="line">            <span class="keyword">int</span> tmp = (mMatrix[k][j]==INF ? INF : (min + mMatrix[k][j]));</div><div class="line">            <span class="keyword">if</span> (flag[j]==<span class="keyword">false</span> &amp;&amp; (tmp&lt;dist[j]) ) &#123;</div><div class="line">                dist[j] = tmp;</div><div class="line">                prev[j] = k;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 打印dijkstra最短路径的结果</span></div><div class="line">    System.out.printf(<span class="string">"dijkstra(%c): \n"</span>, mVexs[vs]);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>; i &lt; mVexs.length; i++)</div><div class="line">        System.out.printf(<span class="string">"  shortest(%c, %c)=%d\n"</span>, mVexs[vs], mVexs[i], dist[i]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="1-4-时间复杂度"><a href="#1-4-时间复杂度" class="headerlink" title="1.4 时间复杂度"></a>1.4 时间复杂度</h3><p>我们可以用大O符号将该算法的运行时间表示为边数m和顶点数n的函数。</p>
+<p>对于基于顶点集Q的实现，算法的运行时间是$O(|E|\cdot dk_{Q}+|V|\cdot em_{Q})$，其中$dk_{Q}和em_{Q}$分别表示完成键的降序排列时间和从Q中提取最小键值的时间。</p>
+<p>Dijkstra算法最简单的实现方法是用一个链表或者数组来存储所有顶点的集合Q，所以搜索Q中最小元素的运算（Extract-Min(Q)）只需要线性搜索 Q中的所有元素。这样的话算法的运行时间是$O(n^{2})$。</p>
+<p>对于边数少于$n^{2}$的稀疏图来说，我们可以用邻接表来更有效的实现该算法。同时需要将一个二叉堆或者斐波纳契堆用作优先队列来寻找最小的顶点（Extract-Min）。当用到二叉堆的时候，算法所需的时间为${\displaystyle O((m+n)logn)}$，斐波纳契堆能稍微提高一些性能，让算法运行时间达到${\displaystyle O(m+nlogn)}$。然而，使用斐波纳契堆进行编程，常常会由于算法常数过大而导致速度没有显著提高。</p>
+<h2 id="二、Floyd算法"><a href="#二、Floyd算法" class="headerlink" title="二、Floyd算法"></a>二、Floyd算法</h2><p>Dijkstra很优秀，但是使用Dijkstra有一个最大的限制，就是不能有负权边。而Bellman-Ford适用于权值可以为负、无权值为负的回路的图。这比Dijkstra算法的使用范围要广。</p>
+<h3 id="2-1-算法思想"><a href="#2-1-算法思想" class="headerlink" title="2.1 算法思想"></a>2.1 算法思想</h3><p>Floyd算法是一个经典的动态规划算法。用通俗的语言来描述的话，首先我们的目标是寻找从点i到点j的最短路径。从动态规划的角度看问题，我们需要为这个目标重新做一个诠释（这个诠释正是动态规划最富创造力的精华所在）</p>
+<p> 从任意节点i到任意节点j的最短路径不外乎2种可能，1是直接从i到j，2是从i经过若干个节点k到j。所以，我们假设Dis(i,j)为节点u到节点v的最短路径的距离，对于每一个节点k，我们检查Dis(i,k) + Dis(k,j) &lt; Dis(i,j)是否成立，如果成立，证明从i到k再到j的路径比i直接到j的路径短，我们便设置Dis(i,j) = Dis(i,k) + Dis(k,j)，这样一来，当我们遍历完所有节点k，Dis(i,j)中记录的便是i到j的最短路径的距离。</p>
+<h3 id="2-2-算法步骤"><a href="#2-2-算法步骤" class="headerlink" title="2.2 算法步骤"></a>2.2 算法步骤</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15034778818372.jpg" alt=""><br>初始状态：S是记录各个顶点间最短路径的矩阵。 </p>
+<ol>
+<li><p>初始化S：矩阵S中顶点a[i][j]的距离为顶点i到顶点j的权值；如果i和j不相邻，则a[i][j]=∞。实际上，就是将图的原始矩阵复制到S中。<br> 注:a[i][j]表示矩阵S中顶点i(第i个顶点)到顶点j(第j个顶点)的距离。</p>
+</li>
+<li><p>以顶点A(第1个顶点)为中介点，若$a[i][j] &gt; a[i][0]+a[0][j]$，则设置$a[i][j]=a[i][0]+a[0][j]$。 以顶点$a[1]$，上一步操作之后，$a[1][6]=∞$；而将A作为中介点时，(B,A)=12，(A,G)=14，因此B和G之间的距离可以更新为26。</p>
+</li>
+<li>同理，依次将顶点B,C,D,E,F,G作为中介点，并更新a[i][j]的大小。</li>
+</ol>
+<h3 id="2-3-代码实现"><a href="#2-3-代码实现" class="headerlink" title="2.3 代码实现"></a>2.3 代码实现</h3><p>以”邻接矩阵”为例对弗洛伊德算法进行说明，对于”邻接表”实现的图在后面会给出相应的源码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MatrixUDG</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mEdgNum;        <span class="comment">// 边的数量</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">char</span>[] mVexs;       <span class="comment">// 顶点集合</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span>[][] mMatrix;    <span class="comment">// 邻接矩阵</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INF = Integer.MAX_VALUE;   <span class="comment">// 最大值</span></div><div class="line"></div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>MatrixUDG是邻接矩阵对应的结构体。mVexs用于保存顶点，mEdgNum用于保存边数，mMatrix则是用于保存矩阵信息的二维数组。例如，mMatrix[i][j]=1，则表示”顶点i(即mVexs[i])”和”顶点j(即mVexs[j])”是邻接点；mMatrix[i][j]=0，则表示它们不是邻接点。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line"> * floyd最短路径。</div><div class="line"> * 即，统计图中各个顶点间的最短路径。</div><div class="line"> *</div><div class="line"> * 参数说明：</div><div class="line"> *     path -- 路径。path[i][j]=k表示，"顶点i"到"顶点j"的最短路径会经过顶点k。</div><div class="line"> *     dist -- 长度数组。即，dist[i][j]=sum表示，"顶点i"到"顶点j"的最短路径的长度是sum。</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">floyd</span><span class="params">(<span class="keyword">int</span>[][] path, <span class="keyword">int</span>[][] dist)</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// 初始化</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mVexs.length; i++) &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mVexs.length; j++) &#123;</div><div class="line">            dist[i][j] = mMatrix[i][j];    <span class="comment">// "顶点i"到"顶点j"的路径长度为"i到j的权值"。</span></div><div class="line">            path[i][j] = j;                <span class="comment">// "顶点i"到"顶点j"的最短路径是经过顶点j。</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 计算最短路径</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; mVexs.length; k++) &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mVexs.length; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mVexs.length; j++) &#123;</div><div class="line"></div><div class="line">                <span class="comment">// 如果经过下标为k顶点路径比原两点间路径更短，则更新dist[i][j]和path[i][j]</span></div><div class="line">                <span class="keyword">int</span> tmp = (dist[i][k]==INF || dist[k][j]==INF) ? INF : (dist[i][k] + dist[k][j]);</div><div class="line">                <span class="keyword">if</span> (dist[i][j] &gt; tmp) &#123;</div><div class="line">                    <span class="comment">// "i到j最短路径"对应的值设，为更小的一个(即经过k)</span></div><div class="line">                    dist[i][j] = tmp;</div><div class="line">                    <span class="comment">// "i到j最短路径"对应的路径，经过k</span></div><div class="line">                    path[i][j] = path[i][k];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 打印floyd最短路径的结果</span></div><div class="line">    System.out.printf(<span class="string">"floyd: \n"</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; mVexs.length; i++) &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; mVexs.length; j++)</div><div class="line">            System.out.printf(<span class="string">"%2d  "</span>, dist[i][j]);</div><div class="line">        System.out.printf(<span class="string">"\n"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-4-时间复杂度"><a href="#2-4-时间复杂度" class="headerlink" title="2.4 时间复杂度"></a>2.4 时间复杂度</h3><p>Floyd-Warshall算法的时间复杂度为$O(N^{3})$，空间复杂度为$O(N^{2})$。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/Dijkstra算法/" rel="tag"># Dijkstra算法</a>
+          
+            <a href="/tags/Floyd算法/" rel="tag"># Floyd算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/29/数据结构与算法（15）：布隆过滤器/" rel="next" title="数据结构与算法（15）：布隆过滤器">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（15）：布隆过滤器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/27/机器学习算法系列（32）：MapReduce执行流程详解/" rel="prev" title="机器学习算法系列（32）：MapReduce执行流程详解">
+                机器学习算法系列（32）：MapReduce执行流程详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">123</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">160</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Dijkstra算法"><span class="nav-text">一、Dijkstra算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-算法思想"><span class="nav-text">1.1 算法思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-算法步骤"><span class="nav-text">1.2 算法步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-代码实现"><span class="nav-text">1.3 代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-时间复杂度"><span class="nav-text">1.4 时间复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Floyd算法"><span class="nav-text">二、Floyd算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-算法思想"><span class="nav-text">2.1 算法思想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-算法步骤"><span class="nav-text">2.2 算法步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-代码实现"><span class="nav-text">2.3 代码实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-时间复杂度"><span class="nav-text">2.4 时间复杂度</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

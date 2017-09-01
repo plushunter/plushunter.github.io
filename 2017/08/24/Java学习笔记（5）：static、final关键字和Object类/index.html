@@ -1,0 +1,837 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,static,final,Object," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、static关键字static 修饰符能够与变量、方法一起使用，表示是“静态”的。静态变量和静态方法能够通过类名来访问，不需要创建一个类的对象来访问该类的静态成员，所以static修饰的成员又称作类变量和类方法。静态变量与实例变量不同，实例变量总是通过对象来访问，因为它们的值在对象和对象之间有所不同。请看下面的例子：">
+<meta name="keywords" content="Java,static,final,Object">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java学习笔记（5）：static、final关键字和Object类">
+<meta property="og:url" content="http://yoursite.com/2017/08/24/Java学习笔记（5）：static、final关键字和Object类/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="一、static关键字static 修饰符能够与变量、方法一起使用，表示是“静态”的。静态变量和静态方法能够通过类名来访问，不需要创建一个类的对象来访问该类的静态成员，所以static修饰的成员又称作类变量和类方法。静态变量与实例变量不同，实例变量总是通过对象来访问，因为它们的值在对象和对象之间有所不同。请看下面的例子：">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15025432513037.png">
+<meta property="og:updated_time" content="2017-09-01T06:50:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java学习笔记（5）：static、final关键字和Object类">
+<meta name="twitter:description" content="一、static关键字static 修饰符能够与变量、方法一起使用，表示是“静态”的。静态变量和静态方法能够通过类名来访问，不需要创建一个类的对象来访问该类的静态成员，所以static修饰的成员又称作类变量和类方法。静态变量与实例变量不同，实例变量总是通过对象来访问，因为它们的值在对象和对象之间有所不同。请看下面的例子：">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15025432513037.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"hide"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> Java学习笔记（5）：static、final关键字和Object类 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+            读书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies" rel="section">
+            
+            电影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/24/Java学习笔记（5）：static、final关键字和Object类/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java学习笔记（5）：static、final关键字和Object类
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-24T22:20:45+08:00">
+                2017-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、static关键字"><a href="#一、static关键字" class="headerlink" title="一、static关键字"></a>一、static关键字</h1><p>static 修饰符能够与变量、方法一起使用，表示是“静态”的。静态变量和静态方法能够通过类名来访问，不需要创建一个类的对象来访问该类的静态成员，所以static修饰的成员又称作类变量和类方法。静态变量与实例变量不同，实例变量总是通过对象来访问，因为它们的值在对象和对象之间有所不同。请看下面的例子：</p>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">public class Demo &#123;</div><div class="line">    static int i = 10;</div><div class="line">    int j;</div><div class="line"></div><div class="line">    Demo() &#123;</div><div class="line">        this.j = 20;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        System.out.println(&quot;类变量 i=&quot; + Demo.i);</div><div class="line">        Demo obj = new Demo();</div><div class="line">        System.out.println(&quot;实例变量 j=&quot; + obj.j);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">类变量 i=10</div><div class="line">实例变量 j=20</div></pre></td></tr></table></figure>
+<h2 id="1-1-static的内存分配"><a href="#1-1-static的内存分配" class="headerlink" title="1.1 static的内存分配"></a>1.1 static的内存分配</h2><p>静态变量属于类，不属于任何独立的对象，所以无需创建类的实例就可以访问静态变量。之所以会产生这样的结果，是因为编译器只为整个类创建了一个静态变量的副本，也就是只分配一个内存空间，虽然有多个实例，但这些实例共享该内存。实例变量则不同，每创建一个对象，都会分配一次内存空间，不同变量的内存相互独立，互不影响，改变 a 对象的实例变量不会影响 b 对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">int</span> j;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Demo obj1 = <span class="keyword">new</span> Demo();</div><div class="line">        obj1.i = <span class="number">10</span>;</div><div class="line">        obj1.j = <span class="number">20</span>;</div><div class="line">       </div><div class="line">        Demo obj2 = <span class="keyword">new</span> Demo();</div><div class="line">       </div><div class="line">        System.out.println(<span class="string">"obj1.i="</span> + obj1.i + <span class="string">", obj1.j="</span> + obj1.j);</div><div class="line">        System.out.println(<span class="string">"obj2.i="</span> + obj2.i + <span class="string">", obj2.j="</span> + obj2.j);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">obj1.i=10, obj1.j=20</div><div class="line">obj2.i=10, obj2.j=0</div></pre></td></tr></table></figure>
+<p>注意：静态变量虽然也可以通过对象来访问，但是不被提倡，编译器也会产生警告。</p>
+<p>上面的代码中，i 是静态变量，通过 obj1 改变 i 的值，会影响到 obj2；j 是实例变量，通过 obj1 改变 j 的值，不会影响到 obj2。这是因为 obj1.i 和 obj2.i 指向同一个内存空间，而 obj1.j 和 obj2.j 指向不同的内存空间，请看下图：<br><img src="http://omu7tit09.bkt.clouddn.com/15025432513037.png" alt=""></p>
+<p>注意：static 的变量是在类装载的时候就会被初始化。也就是说，只要类被装载，不管你是否使用了这个static 变量，它都会被初始化。</p>
+<p>小结：类变量(class variables)用关键字 static 修饰，在类加载的时候，分配类变量的内存，以后再生成类的实例对象时，将共享这块内存（类变量），任何一个对象对类变量的修改，都会影响其它对象。外部有两种访问方式：通过对象来访问或通过类名来访问。</p>
+<h2 id="1-2-静态方法"><a href="#1-2-静态方法" class="headerlink" title="1.2 静态方法"></a>1.2 静态方法</h2><p>静态方法是一种不能向对象实施操作的方法。例如，Math 类的 pow() 方法就是一个静态方法，语法为 Math.pow(x, a)，用来计算 x 的 a 次幂，在使用时无需创建任何 Math 对象。</p>
+<p>因为静态方法不能操作对象，所以不能在静态方法中访问实例变量，只能访问自身类的静态变量。</p>
+<p>以下情形可以使用静态方法：</p>
+<ul>
+<li>一个方法不需要访问对象状态，其所需参数都是通过显式参数提供（例如 Math.pow()）。</li>
+<li>一个方法只需要访问类的静态变量。</li>
+</ul>
+<p>读者肯定注意到，main() 也是一个静态方法，不对任何对象进行操作。实际上，在程序启动时还没有任何对象，main() 方法是程序的入口，将被执行并创建程序所需的对象。</p>
+<p>关于静态变量和静态方法的总结：</p>
+<ul>
+<li>一个类的静态方法只能访问静态变量；</li>
+<li>一个类的静态方法不能够直接调用非静态方法；</li>
+<li>如访问控制权限允许，静态变量和静态方法也可以通过对象来访问，但是不被推荐；</li>
+<li>静态方法中不存在当前对象，因而不能使用 this，当然也不能使用 super；</li>
+<li>静态方法不能被非静态方法覆盖；</li>
+<li>构造方法不允许声明为 static 的；</li>
+<li>局部变量不能使用static修饰。</li>
+</ul>
+<p>静态方法举例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">public class Demo &#123;</div><div class="line">    static int sum(int x, int y)&#123;</div><div class="line">        return x + y;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        int sum = Demo.sum(10, 10);</div><div class="line">        System.out.println(&quot;10+10=&quot; + sum);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">10+10=20</div></pre></td></tr></table></figure>
+<p>static 方法不需它所属的类的任何实例就会被调用，因此没有 this 值，不能访问实例变量，否则会引起编译错误。</p>
+<p>注意：实例变量只能通过对象来访问，不能通过类访问。</p>
+<h2 id="1-3-静态初始器（静态块）"><a href="#1-3-静态初始器（静态块）" class="headerlink" title="1.3 静态初始器（静态块）"></a>1.3 静态初始器（静态块）</h2><p>块是由大括号包围的一段代码。静态初始器(Static Initializer)是一个存在于类中、方法外面的静态块。静态初始器仅仅在类装载的时候（第一次使用类的时候）执行一次，往往用来初始化静态变量。</p>
+<p>示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">public class Demo &#123;</div><div class="line">    public static int i;</div><div class="line">    static&#123;</div><div class="line">        i = 10;</div><div class="line">        System.out.println(&quot;Now in static block.&quot;);</div><div class="line">    &#125;</div><div class="line">    public void test() &#123;</div><div class="line">        System.out.println(&quot;test method: i=&quot; + i);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        System.out.println(&quot;Demo.i=&quot; + Demo.i);</div><div class="line">        new Demo().test();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Now in static block.</div><div class="line">Demo.i=10</div><div class="line">test method: i=10</div></pre></td></tr></table></figure>
+<h2 id="1-4-静态导入"><a href="#1-4-静态导入" class="headerlink" title="1.4 静态导入"></a>1.4 静态导入</h2><p>静态导入是 Java 5 的新增特性，用来导入类的静态变量和静态方法。</p>
+<p>一般我们导入类都这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import packageName.className;  // 导入某个特定的类</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import packageName.*;  // 导入包中的所有类</div></pre></td></tr></table></figure>
+<p>而静态导入可以这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import static packageName.className.methonName;  // 导入某个特定的静态方法</div></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">import static packageName.className.*;  // 导入类中的所有静态成员</div></pre></td></tr></table></figure>
+<p>导入后，可以在当前类中直接用方法名调用静态方法，不必再用 className.methodName 来访问。</p>
+<p>对于使用频繁的静态变量和静态方法，可以将其静态导入。静态导入的好处是可以简化一些操作，例如输出语句 System.out.println(); 中的 out 就是 System 类的静态变量，可以通过 import static java.lang.System.*; 将其导入，下次直接调用 out.println() 就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">import static java.lang.System.*;</div><div class="line">import static java.lang.Math.random;</div><div class="line">public class Demo &#123;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        out.println(&quot;产生的一个随机数：&quot; + random());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">产生的一个随机数：0.05800891549018705</div></pre></td></tr></table></figure>
+<h1 id="二、final关键字"><a href="#二、final关键字" class="headerlink" title="二、final关键字"></a>二、final关键字</h1><p>在 Java 中，声明类、变量和方法时，可使用关键字 final 来修饰。final 所修饰的数据具有“终态”的特征，表示“最终的”意思。具体规定如下：</p>
+<ul>
+<li>final 修饰的类不能被继承。</li>
+<li>final 修饰的方法不能被子类重写。</li>
+<li>final 修饰的变量（成员变量或局部变量）即成为常量，只能赋值一次。</li>
+<li>final 修饰的成员变量必须在声明的同时赋值，如果在声明的时候没有赋值，那么只有 一次赋值的机会，而且只能在构造方法中显式赋值，然后才能使用。</li>
+<li>final 修饰的局部变量可以只声明不赋值，然后再进行一次性的赋值。</li>
+</ul>
+<p>final 一般用于修饰那些通用性的功能、实现方式或取值不能随意被改变的数据，以避免被误用，例如实现数学三角方法、幂运算等功能的方法，以及数学常量π=3.141593、e=2.71828 等。</p>
+<p>事实上，为确保终态性，提供了上述方法和常量的 java.lang.Math 类也已被定义为final 的。</p>
+<p>需要注意的是，如果将引用类型（任何类的类型）的变量标记为 final，那么该变量不能指向任何其它对象。但可以改变对象的内容，因为只有引用本身是 final 的。</p>
+<p>如果变量被标记为 final，其结果是使它成为常数。想改变 final 变量的值会导致一个编译错误。下面是一个正确定义 final 变量的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public final int MAX_ARRAY_SIZE = 25;  // 常量名一般大写</div></pre></td></tr></table></figure>
+<p>常量因为有 final 修饰，所以不能被继承。<br>请看下面的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public final class Demo&#123;</div><div class="line">    public static final int TOTAL_NUMBER = 5;</div><div class="line">    public int id;</div><div class="line">    public Demo() &#123;</div><div class="line">        // 非法，对final变量TOTAL_NUMBER进行二次赋值了</div><div class="line">        // 因为++TOTAL_NUMBER相当于 TOTAL_NUMBER=TOTAL_NUMBER+1</div><div class="line">        id = ++TOTAL_NUMBER;</div><div class="line">    &#125;</div><div class="line">    public static void main(String[] args) &#123;</div><div class="line">        final Demo t = new Demo();</div><div class="line">        final int i = 10;</div><div class="line">        final int j;</div><div class="line">        j = 20;</div><div class="line">        j = 30;  // 非法，对final变量进行二次赋值</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>final 也可以用来修饰类（放在 class 关键字前面），阻止该类再派生出子类，例如 Java.lang.String 就是一个 final 类。这样做是出于安全原因，因为要保证一旦有字符串的引用，就必须是类 String 的字符串，而不是某个其它类的字符串（String 类可能被恶意继承并篡改）。</p>
+<p>方法也可以被 final 修饰，被 final 修饰的方法不能被覆盖；变量也可以被 final 修饰，被 final 修饰的变量在创建对象以后就不允许改变它们的值了。一旦将一个类声明为 final，那么该类包含的方法也将被隐式地声明为 final，但是变量不是。</p>
+<p>被 final 修饰的方法为静态绑定，不会产生多态（动态绑定），程序在运行时不需要再检索方法表，能够提高代码的执行效率。在Java中，被 static 或 private 修饰的方法会被隐式的声明为 final，因为动态绑定没有意义。</p>
+<p>由于动态绑定会消耗资源并且很多时候没有必要，所以有一些程序员认为：除非有足够的理由使用多态性，否则应该将所有的方法都用 final 修饰。</p>
+<p>这样的认识未免有些偏激，因为 JVM 中的即时编译器能够实时监控程序的运行信息，可以准确的知道类之间的继承关系。如果一个方法没有被覆盖并且很短，编译器就能够对它进行优化处理，这个过程为称为内联(inlining)。例如，内联调用 e.getName() 将被替换为访问 e.name 变量。这是一项很有意义的改进，这是由于CPU在处理调用方法的指令时，使用的分支转移会扰乱预取指令的策略，所以，这被视为不受欢迎的。然而，如果 getName() 在另外一个类中被覆盖，那么编译器就无法知道覆盖的代码将会做什么操作，因此也就不能对它进行内联处理了。</p>
+<h1 id="三、Object类"><a href="#三、Object类" class="headerlink" title="三、Object类"></a>三、Object类</h1><p>Object 类位于 java.lang 包中，是所有 Java 类的祖先，Java 中的每个类都由它扩展而来。定义Java类时如果没有显示的指明父类，那么就默认继承了 Object 类。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public class Demo&#123;</div><div class="line">    // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>实际上是下面代码的简写形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">public class Demo extends Object&#123;</div><div class="line">    // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在Java中，只有基本类型不是对象，例如数值、字符和布尔型的值都不是对象，所有的数组类型，不管是对象数组还是基本类型数组都是继承自 Object 类。</p>
+<p>Object 类定义了一些有用的方法，由于是根类，这些方法在其他类中都存在，一般是进行了重载或覆盖，实现了各自的具体功能。</p>
+<h2 id="3-1-equals-方法"><a href="#3-1-equals-方法" class="headerlink" title="3.1 equals() 方法"></a>3.1 equals() 方法</h2><p>Object 类中的 equals() 方法用来检测一个对象是否等价于另外一个对象，语法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public boolean equals(Object obj)</div></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">obj1.equals(obj2);</div></pre></td></tr></table></figure>
+<p>在Java中，数据等价的基本含义是指两个数据的值相等。在通过 equals() 和“==”进行比较的时候，引用类型数据比较的是引用，即内存地址，基本数据类型比较的是值。</p>
+<p>在Java中，数据等价的基本含义是指两个数据的值相等。在通过 equals() 和“==”进行比较的时候，引用类型数据比较的是引用，即内存地址，基本数据类型比较的是值。</p>
+<p>注意：</p>
+<ul>
+<li>equals()方法只能比较引用类型，“==”可以比较引用类型及基本类型。</li>
+<li>当用 equals() 方法进行比较时，对类 File、String、Date 及包装类来说，是比较类型及内容而不考虑引用的是否是同一个实例。</li>
+<li>用“==”进行比较时，符号两边的数据类型必须一致（可自动转换的数据类型除外），否则编译出错，而用 equals 方法比较的两个数据只要都是引用类型即可。</li>
+</ul>
+<h2 id="3-2-hashCode-方法"><a href="#3-2-hashCode-方法" class="headerlink" title="3.2 hashCode()方法"></a>3.2 hashCode()方法</h2><p>散列码(hashCode)是按照一定的算法由对象得到的一个数值，散列码没有规律。如果 x 和 y 是不同的对象，x.hashCode() 与 y.hashCode() 基本上不会相同。</p>
+<p>hashCode() 方法主要用来在集合中实现快速查找等操作，也可以用于对象的比较。</p>
+<p>在 Java 中，对 hashCode 的规定如下：</p>
+<ul>
+<li>在同一个应用程序执行期间，对同一个对象调用 hashCode()，必须返回相同的整数结果——前提是 equals() 所比较的信息都不曾被改动过。至于同一个应用程序在不同执行期所得的调用结果，无需一致。</li>
+<li>如果两个对象被 equals() 方法视为相等，那么对这两个对象调用 hashCode() 必须获得相同的整数结果。</li>
+<li>如果两个对象被 equals() 方法视为不相等，那么对这两个对象调用 hashCode() 不必产生不同的整数结果。然而程序员应该意识到，对不同对象产生不同的整数结果，有可能提升hashTable的效率。</li>
+<li>简单地说：如果两个对象相同，那么它们的 hashCode 值一定要相同；如果两个对象的 hashCode 值相同，它们并不一定相同。在 Java 规范里面规定，一般是覆盖 equals() 方法应该连带覆盖 hashCode() 方法。</li>
+</ul>
+<h2 id="3-3-toString-方法"><a href="#3-3-toString-方法" class="headerlink" title="3.3 toString()方法"></a>3.3 toString()方法</h2><p>toString() 方法是 Object 类中定义的另一个重要方法，是对象的字符串表现形式，语法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">public String toString()</div></pre></td></tr></table></figure>
+<p>返回值是 String 类型，用于描述当前对象的有关信息。Object 类中实现的 toString() 方法是返回当前对象的类型和内存地址信息，但在一些子类（如 String、Date 等）中进行了 重写，也可以根据需要在用户自定义类型中重写 toString() 方法，以返回更适用的信息。</p>
+<p>除显式调用对象的 toString() 方法外，在进行 String 与其它类型数据的连接操作时，会自动调用 toString() 方法。</p>
+<p>以上几种方法，在Java中是经常用到的，这里仅作简单介绍，让大家对Object类和其他类有所了解，详细说明请参考 Java API 文档。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/static/" rel="tag"># static</a>
+          
+            <a href="/tags/final/" rel="tag"># final</a>
+          
+            <a href="/tags/Object/" rel="tag"># Object</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/25/Java学习笔记（6）：异常处理/" rel="next" title="Java学习笔记（6）：异常处理">
+                <i class="fa fa-chevron-left"></i> Java学习笔记（6）：异常处理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/23/Java学习笔记（4）：多态/" rel="prev" title="Java学习笔记（4）：多态">
+                Java学习笔记（4）：多态 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">123</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">160</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、static关键字"><span class="nav-text">一、static关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-static的内存分配"><span class="nav-text">1.1 static的内存分配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-静态方法"><span class="nav-text">1.2 静态方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-静态初始器（静态块）"><span class="nav-text">1.3 静态初始器（静态块）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-静态导入"><span class="nav-text">1.4 静态导入</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、final关键字"><span class="nav-text">二、final关键字</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、Object类"><span class="nav-text">三、Object类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-equals-方法"><span class="nav-text">3.1 equals() 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-hashCode-方法"><span class="nav-text">3.2 hashCode()方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-toString-方法"><span class="nav-text">3.3 toString()方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

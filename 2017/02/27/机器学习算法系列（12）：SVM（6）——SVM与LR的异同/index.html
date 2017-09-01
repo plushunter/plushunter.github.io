@@ -89,7 +89,7 @@
 <meta name="description" content="本文讲述LR与SVM的异同点">
 <meta name="keywords" content="机器学习,SVM,LR">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机器学习算法系列（12）：SVM（6）——SVM与LR的异同">
+<meta property="og:title" content="机器学习算法系列（12）：SVM（6）—SVM与LR的异同">
 <meta property="og:url" content="http://yoursite.com/2017/02/27/机器学习算法系列（12）：SVM（6）——SVM与LR的异同/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="本文讲述LR与SVM的异同点">
@@ -98,9 +98,9 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14995093274307.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015516972426.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015517109584.jpg">
-<meta property="og:updated_time" content="2017-08-01T02:27:32.000Z">
+<meta property="og:updated_time" content="2017-08-20T03:22:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习算法系列（12）：SVM（6）——SVM与LR的异同">
+<meta name="twitter:title" content="机器学习算法系列（12）：SVM（6）—SVM与LR的异同">
 <meta name="twitter:description" content="本文讲述LR与SVM的异同点">
 <meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/14995092441592.png">
 
@@ -134,7 +134,7 @@
 
 
 
-  <title> 机器学习算法系列（12）：SVM（6）——SVM与LR的异同 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 机器学习算法系列（12）：SVM（6）—SVM与LR的异同 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -314,7 +314,7 @@ var _hmt = _hmt || [];
             
             
               
-                机器学习算法系列（12）：SVM（6）——SVM与LR的异同
+                机器学习算法系列（12）：SVM（6）—SVM与LR的异同
               
             
           </h1>
@@ -371,9 +371,8 @@ var _hmt = _hmt || [];
         <p>本文讲述LR与SVM的异同点</p>
 <a id="more"></a>
 <h2 id="一、LR与SVM的相同点"><a href="#一、LR与SVM的相同点" class="headerlink" title="一、LR与SVM的相同点"></a>一、LR与SVM的相同点</h2><ol>
-<li>LR和SVM都是分类算法，都是监督学习算法。</li>
-</ol>
-<ol>
+<li><p>LR和SVM都是分类算法，都是监督学习算法。</p>
+</li>
 <li><p>如果不考虑核函数，LR和SVM都是线性分类算法，也就是说他们的分类决策面都是线性的。LR也是可以用核函数的，至于为什么通常在SVM中运用核函数而不在LR中运用，后面讲到他们之间区别的时候会重点分析。总之，原始的LR和SVM都是线性分类器，这也是为什么通常没人问你决策树和LR什么区别，决策树和SVM什么区别，你说一个非线性分类器和一个线性分类器有什么区别？</p>
 </li>
 <li><p>LR和SVM都是判别模型。判别模型会生成一个表示P(Y|X)的判别函数（或预测模型），而生成模型先计算联合概率p(Y,X)然后通过贝叶斯公式转化为条件概率。简单来说，在计算判别模型时，不会计算联合概率，而在计算生成模型时，必须先计算联合概率。或者这样理解：生成算法尝试去找到底这个数据是怎么生成的（产生的），然后再对一个信号进行分类。基于你的生成假设，那么那个类别最有可能产生这个信号，这个信号就属于那个类别。判别模型不关心数据是怎么生成的，它只关心信号之间的差别，然后用差别来简单对给定的一个信号进行分类。常见的判别模型有：KNN、SVM、LR，常见的生成模型有：朴素贝叶斯，隐马尔可夫模型。当然，这也是为什么很少有人问你朴素贝叶斯和LR以及朴素贝叶斯和SVM有什么区别。</p>
@@ -432,8 +431,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/27/机器学习算法系列（12）：SVM（5）——对偶/" rel="next" title="机器学习算法系列（12）：SVM（5）——对偶">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（12）：SVM（5）——对偶
+              <a href="/2017/02/27/机器学习算法系列（12）：SVM（2）——线性支持向量机/" rel="next" title="机器学习算法系列（12）：SVM（2）—线性支持向量机">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（12）：SVM（2）—线性支持向量机
               </a>
             
           </div>
@@ -442,8 +441,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/24/机器学习算法系列（11）：聚类（四）/" rel="prev" title="机器学习算法系列（11）：聚类（四）">
-                机器学习算法系列（11）：聚类（四） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/27/机器学习算法系列（12）：SVM（3）——非线性支持向量机/" rel="prev" title="机器学习算法系列（12）：SVM（3）—非线性支持向量机">
+                机器学习算法系列（12）：SVM（3）—非线性支持向量机 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -512,7 +511,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">103</span>
+              <span class="site-state-item-count">123</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -529,7 +528,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">129</span>
+                <span class="site-state-item-count">160</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
