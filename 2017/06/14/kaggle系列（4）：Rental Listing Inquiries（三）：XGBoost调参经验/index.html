@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/14/kaggle系列（4）：Rental Listing Inquiries（三）：XGBoost调参经验/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="这篇文章翻译自Complete Guide to Parameter Tuning in XGBoost (with codes in Python)，它详细介绍了XGBoost中参数的含义，然后在一个实例中对参数调整进行了实验。">
-<meta property="og:updated_time" content="2017-09-01T07:03:37.000Z">
+<meta property="og:updated_time" content="2017-09-11T12:20:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kaggle系列（4）：Rental Listing Inquiries（三）：XGBoost调参指南">
 <meta name="twitter:description" content="这篇文章翻译自Complete Guide to Parameter Tuning in XGBoost (with codes in Python)，它详细介绍了XGBoost中参数的含义，然后在一个实例中对参数调整进行了实验。">
@@ -391,7 +391,7 @@ var _hmt = _hmt || [];
 </li>
 <li><p>剪枝<br>当分裂时遇到一个负损失时，GBM会停止分裂。因此GBM实际上是一个贪心算法。<br>XGBoost会一直分裂到指定的最大深度(max_depth)，然后回过头来剪枝。如果某个节点之后不再有正值，它会去除这个分裂。<br>这种做法的优点，当一个负损失（如-2）后面有个正损失（如+10）的时候，就显现出来了。GBM会在-2处停下来，因为它遇到了一个负值。但是XGBoost会继续分裂，然后发现这两个分裂综合起来会得到+8，因此会保留这两个分裂。</p>
 </li>
-<li><p>内置交叉验证<br>XGBoost允许在每一轮boosting迭代中使用交叉验证。因此，可以方便地获得最优boosting迭代次数。<br>而GBM使用网格搜索，只能检测有限个值。</p>
+<li><p>内置交叉验证<br>XGBoost允许在每一轮boosting迭代中使用交叉验证。因此，可以方便地获得最优boosting迭代次数。而GBM使用网格搜索，只能检测有限个值。</p>
 </li>
 <li><p>在已有的模型基础上继续<br>XGBoost可以在上一轮的结果上继续训练。这个特性在某些特定的应用上是一个巨大的优势。<br>sklearn中的GBM的实现也有这个功能，两种算法在这一点上是一致的。</p>
 </li>
@@ -419,7 +419,8 @@ var _hmt = _hmt || [];
 <li>当这个参数值为1时，静默模式开启，不会输出任何信息。一般这个参数就保持默认的0，因为这样能帮我们更好地理解模型。</li>
 </ul>
 </li>
-<li><strong>nthread[默认值为最大可能的线程数]</strong>：<ul>
+<li><p><strong>nthread[默认值为最大可能的线程数]</strong>：</p>
+<ul>
 <li>这个参数用来进行多线程控制，应当输入系统的核数。如果你希望使用CPU全部的核，那就不要输入这个参数，算法会自动检测它。</li>
 </ul>
 </li>
@@ -427,7 +428,8 @@ var _hmt = _hmt || [];
 <p>还有两个参数，XGBoost会自动设置，目前你不用管它。接下来咱们一起看booster参数。</p>
 <h4 id="3-2-2-Booster参数（Booster-Parameters）"><a href="#3-2-2-Booster参数（Booster-Parameters）" class="headerlink" title="3.2.2 Booster参数（Booster Parameters）"></a>3.2.2 Booster参数（Booster Parameters）</h4><p>尽管有两种booster可供选择，我这里只介绍tree booster，因为它的表现远远胜过linear booster，所以linear booster很少用到。</p>
 <ul>
-<li><strong>eta[默认0.3]：</strong><ul>
+<li><p><strong>eta[默认0.3]：</strong></p>
+<ul>
 <li>和GBM中的 learning rate 参数类似。通过减少每一步的权重，可以提高模型的鲁棒性。典型值为0.01-0.2。</li>
 </ul>
 </li>
@@ -443,11 +445,9 @@ var _hmt = _hmt || [];
 </li>
 <li><p><strong>max_leaf_nodes：</strong></p>
 <ul>
-<li>树上最大的节点或叶子的数量。可以替代max_depth的作用。因为如果生成的是二叉树，一个深度为n的树最多生成 n2 个叶子。如果定义了这个参数，GBM会忽略max_depth参数。</li>
+<li>树上最大的节点或叶子的数量。可以替代max_depth的作用。因为如果生成的是二叉树，一个深度为n的树最多生成 $n^2$ 个叶子。如果定义了这个参数，GBM会忽略max_depth参数。</li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p><strong>gamma[默认0]：</strong></p>
 <ul>
 <li>在节点分裂时，只有分裂后损失函数的值下降了，才会分裂这个节点。Gamma指定了节点分裂所需的最小损失函数下降值。这个参数的值越大，算法越保守。这个参数的值和损失函数息息相关，所以是需要调整的。</li>
@@ -460,20 +460,16 @@ var _hmt = _hmt || [];
 <li>这个参数一般用不到，但是你可以挖掘出来它更多的用处。</li>
 </ul>
 </li>
-</ul>
+<li><p><strong>subsample[默认1]：</strong></p>
 <ul>
-<li><strong>subsample[默认1]：</strong><ul>
 <li>和GBM中的subsample参数一模一样。这个参数控制对于每棵树，随机采样的比例。减小这个参数的值，算法会更加保守，避免过拟合。但是，如果这个值设置得过小，它可能会导致欠拟合。典型值：0.5-1。</li>
 </ul>
 </li>
-</ul>
+<li><p><strong>colsample_bytree[默认1]：</strong></p>
 <ul>
-<li><strong>colsample_bytree[默认1]：</strong><ul>
 <li>和GBM里面的max_features参数类似。用来控制每棵随机采样的列数的占比(每一列是一个特征)。典型值：0.5-1</li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p><strong>colsample_bylevel[默认1]：</strong></p>
 <ul>
 <li>用来控制树的每一级的每一次分裂，对列数的采样的占比。我个人一般不太用这个参数，因为subsample参数和colsample_bytree参数可以起到相同的作用。但是如果感兴趣，可以挖掘这个参数更多的用处。</li>
@@ -484,11 +480,13 @@ var _hmt = _hmt || [];
 <li>权重的L2正则化项。(和Ridge regression类似)。这个参数是用来控制XGBoost的正则化部分的。虽然大部分数据科学家很少用到这个参数，但是这个参数在减少过拟合上还是可以挖掘出更多用处的。</li>
 </ul>
 </li>
-<li><strong>alpha[默认1]：</strong><ul>
+<li><p><strong>alpha[默认1]：</strong></p>
+<ul>
 <li>权重的L1正则化项。(和Lasso regression类似)。可以应用在很高维度的情况下，使得算法的速度更快。</li>
 </ul>
 </li>
-<li><strong>scale_pos_weight[默认1]：</strong><ul>
+<li><p><strong>scale_pos_weight[默认1]：</strong></p>
+<ul>
 <li>在各类别样本十分不平衡时，把这个参数设定为一个正值，可以使算法更快收敛。</li>
 </ul>
 </li>
@@ -643,7 +641,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">123</span>
+              <span class="site-state-item-count">133</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -651,7 +649,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -660,7 +658,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">161</span>
+                <span class="site-state-item-count">159</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

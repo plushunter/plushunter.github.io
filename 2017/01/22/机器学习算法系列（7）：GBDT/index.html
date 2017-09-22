@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%883.44.51.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%885.37.47.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%885.44.57.png">
-<meta property="og:updated_time" content="2017-04-12T06:39:12.000Z">
+<meta property="og:updated_time" content="2017-09-02T04:08:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（7）：GBDT">
 <meta name="twitter:description" content="引言GBDT（Gradient Boosting Decision Tree）是一种迭代的决策树算法，又叫 MART（Multiple Additive Regression Tree)，它通过构造一组弱的学习器（树），并把多颗决策树的结果累加起来作为最终的预测输出。该算法将决策树与集成思想进行了有效的结合。">
@@ -455,7 +455,8 @@ var _hmt = _hmt || [];
 </li>
 <li>3）得到输出的最终模型$$<br>\hat{f}\left(x\right)=f_M\left(x\right)=\sum_{m=1}^M{\sum_{j=1}^J{c_{mj}I\left(x\in R_{mj}\right)}}<br>$$</li>
 </ul>
-<h2 id="五、关于GBDT的一些问题"><a href="#五、关于GBDT的一些问题" class="headerlink" title="五、关于GBDT的一些问题"></a>五、关于GBDT的一些问题</h2><h3 id="5-1-GBDT与AdaBoost的区别"><a href="#5-1-GBDT与AdaBoost的区别" class="headerlink" title="5.1 GBDT与AdaBoost的区别"></a>5.1 GBDT与AdaBoost的区别</h3><h2 id="六、参考资料"><a href="#六、参考资料" class="headerlink" title="六、参考资料"></a>六、参考资料</h2><p><a href="http://www.jianshu.com/p/005a4e6ac775" target="_blank" rel="external"><code>GBDT：梯度提升决策树</code></a></p>
+<h2 id="五、关于GBDT的一些问题"><a href="#五、关于GBDT的一些问题" class="headerlink" title="五、关于GBDT的一些问题"></a>五、关于GBDT的一些问题</h2><h3 id="5-1-为什么xgboost-gbdt在调参时为什么树的深度很少就能达到很高的精度？"><a href="#5-1-为什么xgboost-gbdt在调参时为什么树的深度很少就能达到很高的精度？" class="headerlink" title="5.1 为什么xgboost/gbdt在调参时为什么树的深度很少就能达到很高的精度？"></a>5.1 为什么xgboost/gbdt在调参时为什么树的深度很少就能达到很高的精度？</h3><p><a href="https://www.zhihu.com/question/45487317" target="_blank" rel="external">https://www.zhihu.com/question/45487317</a></p>
+<h2 id="六、参考资料"><a href="#六、参考资料" class="headerlink" title="六、参考资料"></a>六、参考资料</h2><p><a href="http://www.jianshu.com/p/005a4e6ac775" target="_blank" rel="external"><code>GBDT：梯度提升决策树</code></a></p>
 
       
     </div>
@@ -570,7 +571,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">123</span>
+              <span class="site-state-item-count">133</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -578,7 +579,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -587,7 +588,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">161</span>
+                <span class="site-state-item-count">159</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -629,7 +630,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Regression-Desicion-Tree：回归树"><span class="nav-text">二、Regression Desicion Tree：回归树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-回归树简介"><span class="nav-text">2.1 回归树简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-回归树的生成"><span class="nav-text">2.2 回归树的生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Boosting-Decision-Tree：提升树"><span class="nav-text">三、Boosting Decision Tree：提升树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-提升树模型"><span class="nav-text">3.1 提升树模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-提升树算法"><span class="nav-text">3.2 提升树算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-提升树实例"><span class="nav-text">3.3 提升树实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Gradient-Boosting-Decision-Tree：梯度提升决策树"><span class="nav-text">四、Gradient Boosting Decision Tree：梯度提升决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-GBDT简介"><span class="nav-text">4.1 GBDT简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-GBDT算法步骤"><span class="nav-text">4.2 GBDT算法步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、关于GBDT的一些问题"><span class="nav-text">五、关于GBDT的一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-GBDT与AdaBoost的区别"><span class="nav-text">5.1 GBDT与AdaBoost的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、参考资料"><span class="nav-text">六、参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Regression-Desicion-Tree：回归树"><span class="nav-text">二、Regression Desicion Tree：回归树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-回归树简介"><span class="nav-text">2.1 回归树简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-回归树的生成"><span class="nav-text">2.2 回归树的生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Boosting-Decision-Tree：提升树"><span class="nav-text">三、Boosting Decision Tree：提升树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-提升树模型"><span class="nav-text">3.1 提升树模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-提升树算法"><span class="nav-text">3.2 提升树算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-提升树实例"><span class="nav-text">3.3 提升树实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Gradient-Boosting-Decision-Tree：梯度提升决策树"><span class="nav-text">四、Gradient Boosting Decision Tree：梯度提升决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-GBDT简介"><span class="nav-text">4.1 GBDT简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-GBDT算法步骤"><span class="nav-text">4.2 GBDT算法步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、关于GBDT的一些问题"><span class="nav-text">五、关于GBDT的一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-为什么xgboost-gbdt在调参时为什么树的深度很少就能达到很高的精度？"><span class="nav-text">5.1 为什么xgboost/gbdt在调参时为什么树的深度很少就能达到很高的精度？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、参考资料"><span class="nav-text">六、参考资料</span></a></li></ol></div>
             
 
           </div>
