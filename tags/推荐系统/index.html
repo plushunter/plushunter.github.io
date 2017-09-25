@@ -301,65 +301,9 @@ var _hmt = _hmt || [];
 
       <h1 class="post-title">
         
-            <a class="post-title-link" href="/2017/07/05/机器学习算法系列（13）：推荐系统（3）——矩阵分解技术/" itemprop="url">
-              
-                <span itemprop="name">机器学习算法系列（13）：推荐系统（3）—矩阵分解技术</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-07-05T23:14:45+08:00"
-              content="2017-07-05" >
-          07-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
             <a class="post-title-link" href="/2017/03/05/机器学习算法系列（13）：推荐系统（1）——简介/" itemprop="url">
               
                 <span itemprop="name">机器学习算法系列（13）：推荐系统（1）—简介</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-05T23:14:45+08:00"
-              content="2017-03-05" >
-          03-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/05/机器学习算法系列（13）：推荐系统（2）——基于领域的协同过滤/" itemprop="url">
-              
-                <span itemprop="name">机器学习算法系列（13）：推荐系统（2）—基于领域的协同过滤</span>
               
             </a>
         
@@ -419,7 +363,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">133</span>
+              <span class="site-state-item-count">1</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -610,6 +554,17 @@ var _hmt = _hmt || [];
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
     }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';
