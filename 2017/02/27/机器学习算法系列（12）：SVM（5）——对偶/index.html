@@ -458,8 +458,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/27/机器学习算法系列（12）：SVM（3）——非线性支持向量机/" rel="prev" title="机器学习算法系列（12）：SVM（3）—非线性支持向量机">
-                机器学习算法系列（12）：SVM（3）—非线性支持向量机 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/27/机器学习算法系列（12）：SVM（1）——线性可分支持向量机/" rel="prev" title="机器学习算法系列（12）：SVM（1）—线性可分支持向量机">
+                机器学习算法系列（12）：SVM（1）—线性可分支持向量机 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -714,6 +714,17 @@ var _hmt = _hmt || [];
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
     }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';

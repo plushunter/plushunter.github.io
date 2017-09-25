@@ -762,6 +762,17 @@ var _hmt = _hmt || [];
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
     }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';

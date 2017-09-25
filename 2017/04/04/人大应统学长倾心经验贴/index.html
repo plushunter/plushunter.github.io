@@ -93,7 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/04/人大应统学长倾心经验贴/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="2016人大考研总算是落下了帷幕，大半年来的努力终于落定。在北京的春天里，窗外飘着杨絮，在图书馆的沙发上码下这难忘时光的的锤炼与凝结。">
-<meta property="og:updated_time" content="2017-09-25T08:15:53.000Z">
+<meta property="og:updated_time" content="2017-09-25T08:18:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="人大应统学长倾心经验贴">
 <meta name="twitter:description" content="2016人大考研总算是落下了帷幕，大半年来的努力终于落定。在北京的春天里，窗外飘着杨絮，在图书馆的沙发上码下这难忘时光的的锤炼与凝结。">
@@ -941,6 +941,17 @@ var _hmt = _hmt || [];
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
     }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';

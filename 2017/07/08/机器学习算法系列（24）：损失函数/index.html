@@ -472,8 +472,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/08/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/" rel="next" title="机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法
+              <a href="/2017/07/13/机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）/" rel="next" title="机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）
               </a>
             
           </div>
@@ -482,8 +482,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/07/机器学习算法系列（23）：TF-IDF与余弦相似度/" rel="prev" title="机器学习算法系列（23）：TF-IDF与余弦相似度">
-                机器学习算法系列（23）：TF-IDF与余弦相似度 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/08/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/" rel="prev" title="机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法">
+                机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -763,6 +763,17 @@ var _hmt = _hmt || [];
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
     }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';

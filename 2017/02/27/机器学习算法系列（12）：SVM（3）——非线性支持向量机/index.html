@@ -465,8 +465,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/27/机器学习算法系列（12）：SVM（5）——对偶/" rel="next" title="机器学习算法系列（12）：SVM（5）—对偶">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（12）：SVM（5）—对偶
+              <a href="/2017/02/27/机器学习算法系列（12）：SVM（2）——线性支持向量机/" rel="next" title="机器学习算法系列（12）：SVM（2）—线性支持向量机">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（12）：SVM（2）—线性支持向量机
               </a>
             
           </div>
@@ -475,8 +475,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/27/机器学习算法系列（12）：SVM（4）——SMO/" rel="prev" title="机器学习算法系列（12）：SVM（4）—SMO">
-                机器学习算法系列（12）：SVM（4）—SMO <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/24/机器学习算法系列（11）：聚类（4）/" rel="prev" title="机器学习算法系列（11）：聚类（4）—密度最大值聚类">
+                机器学习算法系列（11）：聚类（4）—密度最大值聚类 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -756,6 +756,17 @@ var _hmt = _hmt || [];
       $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
       $('.popup').toggle();
     }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
     // search function;
     var searchFunc = function(path, search_id, content_id) {
       'use strict';

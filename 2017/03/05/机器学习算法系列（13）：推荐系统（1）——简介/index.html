@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.08.39.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.08.51.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.10.28.png">
-<meta property="og:updated_time" content="2017-08-20T03:23:48.000Z">
+<meta property="og:updated_time" content="2017-09-25T10:42:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（13）：推荐系统（1）—简介">
 <meta name="twitter:description" content="一、定义1.1 从搜索引擎说起人们在寻找信息时，常常需要借助搜索引擎，主动地提供准确的关键词来进行相应的搜索，但是当用户无法找到准确描述自己需求的关键字时，搜索引擎就无能为力了。">
@@ -401,10 +401,7 @@ var _hmt = _hmt || [];
         <h2 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h2><h3 id="1-1-从搜索引擎说起"><a href="#1-1-从搜索引擎说起" class="headerlink" title="1.1 从搜索引擎说起"></a>1.1 从搜索引擎说起</h3><p>人们在寻找信息时，常常需要借助搜索引擎，主动地提供准确的关键词来进行相应的搜索，但是当用户无法找到准确描述自己需求的关键字时，搜索引擎就无能为力了。</p>
 <a id="more"></a>
 <p>和搜索引擎一样，推荐系统也是一种帮助用户快速发现有用信息的工具。但是和搜索引擎不同的是，推荐系统不需要用户提供明确的需求，而是通过分析用户的历史行为给用户的兴趣建模，从而主动给用户推荐能够满足它们兴趣与需求的信息。</p>
-<!--more-->
-<h3 id="1-2-推荐系统的具体应用"><a href="#1-2-推荐系统的具体应用" class="headerlink" title="1.2 推荐系统的具体应用"></a>1.2 推荐系统的具体应用</h3><p>近十年来，推荐引擎对互联网用户来说随处可见。以亚马逊为例，简单说说实际的应用。<br>Amazon有个性化商品推荐列表和相关商品的推荐列表，以下为一种基于物品的的推荐算法（item-based method），它会给我推荐那些和之前我喜欢的物品相似的物品，因为我之前查找过关于算法数据结构相关的书籍，所以就给我推荐了以下这些计算机领域的经典图书<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.03.04.png" alt="屏幕快照 2017-03-27 下午3.03.04"></center><br>除了个性化推荐列表，亚马逊另一个重要的推荐应用就是相关推荐列表。一种是包含购买此商品的顾客也同时购买，另一种是包含浏览过这个商品的顾客购买的其他商品<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.08.39.png" alt="屏幕快照 2017-03-27 下午3.08.39"></center></p>
-<p><center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.08.51.png" alt="屏幕快照 2017-03-27 下午3.08.51"></center><br>此外，还有一个应用就是打包销售，同时购买这些商品往往会给你一定的折扣。</p>
-<p><center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.10.28.png" alt="屏幕快照 2017-03-27 下午3.10.28"></center><br>除了亚马逊等电子商务领域的推荐系统应用，此外还有像Netflix会向用户推荐电影，豆瓣电台给用户推荐喜欢的歌曲，Facebook给用户推荐个性化物品和好友，Flipboard给特定的用户推荐特定领域的阅读资讯，雅虎的个性化广告投放等等。</p>
+<h3 id="1-2-推荐系统的具体应用"><a href="#1-2-推荐系统的具体应用" class="headerlink" title="1.2 推荐系统的具体应用"></a>1.2 推荐系统的具体应用</h3><p>近十年来，推荐引擎对互联网用户来说随处可见。以亚马逊为例，简单说说实际的应用。<br>Amazon有个性化商品推荐列表和相关商品的推荐列表，以下为一种基于物品的的推荐算法（item-based method），它会给我推荐那些和之前我喜欢的物品相似的物品，因为我之前查找过关于算法数据结构相关的书籍，所以就给我推荐了以下这些计算机领域的经典图书<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.03.04.png" alt="屏幕快照 2017-03-27 下午3.03.04"><br>除了个性化推荐列表，亚马逊另一个重要的推荐应用就是相关推荐列表。一种是包含购买此商品的顾客也同时购买，另一种是包含浏览过这个商品的顾客购买的其他商品.<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.08.39.png" alt="屏幕快照 2017-03-27 下午3.08.39"><br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.08.51.png" alt="屏幕快照 2017-03-27 下午3.08.51"><br>此外，还有一个应用就是打包销售，同时购买这些商品往往会给你一定的折扣。<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.10.28.png" alt="屏幕快照 2017-03-27 下午3.10.28"><br>除了亚马逊等电子商务领域的推荐系统应用，此外还有像Netflix会向用户推荐电影，豆瓣电台给用户推荐喜欢的歌曲，Facebook给用户推荐个性化物品和好友，Flipboard给特定的用户推荐特定领域的阅读资讯，雅虎的个性化广告投放等等。</p>
 <h2 id="二、推荐系统评测"><a href="#二、推荐系统评测" class="headerlink" title="二、推荐系统评测"></a>二、推荐系统评测</h2><p>一个好的推荐系统不仅仅能够准确预测用户的行为，而且能够扩展用户的视野，帮助用户发现那些他们可能会感兴趣，但却不那么容易发现的东西。同时还要能帮助商家将那些被埋没在长尾的好商品介绍给可能对他们感兴趣的用户。</p>
 <h3 id="2-1-推荐系统实验方法"><a href="#2-1-推荐系统实验方法" class="headerlink" title="2.1 推荐系统实验方法"></a>2.1 推荐系统实验方法</h3><p>首先，人们需要通过实验的办法来计算和获取一些指标，从而全面地测评推荐系统的好坏。主要的实验方法有离线实验、用户调查、在线AB测试。</p>
 <h4 id="2-1-1-离线实验"><a href="#2-1-1-离线实验" class="headerlink" title="2.1.1 离线实验"></a>2.1.1 离线实验</h4><p>一般离线试验的步骤如下：</p>
@@ -427,7 +424,7 @@ var _hmt = _hmt || [];
 <li>召回率（Recall）：$$<br>\textrm{Re}call=\frac{\sum_{u\in U}{|R\left(u\right)\cap T\left(u\right)|}}{\sum_{u\in U}{|T\left(u\right)|}}<br>$$</li>
 <li><p>覆盖率(Coverage)，描述了一个推荐系统对物品长尾的发掘能力，</p>
 <ul>
-<li><p>最简单的定义为推荐系统能够推荐出来的物品占总物品集合的比例:$$<br>Coverage=\frac{|\cup_{u\in U}R\left(u\right)|}{|I|}<br>$$</p>
+<li><p>最简单的定义为推荐系统能够推荐出来的物品占总物品集合的比例</p>
 </li>
 <li><p>信息熵 ：$$<br>H=-\sum_{i=1}^n{p\left(i\right)\log p\left(i\right)}<br>$$</p>
 </li>
@@ -438,7 +435,7 @@ var _hmt = _hmt || [];
 <li><p>多样性：如果推荐列表比较多样，覆盖了用户绝大多数的兴趣点，那么就会增加用户找到感兴趣物品的概率。因此给用户的推荐列表也需要满足用户广泛的兴趣，即多样性。</p>
 <ul>
 <li>多样性描述了推荐列表物品两两之间的不相似性。假设$s(i,j)\in[0,1]$定义了物品$i$和$j$之间的相似度，那么用户$u$的推荐列表$R(u)$的多样性定义如下：$$<br>Diversity\left(R\left(u\right)\right)=1-\frac{\sum_{i,j\in R\left(u\right),i\ne j}{s\left(i,j\right)}}{\frac{1}{2}|R\left(u\right)|\left(|R\left(u\right)-1|\right)}<br>$$ </li>
-<li>而推荐系统整体的多样性可以定义为所有哟京沪推荐列表多样性的平均值：$$<br>Diversity=\frac{1}{|U|}\sum_{u\in U}{Diversity\left(R\left(u\right)\right)}<br>$$</li>
+<li>而推荐系统整体的多样性可以定义为所有用户推荐列表多样性的平均值：$$<br>Diversity=\frac{1}{|U|}\sum_{u\in U}{Diversity\left(R\left(u\right)\right)}<br>$$</li>
 </ul>
 </li>
 <li><p>新颖性：给用户推荐那些它们以前没有听说过的物品。最简单方法是利用推荐结果的平均流行度，因为越不热门的物品越可能让用户觉得新颖。但是这个指标比较粗略，因为不同用户不知道的东西是不同的。需要用户调查来准确统计新颖性。</p>
@@ -475,6 +472,26 @@ var _hmt = _hmt || [];
         </div>
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/05/机器学习算法系列（13）：推荐系统（2）——基于领域的协同过滤/" rel="next" title="机器学习算法系列（13）：推荐系统（2）—基于领域的协同过滤">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（13）：推荐系统（2）—基于领域的协同过滤
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/27/机器学习算法系列（12）：SVM（4）——SMO/" rel="prev" title="机器学习算法系列（12）：SVM（4）—SMO">
+                机器学习算法系列（12）：SVM（4）—SMO <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -539,7 +556,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">133</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
