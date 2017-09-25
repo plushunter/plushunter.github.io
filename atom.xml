@@ -597,9 +597,9 @@
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="Java集合" scheme="http://yoursite.com/tags/Java%E9%9B%86%E5%90%88/"/>
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="LinkedList" scheme="http://yoursite.com/tags/LinkedList/"/>
     
@@ -625,9 +625,9 @@
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="Java集合" scheme="http://yoursite.com/tags/Java%E9%9B%86%E5%90%88/"/>
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="LinkedList" scheme="http://yoursite.com/tags/LinkedList/"/>
     
@@ -653,9 +653,9 @@
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="Java集合" scheme="http://yoursite.com/tags/Java%E9%9B%86%E5%90%88/"/>
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="ArrayList" scheme="http://yoursite.com/tags/ArrayList/"/>
     
@@ -681,9 +681,9 @@
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="Java集合" scheme="http://yoursite.com/tags/Java%E9%9B%86%E5%90%88/"/>
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="LinkedHashSet" scheme="http://yoursite.com/tags/LinkedHashSet/"/>
     
@@ -709,9 +709,9 @@
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="Java集合" scheme="http://yoursite.com/tags/Java%E9%9B%86%E5%90%88/"/>
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="LinkedHashMap" scheme="http://yoursite.com/tags/LinkedHashMap/"/>
     
@@ -737,9 +737,9 @@
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="Java集合" scheme="http://yoursite.com/tags/Java%E9%9B%86%E5%90%88/"/>
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="HashTable" scheme="http://yoursite.com/tags/HashTable/"/>
     
@@ -765,11 +765,11 @@
       <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
+      <category term="Java集合" scheme="http://yoursite.com/tags/Java%E9%9B%86%E5%90%88/"/>
+    
       <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="HashSet" scheme="http://yoursite.com/tags/HashSet/"/>
-    
-      <category term="Java集合" scheme="http://yoursite.com/tags/Java%E9%9B%86%E5%90%88/"/>
     
   </entry>
   
@@ -793,9 +793,9 @@
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
       <category term="Java集合" scheme="http://yoursite.com/tags/Java%E9%9B%86%E5%90%88/"/>
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="HashMap" scheme="http://yoursite.com/tags/HashMap/"/>
     
@@ -1855,28 +1855,6 @@
   </entry>
   
   <entry>
-    <title>机器学习算法系列（24）：机器学习中的损失函数</title>
-    <link href="http://yoursite.com/2017/07/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8824%EF%BC%89%EF%BC%9A%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/"/>
-    <id>http://yoursite.com/2017/07/08/机器学习算法系列（24）：损失函数/</id>
-    <published>2017-07-08T15:14:45.000Z</published>
-    <updated>2017-07-31T16:59:52.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：$$\theta^* = argmin_\theta \frac{1}{N}\sum_{i=1}^NL(y_i,f(x_i;\theta))+\lambda Φ(θ)$$</p><a id="more"></a><p>前面的均值函数表示的是经验风险函数，$L$代表的是损失函数，后面的$Φ$是正则化项（regularizer）或者叫惩罚项（penalty term）,它可以是$L_1$，也可以是$L_2$等其他的正则函数。整个式子表示的意思是找到使目标函数最小时的$\theta$值。下面列出集中常见的损失函数。</p><h2 id="一、对数损失函数（逻辑回归）"><a href="#一、对数损失函数（逻辑回归）" class="headerlink" title="一、对数损失函数（逻辑回归）"></a>一、对数损失函数（逻辑回归）</h2><p>有些人可能觉得逻辑回归的损失函数就是平方损失，其实并不是。平方损失函数可以通过线性回归在假设样本是高斯分布的条件下推导得到，而逻辑回归得到的并不是平方损失。在逻辑回归的推导中，它假设样本服从伯努利分布（0-1分布），然后求得满足该分布的似然函数，接着取对数求极值等等。而逻辑回归并没有求似然函数的极值，而是把极大化当做是一种思想，进而推导出它的经验风险函数为：最小化负的似然函数（即$max F(y, f(x)) —&gt; min -F(y, f(x))$)。从损失函数的视角来看，它就成了log损失函数了。</p><p>Log损失函数的标准形式：$$L(Y,P(Y|X))=-logP(Y|X)$$刚刚说到，取对数是为了方便计算极大似然估计，因为在MLE中，直接求导比较困难，所以通常都是先取对数再求导找极值点。损失函数$L(Y.P(Y|X))$表达的是样本在分类$Y$的情况下，使概率$P(Y|X)$达到最大值（换言之，就是利用已知的样本分布，找到最有可能（即最大概率）导致这种分布的参数值；或者什么样的参数才能使我们观测到目前这组数据的概率最大）。因为log函数是单调递增的，所以$logP(Y|X)$也会达到最大值，因此在前面加上负号之后，最大化$P(Y|X)$就等价于最小化$L$了。</p><p>logistic回归的$P(y|x)$表达式如下（为了将类别标签y统一为1和0，下面将表达式分开表示）：$$<br>P\left(Y=y^{\left(i\right)}|x^{\left(i\right)};\theta\right)=\left\{\begin{array}{l}<br>    h_{\theta}\left(x^{\left(i\right)}\right)=\frac{1}{1+e^{-\theta^Tx}},\,\,y^{\left(i\right)}=1\\<br>    1-h_{\theta}\left(x^{\left(i\right)}\right)=\frac{e^{-\theta^Tx}}{1+e^{-\theta^Tx}},\,\,y^{\left(i\right)}=0\\<br>\end{array}\right.<br>$$将上面的公式合并在一起，可得到第$i$个样本正确预测的概率：$$P(y^{(i)}|x^{(i)};\theta)=(h_\theta(x^{(i)}))^{y(i)}·(1-h_\theta(x^{(i)}))^{1-y(i)}$$<br>上式是对一个样本进行建模的数据表达。对于所有的样本，假设每条样本生成过程独立，在整个样本空间中（N个样本）的概率分布为：$$<br>P\left(Y |  X;\theta\right)=\prod_{i=1}^N{\left(\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)^{y^{\left(i\right)}}\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)^{1-y^{\left(i\right)}}\right)}<br>$$将上式代入到对数损失函数中，得到最终的损失函数为：$$J(\theta) = -\frac{1}{N}\sum_{i=1}^N{y^{\left(i\right)}\log\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)+\left(1-y^{\left(i\right)}\right)\log\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)}<br>$$<br>之所以有人认为逻辑回归是平方损失，是因为在使用梯度下降来求最优解的时候，它的迭代式子与平方损失求导后的式子非常相似，从而给人一种直观上的错觉。</p><h2 id="二、平方损失函数（最小二乘法，Ordinary-Least-Squares）"><a href="#二、平方损失函数（最小二乘法，Ordinary-Least-Squares）" class="headerlink" title="二、平方损失函数（最小二乘法，Ordinary Least Squares）"></a>二、平方损失函数（最小二乘法，Ordinary Least Squares）</h2><p>最小二乘法是线性回归的一种，OLS将问题转化成了一个凸优化问题。在线性回归中，它假设样本和噪声都服从高斯分布（为什么假设成高斯分布呢？其实这里隐藏了一个小知识点，就是中心极限定理，可以参考【central limit theorem】），最后通过极大似然估计（MLE）可以推导出最小二乘式子。最小二乘的基本原则是：最优拟合直线应该是使各点到回归直线的距离和最小的直线，即平方和最小。换言之，OLS是基于距离的，而这个距离就是我们用的最多的欧几里得距离。为什么它会选择使用欧式距离作为误差度量呢（即Mean squared error， MSE），主要有以下几个原因：</p><ul><li>简单，计算方便；</li><li>欧氏距离是一种很好的相似性度量标准；</li><li>在不同的表示域变换后特征性质不变。</li></ul><p>平方损失（Square loss）的标准形式如下：$$L(Y,f(X))=(Y-f(x))^2$$当样本个数为n时，此时的损失函数变为：$$L(Y,f(X))=\sum_{i=1}^n(Y-f(X))^2$$$Y-f(X)$表示的是残差，整个式子表示的是残差的平方和，而我们的目的就是最小化这个目标函数值（注：该式子未加入正则项），也就是最小化残差的平方和（residual sum of squares，RSS）。</p><p>而在实际应用中，通常会使用均方差（MSE）作为一项衡量指标，公式如下：$$MSE=\frac{1}{N}\sum_{i=1}^N(\tilde{Y_i}-Y_i)^2$$</p><p>上面提到了线性回归，这里额外补充一句，我们通常说的线性有两种情况，一种是因变量y是自变量x的线性函数，一种是因变量y是参数αα的线性函数。在机器学习中，通常指的都是后一种情况。</p><h2 id="三、指数损失函数（Adaboost）"><a href="#三、指数损失函数（Adaboost）" class="headerlink" title="三、指数损失函数（Adaboost）"></a>三、指数损失函数（Adaboost）</h2><p>学过Adaboost算法的人都知道，它是前向分步加法算法的特例，是一个加和模型，损失函数就是指数函数。在Adaboost中，经过m此迭代之后，可以得到$f_m(x)$:$$f_m(x)=f_{m-1}(x)+a_mG_m(x)$$Adaboost每次迭代时的目的是为了找到最小化下列式子时的参数$a$和G：$$arg\underset{a,G}{min}=\sum_{i=1}^Nexp[-y_i(f_{m-1}(x_i)+aG(x_i))]$$而指数损失函数(exp-loss）的标准形式如下:$$L(y,f(x))=exp[-yf(x)]$$可以看出，Adaboost的目标式子就是指数损失，在给定N个样本的情况下，Adaboost的损失函数为：$$L(y,f(x))=\frac{1}{N}\sum_{i=1}^nexp[-y_if(x_i)]$$</p><h2 id="四、Hinge损失函数（SVM）"><a href="#四、Hinge损失函数（SVM）" class="headerlink" title="四、Hinge损失函数（SVM）"></a>四、Hinge损失函数（SVM）</h2><h3 id="4-1-Hinge损失函数（SVM）"><a href="#4-1-Hinge损失函数（SVM）" class="headerlink" title="4.1 Hinge损失函数（SVM）"></a>4.1 Hinge损失函数（SVM）</h3><p>线性支持向量机学习除了原始最优化问题，还有另外一种解释，就是最优化以下目标函数：$$\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2$$目标函数的第一项是经验损失或经验风险，函数$$L(y·(w·x+b))=[1-y(w·x+b)]_+$$称为合页损失函数（hinge loss function）。下标”+”表示以下取正值的函数：$$<br>\left[z\right]_+=\left\{\begin{array}{l}<br>    z , z&gt;0\\<br>    0 , z\le 0\\<br>\end{array}\right.<br>$$这就是说，当样本点$(x_i,y_i)$被正确分类且函数间隔（确信度）$y_i(w·x_i+b)$大于1时，损失是0，否则损失是$1-y_i(w·x_i+b)$。目标函数的第二项是系数为$\lambda$的$w$的$L_2$范数，是正则化项。</p><p>接下来证明线性支持向量机原始最优化问题：$$<br>\underset{w,b,\xi}{\min} \frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i}<br>$$$$<br>s.t.  y_i\left( w·x_i+b \right) \geqslant 1-\xi _i , i=1,2,···,N<br>$$$$<br>\xi _i\geqslant 0, i=1,2,···\mathrm{，}N<br>$$等价于最优化问题$$\underset{w,b}{min }\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2$$</p><p>先令$[1-y_i(w·x_i+b)]_+=\xi_i$，则$\xi_i≥0$，第二个约束条件成立；由$[1-y_i(w·x_i+b)]_+=\xi_i$，当$1-y_i(w·x_i+b)&gt;0$时，有$y_i(w·x_i+b)=1-\xi_i$;当$1-y_i(w·x_i+b)≤0$时，$\xi_i=0$，有$y_i(w·x_i+b)≥1-\xi_i$，所以第一个约束条件成立。所以两个约束条件都满足，最优化问题可以写作$$\underset{w,b}{min}\sum_{i=1}^N\xi_i+\lambda||w||^2$$若取$\lambda =\frac{1}{2C}$则$$\underset{w,b}{min} \frac{1}{C}(\frac{1}{2} ||w||^2+C\sum_{i=1}^N \xi_i)$$与原始最优化问题等价。</p><p>合页损失函数图像如图所示，横轴是函数间隔$y(w·x+b)$，纵轴是损失。由于函数形状像一个合页，故名合页损失函数。</p><p>图中还画出了0-1损失函数，可以认为它是一个二类分类问题的真正的损失函数，而合页损失函数是0-1损失函数的上界。由于0-1损失函数不是连续可导的，直接优化其构成的目标函数比较困难，可以认为线性支持向量机是优化由0-1损失函数的上界（合页损失函数）构成的目标函数。这时的上界损失函数又称为代理损失函数（surrogate function）。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-08 下午6.11.53.png" alt="屏幕快照 2017-07-08 下午6.11.53"><br>图中虚线显示的是感知机的损失函数$[-y_i(w·x_i+b)]_+$。这时当样本点$(x_i,y_i)$被正确分类时，损失是0，否则损失是$-y_i(w·x_i+b)$，相比之下，合页损失函数不仅要分类正确，而且确信度足够高时损失才是0，也就是说，合页损失函数对学习有更高的要求</p><h3 id="4-2-逻辑斯谛回归和SVM的损失函数对比"><a href="#4-2-逻辑斯谛回归和SVM的损失函数对比" class="headerlink" title="4.2 逻辑斯谛回归和SVM的损失函数对比"></a>4.2 逻辑斯谛回归和SVM的损失函数对比</h3><p>我们先来看一下带松弛变量的 SVM 和正则化的逻辑回归它们的损失函数：<img src="http://omu7tit09.bkt.clouddn.com/14995092441592.png" alt="">其中 $g(z)=(1+exp(−z))^{−1}$<br>可以将两者统一起来:</p><p><img src="http://omu7tit09.bkt.clouddn.com/14995093179927.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/14995093274307.png" alt=""><br>这两个损失函数的目的都是增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。SVM的处理方法是只考虑support vectors，也就是和分类最相关的少数点，去学习分类器。而逻辑回归通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重,两者的根本目的都是一样的。</p><p>svm考虑局部（支持向量），而logistic回归考虑全局，就像大学里的辅导员和教师间的区别。</p><p>辅导员关心的是挂科边缘的人，常常找他们谈话，告诫他们一定得好好学习，不要浪费大好青春，挂科了会拿不到毕业证、学位证等等，相反，对于那些相对优秀或者良好的学生，他们却很少去问，因为辅导员相信他们一定会按部就班的做好分内的事；而大学里的教师却不是这样的，他们关心的是班里的整体情况，大家是不是基本都理解了，平均分怎么样，至于某个人的分数是59还是61，他们倒不是很在意。</p><p>总结：</p><ol><li>LR采用log损失，SVM采用合页损失。</li></ol><ul><li>LR对异常值敏感，SVM对异常值不敏感。</li><li>在训练集较小时，SVM较适用，而LR需要较多的样本。</li><li>LR模型找到的那个超平面，是尽量让所有点都远离他，而SVM寻找的那个超平面，是只让最靠近中间分割线的那些点尽量远离，即只用到那些支持向量的样本。</li><li>对非线性问题的处理方式不同，LR主要靠特征构造，必须组合交叉特征，特征离散化。SVM也可以这样，还可以通过kernel。</li><li>svm 更多的属于非参数模型，而logistic regression 是参数模型，本质不同。其区别就可以参考参数模型和非参模型的区别</li></ul><p>那怎么根据特征数量和样本量来选择SVM和LR模型呢？Andrew NG的课程中给出了以下建议：</p><ol><li>如果Feature的数量很大，跟样本数量差不多，这时候选用LR或者是Linear Kernel的SVM</li><li>如果Feature的数量比较小，样本数量一般，不算大也不算小，选用SVM+Gaussian Kernel</li><li>如果Feature的数量比较小，而样本数量很多，需要手工添加一些feature变成第一种情况。(LR和不带核函数的SVM比较类似。)</li></ol>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：$$\theta^* = argmin_\theta \frac{1}{N}\sum_{i=1}^NL(y_i,f(x_i;\theta))+\lambda Φ(θ)$$&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-      <category term="损失函数" scheme="http://yoursite.com/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法</title>
     <link href="http://yoursite.com/2017/07/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8825%EF%BC%89%EF%BC%9A%E6%9C%80%E9%80%9F%E4%B8%8B%E9%99%8D%E6%B3%95%E3%80%81%E7%89%9B%E9%A1%BF%E6%B3%95%E3%80%81%E6%8B%9F%E7%89%9B%E9%A1%BF%E6%B3%95/"/>
     <id>http://yoursite.com/2017/07/08/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/</id>
@@ -1888,6 +1866,28 @@
     <summary type="html">
     
       &lt;h2 id=&quot;一、最速下降法&quot;&gt;&lt;a href=&quot;#一、最速下降法&quot; class=&quot;headerlink&quot; title=&quot;一、最速下降法&quot;&gt;&lt;/a&gt;一、最速下降法&lt;/h2&gt;&lt;p&gt;最速下降法，又称为梯度下降法，是无约束最优化领域中最简单的算法，单独就这种算法来看，属于早就“过时”了的一种算法。但是，它的理念是其他某些算法的组成部分，或者说是在其他算法中，也有最速下降法的影子。它是一种迭代算法，每一步需要求解目标函数的梯度向量。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="损失函数" scheme="http://yoursite.com/tags/%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>机器学习算法系列（24）：机器学习中的损失函数</title>
+    <link href="http://yoursite.com/2017/07/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8824%EF%BC%89%EF%BC%9A%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/"/>
+    <id>http://yoursite.com/2017/07/08/机器学习算法系列（24）：损失函数/</id>
+    <published>2017-07-08T15:14:45.000Z</published>
+    <updated>2017-07-31T16:59:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：$$\theta^* = argmin_\theta \frac{1}{N}\sum_{i=1}^NL(y_i,f(x_i;\theta))+\lambda Φ(θ)$$</p><a id="more"></a><p>前面的均值函数表示的是经验风险函数，$L$代表的是损失函数，后面的$Φ$是正则化项（regularizer）或者叫惩罚项（penalty term）,它可以是$L_1$，也可以是$L_2$等其他的正则函数。整个式子表示的意思是找到使目标函数最小时的$\theta$值。下面列出集中常见的损失函数。</p><h2 id="一、对数损失函数（逻辑回归）"><a href="#一、对数损失函数（逻辑回归）" class="headerlink" title="一、对数损失函数（逻辑回归）"></a>一、对数损失函数（逻辑回归）</h2><p>有些人可能觉得逻辑回归的损失函数就是平方损失，其实并不是。平方损失函数可以通过线性回归在假设样本是高斯分布的条件下推导得到，而逻辑回归得到的并不是平方损失。在逻辑回归的推导中，它假设样本服从伯努利分布（0-1分布），然后求得满足该分布的似然函数，接着取对数求极值等等。而逻辑回归并没有求似然函数的极值，而是把极大化当做是一种思想，进而推导出它的经验风险函数为：最小化负的似然函数（即$max F(y, f(x)) —&gt; min -F(y, f(x))$)。从损失函数的视角来看，它就成了log损失函数了。</p><p>Log损失函数的标准形式：$$L(Y,P(Y|X))=-logP(Y|X)$$刚刚说到，取对数是为了方便计算极大似然估计，因为在MLE中，直接求导比较困难，所以通常都是先取对数再求导找极值点。损失函数$L(Y.P(Y|X))$表达的是样本在分类$Y$的情况下，使概率$P(Y|X)$达到最大值（换言之，就是利用已知的样本分布，找到最有可能（即最大概率）导致这种分布的参数值；或者什么样的参数才能使我们观测到目前这组数据的概率最大）。因为log函数是单调递增的，所以$logP(Y|X)$也会达到最大值，因此在前面加上负号之后，最大化$P(Y|X)$就等价于最小化$L$了。</p><p>logistic回归的$P(y|x)$表达式如下（为了将类别标签y统一为1和0，下面将表达式分开表示）：$$<br>P\left(Y=y^{\left(i\right)}|x^{\left(i\right)};\theta\right)=\left\{\begin{array}{l}<br>    h_{\theta}\left(x^{\left(i\right)}\right)=\frac{1}{1+e^{-\theta^Tx}},\,\,y^{\left(i\right)}=1\\<br>    1-h_{\theta}\left(x^{\left(i\right)}\right)=\frac{e^{-\theta^Tx}}{1+e^{-\theta^Tx}},\,\,y^{\left(i\right)}=0\\<br>\end{array}\right.<br>$$将上面的公式合并在一起，可得到第$i$个样本正确预测的概率：$$P(y^{(i)}|x^{(i)};\theta)=(h_\theta(x^{(i)}))^{y(i)}·(1-h_\theta(x^{(i)}))^{1-y(i)}$$<br>上式是对一个样本进行建模的数据表达。对于所有的样本，假设每条样本生成过程独立，在整个样本空间中（N个样本）的概率分布为：$$<br>P\left(Y |  X;\theta\right)=\prod_{i=1}^N{\left(\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)^{y^{\left(i\right)}}\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)^{1-y^{\left(i\right)}}\right)}<br>$$将上式代入到对数损失函数中，得到最终的损失函数为：$$J(\theta) = -\frac{1}{N}\sum_{i=1}^N{y^{\left(i\right)}\log\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)+\left(1-y^{\left(i\right)}\right)\log\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)}<br>$$<br>之所以有人认为逻辑回归是平方损失，是因为在使用梯度下降来求最优解的时候，它的迭代式子与平方损失求导后的式子非常相似，从而给人一种直观上的错觉。</p><h2 id="二、平方损失函数（最小二乘法，Ordinary-Least-Squares）"><a href="#二、平方损失函数（最小二乘法，Ordinary-Least-Squares）" class="headerlink" title="二、平方损失函数（最小二乘法，Ordinary Least Squares）"></a>二、平方损失函数（最小二乘法，Ordinary Least Squares）</h2><p>最小二乘法是线性回归的一种，OLS将问题转化成了一个凸优化问题。在线性回归中，它假设样本和噪声都服从高斯分布（为什么假设成高斯分布呢？其实这里隐藏了一个小知识点，就是中心极限定理，可以参考【central limit theorem】），最后通过极大似然估计（MLE）可以推导出最小二乘式子。最小二乘的基本原则是：最优拟合直线应该是使各点到回归直线的距离和最小的直线，即平方和最小。换言之，OLS是基于距离的，而这个距离就是我们用的最多的欧几里得距离。为什么它会选择使用欧式距离作为误差度量呢（即Mean squared error， MSE），主要有以下几个原因：</p><ul><li>简单，计算方便；</li><li>欧氏距离是一种很好的相似性度量标准；</li><li>在不同的表示域变换后特征性质不变。</li></ul><p>平方损失（Square loss）的标准形式如下：$$L(Y,f(X))=(Y-f(x))^2$$当样本个数为n时，此时的损失函数变为：$$L(Y,f(X))=\sum_{i=1}^n(Y-f(X))^2$$$Y-f(X)$表示的是残差，整个式子表示的是残差的平方和，而我们的目的就是最小化这个目标函数值（注：该式子未加入正则项），也就是最小化残差的平方和（residual sum of squares，RSS）。</p><p>而在实际应用中，通常会使用均方差（MSE）作为一项衡量指标，公式如下：$$MSE=\frac{1}{N}\sum_{i=1}^N(\tilde{Y_i}-Y_i)^2$$</p><p>上面提到了线性回归，这里额外补充一句，我们通常说的线性有两种情况，一种是因变量y是自变量x的线性函数，一种是因变量y是参数αα的线性函数。在机器学习中，通常指的都是后一种情况。</p><h2 id="三、指数损失函数（Adaboost）"><a href="#三、指数损失函数（Adaboost）" class="headerlink" title="三、指数损失函数（Adaboost）"></a>三、指数损失函数（Adaboost）</h2><p>学过Adaboost算法的人都知道，它是前向分步加法算法的特例，是一个加和模型，损失函数就是指数函数。在Adaboost中，经过m此迭代之后，可以得到$f_m(x)$:$$f_m(x)=f_{m-1}(x)+a_mG_m(x)$$Adaboost每次迭代时的目的是为了找到最小化下列式子时的参数$a$和G：$$arg\underset{a,G}{min}=\sum_{i=1}^Nexp[-y_i(f_{m-1}(x_i)+aG(x_i))]$$而指数损失函数(exp-loss）的标准形式如下:$$L(y,f(x))=exp[-yf(x)]$$可以看出，Adaboost的目标式子就是指数损失，在给定N个样本的情况下，Adaboost的损失函数为：$$L(y,f(x))=\frac{1}{N}\sum_{i=1}^nexp[-y_if(x_i)]$$</p><h2 id="四、Hinge损失函数（SVM）"><a href="#四、Hinge损失函数（SVM）" class="headerlink" title="四、Hinge损失函数（SVM）"></a>四、Hinge损失函数（SVM）</h2><h3 id="4-1-Hinge损失函数（SVM）"><a href="#4-1-Hinge损失函数（SVM）" class="headerlink" title="4.1 Hinge损失函数（SVM）"></a>4.1 Hinge损失函数（SVM）</h3><p>线性支持向量机学习除了原始最优化问题，还有另外一种解释，就是最优化以下目标函数：$$\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2$$目标函数的第一项是经验损失或经验风险，函数$$L(y·(w·x+b))=[1-y(w·x+b)]_+$$称为合页损失函数（hinge loss function）。下标”+”表示以下取正值的函数：$$<br>\left[z\right]_+=\left\{\begin{array}{l}<br>    z , z&gt;0\\<br>    0 , z\le 0\\<br>\end{array}\right.<br>$$这就是说，当样本点$(x_i,y_i)$被正确分类且函数间隔（确信度）$y_i(w·x_i+b)$大于1时，损失是0，否则损失是$1-y_i(w·x_i+b)$。目标函数的第二项是系数为$\lambda$的$w$的$L_2$范数，是正则化项。</p><p>接下来证明线性支持向量机原始最优化问题：$$<br>\underset{w,b,\xi}{\min} \frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i}<br>$$$$<br>s.t.  y_i\left( w·x_i+b \right) \geqslant 1-\xi _i , i=1,2,···,N<br>$$$$<br>\xi _i\geqslant 0, i=1,2,···\mathrm{，}N<br>$$等价于最优化问题$$\underset{w,b}{min }\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2$$</p><p>先令$[1-y_i(w·x_i+b)]_+=\xi_i$，则$\xi_i≥0$，第二个约束条件成立；由$[1-y_i(w·x_i+b)]_+=\xi_i$，当$1-y_i(w·x_i+b)&gt;0$时，有$y_i(w·x_i+b)=1-\xi_i$;当$1-y_i(w·x_i+b)≤0$时，$\xi_i=0$，有$y_i(w·x_i+b)≥1-\xi_i$，所以第一个约束条件成立。所以两个约束条件都满足，最优化问题可以写作$$\underset{w,b}{min}\sum_{i=1}^N\xi_i+\lambda||w||^2$$若取$\lambda =\frac{1}{2C}$则$$\underset{w,b}{min} \frac{1}{C}(\frac{1}{2} ||w||^2+C\sum_{i=1}^N \xi_i)$$与原始最优化问题等价。</p><p>合页损失函数图像如图所示，横轴是函数间隔$y(w·x+b)$，纵轴是损失。由于函数形状像一个合页，故名合页损失函数。</p><p>图中还画出了0-1损失函数，可以认为它是一个二类分类问题的真正的损失函数，而合页损失函数是0-1损失函数的上界。由于0-1损失函数不是连续可导的，直接优化其构成的目标函数比较困难，可以认为线性支持向量机是优化由0-1损失函数的上界（合页损失函数）构成的目标函数。这时的上界损失函数又称为代理损失函数（surrogate function）。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-08 下午6.11.53.png" alt="屏幕快照 2017-07-08 下午6.11.53"><br>图中虚线显示的是感知机的损失函数$[-y_i(w·x_i+b)]_+$。这时当样本点$(x_i,y_i)$被正确分类时，损失是0，否则损失是$-y_i(w·x_i+b)$，相比之下，合页损失函数不仅要分类正确，而且确信度足够高时损失才是0，也就是说，合页损失函数对学习有更高的要求</p><h3 id="4-2-逻辑斯谛回归和SVM的损失函数对比"><a href="#4-2-逻辑斯谛回归和SVM的损失函数对比" class="headerlink" title="4.2 逻辑斯谛回归和SVM的损失函数对比"></a>4.2 逻辑斯谛回归和SVM的损失函数对比</h3><p>我们先来看一下带松弛变量的 SVM 和正则化的逻辑回归它们的损失函数：<img src="http://omu7tit09.bkt.clouddn.com/14995092441592.png" alt="">其中 $g(z)=(1+exp(−z))^{−1}$<br>可以将两者统一起来:</p><p><img src="http://omu7tit09.bkt.clouddn.com/14995093179927.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/14995093274307.png" alt=""><br>这两个损失函数的目的都是增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。SVM的处理方法是只考虑support vectors，也就是和分类最相关的少数点，去学习分类器。而逻辑回归通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重,两者的根本目的都是一样的。</p><p>svm考虑局部（支持向量），而logistic回归考虑全局，就像大学里的辅导员和教师间的区别。</p><p>辅导员关心的是挂科边缘的人，常常找他们谈话，告诫他们一定得好好学习，不要浪费大好青春，挂科了会拿不到毕业证、学位证等等，相反，对于那些相对优秀或者良好的学生，他们却很少去问，因为辅导员相信他们一定会按部就班的做好分内的事；而大学里的教师却不是这样的，他们关心的是班里的整体情况，大家是不是基本都理解了，平均分怎么样，至于某个人的分数是59还是61，他们倒不是很在意。</p><p>总结：</p><ol><li>LR采用log损失，SVM采用合页损失。</li></ol><ul><li>LR对异常值敏感，SVM对异常值不敏感。</li><li>在训练集较小时，SVM较适用，而LR需要较多的样本。</li><li>LR模型找到的那个超平面，是尽量让所有点都远离他，而SVM寻找的那个超平面，是只让最靠近中间分割线的那些点尽量远离，即只用到那些支持向量的样本。</li><li>对非线性问题的处理方式不同，LR主要靠特征构造，必须组合交叉特征，特征离散化。SVM也可以这样，还可以通过kernel。</li><li>svm 更多的属于非参数模型，而logistic regression 是参数模型，本质不同。其区别就可以参考参数模型和非参模型的区别</li></ul><p>那怎么根据特征数量和样本量来选择SVM和LR模型呢？Andrew NG的课程中给出了以下建议：</p><ol><li>如果Feature的数量很大，跟样本数量差不多，这时候选用LR或者是Linear Kernel的SVM</li><li>如果Feature的数量比较小，样本数量一般，不算大也不算小，选用SVM+Gaussian Kernel</li><li>如果Feature的数量比较小，而样本数量很多，需要手工添加一些feature变成第一种情况。(LR和不带核函数的SVM比较类似。)</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：$$\theta^* = argmin_\theta \frac{1}{N}\sum_{i=1}^NL(y_i,f(x_i;\theta))+\lambda Φ(θ)$$&lt;/p&gt;
     
     </summary>
     
@@ -2094,9 +2094,9 @@
       <category term="Kaggle" scheme="http://yoursite.com/categories/Kaggle/"/>
     
     
-      <category term="kaggle" scheme="http://yoursite.com/tags/kaggle/"/>
-    
       <category term="特征工程" scheme="http://yoursite.com/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/"/>
+    
+      <category term="kaggle" scheme="http://yoursite.com/tags/kaggle/"/>
     
       <category term="XGBoost" scheme="http://yoursite.com/tags/XGBoost/"/>
     
@@ -2121,13 +2121,13 @@
       <category term="Kaggle" scheme="http://yoursite.com/categories/Kaggle/"/>
     
     
-      <category term="kaggle" scheme="http://yoursite.com/tags/kaggle/"/>
-    
       <category term="EDA" scheme="http://yoursite.com/tags/EDA/"/>
     
-      <category term="可视化" scheme="http://yoursite.com/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-    
       <category term="特征工程" scheme="http://yoursite.com/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/"/>
+    
+      <category term="kaggle" scheme="http://yoursite.com/tags/kaggle/"/>
+    
+      <category term="可视化" scheme="http://yoursite.com/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
     
   </entry>
   
@@ -2194,11 +2194,11 @@
       <category term="Kaggle" scheme="http://yoursite.com/categories/Kaggle/"/>
     
     
+      <category term="Kaggle" scheme="http://yoursite.com/tags/Kaggle/"/>
+    
       <category term="EDA" scheme="http://yoursite.com/tags/EDA/"/>
     
       <category term="特征工程" scheme="http://yoursite.com/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/"/>
-    
-      <category term="Kaggle" scheme="http://yoursite.com/tags/Kaggle/"/>
     
       <category term="Voting" scheme="http://yoursite.com/tags/Voting/"/>
     
@@ -2564,9 +2564,9 @@
       <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="MNIST" scheme="http://yoursite.com/tags/MNIST/"/>
-    
       <category term="神经网络" scheme="http://yoursite.com/tags/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C/"/>
+    
+      <category term="MNIST" scheme="http://yoursite.com/tags/MNIST/"/>
     
   </entry>
   
