@@ -86,22 +86,22 @@
 
 
 
-<meta name="description" content="一、数据集与任务介绍MNIST数据集是一个基本的手写字体识别数据集，该数据原本是包含60000个训练图像和10000个测试图像，但这里我们事先对数据进行了划分，从训练样本中抽取10000个数据作为验证集，所以处理后的数据集包含50000个训练样本（training data）、10000个验证样本（validation data）10000个测试样本（test data），都是28乘以28的分辨率">
+<meta name="description" content="近似非常不错 一、数据集与任务介绍MNIST数据集是一个基本的手写字体识别数据集，该数据原本是包含60000个训练图像和10000个测试图像，但这里我们事先对数据进行了划分，从训练样本中抽取10000个数据作为验证集，所以处理后的数据集包含50000个训练样本（training data）、10000个验证样本（validation data）10000个测试样本（test data），都是28乘">
 <meta name="keywords" content="神经网络,MNIST">
 <meta property="og:type" content="article">
 <meta property="og:title" content="深度学习系列（2）：神经网络MNIST实战">
 <meta property="og:url" content="http://yoursite.com/2017/04/14/深度学习系列（2）：神经网络MNIST实战/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="一、数据集与任务介绍MNIST数据集是一个基本的手写字体识别数据集，该数据原本是包含60000个训练图像和10000个测试图像，但这里我们事先对数据进行了划分，从训练样本中抽取10000个数据作为验证集，所以处理后的数据集包含50000个训练样本（training data）、10000个验证样本（validation data）10000个测试样本（test data），都是28乘以28的分辨率">
+<meta property="og:description" content="近似非常不错 一、数据集与任务介绍MNIST数据集是一个基本的手写字体识别数据集，该数据原本是包含60000个训练图像和10000个测试图像，但这里我们事先对数据进行了划分，从训练样本中抽取10000个数据作为验证集，所以处理后的数据集包含50000个训练样本（training data）、10000个验证样本（validation data）10000个测试样本（test data），都是28乘">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%882.37.37.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%882.53.21.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%883.04.36.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%883.05.16.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%883.13.10.png">
-<meta property="og:updated_time" content="2017-04-17T14:15:18.000Z">
+<meta property="og:updated_time" content="2017-11-10T08:29:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（2）：神经网络MNIST实战">
-<meta name="twitter:description" content="一、数据集与任务介绍MNIST数据集是一个基本的手写字体识别数据集，该数据原本是包含60000个训练图像和10000个测试图像，但这里我们事先对数据进行了划分，从训练样本中抽取10000个数据作为验证集，所以处理后的数据集包含50000个训练样本（training data）、10000个验证样本（validation data）10000个测试样本（test data），都是28乘以28的分辨率">
+<meta name="twitter:description" content="近似非常不错 一、数据集与任务介绍MNIST数据集是一个基本的手写字体识别数据集，该数据原本是包含60000个训练图像和10000个测试图像，但这里我们事先对数据进行了划分，从训练样本中抽取10000个数据作为验证集，所以处理后的数据集包含50000个训练样本（training data）、10000个验证样本（validation data）10000个测试样本（test data），都是28乘">
 <meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%882.37.37.png">
 
 
@@ -111,7 +111,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"hide"},
+    sidebar: {"position":"right","display":"always"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -166,7 +166,7 @@ var _hmt = _hmt || [];
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -399,7 +399,8 @@ var _hmt = _hmt || [];
       
 
       
-        <h2 id="一、数据集与任务介绍"><a href="#一、数据集与任务介绍" class="headerlink" title="一、数据集与任务介绍"></a>一、数据集与任务介绍</h2><p>MNIST数据集是一个基本的手写字体识别数据集，该数据原本是包含60000个训练图像和10000个测试图像，但这里我们事先对数据进行了划分，从训练样本中抽取10000个数据作为验证集，所以处理后的数据集包含50000个训练样本（training data）、10000个验证样本（validation data）10000个测试样本（test data），都是28乘以28的分辨率。</p>
+        <p>近似非常不错</p>
+<h2 id="一、数据集与任务介绍"><a href="#一、数据集与任务介绍" class="headerlink" title="一、数据集与任务介绍"></a>一、数据集与任务介绍</h2><p>MNIST数据集是一个基本的手写字体识别数据集，该数据原本是包含60000个训练图像和10000个测试图像，但这里我们事先对数据进行了划分，从训练样本中抽取10000个数据作为验证集，所以处理后的数据集包含50000个训练样本（training data）、10000个验证样本（validation data）10000个测试样本（test data），都是28乘以28的分辨率。</p>
 <a id="more"></a>
 <p>我们可以先将数据集从GitHub上Clone下来：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">➜  fig git:(master) ✗ git clone https://github.com/lisa-lab/DeepLearningTutorials</div></pre></td></tr></table></figure>
@@ -536,7 +537,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">132</span>
+              <span class="site-state-item-count">135</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -544,7 +545,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -553,7 +554,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">161</span>
+                <span class="site-state-item-count">167</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
