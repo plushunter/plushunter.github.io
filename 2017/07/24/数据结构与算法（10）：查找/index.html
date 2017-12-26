@@ -93,10 +93,11 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/24/数据结构与算法（10）：查找/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、基本概念查找（Search）就是根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素（或记录）。在计算机应用中，查找是常用的基本运算，例如编译程序中符号表的查找。先说明几个概念：">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15003947614841.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15004257295693.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15004259399950.png">
-<meta property="og:updated_time" content="2017-09-01T06:36:26.000Z">
+<meta property="og:updated_time" content="2017-12-26T06:35:12.066Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（10）：查找">
 <meta name="twitter:description" content="一、基本概念查找（Search）就是根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素（或记录）。在计算机应用中，查找是常用的基本运算，例如编译程序中符号表的查找。先说明几个概念：">
@@ -438,7 +439,10 @@ var _hmt = _hmt || [];
 <h3 id="3-2-插值查找"><a href="#3-2-插值查找" class="headerlink" title="3.2 插值查找"></a>3.2 插值查找</h3><p>在介绍插值查找之前，首先考虑一个新问题，为什么上述算法一定要是折半，而不是折四分之一或者折更多呢？</p>
 <p>打个比方，在英文字典里面查“apple”，你下意识翻开字典是翻前面的书页还是后面的书页呢？如果再让你查“zoo”，你又怎么查？很显然，这里绝对不会是从中农间开始查起，而是有一定目的的往前或往后翻。</p>
 <p>同样的，比如要在取值范围1~10000之间100个元素从小到大均匀分布的数组中查找5，我们自然会从数组下标较小的开始查找。</p>
-<p>经过上面的分析，折半查找这种查找方式，不是自适应的（也就是说是傻瓜式的）。二分查找中查找点计算如下：$$mid=(low+high)/2$$，即$$mid=low+(high-low)/2$$通过类比，我们可以将查找的点改进为如下：$$mid=low+\frac{key -list[low]}{list[high]-list [low]}\times (high-low)$$也就是将上述的比例参数1/2改进为自适应的，根据关键字在整个有序表中所处的位置，让mid值的变化更靠近关键字key，这样也就间接地减少了比较次数。</p>
+<p>经过上面的分析，折半查找这种查找方式，不是自适应的（也就是说是傻瓜式的）。二分查找中查找点计算如下：</p>
+<script type="math/tex; mode=display">mid=(low+high)/2</script><p>即</p>
+<script type="math/tex; mode=display">mid=low+(high-low)/2</script><p>通过类比，我们可以将查找的点改进为如下：</p>
+<script type="math/tex; mode=display">mid=low+\frac{key -list[low]}{list[high]-list [low]}\times (high-low)</script><p>也就是将上述的比例参数1/2改进为自适应的，根据关键字在整个有序表中所处的位置，让mid值的变化更靠近关键字key，这样也就间接地减少了比较次数。</p>
 <p><strong>基本思想：</strong>基于二分查找算法，将查找点的选择改进为自适应选择，可以提高查找效率。当然，插值查找也属于有序查找。</p>
 <p><strong>注意：</strong>对于表长较大，而关键字分布又比较均匀的查找表来说，插值查找算法的平均性能比折半查找要好的多。反之，数组中如果分布非常不均匀，那么插值查找未必是很合适的选择。</p>
 <p><strong>复杂度分析：</strong>查找成功或者失败的时间复杂度均为$O(log2(log2n))$。</p>
@@ -524,8 +528,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/25/数据结构与算法（11）：哈希表/" rel="next" title="数据结构与算法（11）：哈希表">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法（11）：哈希表
+              <a href="/2017/07/23/机器学习算法系列（30）：Scikit-Learn总结/" rel="next" title="机器学习算法系列（30）：Scikit-Learn总结">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（30）：Scikit-Learn总结
               </a>
             
           </div>
@@ -534,8 +538,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/23/机器学习算法系列（30）：Scikit-Learn总结/" rel="prev" title="机器学习算法系列（30）：Scikit-Learn总结">
-                机器学习算法系列（30）：Scikit-Learn总结 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/25/数据结构与算法（11）：哈希表/" rel="prev" title="数据结构与算法（11）：哈希表">
+                数据结构与算法（11）：哈希表 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -604,7 +608,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -612,7 +616,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -621,7 +625,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -933,9 +937,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -947,13 +974,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

@@ -92,6 +92,7 @@
 <meta property="og:url" content="http://yoursite.com/books/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content=".hexo-douban-clearfix{     clear:both;   }   #tabs{     margin-bottom: 15px;     margin-top:15px;   }   #tabs a {     padding: 5px;   }   #tabs a.hexo-douban-active{     background: #657b83;     co">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://img3.doubanio.com/mpic/s1470003.jpg">
 <meta property="og:image" content="https://img3.doubanio.com/mpic/s6851083.jpg">
 <meta property="og:image" content="https://img1.doubanio.com/mpic/s7137558.jpg">
@@ -547,7 +548,7 @@ function show(id){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -555,7 +556,7 @@ function show(id){
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -564,7 +565,7 @@ function show(id){
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -856,9 +857,32 @@ function show(id){
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -870,13 +894,10 @@ function show(id){
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

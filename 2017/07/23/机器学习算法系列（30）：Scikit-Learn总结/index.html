@@ -93,7 +93,8 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/23/机器学习算法系列（30）：Scikit-Learn总结/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="http://ff120.github.io/2017/05/14/机器学习专题/机器学习_Scikit-Learn使用技巧/Scikit-learn是一个很受欢迎的机器学习方面的python工具包，它定义的一些范式和处理流程影响深远，所以，了解这个工具包对于机器学习算法的整个流程会有一个整体的了解。它已经实现了很多方法帮助我们便捷的处理数据，例如，划分数据集为训练集和验证集，交叉验证，数据预处理">
-<meta property="og:updated_time" content="2017-08-11T02:52:15.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-26T08:04:14.506Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（30）：Scikit-Learn总结">
 <meta name="twitter:description" content="http://ff120.github.io/2017/05/14/机器学习专题/机器学习_Scikit-Learn使用技巧/Scikit-learn是一个很受欢迎的机器学习方面的python工具包，它定义的一些范式和处理流程影响深远，所以，了解这个工具包对于机器学习算法的整个流程会有一个整体的了解。它已经实现了很多方法帮助我们便捷的处理数据，例如，划分数据集为训练集和验证集，交叉验证，数据预处理">
@@ -393,7 +394,7 @@ var _hmt = _hmt || [];
       
 
       
-        <p><a href="http://ff120.github.io/2017/05/14/机器学习专题/机器学习_Scikit-Learn使用技巧/" target="_blank" rel="external">http://ff120.github.io/2017/05/14/机器学习专题/机器学习_Scikit-Learn使用技巧/</a><br>Scikit-learn是一个很受欢迎的机器学习方面的python工具包，它定义的一些范式和处理流程影响深远，所以，了解这个工具包对于机器学习算法的整个流程会有一个整体的了解。它已经实现了很多方法帮助我们便捷的处理数据，例如，划分数据集为训练集和验证集，交叉验证，数据预处理，归一化等等。</p>
+        <p><a href="http://ff120.github.io/2017/05/14/机器学习专题/机器学习_Scikit-Learn使用技巧/" target="_blank" rel="noopener">http://ff120.github.io/2017/05/14/机器学习专题/机器学习_Scikit-Learn使用技巧/</a><br>Scikit-learn是一个很受欢迎的机器学习方面的python工具包，它定义的一些范式和处理流程影响深远，所以，了解这个工具包对于机器学习算法的整个流程会有一个整体的了解。它已经实现了很多方法帮助我们便捷的处理数据，例如，划分数据集为训练集和验证集，交叉验证，数据预处理，归一化等等。</p>
 <a id="more"></a>
 <h2 id="一、性能评价指标"><a href="#一、性能评价指标" class="headerlink" title="一、性能评价指标"></a>一、性能评价指标</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"># 计算均方误差</div><div class="line">from sklearn import metrics</div><div class="line">import numpy as np</div><div class="line">rmse = np.sqrt(metrics.mean_squared_error(y_test,y_pred))</div><div class="line"></div><div class="line"># 计算准确率</div><div class="line">acc = metrics.accuracy_score(y_test,y_pred)</div><div class="line"></div><div class="line">#混淆矩阵</div><div class="line">cm = metrics.confusion_matrix(y_test,y_pred)</div><div class="line"></div><div class="line"># classification_report</div><div class="line">cr = metrics.classification_report(y_true,y_pred)</div><div class="line"></div><div class="line"># ROC AUC 曲线</div><div class="line">from sklearn.metrics import roc_curve,auc</div></pre></td></tr></table></figure>
 <h2 id="二、数据集划分"><a href="#二、数据集划分" class="headerlink" title="二、数据集划分"></a>二、数据集划分</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line">from sklearn import cross_validation</div><div class="line">X_train,X_test,y_train,y_test = cross_validation.train_test_split(X,y,test_size=0.3,random_state=0)</div><div class="line"></div><div class="line"># K折</div><div class="line">from sklearn.cross_validation import KFold</div><div class="line">kf = KFold(n_samples, n_folds=2)</div><div class="line">for train, test in kf:</div><div class="line">    print(&quot;%s %s&quot; % (train, test))</div><div class="line"></div><div class="line"># 保证不同的类别之间的均衡，这里需要用到标签labels</div><div class="line">from sklearn.cross_validation import StratifiedKFold</div><div class="line">labels = [0, 0, 0, 0, 1, 1, 1, 1, 1, 1]</div><div class="line">skf = StratifiedKFold(labels, 3)</div><div class="line">for train, test in skf:</div><div class="line">    print(&quot;%s %s&quot; % (train, test))</div><div class="line">    </div><div class="line"># 留一交叉验证</div><div class="line">from sklearn.cross_validation import LeaveOneOut</div><div class="line">loo = LeaveOneOut(n_samples)</div><div class="line">for train, test in loo:</div><div class="line">    print(&quot;%s %s&quot; % (train, test))</div><div class="line"></div><div class="line"># 留P交叉验证</div><div class="line">from sklearn.cross_validation import LeavePOut</div><div class="line">lpo = LeavePOut(n_samples, p=2)</div><div class="line">for train, test in lpo:</div><div class="line">    print(&quot;%s %s&quot; % (train, test))</div><div class="line">    </div><div class="line">    </div><div class="line"># 按照额外提供的标签留一交叉验证,常用的情况是按照时间序列</div><div class="line">from sklearn.cross_validation import LeaveOneLabelOut</div><div class="line">labels = [1, 1,1, 2, 2]</div><div class="line">lolo = LeaveOneLabelOut(labels)</div><div class="line">for train, test in lolo:</div><div class="line">    print(&quot;%s %s&quot; % (train, test))</div><div class="line">    </div><div class="line"># 按照额外提供的标签留P交叉验证</div><div class="line">from sklearn.cross_validation import LeavePLabelOut</div><div class="line">labels = [1, 1, 2, 2, 3, 3,3]</div><div class="line">lplo = LeavePLabelOut(labels, p=2)</div><div class="line">for train, test in lplo:</div><div class="line">    print(&quot;%s %s&quot; % (train, test))</div><div class="line"></div><div class="line"># 随机分组</div><div class="line">from sklearn.cross_validation import ShuffleSplit</div><div class="line">ss = ShuffleSplit(16, n_iter=3, test_size=0.25,random_state=0)</div><div class="line">for train_index, test_index in ss:</div><div class="line">    print(&quot;%s %s&quot; % (train_index, test_index))</div><div class="line"></div><div class="line"># 考虑类别均衡的随机分组</div><div class="line">from sklearn.cross_validation import StratifiedShuffleSplit</div><div class="line">import numpy as np</div><div class="line">X = np.array([[1, 2], [3, 4], [1, 2], [3, 4]])</div><div class="line">y = np.array([0, 0, 1, 1])</div><div class="line">sss = StratifiedShuffleSplit(y, 3, test_size=0.5, random_state=0)</div><div class="line">for train, test in sss:</div><div class="line">    print(&quot;%s %s&quot; % (train, test))</div></pre></td></tr></table></figure>
@@ -464,8 +465,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/24/数据结构与算法（10）：查找/" rel="next" title="数据结构与算法（10）：查找">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法（10）：查找
+              <a href="/2017/07/23/数据结构与算法（9）：Trie树/" rel="next" title="数据结构与算法（9）：Trie树">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（9）：Trie树
               </a>
             
           </div>
@@ -474,8 +475,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/23/数据结构与算法（9）：Trie树/" rel="prev" title="数据结构与算法（9）：Trie树">
-                数据结构与算法（9）：Trie树 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/24/数据结构与算法（10）：查找/" rel="prev" title="数据结构与算法（10）：查找">
+                数据结构与算法（10）：查找 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -544,7 +545,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -552,7 +553,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -561,7 +562,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -873,9 +874,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -887,13 +911,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

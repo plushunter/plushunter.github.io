@@ -93,10 +93,11 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/13/kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="上一节我们对数据集进行了初步的探索，并将其可视化，对数据有了初步的了解。这样我们有了之前数据探索的基础之后，就有了对其建模的基础feature，结合目标变量，即可进行模型训练了。我们使用交叉验证的方法来判断线下的实验结果，也就是把训练集分成两部分，一部分是训练集，用来训练分类器，另一部分是验证集，用来计算损失评估模型的好坏。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%884.48.02.png">
 <meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%884.48.20.png">
 <meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-20%20%E4%B8%8A%E5%8D%8810.50.42.png">
-<meta property="og:updated_time" content="2017-06-20T03:07:46.000Z">
+<meta property="og:updated_time" content="2017-12-26T06:39:14.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost">
 <meta name="twitter:description" content="上一节我们对数据集进行了初步的探索，并将其可视化，对数据有了初步的了解。这样我们有了之前数据探索的基础之后，就有了对其建模的基础feature，结合目标变量，即可进行模型训练了。我们使用交叉验证的方法来判断线下的实验结果，也就是把训练集分成两部分，一部分是训练集，用来训练分类器，另一部分是验证集，用来计算损失评估模型的好坏。">
@@ -400,7 +401,7 @@ var _hmt = _hmt || [];
         <p>上一节我们对数据集进行了初步的探索，并将其可视化，对数据有了初步的了解。这样我们有了之前数据探索的基础之后，就有了对其建模的基础feature，结合目标变量，即可进行模型训练了。我们使用交叉验证的方法来判断线下的实验结果，也就是把训练集分成两部分，一部分是训练集，用来训练分类器，另一部分是验证集，用来计算损失评估模型的好坏。</p>
 <a id="more"></a>
 <p>在Kaggle的希格斯子信号识别竞赛中，XGBoost因为出众的效率与较高的预测准确度在比赛论坛中引起了参赛选手的广泛关注，在1700多支队伍的激烈竞争中占有一席之地。随着它在Kaggle社区知名度的提高，最近也有队伍借助XGBoost在比赛中夺得第一。其次，因为它的效果好，计算复杂度不高，也在工业界中有大量的应用。</p>
-<p>今天，我们就先来跑一个XGBoost版的Base Model。先回顾一下XGBoost的原理吧：<a href="https://plushunter.github.io/2017/01/26/机器学习算法系列（8）：XgBoost/" target="_blank" rel="external">机器学习算法系列（8）：XgBoost</a></p>
+<p>今天，我们就先来跑一个XGBoost版的Base Model。先回顾一下XGBoost的原理吧：<a href="https://plushunter.github.io/2017/01/26/机器学习算法系列（8）：XgBoost/" target="_blank" rel="noopener">机器学习算法系列（8）：XgBoost</a></p>
 <h2 id="一、-准备工作"><a href="#一、-准备工作" class="headerlink" title="一、 准备工作"></a>一、 准备工作</h2><p>首先我们导入需要的包：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> sys </div><div class="line"><span class="keyword">import</span> operator</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="keyword">from</span> scipy <span class="keyword">import</span> sparse</div><div class="line"><span class="keyword">import</span> xgboost <span class="keyword">as</span> xgb</div><div class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> model_selection,preprocessing,ensemble</div><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> log_loss</div><div class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer,CountVectorizer</div></pre></td></tr></table></figure>
 <p>其中一些包的用途会在之后具体用到的时候进行讲解。</p>
@@ -484,8 +485,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/14/kaggle系列（4）：Rental Listing Inquiries（三）：XGBoost调参经验/" rel="next" title="kaggle系列（4）：Rental Listing Inquiries（三）：XGBoost调参指南">
-                <i class="fa fa-chevron-left"></i> kaggle系列（4）：Rental Listing Inquiries（三）：XGBoost调参指南
+              <a href="/2017/06/13/kaggle系列（2）：Rental Listing Inquiries（一）：EDA/" rel="next" title="kaggle系列（2）：Rental Listing Inquiries（一）：EDA">
+                <i class="fa fa-chevron-left"></i> kaggle系列（2）：Rental Listing Inquiries（一）：EDA
               </a>
             
           </div>
@@ -494,8 +495,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/13/kaggle系列（2）：Rental Listing Inquiries（一）：EDA/" rel="prev" title="kaggle系列（2）：Rental Listing Inquiries（一）：EDA">
-                kaggle系列（2）：Rental Listing Inquiries（一）：EDA <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/14/kaggle系列（4）：Rental Listing Inquiries（三）：XGBoost调参经验/" rel="prev" title="kaggle系列（4）：Rental Listing Inquiries（三）：XGBoost调参指南">
+                kaggle系列（4）：Rental Listing Inquiries（三）：XGBoost调参指南 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -564,7 +565,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -572,7 +573,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -581,7 +582,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -893,9 +894,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -907,13 +931,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

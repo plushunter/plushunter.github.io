@@ -93,8 +93,9 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/19/Java集合学习手册（11）：Java HashMap源码全剖析/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="HashMap简介 HashMap是基于哈希表实现的，每一个元素都是一个key-value对，其内部通过单链表解决冲突问题，容量不足（超过了阈值）时，同样会自动增长。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15032354567744.jpg">
-<meta property="og:updated_time" content="2017-09-05T11:48:17.000Z">
+<meta property="og:updated_time" content="2017-12-26T08:18:00.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合学习手册（11）：Java HashMap源码全剖析">
 <meta name="twitter:description" content="HashMap简介 HashMap是基于哈希表实现的，每一个元素都是一个key-value对，其内部通过单链表解决冲突问题，容量不足（超过了阈值）时，同样会自动增长。">
@@ -414,18 +415,16 @@ var _hmt = _hmt || [];
 <p>首先，如果key为null，则直接从哈希表的第一个位置table[0]对应的链表上查找。记住，key为null的键值对永远都放在以table[0]为头结点的链表中，当然不一定是存放在头结点table[0]中。</p>
 <p>如果key不为null，则先求的key的hash值，根据hash值找到在table中的索引，在该索引对应的单链表中查找是否有键值对的key与目标key相等，有就返回对应的value，没有则返回null。</p>
 <p>put方法稍微复杂些，代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">  // 将“key-value”添加到HashMap中    </div><div class="line">  public V put(K key, V value) &#123;    </div><div class="line">      // 若“key为null”，则将该键值对添加到table[0]中。    </div><div class="line">      if (key == null)    </div><div class="line">          return putForNullKey(value);    </div><div class="line">      // 若“key不为null”，则计算该key的哈希值，然后将其添加到该哈希值对应的链表中。    </div><div class="line">      int hash = hash(key.hashCode());    </div><div class="line">      int i = indexFor(hash, table.length);    </div><div class="line">      for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) &#123;    </div><div class="line">          Object k;    </div><div class="line">          // 若“该key”对应的键值对已经存在，则用新的value取代旧的value。然后退出！    </div><div class="line">          if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;    </div><div class="line">              V oldValue = e.value;    </div><div class="line">              e.value = value;    </div><div class="line">              e.recordAccess(this);    </div><div class="line">              return oldValue;    </div><div class="line">          &#125;    </div><div class="line">      &#125;    </div><div class="line">  </div><div class="line">      // 若“该key”对应的键值对不存在，则将“key-value”添加到table中    </div><div class="line">      modCount++;  </div><div class="line">//将key-value添加到table[i]处  </div><div class="line">      addEntry(hash, key, value, i);    </div><div class="line">      return null;    </div><div class="line">  &#125;  </div><div class="line">  </div><div class="line">  ``` </div><div class="line">如果key为null，则将其添加到table[0]对应的链表中，putForNullKey的源码如下：</div></pre></td></tr></table></figure>
-<p>// putForNullKey()的作用是将“key为null”键值对添加到table[0]位置<br>private V putForNullKey(V value) {<br>    for (Entry<k,v> e = table[0]; e != null; e = e.next) {<br>        if (e.key == null) {<br>            V oldValue = e.value;<br>            e.value = value;<br>            e.recordAccess(this);<br>            return oldValue;<br>        }<br>    }<br>    // 如果没有存在key为null的键值对，则直接题阿见到table[0]处!<br>    modCount++;<br>    addEntry(0, null, value, 0);<br>    return null;<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">如果key不为null，则同样先求出key的hash值，根据hash值得出在table中的索引，而后遍历对应的单链表，如果单链表中存在与目标key相等的键值对，则将新的value覆盖旧的value，比将旧的value返回，如果找不到与目标key相等的键值对，或者该单链表为空，则将该键值对插入到改单链表的头结点位置（每次新插入的节点都是放在头结点的位置），该操作是有addEntry方法实现的，它的源码如下：</div></pre></td></tr></table></figure></k,v></p>
-<p>// 新增Entry。将“key-value”插入指定位置，bucketIndex是位置索引。<br>void addEntry(int hash, K key, V value, int bucketIndex) {<br>    // 保存“bucketIndex”位置的值到“e”中<br>    Entry<k,v> e = table[bucketIndex];<br>    // 设置“bucketIndex”位置的元素为“新Entry”，<br>    // 设置“e”为“新Entry的下一个节点”<br>    table[bucketIndex] = new Entry<k,v>(hash, key, value, e);<br>    // 若HashMap的实际大小 不小于 “阈值”，则调整HashMap的大小<br>    if (size++ &gt;= threshold)<br>        resize(2 * table.length);<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">  </div><div class="line">注意这里倒数第三行的构造方法，将key-value键值对赋给table[bucketIndex]，并将其next指向元素e，这便将key-value放到了头结点中，并将之前的头结点接在了它的后面。该方法也说明，每次put键值对的时候，总是将新的该键值对放在table[bucketIndex]处（即头结点处）。</div><div class="line"></div><div class="line">两外注意最后两行代码，每次加入键值对时，都要判断当前已用的槽的数目是否大于等于阀值（容量*加载因子），如果大于等于，则进行扩容，将容量扩为原来容量的2倍。</div><div class="line"></div><div class="line">### 2.6 关于扩容</div><div class="line">上面我们看到了扩容的方法，resize方法，它的源码如下：</div></pre></td></tr></table></figure></k,v></k,v></p>
-<p>// 重新调整HashMap的大小，newCapacity是调整后的单位<br>void resize(int newCapacity) {<br>    Entry[] oldTable = table;<br>    int oldCapacity = oldTable.length;<br>    if (oldCapacity == MAXIMUM_CAPACITY) {<br>        threshold = Integer.MAX_VALUE;<br>        return;<br>    }    </p>
-<pre><code>// 新建一个HashMap，将“旧HashMap”的全部元素添加到“新HashMap”中，    
-// 然后，将“新HashMap”赋值给“旧HashMap”。    
-Entry[] newTable = new Entry[newCapacity];    
-transfer(newTable);    
-table = newTable;    
-threshold = (int)(newCapacity * loadFactor);    
-</code></pre><p>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">很明显，是新建了一个HashMap的底层数组，而后调用transfer方法，将就HashMap的全部元素添加到新的HashMap中（要重新计算元素在新的数组中的索引位置）。transfer方法的源码如下：</div></pre></td></tr></table></figure></p>
-<p>// 将HashMap中的全部元素都添加到newTable中<br>void transfer(Entry[] newTable) {<br>    Entry[] src = table;<br>    int newCapacity = newTable.length;<br>    for (int j = 0; j &lt; src.length; j++) {<br>        Entry<k,v> e = src[j];<br>        if (e != null) {<br>            src[j] = null;<br>            do {<br>                Entry<k,v> next = e.next;<br>                int i = indexFor(e.hash, newCapacity);<br>                e.next = newTable[i];<br>                newTable[i] = e;<br>                e = next;<br>            } while (e != null);<br>        }<br>    }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">很明显，扩容是一个相当耗时的操作，因为它需要重新计算这些元素在新的数组中的位置并进行复制处理。因此，我们在用HashMap的时，最好能提前预估下HashMap中元素的个数，这样有助于提高HashMap的性能。</div><div class="line"></div><div class="line">### 2..7 containsKey方法和containsValue方法。</div><div class="line"></div><div class="line">注意containsKey方法和containsValue方法。前者直接可以通过key的哈希值将搜索范围定位到指定索引对应的链表，而后者要对哈希数组的每个链表进行搜索。</div><div class="line"></div><div class="line">### 2.8 求hash值和索引值的方法</div><div class="line"></div><div class="line">我们重点来分析下求hash值和索引值的方法，这两个方法便是HashMap设计的最为核心的部分，二者结合能保证哈希表中的元素尽可能均匀地散列。</div><div class="line"></div><div class="line">计算哈希值的方法如下：</div></pre></td></tr></table></figure></k,v></k,v></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">  // 将“key-value”添加到HashMap中    </div><div class="line">  public V put(K key, V value) &#123;    </div><div class="line">      // 若“key为null”，则将该键值对添加到table[0]中。    </div><div class="line">      if (key == null)    </div><div class="line">          return putForNullKey(value);    </div><div class="line">      // 若“key不为null”，则计算该key的哈希值，然后将其添加到该哈希值对应的链表中。    </div><div class="line">      int hash = hash(key.hashCode());    </div><div class="line">      int i = indexFor(hash, table.length);    </div><div class="line">      for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) &#123;    </div><div class="line">          Object k;    </div><div class="line">          // 若“该key”对应的键值对已经存在，则用新的value取代旧的value。然后退出！    </div><div class="line">          if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;    </div><div class="line">              V oldValue = e.value;    </div><div class="line">              e.value = value;    </div><div class="line">              e.recordAccess(this);    </div><div class="line">              return oldValue;    </div><div class="line">          &#125;    </div><div class="line">      &#125;    </div><div class="line">  </div><div class="line">      // 若“该key”对应的键值对不存在，则将“key-value”添加到table中    </div><div class="line">      modCount++;  </div><div class="line">//将key-value添加到table[i]处  </div><div class="line">      addEntry(hash, key, value, i);    </div><div class="line">      return null;    </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>如果key为null，则将其添加到table[0]对应的链表中，putForNullKey的源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// putForNullKey()的作用是将“key为null”键值对添加到table[0]位置    </div><div class="line">private V putForNullKey(V value) &#123;    </div><div class="line">    for (Entry&lt;K,V&gt; e = table[0]; e != null; e = e.next) &#123;    </div><div class="line">        if (e.key == null) &#123;    </div><div class="line">            V oldValue = e.value;    </div><div class="line">            e.value = value;    </div><div class="line">            e.recordAccess(this);    </div><div class="line">            return oldValue;    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">    // 如果没有存在key为null的键值对，则直接题阿见到table[0]处!    </div><div class="line">    modCount++;    </div><div class="line">    addEntry(0, null, value, 0);    </div><div class="line">    return null;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果key不为null，则同样先求出key的hash值，根据hash值得出在table中的索引，而后遍历对应的单链表，如果单链表中存在与目标key相等的键值对，则将新的value覆盖旧的value，比将旧的value返回，如果找不到与目标key相等的键值对，或者该单链表为空，则将该键值对插入到改单链表的头结点位置（每次新插入的节点都是放在头结点的位置），该操作是有addEntry方法实现的，它的源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 新增Entry。将“key-value”插入指定位置，bucketIndex是位置索引。    </div><div class="line">void addEntry(int hash, K key, V value, int bucketIndex) &#123;    </div><div class="line">    // 保存“bucketIndex”位置的值到“e”中    </div><div class="line">    Entry&lt;K,V&gt; e = table[bucketIndex];    </div><div class="line">    // 设置“bucketIndex”位置的元素为“新Entry”，    </div><div class="line">    // 设置“e”为“新Entry的下一个节点”    </div><div class="line">    table[bucketIndex] = new Entry&lt;K,V&gt;(hash, key, value, e);    </div><div class="line">    // 若HashMap的实际大小 不小于 “阈值”，则调整HashMap的大小    </div><div class="line">    if (size++ &gt;= threshold)    </div><div class="line">        resize(2 * table.length);    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意这里倒数第三行的构造方法，将key-value键值对赋给table[bucketIndex]，并将其next指向元素e，这便将key-value放到了头结点中，并将之前的头结点接在了它的后面。该方法也说明，每次put键值对的时候，总是将新的该键值对放在table[bucketIndex]处（即头结点处）。</p>
+<p>两外注意最后两行代码，每次加入键值对时，都要判断当前已用的槽的数目是否大于等于阀值（容量*加载因子），如果大于等于，则进行扩容，将容量扩为原来容量的2倍。</p>
+<h3 id="2-6-关于扩容"><a href="#2-6-关于扩容" class="headerlink" title="2.6 关于扩容"></a>2.6 关于扩容</h3><p>上面我们看到了扩容的方法，resize方法，它的源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// 重新调整HashMap的大小，newCapacity是调整后的单位    </div><div class="line">void resize(int newCapacity) &#123;    </div><div class="line">    Entry[] oldTable = table;    </div><div class="line">    int oldCapacity = oldTable.length;    </div><div class="line">    if (oldCapacity == MAXIMUM_CAPACITY) &#123;    </div><div class="line">        threshold = Integer.MAX_VALUE;    </div><div class="line">        return;    </div><div class="line">    &#125;    </div><div class="line">  </div><div class="line">    // 新建一个HashMap，将“旧HashMap”的全部元素添加到“新HashMap”中，    </div><div class="line">    // 然后，将“新HashMap”赋值给“旧HashMap”。    </div><div class="line">    Entry[] newTable = new Entry[newCapacity];    </div><div class="line">    transfer(newTable);    </div><div class="line">    table = newTable;    </div><div class="line">    threshold = (int)(newCapacity * loadFactor);    </div><div class="line">&#125;   </div><div class="line">``` </div><div class="line">很明显，是新建了一个HashMap的底层数组，而后调用transfer方法，将就HashMap的全部元素添加到新的HashMap中（要重新计算元素在新的数组中的索引位置）。transfer方法的源码如下：</div></pre></td></tr></table></figure>
+<p>// 将HashMap中的全部元素都添加到newTable中<br>void transfer(Entry[] newTable) {<br>    Entry[] src = table;<br>    int newCapacity = newTable.length;<br>    for (int j = 0; j &lt; src.length; j++) {<br>        Entry<k,v> e = src[j];<br>        if (e != null) {<br>            src[j] = null;<br>            do {<br>                Entry<k,v> next = e.next;<br>                int i = indexFor(e.hash, newCapacity);<br>                e.next = newTable[i];<br>                newTable[i] = e;<br>                e = next;<br>            } while (e != null);<br>        }<br>    }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">很明显，扩容是一个相当耗时的操作，因为它需要重新计算这些元素在新的数组中的位置并进行复制处理。因此，我们在用HashMap的时，最好能提前预估下HashMap中元素的个数，这样有助于提高HashMap的性能。</div><div class="line"></div><div class="line">### 2..7 containsKey方法和containsValue方法。</div><div class="line"></div><div class="line">注意containsKey方法和containsValue方法。前者直接可以通过key的哈希值将搜索范围定位到指定索引对应的链表，而后者要对哈希数组的每个链表进行搜索。</div><div class="line"></div><div class="line">### 2.8 求hash值和索引值的方法</div><div class="line"></div><div class="line">我们重点来分析下求hash值和索引值的方法，这两个方法便是HashMap设计的最为核心的部分，二者结合能保证哈希表中的元素尽可能均匀地散列。</div><div class="line"></div><div class="line">计算哈希值的方法如下：</div></pre></td></tr></table></figure></k,v></k,v></p>
 <p>static int hash(int h) {<br>        h ^= (h &gt;&gt;&gt; 20) ^ (h &gt;&gt;&gt; 12);<br>        return h ^ (h &gt;&gt;&gt; 7) ^ (h &gt;&gt;&gt; 4);<br>    }  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">它只是一个数学公式，IDK这样设计对hash值的计算，自然有它的好处，至于为什么这样设计，我们这里不去追究，只要明白一点，用的位的操作使hash值的计算效率很高。</div><div class="line"></div><div class="line">由hash值找到对应索引的方法如下：</div></pre></td></tr></table></figure>
 <p>static int indexFor(int h, int length) {<br>        return h &amp; (length-1);<br>    }<br>```<br>这个我们要重点说下，我们一般对哈希表的散列很自然地会想到用hash值对length取模（即除法散列法），Hashtable中也是这样实现的，这种方法基本能保证元素在哈希表中散列的比较均匀，但取模会用到除法运算，效率很低，HashMap中则通过h&amp;(length-1)的方法来代替取模，同样实现了均匀的散列，但效率要高很多，这也是HashMap对Hashtable的一个改进。</p>
@@ -466,8 +465,8 @@ threshold = (int)(newCapacity * loadFactor);
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/20/Java学习笔记（1）：语法基础/" rel="next" title="Java学习笔记（1）：语法基础">
-                <i class="fa fa-chevron-left"></i> Java学习笔记（1）：语法基础
+              <a href="/2017/08/18/Java集合学习手册（10）：hashCode方法与equal方法/" rel="next" title="Java集合学习手册（10）：hashCode方法与equal方法">
+                <i class="fa fa-chevron-left"></i> Java集合学习手册（10）：hashCode方法与equal方法
               </a>
             
           </div>
@@ -476,8 +475,8 @@ threshold = (int)(newCapacity * loadFactor);
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/18/Java集合学习手册（10）：hashCode方法与equal方法/" rel="prev" title="Java集合学习手册（10）：hashCode方法与equal方法">
-                Java集合学习手册（10）：hashCode方法与equal方法 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/20/Java学习笔记（1）：语法基础/" rel="prev" title="Java学习笔记（1）：语法基础">
+                Java学习笔记（1）：语法基础 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -546,7 +545,7 @@ threshold = (int)(newCapacity * loadFactor);
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -554,7 +553,7 @@ threshold = (int)(newCapacity * loadFactor);
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -563,7 +562,7 @@ threshold = (int)(newCapacity * loadFactor);
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -605,7 +604,7 @@ threshold = (int)(newCapacity * loadFactor);
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、HashMap源码剖析"><span class="nav-text">一、HashMap源码剖析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、HashMap细节剖析"><span class="nav-text">二、HashMap细节剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-存储结构"><span class="nav-text">2.1 存储结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-链表节点的数据结构"><span class="nav-text">2.2 链表节点的数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-构造方法"><span class="nav-text">2.3 构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-HashMap中key和value都允许为null。"><span class="nav-text">2.4 HashMap中key和value都允许为null。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-重点分析put和get"><span class="nav-text">2.5 重点分析put和get</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、HashMap源码剖析"><span class="nav-text">一、HashMap源码剖析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、HashMap细节剖析"><span class="nav-text">二、HashMap细节剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-存储结构"><span class="nav-text">2.1 存储结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-链表节点的数据结构"><span class="nav-text">2.2 链表节点的数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-构造方法"><span class="nav-text">2.3 构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-HashMap中key和value都允许为null。"><span class="nav-text">2.4 HashMap中key和value都允许为null。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-重点分析put和get"><span class="nav-text">2.5 重点分析put和get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-关于扩容"><span class="nav-text">2.6 关于扩容</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -875,9 +874,32 @@ threshold = (int)(newCapacity * loadFactor);
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -889,13 +911,10 @@ threshold = (int)(newCapacity * loadFactor);
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

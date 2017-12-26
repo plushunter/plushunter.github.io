@@ -93,10 +93,11 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/27/机器学习算法系列（12）：SVM（1）——线性可分支持向量机/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="当训练数据线性可分时，通过硬间隔最大化，学习一个线性可分支持向量机。 一般地，当训练数据集线性可分时，存在无穷个分离超平面可将两类数据正确分开。感知机利用误分类最小的策略，求得分离超平面，不过这时的解有无穷多个。线性可分支持向量机利用间隔最大化求分离超平面，解是唯一的。也就是它不仅将正负实例点分开，而且对最难分的实例点（离分离超平面最近的点）也有足够大的确信度将它们分开。这样的超平面应该对未知的新">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-19%20%E4%B8%8B%E5%8D%882.15.14.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015158199160.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015158544941.jpg">
-<meta property="og:updated_time" content="2017-08-20T03:19:30.000Z">
+<meta property="og:updated_time" content="2017-12-26T08:40:07.005Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（12）：SVM（1）—线性可分支持向量机">
 <meta name="twitter:description" content="当训练数据线性可分时，通过硬间隔最大化，学习一个线性可分支持向量机。 一般地，当训练数据集线性可分时，存在无穷个分离超平面可将两类数据正确分开。感知机利用误分类最小的策略，求得分离超平面，不过这时的解有无穷多个。线性可分支持向量机利用间隔最大化求分离超平面，解是唯一的。也就是它不仅将正负实例点分开，而且对最难分的实例点（离分离超平面最近的点）也有足够大的确信度将它们分开。这样的超平面应该对未知的新">
@@ -382,68 +383,136 @@ var _hmt = _hmt || [];
         <p>当训练数据线性可分时，通过硬间隔最大化，学习一个线性可分支持向量机。</p>
 <p>一般地，当训练数据集线性可分时，存在无穷个分离超平面可将两类数据正确分开。感知机利用误分类最小的策略，求得分离超平面，不过这时的解有无穷多个。线性可分支持向量机利用间隔最大化求分离超平面，解是唯一的。也就是它不仅将正负实例点分开，而且对最难分的实例点（离分离超平面最近的点）也有足够大的确信度将它们分开。这样的超平面应该对未知的新实例有很好的分类预测能力。</p>
 <a id="more"></a>
-<h2 id="一、线性可分支持向量机与硬间隔最大化"><a href="#一、线性可分支持向量机与硬间隔最大化" class="headerlink" title="一、线性可分支持向量机与硬间隔最大化"></a>一、线性可分支持向量机与硬间隔最大化</h2><h4 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h4><p>假设给定一个特征空间上的训练数据集<br>$$<br>T=\left\{ \left( x_1,y_1 \right) ,\left( x_2,y_2 \right) ,···,\left( x_N,y_N \right) \right\}<br>$$<br>其中$<br>x_i\in R^n,y_i\in \left\{ +1,-1 \right\} ,i=1,2,···,N<br>$，$x_i$为第$i$个特征向量，也称为实例，$y_i$为$x_i$的类标记，当$y_i=+1$时，称$x_i$为正例；当$y_i=-1$时，称$x_i$为负例，$(x_i,y_i)$称为样本点。再假设训练数据集是线性可分的。</p>
-<p>给定线性可分训练数据集，通过<strong>间隔最大化</strong>得到的<strong>分离超平面</strong>为$$<br>w^T·x+b=0<br>$$<br>以及相应的<strong>分类决策函数</strong>$$<br>f\left( x \right) =sign\left( w^T·x+b \right)<br>$$</p>
-<p>该决策函数称为线性可分支持向量机</p>
-<h4 id="1-2-函数间隔与几何间隔"><a href="#1-2-函数间隔与几何间隔" class="headerlink" title="1.2 函数间隔与几何间隔"></a>1.2 函数间隔与几何间隔</h4><p>一般来说，一个点距离分离超平面的远近可以表示分类预测的确信程度。在超平面确定的情况下$|w^T·x+b|$能够相对地表示点$x$距离超平面的远近。而$w^T·x+b$的符号与类标记的符号是否一致能够表示分类是否正确，所以可用$y(w^T·x+b)$来表示分类的正确性与确信度，这就是<strong>函数间隔</strong><code>functional margin</code>的概念</p>
-<p>但是，函数间隔有一个不足之处，就是在选择分离超平面时，只要成比例地改变$w$和$b$，超平面并没有变化，而函数间隔却以同样比例变化了。因此，我们可以对分离超平面的法向量$w$加上某些约束，使得间隔确定，此时函数间隔成为<strong>几何间隔</strong><code>geometric margin</code>。</p>
-<p>对于给定的训练数据集$T$和超平面$(w,b)$，定义超平面$(w,b)$关于样本点$(x_i,y_i)$的几何间隔为$$<br>\gamma _i=y_i\left( \frac{w}{||w||}·x_i+\frac{b}{||w||} \right)<br>$$</p>
-<p>定义超平面$(w,b)$关于训练数据集$T$的几何间隔为超平面$(w,b)$关于$T$中所有样本点$(x_i,y_i)$的几何间隔之最小值，即<br>$$<br>\gamma =\underset{i=1,···,N}{\min}\gamma _i<br>$$</p>
-<p>超平面$(w,b)$关于样本点$(x_i,y_i)$的几何间隔一般是实例点到超平面的带符号的距离，当样本点被超平面正确分类时就是实例点到超平面的距离。</p>
-<p>函数间隔与几何间隔的关系为$$<br>\gamma =\frac{\hat{\gamma}}{||w||}<br>$$若$||w||=1$，那么函数间隔和几何间隔相等。如果超平面参数$w$和$b$成比例地改变（超平面没有改变），函数间隔也按此比例改变，而几何间隔不变。</p>
+<h2 id="一、线性可分支持向量机与硬间隔最大化"><a href="#一、线性可分支持向量机与硬间隔最大化" class="headerlink" title="一、线性可分支持向量机与硬间隔最大化"></a>一、线性可分支持向量机与硬间隔最大化</h2><h4 id="1-1-线性可分支持向量机"><a href="#1-1-线性可分支持向量机" class="headerlink" title="1.1 线性可分支持向量机"></a>1.1 线性可分支持向量机</h4><p>假设给定一个特征空间上的训练数据集</p>
+<script type="math/tex; mode=display">
+T=\left\{ \left( x_1,y_1 \right) ,\left( x_2,y_2 \right) ,···,\left( x_N,y_N \right) \right\}</script><p>其中$<br>x_i\in R^n,y_i\in \left\{ +1,-1 \right\} ,i=1,2,···,N<br>$，$x_i$为第$i$个特征向量，也称为实例，$y_i$为$x_i$的类标记，当$y_i=+1$时，称$x_i$为正例；当$y_i=-1$时，称$x_i$为负例，$(x_i,y_i)$称为样本点。再假设训练数据集是线性可分的。</p>
+<p>给定线性可分训练数据集，通过间隔最大化得到的分离超平面为</p>
+<script type="math/tex; mode=display">
+w^T·x+b=0</script><p>以及相应的分类决策函数</p>
+<script type="math/tex; mode=display">
+f\left( x \right) =sign\left( w^T·x+b \right)</script><p>该决策函数称为线性可分支持向量机</p>
+<h4 id="1-2-函数间隔与几何间隔"><a href="#1-2-函数间隔与几何间隔" class="headerlink" title="1.2 函数间隔与几何间隔"></a>1.2 函数间隔与几何间隔</h4><p>一般来说，一个点距离分离超平面的远近可以表示分类预测的确信程度。在超平面确定的情况下$|w^T·x+b|$能够相对地表示点$x$距离超平面的远近。而$w^T·x+b$的符号与类标记的符号是否一致能够表示分类是否正确，所以可用$y(w^T·x+b)$来表示分类的正确性与确信度，这就是函数间隔<code>functional margin</code>的概念</p>
+<p>但是，函数间隔有一个不足之处，就是在选择分离超平面时，只要成比例地改变$w$和$b$，超平面并没有变化，而函数间隔却以同样比例变化了。因此，我们可以对分离超平面的法向量$w$加上某些约束，使得间隔确定，此时函数间隔成为几何间隔<code>geometric margin</code>。</p>
+<p>对于给定的训练数据集$T$和超平面$(w,b)$，定义超平面$(w,b)$关于样本点$(x_i,y_i)$的几何间隔为</p>
+<script type="math/tex; mode=display">
+\gamma _i=y_i\left( \frac{w}{||w||}·x_i+\frac{b}{||w||} \right)</script><p>定义超平面$(w,b)$关于训练数据集$T$的几何间隔为超平面$(w,b)$关于$T$中所有样本点$(x_i,y_i)$的几何间隔之最小值，即</p>
+<script type="math/tex; mode=display">
+\gamma =\underset{i=1,···,N}{\min}\gamma _i</script><p>超平面$(w,b)$关于样本点$(x_i,y_i)$的几何间隔一般是实例点到超平面的带符号的距离，当样本点被超平面正确分类时就是实例点到超平面的距离。</p>
+<p>函数间隔与几何间隔的关系为</p>
+<script type="math/tex; mode=display">
+\gamma =\frac{\hat{\gamma}}{||w||}</script><p>若$||w||=1$，那么函数间隔和几何间隔相等。如果超平面参数$w$和$b$成比例地改变（超平面没有改变），函数间隔也按此比例改变，而几何间隔不变。</p>
 <h4 id="1-3-间隔最大化"><a href="#1-3-间隔最大化" class="headerlink" title="1.3 间隔最大化"></a>1.3 间隔最大化</h4><p>支持向量机学习的基本想法是求解能够正确划分训练数据集并且几何间隔最大的分离超平面。几何间隔最大的分离超平面是唯一的。</p>
-<p><strong>间隔最大化</strong>的直观解释是：对训练数据集找到几何间隔最大的超平面意味着以充分大的确信度对训练数据记性分类。即，不仅将正负实例点分开，而且对最难分的实例点（离超平面最近的点）也有足够大的确信度将它们分开。这样的超平面应该对未知的新实例有很好的分类预测能力。</p>
-<p><strong>最大间隔分离超平面</strong></p>
-<p>接下来求一个几何间隔最大的分离超平面，即最大间隔分离超平面。具体地，可以表示为下面的约束最优化问题：$$<br>\underset{w,b}{\max}\,\,\gamma<br>$$$$<br>s.t\,\,\,\,y_i\left( \frac{w}{||w||}·x_i+\frac{b}{||w||} \right) \geqslant \gamma \,\,,\,\,i=1,2,···,N<br>$$<br>即最大化超平面$(w,b)$关于训练数据集的几何间隔$\gamma $，约束条件表示的是超平面$(w,b)$关于每个训练样本点的几何间隔至少是$\gamma $</p>
-<p>根据几何间隔和函数间隔的关系，可以将此问题改写为$$<br>\underset{w,b}{\max} \frac{\hat{\gamma}}{||w||}<br>$$$$<br>s.t  y_i\left( w·x_i+b \right) \geqslant \hat{\gamma} , i=1,2,···,N<br>$$<br>函数间隔$<br>\hat{\gamma}<br>$的取值不影响最优化的解。函数间隔因为$w$，$b$按比例改变为$<br>\lambda w\mathrm{，}\lambda b<br>$而成为$<br>\lambda \hat{\gamma}<br>$，但是对最优化问题中的不等式约束没有影响，对目标函数的优化也没有影响，即两者等价。这样，我们可以取$<br> \hat{\gamma}=1<br>$，代入后注意到最大化$<br>\frac{1}{||w||}<br>$和最小化$<br>\frac{1}{2}||w||^2<br>$是等价的，因为我们关心的并不是最优情况下目标函数的具体数值。于是就得到下面的线性可分支持向量机学习的最优化问题。</p>
+<p>间隔最大化的直观解释是：对训练数据集找到几何间隔最大的超平面意味着以充分大的确信度对训练数据记性分类。即，不仅将正负实例点分开，而且对最难分的实例点（离超平面最近的点）也有足够大的确信度将它们分开。这样的超平面应该对未知的新实例有很好的分类预测能力。</p>
+<p>最大间隔分离超平面</p>
+<p>接下来求一个几何间隔最大的分离超平面，即最大间隔分离超平面。具体地，可以表示为下面的约束最优化问题：</p>
+<script type="math/tex; mode=display">
+\underset{w,b}{\max}\,\,\gamma</script><script type="math/tex; mode=display">
+s.t\,\,\,\,y_i\left( \frac{w}{||w||}·x_i+\frac{b}{||w||} \right) \geqslant \gamma \,\,,\,\,i=1,2,···,N</script><p>即最大化超平面$(w,b)$关于训练数据集的几何间隔$\gamma $，约束条件表示的是超平面$(w,b)$关于每个训练样本点的几何间隔至少是$\gamma $</p>
+<p>根据几何间隔和函数间隔的关系，可以将此问题改写为</p>
+<script type="math/tex; mode=display">
+\underset{w,b}{\max}\ \frac{\hat{\gamma}}{||w||}</script><script type="math/tex; mode=display">
+s.t\ \ y_i\left( w·x_i+b \right) \geqslant \hat{\gamma}\ ,\ i=1,2,···,N</script><p>函数间隔$\hat{\gamma}$的取值不影响最优化的解。函数间隔因为$w$，$b$按比例改变为$\lambda w\mathrm{，}\lambda b$而成为$\lambda \hat{\gamma}$，但是对最优化问题中的不等式约束没有影响，对目标函数的优化也没有影响，即两者等价。这样，我们可以取$ \hat{\gamma}=1$，代入后注意到最大化$<br>\frac{1}{||w||}$和最小化$\frac{1}{2}||w||^2$是等价的，因为我们关心的并不是最优情况下目标函数的具体数值。于是就得到下面的线性可分支持向量机学习的最优化问题。</p>
 <ol>
-<li>构造并求解约束最优化问题：$$<br>\underset{w,b}{\min}\frac{1}{2}||w||^2<br>$$<br>$$<br>                s.t  y_i\left( w·x_i+b \right) -1\geqslant 0, i=1,2,···,N<br>$$求得最优解$w^<em>$,$b^</em>$</li>
-<li>由此得到分割超平面：$$<br>w^<em>·x+b^</em>=0<br>$$<br>分类决策函数<br>$$<br>f\left( x \right) =sign\left( w^*·x+b \right)<br>$$</li>
+<li>构造并求解约束最优化问题：<script type="math/tex; mode=display">
+\underset{w,b}{\min}\frac{1}{2}||w||^2</script><script type="math/tex; mode=display">
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t\ \ y_i\left( w·x_i+b \right) -1\geqslant 0,\ i=1,2,···,N</script>求得最优解$w^<em>$,$b^</em>$</li>
+<li>由此得到分割超平面：<script type="math/tex; mode=display">
+w^*·x+b^*=0</script>分类决策函数<script type="math/tex; mode=display">
+f\left( x \right) =sign\left( w^*·x+b \right)</script></li>
 </ol>
-<p>这其实是一个凸二次规划<code>convex quadratic programming</code> 问题，凸优化问题是指约束最优化问题$$<br>\underset{w}{\min}   f\left( w \right)<br>$$$$<br>                 s.t   g_i\left( w \right) \le 0 , i=1,2,···,k<br>$$$$<br>             h_i\left( w \right) =0 , i=1,2,···,l <br>$$<br>其中，目标函数$f(w)$和约束函数$g_i(w)$都是$R^n$上的连续可微的凸函数，约束函数$h_i(w)$是$R^n$上的仿射函数。当目标函数$f(w)$是二次函数且约束函数$g_i(w)$是仿射函数时，上述凸优化问题成为凸二次规划问题。</p>
-<p><strong>支持向量和间隔边界</strong></p>
-<p>在线性可分情况下，训练数据集的样本点中与分离超平面距离最近的样本点的实例成为支持向量<code>support vector</code>。支持向量是使约束条件式等号成立的点，即$$<br>y_i\left( w·x_i+b \right) -1=0<br>$$对$y_i=+1$的实例点，支持向量在超平面$$<br>H_1\mathrm{：}w·x_i+b=1<br>$$<br>对$y_i=-1$的负例点，支持向量在超平面$$<br>H_2\mathrm{：}w·x_i+b=-1<br>$$</p>
-<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-19%20%E4%B8%8B%E5%8D%882.15.14.png" alt="屏幕快照 2017-03-19 下午2.15.14"></center>
-
+<p>这其实是一个凸二次规划<code>convex quadratic programming</code> 问题，凸优化问题是指约束最优化问题</p>
+<script type="math/tex; mode=display">
+\underset{w}{\min}\ \ \ f\left( w \right)</script><script type="math/tex; mode=display">
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ s.t\ \ \ g_i\left( w \right) \le 0\ ,\ i=1,2,···,k</script><script type="math/tex; mode=display">
+\ \ \ \ \ \ \ \ \ \ \ \ \ h_i\left( w \right) =0\ ,\ i=1,2,···,l\</script><p>其中，目标函数$f(w)$和约束函数$g_i(w)$都是$R^n$上的连续可微的凸函数，约束函数$h_i(w)$是$R^n$上的仿射函数。当目标函数$f(w)$是二次函数且约束函数$g_i(w)$是仿射函数时，上述凸优化问题成为凸二次规划问题。</p>
+<p>支持向量和间隔边界</p>
+<p>在线性可分情况下，训练数据集的样本点中与分离超平面距离最近的样本点的实例成为支持向量<code>support vector</code>。支持向量是使约束条件式等号成立的点，即</p>
+<script type="math/tex; mode=display">
+y_i\left( w·x_i+b \right) -1=0</script><p>对$y_i=+1$的实例点，支持向量在超平面</p>
+<script type="math/tex; mode=display">
+H_1\mathrm{：}w·x_i+b=1</script><p>对$y_i=-1$的负例点，支持向量在超平面</p>
+<script type="math/tex; mode=display">
+H_2\mathrm{：}w·x_i+b=-1</script><p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-19%20%E4%B8%8B%E5%8D%882.15.14.png" alt="屏幕快照 2017-03-19 下午2.15.14"></p>
 <p>可以看到两个支撑着中间的长带的超平面，它们到中间的分离超平面的距离相等，为什么一定是相等的呢？，即我们所能得到的最大的几何间隔 $\tilde{\gamma}$ 。而“支撑”这两个超平面的必定会有一些点，试想，如果某超平面没有碰到任意一个点的话，那么我就可以进一步地扩充中间的 gap ，于是这个就不是最大的 margin 了。由于在 $n$ 维向量空间里一个点实际上是和以原点为起点，该点为终点的一个向量是等价的，所以这些“支撑”的点便叫做支持向量。</p>
 <p>注意到$H_1$和$H_2$平行，并且没有实例点落在他们中间。在$H_1$和$H_2$之间形成一条长带，分离超平面与他们平行且位于他们中间。长带的宽度，即$H_1$与$H_2$之间的距离成为间隔<code>margin</code>，间隔依赖于分离超平面的法向量$w$，等于$<br>\frac{2}{||w||}<br>$。$H_1$和$H_2$称为间隔边界。</p>
 <p>在决定分离超平面时只有支持向量起作用，而其他实例点并不起作用。如果移动支持向量将改变所求的解；但是如果在将俄边界以外移动其他实例点，甚至去掉这些点，则解是不会改变的。由于支持向量在确定分离超平面中起着决定性作用，所以将这种分类模型称为支持向量机。支持向量机的个数一般都很少，所以支持向量机由很少的“重要的”训练样本确定。</p>
 <p>很显然，由于这些 supporting vector 刚好在边界上，所以它们是满足 $y(w^Tx+b)=1$ ，而对于所有不是支持向量的点，也就是在“阵地后方”的点，则显然有$y(w^Tx+b)&gt;1$ 。事实上，当最优的超平面确定下来之后，这些后方的点就完全成了路人甲了，它们可以在自己的边界后方随便飘来飘去都不会对超平面产生任何影响。这样的特性在实际中有一个最直接的好处就在于存储和计算上的优越性，例如，如果使用 100 万个点求出一个最优的超平面，其中是支持向量的有 100 个，那么我只需要记住这 100 个点的信息即可，对于后续分类也只需要利用这 100 个点而不是全部 100 万个点来做计算。</p>
 <h4 id="1-4-学习的对偶算法"><a href="#1-4-学习的对偶算法" class="headerlink" title="1.4 学习的对偶算法"></a>1.4 学习的对偶算法</h4><p>为了求解线性可分支持向量机的最优化问题，将它作为原始最优化问题，应用拉格朗日对偶性，通过求解对偶问题得到原始问题的最优解，这就是线性可分支持向量机的对偶算法<code>dual algorithm</code>。</p>
 <p>这样做的优点是，一是对偶问题往往更容易求解；二是引入核函数，进而推广到非线性分类问题。</p>
-<p>首先构建拉格朗日函数，为此，对每一个不等式约束引进拉格朗日乘子$a_i≥0，i=1,2,···,N$定义拉格朗日函数：<br>$$<br>L\left( w,b,a \right) =\frac{1}{2}||w||^2-\sum_{i=1}^N{a_i(y_i\left( w·x_i+b )-1\right)} $$其中，$<br>a=\left( a_1,a_2,···,a_N \right) ^T<br>$<br>然后我们令$$θ(w)=\underset{a_i≥0}{max}L(w,b,α)$$容易验证，当某个约束条件不满足时，例如 $y_i(w^Tx_i+b)&lt;1$，那么我们显然有 $θ(w)=∞$ （只要令$α_i=∞$即可）。而当所有约束条件都满足时，则有 $θ(w)=\frac{1}{2}||w||_2$ ，亦即我们最初要最小化的量。因此，在要求约束条件得到满足的情况下最小化 $\frac{1}{2}||w||_2$ 实际上等价于直接最小化 $θ(w)$（当然，这里也有约束条件，就是 $α_i≥0,i=1,…,n$），因为如果约束条件没有得到满足，$θ(w)$ 会等于无穷大，自然不会是我们所要求的最小值。 具体写出来，我们现在的目标函数变成了：$$<br>\underset{w,b}{min}\theta(w)=\underset{w,b}{\min}\underset{a_i≥0}{\max}L\left( w,b,a \right) =p^*<br>$$这里用 $p^∗$ 表示这个问题的最优值，这个问题和我们最初的问题是等价的。不过，现在我们来把最小和最大的位置交换一下：$$\underset{a_i≥0}{\max}\underset{w,b}{\min}L\left( w,b,a \right) =d^∗$$当然，交换以后的问题不再等价于原问题，这个新问题的最优值用 $d^∗$ 来表示。并，我们有 $d^∗≤p^∗$，这在直观上也不难理解，最大值中最小的一个总也比最小值中最大的一个要大吧！总之，第二个问题的最优值$d^∗$ 在这里提供了一个第一个问题的最优值$p^∗$ 的一个下界，在满足某些条件的情况下，这两者相等，这个时候我们就可以通过求解第二个问题来间接地求解第一个问题。具体来说，就是要满足 KKT 条件，这里暂且先略过不说，直接给结论：我们这里的问题是满足 KKT 条件的，因此现在我们便转化为求解第二个问题。</p>
+<p>首先构建拉格朗日函数，为此，对每一个不等式约束引进拉格朗日乘子$a_i≥0，i=1,2,···,N$定义拉格朗日函数：</p>
+<script type="math/tex; mode=display">
+L\left( w,b,a \right) =\frac{1}{2}||w||^2-\sum_{i=1}^N{a_i(y_i\left( w·x_i+b )-1\right)}</script><p>其中，$a=\left( a_1,a_2,···,a_N \right) ^T$<br>然后我们令</p>
+<script type="math/tex; mode=display">θ(w)=\underset{a_i≥0}{max}L(w,b,α)</script><p>容易验证，当某个约束条件不满足时，例如 $y_i(w^Tx_i+b)&lt;1$，那么我们显然有 $θ(w)=∞$ （只要令$α_i=∞$即可）。而当所有约束条件都满足时，则有 $θ(w)=\frac{1}{2}||w||_2$ ，亦即我们最初要最小化的量。因此，在要求约束条件得到满足的情况下最小化 $\frac{1}{2}||w||_2$ 实际上等价于直接最小化 $θ(w)$（当然，这里也有约束条件，就是 $α_i≥0,i=1,…,n$），因为如果约束条件没有得到满足，$θ(w)$ 会等于无穷大，自然不会是我们所要求的最小值。 具体写出来，我们现在的目标函数变成了：</p>
+<script type="math/tex; mode=display">
+\underset{w,b}{min}\theta(w)=\underset{w,b}{\min}\underset{a_i≥0}{\max}L\left( w,b,a \right) =p^*</script><p>这里用 $p^∗$ 表示这个问题的最优值，这个问题和我们最初的问题是等价的。不过，现在我们来把最小和最大的位置交换一下：</p>
+<script type="math/tex; mode=display">\underset{a_i≥0}{\max}\underset{w,b}{\min}L\left( w,b,a \right) =d^∗</script><p>当然，交换以后的问题不再等价于原问题，这个新问题的最优值用 $d^∗$ 来表示。并，我们有 $d^∗≤p^∗$，这在直观上也不难理解，最大值中最小的一个总也比最小值中最大的一个要大吧！总之，第二个问题的最优值$d^∗$ 在这里提供了一个第一个问题的最优值$p^∗$ 的一个下界，在满足某些条件的情况下，这两者相等，这个时候我们就可以通过求解第二个问题来间接地求解第一个问题。具体来说，就是要满足 KKT 条件，这里暂且先略过不说，直接给结论：我们这里的问题是满足 KKT 条件的，因此现在我们便转化为求解第二个问题。</p>
 <p>为了得到对偶问题的解，需要先求$L(w,b,a)$对$w,b$的极小，再求对$a$的极大。</p>
 <ol>
-<li><p>求$<br>\underset{w,b}{\min}L\left( w,b,a \right)<br>$<br>将拉格朗日函数$L(w,b,a)$分别对$w,b$求偏导数并令其为$0$。<br>$$<br>\nabla _wL\left( w,b,a \right) =w-\sum_{i=1}^N{a_iy_ix_i}=0<br>$$$$<br>\nabla _bL\left( w,b,a \right) =\sum_{i=1}^N{a_iy_i}=0<br>$$得到$$<br>w=\sum_{i=1}^N{a_iy_ix_i}<br>$$$$<br>\sum_{i=1}^N{a_iy_i=0}<br>$$将其代入拉格朗日函数，得到<br>$$<br>L\left( w,b,a \right) =\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) -\sum_{i=1}^N{a_iy_i\left( \left( \sum_{j=1}^N{a_jy_jx_j} \right) ·x_i+b \right) +\sum_{i=1}^N{a_i}}}}<br>$$$$<br>=-\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) +\sum_{i=1}^N{a_i}}}<br>$$</p>
-</li>
-<li><p>求$<br>\underset{w,b}{\min}L\left( w,b,a \right)<br>$对$a$的极大，即是对偶问题<br>$$<br>\underset{a}{\max} \sum_{i=1}^N{a_i}-\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right)}}<br>$$$$<br>s.t. \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>a_i\geqslant 0,  i=1,2,···,N<br>$$</p>
-</li>
+<li><p>求$<br>\underset{w,b}{\min}L\left( w,b,a \right)<br>$<br>将拉格朗日函数$L(w,b,a)$分别对$w,b$求偏导数并令其为$0$。</p>
+<script type="math/tex; mode=display">
+\nabla _wL\left( w,b,a \right) =w-\sum_{i=1}^N{a_iy_ix_i}=0</script><script type="math/tex; mode=display">
+\nabla _bL\left( w,b,a \right) =\sum_{i=1}^N{a_iy_i}=0</script><p>得到</p>
+<script type="math/tex; mode=display">
+w=\sum_{i=1}^N{a_iy_ix_i}</script><script type="math/tex; mode=display">
+\sum_{i=1}^N{a_iy_i=0}</script><p>将其代入拉格朗日函数，得到</p>
+<script type="math/tex; mode=display">
+L\left( w,b,a \right) =\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) -\sum_{i=1}^N{a_iy_i\left( \left( \sum_{j=1}^N{a_jy_jx_j} \right) ·x_i+b \right) +\sum_{i=1}^N{a_i}}}}</script><script type="math/tex; mode=display">
+=-\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) +\sum_{i=1}^N{a_i}}}</script></li>
+<li><p>求$<br>\underset{w,b}{\min}L\left( w,b,a \right)<br>$对$a$的极大，即是对偶问题</p>
+<script type="math/tex; mode=display">
+\underset{a}{\max} \sum_{i=1}^N{a_i}-\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right)}}</script><script type="math/tex; mode=display">
+s.t.\ \sum_{i=1}^N{a_iy_i=0}</script><script type="math/tex; mode=display">
+a_i\geqslant 0,\ \ i=1,2,···,N</script></li>
 </ol>
-<p>将目标函数由求极大转换为极小，就得到下面与之等价的对偶最优化问题。<br>$$<br>\underset{a}{\min}   \frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right)}}-\sum_{i=1}^N{a_i}<br>$$$$<br>s.t. \sum_{i=1}^N{a_iy_i=0}<br>$$$$<br>a_i\geqslant 0,  i=1,2,···,N<br>$$</p>
-<p>让我们先来看看推导过程中得到的一些有趣的形式。首先就是关于我们的 hyper plane ，对于一个数据点 x 进行分类，实际上是通过把 x 带入到 $f(x)=w^Tx+b$ 算出结果然后根据其正负号来进行类别划分的。而前面的推导中我们得到$f(w)=∑^n_{i=1}α_iy_ix_i$ ，因此$$f(x)=(∑^n_{i=1}α_iy_ix_i)^Tx+b=∑^n_{i=1}α_iy_i ⟨x_i,x⟩+b$$这里的形式的有趣之处在于，对于新点 x 的预测，只需要计算它与训练数据点的内积即可（这里 ⟨⋅,⋅⟩ 表示向量内积），这一点至关重要，是之后使用 Kernel 进行非线性推广的基本前提。此外，所谓 Supporting Vector 也在这里显示出来——事实上，所有非 Supporting Vector 所对应的系数 α 都是等于零的，因此对于新点的内积计算实际上只要针对少量的“支持向量”而不是所有的训练数据即可。</p>
+<p>将目标函数由求极大转换为极小，就得到下面与之等价的对偶最优化问题。</p>
+<script type="math/tex; mode=display">
+\underset{a}{\min}\ \ \ \frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right)}}-\sum_{i=1}^N{a_i}</script><script type="math/tex; mode=display">
+s.t.\ \sum_{i=1}^N{a_iy_i=0}</script><script type="math/tex; mode=display">
+a_i\geqslant 0,\ \ i=1,2,···,N</script><p>让我们先来看看推导过程中得到的一些有趣的形式。首先就是关于我们的 hyper plane ，对于一个数据点 x 进行分类，实际上是通过把 x 带入到 $f(x)=w^Tx+b$ 算出结果然后根据其正负号来进行类别划分的。而前面的推导中我们得到$f(w)=∑^n_{i=1}α_iy_ix_i$ ，因此</p>
+<script type="math/tex; mode=display">f(x)=(∑^n_{i=1}α_iy_ix_i)^Tx+b=∑^n_{i=1}α_iy_i ⟨x_i,x⟩+b</script><p>这里的形式的有趣之处在于，对于新点 x 的预测，只需要计算它与训练数据点的内积即可（这里 ⟨⋅,⋅⟩ 表示向量内积），这一点至关重要，是之后使用 Kernel 进行非线性推广的基本前提。此外，所谓 Supporting Vector 也在这里显示出来——事实上，所有非 Supporting Vector 所对应的系数 α 都是等于零的，因此对于新点的内积计算实际上只要针对少量的“支持向量”而不是所有的训练数据即可。</p>
 <p>为什么非支持向量对应的 α 等于零呢？直观上来理解的话，就是这些“后方”的点——正如我们之前分析过的一样，对超平面是没有影响的，由于分类完全有超平面决定，所以这些无关的点并不会参与分类问题的计算，因而也就不会产生任何影响了。</p>
-<p>这个结论也可由刚才的推导中得出，回忆一下我们刚才通过 Lagrange multiplier 得到的目标函数：$$\underset{a_i≥0}{max}L(w,b,a)=\underset{a_i≥0}{max}\frac{1}{2}||w||^2-\sum_{i=1}^na_i(y_i(w^Tx_i+b)-1)$$注意到如果 $x_i$ 是支持向量的话，上式中$(y_i(w^Tx_i+b)-1)$部分是等于 0 的（因为支持向量的 functional margin 等于 1 ），而对于非支持向量来说，函数间隔会大于 1 ，因此这个部分是大于零的，而 $a_i$ 又是非负的，为了满足最大化，$α_i$ 必须等于 0 。</p>
+<p>这个结论也可由刚才的推导中得出，回忆一下我们刚才通过 Lagrange multiplier 得到的目标函数：</p>
+<script type="math/tex; mode=display">\underset{a_i≥0}{max}L(w,b,a)=\underset{a_i≥0}{max}\frac{1}{2}||w||^2-\sum_{i=1}^na_i(y_i(w^Tx_i+b)-1)</script><p>注意到如果 $x_i$ 是支持向量的话，上式中$(y_i(w^Tx_i+b)-1)$部分是等于 0 的（因为支持向量的 functional margin 等于 1 ），而对于非支持向量来说，函数间隔会大于 1 ，因此这个部分是大于零的，而 $a_i$ 又是非负的，为了满足最大化，$α_i$ 必须等于 0 。</p>
 <p><code>线性可分支持向量机学习算法</code></p>
 <ul>
-<li>输入：线性可分训练数据集$<br>T=\left\{ \left( x_1,y_1 \right) ,\left( x_2,y_2 \right) ,···,\left( x_N,y_N \right) \right\}<br>$,其中,$<br>x_i\in R^n,y_i\in \left\{ +1,-1 \right\} ,i=1,2,···,N$</li>
+<li>输入：线性可分训练数据集$T=\left\{ \left( x_1,y_1 \right) ,\left( x_2,y_2 \right) ,···,\left( x_N,y_N \right) \right\} $,其中,$<br>x_i\in R^n,y_i\in \left\{ +1,-1 \right\} ,i=1,2,···,N$</li>
 <li>输出：最大间隔分离超平面和分类决策函数</li>
 </ul>
 <p>步骤如下</p>
 <ol>
-<li><p>构造并求解约束最优化问题$$<br>\underset{a}{\min}\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) -\sum_{i=1}^N{a_i}}}<br>$$$$<br>s.t.    \sum_{i=1}^N{a_iy_j=0}<br>$$$$<br>a_i\geqslant 0, i=1,2,···,N<br>$$求得最优解$a^<em>=(a_1^</em>,a_2^<em>,···,a_N^</em>)$</p>
+<li><p>构造并求解约束最优化问题</p>
+<script type="math/tex; mode=display">
+\underset{a}{\min}\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_j\left( x_i·x_j \right) -\sum_{i=1}^N{a_i}}}</script><script type="math/tex; mode=display">
+s.t.\ \ \ \ \sum_{i=1}^N{a_iy_j=0}</script><script type="math/tex; mode=display">
+a_i\geqslant 0,\ i=1,2,···,N</script><p>求得最优解$a^<em>=(a_1^</em>,a_2^<em>,···,a_N^</em>)$</p>
 </li>
-<li><p>计算$$<br>w^<em>=\sum_i^{}{a_{i}^{</em>}y_ix_i}<br>$$并选择$a^<em>$的一个正分量$a_j^</em>&gt;0$，计算<br>$$<br>b^<em>=y_j-\sum_{i=1}^N{a_{i}^{</em>}y_i\left( x_i·x_j \right)}<br>$$</p>
-</li>
-<li><p>求得分离超平面<br>$$w^<em>·x+b^</em>=0<br>$$分类决策函数：<br>$$f(x)=sign(w^<em>·x+b^</em>)$$</p>
-</li>
+<li><p>计算</p>
+<script type="math/tex; mode=display">
+w^*=\sum_i^{}{a_{i}^{*}y_ix_i}</script><p>并选择$a^<em>$的一个正分量$a_j^</em>&gt;0$，计算</p>
+<script type="math/tex; mode=display">
+b^*=y_j-\sum_{i=1}^N{a_{i}^{*}y_i\left( x_i·x_j \right)}</script></li>
+<li><p>求得分离超平面</p>
+<script type="math/tex; mode=display">w^*·x+b^*=0</script><p>分类决策函数：</p>
+<script type="math/tex; mode=display">f(x)=sign(w^*·x+b^*)</script></li>
 </ol>
-<p>在线性可分支持向量机中，$w^<em>和b^</em>$只依赖于训练数据中对应于$a_i^<em>&gt;0$的样本点$x_i,y_i$,而其他样本点对$w^</em>和b^<em>$没有影响。我们将训练数据中对应于$a_i^</em>&gt;0$的实例点$<br>x_i\in R^n<br>$称为<strong>支持向量</strong>。</p>
+<p>在线性可分支持向量机中，$w^<em>和b^</em>$只依赖于训练数据中对应于$a_i^<em>&gt;0$的样本点$x_i,y_i$,而其他样本点对$w^</em>和b^<em>$没有影响。我们将训练数据中对应于$a_i^</em>&gt;0$的实例点$<br>x_i\in R^n<br>$称为支持向量。</p>
 <p>对于线性可分问题，上述线性可分支持向量机的学习（硬间隔最大化）算法是完美的。但是，训练数据集线性可分是理想的情形。在现实问题中，训练数据集往往是线性不可分的，即在样本中出现噪声或特异点。此时，有更一般的学习算法。</p>
 <h4 id="1-5-KKT条件"><a href="#1-5-KKT条件" class="headerlink" title="1.5 KKT条件"></a>1.5 KKT条件</h4><p>对于包含等式和不等式约束的一般优化问题<br><img src="http://omu7tit09.bkt.clouddn.com/15015158199160.jpg" alt=""><br>KKT条件（$x^*$是最优解的必要条件）为</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/15015158544941.jpg" alt=""><br>上式便称为不等式约束优化问题的KKT（Karush-Kuhn-Tucker）条件.$\mu _{j}$称为KKT乘子，当约束起作用时$\mu_1&gt;0,g_1(x)=0$，当约束不起作用时$\mu_1=0,g_1(x)&lt;0$</p>
-<p>更细致的推导可以看这篇文章：<a href="https://zhuanlan.zhihu.com/p/26514613" target="_blank" rel="external">浅谈最优化问题的KKT条件</a></p>
-<p>证明可以将线性可分支持向量机的原始问题和对偶问题等同起来的充分必要条件KKT条件，即得<br>$$<br>\nabla _wL\left( w^<em>,b^</em>,a^<em> \right) =w^</em>-\sum_{i=1}^N{a_iy_ix_i=0}<br>$$$$<br>\nabla _bL\left( w^<em>,b^</em>,a^<em> \right) =-\sum_{i=1}^N{a_{i}^{</em>}y_i=0}<br>$$$$<br>a_{i}^{<em>}\left( y_i\left( w^</em>·x_i+b^<em> \right) -1 \right) =0 , i=1,2,···,N<br>$$$$<br>y_i\left( w^</em>·x_i+b^<em> \right) -1\geqslant 0 , 1,2,···,N<br>$$$$<br>a_{i}^{</em>}\geqslant 0 , i=1,2,···,N<br>$$<br>由此得<br>$$<br>w^<em>=\sum_i^{}{a_{i}^{</em>}y_ix_i}<br>$$<br>其中至少有一个$a_j^<em>&gt;0$(反证法，假设$a^</em>=0$，由上可知$w^<em>=0$，而$w^</em>=0$不是原始最优化问题的解，产生矛盾)，对此$j$有<br>$$<br>y_j\left( w^<em>·x_j+b^</em> \right) -1=0<br>$$$$<br>a_{j}^{<em>}y_jx_j·x_i+b^</em>=1/y_j=y_j<br>$$$$<br>b^<em>=y_j-\sum_{i=1}^N{a_{i}^{</em>}y_i\left( x_i·x_j \right)}<br>$$</p>
-<p>综上所述，对于给定的线性可分训练数据集，可以首先求对偶问题的解$a^<em>$;再利用求得原始问题的解$w^</em>,b^*$,从而得到分离超平面及分类决策函数。这种算法称为线性可分支持向量机的对偶学习算法，是线性可分支持向量机学习的基本算法。</p>
+<p>更细致的推导可以看这篇文章：<a href="https://zhuanlan.zhihu.com/p/26514613" target="_blank" rel="noopener">浅谈最优化问题的KKT条件</a></p>
+<p>证明可以将线性可分支持向量机的原始问题和对偶问题等同起来的充分必要条件KKT条件，即得</p>
+<script type="math/tex; mode=display">
+\nabla _wL\left( w^*,b^*,a^* \right) =w^*-\sum_{i=1}^N{a_iy_ix_i=0}</script><script type="math/tex; mode=display">
+\nabla _bL\left( w^*,b^*,a^* \right) =-\sum_{i=1}^N{a_{i}^{*}y_i=0}</script><script type="math/tex; mode=display">
+a_{i}^{*}\left( y_i\left( w^*·x_i+b^* \right) -1 \right) =0\ ,\ i=1,2,···,N</script><script type="math/tex; mode=display">
+y_i\left( w^*·x_i+b^* \right) -1\geqslant 0\ ,\ 1,2,···,N</script><script type="math/tex; mode=display">
+a_{i}^{*}\geqslant 0\ ,\ i=1,2,···,N</script><p>由此得 </p>
+<script type="math/tex; mode=display">
+w^*=\sum_i^{}{a_{i}^{*}y_ix_i}</script><p>其中至少有一个$a_j^<em>&gt;0$(反证法，假设$a^</em>=0$，由上可知$w^<em>=0$，而$w^</em>=0$不是原始最优化问题的解，产生矛盾)，对此$j$有</p>
+<script type="math/tex; mode=display">
+y_j\left( w^*·x_j+b^* \right) -1=0</script><script type="math/tex; mode=display">
+a_{j}^{*}y_jx_j·x_i+b^*=1/y_j=y_j</script><script type="math/tex; mode=display">
+b^*=y_j-\sum_{i=1}^N{a_{i}^{*}y_i\left( x_i·x_j \right)}</script><p>综上所述，对于给定的线性可分训练数据集，可以首先求对偶问题的解$a^<em>$;再利用求得原始问题的解$w^</em>,b^*$,从而得到分离超平面及分类决策函数。这种算法称为线性可分支持向量机的对偶学习算法，是线性可分支持向量机学习的基本算法。</p>
 
       
     </div>
@@ -478,8 +547,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/27/机器学习算法系列（12）：SVM（4）——SMO/" rel="next" title="机器学习算法系列（12）：SVM（4）—SMO">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（12）：SVM（4）—SMO
+              <a href="/2017/02/24/机器学习算法系列（11）：聚类（4）/" rel="next" title="机器学习算法系列（11）：聚类（4）—密度最大值聚类">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（11）：聚类（4）—密度最大值聚类
               </a>
             
           </div>
@@ -488,7 +557,7 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/27/机器学习算法系列（12）：SVM（2）——线性支持向量机/" rel="prev" title="机器学习算法系列（12）：SVM（2）—线性支持向量机">
+              <a href="/2017/02/28/机器学习算法系列（12）：SVM（2）——线性支持向量机/" rel="prev" title="机器学习算法系列（12）：SVM（2）—线性支持向量机">
                 机器学习算法系列（12）：SVM（2）—线性支持向量机 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -558,7 +627,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -566,7 +635,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -575,7 +644,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -887,9 +956,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -901,13 +993,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

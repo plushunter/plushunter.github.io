@@ -1,0 +1,942 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习,SVM,非线性支持向量机," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。">
+<meta name="keywords" content="机器学习,SVM,非线性支持向量机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法系列（12）：SVM（3）—非线性支持向量机">
+<meta property="og:url" content="http://yoursite.com/2017/03/01/机器学习算法系列（12）：SVM（3）——非线性支持向量机/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8811.03.17.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015514050397.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015532285157.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015532573289.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015532782016.jpg">
+<meta property="og:updated_time" content="2017-12-26T08:55:23.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习算法系列（12）：SVM（3）—非线性支持向量机">
+<meta name="twitter:description" content="当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8811.03.17.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 机器学习算法系列（12）：SVM（3）—非线性支持向量机 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-yiyu">
+          <a href="/yiyu" rel="section">
+            
+            呓语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+            读书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies" rel="section">
+            
+            电影
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/01/机器学习算法系列（12）：SVM（3）——非线性支持向量机/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习算法系列（12）：SVM（3）—非线性支持向量机
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-01T23:14:45+08:00">
+                2017-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。</p>
+<a id="more"></a>
+<h2 id="三、非线性支持向量机与核函数"><a href="#三、非线性支持向量机与核函数" class="headerlink" title="三、非线性支持向量机与核函数"></a>三、非线性支持向量机与核函数</h2><h4 id="3-1-核技巧"><a href="#3-1-核技巧" class="headerlink" title="3.1 核技巧"></a>3.1 核技巧</h4><p>前面我们介绍了线性情况下的支持向量机，他通过寻找一个现行的超平面来达到对数据线性分类的目的。不过，由于是线性方法，所以对非线性的数据就没有办法处理了。</p>
+<p>例如图中的两类数据，分别分布为两个圆圈的形状，不论是任何高级的分类器，只要他是线性的，就没有办法处理，SVM也不行。因为这样的数据本身就是线性不可分的。<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8811.03.17.png" alt="屏幕快照 2017-03-20 上午11.03.17"></p>
+<p>此数据集为两个半径不同的圆圈加上了少量的噪音得到，所以一个理想的分界应该是一个圆圈而不是一条直线。如果用$X_1和X_2$来表示这个二维平面的两个坐标的话，则此方程可以写作</p>
+<script type="math/tex; mode=display">
+a_1X_1+a_2X_{1}^{2}+a_3X_2+a_4X_{2}^{2}+a_5X_1X_2+a_6=0</script><p>注意上面的形式，如果我们构造另外一个无谓的空间，其中五个坐标的值分别为$Z_1=X_1,Z_2=X_1^2,Z_3=X_2,Z_4=X_2^2,Z_5=X_1·X_2$</p>
+<p>那么显然，上面的方程在新的坐标系下可以写作：</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^5{a_iZ_i+}a_6=0</script><p>如果我们做一个映射$<br>\phi :R^2\rightarrow R^5<br>$，将$X$按照上面的规则映射为$Z$那么在新的空间中原来的数据将变成线性可分的，从而使用之前我们推倒的线性分类算法就可以进行处理了。这正是核方法处理非线性问题的基本思想。</p>
+<p>总结一下，用线性分类方法求解非线性分类问题分为两步：首先使用一个变换将原空间的数据映射到新空间；然后在新空间里用线性分类学习方法从训练数据中学习分类模型。核技巧就属于这样的方法。</p>
+<p>现在回到SVM的情形，假设原始的数据是非线性的，我们通过一个映射$\phi \left( · \right) $将其映射到一个高维空间中，数据变得线性可分了，这个时候，我们就可以使用原来的推导来进行计算，只是所有的推导现在是在新的空间，而不是原始空间中进行。当然，推导过程也并不是可以简单地直接类比的，例如，原本我们要求超平面的法向量$w$，但是如果映射之后得到的新空间的维度是无穷维的（确实会出现这样的情况，比如后面会提到的高斯核函数），要表示一个无穷维的向量描述起来就比较麻烦。</p>
+<p>我们似乎可以这样做，拿到非线性数据，就找一个映射$\phi（·） $，然后一股脑把原来的数据映射到新空间，再做线性SVM即可。但是在之前对一个二维空间做映射，选择的新空间是原始空间的所有一阶和二阶的组合，得到了五个维度；但如果原始空间是三维，我们就会得到19维的新空间，这个数目是呈爆炸性增长的，这给映射的计算带来了很大困难，而且如果遇到无穷维的情况，就根本无从计算了，所以就需要核函数出马了。</p>
+<p>核技巧的想法是，再学习与预测中只定义核函数$K\left( x,z \right) $，而不显式地定义映射函数$\phi（·） $。不像之前是映射到高维空间中，然后再根据内积公式进行计算，现在我们直接在原来的低维空间中进行计算，而不需要显式的写出映射后的结果。通常，直接计算$K(x,z)$比较容易，而通过$\phi \left( x \right) \mathrm{和}\phi \left( z \right) $计算$K(x,z)$并不容易。</p>
+<p>最理想的情况下，我们希望知道数据的具体形状和分布，从而得到一个刚好可以将数据映射成线性可分的$\phi（·） $，然后通过这个$\phi（·） $得到对应的$K(·，·)$进行内积计算。然而，第二步通常是非常困难甚至完全没法做的。不过，由于第一步也是几乎无法做到的，因为对于任意的数据分析其形状找到合适的映射本身就不是什么容易的事情，所以，人们通常是“胡乱”选择一个核函数即可——我们直到她对应了某个映射，虽然我们不知道这个映射具体是什么，由于我们的计算只需要核函数即可，所以我们也并不关心也没有必要求出所对应的映射的具体形式。</p>
+<p>我们注意到在线性支持向量机的对偶问题中，无论是目标函数还是决策函数（分离超平面）都只涉及输入实例与实例之间的内积。在对偶问题的目标函数中的内积$x_i·x_j$可以用核函数$K(x_i·x_j)=\phi \left( x_i \right) ·\phi \left( x_j \right) $来代替，此时对偶问题的目标函数成为：</p>
+<script type="math/tex; mode=display">
+\underset{a}{\max}\ \ \ \ \sum_{i=1}^N{a_i-\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_jK⟨ x_i,x_j ⟩}}}</script><p>同样，分类决策函数中的内积也可以用核函数代替，而分类决策函数式成为</p>
+<script type="math/tex; mode=display">
+sign\left( \sum_{i=1}^N{a_{i}^{*}y_iK⟨ x_i,x⟩}+b \right)</script><p>在核函数$K(x,z)$给定的条件下，可以利用解线性分类问题的方法求解非线性分类问题的支持向量机。学习是隐性地在特征空间进行的，不需要显式地定义特征空间和映射函数。这样的技巧称为核技巧，它是巧妙地利用线性分类学习方法与核函数解决非线性问题的技术。在实际应用中，往往依赖领域知识直接选择核函数，核函数选择的有效性需要通过实验验证。</p>
+<h4 id="3-2-常用核函数"><a href="#3-2-常用核函数" class="headerlink" title="3.2 常用核函数"></a>3.2 常用核函数</h4><p>通常人们会从一些常用的核函数中选择，根据问题和数据的不同，选择不同的参数，实际上就是得到了不同的核函数。</p>
+<ol>
+<li>多项式核函数<code>polynomial kernel function</code><script type="math/tex; mode=display">
+K\left( x,z \right) =\left( x·z+1 \right) ^p</script>对应的支持向量机是一个p次多项式分类器。在此情形下，分类决策函数成为<script type="math/tex; mode=display">f\left( x \right) =sign\left( \sum_{i=1}^N{a_iy_i\left( x_i·x+1 \right) ^p+b} \right)</script></li>
+</ol>
+<ol>
+<li>高斯核函数<code>gaussian kernel function</code><script type="math/tex; mode=display">
+K\left( x,z \right) =\exp \left( -\frac{||x-z||^2}{2\sigma ^2} \right)</script>这个核就是会将原始空间映射为无穷维空间的那个家伙。不过如果$\sigma$选得很大的话，高次特征上的权重实际上衰减的非常快，所以实际上相当于一个低维的子空间；反过来，如果$\sigma$选得很小，则可以将任意的数据映射为线性可分，当然，这并不一定是好事，因为随之而来的可能是非常严重的过拟合问题。不过，总的来说，通过调控参数$\sigma$，高斯核实际上具有相当高的灵活性，也是使用最为广泛的核函数之一。它对应的支持向量机是高斯径向基函数分类器，在此情形下，分类决策函数称为<br><script type="math/tex">f\left( x \right) =sign\left( \sum_{i=1}^N{a_iy_i\exp \left( -\frac{||x-z||^2}{2\sigma ^2} \right) +b} \right)</script><img src="http://omu7tit09.bkt.clouddn.com/15015514050397.jpg" alt=""></li>
+</ol>
+<ol>
+<li>字符串核函数：核函数不仅可以定义在欧式空间上，还可以定义在离散数据的集合上，比如，字符串核实定义在字符串集合上的核函数，字符串核函数在文本分类、信息检索、生物信息学等方面都有应用。</li>
+<li>线性核 $κ(x_1,x_2)=⟨x_1,x_2⟩$ ，这实际上就是原始空间中的内积。这个核存在的主要目的是使得“映射后空间中的问题”和“映射前空间中的问题”两者在形式上统一起来了。</li>
+</ol>
+<p>最后，总结一下：对于非线性的情况，SVM 的处理方法是选择一个核函数 κ(⋅,⋅) ，通过将数据映射到高维空间，来解决在原始空间中线性不可分的问题。由于核函数的优良品质，这样的非线性扩展在计算量上并没有比原来复杂多少，这一点是非常难得的。当然，这要归功于核方法——除了 SVM 之外，任何将计算表示为数据点的内积的方法，都可以使用核方法进行非线性扩展。</p>
+<p>非线性支持向量机学习算法步骤如下：</p>
+<ol>
+<li><p>选取适当的核函数$K(x,z)$和适当的参数$C$，构造并求解最优化问题</p>
+<script type="math/tex; mode=display">
+\underset{a}{\max}\,\,\,\,\,\,\,\,\sum_{i=1}^N{a_i-\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^N{a_ia_jy_iy_jK\left( x_i,x_j \right)}}}</script><script type="math/tex; mode=display">
+s.t.\ \ \ \ \sum_{i=1}^N{a_iy_i=0}</script><script type="math/tex; mode=display">
+0\le a_i\le C\ \ ,\ \ i=1,2,···,N</script><p>求得最优解</p>
+<script type="math/tex; mode=display">
+a^*=\left( a_{1}^{*},a_{2}^{*},···,a_{N}^{*} \right) ^T</script></li>
+<li><p>选择$a^<em>$的一个正分量$a_i^</em>$适合约束条件$0&lt;a_i&lt;C$,计算</p>
+<script type="math/tex; mode=display">
+b^*=y_j-\sum_{i=1}^N{y_ia_{i}^{*}K\left( x_i·x_j \right)}</script></li>
+<li><p>构造决策函数：</p>
+<script type="math/tex; mode=display">
+f(X)=sign\left( \sum_{i=1}^N{a_{i}^{*}y_iK\left( x_i,x \right)}+b \right)</script><p>当$K(x,z)$是正定核函数时，该问题为凸二次规划问题，解是存在的。</p>
+</li>
+</ol>
+<h3 id="3-3-感性认识"><a href="#3-3-感性认识" class="headerlink" title="3.3 感性认识"></a>3.3 感性认识</h3><p>比如我们有一个一维的数据分布是如下图的样子，你想把它用一个直线来分开，你发现是不可能的，因为他们是间隔的。所以不论你画在哪，比如绿色竖线，都不可能把两个类分开。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15015532285157.jpg" alt=""><br>但是我们使用一个简单的升维的方法，把原来一维的空间投射到二维中，$x-&gt;(x, x^2)<br>$。比如:</p>
+<p>0-&gt;(0,0)<br>1-&gt;(1,1)<br>2-&gt;(2,4)</p>
+<p>这时候就线性可分了</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15015532573289.jpg" alt=""></p>
+<p>再举个例子，在一个二维平面里面，这样的情况是不可能只用一个平面来分类的，但是只要把它投射到三维的球体上，就可能很轻易地分类。<br><img src="http://omu7tit09.bkt.clouddn.com/15015532782016.jpg" alt=""></p>
+<p>理论上，由于train set是有限的，当你把data投射到无限维度的空间上是一定可以在train set上完美分类的，至于在test set上就不一定了。</p>
+<p>在实用中，很多使用者都是盲目地试验各种核函数，并扫描其中的参数，选择效果最好的，来“避免过拟合”。至于什么样的核函数适用于什么样的问题，大多数人都不懂。核函数要满足的条件称为Mercer’s condition。使用SVM的很多人甚至都不知道这个条件，也不关心它；有些不满足该条件的函数也被拿来当核函数用。</p>
+<p><a href="http://www.svms.org/mercer/" target="_blank" rel="noopener">Mercer’s Condition</a><br><a href="https://www.zhihu.com/question/24627666/answer/35507744" target="_blank" rel="noopener">机器学习有很多关于核函数的说法，核函数的定义和作用是什么？</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/SVM/" rel="tag"># SVM</a>
+          
+            <a href="/tags/非线性支持向量机/" rel="tag"># 非线性支持向量机</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/28/机器学习算法系列（12）：SVM（2）——线性支持向量机/" rel="next" title="机器学习算法系列（12）：SVM（2）—线性支持向量机">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（12）：SVM（2）—线性支持向量机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/02/机器学习算法系列（12）：SVM（4）——SMO/" rel="prev" title="机器学习算法系列（12）：SVM（4）—SMO">
+                机器学习算法系列（12）：SVM（4）—SMO <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/v.png"
+               alt="狗皮膏药" />
+          <p class="site-author-name" itemprop="name">狗皮膏药</p>
+          <p class="site-description motion-element" itemprop="description">在隆冬，我终于知道，我身上有一个不可战胜的夏天</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">137</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">176</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#三、非线性支持向量机与核函数"><span class="nav-text">三、非线性支持向量机与核函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-核技巧"><span class="nav-text">3.1 核技巧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-常用核函数"><span class="nav-text">3.2 常用核函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-感性认识"><span class="nav-text">3.3 感性认识</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

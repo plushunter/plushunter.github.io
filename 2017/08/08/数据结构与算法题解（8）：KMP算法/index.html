@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/08/数据结构与算法题解（8）：KMP算法/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="KMP算法是三位大牛：D.E.Knuth、J.H.Morris和V.R.Pratt同时发现的。其中第一位就是《计算机程序设计艺术》的作者！">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15036521901218.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15036522704129.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15036522864541.png">
@@ -432,8 +433,8 @@ var _hmt = _hmt || [];
 <p>如下图也是一样的情况：<br><img src="http://omu7tit09.bkt.clouddn.com/15036592059994.png" alt=""></p>
 <p>可以把j指针移动到第2位，因为前面有两个字母是一样的：<br><img src="http://omu7tit09.bkt.clouddn.com/15036592316849.png" alt=""></p>
 <p>至此我们可以大概看出一点端倪，当匹配失败时，j要移动的下一个位置k。存在着这样的性质：最前面的k个字符和j之前的最后k个字符是一样的。</p>
-<p>如果用数学公式来表示是这样的<br>$$P[0，k-1] == P[j-k， j-1]$$</p>
-<p>这个相当重要，如果觉得不好记的话，可以通过下图来理解：<br><img src="http://omu7tit09.bkt.clouddn.com/15036593863265.png" alt=""></p>
+<p>如果用数学公式来表示是这样的</p>
+<script type="math/tex; mode=display">P[0，k-1] == P[j-k， j-1]</script><p>这个相当重要，如果觉得不好记的话，可以通过下图来理解：<br><img src="http://omu7tit09.bkt.clouddn.com/15036593863265.png" alt=""></p>
 <p>弄明白了这个就应该可能明白为什么可以直接将j移动到k位置了。</p>
 <p>因为:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">当T[i] != P[j]时</div><div class="line"></div><div class="line">有T[i-j ~ i-1] == P[0 ~ j-1]</div><div class="line"></div><div class="line">由P[0 ~ k-1] == P[j-k ~ j-1]</div><div class="line"></div><div class="line">必然：T[i-k ~ i-1] == P[0 ~ k-1]</div></pre></td></tr></table></figure>
@@ -496,8 +497,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/08/数据结构与算法题解（9）：最长公共子序列和最长公共子串/" rel="next" title="数据结构与算法题解（9）：最长公共子序列和最长公共子串">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（9）：最长公共子序列和最长公共子串
+              <a href="/2017/08/07/数据结构与算法题解（7）：最短编辑距离/" rel="next" title="数据结构与算法题解（7）：最短编辑距离">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（7）：最短编辑距离
               </a>
             
           </div>
@@ -506,8 +507,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/07/数据结构与算法题解（7）：最短编辑距离/" rel="prev" title="数据结构与算法题解（7）：最短编辑距离">
-                数据结构与算法题解（7）：最短编辑距离 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/08/数据结构与算法题解（9）：最长公共子序列和最长公共子串/" rel="prev" title="数据结构与算法题解（9）：最长公共子序列和最长公共子串">
+                数据结构与算法题解（9）：最长公共子序列和最长公共子串 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -567,7 +568,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -575,7 +576,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -584,7 +585,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -880,9 +881,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -894,13 +918,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

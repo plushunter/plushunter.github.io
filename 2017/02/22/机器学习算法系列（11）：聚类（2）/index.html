@@ -93,9 +93,10 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/22/机器学习算法系列（11）：聚类（2）/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="三、K-Means算法3.1 原理K-Means算法属于基于划分的聚类算法，对N 维欧氏空间中的点进行聚类，是一种最简单的无监督学习方法。它通过迭代来实现，其基本思想是：每次确定K个类别中心，然后将各个结点归属到与之距离最近的中心点所在的Cluster，然后将类别中心更新为属于各Cluster的所有样本的均值，反复迭代，直至类别中心不再发生变化或变化小于某阈值。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8A%E5%8D%889.30.11.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8A%E5%8D%8810.29.32.png">
-<meta property="og:updated_time" content="2017-08-20T03:17:18.000Z">
+<meta property="og:updated_time" content="2017-12-26T08:43:18.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（11）：聚类（2）—Kmeans">
 <meta name="twitter:description" content="三、K-Means算法3.1 原理K-Means算法属于基于划分的聚类算法，对N 维欧氏空间中的点进行聚类，是一种最简单的无监督学习方法。它通过迭代来实现，其基本思想是：每次确定K个类别中心，然后将各个结点归属到与之距离最近的中心点所在的Cluster，然后将类别中心更新为属于各Cluster的所有样本的均值，反复迭代，直至类别中心不再发生变化或变化小于某阈值。">
@@ -398,23 +399,26 @@ var _hmt = _hmt || [];
       
         <h2 id="三、K-Means算法"><a href="#三、K-Means算法" class="headerlink" title="三、K-Means算法"></a>三、K-Means算法</h2><h3 id="3-1-原理"><a href="#3-1-原理" class="headerlink" title="3.1 原理"></a>3.1 原理</h3><p>K-Means算法属于基于划分的聚类算法，对N 维欧氏空间中的点进行聚类，是一种最简单的无监督学习方法。它通过迭代来实现，其基本思想是：每次确定K个类别中心，然后将各个结点归属到与之距离最近的中心点所在的Cluster，然后将类别中心更新为属于各Cluster的所有样本的均值，反复迭代，直至类别中心不再发生变化或变化小于某阈值。</p>
 <a id="more"></a>
-<h3 id="3-2-基本假设"><a href="#3-2-基本假设" class="headerlink" title="3.2 基本假设"></a>3.2 基本假设</h3><p>K-Means聚类需要对数据进行一个基本假设：对于每一个 cluster ，我们可以选出一个中心点 (center) ，使得该 cluster 中的所有的点到该中心点的距离小于到其他 cluster 的中心的距离。虽然实际情况中得到的数据并不能保证总是满足这样的约束，但这通常已经是我们所能达到的最好的结果，而那些误差通常是固有存在的或者问题本身的不可分性造成的。例如下图所示的两个高斯分布，从两个分布中随机地抽取一些数据点出来，混杂到一起，现在要让你将这些混杂在一起的数据点按照它们被生成的那个分布分开来：<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8A%E5%8D%889.30.11.png" alt="屏幕快照 2017-03-25 上午9.30.11"></center><br>由于这两个分布本身有很大一部分重叠在一起了，例如，对于数据点 2.5 来说，它由两个分布产生的概率都是相等的，你所做的只能是一个猜测；稍微好一点的情况是 2 ，通常我们会将它归类为左边的那个分布，因为概率大一些，然而此时它由右边的分布生成的概率仍然是比较大的，我们仍然有不小的几率会猜错。而整个阴影部分是我们所能达到的最小的猜错的概率，这来自于问题本身的不可分性，无法避免。因此，我们将 k-means 所依赖的这个假设看作是合理的。</p>
+<h3 id="3-2-基本假设"><a href="#3-2-基本假设" class="headerlink" title="3.2 基本假设"></a>3.2 基本假设</h3><p>K-Means聚类需要对数据进行一个基本假设：对于每一个 cluster ，我们可以选出一个中心点 (center) ，使得该 cluster 中的所有的点到该中心点的距离小于到其他 cluster 的中心的距离。虽然实际情况中得到的数据并不能保证总是满足这样的约束，但这通常已经是我们所能达到的最好的结果，而那些误差通常是固有存在的或者问题本身的不可分性造成的。例如下图所示的两个高斯分布，从两个分布中随机地抽取一些数据点出来，混杂到一起，现在要让你将这些混杂在一起的数据点按照它们被生成的那个分布分开来：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8A%E5%8D%889.30.11.png" alt="屏幕快照 2017-03-25 上午9.30.11"><br>由于这两个分布本身有很大一部分重叠在一起了，例如，对于数据点 2.5 来说，它由两个分布产生的概率都是相等的，你所做的只能是一个猜测；稍微好一点的情况是 2 ，通常我们会将它归类为左边的那个分布，因为概率大一些，然而此时它由右边的分布生成的概率仍然是比较大的，我们仍然有不小的几率会猜错。而整个阴影部分是我们所能达到的最小的猜错的概率，这来自于问题本身的不可分性，无法避免。因此，我们将 k-means 所依赖的这个假设看作是合理的。</p>
 <h3 id="3-3-算法步骤"><a href="#3-3-算法步骤" class="headerlink" title="3.3 算法步骤"></a>3.3 算法步骤</h3><p>假定输入样本为$S=x_1,x_2,···,x_n$，则算法步骤为：</p>
 <ul>
 <li>1、选择初始的K个类别中心$\mu_1,\mu_2,···,\mu_k$。这个过程通常是针对具体地问题有一些启发式的选取方法，或者大多数情况下采用随机选取的办法。因为K-Means并不能保证全局最优，而是否能收敛到全局最优解其实和初值的选取有很大的关系，所以有时候我们会多次选取初值跑一个K-Means，并取其中最好的一次结果。</li>
-<li>2、对于每个样本$x_i$，将其标记为距离类别中心最近的类别，即：$$label_i=arg\underset{1\le j\le k}{\min}||x_i-\mu_j||$$</li>
-<li>3、将每个类别中心更新为隶属于该类别的所有样本的均值$$<br>\mu_j=\frac{1}{|c_j|}\sum_{i\in c_j}{x_i}<br>$$</li>
+<li>2、对于每个样本$x_i$，将其标记为距离类别中心最近的类别，即：<script type="math/tex; mode=display">label_i=arg\underset{1\le j\le k}{\min}||x_i-\mu_j||</script></li>
+<li>3、将每个类别中心更新为隶属于该类别的所有样本的均值<script type="math/tex; mode=display">
+\mu_j=\frac{1}{|c_j|}\sum_{i\in c_j}{x_i}</script></li>
 <li>4、重复前两步，直到类别中心的变化小于某阈值或者达到最大迭代次数</li>
 </ul>
-<h3 id="3-4-理论分析"><a href="#3-4-理论分析" class="headerlink" title="3.4 理论分析"></a>3.4 理论分析</h3><p>基于上述的假设，我们导出K-Means所要优化的目标函数：设我们一共有N个数据点需要分为K个Cluster，K-Means需要最小化的损失函数为：<br>$$<br>J=\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^K{r_{ij}||x_i-\mu_j||^2}}<br>$$<br>这个函数，其中$r_{ij}$在数据点$n$被归类到$Cluster(j) $的时候为1，否则为0.直接寻找$r_{ij}$和$\mu_j$来最小化$J$并不容易，不过我们可以通过反复迭代以下两步的方法来进行：</p>
+<h3 id="3-4-理论分析"><a href="#3-4-理论分析" class="headerlink" title="3.4 理论分析"></a>3.4 理论分析</h3><p>基于上述的假设，我们导出K-Means所要优化的目标函数：设我们一共有N个数据点需要分为K个Cluster，K-Means需要最小化的损失函数为：</p>
+<script type="math/tex; mode=display">
+J=\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^K{r_{ij}||x_i-\mu_j||^2}}</script><p>这个函数，其中$r_{ij}$在数据点$n$被归类到$Cluster(j) $的时候为1，否则为0.直接寻找$r_{ij}$和$\mu_j$来最小化$J$并不容易，不过我们可以通过反复迭代以下两步的方法来进行：</p>
 <ul>
 <li>1、先固定$\mu_j$，选择最优的$r_{ij}$，很容易看出，只要将数据点归类到离它最近的那个中心就能保证$J$最小，通俗来讲，因为每个样本点都有一个$r_{ij}$，不是0就是1，那么我们要想让$J$最小，就要保证当一个样本的$r_{ij=1}$时，与类别中心距离的平方和达到最小。这一步即</li>
-<li>2、然后固定$r_{ij}$，再求最优的$\mu_j$。将$J$对$\mu_k$求导并令导数等于零，即令 $$<br>\frac{\partial J}{\partial\mu_j}=\sum_{i=1}^{N_j}{r_{ij}\left(x_i-\mu_j\right)}=0<br>$$<br>很容易得到$J$最小的时候$\mu_j$应该满足$$<br>\mu_j=\frac{\sum_i{r_{ij}x_i}}{\sum_i{r_{ij}}}<br>$$</li>
+<li>2、然后固定$r_{ij}$，再求最优的$\mu_j$。将$J$对$\mu_k$求导并令导数等于零，即令<script type="math/tex; mode=display">
+\frac{\partial J}{\partial\mu_j}=\sum_{i=1}^{N_j}{r_{ij}\left(x_i-\mu_j\right)}=0</script>很容易得到$J$最小的时候$\mu_j$应该满足<script type="math/tex; mode=display">
+\mu_j=\frac{\sum_i{r_{ij}x_i}}{\sum_i{r_{ij}}}</script></li>
 </ul>
 <p>$\mu_j$的值是所有$Cluster(j)$中的数据点的平均值。由于每一次迭代都是取到$J$的最小值，因此$J$智慧不断地减小或者保持不变，而不会增加，这保证了K-Means最终或到达一个极小值。虽然K-Means并不能保证总是得到全局最优解，但是对于这样的问题，像K-Means这样复杂度的算法，这样的结果已经是很不错了。</p>
-<h3 id="3-5-算法演练"><a href="#3-5-算法演练" class="headerlink" title="3.5 算法演练"></a>3.5 算法演练</h3><p>下面看一个来自WIKI的实例</p>
-<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8A%E5%8D%8810.29.32.png" alt="屏幕快照 2017-03-25 上午10.29.32"></center>
-
+<h3 id="3-5-算法演练"><a href="#3-5-算法演练" class="headerlink" title="3.5 算法演练"></a>3.5 算法演练</h3><p>下面看一个来自WIKI的实例<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-25%20%E4%B8%8A%E5%8D%8810.29.32.png" alt="屏幕快照 2017-03-25 上午10.29.32"></p>
 <ul>
 <li>1、随机生成三个初始的中心点（这个中心点不一定是样本点），即图中红、绿、蓝三个小圈；</li>
 <li>2、计算每个样本点与这三个中心店的距离，并将它们归属到离得最近的中心点对应的Cluster。此时图中分成了三个簇，分别是红色、绿色、蓝色部分；</li>
@@ -470,8 +474,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/23/机器学习算法系列（11）：聚类（3）/" rel="next" title="机器学习算法系列（11）：聚类（3）—DBSCAN">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（11）：聚类（3）—DBSCAN
+              <a href="/2017/02/20/机器学习算法系列（11）：聚类（1）/" rel="next" title="机器学习算法系列（11）：聚类（1）—简介">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（11）：聚类（1）—简介
               </a>
             
           </div>
@@ -480,8 +484,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/20/机器学习算法系列（11）：聚类（1）/" rel="prev" title="机器学习算法系列（11）：聚类（1）—简介">
-                机器学习算法系列（11）：聚类（1）—简介 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/23/机器学习算法系列（11）：聚类（3）/" rel="prev" title="机器学习算法系列（11）：聚类（3）—DBSCAN">
+                机器学习算法系列（11）：聚类（3）—DBSCAN <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -550,7 +554,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -558,7 +562,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -567,7 +571,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -879,9 +883,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -893,13 +920,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

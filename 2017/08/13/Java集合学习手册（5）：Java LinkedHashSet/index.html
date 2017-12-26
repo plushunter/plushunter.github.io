@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/13/Java集合学习手册（5）：Java LinkedHashSet/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、概述首先我们需要知道的是它是一个Set的实现，所以它其中存的肯定不是键值对，而是值。此实现与HashSet的不同之处在于，LinkedHashSet维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可为插入顺序或是访问顺序。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-09-01T06:43:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合学习手册（5）：Java LinkedHashSet">
@@ -449,8 +450,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/14/Java集合学习手册（6）：Java ArrayList/" rel="next" title="Java集合学习手册（6）：Java ArrayList">
-                <i class="fa fa-chevron-left"></i> Java集合学习手册（6）：Java ArrayList
+              <a href="/2017/08/12/Java集合学习手册（4）：Java LinkedHashMap/" rel="next" title="Java集合学习手册（4）：Java LinkedHashMap">
+                <i class="fa fa-chevron-left"></i> Java集合学习手册（4）：Java LinkedHashMap
               </a>
             
           </div>
@@ -459,8 +460,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/12/Java集合学习手册（4）：Java LinkedHashMap/" rel="prev" title="Java集合学习手册（4）：Java LinkedHashMap">
-                Java集合学习手册（4）：Java LinkedHashMap <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/14/Java集合学习手册（6）：Java ArrayList/" rel="prev" title="Java集合学习手册（6）：Java ArrayList">
+                Java集合学习手册（6）：Java ArrayList <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -529,7 +530,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -537,7 +538,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -546,7 +547,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -858,9 +859,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -872,13 +896,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

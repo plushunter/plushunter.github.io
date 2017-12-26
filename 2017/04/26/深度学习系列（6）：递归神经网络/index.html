@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/26/深度学习系列（6）：递归神经网络/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="上一篇我们学习了循环神经网络，它可以用来处理包含序列的信息。然而，除此之外，信息往往还存在着诸如树结构、图结构等更复杂的结构。对于这种复杂的结构。循环神经网络就无能为力了。本文学习一种更为强大、复杂的神经网络：递归神经网络（Recursive Neural NetWork，RNN），以及它的训练算法BPTS（Back Propagation Through Structure）。顾名思义，递归神经">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%883.25.06.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%883.26.16.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%883.29.23.png">
@@ -103,7 +104,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%883.47.37.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%884.25.28.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%884.57.04.png">
-<meta property="og:updated_time" content="2017-04-26T10:57:13.000Z">
+<meta property="og:updated_time" content="2017-12-26T10:34:00.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（6）：递归神经网络">
 <meta name="twitter:description" content="上一篇我们学习了循环神经网络，它可以用来处理包含序列的信息。然而，除此之外，信息往往还存在着诸如树结构、图结构等更复杂的结构。对于这种复杂的结构。循环神经网络就无能为力了。本文学习一种更为强大、复杂的神经网络：递归神经网络（Recursive Neural NetWork，RNN），以及它的训练算法BPTS（Back Propagation Through Structure）。顾名思义，递归神经">
@@ -413,18 +414,95 @@ var _hmt = _hmt || [];
 <p>尽管递归神经网络具有更为强大的表示能力，但是在实际应用中并不太流行。其中一个主要原因是，递归神经网络的输入是树/图结构，而这种结构需要花费很多人工去标注。想象一下，如果我们用循环神经网络处理句子，那么我们可以直接把句子作为输入。然而，如果我们用递归神经网络处理句子，我们就必须把每个句子标注为语法解析树的形式，这无疑要花费非常大的精力。很多时候，相对于递归神经网络能够带来的性能提升，这个投入是不太划算的。</p>
 <h2 id="二、递归神经网络的前向计算"><a href="#二、递归神经网络的前向计算" class="headerlink" title="二、递归神经网络的前向计算"></a>二、递归神经网络的前向计算</h2><p>接下来，我们详细介绍一下递归神经网络是如何处理树/图结构的信息的。在这里，我们以处理树型信息为例进行介绍。</p>
 <p>递归神经网络的输入是两个子节点（也可以是多个），输出就是将这两个子节点编码后产生的父节点，父节点的维度和每个子节点是相同的。如下图所示：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%883.33.43.png" alt="屏幕快照 2017-04-26 下午3.33.43"></p>
-<p>$c_1$和$c_2$分别是表示两个子节点的向量，$p$是表示父节点的向量。子节点和父节点组成一个全连接神经网络，也就是子节点的每个神经元都和父节点的每个神经元两两相连。我们用矩阵$W$表示这些连接上的权重，它的维度将是$d×2d$，其中，$d$表示每个节点的维度。父节点的计算公式可以写成：$$<br>p=\tan\textrm{h}\left(W\left[\begin{array}{c}<br>    c_1\\<br>    c_2\\<br>\end{array}\right]+b\right)<br>$$在上式中，tanh是激活函数（当然也可以用其它的激活函数），是偏置项，它也是一个维度为的向量。</p>
+<p>$c_1$和$c_2$分别是表示两个子节点的向量，$p$是表示父节点的向量。子节点和父节点组成一个全连接神经网络，也就是子节点的每个神经元都和父节点的每个神经元两两相连。我们用矩阵$W$表示这些连接上的权重，它的维度将是$d×2d$，其中，$d$表示每个节点的维度。父节点的计算公式可以写成：</p>
+<script type="math/tex; mode=display">
+p=\tan\textrm{h}\left(W\left[\begin{array}{c}
+    c_1\\
+    c_2\\
+\end{array}\right]+b\right)</script><p>在上式中，tanh是激活函数（当然也可以用其它的激活函数），是偏置项，它也是一个维度为的向量。</p>
 <p>然后，我们把产生的父节点的向量和其他子节点的向量再次作为网络的输入，再次产生它们的父节点。如此递归下去，直至整棵树处理完毕。最终，我们将得到根节点的向量，我们可以认为它是对整棵树的表示，这样我们就实现了把树映射为一个向量。在下图中，我们使用递归神经网络处理一棵树，最终得到的向量$p_3$，就是对整棵树的表示：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%883.37.06.png" alt="屏幕快照 2017-04-26 下午3.37.06"><br>举个例子，我们使用递归神将网络将”两个外语学校的学生”映射为一个向量，如下图所示：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%883.37.44.png" alt="屏幕快照 2017-04-26 下午3.37.44"><br>最后得到的向量$p_3$就是对整个句子”两个外语学校的学生”的表示。由于整个结构是递归的，不仅仅是根节点，事实上每个节点都是以其为根的子树的表示。比如，在左边的这棵树中，向量$p_2$是短语”外语学院的学生”的表示，而向量$p_1$是短语”外语学院的”的表示。</p>
-<p>$$<br>p=\tan\textrm{h}\left(W\left[\begin{array}{c}<br>    c_1\\<br>    c_2\\<br>\end{array}\right]+b\right)<br>$$该式就是递归神经网络的前向计算算法，它和全连接神经网络没有什么区别，只是在输入的过程中需要根据输入的树结构依次输入每个子节点。</p>
+<script type="math/tex; mode=display">
+p=\tan\textrm{h}\left(W\left[\begin{array}{c}
+    c_1\\
+    c_2\\
+\end{array}\right]+b\right)</script><p>该式就是递归神经网络的前向计算算法，它和全连接神经网络没有什么区别，只是在输入的过程中需要根据输入的树结构依次输入每个子节点。</p>
 <p>需要特别注意的是，递归神经网络的权重$W$和偏置项$b$在所有节点都是共享的。</p>
 <h2 id="三、递归神经网络的训练"><a href="#三、递归神经网络的训练" class="headerlink" title="三、递归神经网络的训练"></a>三、递归神经网络的训练</h2><p>递归神经网络的训练算法和循环神经网络类似，两者不同之处在于，前者需要将残差$\selta$从根节点反向传播到各个子节点，而后者是将残差$\delta$从当前时刻$t_k$反向传播到初始时刻$t_1$。</p>
 <p>下面，我们介绍适用于递归神经网络的训练算法，也就是BPTS算法。</p>
-<h3 id="3-1-误差项的传递"><a href="#3-1-误差项的传递" class="headerlink" title="3.1 误差项的传递"></a>3.1 误差项的传递</h3><p>首先，我们先推导将误差从父节点传递到子节点的公式，如下图：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%883.47.37.png" alt="屏幕快照 2017-04-26 下午3.47.37"><br>定义$\delta_p$为误差函数E相对于父节点$p$的加权输入$net_p$的导数，即：$$\delta_p=\frac{\partial E}{\partial net_p}$$设$net_p$是父节点的加权输入，则$$<br>net_p=W\left[\begin{array}{c}<br>    c_1\\<br>    c_2\\<br>\end{array}\right]+b<br>$$在上述式子里，$net_p、c_1、c_2$都是向量，而$W$是矩阵。为了看清楚它们的关系，我们将其展开：$$<br>\left[\begin{array}{c}<br>    net_{p1}\\<br>    net_{p2}\\<br>    ···\\<br>    net_{pn}\\<br>\end{array}\right]=\left[\begin{matrix}<br>    w_{p1c11}&amp;        w_{p1c12}&amp;        ···&amp;        w_{p1c21}···\\<br>    w_{p2c11}&amp;        w_{p2c12}&amp;        ···&amp;        w_{p2c21}···\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    w_{pnc11}&amp;        w_{pnc12}&amp;        ···&amp;        w_{pnc21}···\\<br>\end{matrix}\right]\left[\begin{array}{c}<br>    net_{c11}\\<br>    net_{c12}\\<br>    ···\\<br>    net_{c21}\\<br>    net_{c22}\\<br>    ···\\<br>\end{array}\right]<br>$$在上面的公式中，$p_i$表示父节点$p$的第i个分量；$c_{1i}$表示子节点的第i个分量；$c_{2i}$表示$c_2$子节点的第$i$个分量；$w_{p_ic_{jk} }$表子节点$c_j$的第k个分量到父节点p的第i个分量的权重。根据上面展开后的矩阵乘法形式，我们不难看出，对于子节点$c_{jk}$来说，它会影响父节点所有的分量。因此，我们求误差函数E对$c_{jk}$的导数时，必须用到全导数公式，也就是：$$<br>\frac{\partial E}{\partial c_{jk}}=\sum_i{\frac{\partial E}{\partial net_{p_i}}\frac{\partial net_{p_i}}{\partial c_{jk}}}=\sum_i{\delta_{p_i}w_{p_ic_{jk}}}<br>$$有了上式，我们就可以把它表示为矩阵形式，从而得到一个向量化表达：$$<br>\frac{\partial E}{\partial c_j}=U_j\delta_p<br>$$其中，矩阵$U_j$是从矩阵$W$中提取部分元素组成的矩阵。其单元为$u_{j_{ik}}=w_{p_k}c_{ji}$上式看上出可能有点抽象，从下图，我们可以直观的看到$U_j$到底是啥。首先我们把$W$矩阵拆分为两个矩阵$W_1$和$W_2$，如下图所示：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%884.25.28.png" alt="屏幕快照 2017-04-26 下午4.25.28"></p>
-<p>显然，子矩阵$W_1$和$W_2$分别对应子节点$c_1$和$c_2$的到父节点$p$权重。则矩阵$U_j$为：$$U_j=W_j^T$$也就是说，将误差项反向传递到相应子节点$c_j$的矩阵$U_j$就是其对应权重矩阵$W_j$的转置。</p>
-<p>现在，我们设$net_{c_j}$是子节点$c_j$的加权输入，$f$是子节点$c$的激活函数，则：$$c_j=f(net_{c_j})$$这样，我们得到：$$<br>\delta_{c_j}=\frac{\partial E}{\partial net_{c_j}}=\frac{\partial E}{\partial c_j}\frac{\partial c_j}{\partial net_{c_j}}=W_{j}^{T}\delta_p°f’\left(net_{c_j}\right)<br>$$如果我们将不同子节点$c_j$对应的误差项$\delta_{c_j}$连接成一个向量$$<br>\delta_c=\left[\begin{array}{c}<br>    \delta_{c_1}\\<br>    \delta_{c_2}\\<br>\end{array}\right]<br>$$那么，上式可以写成$$<br>\delta_c=W^T\delta_p°f’\left(net_c\right)<br>$$它就是将误差项从父节点传递到其子节点的公式。注意上式中的$net_c$也是将两个子结点的加权输入$net_{c_1}$和$net_{c_2}$连在一起的向量。<br>有了传递一层的公式，我们就不难写出逐层传递的公式。<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%884.57.04.png" alt="屏幕快照 2017-04-26 下午4.57.04"><br>上图是在树型结构中反向传递项的全景图，反复应用上式，在已知$\delta_p^{(3)}$的情况下，我们不难算出$\delta_p^{(1)}$为：$$<br>\delta^{\left(2\right)}=W^T\delta_{p}^{\left(3\right)}°f’\left(net^{\left(2\right)}\right)<br>$$$$<br>\delta_{p}^{\left(2\right)}=\left[\delta^{\left(2\right)}\right]_p<br>$$$$<br>\delta^{\left(1\right)}=W^T\delta_{p}^{\left(2\right)}°f’\left(net^{\left(1\right)}\right)<br>$$$$<br>\delta_{p}^{\left(1\right)}=\left[\delta^{\left(1\right)}\right]_p<br>$$在上面的公式中$$<br>\delta^{\left(2\right)}=\left[\begin{array}{c}<br>    \delta_{c}^{\left(2\right)}\\<br>    \delta_{p}^{\left(2\right)}\\<br>\end{array}\right]<br>$$,$\left[\delta^{\left(2\right)}\right]_p$表示取向量$\delta^{(2)}$属于节点p的部分。</p>
-<h3 id="3-2-权重梯度的计算"><a href="#3-2-权重梯度的计算" class="headerlink" title="3.2 权重梯度的计算"></a>3.2 权重梯度的计算</h3><p>根据加权输入的计算公式：<br>$$net_p^{(l)}=Wc^{(l)}+b$$其中，$net_p^{(l)}$表示第$l$层的父节点的加权输入，$c^{(l)}$表示第$l$层的子节点。W是权重矩阵，$b$是偏置项，将其展开可得：$$<br>net_{p_j}^{l}=\sum_i{w_{ji}c_{i}^{l}}+b_j<br>$$那么，我们可以求得误差函数在第$l$层对权重的梯度为：$$<br>\frac{\partial E}{\partial w_{ji}^{\left(l\right)}}=\frac{\partial E}{\partial net_{p_j}^{\left(l\right)}}\frac{\partial net_{p_j}^{\left(l\right)}}{\partial w_{ji}^{\left(l\right)}}=\delta_{p_j}^{\left(l\right)}·c_{i}^{\left(l\right)}<br>$$上式是针对一个权重项$w_{ji}$的公式，现在需要把它扩展为对所有的权重项的公式。我们可以把上式写成写成矩阵的形式（在下面的公式中，m=2n）:$$<br>\frac{\partial E}{\partial W^{\left(l\right)}}=\delta^{\left(l\right)}·\left(c^{\left(l\right)}\right)^T<br>$$这就是第$l$层权重项的梯度计算公式。我们知道，由于权重$W$是在所有层共享的，所以和循环神经网络一样，递归神经网络的最终权重梯度是各个层权重梯度之和。即：$$<br>\frac{\partial E}{\partial W}=\sum_l{\frac{\partial E}{\partial W^{\left(l\right)}}}<br>$$和循环神经网络一样，递归神经网络最终梯度之和是各层梯度之和。</p>
-<p>接下来，我们求偏置项$b$的梯度计算公式。先计算误差函数对第$l$层偏置项$b^{(l)}$的梯度：$$<br>\frac{\partial E}{\partial b_{j}^{\left(l\right)}}=\frac{\partial E}{\partial net_{p_j}^{\left(l\right)}}\frac{\partial net_{p_j}^{\left(l\right)}}{\partial b_{j}^{\left(l\right)}}=\delta_{p_j}^{\left(l\right)}<br>$$把上式扩展为矩阵的形式：$$<br>\frac{\partial E}{\partial b^{\left(l\right)}}=\delta_{p}^{\left(l\right)}<br>$$最终的偏置项梯度是各个层偏置项梯度之和，即：$$<br>\frac{\partial E}{\partial b}=\sum_l{\frac{\partial E}{\partial b^{\left(l\right)}}}<br>$$</p>
-<h3 id="3-3-权重更新"><a href="#3-3-权重更新" class="headerlink" title="3.3 权重更新"></a>3.3 权重更新</h3><p>如果使用梯度下降优化算法，那么权重更新公式为：$$<br>W\gets W+\eta\frac{\partial E}{\partial W}<br>$$其中，$\eta$是学习速率常数。把之前的式子代入上式，即可完成权重的更新。同理，偏置项的更新公式为：$$<br>b\gets b+\eta\frac{\partial E}{\partial b}<br>$$同样把之前求得式子代入上式，即可完成偏置项的更新。</p>
+<h3 id="3-1-误差项的传递"><a href="#3-1-误差项的传递" class="headerlink" title="3.1 误差项的传递"></a>3.1 误差项的传递</h3><p>首先，我们先推导将误差从父节点传递到子节点的公式，如下图：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%883.47.37.png" alt="屏幕快照 2017-04-26 下午3.47.37"><br>定义$\delta_p$为误差函数E相对于父节点$p$的加权输入$net_p$的导数，即：</p>
+<script type="math/tex; mode=display">\delta_p=\frac{\partial E}{\partial net_p}</script><p>设$net_p$是父节点的加权输入，则</p>
+<script type="math/tex; mode=display">
+net_p=W\left[\begin{array}{c}
+    c_1\\
+    c_2\\
+\end{array}\right]+b</script><p>在上述式子里，$net_p、c_1、c_2$都是向量，而$W$是矩阵。为了看清楚它们的关系，我们将其展开：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{c}
+    net_{p1}\\
+    net_{p2}\\
+    ···\\
+    net_{pn}\\
+\end{array}\right]=\left[\begin{matrix}
+    w_{p1c11}&        w_{p1c12}&        ···&        w_{p1c21}···\\
+    w_{p2c11}&        w_{p2c12}&        ···&        w_{p2c21}···\\
+    ···&        ···&        ···&        ···\\
+    w_{pnc11}&        w_{pnc12}&        ···&        w_{pnc21}···\\
+\end{matrix}\right]\left[\begin{array}{c}
+    net_{c11}\\
+    net_{c12}\\
+    ···\\
+    net_{c21}\\
+    net_{c22}\\
+    ···\\
+\end{array}\right]</script><p>在上面的公式中，$p_i$表示父节点$p$的第i个分量；$c_{1i}$表示子节点的第i个分量；$c_{2i}$表示$c_2$子节点的第$i$个分量；$w_{p_ic_{jk} }$表子节点$c_j$的第k个分量到父节点p的第i个分量的权重。根据上面展开后的矩阵乘法形式，我们不难看出，对于子节点$c_{jk}$来说，它会影响父节点所有的分量。因此，我们求误差函数E对$c_{jk}$的导数时，必须用到全导数公式，也就是：</p>
+<script type="math/tex; mode=display">
+\frac{\partial E}{\partial c_{jk}}=\sum_i{\frac{\partial E}{\partial net_{p_i}}\frac{\partial net_{p_i}}{\partial c_{jk}}}=\sum_i{\delta_{p_i}w_{p_ic_{jk}}}</script><p>有了上式，我们就可以把它表示为矩阵形式，从而得到一个向量化表达：</p>
+<script type="math/tex; mode=display">
+\frac{\partial E}{\partial c_j}=U_j\delta_p</script><p>其中，矩阵$U_j$是从矩阵$W$中提取部分元素组成的矩阵。其单元为$u_{j_{ik}}=w_{p_k}c_{ji}$上式看上出可能有点抽象，从下图，我们可以直观的看到$U_j$到底是啥。首先我们把$W$矩阵拆分为两个矩阵$W_1$和$W_2$，如下图所示：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%884.25.28.png" alt="屏幕快照 2017-04-26 下午4.25.28"></p>
+<p>显然，子矩阵$W_1$和$W_2$分别对应子节点$c_1$和$c_2$的到父节点$p$权重。则矩阵$U_j$为：</p>
+<script type="math/tex; mode=display">U_j=W_j^T</script><p>也就是说，将误差项反向传递到相应子节点$c_j$的矩阵$U_j$就是其对应权重矩阵$W_j$的转置。</p>
+<p>现在，我们设$net_{c_j}$是子节点$c_j$的加权输入，$f$是子节点$c$的激活函数，则：</p>
+<script type="math/tex; mode=display">c_j=f(net_{c_j})</script><p>这样，我们得到：</p>
+<script type="math/tex; mode=display">
+\delta_{c_j}=\frac{\partial E}{\partial net_{c_j}}=\frac{\partial E}{\partial c_j}\frac{\partial c_j}{\partial net_{c_j}}=W_{j}^{T}\delta_p°f'\left(net_{c_j}\right)</script><p>如果我们将不同子节点$c_j$对应的误差项$\delta_{c_j}$连接成一个向量</p>
+<script type="math/tex; mode=display">
+\delta_c=\left[\begin{array}{c}
+    \delta_{c_1}\\
+    \delta_{c_2}\\
+\end{array}\right]</script><p>那么，上式可以写成</p>
+<script type="math/tex; mode=display">
+\delta_c=W^T\delta_p°f'\left(net_c\right)</script><p>它就是将误差项从父节点传递到其子节点的公式。注意上式中的$net_c$也是将两个子结点的加权输入$net_{c_1}$和$net_{c_2}$连在一起的向量。<br>有了传递一层的公式，我们就不难写出逐层传递的公式。<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-26%20%E4%B8%8B%E5%8D%884.57.04.png" alt="屏幕快照 2017-04-26 下午4.57.04"><br>上图是在树型结构中反向传递项的全景图，反复应用上式，在已知$\delta_p^{(3)}$的情况下，我们不难算出$\delta_p^{(1)}$为：</p>
+<script type="math/tex; mode=display">
+\delta^{\left(2\right)}=W^T\delta_{p}^{\left(3\right)}°f'\left(net^{\left(2\right)}\right)</script><script type="math/tex; mode=display">
+\delta_{p}^{\left(2\right)}=\left[\delta^{\left(2\right)}\right]_p</script><script type="math/tex; mode=display">
+\delta^{\left(1\right)}=W^T\delta_{p}^{\left(2\right)}°f'\left(net^{\left(1\right)}\right)</script><script type="math/tex; mode=display">
+\delta_{p}^{\left(1\right)}=\left[\delta^{\left(1\right)}\right]_p</script><p>在上面的公式中</p>
+<script type="math/tex; mode=display">
+\delta^{\left(2\right)}=\left[\begin{array}{c}
+    \delta_{c}^{\left(2\right)}\\
+    \delta_{p}^{\left(2\right)}\\
+\end{array}\right]</script><p>$\left[\delta^{\left(2\right)}\right]_p$表示取向量$\delta^{(2)}$属于节点p的部分。</p>
+<h3 id="3-2-权重梯度的计算"><a href="#3-2-权重梯度的计算" class="headerlink" title="3.2 权重梯度的计算"></a>3.2 权重梯度的计算</h3><p>根据加权输入的计算公式：</p>
+<script type="math/tex; mode=display">net_p^{(l)}=Wc^{(l)}+b</script><p>其中，$net_p^{(l)}$表示第$l$层的父节点的加权输入，$c^{(l)}$表示第$l$层的子节点。W是权重矩阵，$b$是偏置项，将其展开可得：</p>
+<script type="math/tex; mode=display">
+net_{p_j}^{l}=\sum_i{w_{ji}c_{i}^{l}}+b_j</script><p>那么，我们可以求得误差函数在第$l$层对权重的梯度为：</p>
+<script type="math/tex; mode=display">
+\frac{\partial E}{\partial w_{ji}^{\left(l\right)}}=\frac{\partial E}{\partial net_{p_j}^{\left(l\right)}}\frac{\partial net_{p_j}^{\left(l\right)}}{\partial w_{ji}^{\left(l\right)}}=\delta_{p_j}^{\left(l\right)}·c_{i}^{\left(l\right)}</script><p>上式是针对一个权重项$w_{ji}$的公式，现在需要把它扩展为对所有的权重项的公式。我们可以把上式写成写成矩阵的形式（在下面的公式中，m=2n）:</p>
+<script type="math/tex; mode=display">
+\frac{\partial E}{\partial W^{\left(l\right)}}=\delta^{\left(l\right)}·\left(c^{\left(l\right)}\right)^T</script><p>这就是第$l$层权重项的梯度计算公式。我们知道，由于权重$W$是在所有层共享的，所以和循环神经网络一样，递归神经网络的最终权重梯度是各个层权重梯度之和。即：</p>
+<script type="math/tex; mode=display">
+\frac{\partial E}{\partial W}=\sum_l{\frac{\partial E}{\partial W^{\left(l\right)}}}</script><p>和循环神经网络一样，递归神经网络最终梯度之和是各层梯度之和。</p>
+<p>接下来，我们求偏置项$b$的梯度计算公式。先计算误差函数对第$l$层偏置项$b^{(l)}$的梯度：</p>
+<script type="math/tex; mode=display">
+\frac{\partial E}{\partial b_{j}^{\left(l\right)}}=\frac{\partial E}{\partial net_{p_j}^{\left(l\right)}}\frac{\partial net_{p_j}^{\left(l\right)}}{\partial b_{j}^{\left(l\right)}}=\delta_{p_j}^{\left(l\right)}</script><p>把上式扩展为矩阵的形式：</p>
+<script type="math/tex; mode=display">
+\frac{\partial E}{\partial b^{\left(l\right)}}=\delta_{p}^{\left(l\right)}</script><p>最终的偏置项梯度是各个层偏置项梯度之和，即：</p>
+<script type="math/tex; mode=display">
+\frac{\partial E}{\partial b}=\sum_l{\frac{\partial E}{\partial b^{\left(l\right)}}}</script><h3 id="3-3-权重更新"><a href="#3-3-权重更新" class="headerlink" title="3.3 权重更新"></a>3.3 权重更新</h3><p>如果使用梯度下降优化算法，那么权重更新公式为：</p>
+<script type="math/tex; mode=display">
+W\gets W+\eta\frac{\partial E}{\partial W}</script><p>其中，$\eta$是学习速率常数。把之前的式子代入上式，即可完成权重的更新。同理，偏置项的更新公式为：</p>
+<script type="math/tex; mode=display">
+b\gets b+\eta\frac{\partial E}{\partial b}</script><p>同样把之前求得式子代入上式，即可完成偏置项的更新。</p>
 <p>这就是递归神经网络的训练算法BPTS。</p>
 
       
@@ -460,8 +538,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/01/深度学习系列（12）：pytorch实现卷积神经网络/" rel="next" title="深度学习系列（12）：pytorch实现卷积神经网络">
-                <i class="fa fa-chevron-left"></i> 深度学习系列（12）：pytorch实现卷积神经网络
+              <a href="/2017/04/25/深度学习系列（5）：长短时记忆网络（LSTM）/" rel="next" title="深度学习系列（5）：长短时记忆网络（LSTM）">
+                <i class="fa fa-chevron-left"></i> 深度学习系列（5）：长短时记忆网络（LSTM）
               </a>
             
           </div>
@@ -470,8 +548,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/25/深度学习系列（5）：长短时记忆网络（LSTM）/" rel="prev" title="深度学习系列（5）：长短时记忆网络（LSTM）">
-                深度学习系列（5）：长短时记忆网络（LSTM） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/11/深度学习系列（7）：神经网络的优化方法/" rel="prev" title="深度学习系列（7）：神经网络的优化方法">
+                深度学习系列（7）：神经网络的优化方法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -540,7 +618,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -548,7 +626,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -557,7 +635,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -869,9 +947,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -883,13 +984,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/28/数据结构与算法（14）：最短路算法/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="最短路径问题是图论研究中的一个经典算法问题，旨在寻找图（由结点和路径组成的）中两结点之间的最短路径。算法具体的形式包括：">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15034750643056.gif">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15034750948707.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15034751165686.jpg">
@@ -502,8 +503,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/29/数据结构与算法（15）：布隆过滤器/" rel="next" title="数据结构与算法（15）：布隆过滤器">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法（15）：布隆过滤器
+              <a href="/2017/07/27/机器学习算法系列（32）：MapReduce执行流程详解/" rel="next" title="机器学习算法系列（32）：MapReduce执行流程详解">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（32）：MapReduce执行流程详解
               </a>
             
           </div>
@@ -512,8 +513,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/27/机器学习算法系列（32）：MapReduce执行流程详解/" rel="prev" title="机器学习算法系列（32）：MapReduce执行流程详解">
-                机器学习算法系列（32）：MapReduce执行流程详解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/29/数据结构与算法（15）：布隆过滤器/" rel="prev" title="数据结构与算法（15）：布隆过滤器">
+                数据结构与算法（15）：布隆过滤器 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -582,7 +583,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -590,7 +591,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -599,7 +600,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -911,9 +912,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -925,13 +949,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

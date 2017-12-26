@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/09/02/机器学习算法系列（34）：使用Sklearn进行集成学习（理论）/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、前言很多人在竞赛（Kaggle，天池等）或工程实践中使用了集成学习（例如，RF、GTB等），确实也取得了不错的效果，在保证准确度的同时也提升了模型防止过拟合的能力。但是，我们真的用对了集成学习吗？">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15043255665954.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15043256075450.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15043256303505.jpg">
@@ -118,7 +119,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15049169776362.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15049170105760.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15049170394638.png">
-<meta property="og:updated_time" content="2017-09-22T14:40:06.000Z">
+<meta property="og:updated_time" content="2017-12-26T08:04:27.829Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（34）：使用Sklearn进行集成学习（理论）">
 <meta name="twitter:description" content="一、前言很多人在竞赛（Kaggle，天池等）或工程实践中使用了集成学习（例如，RF、GTB等），确实也取得了不错的效果，在保证准确度的同时也提升了模型防止过拟合的能力。但是，我们真的用对了集成学习吗？">
@@ -536,8 +537,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/03/机器学习算法系列（35）：使用Sklearn进行集成学习（实践）/" rel="next" title="机器学习算法系列（35）：使用Sklearn进行集成学习（实践）">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（35）：使用Sklearn进行集成学习（实践）
+              <a href="/2017/08/31/机器学习算法系列（33）：特征处理（Feature Processing）/" rel="next" title="机器学习算法系列（33）：特征处理（Feature Processing）">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（33）：特征处理（Feature Processing）
               </a>
             
           </div>
@@ -546,8 +547,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/31/机器学习算法系列（33）：特征处理（Feature Processing）/" rel="prev" title="机器学习算法系列（33）：特征处理（Feature Processing）">
-                机器学习算法系列（33）：特征处理（Feature Processing） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/03/机器学习算法系列（35）：使用Sklearn进行集成学习（实践）/" rel="prev" title="机器学习算法系列（35）：使用Sklearn进行集成学习（实践）">
+                机器学习算法系列（35）：使用Sklearn进行集成学习（实践） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -616,7 +617,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -624,7 +625,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -633,7 +634,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -945,9 +946,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -959,13 +983,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

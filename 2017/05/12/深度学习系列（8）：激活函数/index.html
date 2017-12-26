@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="深度学习的基本原理是基于人工神经网络，信号从一个神经元进入，经过非线性的activation function，传入到下一层神经元；再经过该层神经元的activate function，继续往下传递，如此循环往复，直到输出层。其中的激活函数的主要作用是提供网络的非线性建模能力，使得神经网络有足够的capacity来抓取复杂的pattern，在各个领域取得state-of-the-art的结果。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%884.14.47.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%885.07.16.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%886.07.46.png">
@@ -104,7 +105,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%889.14.25.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%889.26.38.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%889.28.10.png">
-<meta property="og:updated_time" content="2017-05-13T03:14:59.000Z">
+<meta property="og:updated_time" content="2017-12-26T09:03:43.350Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（8）：激活函数">
 <meta name="twitter:description" content="深度学习的基本原理是基于人工神经网络，信号从一个神经元进入，经过非线性的activation function，传入到下一层神经元；再经过该层神经元的activate function，继续往下传递，如此循环往复，直到输出层。其中的激活函数的主要作用是提供网络的非线性建模能力，使得神经网络有足够的capacity来抓取复杂的pattern，在各个领域取得state-of-the-art的结果。">
@@ -414,10 +415,13 @@ var _hmt = _hmt || [];
 <li>1）在定义域内处处可导</li>
 <li>2）两侧导数逐渐趋近于0，即$\lim_{x\rightarrow\infty}f’\left(x\right)=0$。<br>的激活函数定义为软饱和激活函数。</li>
 </ul>
-<p>与极限的定义类似，饱和也分为左饱和与右饱和，左侧软饱和为：$$\lim_{x\rightarrow -\infty}f’\left(x\right)=0$$右侧软饱和为：$$\lim_{x\rightarrow +\infty}f’\left(x\right)=0$$</p>
-<p>与软饱和激活函数相对的是硬饱和激活函数，即：$$f’(x)=0,   当|x|&gt;c,c为常数$$同理，应饱和也分为左饱和与右饱和，左侧硬饱和为：$$f’(x)=0,   当-x&gt;c, c为正数$$右侧硬饱和为：$$f’(x)=0,   当x&gt;c, c为正数$$</p>
-<h2 id="二、sigmoid"><a href="#二、sigmoid" class="headerlink" title="二、sigmoid"></a>二、sigmoid</h2><p>sigmoid非线性函数的数学公式为：$$\sigma\left(x\right)=\frac{1}{1+e^{-x}}$$函数图像及梯度函数图像如下所示：</p>
-<p><center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%884.14.47.png" alt="屏幕快照 2017-05-12 下午4.14.47"></center><br>它将输入实数值“挤压”到0-1范围内。更具体地说，很大的负数变成0，很大的正数变成1。它是便于求导的平滑函数，其导数为$\sigma(x)(1-\sigma(x))$，这是它的优点。sigmoid 在定义域内处处可导，且两侧导数逐渐趋近于0，即：$\lim_{x\rightarrow\infty}f’\left(x\right)=0$</p>
+<p>与极限的定义类似，饱和也分为左饱和与右饱和，左侧软饱和为：</p>
+<script type="math/tex; mode=display">\lim_{x\rightarrow -\infty}f'\left(x\right)=0</script><p>右侧软饱和为：</p>
+<script type="math/tex; mode=display">\lim_{x\rightarrow +\infty}f'\left(x\right)=0</script><p>与软饱和激活函数相对的是硬饱和激活函数，即：</p>
+<script type="math/tex; mode=display">f'(x)=0,   当|x|>c,c为常数</script><p>同理，应饱和也分为左饱和与右饱和，左侧硬饱和为：</p>
+<script type="math/tex; mode=display">f'(x)=0,   当-x>c, c为正数</script><p>右侧硬饱和为：</p>
+<script type="math/tex; mode=display">f'(x)=0,   当x>c, c为正数</script><h2 id="二、sigmoid"><a href="#二、sigmoid" class="headerlink" title="二、sigmoid"></a>二、sigmoid</h2><p>sigmoid非线性函数的数学公式为：</p>
+<script type="math/tex; mode=display">\sigma\left(x\right)=\frac{1}{1+e^{-x}}</script><p>函数图像及梯度函数图像如下所示：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%884.14.47.png" alt="屏幕快照 2017-05-12 下午4.14.47"><br>它将输入实数值“挤压”到0-1范围内。更具体地说，很大的负数变成0，很大的正数变成1。它是便于求导的平滑函数，其导数为$\sigma(x)(1-\sigma(x))$，这是它的优点。sigmoid 在定义域内处处可导，且两侧导数逐渐趋近于0，即：$\lim_{x\rightarrow\infty}f’\left(x\right)=0$</p>
 <p>然而现在sigmoid函数已经不太受欢迎，实际很少使用了，这是因为它有三个主要缺点：</p>
 <ul>
 <li><p>1）梯度消失。Sigmoid 的软饱和性，使得深度神经网络在二三十年里一直难以有效的训练，是阻碍神经网络发展的重要原因。具体地，我们知道优化神经网络的方法是Back Propagation，即导数的反向传递：先计算输出层对应的loss，然后将loss以导数的形式不断向上一层网络传递，修正相应的参数，达到降低loss的目的。sigmoid反向传导的梯度包含了一个f’(x) 因子（sigmoid关于输入的导数），因此一旦输入落入饱和区，f’(x) 就会变得接近于0，导致了向底层传递的梯度也变得非常小。此时，网络参数很难得到有效训练。这种现象被称为梯度消失。一般来说， sigmoid 网络在 5 层之内就会产生梯度消失现象。我们也可以在图中看出原因，主要在于两点：(1) 在上图中容易看出，当$\sigma(x)$中x较大或较小时，导数接近0，而后向传递的数学依据是微积分求导的链式法则，当前层的导数需要之前各层导数的乘积，几个小数的相乘，结果会很接近0 (2) Sigmoid导数的最大值是0.25，这意味着导数在每一层至少会被压缩为原来的1/4，通过两层后被变为1/16，…，通过10层后为1/1048576。请注意这里是“至少”，导数达到最大值这种情况还是很少见的。梯度消失问题至今仍然存在，但被新的优化方法有效缓解了，例如DBN中的分层预训练，Batch Normalization的逐层归一化，Xavier和MSRA权重初始化等代表性技术。</p>
@@ -427,8 +431,10 @@ var _hmt = _hmt || [];
 <li><p>3）幂运算相对耗时：相对于前两项，这其实并不是一个大问题，我们目前是具备相应计算能力的，但面对深度学习中庞大的计算量，最好是能省则省。之后我们会看到，在ReLU函数中，需要做的仅仅是一个thresholding，相对于幂运算来讲会快很多。</p>
 </li>
 </ul>
-<h2 id="三、tanh"><a href="#三、tanh" class="headerlink" title="三、tanh"></a>三、tanh</h2><p>tanh非线性函数的数学公式为：$$tanh x = \frac{e^x-e^{-x}}{e^x+e^{-x}}$$函数图像及梯度函数图像如下所示：<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%886.07.46.png" alt="屏幕快照 2017-05-12 下午6.07.46"></center><br>如上图所示，计算可以知道：$tanh(x)=2sigmoid(2x)-1$，它其实是一个简单放大的sigmoid神经元，和sigmoid神经元一样，也具有软饱和性。但是和sigmoid神经元不同的是，它解决了zero-centered的输出问题，因此，在实际操作中，tanh非线性函数比sigmoid非线性函数更受欢迎。然而，gradient vanishing的问题和幂运算的问题仍然存在。Xavier在文献[]中分析了sigmoid与tanh的饱和现象及特点，具体见原论文。此外，文献[]中提到了tanh网络的收敛速度要比sigmoid块。因为tanh的输出均值比sigmoid更接近0，SGD会更接近natural gradient（一种二次优化技术），从而降低所需的迭代次数。</p>
-<h2 id="四、ReLU"><a href="#四、ReLU" class="headerlink" title="四、ReLU"></a>四、ReLU</h2><p>ReLU非线性函数的数学公式为：$$ReLU(x)=max(0,x)$$函数图像及梯度函数图像如下所示：<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%886.32.04.png" alt="屏幕快照 2017-05-12 下午6.32.04"></center><br>虽然2006年Hinton教授提出通过分层无监督预训练解决深层网络训练困难的问题，但是深度网络的直接监督式训练的最终突破，最主要的原因是新型激活函数ReLU。它有以下几大优点：</p>
+<h2 id="三、tanh"><a href="#三、tanh" class="headerlink" title="三、tanh"></a>三、tanh</h2><p>tanh非线性函数的数学公式为：</p>
+<script type="math/tex; mode=display">tanh x = \frac{e^x-e^{-x}}{e^x+e^{-x}}</script><p>函数图像及梯度函数图像如下所示：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%886.07.46.png" alt="屏幕快照 2017-05-12 下午6.07.46"><br>如上图所示，计算可以知道：$tanh(x)=2sigmoid(2x)-1$，它其实是一个简单放大的sigmoid神经元，和sigmoid神经元一样，也具有软饱和性。但是和sigmoid神经元不同的是，它解决了zero-centered的输出问题，因此，在实际操作中，tanh非线性函数比sigmoid非线性函数更受欢迎。然而，gradient vanishing的问题和幂运算的问题仍然存在。Xavier在文献[]中分析了sigmoid与tanh的饱和现象及特点，具体见原论文。此外，文献[]中提到了tanh网络的收敛速度要比sigmoid块。因为tanh的输出均值比sigmoid更接近0，SGD会更接近natural gradient（一种二次优化技术），从而降低所需的迭代次数。</p>
+<h2 id="四、ReLU"><a href="#四、ReLU" class="headerlink" title="四、ReLU"></a>四、ReLU</h2><p>ReLU非线性函数的数学公式为：</p>
+<script type="math/tex; mode=display">ReLU(x)=max(0,x)</script><p>函数图像及梯度函数图像如下所示：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%886.32.04.png" alt="屏幕快照 2017-05-12 下午6.32.04"><br>虽然2006年Hinton教授提出通过分层无监督预训练解决深层网络训练困难的问题，但是深度网络的直接监督式训练的最终突破，最主要的原因是新型激活函数ReLU。它有以下几大优点：</p>
 <ul>
 <li>1）解决了gradient vanishing问题：ReLU在$x<0$时硬饱和。由于$x>0$时导数为1，所以，ReLU能够在$x&gt;0$时保持梯度不衰减，从而缓解梯度消失问题。</0$时硬饱和。由于$x></li>
 <li>2）计算速度非常快。对比sigmoid和tanh神经元含有指数运算等耗费计算资源的操作，ReLU可以简单地通过对一个矩阵进行阈值计算得到。</li>
@@ -444,16 +450,20 @@ var _hmt = _hmt || [];
 <li>2）偏移现象。即输出均值恒大于零。偏移现象和Dead ReLU Problem会共同影响网络的收敛性。</li>
 </ul>
 <p>尽管存在上述几个问题，ReLU目前仍是最常用的activation function，在搭建人工神经网络的时候推荐优先尝试！</p>
-<h2 id="五、Leaky-ReLU"><a href="#五、Leaky-ReLU" class="headerlink" title="五、Leaky ReLU"></a>五、Leaky ReLU</h2><p>Leaky ReLU非线性函数的数学公式为：$$f(x)=max(0.01x,x)$$函数图像及梯度函数图像如下所示：<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%887.23.31.png" alt="屏幕快照 2017-05-12 下午7.23.31"></center><br>人们为了解决Dead ReLU Problem，提出了将ReLU的前半段设为0.01x而非0。<br>理论上来说，Leaky ReLU拥有ReLU的所有优点，外加不会有Dead ReLU problem，但是在实际操作中，并没有完全证明Leaky ReLU总是好于ReLU。有些研究者的论文指出这个激活函数表现很不错，但是其效果并不是很稳定。</p>
-<h2 id="六、PReLU"><a href="#六、PReLU" class="headerlink" title="六、PReLU"></a>六、PReLU</h2><p>Parametric ReLU非线性函数的数学公式为：$$f(x)=max(\alpha x,x)$$<br>PReLU是ReLU和LReLU的改进版本，具有非饱和性。与LReLU相比，PReLU中的负半轴斜率$\alpha$由back propagation学习而非固定。原文献建议初始化$\alpha$为0.25，不采用正则。</p>
+<h2 id="五、Leaky-ReLU"><a href="#五、Leaky-ReLU" class="headerlink" title="五、Leaky ReLU"></a>五、Leaky ReLU</h2><p>Leaky ReLU非线性函数的数学公式为：</p>
+<script type="math/tex; mode=display">f(x)=max(0.01x,x)</script><p>函数图像及梯度函数图像如下所示：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%887.23.31.png" alt="屏幕快照 2017-05-12 下午7.23.31"><br>人们为了解决Dead ReLU Problem，提出了将ReLU的前半段设为0.01x而非0。<br>理论上来说，Leaky ReLU拥有ReLU的所有优点，外加不会有Dead ReLU problem，但是在实际操作中，并没有完全证明Leaky ReLU总是好于ReLU。有些研究者的论文指出这个激活函数表现很不错，但是其效果并不是很稳定。</p>
+<h2 id="六、PReLU"><a href="#六、PReLU" class="headerlink" title="六、PReLU"></a>六、PReLU</h2><p>Parametric ReLU非线性函数的数学公式为：</p>
+<script type="math/tex; mode=display">f(x)=max(\alpha x,x)</script><p>PReLU是ReLU和LReLU的改进版本，具有非饱和性。与LReLU相比，PReLU中的负半轴斜率$\alpha$由back propagation学习而非固定。原文献建议初始化$\alpha$为0.25，不采用正则。</p>
 <p>虽然PReLU 引入了额外的参数，但基本不需要担心过拟合。例如，在cifar10+NIN实验中， PReLU比ReLU和ELU多引入了参数，但也展现了更优秀的性能。所以实验中若发现网络性能不好，建议从其他角度寻找原因。</p>
 <p>与ReLU相比，PReLU收敛速度更快。因为PReLU的输出更接近0均值，使得SGD更接近natural gradient。证明过程参见原文[10]。</p>
 <h2 id="七、RReLU"><a href="#七、RReLU" class="headerlink" title="七、RReLU"></a>七、RReLU</h2><p>数学形式与PReLU类似，但RReLU[9]是一种非确定性激活函数，其参数是随机的。这种随机性类似于一种噪声，能够在一定程度上起到正则效果。作者在cifar10/100上观察到了性能提升。</p>
-<p>综上，ReLU家族讲完了，总结如下图：</p>
-<p><center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%888.56.35.png" alt="屏幕快照 2017-05-12 下午8.56.35"></center><br>其中表格为在cifar10上采用NIN网络的实验结果。</p>
-<h2 id="八、Maxout"><a href="#八、Maxout" class="headerlink" title="八、Maxout"></a>八、Maxout</h2><p>Maxout[13]是ReLU的推广，其发生饱和是一个零测集事件（measure zero event）。正式定义为：$$max(w_1^Tx+b_1,w^T_2+b_2,···,w_n^Tx+b_n)$$Maxout网络能够近似任意连续函数，且Maxout是对ReLU和leaky ReLU的一般化归纳，当$w_2,b_2,···,w_n,b_n$为0时，退化为ReLU。其实，Maxout的思想在视觉领域存在已久。例如，在HOG特征里有这么一个过程：计算三个通道的梯度强度，然后在每一个像素位置上，仅取三个通道中梯度强度最大的数值，最终形成一个通道。这其实就是Maxout的一种特例。</p>
+<p>综上，ReLU家族讲完了，总结如下图：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%888.56.35.png" alt="屏幕快照 2017-05-12 下午8.56.35"><br>其中表格为在cifar10上采用NIN网络的实验结果。</p>
+<h2 id="八、Maxout"><a href="#八、Maxout" class="headerlink" title="八、Maxout"></a>八、Maxout</h2><p>Maxout[13]是ReLU的推广，其发生饱和是一个零测集事件（measure zero event）。正式定义为：</p>
+<script type="math/tex; mode=display">max(w_1^Tx+b_1,w^T_2+b_2,···,w_n^Tx+b_n)</script><p>Maxout网络能够近似任意连续函数，且Maxout是对ReLU和leaky ReLU的一般化归纳，当$w_2,b_2,···,w_n,b_n$为0时，退化为ReLU。其实，Maxout的思想在视觉领域存在已久。例如，在HOG特征里有这么一个过程：计算三个通道的梯度强度，然后在每一个像素位置上，仅取三个通道中梯度强度最大的数值，最终形成一个通道。这其实就是Maxout的一种特例。</p>
 <p>所以Maxout神经元就拥有ReLU单元的所有优点（线性操作和不饱和，能够缓解梯度消失），而没有它的缺点（死亡的ReLU单元）。然而和ReLU对比，它每个神经元的参数数量增加了一倍，这就导致整体参数的数量激增。</p>
-<h2 id="九、ELU"><a href="#九、ELU" class="headerlink" title="九、ELU"></a>九、ELU</h2><p>ELU（Exponential Linear Units）非线性函数的数学公式为：$$<br>f(x)=max(0,x)+\alpha·min(0,exp(x)-1)<br>$$函数图像及梯度函数图像如下所示：<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%889.14.25.png" alt="屏幕快照 2017-05-12 下午9.14.25"></center><br>ELU也是为解决ReLU存在的问题而提出，显然，ELU有ReLU的基本所有优点，并有自身的特点，罗列如下：</p>
+<h2 id="九、ELU"><a href="#九、ELU" class="headerlink" title="九、ELU"></a>九、ELU</h2><p>ELU（Exponential Linear Units）非线性函数的数学公式为：</p>
+<script type="math/tex; mode=display">
+f(x)=max(0,x)+\alpha·min(0,exp(x)-1)</script><p>函数图像及梯度函数图像如下所示：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-12%20%E4%B8%8B%E5%8D%889.14.25.png" alt="屏幕快照 2017-05-12 下午9.14.25"><br>ELU也是为解决ReLU存在的问题而提出，显然，ELU有ReLU的基本所有优点，并有自身的特点，罗列如下：</p>
 <ul>
 <li>1）右侧线性部分使得ELU能够缓解梯度消失，而左侧软饱和能够燃ELU对输入变换或噪声更加鲁棒。</li>
 <li>2）ELU的输出均值接近于零，即zero-centered，所以收敛速度更快。经ELU的作者实验，ELU的收敛性质的确优于ReLU和PReLU。在cifar10上，ELU 网络的loss 降低速度更快；在 ImageNet上，不加 Batch Normalization 30 层以上的 ReLU 网络会无法收敛，PReLU网络在MSRA的Fan-in （caffe ）初始化下会发散，而 ELU 网络在Fan-in/Fan-out下都能收敛 。</li>
@@ -498,8 +508,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/14/深度学习系列（9）：Batch Normalization/" rel="next" title="深度学习系列（9）：Batch Normalization">
-                <i class="fa fa-chevron-left"></i> 深度学习系列（9）：Batch Normalization
+              <a href="/2017/05/11/深度学习系列（7）：神经网络的优化方法/" rel="next" title="深度学习系列（7）：神经网络的优化方法">
+                <i class="fa fa-chevron-left"></i> 深度学习系列（7）：神经网络的优化方法
               </a>
             
           </div>
@@ -508,8 +518,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/11/深度学习系列（7）：神经网络的优化方法/" rel="prev" title="深度学习系列（7）：神经网络的优化方法">
-                深度学习系列（7）：神经网络的优化方法 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/05/14/深度学习系列（9）：Batch Normalization/" rel="prev" title="深度学习系列（9）：Batch Normalization">
+                深度学习系列（9）：Batch Normalization <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -578,7 +588,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -586,7 +596,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -595,7 +605,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -907,9 +917,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -921,13 +954,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

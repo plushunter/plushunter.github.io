@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/26/数据结构与算法（12）：排序/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="经典排序算法在面试中占有很大的比重，也是基础，在这里整理并用Java实现了几大经典排序算法，包括冒泡排序、插入排序、选择排序、希尔排序、归并排序、快速排序、堆排序、同排序。我们默认将一个无序数列排序成由小到大。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-09%20%E4%B8%8A%E5%8D%888.49.45.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-09%20%E4%B8%8A%E5%8D%889.15.53.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-09%20%E4%B8%8A%E5%8D%8810.42.28.png">
@@ -424,7 +425,7 @@ var _hmt = _hmt || [];
 <p>时间复杂度：最好$O(n)$；最坏$O(n^2)$；平均$O(n^2)$<br>空间复杂度：$O(1)$<br>稳定性：稳定</p>
 </blockquote>
 <h2 id="二、选择排序（Selection-Sort）"><a href="#二、选择排序（Selection-Sort）" class="headerlink" title="二、选择排序（Selection Sort）"></a>二、选择排序（Selection Sort）</h2><h3 id="2-1-思想"><a href="#2-1-思想" class="headerlink" title="2.1 思想"></a>2.1 思想</h3><p>每个回合都选择出剩下的元素中最大的那个，选择的方法是首先默认第一元素是最大的，如果后面的元素比它大的话，那就更新剩下的最大的元素值，找到剩下元素中最大的之后将它放入到合适的位置就行了。和冒泡排序类似，只是找剩下的元素中最大的方式不同而已。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-09%20%E4%B8%8A%E5%8D%889.15.53.png" alt="屏幕快照 2017-03-09 上午9.15.53">   </p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-09%20%E4%B8%8A%E5%8D%889.15.53.png" alt="屏幕快照 2017-03-09 上午9.15.53">   &lt;/center&gt;</p>
 <h3 id="2-2-代码"><a href="#2-2-代码" class="headerlink" title="2.2 代码"></a>2.2 代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectionSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> temp, min = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; arr.length - <span class="number">1</span>; ++index) &#123;</div><div class="line">            min = index;</div><div class="line">            <span class="comment">// 循环查找最小值</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = index + <span class="number">1</span>; j &lt; arr.length; ++j) &#123;</div><div class="line">                <span class="keyword">if</span> (arr[min] &gt; arr[j]) &#123;</div><div class="line">                    min = j;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (min != index) &#123;</div><div class="line">                temp = arr[index];</div><div class="line">                arr[index] = arr[min];</div><div class="line">                arr[min] = temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">10</span>,<span class="number">30</span>,<span class="number">20</span>,<span class="number">60</span>,<span class="number">40</span>,<span class="number">50</span>&#125;;</div><div class="line">        Demo.selectionSort(arr);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i:arr)&#123;</div><div class="line">            System.out.print(i+<span class="string">","</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="2-3-时空复杂度"><a href="#2-3-时空复杂度" class="headerlink" title="2.3 时空复杂度"></a>2.3 时空复杂度</h3><p>对具有$n$个数据元素的序列进行排序时，选择排序需要进行$n-1$趟选择。进行第$i$趟选择时，后面已经有$i-1$个数据元素排好序，第$i$趟从剩下的$n-i+1$个数据元素中选择一个关键字最大的数据元素，并将它与第$i$个数据元素交换，这样即可使后面的$i$个数据元素排好序。</p>
 <p>选择排序的关键字比较次数与序列的初始状态无关。对n个数据元素进行排序时，第一趟的比较次数为$n-1$，第$i$趟的比较次数是$n-1$次，第$n-1$趟（最后一趟）的比较次数是1次。因此，总的比较次数为$n(n-1)/2$</p>
@@ -465,7 +466,7 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>时间复杂度：$O(nlog_{2}n)$<br>空间复杂度：$O(n)$<br>稳定性：稳定</p>
 </blockquote>
-<h2 id="六、快速排序（Quick-Sort）"><a href="#六、快速排序（Quick-Sort）" class="headerlink" title="六、快速排序（Quick Sort）"></a>六、快速排序（Quick Sort）</h2><h3 id="6-1-思想"><a href="#6-1-思想" class="headerlink" title="6.1 思想"></a>6.1 思想</h3><p>快速排序是图灵奖得主C.R.A Hoare于1960年提出的一种划分交换排序。它采用了一种分治的策略，通常称其为<a href="https://www.wikiwand.com/en/Quicksort" target="_blank" rel="external">分治法（Divide-and-Conquer Method）</a></p>
+<h2 id="六、快速排序（Quick-Sort）"><a href="#六、快速排序（Quick-Sort）" class="headerlink" title="六、快速排序（Quick Sort）"></a>六、快速排序（Quick Sort）</h2><h3 id="6-1-思想"><a href="#6-1-思想" class="headerlink" title="6.1 思想"></a>6.1 思想</h3><p>快速排序是图灵奖得主C.R.A Hoare于1960年提出的一种划分交换排序。它采用了一种分治的策略，通常称其为<a href="https://www.wikiwand.com/en/Quicksort" target="_blank" rel="noopener">分治法（Divide-and-Conquer Method）</a></p>
 <p>分治法的基本思想是：将原问题分解为若干个规模更小但结构与原问题相似的子问题。递归地解这些子问题，然后将这些子问题组合为原问题的解。</p>
 <p>利用分治法可将快速排序分为三步：</p>
 <ol>
@@ -526,7 +527,7 @@ var _hmt = _hmt || [];
 <p>设有数组 array = [29, 25, 3, 49, 9, 37, 21, 43]，那么数组中最大数为 49，先设置 5 个桶，那么每个桶可存放数的范围为：0~9、10~19、20~29、30~39、40~49，然后分别将这些数放人自己所属的桶，如下图：</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/15005389746937.png" alt=""><br>然后，分别对每个桶里面的数进行排序，或者在将数放入桶的同时用插入排序进行排序。最后，将各个桶中的数据有序的合并起来，如下图：</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/15005389874146.png" alt=""></p>
-<p><a href="http://www.cs.usfca.edu/~galles/visualization/BucketSort.html" target="_blank" rel="external">Data Structure Visualizations</a> 提供了一个桶排序的分步动画演示。</p>
+<p><a href="http://www.cs.usfca.edu/~galles/visualization/BucketSort.html" target="_blank" rel="noopener">Data Structure Visualizations</a> 提供了一个桶排序的分步动画演示。</p>
 <h2 id="九、各种排序方法的时空复杂度"><a href="#九、各种排序方法的时空复杂度" class="headerlink" title="九、各种排序方法的时空复杂度"></a>九、各种排序方法的时空复杂度</h2><p> <img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-10%20%E4%B8%8B%E5%8D%8812.50.56.png" alt="屏幕快照 2017-03-10 下午12.50.56">   </p>
 <h3 id="9-1-时间复杂度"><a href="#9-1-时间复杂度" class="headerlink" title="9.1 时间复杂度"></a>9.1 时间复杂度</h3><blockquote>
 <p>＂快些以$O(nlog_2n)$的速度归队＂</p>
@@ -551,7 +552,7 @@ var _hmt = _hmt || [];
 <li>比较次数与初始序列无关的是：简单选择与折半插入</li>
 <li>排序趟数与原始序列有关的是：交换类的（冒泡和快排）</li>
 </ul>
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>维基百科：希尔排序，快速排序，归并排序，堆排序<br><a href="http://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html" target="_blank" rel="external">排序算法可视化</a></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>维基百科：希尔排序，快速排序，归并排序，堆排序<br><a href="http://www.cs.usfca.edu/~galles/visualization/ComparisonSort.html" target="_blank" rel="noopener">排序算法可视化</a></p>
 
       
     </div>
@@ -588,8 +589,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/26/机器学习算法系列（31）：在线最优化求解（online Optimization）/" rel="next" title="机器学习算法系列（31）：在线最优化求解（online Optimization）">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（31）：在线最优化求解（online Optimization）
+              <a href="/2017/07/25/数据结构与算法（11）：哈希表/" rel="next" title="数据结构与算法（11）：哈希表">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（11）：哈希表
               </a>
             
           </div>
@@ -598,8 +599,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/25/数据结构与算法（11）：哈希表/" rel="prev" title="数据结构与算法（11）：哈希表">
-                数据结构与算法（11）：哈希表 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/26/机器学习算法系列（31）：在线最优化求解（online Optimization）/" rel="prev" title="机器学习算法系列（31）：在线最优化求解（online Optimization）">
+                机器学习算法系列（31）：在线最优化求解（online Optimization） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -668,7 +669,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -676,7 +677,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -685,7 +686,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -997,9 +998,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -1011,13 +1035,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

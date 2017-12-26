@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/27/Java学习笔记（8）：常用库类、向量与哈希/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、Java基础类库Java 的类库是 Java 语言提供的已经实现的标准类的集合，是 Java 编程的 API（Application Program Interface），它可以帮助开发者方便、快捷地开发 Java 程序。这些类根据实现的功能不同，可以划分为不同的集合，每个集合组成一个包，称为类库。Java 类库中大部分都是由Sun 公司提供的，这些类库称为基础类库。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-09-01T06:50:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习笔记（8）：常用库类、向量与哈希">
@@ -411,6 +412,7 @@ var _hmt = _hmt || [];
 <h2 id="2-1-Math类"><a href="#2-1-Math类" class="headerlink" title="2.1 Math类"></a>2.1 Math类</h2><blockquote>
 <p>Math类的主要方法</p>
 </blockquote>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -473,6 +475,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <p>例如：产生10个10~100之间的随机整数。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//********** ep8_2.java **********</div><div class="line">class Demo&#123;</div><div class="line">    public static void main(String args[])&#123;</div><div class="line">        int a;</div><div class="line">        System.out.print(&quot;随机数为：&quot;);</div><div class="line">        for(int i=1;i&lt;=10;i++)&#123;</div><div class="line">            a=(int)((100-10+1)*Math.random()+10);</div><div class="line">            System.out.print(&quot; &quot;+a);</div><div class="line">        &#125;</div><div class="line">        System.out.println();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="2-2-字符串类"><a href="#2-2-字符串类" class="headerlink" title="2.2 字符串类"></a>2.2 字符串类</h2><p>字符串是字符的序列。在 Java 中，字符串无论是常量还是变量都是用类的对象来实现的。java.lang 提供了两种字符串类：String 类和 StringBuffer 类。</p>
@@ -482,6 +485,7 @@ var _hmt = _hmt || [];
 <p>按照 Java 语言的规定，String 类是 immutable 的 Unicode 字符序列，其作用是实现一种不能改变的静态字符串。例如，把两个字符串连接起来的结果是生成一个新的字符串，而不会使原来的字符串改变。实际上，所有改变字符串的结果都是生成新的字符串，而不是改变原来字符串。</p>
 <p>字符串与数组的实现很相似，也是通过 index 编号来指出字符在字符串中的位置的，编号从0 开始，第 2 个字符的编号为 1，以此类推。如果要访问的编号不在合法的范围内，系统会产生 StringIndexOutOfBoundsExecption 异常。如果 index 的值不是整数，则会产生编译错误。</p>
 <p>String 类提供了如下表所示的几种字符串创建方法。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -508,11 +512,13 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <blockquote>
 <p>2.StringBuffer 类</p>
 </blockquote>
 <p>String 类不能改变字符串对象中的内容，只能通过建立一个新串来实现字符串的变化。如果字符串需要动态改变，就需要用 StringBuffer 类。StringBuffer 类主要用来实现字符串内容的添加、修改、删除，也就是说该类对象实体的内存空间可以自动改变大小，以便于存放一个可变的字符序列。</p>
 <p>StringBuffer 类提供的三种构造方法：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -535,9 +541,11 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <blockquote>
 <p>几种 StringBuffer 类常用的方法</p>
 </blockquote>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -572,6 +580,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <h1 id="三、日期和时间类"><a href="#三、日期和时间类" class="headerlink" title="三、日期和时间类"></a>三、日期和时间类</h1><p>Java 的日期和时间类位于 java.util 包中。利用日期时间类提供的方法，可以获取当前的日期和时间，创建日期和时间参数，计算和比较时间。</p>
 <h2 id="3-1-Date-类"><a href="#3-1-Date-类" class="headerlink" title="3.1 Date 类"></a>3.1 Date 类</h2><p>Date 类是 Java 中的日期时间类，其构造方法比较多，下面是常用的两个：</p>
 <ul>
@@ -583,6 +592,7 @@ var _hmt = _hmt || [];
 <p>运行结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Mon Feb 05 22:50:05 CST 2007</div><div class="line">从1970年1月1日0时到现在共有：1170687005390 毫秒</div></pre></td></tr></table></figure>
 <p>一些比较常用的 Date 类方法：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -629,6 +639,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <p>Date 对象表示时间的默认顺序是星期、月、日、小时、分、秒、年。若需要修改时间显示的格式可以使用“SimpleDateFormat(String pattern)”方法。</p>
 <p>例如，用不同的格式输出时间：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">import java.util.Date;</div><div class="line">import java.text.SimpleDateFormat;</div><div class="line">public class Demo&#123;</div><div class="line">    public static void main(String args[])&#123;</div><div class="line">        Date da=new Date();</div><div class="line">        System.out.println(da);</div><div class="line">        SimpleDateFormat ma1=new SimpleDateFormat(&quot;yyyy 年 MM 月 dd 日 E 北京时间&quot;);</div><div class="line">        System.out.println(ma1.format(da));</div><div class="line">        SimpleDateFormat ma2=new SimpleDateFormat(&quot;北京时间：yyyy 年 MM 月 dd 日 HH 时 mm 分 ss 秒&quot;);</div><div class="line">        System.out.println(ma2.format(-1000));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -644,6 +655,7 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">calendar.get(Calendar.MONTH);</div></pre></td></tr></table></figure>
 <p>如果返回值为 0 代表当前日历是一月份，如果返回 1 代表二月份，依此类推。</p>
 <p>由 Calendar 定义的一些常用方法如下表所示：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -706,6 +718,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="3-3-GregorianCalendar-类"><a href="#3-3-GregorianCalendar-类" class="headerlink" title="3.3 GregorianCalendar 类"></a>3.3 GregorianCalendar 类</h2><p>GregorianCalendar 是一个具体实现 Calendar 类的类，该类实现了公历日历。Calendar 类的 getInstance() 方法返回一个 GregorianCalendar，它被初始化为默认的地域和时区下的当前日期和时间。</p>
 <p>GregorianCalendar 类定义了两个字段：AD 和 BC，分别代表公元前和公元后。其默认的构造方法 GregorianCalendar() 以默认的地域和时区的当前日期和时间初始化对象，另外也可以指定地域和时区来建立一个 GregorianCalendar 对象，例如：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GregorianCalendar(Locale locale);</div><div class="line">GregorianCalendar(TimeZone timeZone);</div><div class="line">GregorianCalendar(TimeZone timeZone,Locale locale);</div></pre></td></tr></table></figure>
@@ -730,6 +743,7 @@ var _hmt = _hmt || [];
 <li>Hashtable(int capacity,float loadFactor)</li>
 </ul>
 <p>哈希表类的主要方法如下表所示。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -780,6 +794,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <p>哈希表的创建也可以通过 new 操作符实现。其语句为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">HashTable has=new HashTable();</div></pre></td></tr></table></figure>
 <p>哈希表的遍历</p>
@@ -818,8 +833,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/28/Java学习笔记（9）：内部类、抽象类、接口/" rel="next" title="Java学习笔记（9）：内部类、抽象类、接口">
-                <i class="fa fa-chevron-left"></i> Java学习笔记（9）：内部类、抽象类、接口
+              <a href="/2017/08/26/Java学习笔记（7）：深入理解java异常处理机制/" rel="next" title="Java学习笔记（7）：深入理解java异常处理机制">
+                <i class="fa fa-chevron-left"></i> Java学习笔记（7）：深入理解java异常处理机制
               </a>
             
           </div>
@@ -828,8 +843,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/26/Java学习笔记（7）：深入理解java异常处理机制/" rel="prev" title="Java学习笔记（7）：深入理解java异常处理机制">
-                Java学习笔记（7）：深入理解java异常处理机制 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/28/Java学习笔记（9）：内部类、抽象类、接口/" rel="prev" title="Java学习笔记（9）：内部类、抽象类、接口">
+                Java学习笔记（9）：内部类、抽象类、接口 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -898,7 +913,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -906,7 +921,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -915,7 +930,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -1227,9 +1242,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -1241,13 +1279,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

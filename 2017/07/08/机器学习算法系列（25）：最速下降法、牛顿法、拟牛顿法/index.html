@@ -93,7 +93,8 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/08/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、最速下降法最速下降法，又称为梯度下降法，是无约束最优化领域中最简单的算法，单独就这种算法来看，属于早就“过时”了的一种算法。但是，它的理念是其他某些算法的组成部分，或者说是在其他算法中，也有最速下降法的影子。它是一种迭代算法，每一步需要求解目标函数的梯度向量。">
-<meta property="og:updated_time" content="2017-08-20T03:34:45.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-26T08:03:51.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法">
 <meta name="twitter:description" content="一、最速下降法最速下降法，又称为梯度下降法，是无约束最优化领域中最简单的算法，单独就这种算法来看，属于早就“过时”了的一种算法。但是，它的理念是其他某些算法的组成部分，或者说是在其他算法中，也有最速下降法的影子。它是一种迭代算法，每一步需要求解目标函数的梯度向量。">
@@ -395,25 +396,50 @@ var _hmt = _hmt || [];
       
         <h2 id="一、最速下降法"><a href="#一、最速下降法" class="headerlink" title="一、最速下降法"></a>一、最速下降法</h2><p>最速下降法，又称为梯度下降法，是无约束最优化领域中最简单的算法，单独就这种算法来看，属于早就“过时”了的一种算法。但是，它的理念是其他某些算法的组成部分，或者说是在其他算法中，也有最速下降法的影子。它是一种迭代算法，每一步需要求解目标函数的梯度向量。</p>
 <a id="more"></a>
-<p>假设$f(x)$是$R^n$上具有一阶连续偏导的函数。要求解的无约束最优化问题是：$$\underset {x\in R^n}{min}  f(x)$$</p>
-<p>梯度下降法是一种迭代算法。选取适当的初值$x^{(0)}$，不断迭代，更新$x$的值，进行目标函数的极小化，直到收敛。由于负梯度方向是使函数值下降最快的方向，在迭代的每一步，以负梯度方向更新$x$的值，从而达到减少函数值的目的。</p>
-<p>由于$f(x)$具有一阶连续偏导数，若第$k$次迭代值为$x^{(k)}$，则可将$f(x)$在$x^{(k)}$附近进行一阶泰勒展开：$$f(x)=f(x^{(k)})+g_k^T(x-x^{(k)})$$这里，$g_k=g(x^{(k)})=∇f(x^{(k)})$为$f(x)$在$x^{(k)}$的梯度。</p>
-<p>求出第$k+1$次迭代值$x^{(k+1)}$:$$x^{(k+1)}\leftarrow x^{(k)}+\lambda_kp_k$$其中$p_k$是搜索方向，取负梯度方向$p_k=-∇f(x^{(k)})$,$\lambda _k$是步长，由一维搜索确定，即$\lambda_k$使得$$f(x^{(k)}+\lambda_kp_k)=\underset {\lambda≥0}{min}  f(x^{(k)}+\lambda p_k)$$</p>
-<p>算法步骤如下：</p>
+<p>假设$f(x)$是$R^n$上具有一阶连续偏导的函数。要求解的无约束最优化问题是：</p>
+<script type="math/tex; mode=display">\underset {x\in R^n}{min} \ f(x)</script><p>梯度下降法是一种迭代算法。选取适当的初值$x^{(0)}$，不断迭代，更新$x$的值，进行目标函数的极小化，直到收敛。由于负梯度方向是使函数值下降最快的方向，在迭代的每一步，以负梯度方向更新$x$的值，从而达到减少函数值的目的。</p>
+<p>由于$f(x)$具有一阶连续偏导数，若第$k$次迭代值为$x^{(k)}$，则可将$f(x)$在$x^{(k)}$附近进行一阶泰勒展开：</p>
+<script type="math/tex; mode=display">f(x)=f(x^{(k)})+g_k^T(x-x^{(k)})</script><p>这里，$g_k=g(x^{(k)})=∇f(x^{(k)})$为$f(x)$在$x^{(k)}$的梯度。</p>
+<p>求出第$k+1$次迭代值$x^{(k+1)}$:</p>
+<script type="math/tex; mode=display">x^{(k+1)}\leftarrow x^{(k)}+\lambda_kp_k</script><p>其中$p_k$是搜索方向，取负梯度方向$p_k=-∇f(x^{(k)})$,$\lambda _k$是步长，由一维搜索确定，即$\lambda_k$使得</p>
+<script type="math/tex; mode=display">f(x^{(k)}+\lambda_kp_k)=\underset {\lambda≥0}{min} \ f(x^{(k)}+\lambda p_k)</script><p>算法步骤如下：</p>
 <p>输入：目标函数$f(x)$，梯度函数$g(x)=∇f(x)$，计算精度$\xi$;</p>
 <p>输出：$f(x)$的极小点$x^*$</p>
 <ol>
 <li>取初始值$x^{(0)}\in R^{n}$，置$k=0$</li>
 <li>计算 $f(x^{(k)})$</li>
-<li>计算梯度$g_k=g(x^{(k)})$，当$||g_k||＜\xi$时，停止迭代，令$x^*=x^{(k)}$；否则，令$p_k = -g(x^{(k)})$，求$\lambda_k$，使$$f(x^{(k)}+\lambda_kp_k)=\underset {\lambda≥0}{min}  f(x^{(k)}+\lambda p_k)$$</li>
+<li>计算梯度$g_k=g(x^{(k)})$，当$||g_k||＜\xi$时，停止迭代，令$x^*=x^{(k)}$；否则，令$p_k = -g(x^{(k)})$，求$\lambda_k$，使<script type="math/tex; mode=display">f(x^{(k)}+\lambda_kp_k)=\underset {\lambda≥0}{min} \ f(x^{(k)}+\lambda p_k)</script></li>
 <li>置$x^{(k+1 )}=x^{(k)}+\lambda _kp_k$，计算$f(x^{(k+1)})$当$||f(x^{(k+1)})-f(x^{(k)})||＜\xi$或$||x^{(k=1)}-x^{(k)}||＜\xi$，停止迭代，令$x^*=x^{(k+1)}$</li>
 <li>否则，置$k=k+1$，转到步骤3。</li>
 </ol>
 <p>当目标函数是凸函数时，梯度下降法的解释全局最优解。一般情况下，其解不保证是全局最优解。梯度下降法的收敛速度也未必是很快的。</p>
-<h2 id="二、牛顿法"><a href="#二、牛顿法" class="headerlink" title="二、牛顿法"></a>二、牛顿法</h2><p>考虑如下无约束的极小化问题$$\underset{X}{min} f(x)$$其中$X=(x_1,x_2,x_3，···，x_N)^T \in R^N$这里我们假定$f$为凸函数，且两阶连续可微。记$x^*$为目标函数的极小值。</p>
-<p>为了简单起见，首先考虑$N=1$的简单情形（此时目标函数$f(X)$变为$f(x)$）。牛顿法的基本思想是：在现有极小值估计值的附近对$f(x)$作二阶泰勒展开，进而找极小点的下一个估计值。设$x_k$为当前的极小点估计值，则$$f(x) = f(x_k)+ f^{‘}(x_k)(x-x_k)+\frac{1}{2}f^{‘’}(x_k)(x-x_k)^2$$表示$f(x)$在$x_k$附近的二阶泰勒展开式（略去了关于$x-x_k$的高阶项）。由于求得是最值，由极值必要条件可知，$f(x)$应该满足$$f^{‘}(x)=0$$，即$$f^{‘}(x_k)+f^{‘’}(x_k)(x-x_k)^2$$从而求得$$x=x_k-\frac{f^{‘}(x_k)}{f^{‘’}{(x_k)}}$$于是，若给定初始值$x_0$，则可以构造如下的迭代格式$$x_{k+1}=x_k-\frac{f^{‘}(x_k)}{f^{‘’}{(x_k)}}$$于是，若给定初始值$x_0$，则可以构造如下的迭代格式$$x_{k+1}=x_k-\frac{f^{‘}(x_k)}{f^{‘’}{(x_k)}} ,   k=0,1,···$$产生序列$\{x_k\}$来逼近$f(x)$的极小点。在一定条件下$\{x_k\}$可以收敛到$f(x)$的极小点。</p>
-<p>对于$N&gt;1$的情形，二阶泰勒展开式可以做推广，此时$$f(X)=f(X_k)+∇f(X_k) · (X-X_k)+\frac{1}{2}· (X-X_k)^T·∇^2f(X_k)·(X-X_k)$$其中$∇f$为$f$的梯度向量，$∇^2f$为海森矩阵，其定义分别为$$<br>\nabla f=\left[\begin{array}{c}<br>    \frac{\partial f}{\partial x_1}\\<br>    \frac{\partial f}{\partial x_2}\\<br>    ···\\<br>    \frac{\partial f}{\partial x_N}\\<br>\end{array}\right],\\nabla f^2=\left[\begin{matrix}<br>    \frac{\partial^2f}{\partial x_{1}^{2}}&amp;        \frac{\partial^2f}{\partial x_1\partial x_2}&amp;        ···&amp;        \frac{\partial^2f}{\partial x_1\partial x_N}\\<br>    \frac{\partial^2f}{\partial x_2\partial x_1}&amp;        \frac{\partial^2f}{\partial x_{2}^{2}}&amp;        ···&amp;        \frac{\partial^2f}{\partial x_2\partial x_N}\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    \frac{\partial^2f}{\partial x_N\partial x_1}&amp;        \frac{\partial^2f}{\partial x_N\partial x_2}&amp;        ···&amp;        \frac{\partial^2f}{\partial x_{N}^{2}}\\<br>\end{matrix}\right]<br>$$注意，$∇f$和$∇^2f$中的元素均为关于$X$的函数，以下分别将其简记为$g$和$H$。特别地，若$f$的混合偏导数可交换次序(即对$\forall i,j$，成立$\frac{\partial^2f}{\partial x_i\partial x_j}=\frac{\partial^2f}{\partial x_j\partial x_i}$)，则海森矩阵$H$为对称矩阵，而$∇f(X_k)$和$∇^2f(X_k )$则表示将$X$取为$X_k$后得到的实值向量和矩阵，以下分别将其简记为$g_k$和$H_k$（这里字母g表示gradient，H表示Hessian）</p>
-<p>同样地，由于是求极小点，极值必要条件要求它为$f(X)$的驻点，即$$∇f(X)=0 $$亦即对二阶泰勒展开作用一个梯度算子$$g_k+H_k·(X-X_k)=0$$进一步，若矩阵$H_k$非奇异，则可解得$$X=X_k-H_k^{-1}·g_k$$于是，若给定初始值$X_0$，则同样可以构造出迭代格式$$X_{k+1}=X_k-H^{-1}_k·g_k$$这就是原始的牛顿迭代法，其迭代格式中的搜索方向$d_k=-H^{-1}_k·g_k$称为牛顿方向。下面给出牛顿法的完整算法描述：</p>
+<h2 id="二、牛顿法"><a href="#二、牛顿法" class="headerlink" title="二、牛顿法"></a>二、牛顿法</h2><p>考虑如下无约束的极小化问题</p>
+<script type="math/tex; mode=display">\underset{X}{min}\ f(x)</script><p>其中$X=(x_1,x_2,x_3，···，x_N)^T \in R^N$这里我们假定$f$为凸函数，且两阶连续可微。记$x^*$为目标函数的极小值。</p>
+<p>为了简单起见，首先考虑$N=1$的简单情形（此时目标函数$f(X)$变为$f(x)$）。牛顿法的基本思想是：在现有极小值估计值的附近对$f(x)$作二阶泰勒展开，进而找极小点的下一个估计值。设$x_k$为当前的极小点估计值，则</p>
+<script type="math/tex; mode=display">f(x) = f(x_k)+ f^{'}(x_k)(x-x_k)+\frac{1}{2}f^{''}(x_k)(x-x_k)^2</script><p>表示$f(x)$在$x_k$附近的二阶泰勒展开式（略去了关于$x-x_k$的高阶项）。由于求得是最值，由极值必要条件可知，$f(x)$应该满足<script type="math/tex">f^{'}(x)=0</script>，即</p>
+<script type="math/tex; mode=display">f^{'}(x_k)+f^{''}(x_k)(x-x_k)^2</script><p>从而求得</p>
+<script type="math/tex; mode=display">x=x_k-\frac{f^{'}(x_k)}{f^{''}{(x_k)}}</script><p>于是，若给定初始值$x_0$，则可以构造如下的迭代格式</p>
+<script type="math/tex; mode=display">x_{k+1}=x_k-\frac{f^{'}(x_k)}{f^{''}{(x_k)}}</script><p>于是，若给定初始值$x_0$，则可以构造如下的迭代格式</p>
+<script type="math/tex; mode=display">x_{k+1}=x_k-\frac{f^{'}(x_k)}{f^{''}{(x_k)}} , \  k=0,1,···</script><p>产生序列$\{x_k\}$来逼近$f(x)$的极小点。在一定条件下$\{x_k\}$可以收敛到$f(x)$的极小点。</p>
+<p>对于$N&gt;1$的情形，二阶泰勒展开式可以做推广，此时</p>
+<script type="math/tex; mode=display">f(X)=f(X_k)+∇f(X_k)\ ·\ (X-X_k)+\frac{1}{2}· (X-X_k)^T·∇^2f(X_k)·(X-X_k)</script><p>其中$∇f$为$f$的梯度向量，$∇^2f$为海森矩阵，其定义分别为</p>
+<script type="math/tex; mode=display">
+\nabla f=\left[\begin{array}{c}
+    \frac{\partial f}{\partial x_1}\\
+    \frac{\partial f}{\partial x_2}\\
+    ···\\
+    \frac{\partial f}{\partial x_N}\\
+\end{array}\right],\\nabla f^2=\left[\begin{matrix}
+    \frac{\partial^2f}{\partial x_{1}^{2}}&        \frac{\partial^2f}{\partial x_1\partial x_2}&        ···&        \frac{\partial^2f}{\partial x_1\partial x_N}\\
+    \frac{\partial^2f}{\partial x_2\partial x_1}&        \frac{\partial^2f}{\partial x_{2}^{2}}&        ···&        \frac{\partial^2f}{\partial x_2\partial x_N}\\
+    ···&        ···&        ···&        ···\\
+    \frac{\partial^2f}{\partial x_N\partial x_1}&        \frac{\partial^2f}{\partial x_N\partial x_2}&        ···&        \frac{\partial^2f}{\partial x_{N}^{2}}\\
+\end{matrix}\right]</script><p>注意，$∇f$和$∇^2f$中的元素均为关于$X$的函数，以下分别将其简记为$g$和$H$。特别地，若$f$的混合偏导数可交换次序(即对$\forall\ i,j$，成立$\frac{\partial^2f}{\partial x_i\partial x_j}=\frac{\partial^2f}{\partial x_j\partial x_i}$)，则海森矩阵$H$为对称矩阵，而$∇f(X_k)$和$∇^2f(X_k )$则表示将$X$取为$X_k$后得到的实值向量和矩阵，以下分别将其简记为$g_k$和$H_k$（这里字母g表示gradient，H表示Hessian）</p>
+<p>同样地，由于是求极小点，极值必要条件要求它为$f(X)$的驻点，即</p>
+<script type="math/tex; mode=display">∇f(X)=0</script><p>亦即对二阶泰勒展开作用一个梯度算子</p>
+<script type="math/tex; mode=display">g_k+H_k·(X-X_k)=0</script><p>进一步，若矩阵$H_k$非奇异，则可解得</p>
+<script type="math/tex; mode=display">X=X_k-H_k^{-1}·g_k</script><p>于是，若给定初始值$X_0$，则同样可以构造出迭代格式</p>
+<script type="math/tex; mode=display">X_{k+1}=X_k-H^{-1}_k·g_k</script><p>这就是原始的牛顿迭代法，其迭代格式中的搜索方向$d_k=-H^{-1}_k·g_k$称为牛顿方向。下面给出牛顿法的完整算法描述：</p>
 <ol>
 <li>给定初值$X_0$和精度阀值$\xi$，并令$k:=0$</li>
 <li>计算$g_k$和$H_k$</li>
@@ -423,8 +449,8 @@ var _hmt = _hmt || [];
 </ol>
 <p>当目标函数是二次函数时，由于二次泰勒展开函数与原目标函数不是近似而是完全相同的二次式，海森矩阵退化成一个常数矩阵，从任一初始点出发，秩序一步迭代即可达到$f(X)$的极小点$X^*$，因此牛顿法是一种具有二次收敛性的算法。对于非二次函数，若函数的二次形性态较强，或迭代点已进入极小点的领域，则其收敛速度也是很快的，这是牛顿法的主要优点。</p>
 <p>但原始牛顿法由于迭代公式中没有步长因子，而是定步长迭代，对于非二次型目标函数，有时会使函数值上升，即出现$f(X_{k=1})&gt;f(X_k )$的情况，这表明原始牛顿法不能保证函数值稳定地下降，在严重的情况下甚至可能造成迭代点列$\{X_k\}$的发散而导致计算失败。</p>
-<p>为了消除这个弊病，人们提出了“阻尼牛顿法”，阻尼牛顿法每次迭代的方向仍然采用$d_k$，但每次迭代需沿此方向作一维搜索（line search），寻求最优的步长因子$\lambda _k $，即$$\lambda_k =arg \underset{\lambda \in R}{min}f(X_k+\lambda d_k)$$</p>
-<p>下面给出阻尼牛顿法的完整算法描述：</p>
+<p>为了消除这个弊病，人们提出了“阻尼牛顿法”，阻尼牛顿法每次迭代的方向仍然采用$d_k$，但每次迭代需沿此方向作一维搜索（line search），寻求最优的步长因子$\lambda _k $，即</p>
+<script type="math/tex; mode=display">\lambda_k =arg \underset{\lambda \in R}{min}f(X_k+\lambda d_k)</script><p>下面给出阻尼牛顿法的完整算法描述：</p>
 <ol>
 <li>给定初值$X_0$和精度阀值$\xi$，并令$k:=0$</li>
 <li>计算$g_k$和$H_k$</li>
@@ -442,25 +468,45 @@ var _hmt = _hmt || [];
 <p>也有人把“拟牛顿法”翻译成“准牛顿法”，其实都是表示“类似于牛顿法”的意思，因此只是对算法中用来计算搜索方向的海森矩阵（或海森矩阵的逆）作了近似计算罢了。</p>
 <p>在介绍具体的拟牛顿法之前，我们先推到一个拟牛顿条件，或者叫拟牛顿方程，还有的叫做割线条件。因为对海森矩阵（或海森矩阵的逆）做近似总不能随便近似，也需要理论指导，而拟牛顿条件则是用来提供理论指导的，它指出了用来近似的矩阵应该满足的条件。</p>
 <p>为明确起见，下文中用$B$表示对海森矩阵$H$本身的近似，而用$D$表示对海森矩阵的逆$H^{-1}$的近似，即$B≈H,D≈H^{-1}$</p>
-<h3 id="3-1-拟牛顿条件"><a href="#3-1-拟牛顿条件" class="headerlink" title="3.1 拟牛顿条件"></a>3.1 拟牛顿条件</h3><p>设经过$k+1$次迭代后得到$X_{k+1}$，此时将目标函数$f(X)$在$X_{k+1}$附近作泰勒展开，取二阶近似，得到$$f(X)≈ f(X_{k+1})+∇f(X_{k+1}) · (X-X_{k+1})+\frac{1}{2}· (X-X_{k+1})^T·∇^2f(X_{k+1})·(X-X_{k+1})$$在两边同时作用一个梯度算子$∇$，可得$$∇f(X)≈∇f（X_{k+1}）+H_{k+1}·(X-X_{k+ 1})$$取$X=X_k$并整理，可得$$g_{k+1}-g_k≈H_{k+1}·(X_{k+1}-X_k)$$若引入记号$s_k=X_{k+1}， y_k=g_{k+1}-g_k$则可以改写成$$y_k≈H_{k+1}·s_k$$或者$$s_k≈H^{-1}_{k+1}·y_k$$这就是所谓的拟牛顿条件，它对迭代过程中的海森矩阵$H_{k+1}$作约束，因此，对$H_{k+1}$做近似的$B_{k+1}$，以及对$H_{k+1}^{-1}$做近似的$D_{k+1 }$可以将$$y_k≈H_{k+1}·s_k$$或者$$s_k≈H^{-1}_{k+1}·y_k$$作为指导。</p>
-<h3 id="3-2-DFP算法"><a href="#3-2-DFP算法" class="headerlink" title="3.2 DFP算法"></a>3.2 DFP算法</h3><p>DFP算法是以William C.Davidon、Roger Fletcher、Michael J.D.Powell三个人的名字的首字母命名的，它由Davidon于1959年首先提出，是最早的拟牛顿法。该算法的核心是：通过迭代的方法，对$H_{k+1}^{-1}$做近似，迭代格式为$$D_{k+1}=D_k+\Delta D_k , k=0,1,2,···$$其中的$D_0$通常取为单位矩阵$I$。因此，关键是每一步的校正矩阵$\Delta D_k$如何构造。</p>
+<h3 id="3-1-拟牛顿条件"><a href="#3-1-拟牛顿条件" class="headerlink" title="3.1 拟牛顿条件"></a>3.1 拟牛顿条件</h3><p>设经过$k+1$次迭代后得到$X_{k+1}$，此时将目标函数$f(X)$在$X_{k+1}$附近作泰勒展开，取二阶近似，得到</p>
+<script type="math/tex; mode=display">f(X)≈ f(X_{k+1})+∇f(X_{k+1})\ ·\ (X-X_{k+1})+\frac{1}{2}· (X-X_{k+1})^T·∇^2f(X_{k+1})·(X-X_{k+1})</script><p>在两边同时作用一个梯度算子$∇$，可得</p>
+<script type="math/tex; mode=display">∇f(X)≈∇f（X_{k+1}）+H_{k+1}·(X-X_{k+ 1})</script><p>取$X=X_k$并整理，可得</p>
+<script type="math/tex; mode=display">g_{k+1}-g_k≈H_{k+1}·(X_{k+1}-X_k)</script><p>若引入记号$s_k=X_{k+1}， y_k=g_{k+1}-g_k$则可以改写成</p>
+<script type="math/tex; mode=display">y_k≈H_{k+1}·s_k</script><p>或者</p>
+<script type="math/tex; mode=display">s_k≈H^{-1}_{k+1}·y_k</script><p>这就是所谓的拟牛顿条件，它对迭代过程中的海森矩阵$H_{k+1}$作约束，因此，对$H_{k+1}$做近似的$B_{k+1}$，以及对$H_{k+1}^{-1}$做近似的$D_{k+1 }$可以将</p>
+<script type="math/tex; mode=display">y_k≈H_{k+1}·s_k</script><p>或者</p>
+<script type="math/tex; mode=display">s_k≈H^{-1}_{k+1}·y_k</script><p>作为指导。</p>
+<h3 id="3-2-DFP算法"><a href="#3-2-DFP算法" class="headerlink" title="3.2 DFP算法"></a>3.2 DFP算法</h3><p>DFP算法是以William C.Davidon、Roger Fletcher、Michael J.D.Powell三个人的名字的首字母命名的，它由Davidon于1959年首先提出，是最早的拟牛顿法。该算法的核心是：通过迭代的方法，对$H_{k+1}^{-1}$做近似，迭代格式为</p>
+<script type="math/tex; mode=display">D_{k+1}=D_k+\Delta D_k , k=0,1,2,···</script><p>其中的$D_0$通常取为单位矩阵$I$。因此，关键是每一步的校正矩阵$\Delta D_k$如何构造。</p>
 <p>注意，我们猜想$\Delta D_k$可能与$s_k,y_k$和$D_k$发生关联。这里，我们采用“待定法”，即首先将$\Delta D_k$待定城某种形式，然后结合拟牛顿条件来进行推导。</p>
-<p>那将$\Delta D_k$待定成什么形式呢？说起来比较tricky，我们将其待定为$$\Delta D_k=\alpha uu^T+\beta vv^T$$其中$\alpha$和$\beta$为待定向量。从形式上看，这种待定公式至少保证了矩阵$\Delta D_k$的对称性（因为$uu^T$和$vv^T$均为对称矩阵）</p>
-<p>将其代入迭代式，并结合拟牛顿指导条件，可得$$s_k=D_ky_k+\alpha uu^Ty_k+\beta vv^Ty_k$$将其改写一下$$s_k=D_ky_k+u(\alpha u^Ty_k)+v(\beta v^Ty_k)\\=D_ky_k+(\alpha u^Ty_k)u+(\beta v^Ty_k)v$$括号中为两个数，既然是数，我们不妨作如下简单赋值$$\alpha u^Ty_k=1 ，  \beta v^Ty_k=-1$$即$$\alpha=\frac{1}{u^Ty_k},\beta=-\frac{1}{v^Ty_k}$$其中向量$u,v$仍有待确定。</p>
-<p>我们把$s_k=D_ky_k+u-v$写作$$u-v=s_k-D_ky_k$$要上式成立，不妨直接取$$u=s_k,v=D_ky_k$$代入求$\alpha$和$\beta$的式子，便得到$$\alpha=\frac{1}{s^T_ky_k},\beta=\frac{1}{(D_ky_k)^Ty_k}=-\frac{1}{y^T_kD_ky_k}$$其中第二个式子用到了$D_k$的对称性。至此，我们已经将校正矩阵$\Delta D_k$构造出来了，我们就可以得到$$\Delta D_k=\frac{s_ks_k^T}{s_k^Ty_k}-\frac{D_ky_ky_k^TD_k}{y_k^TD_ky_k}$$</p>
-<p>综上，我们给出DFP算法的一个完整的算法描述。</p>
+<p>那将$\Delta D_k$待定成什么形式呢？说起来比较tricky，我们将其待定为</p>
+<script type="math/tex; mode=display">\Delta D_k=\alpha uu^T+\beta vv^T</script><p>其中$\alpha$和$\beta$为待定向量。从形式上看，这种待定公式至少保证了矩阵$\Delta D_k$的对称性（因为$uu^T$和$vv^T$均为对称矩阵）</p>
+<p>将其代入迭代式，并结合拟牛顿指导条件，可得</p>
+<script type="math/tex; mode=display">s_k=D_ky_k+\alpha uu^Ty_k+\beta vv^Ty_k</script><p>将其改写一下</p>
+<script type="math/tex; mode=display">s_k=D_ky_k+u(\alpha u^Ty_k)+v(\beta v^Ty_k)\\=D_ky_k+(\alpha u^Ty_k)u+(\beta v^Ty_k)v</script><p>括号中为两个数，既然是数，我们不妨作如下简单赋值</p>
+<script type="math/tex; mode=display">\alpha u^Ty_k=1 ，\  \beta v^Ty_k=-1$$即$$\alpha=\frac{1}{u^Ty_k},\beta=-\frac{1}{v^Ty_k}</script><p>其中向量$u,v$仍有待确定。</p>
+<p>我们把$s_k=D_ky_k+u-v$写作</p>
+<script type="math/tex; mode=display">u-v=s_k-D_ky_k</script><p>要上式成立，不妨直接取</p>
+<script type="math/tex; mode=display">u=s_k,v=D_ky_k</script><p>代入求$\alpha$和$\beta$的式子，便得到</p>
+<script type="math/tex; mode=display">\alpha=\frac{1}{s^T_ky_k},\beta=\frac{1}{(D_ky_k)^Ty_k}=-\frac{1}{y^T_kD_ky_k}</script><p>其中第二个式子用到了$D_k$的对称性。至此，我们已经将校正矩阵$\Delta D_k$构造出来了，我们就可以得到</p>
+<script type="math/tex; mode=display">\Delta D_k=\frac{s_ks_k^T}{s_k^Ty_k}-\frac{D_ky_ky_k^TD_k}{y_k^TD_ky_k}</script><p>综上，我们给出DFP算法的一个完整的算法描述。</p>
 <ol>
 <li>给定初值$X_0$和精度阀值$\xi$，并令$k:=0$</li>
 <li>确定搜索方向$d_k=-D^{-1}_k·g_k$</li>
 <li>利用$\lambda_k =arg \underset{\lambda \in R}{min}f(X_k+\lambda d_k)$得到步长$\lambda _k$，令$s_k=\lambda_kd_k$，计算新的迭代点$X_{k+1}:=X_k+s_k$</li>
 <li>若$||g_{k=1}||&lt;\xi$，则算法结束</li>
 <li>计算$y_k=g_{k+1}-g_k$</li>
-<li>计算$$D_{k+1}=D_k+\frac{s_ks_k^T}{s_k^Ty_k}-\frac{D_ky_ky_k^TD_k}{y_k^TD_ky_k}$$ </li>
+<li>计算<script type="math/tex; mode=display">D_{k+1}=D_k+\frac{s_ks_k^T}{s_k^Ty_k}-\frac{D_ky_ky_k^TD_k}{y_k^TD_ky_k}</script></li>
 <li>令$k:=k+1$转至步骤2.</li>
 </ol>
 <h3 id="3-3-BFGS算法"><a href="#3-3-BFGS算法" class="headerlink" title="3.3 BFGS算法"></a>3.3 BFGS算法</h3><p>BFGS算法是以其发明者Broyden、Fletcher、Goldfarb和Shanno四个人的名字的首字母命名的。与DFP算法相比，BFGS算法性能更加。目前它已成为求解无约束非线性优化问题最常用的方法之一。BFGS算法已有较完善的局部收敛理论，对其全局收敛的研究也取得了重要成果。</p>
-<p>BFGS算法中核心公式的推导过程和DFP完全类似，只是互换了其中$s_k$和$y_k$的位置。需要注意的是，BFGS算法是直接逼近海森矩阵，即$B_k≈H_k$,仍采用迭代方法，设迭代格式为$$B_{k+1}=B_k+\Delta B_k , k=0,1,2,···$$其中的$B_0$也常取为单位矩阵$I$。因此，关键是每一步的校正矩阵$\Delta B_k$如何构造，同样，将其待定为$$\Delta B_k=\alpha uu^T+\beta vv^T$$将其代入上式，并结合指导条件$y_k≈H_{k+1}·s_k$，可得$$y_k=B_ks_k+(au^Ts_k)u+(\beta v^Ts_k)v$$通过令$au^Ts_k=1,\beta v^Ts_k=-1$,以及$$u=y_k,v=B_ks_k$$可以算得$$\alpha=\frac{1}{y^T_ks_k},\beta = -\frac{1}{s^T_kB_ks_k}$$综上，便得到了如下的校正矩阵$\Delta B_k$的公式$$\Delta B_k=\frac{y_ky_k^T}{y_k^Ts_k}-\frac{B_ks_ks_k^TB_k}{s^T_kB_ks_k}$$</p>
-<p>好了，现在把矩阵$\Delta B_k$和$\Delta D_k$拿出来对比一下，除了你将$D$换成$B$外，就是把$s_k$和$y_k$互换了一下位置。</p>
+<p>BFGS算法中核心公式的推导过程和DFP完全类似，只是互换了其中$s_k$和$y_k$的位置。需要注意的是，BFGS算法是直接逼近海森矩阵，即$B_k≈H_k$,仍采用迭代方法，设迭代格式为</p>
+<script type="math/tex; mode=display">B_{k+1}=B_k+\Delta B_k , k=0,1,2,···</script><p>其中的$B_0$也常取为单位矩阵$I$。因此，关键是每一步的校正矩阵$\Delta B_k$如何构造，同样，将其待定为</p>
+<script type="math/tex; mode=display">\Delta B_k=\alpha uu^T+\beta vv^T</script><p>将其代入上式，并结合指导条件$y_k≈H_{k+1}·s_k$，可得</p>
+<script type="math/tex; mode=display">y_k=B_ks_k+(au^Ts_k)u+(\beta v^Ts_k)v</script><p>通过令$au^Ts_k=1,\beta v^Ts_k=-1$,以及</p>
+<script type="math/tex; mode=display">u=y_k,v=B_ks_k$$可以算得
+$$\alpha=\frac{1}{y^T_ks_k},\beta = -\frac{1}{s^T_kB_ks_k}</script><p>综上，便得到了如下的校正矩阵$\Delta B_k$的公式</p>
+<script type="math/tex; mode=display">\Delta B_k=\frac{y_ky_k^T}{y_k^Ts_k}-\frac{B_ks_ks_k^TB_k}{s^T_kB_ks_k}</script><p>好了，现在把矩阵$\Delta B_k$和$\Delta D_k$拿出来对比一下，除了你将$D$换成$B$外，就是把$s_k$和$y_k$互换了一下位置。</p>
 <p>最后，给出BFGS算法的一个完整算法描述：</p>
 <ol>
 <li>给定初值$X_0$和精度阀值$\xi$，并令$k:=0$</li>
@@ -468,7 +514,7 @@ var _hmt = _hmt || [];
 <li>利用$\lambda_k =arg \underset{\lambda \in R}{min}f(X_k+\lambda d_k)$得到步长$\lambda _k$，令$s_k=\lambda_kd_k$，计算新的迭代点$X_{k+1}:=X_k+s_k$</li>
 <li>若$||g_{k=1}||&lt;\xi$，则算法结束</li>
 <li>计算$y_k=g_{k+1}-g_k$</li>
-<li>计算$$B_{k+1}=B_k+\frac{y_ky_k^T}{y_k^Ts_k}-\frac{B_ks_ks_k^TB_k}{s^T_kB_ks_k}$$ </li>
+<li>计算<script type="math/tex; mode=display">B_{k+1}=B_k+\frac{y_ky_k^T}{y_k^Ts_k}-\frac{B_ks_ks_k^TB_k}{s^T_kB_ks_k}</script></li>
 <li>令$k:=k+1$转至步骤2.</li>
 </ol>
 <h3 id="3-4-L-BFGS算法"><a href="#3-4-L-BFGS算法" class="headerlink" title="3.4 L-BFGS算法"></a>3.4 L-BFGS算法</h3>
@@ -503,8 +549,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/08/机器学习算法系列（24）：损失函数/" rel="next" title="机器学习算法系列（24）：机器学习中的损失函数">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（24）：机器学习中的损失函数
+              <a href="/2017/07/07/机器学习算法系列（23）：TF-IDF与余弦相似度/" rel="next" title="机器学习算法系列（23）：TF-IDF与余弦相似度">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（23）：TF-IDF与余弦相似度
               </a>
             
           </div>
@@ -513,8 +559,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/07/机器学习算法系列（23）：TF-IDF与余弦相似度/" rel="prev" title="机器学习算法系列（23）：TF-IDF与余弦相似度">
-                机器学习算法系列（23）：TF-IDF与余弦相似度 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/08/机器学习算法系列（24）：损失函数/" rel="prev" title="机器学习算法系列（24）：机器学习中的损失函数">
+                机器学习算法系列（24）：机器学习中的损失函数 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -583,7 +629,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -591,7 +637,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -600,7 +646,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -912,9 +958,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -926,13 +995,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

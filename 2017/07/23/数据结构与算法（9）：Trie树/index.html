@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/23/数据结构与算法（9）：Trie树/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="Trie树是一种非常重要的数据结构，它在信息检索，字符串匹配等领域有广泛的应用，同时，它也是很多算法和复杂数据结构的基础，如后缀树，AC自动机等，因此，掌握Trie树这种数据结构，对于一名IT人员，显得非常基础且必要！">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15022924407569.png">
 <meta property="og:updated_time" content="2017-09-01T06:36:20.000Z">
 <meta name="twitter:card" content="summary">
@@ -507,8 +508,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/23/机器学习算法系列（30）：Scikit-Learn总结/" rel="next" title="机器学习算法系列（30）：Scikit-Learn总结">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（30）：Scikit-Learn总结
+              <a href="/2017/07/23/机器学习算法系列（29）：Sparsity and Some Basics of L1 Regularization/" rel="next" title="机器学习算法系列（29）：Sparsity and Some Basics of L1 Regularization">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（29）：Sparsity and Some Basics of L1 Regularization
               </a>
             
           </div>
@@ -517,8 +518,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/23/机器学习算法系列（29）：Sparsity and Some Basics of L1 Regularization/" rel="prev" title="机器学习算法系列（29）：Sparsity and Some Basics of L1 Regularization">
-                机器学习算法系列（29）：Sparsity and Some Basics of L1 Regularization <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/23/机器学习算法系列（30）：Scikit-Learn总结/" rel="prev" title="机器学习算法系列（30）：Scikit-Learn总结">
+                机器学习算法系列（30）：Scikit-Learn总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -587,7 +588,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -595,7 +596,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -604,7 +605,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -916,9 +917,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -930,13 +954,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

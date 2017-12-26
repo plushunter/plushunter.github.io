@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/04/数据结构与算法题解（3）：字符串题解/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="字符串相关题解java实现">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午9.44.36.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15016515510574.jpg">
 <meta property="og:updated_time" content="2017-09-01T07:02:10.000Z">
@@ -413,7 +414,7 @@ var _hmt = _hmt || [];
 <h2 id="三、第一次只出现一次的字符（字符串）"><a href="#三、第一次只出现一次的字符（字符串）" class="headerlink" title="三、第一次只出现一次的字符（字符串）"></a>三、第一次只出现一次的字符（字符串）</h2><p>在一个字符串(1&lt;=字符串长度&lt;=10000，全部由字母组成)中找到第一个只出现一次的字符,并返回它的位置.</p>
 <p>我们可以使用一个容器来存放每个字符的出现次数。在这个数据容器中可以根据字符来查找出现的次数，也就是这个容器的作用是把一个字符映射成一个数字。在常用的数据容器中，哈希表正是这个用途。</p>
 <p>为了解决这个问题，我们可以定义哈希表的键值（Key）是字符，而值（Value）是该字符出现的次数。同时我们还需要从头开始扫描字符串两次。第一次扫面字符串时，每扫到一个字符就在哈希表的对应项把次数加1.接下来第二次扫描时，每扫描到一个字符就能在哈希表中得到该字符出现的次数，这样第一个只出现一次的字符就是符合要求的输出。</p>
-<p>需要涉及到Java中HashMap工作原理及实现，<a href="http://yikun.github.io/2015/04/01/Java-HashMap工作原理及实现/" target="_blank" rel="external">资料链接</a></p>
+<p>需要涉及到Java中HashMap工作原理及实现，<a href="http://yikun.github.io/2015/04/01/Java-HashMap工作原理及实现/" target="_blank" rel="noopener">资料链接</a></p>
 <blockquote>
 <p>java</p>
 </blockquote>
@@ -515,8 +516,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/04/数据结构与算法题解（4）：二叉树题解/" rel="next" title="数据结构与算法题解（4）：二叉树题解">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（4）：二叉树题解
+              <a href="/2017/08/03/数据结构与算法题解（2）：数组题解/" rel="next" title="数据结构与算法题解（2）：数组题解">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（2）：数组题解
               </a>
             
           </div>
@@ -525,8 +526,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/03/数据结构与算法题解（2）：数组题解/" rel="prev" title="数据结构与算法题解（2）：数组题解">
-                数据结构与算法题解（2）：数组题解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/04/数据结构与算法题解（4）：二叉树题解/" rel="prev" title="数据结构与算法题解（4）：二叉树题解">
+                数据结构与算法题解（4）：二叉树题解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -595,7 +596,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -603,7 +604,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -612,7 +613,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -924,9 +925,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -938,13 +962,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

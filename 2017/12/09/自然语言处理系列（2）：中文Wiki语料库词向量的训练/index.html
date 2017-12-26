@@ -93,7 +93,8 @@
 <meta property="og:url" content="http://yoursite.com/2017/12/09/自然语言处理系列（2）：中文Wiki语料库词向量的训练/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="要通过计算机进行自然语言处理，首先就需要将这些文本数字化，目前用的最广泛的方法是词向量，根据训练使用算法的不同，目前主要有Word2Vec和GloVe两大方法，本文主要讲述通过这两个方法分别训练中文维基百科语料库的词向量。">
-<meta property="og:updated_time" content="2017-12-16T14:27:35.813Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-26T08:59:57.999Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自然语言处理系列（2）：中文Wiki语料库词向量的训练">
 <meta name="twitter:description" content="要通过计算机进行自然语言处理，首先就需要将这些文本数字化，目前用的最广泛的方法是词向量，根据训练使用算法的不同，目前主要有Word2Vec和GloVe两大方法，本文主要讲述通过这两个方法分别训练中文维基百科语料库的词向量。">
@@ -395,12 +396,12 @@ var _hmt = _hmt || [];
       
         <p>要通过计算机进行自然语言处理，首先就需要将这些文本数字化，目前用的最广泛的方法是词向量，根据训练使用算法的不同，目前主要有Word2Vec和GloVe两大方法，本文主要讲述通过这两个方法分别训练中文维基百科语料库的词向量。</p>
 <a id="more"></a>
-<h2 id="一、获取并处理中文维基百科语料库"><a href="#一、获取并处理中文维基百科语料库" class="headerlink" title="一、获取并处理中文维基百科语料库"></a>一、获取并处理中文维基百科语料库</h2><h3 id="1-1-下载"><a href="#1-1-下载" class="headerlink" title="1.1 下载"></a>1.1 下载</h3><p>中文维基百科语料库的下载链接为：<a href="https://dumps.wikimedia.org/zhwiki/" target="_blank" rel="external">https://dumps.wikimedia.org/zhwiki/</a>，本试验下载的是最新的<a href="https://dumps.wikimedia.org/zhwiki/latest/zhwiki-latest-pages-articles.xml.bz2" target="_blank" rel="external">zhwiki-latest-pages-articles.xml.bz2</a>。这个压缩包里面存的是标题、正文部分，该目录下还包括了其他类型的语料库，如仅包含标题，摘要等。</p>
+<h2 id="一、获取并处理中文维基百科语料库"><a href="#一、获取并处理中文维基百科语料库" class="headerlink" title="一、获取并处理中文维基百科语料库"></a>一、获取并处理中文维基百科语料库</h2><h3 id="1-1-下载"><a href="#1-1-下载" class="headerlink" title="1.1 下载"></a>1.1 下载</h3><p>中文维基百科语料库的下载链接为：<a href="https://dumps.wikimedia.org/zhwiki/" target="_blank" rel="noopener">https://dumps.wikimedia.org/zhwiki/</a>，本试验下载的是最新的<a href="https://dumps.wikimedia.org/zhwiki/latest/zhwiki-latest-pages-articles.xml.bz2" target="_blank" rel="noopener">zhwiki-latest-pages-articles.xml.bz2</a>。这个压缩包里面存的是标题、正文部分，该目录下还包括了其他类型的语料库，如仅包含标题，摘要等。</p>
 <h3 id="1-2-抽取内容"><a href="#1-2-抽取内容" class="headerlink" title="1.2 抽取内容"></a>1.2 抽取内容</h3><p>Wikipedia Extractor是一个开源的用于抽取维基百科语料库的工具，由python携程，通过这个工具可以很容易地从语料库中抽取相关内容。使用方法如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/attardi/wikiextractor.git wikiextractor</div><div class="line">$ wikiextractor/WikiExtractor.py  -b 2000M -o zhwiki_extracted zhwiki-latest-pages-articles.xml.bz2</div></pre></td></tr></table></figure>
 <p>由于这个工具就是一个python脚本，因此无需安装，<code>-b</code>参数指对提取出来的内容进行切片后每个文件的大小，如果要将所有内容保存在同一个文件，那么就需要把这个参数设置地大一点，<code>-o</code>的参数指提取出来的文件放置的目录，抽取出来的文件的路径为<code>zhwiki_extract/AA/wiki_00</code>。更多的参数可参考其github主页的说明。</p>
 <p>抽取后的内容格式为每篇文章被一对<code>&lt;doc&gt;&lt;/doc&gt;</code>包起来，而<code>&lt;doc&gt;</code>中的包含了属性有文章的id、url和title属性，如<code>&lt;doc id=&quot;13&quot; url=&quot;https://zh.wikipedia.org/wiki?curid=13&quot; title=&quot;数学&quot;&gt;</code></p>
-<h3 id="1-3-繁简转换"><a href="#1-3-繁简转换" class="headerlink" title="1.3 繁简转换"></a>1.3 繁简转换</h3><p>由上一步提取出来的中文维基百科中的语料中既有繁体字也有简体字，这里需要将其统一变为简体字，采用的工具也是开源的<a href="https://github.com/BYVoid/OpenCC" target="_blank" rel="external">OpenCC</a>转换器。安装使用方法如下：</p>
+<h3 id="1-3-繁简转换"><a href="#1-3-繁简转换" class="headerlink" title="1.3 繁简转换"></a>1.3 繁简转换</h3><p>由上一步提取出来的中文维基百科中的语料中既有繁体字也有简体字，这里需要将其统一变为简体字，采用的工具也是开源的<a href="https://github.com/BYVoid/OpenCC" target="_blank" rel="noopener">OpenCC</a>转换器。安装使用方法如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; &lt; /dev/null 2&gt; /dev/null</div><div class="line">$ brew install opencc</div><div class="line">$ cd OpenCC</div><div class="line">$ opencc -i /Users/HuaZhang/Desktop/zhwiki_extracted/AA/zhwiki_extract/AA/wiki_00 -o zhwiki_extract/zhs_wiki -c /Users/HuaZhang/OpenCC/data/config/t2s.json</div></pre></td></tr></table></figure>
 <p>其中<code>-i</code>表示输入文件路径，<code>-o</code>表示输出的文件，<code>-c</code>表示转换的配置文件，这里使用的繁体转简体的配置文件，OpenCC自带了一系列的转换配置文件，可以参考其github主页的说明。</p>
 <h3 id="1-4-去除标点"><a href="#1-4-去除标点" class="headerlink" title="1.4 去除标点"></a>1.4 去除标点</h3><p>去除标点符号有两个问题需要解决，一个是像下面这种为了解决各地术语，名称不同的问题：</p>
@@ -410,7 +411,7 @@ var _hmt = _hmt || [];
 <p>经过该步骤处理之后，得到了简体中文的纯净文本，如下所示：</p>
 <p>&gt;<br>doc id13 urlhttpszhwikipediaorgwikicurid13 title数学<br>数学<br>数学是利用符号语言研究数量结构变化以及空间等概念的一门学科从某种角度看属于形式科学的一种数学透过抽象化和逻辑推理的使用由计数计算量度和对物体形状及运动的观察而产生数学家们拓展这些概念为了公式化新的猜想以及从选定的公理及定义中建立起严谨推导出的定理<br>·······<br>数学奖通常和其他科学的奖项分开数学上最有名的奖为菲尔兹奖创立于1936年每四年颁奖一次它通常被认为是数学的诺贝尔奖另一个国际上主要的奖项为阿贝尔奖创立于2003年两者都颁奖于特定的工作主题包括数学新领域的创新或已成熟领域中未解决问题的解答著名的23个问题称为希尔伯特的23个问题于1900年由德国数学家大卫希尔伯特所提出这一连串的问题在数学家之间有著极高的名望且至少有九个问题已经被解答了出来另一新的七个重要问题称为千禧年大奖难题发表于2000年对其每一个问题的解答都有著一百万美元的奖金而当中只有一个问题黎曼猜想和希尔伯特的问题重复<br>doc</p>
 <h3 id="1-5-jieba分词"><a href="#1-5-jieba分词" class="headerlink" title="1.5 jieba分词"></a>1.5 jieba分词</h3><p>下面需要对其进行分词并且整理成每行一篇文本的格式，从而方便后续的处理。</p>
-<p>分词采用 python 的分词工具 <a href="https://github.com/fxsjy/jieba" target="_blank" rel="external">jieba</a>，通过 <code>pip install jieba</code>安装即可。且将一篇文章分词后的结果存储在一行，由前面可知，每篇文章存储在一对<code>&lt;doc&gt;&lt;/doc&gt;</code>标签中，由于前面去掉了标点，所以现在变成了<code>doc doc</code>,所以只要判断当前行为doc时即可认为文章结束，从而开始在新的一行记录下一篇文章的分词结果。实现的python代码如下:</p>
+<p>分词采用 python 的分词工具 <a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">jieba</a>，通过 <code>pip install jieba</code>安装即可。且将一篇文章分词后的结果存储在一行，由前面可知，每篇文章存储在一对<code>&lt;doc&gt;&lt;/doc&gt;</code>标签中，由于前面去掉了标点，所以现在变成了<code>doc doc</code>,所以只要判断当前行为doc时即可认为文章结束，从而开始在新的一行记录下一篇文章的分词结果。实现的python代码如下:</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> io</div><div class="line"><span class="keyword">import</span> jieba</div><div class="line"></div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(<span class="string">'utf-8'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cut_words</span><span class="params">(input_file, output_file)</span>:</span></div><div class="line">    count = <span class="number">0</span></div><div class="line">    <span class="keyword">with</span> io.open(output_file, mode = <span class="string">'w'</span>, encoding = <span class="string">'utf-8'</span>) <span class="keyword">as</span> outfile:</div><div class="line">        <span class="keyword">with</span> io.open(input_file, mode = <span class="string">'r'</span>, encoding = <span class="string">'utf-8'</span>) <span class="keyword">as</span> infile:</div><div class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> infile:</div><div class="line">                line = line.strip()</div><div class="line">                <span class="keyword">if</span> len(line) &lt; <span class="number">1</span>:  <span class="comment"># empty line</span></div><div class="line">                    <span class="keyword">continue</span></div><div class="line">                <span class="keyword">if</span> line.startswith(<span class="string">'doc'</span>): <span class="comment"># start or end of a passage</span></div><div class="line">                    <span class="keyword">if</span> line == <span class="string">'doc'</span>: <span class="comment"># end of a passage</span></div><div class="line">                        outfile.write(<span class="string">u'\n'</span>)</div><div class="line">                        count = count + <span class="number">1</span></div><div class="line">                        <span class="keyword">if</span>(count % <span class="number">1000</span> == <span class="number">0</span>):</div><div class="line">                            print(<span class="string">'%s articles were finished.......'</span> %count)</div><div class="line">                    <span class="keyword">continue</span></div><div class="line">                <span class="keyword">for</span> word <span class="keyword">in</span> jieba.cut(line):</div><div class="line">                    outfile.write(word + <span class="string">' '</span>)</div><div class="line">    print(<span class="string">'%s articles were finished.......'</span> %count)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">if</span> len(sys.argv) &lt; <span class="number">3</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">"Usage: python script.py input_file output_file"</span></div><div class="line">        sys.exit()</div><div class="line">    input_file, output_file = sys.argv[<span class="number">1</span>], sys.argv[<span class="number">2</span>]</div><div class="line">    cut_words(input_file, output_file)</div></pre></td></tr></table></figure>
 <h2 id="二、通过Word2Vec训练词向量"><a href="#二、通过Word2Vec训练词向量" class="headerlink" title="二、通过Word2Vec训练词向量"></a>二、通过Word2Vec训练词向量</h2><p>Word2vec中包含了两种训练词向量的方法：Continuous Bag of Words(CBOW)和Skip-gram。CBOW的目标是根据上下文来预测当前词语的概率。Skip-gram刚好相反，根据当前词语来预测上下文的概率。这两种方法都利用人工神经网络作为它们的分类算法。起初，每个单词都是一个随机N维向量。训练时，该算法利用CBOW或者Skip-gram的方法获得了每个单词的最优向量。</p>
 <p>最初 Google 开源的 Word2Vec 是用C来写的，后面陆续有了Python ，Java 等语言的版本，这里采用的是 Python 版本的 gensim。通过 gensim 提供的 API 可以比较容易地进行词向量的训练。gensim的建议通过<code>conda install gensim</code>安装</p>
@@ -463,8 +464,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/10/自然语言处理系列（3）：词向量和语言模型/" rel="next" title="自然语言处理系列（3）：词向量和语言模型">
-                <i class="fa fa-chevron-left"></i> 自然语言处理系列（3）：词向量和语言模型
+              <a href="/2017/12/08/自然语言处理系列（1）：词向量与统计语言模型/" rel="next" title="自然语言处理系列（1）：词向量与统计语言模型">
+                <i class="fa fa-chevron-left"></i> 自然语言处理系列（1）：词向量与统计语言模型
               </a>
             
           </div>
@@ -473,8 +474,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/08/自然语言处理系列（1）：词向量与统计语言模型/" rel="prev" title="自然语言处理系列（1）：词向量与统计语言模型">
-                自然语言处理系列（1）：词向量与统计语言模型 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/10/自然语言处理系列（3）：词向量和语言模型/" rel="prev" title="自然语言处理系列（3）：词向量和语言模型">
+                自然语言处理系列（3）：词向量和语言模型 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -543,7 +544,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -551,7 +552,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -560,7 +561,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -872,9 +873,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -886,13 +910,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

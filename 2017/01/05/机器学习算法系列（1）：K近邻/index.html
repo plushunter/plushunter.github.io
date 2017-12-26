@@ -93,9 +93,10 @@
 <meta property="og:url" content="http://yoursite.com/2017/01/05/机器学习算法系列（1）：K近邻/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、K近邻算法K近邻算法简单、直观。首先给出一张图，根据这张图来理解最近邻分类器。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-23%20%E4%B8%8B%E5%8D%883.26.59.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-23%20%E4%B8%8B%E5%8D%883.27.22.png">
-<meta property="og:updated_time" content="2017-04-11T11:06:03.000Z">
+<meta property="og:updated_time" content="2017-12-26T08:49:36.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（1）：K近邻">
 <meta name="twitter:description" content="一、K近邻算法K近邻算法简单、直观。首先给出一张图，根据这张图来理解最近邻分类器。">
@@ -398,9 +399,7 @@ var _hmt = _hmt || [];
       
         <h2 id="一、K近邻算法"><a href="#一、K近邻算法" class="headerlink" title="一、K近邻算法"></a>一、K近邻算法</h2><p>K近邻算法简单、直观。首先给出一张图，根据这张图来理解最近邻分类器。</p>
 <a id="more"></a>
-<center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-23%20%E4%B8%8B%E5%8D%883.26.59.png" alt="屏幕快照 2017-03-23 下午3.26.59"></center>
-
-
+<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-23%20%E4%B8%8B%E5%8D%883.26.59.png" alt="屏幕快照 2017-03-23 下午3.26.59"></p>
 <p>根据上图所示，有两类不同的样本数据，分别用蓝色的小正方形和红色的小三角形表示，而图正中间的那个绿色的圆所标示的数据则是待分类的数据。也就是说，现在，我们不知道中间那个绿色的数据是从属于哪一类（蓝色小正方形或者红色小三角形），下面，我们就要解决这个问题：给这个绿色的圆分类。</p>
 <p>我们常说，物以类聚，人以群分，判别一个人是一个什么样的人，常常可以从他身边的朋友入手，所谓观其友，而识其人。我们不是要判别上图中那个绿色的圆是属于那一类数据么，好说，从他的另据下手。但一次性看多少个邻居呢？从上图中，你还可以看到：</p>
 <ul>
@@ -415,33 +414,37 @@ var _hmt = _hmt || [];
 <li>1)根据给定的距离度量，在训练集$T$中找出与$x$最邻近的$k$个点，涵盖这k个点的$x$领域记作$N_k(x)$;</li>
 <li>2)在$N_k(x)$中根据分类决策规则（如多数表决）决定$x$的类别$y$:</li>
 </ul>
-<p>$$<br>y=arg\underset{c_j}{\max}\sum_{x_i\in N_k\left( x \right)}^{}{I\left( y_i=c_i \right)   ,  i=1,2,···,N;j=1,2,···,K}<br>$$<br>其中$I$为指示函数，即当$y_i=c_i$时为1，否则为0.</p>
+<script type="math/tex; mode=display">
+y=arg\underset{c_j}{\max}\sum_{x_i\in N_k\left( x \right)}^{}{I\left( y_i=c_i \right) \ \ ,\ \ i=1,2,···,N;j=1,2,···,K}</script><p>其中$I$为指示函数，即当$y_i=c_i$时为1，否则为0.</p>
 <h2 id="二、K近邻模型"><a href="#二、K近邻模型" class="headerlink" title="二、K近邻模型"></a>二、K近邻模型</h2><h3 id="2-1-模型"><a href="#2-1-模型" class="headerlink" title="2.1 模型"></a>2.1 模型</h3><p>k近邻法中，当训练集、距离度量、K值以及分类决策规则确定后，对于任何一个新的输入实例，它所属的类唯一地确定。这相当于根据上述要素将特征空间划分为一些子空间，确定子空间里的每个点所属的类。</p>
 <h3 id="2-2-距离度量"><a href="#2-2-距离度量" class="headerlink" title="2.2 距离度量"></a>2.2 距离度量</h3><p>特征空间中两个实例点的距离可以反映出两个实力点之间的相似性程度。K近邻模型的特征空间一般是N维实数向量空间，使用的距离可以是欧式距离，也可以是其他距离。</p>
 <ul>
 <li>欧氏距离：最常见的两点之间或多点之间的距离表示法，又称之为欧几里得度量，它定义于欧几里得空间中</li>
 </ul>
-<p>$$<br>d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( x_i-y_i \right) ^2}}<br>$$</p>
-<ul>
+<script type="math/tex; mode=display">
+d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( x_i-y_i \right) ^2}}</script><ul>
 <li><p>曼哈顿距离：我们可以定义曼哈顿距离的正式意义为$L1$距离或城市区块距离，也就是在欧几里得空间的固定直角坐标系上两点所形成的线段对轴产生的投射的距离总和。</p>
-<p>  通俗来讲，想想你在曼哈顿要从一个十字路口开车到另一个十字路口，驾驶距离是两点间的直线距离吗？显然不是，除非你能穿越大楼。而实际驾驶距离就是这个“曼哈顿距离”,此即曼哈顿距离名称的来源，同时，曼哈顿距离也称为城市街区距离。<br>  $$<br>d\left( x,y \right) =\sum_{i=1}^n{|x_i-y_i|}<br>$$</p>
+<p>  通俗来讲，想想你在曼哈顿要从一个十字路口开车到另一个十字路口，驾驶距离是两点间的直线距离吗？显然不是，除非你能穿越大楼。而实际驾驶距离就是这个“曼哈顿距离”,此即曼哈顿距离名称的来源，同时，曼哈顿距离也称为城市街区距离。</p>
+<script type="math/tex; mode=display">
+d\left( x,y \right) =\sum_{i=1}^n{|x_i-y_i|}</script></li>
+<li><p>切比雪夫距离：</p>
+<script type="math/tex; mode=display">
+d\left( x,y \right) =\underset{k\rightarrow \infty}{\lim}\left( \sum_{i=1}^n{|x_i-y_i|^k} \right) ^{\frac{1}{k}}</script></li>
+<li><p>闵可夫斯基距离：它不是一种距离，而是一组距离的定义。</p>
+<script type="math/tex; mode=display">
+d\left( x,y \right) =\left( \sum_{i=1}^n{|x_i-y_i|^k} \right) ^{\frac{1}{k}}</script><p>  当p=1时，即曼哈顿距离<br>  当p=2时，即欧式距离<br>  当$p\rightarrow \infty$，即切比雪夫距离</p>
 </li>
-<li><p>切比雪夫距离：$$<br>d\left( x,y \right) =\underset{k\rightarrow \infty}{\lim}\left( \sum_{i=1}^n{|x_i-y_i|^k} \right) ^{\frac{1}{k}}<br>$$</p>
-</li>
-<li><p>闵可夫斯基距离：它不是一种距离，而是一组距离的定义。<br>$$<br>d\left( x,y \right) =\left( \sum_{i=1}^n{|x_i-y_i|^k} \right) ^{\frac{1}{k}}<br>$$</p>
-<p>  当p=1时，即曼哈顿距离<br>  当p=2时，即欧式距离<br>  当$p\rightarrow \infty$，即切比雪夫距离</p>
-</li>
-<li><p>标准化欧氏距离：对样本集先进行标准化$<br>\hat{x}_i=\frac{x_i-\bar{x}}{s}$经过简单的推导就可以得到来标准化欧氏距离。<br>$$<br>d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( \frac{x_i-y_i}{s} \right) ^2}}<br>$$</p>
-</li>
+<li><p>标准化欧氏距离：对样本集先进行标准化$<br>\hat{x}_i=\frac{x_i-\bar{x}}{s}$经过简单的推导就可以得到来标准化欧氏距离。</p>
+<script type="math/tex; mode=display">
+d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( \frac{x_i-y_i}{s} \right) ^2}}</script></li>
 <li><p>夹角余弦：几何中夹角余弦可用来衡量两个向量方向的相似度，机器学习中借用这一概念来衡量向量之间的相似度。</p>
 </li>
 </ul>
-<p>$$<br>\cos \left( \theta \right) =\frac{a·b}{|a|·|b|}<br>$$</p>
-<h3 id="2-3-K值的选择"><a href="#2-3-K值的选择" class="headerlink" title="2.3 K值的选择"></a>2.3 K值的选择</h3><p>K值得选择会对K近邻法的结果产生重大影响。</p>
+<script type="math/tex; mode=display">
+\cos \left( \theta \right) =\frac{a·b}{|a|·|b|}</script><h3 id="2-3-K值的选择"><a href="#2-3-K值的选择" class="headerlink" title="2.3 K值的选择"></a>2.3 K值的选择</h3><p>K值得选择会对K近邻法的结果产生重大影响。</p>
 <p>如果选择较小的K值，就相当于用较小的领域中的训练实例进行预测，“学习”近似误差会减小，只有与输入实例较近或相似的训练实例才会对预测结果起作用，与此同时带来的问题是“学习”的估计误差会增大，换句话说，K值得减小就意味着整体模型变得复杂，容易发生过拟合（容易受到训练数据的噪声而产生的过拟合的影响）。</p>
 <p>如果选择较大的K值，就相当于用较大领域中的训练实例进行预测，其优点是可以减小学习的估计误差，但缺点是学习的近似误差会增大。这时候，与输入实例较远的训练实例也会对预测器作用，使预测发生错误，且K值得增大就意味着整体的模型变得简单。</p>
-<p>如果K=N。那么无论输入实例是什么，都将简单地预测它属于在训练实例中最多的类。这时，模型过于简单，完全忽略训练实例中的大量有用信息，是不可取的（最近邻列表中可能包含远离其近邻的数据点），如下图所示。</p>
-<p><center><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-23%20%E4%B8%8B%E5%8D%883.27.22.png" alt="11"></center><br>在实际应用中，K值一般取一个比较小的数值。通常采用交叉验证法来选取最优的K值（经验规则：K一般低于训练样本数的平方根）。</p>
+<p>如果K=N。那么无论输入实例是什么，都将简单地预测它属于在训练实例中最多的类。这时，模型过于简单，完全忽略训练实例中的大量有用信息，是不可取的（最近邻列表中可能包含远离其近邻的数据点），如下图所示。<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-23%20%E4%B8%8B%E5%8D%883.27.22.png" alt="11"><br>在实际应用中，K值一般取一个比较小的数值。通常采用交叉验证法来选取最优的K值（经验规则：K一般低于训练样本数的平方根）。</p>
 <h3 id="2-4-分类决策规则"><a href="#2-4-分类决策规则" class="headerlink" title="2.4 分类决策规则"></a>2.4 分类决策规则</h3><p>K近邻法中的分类决策规则往往是多数表决，即由输入实例的K个邻近的训练实例中的多数类决定输入实例的类。</p>
 <h2 id="三、K近邻的优缺点"><a href="#三、K近邻的优缺点" class="headerlink" title="三、K近邻的优缺点"></a>三、K近邻的优缺点</h2><h3 id="3-1-优点"><a href="#3-1-优点" class="headerlink" title="3.1 优点"></a>3.1 优点</h3><ul>
 <li>简单、易于理解、易于实现、无需估计参数、无需训练。</li>
@@ -492,8 +495,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/08/机器学习算法系列（2）：线性回归/" rel="next" title="机器学习算法系列（2）：线性回归">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（2）：线性回归
+              <a href="/2017/01/01/笑忘录（4）：二零一七第一天/" rel="next" title="笑忘录（4）：二零一七第一天">
+                <i class="fa fa-chevron-left"></i> 笑忘录（4）：二零一七第一天
               </a>
             
           </div>
@@ -502,8 +505,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/01/二零一七第一天/" rel="prev" title="二零一七第一天">
-                二零一七第一天 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/01/08/机器学习算法系列（2）：线性回归/" rel="prev" title="机器学习算法系列（2）：线性回归">
+                机器学习算法系列（2）：线性回归 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -572,7 +575,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -580,7 +583,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -589,7 +592,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -901,9 +904,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -915,13 +941,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

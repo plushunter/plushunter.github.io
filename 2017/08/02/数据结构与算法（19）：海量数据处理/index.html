@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/02/数据结构与算法（19）：海量数据处理/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、何谓海量数据处理？所谓海量数据处理，其实很简单，海量，海量，何谓海量，就是数据量太大，所以导致要么是无法再较短时间内迅速解决，要么是数据太大，导致无法一次性装入内存。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15022535201076.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15022535649356.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15022536293546.jpg">
@@ -527,7 +528,7 @@ var _hmt = _hmt || [];
 <h3 id="密钥三：Bloom-filter-Bitmap"><a href="#密钥三：Bloom-filter-Bitmap" class="headerlink" title="密钥三：Bloom filter/Bitmap"></a>密钥三：Bloom filter/Bitmap</h3><blockquote>
 <p>Bloom filter</p>
 </blockquote>
-<p><a href="http://blog.csdn.net/v_july_v/article/details/6685894" target="_blank" rel="external">海量数据处理之Bloom Filter详解</a></p>
+<p><a href="http://blog.csdn.net/v_july_v/article/details/6685894" target="_blank" rel="noopener">海量数据处理之Bloom Filter详解</a></p>
 <p>适用范围：可以用来实现数据字典，进行数据的判重，或者集合求交集</p>
 <p>基本原理及要点： 对于原理来说很简单，位数组+k个独立hash函数。将hash函数对应的值的位数组置1，查找时如果发现所有hash函数对应位都是1说明存在，很明显这个过程并不保证查找的结果是100%正确的。同时也不支持删除一个已经插入的关键字，因为该关键字对应的位会牵动到其他的关键字。所以一个简单的改进就是 counting Bloom filter，用一个counter数组代替位数组，就可以支持删除了。 </p>
 <p>还有一个比较重要的问题，如何根据输入元素个数n，确定位数组m的大小及hash函数个数。当hash函数个数$k=(ln2)<em>(m/n)$时错误率最小。在错误率不大于E的情况下，m至少要等于$n</em>lg(1/E)$才能表示任意n个元素的集合。但m还应该更大些，因为还要保证bit数组里至少一半为0，则$m&gt;=nlg(1/E)*lge$ 大概就是$nlg(1/E)1.44$倍(lg表示以2为底的对数)。 </p>
@@ -542,7 +543,7 @@ var _hmt = _hmt || [];
 <blockquote>
 <p>Bitmap介绍</p>
 </blockquote>
-<p><a href="http://blog.csdn.net/v_july_v/article/details/6685962" target="_blank" rel="external">Bit-map详解</a></p>
+<p><a href="http://blog.csdn.net/v_july_v/article/details/6685962" target="_blank" rel="noopener">Bit-map详解</a></p>
 <p>所谓的Bit-map就是用一个bit位来标记某个元素对应的Value， 而Key即是该元素。由于采用了Bit为单位来存储数据，因此在存储空间方面，可以大大节省。</p>
 <p>如果说了这么多还没明白什么是Bit-map，那么我们来看一个具体的例子，假设我们要对0-7内的5个元素(4,7,2,5,3)排序（这里假设这些元素没有重复）。那么我们就可以采用Bit-map的方法来达到排序的目的。要表示8个数，我们就只需要8个Bit（1Bytes），首先我们开辟1Byte的空间，将这些空间的所有Bit位都置为0，如下图：<br><img src="http://omu7tit09.bkt.clouddn.com/15022535201076.jpg" alt=""></p>
 <p>然后遍历这5个元素，首先第一个元素是4，那么就把4对应的位置为1（可以这样操作 p+(i/8)|(0×01&lt;&lt;(i%8)) 当然了这里的操作涉及到Big-ending和Little-ending的情况，这里默认为Big-ending）,因为是从零开始的，所以要把第五位置为一，如下图：<br><img src="http://omu7tit09.bkt.clouddn.com/15022535649356.jpg" alt=""></p>
@@ -578,7 +579,7 @@ var _hmt = _hmt || [];
 <li>密钥一（8）：一个文本文件，大约有一万行，每行一个词，要求统计出其中最频繁出现的前10个词。其解决方法是：用trie树统计每个词出现的次数，时间复杂度是O(n*le)（le表示单词的平准长度），然后是找出出现最频繁的前10个词。</li>
 <li>1000万字符串，其中有些是相同的(重复),需要把重复的全部去掉，保留没有重复的字符串。请问怎么设计和实现？</li>
 </ol>
-<p>更多有关Trie树的介绍，请参见此文：<a href="http://blog.csdn.net/v_july_v/article/details/6897097" target="_blank" rel="external">从Trie树（字典树）谈到后缀树</a></p>
+<p>更多有关Trie树的介绍，请参见此文：<a href="http://blog.csdn.net/v_july_v/article/details/6897097" target="_blank" rel="noopener">从Trie树（字典树）谈到后缀树</a></p>
 <blockquote>
 <p>数据库索引</p>
 </blockquote>
@@ -586,7 +587,7 @@ var _hmt = _hmt || [];
 <li>适用范围：大数据量的增删改查 </li>
 <li>基本原理及要点：利用数据的设计实现方法，对海量数据的增删改查进行处理。</li>
 </ul>
-<p>关于数据库索引及其优化，更多可参见此文：<a href="http://www.cnblogs.com/pkuoliver/archive/2011/08/17/mass-data-topic-7-index-and-optimize.html" target="_blank" rel="external">海量数据处理专题（七）——数据库索引及优化</a>。同时，关于MySQL索引背后的数据结构及算法原理，这里还有一篇很好的文章：<a href="http://www.codinglabs.org/html/theory-of-mysql-index.html" target="_blank" rel="external">MySQL索引背后的数据结构及算法原理</a>。</p>
+<p>关于数据库索引及其优化，更多可参见此文：<a href="http://www.cnblogs.com/pkuoliver/archive/2011/08/17/mass-data-topic-7-index-and-optimize.html" target="_blank" rel="noopener">海量数据处理专题（七）——数据库索引及优化</a>。同时，关于MySQL索引背后的数据结构及算法原理，这里还有一篇很好的文章：<a href="http://www.codinglabs.org/html/theory-of-mysql-index.html" target="_blank" rel="noopener">MySQL索引背后的数据结构及算法原理</a>。</p>
 <blockquote>
 <p>倒排索引(Inverted index)</p>
 </blockquote>
@@ -606,7 +607,7 @@ var _hmt = _hmt || [];
 <p>（1）有一个1G大小的一个文件，里面每一行是一个词，词的大小不超过16个字节，内存限制大小是1M。返回频数最高的100个词。 </p>
 </blockquote>
 <p>这个数据具有很明显的特点，词的大小为16个字节，但是内存只有1m做hash有些不够，所以可以用来排序。内存可以当输入缓冲区使用。</p>
-<p>关于多路归并算法及外排序的具体应用场景，请参见：<br><a href="http://blog.csdn.net/v_JULY_v/article/details/6451990" target="_blank" rel="external">如何给10000000个数据量的磁盘文件排序</a>。</p>
+<p>关于多路归并算法及外排序的具体应用场景，请参见：<br><a href="http://blog.csdn.net/v_JULY_v/article/details/6451990" target="_blank" rel="noopener">如何给10000000个数据量的磁盘文件排序</a>。</p>
 <h3 id="密匙六：分布式处理之Mapreduce"><a href="#密匙六：分布式处理之Mapreduce" class="headerlink" title="密匙六：分布式处理之Mapreduce"></a>密匙六：分布式处理之Mapreduce</h3><p>MapReduce是一种计算模型，简单的说就是将大批量的工作（数据）分解（MAP）执行，然后再将结果合并成最终结果（REDUCE）。这样做的好处是可以在任务被分解后，可以通过大量机器进行并行计算，减少整个操作的时间。但如果你要我再通俗点介绍，那么，说白了，Mapreduce的原理就是一个归并排序。</p>
 <ul>
 <li>适用范围：数据量大，但是数据种类小可以放入内存</li>
@@ -618,7 +619,7 @@ var _hmt = _hmt || [];
 <li>海量数据分布在100台电脑中，想个办法高效统计出这批数据的TOP10。</li>
 <li>一共有N个机器，每个机器上有N个数。每个机器最多存O(N)个数并对它们操作。如何找到$N^2$个数的中位数(median)？</li>
 </ul>
-<p>更多具体阐述请参见：<br><a href="http://blog.csdn.net/v_july_v/article/details/6704077" target="_blank" rel="external">从Hadhoop框架与MapReduce模式中谈海量数据处理</a><br><a href="http://blog.csdn.net/v_july_v/article/details/6637014" target="_blank" rel="external"> MapReduce技术的初步了解与学习</a></p>
+<p>更多具体阐述请参见：<br><a href="http://blog.csdn.net/v_july_v/article/details/6704077" target="_blank" rel="noopener">从Hadhoop框架与MapReduce模式中谈海量数据处理</a><br><a href="http://blog.csdn.net/v_july_v/article/details/6637014" target="_blank" rel="noopener"> MapReduce技术的初步了解与学习</a></p>
 <h2 id="四、海量数据处理题库搜集"><a href="#四、海量数据处理题库搜集" class="headerlink" title="四、海量数据处理题库搜集"></a>四、海量数据处理题库搜集</h2><ol>
 <li>如何在海量数据中查找给定部分数据最相似的top200向量，向量的维度也很高，因为之前了解过其他面蚂蚁金服的朋友，也有问到这个题目的，所以反应比较快，直接就说可以用KD树，聚类，hash，</li>
 <li>如何在海量数据中查找给定部分数据最相似的top200向量，向量的维度也很高，实现一个分布式的topN算法</li>
@@ -672,8 +673,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/03/数据结构与算法题解（1）：链表题解/" rel="next" title="数据结构与算法题解（1）：链表题解">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（1）：链表题解
+              <a href="/2017/08/01/数据结构与算法（18）：倒排索引/" rel="next" title="数据结构与算法（18）：倒排索引">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（18）：倒排索引
               </a>
             
           </div>
@@ -682,8 +683,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/01/数据结构与算法（18）：倒排索引/" rel="prev" title="数据结构与算法（18）：倒排索引">
-                数据结构与算法（18）：倒排索引 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/03/数据结构与算法题解（1）：链表题解/" rel="prev" title="数据结构与算法题解（1）：链表题解">
+                数据结构与算法题解（1）：链表题解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -752,7 +753,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -760,7 +761,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -769,7 +770,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -1081,9 +1082,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -1095,13 +1119,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

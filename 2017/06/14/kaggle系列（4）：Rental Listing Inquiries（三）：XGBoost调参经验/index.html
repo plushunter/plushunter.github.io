@@ -93,7 +93,8 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/14/kaggle系列（4）：Rental Listing Inquiries（三）：XGBoost调参经验/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="这篇文章翻译自Complete Guide to Parameter Tuning in XGBoost (with codes in Python)，它详细介绍了XGBoost中参数的含义，然后在一个实例中对参数调整进行了实验。">
-<meta property="og:updated_time" content="2017-09-11T12:20:11.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-26T06:39:24.949Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kaggle系列（4）：Rental Listing Inquiries（三）：XGBoost调参指南">
 <meta name="twitter:description" content="这篇文章翻译自Complete Guide to Parameter Tuning in XGBoost (with codes in Python)，它详细介绍了XGBoost中参数的含义，然后在一个实例中对参数调整进行了实验。">
@@ -393,12 +394,12 @@ var _hmt = _hmt || [];
       
 
       
-        <p>这篇文章翻译自<a href="https://www.analyticsvidhya.com/blog/2016/03/complete-guide-parameter-tuning-xgboost-with-codes-python/" target="_blank" rel="external">Complete Guide to Parameter Tuning in XGBoost (with codes in Python)</a>，它详细介绍了XGBoost中参数的含义，然后在一个实例中对参数调整进行了实验。</p>
+        <p>这篇文章翻译自<a href="https://www.analyticsvidhya.com/blog/2016/03/complete-guide-parameter-tuning-xgboost-with-codes-python/" target="_blank" rel="noopener">Complete Guide to Parameter Tuning in XGBoost (with codes in Python)</a>，它详细介绍了XGBoost中参数的含义，然后在一个实例中对参数调整进行了实验。</p>
 <a id="more"></a>
-<p>##一、Introduction<br>如果你的预测模型效果不怎么好，使用XGBoost吧。XGBoost已经成为许多数据科学家的终极武器了！这是一个内部实现高度复杂的算法，在处理各种不规范的数据时有足够强大的表现。</p>
+<h2 id="一、Introduction"><a href="#一、Introduction" class="headerlink" title="一、Introduction"></a>一、Introduction</h2><p>如果你的预测模型效果不怎么好，使用XGBoost吧。XGBoost已经成为许多数据科学家的终极武器了！这是一个内部实现高度复杂的算法，在处理各种不规范的数据时有足够强大的表现。</p>
 <p>利用XGBoost建立模型很简单，但是因为它使用了很多参数，以致使用XGBoost来提升预测效果比较有难度。为提高模型的预测能力，调参是必须要做的一步。但仍然有很多现实的挑战——哪些参数是我们需要调整的？每个参数的最佳值又应该是多少呢？</p>
 <p>这篇文章最适合刚刚接触XGBoost的人，在这篇文章中，我们将会介绍一些XGBoost相关的知识，同时了解一些XGBoost参数调整技艺。最后使用Python对一个数据集实践XGBoost。</p>
-<h2 id="二、What-should-you-know"><a href="#二、What-should-you-know" class="headerlink" title="二、What should you know ?"></a>二、What should you know ?</h2><p>XGBoost(eXtreme Gradient Boosting)是Gradient Boosting算法的一个优化的版本。因为我在前一篇文章，<a href="https://www.analyticsvidhya.com/blog/2016/02/complete-guide-parameter-tuning-gradient-boosting-gbm-python/" target="_blank" rel="external">基于Python的Gradient Boosting算法参数调整完全指南</a>，里面已经涵盖了Gradient Boosting算法的很多细节了。我强烈建议大家在读本篇文章之前，把那篇文章好好读一遍。它会帮助你对Boosting算法有一个宏观的理解，同时也会对GBM的参数调整有更好的体会。</p>
+<h2 id="二、What-should-you-know"><a href="#二、What-should-you-know" class="headerlink" title="二、What should you know ?"></a>二、What should you know ?</h2><p>XGBoost(eXtreme Gradient Boosting)是Gradient Boosting算法的一个优化的版本。因为我在前一篇文章，<a href="https://www.analyticsvidhya.com/blog/2016/02/complete-guide-parameter-tuning-gradient-boosting-gbm-python/" target="_blank" rel="noopener">基于Python的Gradient Boosting算法参数调整完全指南</a>，里面已经涵盖了Gradient Boosting算法的很多细节了。我强烈建议大家在读本篇文章之前，把那篇文章好好读一遍。它会帮助你对Boosting算法有一个宏观的理解，同时也会对GBM的参数调整有更好的体会。</p>
 <p>特别鸣谢：我个人十分感谢Mr Sudalai Rajkumar (aka SRK)大神的支持，目前他在AV Rank中位列第二。如果没有他的帮助，就没有这篇文章。在他的帮助下，我们才能给无数的数据科学家指点迷津。给他一个大大的赞！</p>
 <h2 id="三、Table-of-Contents"><a href="#三、Table-of-Contents" class="headerlink" title="三、Table of Contents"></a>三、Table of Contents</h2><h3 id="3-1-The-XGBoost-Advantage"><a href="#3-1-The-XGBoost-Advantage" class="headerlink" title="3.1 The XGBoost Advantage"></a>3.1 The XGBoost Advantage</h3><p>XGBoost算法可以给预测模型带来能力的提升。当我对它的表现有更多了解的时候，当我对它的高准确率背后的原理有更多了解的时候，我发现它具有很多优势：</p>
 <ul>
@@ -418,15 +419,15 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <p>相信你已经对XGBoost强大的功能有了点概念。注意这是我自己总结出来的几点，你如果有更多的想法，尽管在下面评论指出，我会更新这个列表的！<br>你的胃口被我吊起来了吗？棒棒哒！如果你想更深入了解相关信息，可以参考下面这些文章：</p>
-<p><a href="http://xgboost.readthedocs.io/en/latest/model.html" target="_blank" rel="external">XGBoost Guide - Introduce to Boosted Trees </a></p>
-<p><a href="https://www.youtube.com/watch?v=X47SGnTMZIU" target="_blank" rel="external">Words from the Auther of XGBoost </a></p>
+<p><a href="http://xgboost.readthedocs.io/en/latest/model.html" target="_blank" rel="noopener">XGBoost Guide - Introduce to Boosted Trees </a></p>
+<p><a href="https://www.youtube.com/watch?v=X47SGnTMZIU" target="_blank" rel="noopener">Words from the Auther of XGBoost </a></p>
 <h3 id="3-2-Understanding-XGBoost-Parameters"><a href="#3-2-Understanding-XGBoost-Parameters" class="headerlink" title="3.2 Understanding XGBoost Parameters"></a>3.2 Understanding XGBoost Parameters</h3><p>XGBoost的作者把所有参数分成了三类：</p>
 <ul>
 <li>通用参数：宏观函数控制。</li>
 <li>Booster参数：控制每一步的Booster（tree/regression）</li>
 <li>学习目标参数：控制训练目标的表现</li>
 </ul>
-<p>在这里我会类比GBM来讲解，所以作为一种基础知识，强烈推荐先阅读<a href="https://www.analyticsvidhya.com/blog/2016/02/complete-guide-parameter-tuning-gradient-boosting-gbm-python/" target="_blank" rel="external">这篇文章</a>。</p>
+<p>在这里我会类比GBM来讲解，所以作为一种基础知识，强烈推荐先阅读<a href="https://www.analyticsvidhya.com/blog/2016/02/complete-guide-parameter-tuning-gradient-boosting-gbm-python/" target="_blank" rel="noopener">这篇文章</a>。</p>
 <h4 id="3-2-1-通用参数（General-Parameters）"><a href="#3-2-1-通用参数（General-Parameters）" class="headerlink" title="3.2.1 通用参数（General Parameters）"></a>3.2.1 通用参数（General Parameters）</h4><p>这些参数用来控制XGBoost的宏观功能。</p>
 <ul>
 <li><p><strong>booster[默认gbtree]</strong>：选择每次迭代的模型，有两种选择： </p>
@@ -540,9 +541,9 @@ var _hmt = _hmt || [];
 </ul>
 <p>你肯定在疑惑为啥咱们没有介绍和GBM中的<code>n_estimators</code>类似的参数。XGBClassifier中确实有一个类似的参数，但是，是在标准XGBoost实现中调用拟合函数时，把它作为<code>num_boosting_rounds</code>参数传入。 </p>
 <p>XGBoost Guide 的一些部分是我强烈推荐大家阅读的，通过它可以对代码和参数有一个更好的了解：</p>
-<p><a href="http://xgboost.readthedocs.io/en/latest/parameter.html#general-parameters" target="_blank" rel="external">XGBoost Parameters (official guide) </a></p>
-<p><a href="https://github.com/dmlc/xgboost/tree/master/demo/guide-python" target="_blank" rel="external">XGBoost Demo Codes (xgboost GitHub repository)</a></p>
-<p><a href="http://xgboost.readthedocs.io/en/latest/python/python_api.html" target="_blank" rel="external">Python API Reference (official guide)</a></p>
+<p><a href="http://xgboost.readthedocs.io/en/latest/parameter.html#general-parameters" target="_blank" rel="noopener">XGBoost Parameters (official guide) </a></p>
+<p><a href="https://github.com/dmlc/xgboost/tree/master/demo/guide-python" target="_blank" rel="noopener">XGBoost Demo Codes (xgboost GitHub repository)</a></p>
+<p><a href="http://xgboost.readthedocs.io/en/latest/python/python_api.html" target="_blank" rel="noopener">Python API Reference (official guide)</a></p>
 <h3 id="3-3-Tuning-Parameters-with-Example"><a href="#3-3-Tuning-Parameters-with-Example" class="headerlink" title="3.3 Tuning Parameters (with Example)"></a>3.3 Tuning Parameters (with Example)</h3><ul>
 <li>未完待续······</li>
 </ul>
@@ -582,8 +583,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/16/机器学习算法系列（20）：项目模型优化四要素/" rel="next" title="机器学习算法系列（20）：机器学习模型优化四要素">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（20）：机器学习模型优化四要素
+              <a href="/2017/06/13/kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost/" rel="next" title="kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost">
+                <i class="fa fa-chevron-left"></i> kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost
               </a>
             
           </div>
@@ -592,8 +593,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/13/kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost/" rel="prev" title="kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost">
-                kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/16/机器学习算法系列（20）：项目模型优化四要素/" rel="prev" title="机器学习算法系列（20）：机器学习模型优化四要素">
+                机器学习算法系列（20）：机器学习模型优化四要素 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -662,7 +663,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -670,7 +671,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -679,7 +680,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -721,7 +722,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二、What-should-you-know"><span class="nav-text">二、What should you know ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Table-of-Contents"><span class="nav-text">三、Table of Contents</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-The-XGBoost-Advantage"><span class="nav-text">3.1 The XGBoost Advantage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Understanding-XGBoost-Parameters"><span class="nav-text">3.2 Understanding XGBoost Parameters</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-通用参数（General-Parameters）"><span class="nav-text">3.2.1 通用参数（General Parameters）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-Booster参数（Booster-Parameters）"><span class="nav-text">3.2.2 Booster参数（Booster Parameters）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3-学习目标参数"><span class="nav-text">3.2.3 学习目标参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Tuning-Parameters-with-Example"><span class="nav-text">3.3 Tuning Parameters (with Example)</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Introduction"><span class="nav-text">一、Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、What-should-you-know"><span class="nav-text">二、What should you know ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Table-of-Contents"><span class="nav-text">三、Table of Contents</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-The-XGBoost-Advantage"><span class="nav-text">3.1 The XGBoost Advantage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Understanding-XGBoost-Parameters"><span class="nav-text">3.2 Understanding XGBoost Parameters</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-1-通用参数（General-Parameters）"><span class="nav-text">3.2.1 通用参数（General Parameters）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-2-Booster参数（Booster-Parameters）"><span class="nav-text">3.2.2 Booster参数（Booster Parameters）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-3-学习目标参数"><span class="nav-text">3.2.3 学习目标参数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Tuning-Parameters-with-Example"><span class="nav-text">3.3 Tuning Parameters (with Example)</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -991,9 +992,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -1005,13 +1029,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

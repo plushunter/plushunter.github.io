@@ -86,21 +86,22 @@
 
 
 
-<meta name="description" content="损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：$$\theta^* = argmin_\theta \frac{1}{">
+<meta name="description" content="损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子： \theta^* = argmin_\theta \frac{1}{N">
 <meta name="keywords" content="损失函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习算法系列（24）：机器学习中的损失函数">
 <meta property="og:url" content="http://yoursite.com/2017/07/08/机器学习算法系列（24）：损失函数/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：$$\theta^* = argmin_\theta \frac{1}{">
+<meta property="og:description" content="损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子： \theta^* = argmin_\theta \frac{1}{N">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-08 下午6.11.53.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14995092441592.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14995093179927.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14995093274307.png">
-<meta property="og:updated_time" content="2017-07-31T16:59:52.000Z">
+<meta property="og:updated_time" content="2017-12-26T08:03:48.016Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（24）：机器学习中的损失函数">
-<meta name="twitter:description" content="损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：$$\theta^* = argmin_\theta \frac{1}{">
+<meta name="twitter:description" content="损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子： \theta^* = argmin_\theta \frac{1}{N">
 <meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-08 下午6.11.53.png">
 
 
@@ -398,25 +399,51 @@ var _hmt = _hmt || [];
       
 
       
-        <p>损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：$$\theta^* = argmin_\theta \frac{1}{N}\sum_{i=1}^NL(y_i,f(x_i;\theta))+\lambda Φ(θ)$$</p>
-<a id="more"></a>
+        <p>损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子：</p>
+<script type="math/tex; mode=display">\theta^* = argmin_\theta \frac{1}{N}\sum_{i=1}^NL(y_i,f(x_i;\theta))+\lambda Φ(θ)</script><a id="more"></a>
 <p>前面的均值函数表示的是经验风险函数，$L$代表的是损失函数，后面的$Φ$是正则化项（regularizer）或者叫惩罚项（penalty term）,它可以是$L_1$，也可以是$L_2$等其他的正则函数。整个式子表示的意思是找到使目标函数最小时的$\theta$值。下面列出集中常见的损失函数。</p>
 <h2 id="一、对数损失函数（逻辑回归）"><a href="#一、对数损失函数（逻辑回归）" class="headerlink" title="一、对数损失函数（逻辑回归）"></a>一、对数损失函数（逻辑回归）</h2><p>有些人可能觉得逻辑回归的损失函数就是平方损失，其实并不是。平方损失函数可以通过线性回归在假设样本是高斯分布的条件下推导得到，而逻辑回归得到的并不是平方损失。在逻辑回归的推导中，它假设样本服从伯努利分布（0-1分布），然后求得满足该分布的似然函数，接着取对数求极值等等。而逻辑回归并没有求似然函数的极值，而是把极大化当做是一种思想，进而推导出它的经验风险函数为：最小化负的似然函数（即$max F(y, f(x)) —&gt; min -F(y, f(x))$)。从损失函数的视角来看，它就成了log损失函数了。</p>
-<p>Log损失函数的标准形式：$$L(Y,P(Y|X))=-logP(Y|X)$$刚刚说到，取对数是为了方便计算极大似然估计，因为在MLE中，直接求导比较困难，所以通常都是先取对数再求导找极值点。损失函数$L(Y.P(Y|X))$表达的是样本在分类$Y$的情况下，使概率$P(Y|X)$达到最大值（换言之，就是利用已知的样本分布，找到最有可能（即最大概率）导致这种分布的参数值；或者什么样的参数才能使我们观测到目前这组数据的概率最大）。因为log函数是单调递增的，所以$logP(Y|X)$也会达到最大值，因此在前面加上负号之后，最大化$P(Y|X)$就等价于最小化$L$了。</p>
-<p>logistic回归的$P(y|x)$表达式如下（为了将类别标签y统一为1和0，下面将表达式分开表示）：$$<br>P\left(Y=y^{\left(i\right)}|x^{\left(i\right)};\theta\right)=\left\{\begin{array}{l}<br>    h_{\theta}\left(x^{\left(i\right)}\right)=\frac{1}{1+e^{-\theta^Tx}},\,\,y^{\left(i\right)}=1\\<br>    1-h_{\theta}\left(x^{\left(i\right)}\right)=\frac{e^{-\theta^Tx}}{1+e^{-\theta^Tx}},\,\,y^{\left(i\right)}=0\\<br>\end{array}\right.<br>$$将上面的公式合并在一起，可得到第$i$个样本正确预测的概率：$$P(y^{(i)}|x^{(i)};\theta)=(h_\theta(x^{(i)}))^{y(i)}·(1-h_\theta(x^{(i)}))^{1-y(i)}$$<br>上式是对一个样本进行建模的数据表达。对于所有的样本，假设每条样本生成过程独立，在整个样本空间中（N个样本）的概率分布为：$$<br>P\left(Y |  X;\theta\right)=\prod_{i=1}^N{\left(\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)^{y^{\left(i\right)}}\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)^{1-y^{\left(i\right)}}\right)}<br>$$将上式代入到对数损失函数中，得到最终的损失函数为：$$J(\theta) = -\frac{1}{N}\sum_{i=1}^N{y^{\left(i\right)}\log\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)+\left(1-y^{\left(i\right)}\right)\log\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)}<br>$$<br>之所以有人认为逻辑回归是平方损失，是因为在使用梯度下降来求最优解的时候，它的迭代式子与平方损失求导后的式子非常相似，从而给人一种直观上的错觉。</p>
+<p>Log损失函数的标准形式：</p>
+<script type="math/tex; mode=display">L(Y,P(Y|X))=-logP(Y|X)</script><p>刚刚说到，取对数是为了方便计算极大似然估计，因为在MLE中，直接求导比较困难，所以通常都是先取对数再求导找极值点。损失函数$L(Y.P(Y|X))$表达的是样本在分类$Y$的情况下，使概率$P(Y|X)$达到最大值（换言之，就是利用已知的样本分布，找到最有可能（即最大概率）导致这种分布的参数值；或者什么样的参数才能使我们观测到目前这组数据的概率最大）。因为log函数是单调递增的，所以$logP(Y|X)$也会达到最大值，因此在前面加上负号之后，最大化$P(Y|X)$就等价于最小化$L$了。</p>
+<p>logistic回归的$P(y|x)$表达式如下（为了将类别标签y统一为1和0，下面将表达式分开表示）：</p>
+<script type="math/tex; mode=display">
+P\left(Y=y^{\left(i\right)}|x^{\left(i\right)};\theta\right)=\left\{\begin{array}{l}
+    h_{\theta}\left(x^{\left(i\right)}\right)=\frac{1}{1+e^{-\theta^Tx}},\,\,y^{\left(i\right)}=1\\
+    1-h_{\theta}\left(x^{\left(i\right)}\right)=\frac{e^{-\theta^Tx}}{1+e^{-\theta^Tx}},\,\,y^{\left(i\right)}=0\\
+\end{array}\right.</script><p>将上面的公式合并在一起，可得到第$i$个样本正确预测的概率：</p>
+<script type="math/tex; mode=display">P(y^{(i)}|x^{(i)};\theta)=(h_\theta(x^{(i)}))^{y(i)}·(1-h_\theta(x^{(i)}))^{1-y(i)}</script><p>上式是对一个样本进行建模的数据表达。对于所有的样本，假设每条样本生成过程独立，在整个样本空间中（N个样本）的概率分布为：</p>
+<script type="math/tex; mode=display">
+P\left(Y\ | \ X;\theta\right)=\prod_{i=1}^N{\left(\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)^{y^{\left(i\right)}}\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)^{1-y^{\left(i\right)}}\right)}</script><p>将上式代入到对数损失函数中，得到最终的损失函数为：</p>
+<script type="math/tex; mode=display">J(\theta) = -\frac{1}{N}\sum_{i=1}^N{y^{\left(i\right)}\log\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)+\left(1-y^{\left(i\right)}\right)\log\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)}</script><p>之所以有人认为逻辑回归是平方损失，是因为在使用梯度下降来求最优解的时候，它的迭代式子与平方损失求导后的式子非常相似，从而给人一种直观上的错觉。</p>
 <h2 id="二、平方损失函数（最小二乘法，Ordinary-Least-Squares）"><a href="#二、平方损失函数（最小二乘法，Ordinary-Least-Squares）" class="headerlink" title="二、平方损失函数（最小二乘法，Ordinary Least Squares）"></a>二、平方损失函数（最小二乘法，Ordinary Least Squares）</h2><p>最小二乘法是线性回归的一种，OLS将问题转化成了一个凸优化问题。在线性回归中，它假设样本和噪声都服从高斯分布（为什么假设成高斯分布呢？其实这里隐藏了一个小知识点，就是中心极限定理，可以参考【central limit theorem】），最后通过极大似然估计（MLE）可以推导出最小二乘式子。最小二乘的基本原则是：最优拟合直线应该是使各点到回归直线的距离和最小的直线，即平方和最小。换言之，OLS是基于距离的，而这个距离就是我们用的最多的欧几里得距离。为什么它会选择使用欧式距离作为误差度量呢（即Mean squared error， MSE），主要有以下几个原因：</p>
 <ul>
 <li>简单，计算方便；</li>
 <li>欧氏距离是一种很好的相似性度量标准；</li>
 <li>在不同的表示域变换后特征性质不变。</li>
 </ul>
-<p>平方损失（Square loss）的标准形式如下：$$L(Y,f(X))=(Y-f(x))^2$$当样本个数为n时，此时的损失函数变为：$$L(Y,f(X))=\sum_{i=1}^n(Y-f(X))^2$$$Y-f(X)$表示的是残差，整个式子表示的是残差的平方和，而我们的目的就是最小化这个目标函数值（注：该式子未加入正则项），也就是最小化残差的平方和（residual sum of squares，RSS）。</p>
-<p>而在实际应用中，通常会使用均方差（MSE）作为一项衡量指标，公式如下：$$MSE=\frac{1}{N}\sum_{i=1}^N(\tilde{Y_i}-Y_i)^2$$</p>
-<p>上面提到了线性回归，这里额外补充一句，我们通常说的线性有两种情况，一种是因变量y是自变量x的线性函数，一种是因变量y是参数αα的线性函数。在机器学习中，通常指的都是后一种情况。</p>
-<h2 id="三、指数损失函数（Adaboost）"><a href="#三、指数损失函数（Adaboost）" class="headerlink" title="三、指数损失函数（Adaboost）"></a>三、指数损失函数（Adaboost）</h2><p>学过Adaboost算法的人都知道，它是前向分步加法算法的特例，是一个加和模型，损失函数就是指数函数。在Adaboost中，经过m此迭代之后，可以得到$f_m(x)$:$$f_m(x)=f_{m-1}(x)+a_mG_m(x)$$Adaboost每次迭代时的目的是为了找到最小化下列式子时的参数$a$和G：$$arg\underset{a,G}{min}=\sum_{i=1}^Nexp[-y_i(f_{m-1}(x_i)+aG(x_i))]$$而指数损失函数(exp-loss）的标准形式如下:$$L(y,f(x))=exp[-yf(x)]$$可以看出，Adaboost的目标式子就是指数损失，在给定N个样本的情况下，Adaboost的损失函数为：$$L(y,f(x))=\frac{1}{N}\sum_{i=1}^nexp[-y_if(x_i)]$$</p>
-<h2 id="四、Hinge损失函数（SVM）"><a href="#四、Hinge损失函数（SVM）" class="headerlink" title="四、Hinge损失函数（SVM）"></a>四、Hinge损失函数（SVM）</h2><h3 id="4-1-Hinge损失函数（SVM）"><a href="#4-1-Hinge损失函数（SVM）" class="headerlink" title="4.1 Hinge损失函数（SVM）"></a>4.1 Hinge损失函数（SVM）</h3><p>线性支持向量机学习除了原始最优化问题，还有另外一种解释，就是最优化以下目标函数：$$\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2$$目标函数的第一项是经验损失或经验风险，函数$$L(y·(w·x+b))=[1-y(w·x+b)]_+$$称为合页损失函数（hinge loss function）。下标”+”表示以下取正值的函数：$$<br>\left[z\right]_+=\left\{\begin{array}{l}<br>    z , z&gt;0\\<br>    0 , z\le 0\\<br>\end{array}\right.<br>$$这就是说，当样本点$(x_i,y_i)$被正确分类且函数间隔（确信度）$y_i(w·x_i+b)$大于1时，损失是0，否则损失是$1-y_i(w·x_i+b)$。目标函数的第二项是系数为$\lambda$的$w$的$L_2$范数，是正则化项。</p>
-<p>接下来证明线性支持向量机原始最优化问题：$$<br>\underset{w,b,\xi}{\min} \frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i}<br>$$$$<br>s.t.  y_i\left( w·x_i+b \right) \geqslant 1-\xi _i , i=1,2,···,N<br>$$$$<br>\xi _i\geqslant 0, i=1,2,···\mathrm{，}N<br>$$等价于最优化问题$$\underset{w,b}{min }\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2$$</p>
-<p>先令$[1-y_i(w·x_i+b)]_+=\xi_i$，则$\xi_i≥0$，第二个约束条件成立；由$[1-y_i(w·x_i+b)]_+=\xi_i$，当$1-y_i(w·x_i+b)&gt;0$时，有$y_i(w·x_i+b)=1-\xi_i$;当$1-y_i(w·x_i+b)≤0$时，$\xi_i=0$，有$y_i(w·x_i+b)≥1-\xi_i$，所以第一个约束条件成立。所以两个约束条件都满足，最优化问题可以写作$$\underset{w,b}{min}\sum_{i=1}^N\xi_i+\lambda||w||^2$$若取$\lambda =\frac{1}{2C}$则$$\underset{w,b}{min} \frac{1}{C}(\frac{1}{2} ||w||^2+C\sum_{i=1}^N \xi_i)$$与原始最优化问题等价。</p>
+<p>平方损失（Square loss）的标准形式如下：<script type="math/tex">L(Y,f(X))=(Y-f(x))^2</script>当样本个数为n时，此时的损失函数变为：$$L(Y,f(X))=\sum_{i=1}^n(Y-f(X))^2$$$Y-f(X)$表示的是残差，整个式子表示的是残差的平方和，而我们的目的就是最小化这个目标函数值（注：该式子未加入正则项），也就是最小化残差的平方和（residual sum of squares，RSS）。</p>
+<p>而在实际应用中，通常会使用均方差（MSE）作为一项衡量指标，公式如下：</p>
+<script type="math/tex; mode=display">MSE=\frac{1}{N}\sum_{i=1}^N(\tilde{Y_i}-Y_i)^2</script><p>上面提到了线性回归，这里额外补充一句，我们通常说的线性有两种情况，一种是因变量y是自变量x的线性函数，一种是因变量y是参数α的线性函数。在机器学习中，通常指的都是后一种情况。</p>
+<h2 id="三、指数损失函数（Adaboost）"><a href="#三、指数损失函数（Adaboost）" class="headerlink" title="三、指数损失函数（Adaboost）"></a>三、指数损失函数（Adaboost）</h2><p>学过Adaboost算法的人都知道，它是前向分步加法算法的特例，是一个加和模型，损失函数就是指数函数。在Adaboost中，经过m此迭代之后，可以得到$f_m(x)$:</p>
+<script type="math/tex; mode=display">f_m(x)=f_{m-1}(x)+a_mG_m(x)</script><p>Adaboost每次迭代时的目的是为了找到最小化下列式子时的参数$a$和G：</p>
+<script type="math/tex; mode=display">arg\underset{a,G}{min}=\sum_{i=1}^Nexp[-y_i(f_{m-1}(x_i)+aG(x_i))]</script><p>而指数损失函数(exp-loss）的标准形式如下:</p>
+<script type="math/tex; mode=display">L(y,f(x))=exp[-yf(x)]</script><p>可以看出，Adaboost的目标式子就是指数损失，在给定N个样本的情况下，Adaboost的损失函数为：</p>
+<script type="math/tex; mode=display">L(y,f(x))=\frac{1}{N}\sum_{i=1}^nexp[-y_if(x_i)]</script><h2 id="四、Hinge损失函数（SVM）"><a href="#四、Hinge损失函数（SVM）" class="headerlink" title="四、Hinge损失函数（SVM）"></a>四、Hinge损失函数（SVM）</h2><h3 id="4-1-Hinge损失函数（SVM）"><a href="#4-1-Hinge损失函数（SVM）" class="headerlink" title="4.1 Hinge损失函数（SVM）"></a>4.1 Hinge损失函数（SVM）</h3><p>线性支持向量机学习除了原始最优化问题，还有另外一种解释，就是最优化以下目标函数：</p>
+<script type="math/tex; mode=display">\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2</script><p>目标函数的第一项是经验损失或经验风险，函数</p>
+<script type="math/tex; mode=display">L(y·(w·x+b))=[1-y(w·x+b)]_+</script><p>称为合页损失函数（hinge loss function）。下标”+”表示以下取正值的函数：</p>
+<script type="math/tex; mode=display">
+\left[z\right]_+=\left\{\begin{array}{l}
+    z\ ,\ z>0\\
+    0\ ,\ z\le 0\\
+\end{array}\right.</script><p>这就是说，当样本点$(x_i,y_i)$被正确分类且函数间隔（确信度）$y_i(w·x_i+b)$大于1时，损失是0，否则损失是$1-y_i(w·x_i+b)$。目标函数的第二项是系数为$\lambda$的$w$的$L_2$范数，是正则化项。</p>
+<p>接下来证明线性支持向量机原始最优化问题：</p>
+<script type="math/tex; mode=display">
+\underset{w,b,\xi}{\min}\ \frac{1}{2}||w||^2+C\sum_{i=1}^N{\xi _i}</script><script type="math/tex; mode=display">
+s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script><script type="math/tex; mode=display">
+\xi _i\geqslant 0,\ i=1,2,···\mathrm{，}N</script><p>等价于最优化问题</p>
+<script type="math/tex; mode=display">\underset{w,b}{min }\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2</script><p>先令$[1-y_i(w·x_i+b)]_+=\xi_i$，则$\xi_i≥0$，第二个约束条件成立；由$[1-y_i(w·x_i+b)]_+=\xi_i$，当$1-y_i(w·x_i+b)&gt;0$时，有$y_i(w·x_i+b)=1-\xi_i$;当$1-y_i(w·x_i+b)≤0$时，$\xi_i=0$，有$y_i(w·x_i+b)≥1-\xi_i$，所以第一个约束条件成立。所以两个约束条件都满足，最优化问题可以写作</p>
+<script type="math/tex; mode=display">\underset{w,b}{min}\sum_{i=1}^N\xi_i+\lambda||w||^2</script><p>若取$\lambda =\frac{1}{2C}$则</p>
+<script type="math/tex; mode=display">\underset{w,b}{min} \frac{1}{C}(\frac{1}{2} ||w||^2+C\sum_{i=1}^N \xi_i)</script><p>与原始最优化问题等价。</p>
 <p>合页损失函数图像如图所示，横轴是函数间隔$y(w·x+b)$，纵轴是损失。由于函数形状像一个合页，故名合页损失函数。</p>
 <p>图中还画出了0-1损失函数，可以认为它是一个二类分类问题的真正的损失函数，而合页损失函数是0-1损失函数的上界。由于0-1损失函数不是连续可导的，直接优化其构成的目标函数比较困难，可以认为线性支持向量机是优化由0-1损失函数的上界（合页损失函数）构成的目标函数。这时的上界损失函数又称为代理损失函数（surrogate function）。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-08 下午6.11.53.png" alt="屏幕快照 2017-07-08 下午6.11.53"><br>图中虚线显示的是感知机的损失函数$[-y_i(w·x_i+b)]_+$。这时当样本点$(x_i,y_i)$被正确分类时，损失是0，否则损失是$-y_i(w·x_i+b)$，相比之下，合页损失函数不仅要分类正确，而且确信度足够高时损失才是0，也就是说，合页损失函数对学习有更高的要求</p>
 <h3 id="4-2-逻辑斯谛回归和SVM的损失函数对比"><a href="#4-2-逻辑斯谛回归和SVM的损失函数对比" class="headerlink" title="4.2 逻辑斯谛回归和SVM的损失函数对比"></a>4.2 逻辑斯谛回归和SVM的损失函数对比</h3><p>我们先来看一下带松弛变量的 SVM 和正则化的逻辑回归它们的损失函数：<img src="http://omu7tit09.bkt.clouddn.com/14995092441592.png" alt="">其中 $g(z)=(1+exp(−z))^{−1}$<br>可以将两者统一起来:</p>
@@ -472,8 +499,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/13/机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）/" rel="next" title="机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）
+              <a href="/2017/07/08/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/" rel="next" title="机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法
               </a>
             
           </div>
@@ -482,8 +509,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/08/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/" rel="prev" title="机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法">
-                机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/13/机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）/" rel="prev" title="机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）">
+                机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -552,7 +579,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -560,7 +587,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -569,7 +596,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -881,9 +908,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -895,13 +945,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

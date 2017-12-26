@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/20/Java学习笔记（1）：语法基础/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="Java是完全面向对象的语言。通过虚拟机的运行机制，实现“跨平台”的理念。一次编译，永久使用。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15024502085934.png">
 <meta property="og:updated_time" content="2017-09-01T06:45:34.000Z">
 <meta name="twitter:card" content="summary">
@@ -410,7 +411,7 @@ var _hmt = _hmt || [];
 <li>Java中的语句要以 ; 结尾 (与C/C++相同)。</li>
 <li>用花括号 {} 来整合语句，形成程序块。通过程序块，我们可以知道程序的不同部分的范围，比如类从哪里开始，到哪里结束。</li>
 </ul>
-<h2 id="一、编译与运行"><a href="#一、编译与运行" class="headerlink" title="一、编译与运行"></a>一、编译与运行</h2><p>Java程序要经过编译器编译才能执行。在Linux或Mac下，可以下载安装 <a href="http://www.oracle.com/technetwork/java/javase/downloads" target="_blank" rel="external">Java JDK</a></p>
+<h2 id="一、编译与运行"><a href="#一、编译与运行" class="headerlink" title="一、编译与运行"></a>一、编译与运行</h2><p>Java程序要经过编译器编译才能执行。在Linux或Mac下，可以下载安装 <a href="http://www.oracle.com/technetwork/java/javase/downloads" target="_blank" rel="noopener">Java JDK</a></p>
 <p>使用 javac 来编译。在命令行中输入下面语句 编译 :</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$javac HelloWorld.java</div></pre></td></tr></table></figure>
 <p>当前路径下，将有一个名为HelloWorld.class的文件生成。<br>使用 java 命令来 运行 。</p>
@@ -418,6 +419,7 @@ var _hmt = _hmt || [];
 <p>Java会搜寻该类中的main方法，并执行。</p>
 <h2 id="二、变量"><a href="#二、变量" class="headerlink" title="二、变量"></a>二、变量</h2><p>计算机语言通常需要在内存中存放数据，比如C语言中的变量，Java也有类似的变量。Java和C语言都是静态类型的语言。在使用变量之前，要声明变量的类型。</p>
 <p>变量(variable) 占据一定的内存空间。不同类型的变量占据不同的大小。Java中的变量类型如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -478,6 +480,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <p>在Java中，变量需要先 声明(declare)才能使用。在声明中，我说明变量的类型，赋予变量以特别名字，以便在后面的程序中调用它。你可以在程序中的任意位置声明变量。 比如:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Declare in the middle:"</span>);</div><div class="line">        <span class="keyword">int</span> a;</div><div class="line">        a = <span class="number">5</span>;</div><div class="line">        System.out.println(a);  <span class="comment">// print an integer</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面a是变量名。可以在声明变量的同时，给变量赋值，比如 int a = 5;</p>
@@ -527,6 +530,7 @@ var _hmt = _hmt || [];
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span></div><div class="line">    &#123;</div><div class="line">        System.out.println(<span class="string">"Declare in the middle:"</span>);</div><div class="line">        <span class="keyword">int</span> a;</div><div class="line">        a = <span class="number">5</span> + <span class="number">1</span>;</div><div class="line">        System.out.println(a);  <span class="comment">// print an integer</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>上面的5 + 1也是一个表达式，等于6。</p>
 <h3 id="3-1-数学表达式"><a href="#3-1-数学表达式" class="headerlink" title="3.1 数学表达式"></a>3.1 数学表达式</h3><p>数学运算，结果为一个数值</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -553,7 +557,9 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="3-2-关系表达式"><a href="#3-2-关系表达式" class="headerlink" title="3.2 关系表达式"></a>3.2 关系表达式</h3><p>判断表达式是否成立。即一个boolean值，真假</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -584,7 +590,9 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="3-3-布林表达式"><a href="#3-3-布林表达式" class="headerlink" title="3.3 布林表达式"></a>3.3 布林表达式</h3><p>两个boolean值的与、或、非的逻辑关系</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -605,7 +613,9 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <h3 id="3-4-位运算"><a href="#3-4-位运算" class="headerlink" title="3.4 位运算"></a>3.4 位运算</h3><p>对整数的二进制形式逐位进行逻辑运算，得到一个整数</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -637,7 +647,9 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <p>还有下列在C中常见的运算符，我会在用到的时候进一步解释:</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -647,7 +659,7 @@ var _hmt = _hmt || [];
 </thead>
 <tbody>
 <tr>
-<td>n –</td>
+<td>n —</td>
 <td>变量n减1</td>
 </tr>
 <tr>
@@ -656,6 +668,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="四、控制结构"><a href="#四、控制结构" class="headerlink" title="四、控制结构"></a>四、控制结构</h2><p>Java中控制结构(control flow)的语法与C类似。它们都使用{}来表达隶属关系。</p>
 <h3 id="4-1-选择（if）"><a href="#4-1-选择（if）" class="headerlink" title="4.1 选择（if）"></a>4.1 选择（if）</h3><p>condition是一个表示真假值的表达式。statements;是语句。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (conditon1) &#123;</div><div class="line">  statements;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> <span class="keyword">if</span> (condition2) &#123;</div><div class="line">  statements;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">  statements;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -800,8 +813,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/21/Java学习笔记（2）：类与对象/" rel="next" title="Java学习笔记（2）：类与对象">
-                <i class="fa fa-chevron-left"></i> Java学习笔记（2）：类与对象
+              <a href="/2017/08/19/Java集合学习手册（11）：Java HashMap源码全剖析/" rel="next" title="Java集合学习手册（11）：Java HashMap源码全剖析">
+                <i class="fa fa-chevron-left"></i> Java集合学习手册（11）：Java HashMap源码全剖析
               </a>
             
           </div>
@@ -810,8 +823,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/19/Java集合学习手册（11）：Java HashMap源码全剖析/" rel="prev" title="Java集合学习手册（11）：Java HashMap源码全剖析">
-                Java集合学习手册（11）：Java HashMap源码全剖析 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/21/Java学习笔记（2）：类与对象/" rel="prev" title="Java学习笔记（2）：类与对象">
+                Java学习笔记（2）：类与对象 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -880,7 +893,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -888,7 +901,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -897,7 +910,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -1209,9 +1222,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -1223,13 +1259,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

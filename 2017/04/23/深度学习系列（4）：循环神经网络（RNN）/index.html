@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/23/深度学习系列（4）：循环神经网络（RNN）/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="之前学习了全连接神经网络和卷积神经网络，以及它们的训练与应用。它们都只能单独的去处理单个的输入，且前后的输入之间毫无关系。但是，在一些任务中，我们需要更好的去处理序列的信息，即前后的输入之间存在关系。比如，在理解一整句话的过程中，孤立理解组成这句话的词是不够的，我们需要整体的处理由这些词连接起来的整个序列；当我们处理视频时，我们也不能单独地仅仅分析每一帧，而要分析这些帧连接起来的整个序列。这就引出">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%885.06.05.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%885.11.21.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%885.22.35.png">
@@ -100,7 +101,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%886.11.33.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%889.01.00.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-23%20%E4%B8%8A%E5%8D%8811.08.04.png">
-<meta property="og:updated_time" content="2017-04-26T07:12:34.000Z">
+<meta property="og:updated_time" content="2017-12-26T10:33:53.349Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（4）：循环神经网络（RNN）">
 <meta name="twitter:description" content="之前学习了全连接神经网络和卷积神经网络，以及它们的训练与应用。它们都只能单独的去处理单个的输入，且前后的输入之间毫无关系。但是，在一些任务中，我们需要更好的去处理序列的信息，即前后的输入之间存在关系。比如，在理解一整句话的过程中，孤立理解组成这句话的词是不够的，我们需要整体的处理由这些词连接起来的整个序列；当我们处理视频时，我们也不能单独地仅仅分析每一帧，而要分析这些帧连接起来的整个序列。这就引出">
@@ -420,20 +421,32 @@ var _hmt = _hmt || [];
 <p>RNN就解决了N-Gram的缺陷，它在理论上可以往前看（往后看）任意多个词。</p>
 <h2 id="二、基本循环神经网络"><a href="#二、基本循环神经网络" class="headerlink" title="二、基本循环神经网络"></a>二、基本循环神经网络</h2><p>开始前，我们先回顾一下，简单的MLP三层神经网络模型：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%885.06.05.png" alt="屏幕快照 2017-04-22 下午5.06.05"><br>其中x是一个向量，它表示输入层的值（这里面没有画出来表示神经元节点的圆圈）；s是一个向量，它表示隐藏层的值（这里隐藏层面画了一个节点，你也可以想象这一层其实是多个节点，节点数与向量s的维度相同）；U是输入层到隐藏层的权重矩阵；o也是一个向量，它表示输出层的值；V是隐藏层到输出层的权重矩阵。</p>
 <p>再看下图中一个简单的循环神经网络图，它由输入层、一个隐藏层和一个输出层组成。我们可以看到，循环神经网络的隐藏层的值s不仅仅取决于当前这次的输入x，还取决于上一次隐藏层的值s。权重矩阵W就是隐藏层上一次的值作为这一次的输入的权重。<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%885.11.21.png" alt="屏幕快照 2017-04-22 下午5.11.21"><br>如果我们把上面的图展开，循环神经网络也可以画成下面这个样子：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%885.22.35.png" alt="屏幕快照 2017-04-22 下午5.22.35"></p>
-<p>现在看起来就清楚不少了，这个网络在t时刻接收到输入$X_t$之后，隐藏层的值是$S_t$，输出值是$o_t$。关键一点是，$s_t$的值不仅仅取决于$X_t$，还取决于$S_{t-1}$。我们可以使用下面的公式来表示循环神经网络的计算方法：<br>$$o_t=g(Vs_t)$$$$s_t=f(Ux_t+Ws_{t-1})$$式1是输出层的计算公式，输出层是一个全连接层，也就是它的每个节点都和隐藏层的每个节点相连。V是输出层的权重矩阵，g是激活函数。式2是隐藏层的计算公式，它是循环层。U是输入x的权重矩阵，W是上一次的值$s_{t-1}$作为这一次的输入的权重矩阵，f是激活函数。</p>
+<p>现在看起来就清楚不少了，这个网络在t时刻接收到输入$X_t$之后，隐藏层的值是$S_t$，输出值是$o_t$。关键一点是，$s_t$的值不仅仅取决于$X_t$，还取决于$S_{t-1}$。我们可以使用下面的公式来表示循环神经网络的计算方法：</p>
+<script type="math/tex; mode=display">o_t=g(Vs_t)$$$$s_t=f(Ux_t+Ws_{t-1})</script><p>式1是输出层的计算公式，输出层是一个全连接层，也就是它的每个节点都和隐藏层的每个节点相连。V是输出层的权重矩阵，g是激活函数。式2是隐藏层的计算公式，它是循环层。U是输入x的权重矩阵，W是上一次的值$s_{t-1}$作为这一次的输入的权重矩阵，f是激活函数。</p>
 <p>从上面的公式可以看出，循环层和全连接层的区别就是多了一个权重矩阵W。</p>
-<p>若反复把式2代入带式1，我们将得到：<br>$$o_t=g(Vs_t)=g(Vf(Ux_t+Ws_{t-1}))$$$$<br>=g(Vf(Ux_t+Wf(Ux_{t-1}+Ws_{t-2 })))$$$$<br>=g(Vf(Ux_t+Wf(Ux_{t-1}+Wf(Ux_{t-2}+Ws_{t-3 }))))$$<br>从上面可以看出，循环神经网络的输出值$o_t$，是受前面历次输入值$x_{t}$、$x_{t-1}$、$x_{t-2} …$的影响的，这就是为什么循环神经网络可以往前看任意多个输入值的原因。</p>
+<p>若反复把式2代入带式1，我们将得到：</p>
+<script type="math/tex; mode=display">o_t=g(Vs_t)=g(Vf(Ux_t+Ws_{t-1}))</script><script type="math/tex; mode=display">=g(Vf(Ux_t+Wf(Ux_{t-1}+Ws_{t-2 })))</script><script type="math/tex; mode=display">=g(Vf(Ux_t+Wf(Ux_{t-1}+Wf(Ux_{t-2}+Ws_{t-3 }))))</script><p>从上面可以看出，循环神经网络的输出值$o_t$，是受前面历次输入值$x_{t}$、$x_{t-1}$、$x_{t-2} …$的影响的，这就是为什么循环神经网络可以往前看任意多个输入值的原因。</p>
 <h2 id="三、双向循环神经网络"><a href="#三、双向循环神经网络" class="headerlink" title="三、双向循环神经网络"></a>三、双向循环神经网络</h2><p>对于语言模型来说，很多时候光看前面的词是不够的，比如下面这句话：</p>
 <blockquote>
 <p>我的手机坏了，我打算____一部新手机。</p>
 </blockquote>
 <p>可以想象，如果我们只看横线前面的词，手机坏了，那么我是打算修一修？换一部新的？还是大哭一场？这些都是无法确定的，但是如果我们也看到了后面的词是“一部新手机”，那么横线上的词填“买”的概率就大很多了。</p>
 <p>而这个在单向循环神经网络是无法建模的，因此我们需要双向循环神经网络，如下图所示：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%885.54.21.png" alt="屏幕快照 2017-04-22 下午5.54.21"></p>
-<p>我们先考虑$y-2$的计算，从上图可以看出，双向卷积神经网络的隐藏层要保存两个值，一个A参与正向计算，另一个$A’$参与反向计算。最终的输出值$y_2$取决于$A_2$和$A_2’$，其计算方法为：<br>$$y_2=g(VA_2+V’A_2’)$$$A_2$和$A_2’$则分别计算：<br>$$A_2=f(WA_1+Ux_2)$$$$<br>A_2’=f(W’A_3’+U’x_2 )$$现在，我们已经可以看出一般的规律：正向计算时，隐藏层的值$s_t$与$s_{t-1}$有关；反向计算时，隐藏层的值$s_t’$与$s_{t+1}’$有关；最终的输出取决于正向和反向计算的加和。现在，我们仿照式1和式2，写出双向循环神经网络的计算方法：<br>$$o_t=g(Vs_t+V’s_t’)$$$$<br>s_t=f(Ux_t+Ws_{t-1 })$$$$<br>s_t’=f(U’x_t+W’s_{t+1}’)$$从上面三个公式我们可以看到，正向计算和反向计算不共享权重，也就是说$U$和$U’$、$W$和$W’$、$V$和$V’$都是不同的权重矩阵。</p>
+<p>我们先考虑$y-2$的计算，从上图可以看出，双向卷积神经网络的隐藏层要保存两个值，一个A参与正向计算，另一个$A’$参与反向计算。最终的输出值$y_2$取决于$A_2$和$A_2’$，其计算方法为：</p>
+<script type="math/tex; mode=display">y_2=g(VA_2+V'A_2')</script><p>$A_2$和$A_2’$则分别计算：</p>
+<script type="math/tex; mode=display">A_2=f(WA_1+Ux_2)</script><script type="math/tex; mode=display">
+A_2'=f(W'A_3'+U'x_2 )</script><p>现在，我们已经可以看出一般的规律：正向计算时，隐藏层的值$s_t$与$s_{t-1}$有关；反向计算时，隐藏层的值$s_t’$与$s_{t+1}’$有关；最终的输出取决于正向和反向计算的加和。现在，我们仿照式1和式2，写出双向循环神经网络的计算方法：</p>
+<script type="math/tex; mode=display">o_t=g(Vs_t+V's_t')</script><script type="math/tex; mode=display">
+s_t=f(Ux_t+Ws_{t-1 })</script><script type="math/tex; mode=display">
+s_t'=f(U'x_t+W's_{t+1}')</script><p>从上面三个公式我们可以看到，正向计算和反向计算不共享权重，也就是说$U$和$U’$、$W$和$W’$、$V$和$V’$都是不同的权重矩阵。</p>
 <h2 id="四、深度循环神经网络"><a href="#四、深度循环神经网络" class="headerlink" title="四、深度循环神经网络"></a>四、深度循环神经网络</h2><p>前面我们介绍的循环神经网络只有一个隐藏层，我们当然也可以堆叠两个以上的隐藏层，这样就得到了深度循环神经网络。如下图所示：</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%886.11.33.png" alt="屏幕快照 2017-04-22 下午6.11.33"></p>
-<p>我们把第$i$个隐藏层的值表示为$s_t^{(i)}、s_t^{‘(i)}$，则深度循环神经网络的计算方式可以表示为：<br>$$o_t=g(V^{(i)}s_t^{(i)}+V^{‘(i)}s_t^{‘(i)})$$$$<br>s_t^{(i)}=f(U^{(i)}s_t^{i-1}+W^{(i)})$$$$<br>s_t^{‘(i)}=f(U^{‘(i)}s_t^{‘(i-1)}+W^{‘(i)}s_{t+1}’)$$$$···$$$$<br>s_t^{(1)}=f(U^{(1)}x_t+W^{(1)}s_{t-1})$$$$<br>s_t^{‘(1)}=f(U^{‘(1)}x_t+W^{‘(1)}s_{t+1}’)$$</p>
-<h2 id="五、循环神经网络的训练算法：BPTT"><a href="#五、循环神经网络的训练算法：BPTT" class="headerlink" title="五、循环神经网络的训练算法：BPTT"></a>五、循环神经网络的训练算法：BPTT</h2><p>BPTT算法是针对循环层的训练算法，它的基本原理和BP算法是一样的，也包含同样的三个步骤：</p>
+<p>我们把第$i$个隐藏层的值表示为$s_t^{(i)}、s_t^{‘(i)}$，则深度循环神经网络的计算方式可以表示为：</p>
+<script type="math/tex; mode=display">o_t=g(V^{(i)}s_t^{(i)}+V^{'(i)}s_t^{'(i)})</script><script type="math/tex; mode=display">
+s_t^{(i)}=f(U^{(i)}s_t^{i-1}+W^{(i)})</script><script type="math/tex; mode=display">
+s_t^{'(i)}=f(U^{'(i)}s_t^{'(i-1)}+W^{'(i)}s_{t+1}')</script><script type="math/tex; mode=display">···</script><script type="math/tex; mode=display">
+s_t^{(1)}=f(U^{(1)}x_t+W^{(1)}s_{t-1})</script><script type="math/tex; mode=display">
+s_t^{'(1)}=f(U^{'(1)}x_t+W^{'(1)}s_{t+1}')</script><h2 id="五、循环神经网络的训练算法：BPTT"><a href="#五、循环神经网络的训练算法：BPTT" class="headerlink" title="五、循环神经网络的训练算法：BPTT"></a>五、循环神经网络的训练算法：BPTT</h2><p>BPTT算法是针对循环层的训练算法，它的基本原理和BP算法是一样的，也包含同样的三个步骤：</p>
 <ul>
 <li>1）前向计算每个神经元的输出值；</li>
 <li>2）反向计算每个神经元的误差项$\delta_j$，它是误差函数E对神经元$j$的加权输入$net_j$的偏导数；</li>
@@ -442,22 +455,251 @@ var _hmt = _hmt || [];
 </ul>
 <p>循环层如下图所示：</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%889.01.00.png" alt="屏幕快照 2017-04-22 下午9.01.00"></p>
-<h3 id="5-1-前向计算"><a href="#5-1-前向计算" class="headerlink" title="5.1 前向计算"></a>5.1 前向计算</h3><p>使用前面的式2对循环层进行前向计算：$$s_t=f(Ux_t+Ws_{t-1})$$注意，上面的$s_t、x_t、s_{t-1}$都是向量，用黑体字表示；而$U、V$是矩阵，用大写字母表示。向量的下标表示时刻，例如，$s_t$表示在$t$时刻向量$s$的值。</p>
-<p>我们假设输入向量x的维度是$m$，输出向量的维度是$n$，则矩阵$U$的维度是$n×m$，矩阵$W$的维度是$n×n$。下面是上式展开成矩阵的样子，看起来更直观一点：$$<br>\left[\begin{array}{c}<br>    s_{1}^{t}\\<br>    s_{2}^{t}\\<br>    ·\\<br>    s_{n}^{t}\\<br>\end{array}\right]=f\left(\left[\begin{matrix}<br>    u_{11}&amp;        u_{12}&amp;        ··&amp;        u_{1m}\\<br>    u_{21}&amp;        u_{22}&amp;        ··&amp;        u_{2m}\\<br>    ·&amp;        ·&amp;        ·&amp;        ·\\<br>    u_{n1}&amp;        u_{n2}&amp;        ···&amp;        u_{nm}\\<br>\end{matrix}\right]\left[\begin{array}{c}<br>    x_1\\<br>    x_2\\<br>    ···\\<br>    x_m\\<br>\end{array}\right]+\left[\begin{matrix}<br>    w_{11}&amp;        w_{12}&amp;        ···&amp;        w_{1n}\\<br>    w_{21}&amp;        w_{22}&amp;        ···&amp;        w_{2n}\\<br>    ··&amp;        ··&amp;        ···&amp;        ··\\<br>    w_{n1}&amp;        w_{n2}&amp;        ···&amp;        w_{nn}\\<br>\end{matrix}\right]\left[\begin{array}{c}<br>    s_{1}^{t-1}\\<br>    s_{2}^{t-1}\\<br>    ···\\<br>    s_{n}^{t-1}\\<br>\end{array}\right]\right)<br>$$在这里我们用手写体字母表示向量的一个元素，它的下标表示它是这个向量的第几个元素，它的上标表示第几个时刻。例如，$s_j^t$表示向量$s$的第$j$个元素在$t$时刻的值。$u_{ji}$表示输入层第$i$个神经元到循环层第$j$个神经元的权重。$w_{ji}$表示循环层第$t-1$时刻的第$i$个时刻的第$j$个神经元的权重。</p>
+<h3 id="5-1-前向计算"><a href="#5-1-前向计算" class="headerlink" title="5.1 前向计算"></a>5.1 前向计算</h3><p>使用前面的式2对循环层进行前向计算：</p>
+<script type="math/tex; mode=display">s_t=f(Ux_t+Ws_{t-1})</script><p>注意，上面的$s_t、x_t、s_{t-1}$都是向量，用黑体字表示；而$U、V$是矩阵，用大写字母表示。向量的下标表示时刻，例如，$s_t$表示在$t$时刻向量$s$的值。</p>
+<p>我们假设输入向量x的维度是$m$，输出向量的维度是$n$，则矩阵$U$的维度是$n×m$，矩阵$W$的维度是$n×n$。下面是上式展开成矩阵的样子，看起来更直观一点：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{c}
+    s_{1}^{t}\\
+    s_{2}^{t}\\
+    ·\\
+    s_{n}^{t}\\
+\end{array}\right]=f\left(\left[\begin{matrix}
+    u_{11}&        u_{12}&        ··&        u_{1m}\\
+    u_{21}&        u_{22}&        ··&        u_{2m}\\
+    ·&        ·&        ·&        ·\\
+    u_{n1}&        u_{n2}&        ···&        u_{nm}\\
+\end{matrix}\right]\left[\begin{array}{c}
+    x_1\\
+    x_2\\
+    ···\\
+    x_m\\
+\end{array}\right]+\left[\begin{matrix}
+    w_{11}&        w_{12}&        ···&        w_{1n}\\
+    w_{21}&        w_{22}&        ···&        w_{2n}\\
+    ··&        ··&        ···&        ··\\
+    w_{n1}&        w_{n2}&        ···&        w_{nn}\\
+\end{matrix}\right]\left[\begin{array}{c}
+    s_{1}^{t-1}\\
+    s_{2}^{t-1}\\
+    ···\\
+    s_{n}^{t-1}\\
+\end{array}\right]\right)</script><p>在这里我们用手写体字母表示向量的一个元素，它的下标表示它是这个向量的第几个元素，它的上标表示第几个时刻。例如，$s_j^t$表示向量$s$的第$j$个元素在$t$时刻的值。$u_{ji}$表示输入层第$i$个神经元到循环层第$j$个神经元的权重。$w_{ji}$表示循环层第$t-1$时刻的第$i$个时刻的第$j$个神经元的权重。</p>
 <h3 id="5-2-误差项的计算"><a href="#5-2-误差项的计算" class="headerlink" title="5.2 误差项的计算"></a>5.2 误差项的计算</h3><p>BTPP算法将第$l$层$t$时刻的误差项$\delta _t^l$值沿两个方向传播，一个方向是其传递到上一层网络，得到$\delta _t^{l-1}$，这部分只和权重矩阵$U$有关；另一个方向是将其沿着时间线传递到初始$t_1$时刻，得到$\delta_1^l$，这部分只和权重矩阵$W$有关。</p>
-<p>我们用向量$net_j$表示神经元在$t$时刻的加权输入，因为：<br>$$net_j=Ux_t+Ws_{t-1}$$$$s_{t-1}=f(net_{t-1})$$因此：$$<br>\frac{\partial net_t}{\partial net_{t-1}}=\frac{\partial net_t}{\partial s_{t-1}}\frac{\partial s_{t-1}}{\partial net_{t-1}}<br>$$我们用$a$表示列向量，用$a^T$表示行向量。上式的第一项是向量函数对向量求导，其结果为Jacobian矩阵：$$<br>\frac{\partial net_t}{\partial s_{t-1}}=\left[\begin{matrix}<br>    w_{11}&amp;        w_{12}&amp;        ···&amp;        w_{1n}\\<br>    w_{21}&amp;        w_{22}&amp;        ···&amp;        w_{2n}\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    w_{n1}&amp;        w_{n2}&amp;        ···&amp;        w_{nn}\\<br>\end{matrix}\right]=W<br>$$上式第二项也是一个jacobian矩阵：$$<br>\frac{\partial s_{t-1}}{\partial net_{t-1}}=\left[\begin{matrix}<br>    \frac{\partial s_{1}^{t-1}}{\partial net_{1}^{t-1}}&amp;        \frac{\partial s_{1}^{t-1}}{\partial net_{2}^{t-1}}&amp;        ···&amp;        \frac{\partial s_{1}^{t-1}}{\partial net_{n}^{t-1}}\\<br>    \frac{\partial s_{2}^{t-1}}{\partial net_{1}^{t-1}}&amp;        \frac{\partial s_{2}^{t-1}}{\partial net_{2}^{t-1}}&amp;        ···&amp;        \frac{\partial s_{2}^{t-1}}{\partial net_{n}^{t-1}}\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    \frac{\partial s_{n}^{t-1}}{\partial net_{1}^{t-1}}&amp;        \frac{\partial s_{n}^{t-1}}{\partial net_{2}^{t-1}}&amp;        ···&amp;        \frac{\partial s_{n}^{t-1}}{\partial net_{n}^{t-1}}\\<br>\end{matrix}\right]<br>$$$$<br>=\left[\begin{matrix}<br>    f’\left(net_{1}^{t-1}\right)&amp;        0&amp;        ···&amp;        0\\<br>    0&amp;        f’\left(net_{2}^{t-1}\right)&amp;        0&amp;        0\\<br>    0&amp;        0&amp;        ···&amp;        0\\<br>    0&amp;        0&amp;        0&amp;        f’\left(net_{n}^{t-1}\right)\\<br>\end{matrix}\right]<br>$$$$<br>=diag\left[f’\left(net_{t-1}\right)\right]<br>$$最后，将俩项合在一起，可得：$$<br>\frac{\partial net_t}{\partial net_{t-1}}=\frac{\partial net_t}{\partial s_{t-1}}\frac{\partial s_{t-1}}{\partial net_{t-1}}=W·diag\left[f’\left(net_{t-1}\right)\right]<br>$$上式描述了将$\delta$沿时间往前传递一个时刻的规律，有了这个规律，我们就可以求得任意时刻$k$的误差项$\delta_k$：$$<br>\delta_{k}^{T}=\frac{\partial E}{\partial net_k}=\frac{\partial E}{\partial net_t}·\frac{\partial net_t}{\partial net_{t-1}}·\frac{\partial net_{t-1}}{\partial net_{t-2}}···\frac{\partial net_{k+1}}{\partial net_k}<br>$$$$<br>=\delta_{t}^{T}Wdiag\left[f’\left(net_{t-1}\right)\right]Wdiag\left[f’\left(net_{t-2}\right)\right]···Wdiag\left[f’\left(net_k\right)\right]<br>$$$$<br>=\delta_{t}^{T}\prod_{i=k}^{t-1}{Wdiag\left[f’\left(net_i\right)\right]}<br>$$这个就是将误差项沿着时间反向传播的算法。</p>
-<p>循环层将误差项反向传递到上一层网络，与普通的全连接层是完全一样的，在此简要描述一下：<br>循环曾的加权输入$net^l$与上一层的加权输入$net^{l-1}$关系如下：<br>$$net^l_t=Ua_t^{l-1}+Ws_{t-1}$$$$<br>a_t^{l-1}=f^{l-1}(net_t^{l-1})$$上式中$net_t^l$是第$l$层神经元的加权输入（假如第$l$是循环层）；$net_t^{l-1}$是$l-1$层神经元的加权输入；$a_t^{l-1}$是第$l-1$层神经元的输出；$f^{l-1}$是第$l-1$层的激活函数。$$<br>\frac{\partial net_{t}^{l}}{\partial net_{t}^{l-1}}=\frac{\partial net_{t}^{l}}{\partial a_{t}^{l-1}}\frac{\partial a_{t}^{l-1}}{\partial net_{t}^{l-1}}=U ·diag\left[f’^{l-1}\left(net_{t}^{l-1}\right)\right]<br>$$所以$$<br>\delta_{t}^{l-1}=\frac{\partial E}{\partial net_{t}^{l-1}}=\frac{\partial E}{\partial net_{t}^{l}}\frac{\partial net_{t}^{l}}{\partial net_{t}^{l-1}}<br>$$$$<br>=\delta_{t}^{l}·U·diag\left[f’^{l-1}\left(net_{t}^{l-1}\right)\right]<br>$$上式就是将误差项传递到上一层算法。</p>
-<h3 id="5-3-权重梯度的计算"><a href="#5-3-权重梯度的计算" class="headerlink" title="5.3 权重梯度的计算"></a>5.3 权重梯度的计算</h3><p>接下来是BPTT算法的最后一步：计算每个权重的梯度。<br>首先我们计算误差函数$E$对权重矩阵$W$的梯度$$<br>\frac{\partial E}{\partial W}<br>$$<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-23%20%E4%B8%8A%E5%8D%8811.08.04.png" alt="屏幕快照 2017-04-23 上午11.08.04"></p>
+<p>我们用向量$net_j$表示神经元在$t$时刻的加权输入，因为：</p>
+<script type="math/tex; mode=display">net_j=Ux_t+Ws_{t-1}$$$$s_{t-1}=f(net_{t-1})</script><p>因此：</p>
+<script type="math/tex; mode=display">
+\frac{\partial net_t}{\partial net_{t-1}}=\frac{\partial net_t}{\partial s_{t-1}}\frac{\partial s_{t-1}}{\partial net_{t-1}}</script><p>我们用$a$表示列向量，用$a^T$表示行向量。上式的第一项是向量函数对向量求导，其结果为Jacobian矩阵：</p>
+<script type="math/tex; mode=display">
+\frac{\partial net_t}{\partial s_{t-1}}=\left[\begin{matrix}
+    w_{11}&        w_{12}&        ···&        w_{1n}\\
+    w_{21}&        w_{22}&        ···&        w_{2n}\\
+    ···&        ···&        ···&        ···\\
+    w_{n1}&        w_{n2}&        ···&        w_{nn}\\
+\end{matrix}\right]=W</script><p>上式第二项也是一个jacobian矩阵：</p>
+<script type="math/tex; mode=display">
+\frac{\partial s_{t-1}}{\partial net_{t-1}}=\left[\begin{matrix}
+    \frac{\partial s_{1}^{t-1}}{\partial net_{1}^{t-1}}&        \frac{\partial s_{1}^{t-1}}{\partial net_{2}^{t-1}}&        ···&        \frac{\partial s_{1}^{t-1}}{\partial net_{n}^{t-1}}\\
+    \frac{\partial s_{2}^{t-1}}{\partial net_{1}^{t-1}}&        \frac{\partial s_{2}^{t-1}}{\partial net_{2}^{t-1}}&        ···&        \frac{\partial s_{2}^{t-1}}{\partial net_{n}^{t-1}}\\
+    ···&        ···&        ···&        ···\\
+    \frac{\partial s_{n}^{t-1}}{\partial net_{1}^{t-1}}&        \frac{\partial s_{n}^{t-1}}{\partial net_{2}^{t-1}}&        ···&        \frac{\partial s_{n}^{t-1}}{\partial net_{n}^{t-1}}\\
+\end{matrix}\right]</script><script type="math/tex; mode=display">
+=\left[\begin{matrix}
+    f'\left(net_{1}^{t-1}\right)&        0&        ···&        0\\
+    0&        f'\left(net_{2}^{t-1}\right)&        0&        0\\
+    0&        0&        ···&        0\\
+    0&        0&        0&        f'\left(net_{n}^{t-1}\right)\\
+\end{matrix}\right]</script><script type="math/tex; mode=display">
+=diag\left[f'\left(net_{t-1}\right)\right]</script><p>最后，将俩项合在一起，可得：</p>
+<script type="math/tex; mode=display">
+\frac{\partial net_t}{\partial net_{t-1}}=\frac{\partial net_t}{\partial s_{t-1}}\frac{\partial s_{t-1}}{\partial net_{t-1}}=W·diag\left[f'\left(net_{t-1}\right)\right]</script><p>上式描述了将$\delta$沿时间往前传递一个时刻的规律，有了这个规律，我们就可以求得任意时刻$k$的误差项$\delta_k$：</p>
+<script type="math/tex; mode=display">
+\delta_{k}^{T}=\frac{\partial E}{\partial net_k}=\frac{\partial E}{\partial net_t}·\frac{\partial net_t}{\partial net_{t-1}}·\frac{\partial net_{t-1}}{\partial net_{t-2}}···\frac{\partial net_{k+1}}{\partial net_k}</script><script type="math/tex; mode=display">
+=\delta_{t}^{T}Wdiag\left[f'\left(net_{t-1}\right)\right]Wdiag\left[f'\left(net_{t-2}\right)\right]···Wdiag\left[f'\left(net_k\right)\right]</script><script type="math/tex; mode=display">
+=\delta_{t}^{T}\prod_{i=k}^{t-1}{Wdiag\left[f'\left(net_i\right)\right]}</script><p>这个就是将误差项沿着时间反向传播的算法。</p>
+<p>循环层将误差项反向传递到上一层网络，与普通的全连接层是完全一样的，在此简要描述一下：<br>循环曾的加权输入$net^l$与上一层的加权输入$net^{l-1}$关系如下：</p>
+<script type="math/tex; mode=display">net^l_t=Ua_t^{l-1}+Ws_{t-1}</script><script type="math/tex; mode=display">
+a_t^{l-1}=f^{l-1}(net_t^{l-1})</script><p>上式中$net_t^l$是第$l$层神经元的加权输入（假如第$l$是循环层）；$net_t^{l-1}$是$l-1$层神经元的加权输入；$a_t^{l-1}$是第$l-1$层神经元的输出；$f^{l-1}$是第$l-1$层的激活函数。</p>
+<script type="math/tex; mode=display">
+\frac{\partial net_{t}^{l}}{\partial net_{t}^{l-1}}=\frac{\partial net_{t}^{l}}{\partial a_{t}^{l-1}}\frac{\partial a_{t}^{l-1}}{\partial net_{t}^{l-1}}=U ·diag\left[f'^{l-1}\left(net_{t}^{l-1}\right)\right]</script><p>所以</p>
+<script type="math/tex; mode=display">
+\delta_{t}^{l-1}=\frac{\partial E}{\partial net_{t}^{l-1}}=\frac{\partial E}{\partial net_{t}^{l}}\frac{\partial net_{t}^{l}}{\partial net_{t}^{l-1}}</script><script type="math/tex; mode=display">
+=\delta_{t}^{l}·U·diag\left[f'^{l-1}\left(net_{t}^{l-1}\right)\right]</script><p>上式就是将误差项传递到上一层算法。</p>
+<h3 id="5-3-权重梯度的计算"><a href="#5-3-权重梯度的计算" class="headerlink" title="5.3 权重梯度的计算"></a>5.3 权重梯度的计算</h3><p>接下来是BPTT算法的最后一步：计算每个权重的梯度。<br>首先我们计算误差函数$E$对权重矩阵$W$的梯度</p>
+<script type="math/tex; mode=display">
+\frac{\partial E}{\partial W}</script><p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-23%20%E4%B8%8A%E5%8D%8811.08.04.png" alt="屏幕快照 2017-04-23 上午11.08.04"></p>
 <p>上图展示了我们到目前为止，在前两步中已经计算得到的量，包括每个时刻$t$循环层的输出值$s_t$，以及误差项$\delta_t$。</p>
-<p>我们只要知道了任意一个时刻的误差项$\delta_t$，以及上一个时刻循环层的输出值$s_{t-1}$，就可以按照下面的公式求出权重矩阵在$t$时刻的梯度：$$<br>\nabla_{w_t}E=\left[\begin{matrix}<br>    \delta_{1}^{t}s_{1}^{t-1}&amp;        \delta_{1}^{t}s_{2}^{t-1}&amp;        ···&amp;        \delta_{1}^{t}s_{n}^{t-1}\\<br>    \delta_{2}^{t}s_{1}^{t-1}&amp;        \delta_{2}^{t}s_{2}^{t-1}&amp;        ···&amp;        \delta_{2}^{t}s_{n}^{t-1}\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    \delta_{n}^{t}s_{1}^{t-1}&amp;        \delta_{n}^{t}s_{2}^{t-1}&amp;        ···&amp;        \delta_{n}^{t}s_{n}^{t-1}\\<br>\end{matrix}\right]<br>$$上式中，$\delta_i^t$表示$t$时刻误差项向量的第$i$个分量；$s_i^{t-1}$表示$t-1$时刻循环层第$i$个神经元的输出值。</p>
+<p>我们只要知道了任意一个时刻的误差项$\delta_t$，以及上一个时刻循环层的输出值$s_{t-1}$，就可以按照下面的公式求出权重矩阵在$t$时刻的梯度：</p>
+<script type="math/tex; mode=display">
+\nabla_{w_t}E=\left[\begin{matrix}
+    \delta_{1}^{t}s_{1}^{t-1}&        \delta_{1}^{t}s_{2}^{t-1}&        ···&        \delta_{1}^{t}s_{n}^{t-1}\\
+    \delta_{2}^{t}s_{1}^{t-1}&        \delta_{2}^{t}s_{2}^{t-1}&        ···&        \delta_{2}^{t}s_{n}^{t-1}\\
+    ···&        ···&        ···&        ···\\
+    \delta_{n}^{t}s_{1}^{t-1}&        \delta_{n}^{t}s_{2}^{t-1}&        ···&        \delta_{n}^{t}s_{n}^{t-1}\\
+\end{matrix}\right]</script><p>上式中，$\delta_i^t$表示$t$时刻误差项向量的第$i$个分量；$s_i^{t-1}$表示$t-1$时刻循环层第$i$个神经元的输出值。</p>
 <p>下面我们简单推导一下上式。</p>
-<p>我们知道$$net_t=Ux_t+Ws_{t-1}$$$$<br>\left[\begin{array}{c}<br>    net_{1}^{t}\\<br>    net_{2}^{t}\\<br>    ·\\<br>    net_{n}^{t}\\<br>\end{array}\right]=Ux_t+\left[\begin{matrix}<br>    w_{11}&amp;        w_{12}&amp;        ···&amp;        w_{1n}\\<br>    w_{21}&amp;        w_{22}&amp;        ···&amp;        w_{2n}\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    w_{n1}&amp;        w_{n2}&amp;        ···&amp;        w_{nn}\\<br>\end{matrix}\right]\left[\begin{array}{c}<br>    s_{1}^{t-1}\\<br>    s_{2}^{t-1}\\<br>    ···\\<br>    s_{n}^{t-1}\\<br>\end{array}\right]<br>$$$$<br>=Ux_t+\left[\begin{array}{c}<br>    w_{11}s_{1}^{t-1}+w_{12}s_{2}^{t-1}+···+w_{1n}s_{n}^{t-1}\\<br>    w_{21}s_{1}^{t-1}+w_{22}s_{2}^{t-1}+···+w_{2n}s_{n}^{t-1}\\<br>    ···\\<br>    w_{n1}s_{1}^{t-1}+w_{n2}s_{2}^{t-1}+···+w_{nn}s_{n}^{t-1}\\<br>\end{array}\right]<br>$$因为对$W$求导与$Ux_t$无关，我们不加考虑。现在，我们考虑对权重项$w_{ji}$求导。通过观察上式我们可以看到$w_{ji}$只与$net^t_j$有关，所以：$$<br>\frac{\partial E}{\partial w_{ji}}=\frac{\partial E}{\partial net_{j}^{t}}\frac{\partial net_{j}^{t}}{\partial w_{ji}}=\delta_{j}^{t}s_{i}^{t-1}$$按照这个规律就可以生成梯度矩阵$\nabla_{w_t}E$了。</p>
-<p>我们已经求得权重矩阵$W$在$t$时刻的梯度$\nabla_{w_t}E$，最终的梯度$\nabla_{w_t}E$是各个时刻的梯度之和：$$<br>=\left[\begin{matrix}<br>    \delta_{1}^{t}s_{1}^{t-1}&amp;        \delta_{1}^{t}s_{2}^{t-1}&amp;        ···&amp;        \delta_{1}^{t}s_{n}^{t-1}\\<br>    \delta_{2}^{t}s_{1}^{t-1}&amp;        \delta_{2}^{t}s_{2}^{t-1}&amp;        ···&amp;        \delta_{2}^{t}s_{n}^{t-1}\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    \delta_{n}^{t}s_{1}^{t-1}&amp;        \delta_{n}^{t}s_{2}^{t-1}&amp;        ···&amp;        \delta_{n}^{t}s_{n}^{t-1}\\<br>\end{matrix}\right]+···+\left[\begin{matrix}<br>    \delta_{1}^{1}s_{1}^{0}&amp;        \delta_{1}^{1}s_{2}^{0}&amp;        ···&amp;        \delta_{1}^{1}s_{n}^{0}\\<br>    \delta_{2}^{1}s_{1}^{0}&amp;        \delta_{2}^{1}s_{2}^{0}&amp;        ···&amp;        \delta_{2}^{1}s_{n}^{0}\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    \delta_{n}^{1}s_{1}^{0}&amp;        \delta_{n}^{1}s_{2}^{0}&amp;        ···&amp;        \delta_{n}^{1}s_{n}^{0}\\<br>\end{matrix}\right]<br>$$这就是计算循环曾权重矩阵$W$的梯度的公式。</p>
+<p>我们知道</p>
+<script type="math/tex; mode=display">net_t=Ux_t+Ws_{t-1}</script><script type="math/tex; mode=display">
+\left[\begin{array}{c}
+    net_{1}^{t}\\
+    net_{2}^{t}\\
+    ·\\
+    net_{n}^{t}\\
+\end{array}\right]=Ux_t+\left[\begin{matrix}
+    w_{11}&        w_{12}&        ···&        w_{1n}\\
+    w_{21}&        w_{22}&        ···&        w_{2n}\\
+    ···&        ···&        ···&        ···\\
+    w_{n1}&        w_{n2}&        ···&        w_{nn}\\
+\end{matrix}\right]\left[\begin{array}{c}
+    s_{1}^{t-1}\\
+    s_{2}^{t-1}\\
+    ···\\
+    s_{n}^{t-1}\\
+\end{array}\right]</script><script type="math/tex; mode=display">
+=Ux_t+\left[\begin{array}{c}
+    w_{11}s_{1}^{t-1}+w_{12}s_{2}^{t-1}+···+w_{1n}s_{n}^{t-1}\\
+    w_{21}s_{1}^{t-1}+w_{22}s_{2}^{t-1}+···+w_{2n}s_{n}^{t-1}\\
+    ···\\
+    w_{n1}s_{1}^{t-1}+w_{n2}s_{2}^{t-1}+···+w_{nn}s_{n}^{t-1}\\
+\end{array}\right]</script><p>因为对$W$求导与$Ux_t$无关，我们不加考虑。现在，我们考虑对权重项$w_{ji}$求导。通过观察上式我们可以看到$w_{ji}$只与$net^t_j$有关，所以：</p>
+<script type="math/tex; mode=display">
+\frac{\partial E}{\partial w_{ji}}=\frac{\partial E}{\partial net_{j}^{t}}\frac{\partial net_{j}^{t}}{\partial w_{ji}}=\delta_{j}^{t}s_{i}^{t-1}</script><p>按照这个规律就可以生成梯度矩阵$\nabla_{w_t}E$了。</p>
+<p>我们已经求得权重矩阵$W$在$t$时刻的梯度$\nabla_{w_t}E$，最终的梯度$\nabla_{w_t}E$是各个时刻的梯度之和：</p>
+<script type="math/tex; mode=display">
+=\left[\begin{matrix}
+    \delta_{1}^{t}s_{1}^{t-1}&        \delta_{1}^{t}s_{2}^{t-1}&        ···&        \delta_{1}^{t}s_{n}^{t-1}\\
+    \delta_{2}^{t}s_{1}^{t-1}&        \delta_{2}^{t}s_{2}^{t-1}&        ···&        \delta_{2}^{t}s_{n}^{t-1}\\
+    ···&        ···&        ···&        ···\\
+    \delta_{n}^{t}s_{1}^{t-1}&        \delta_{n}^{t}s_{2}^{t-1}&        ···&        \delta_{n}^{t}s_{n}^{t-1}\\
+\end{matrix}\right]+···+\left[\begin{matrix}
+    \delta_{1}^{1}s_{1}^{0}&        \delta_{1}^{1}s_{2}^{0}&        ···&        \delta_{1}^{1}s_{n}^{0}\\
+    \delta_{2}^{1}s_{1}^{0}&        \delta_{2}^{1}s_{2}^{0}&        ···&        \delta_{2}^{1}s_{n}^{0}\\
+    ···&        ···&        ···&        ···\\
+    \delta_{n}^{1}s_{1}^{0}&        \delta_{n}^{1}s_{2}^{0}&        ···&        \delta_{n}^{1}s_{n}^{0}\\
+\end{matrix}\right]</script><p>这就是计算循环曾权重矩阵$W$的梯度的公式。</p>
 <p>前面介绍了权重梯度的计算方法，看上去比较直观。但为什么最终的梯度的是各个时刻的梯度之和呢？我们前面只是直接用了这个结论，实际上这里面是有道理的。</p>
-<p>我们从这个式子开始：$$net_t=Ux_t+Wf(net_{t-1})$$因为$Ux_t$与$W$完全无关，我们把它看做常量。现在，考虑第一个式子加号右边的部分，因为$W$和$f(net_{t-1})$都是$W$的函数，所以，对其求偏导得到：$$<br>\frac{\partial net_t}{\partial W}=\frac{\partial W}{\partial W}f\left(net_{t-1}\right)+W\frac{\partial f\left(net_{t-1}\right)}{\partial W}<br>$$我们最终需要计算的是$$<br>\nabla_WE=\frac{\partial E}{\partial W}=\frac{\partial E}{\partial net_t}\frac{\partial net_t}{\partial W}=\delta_{t}^{T}\frac{\partial W}{\partial W}f\left(net_{t-1}\right)+\delta_{t}^{T}W\frac{\partial f\left(net_{t-1}\right)}{\partial W}<br>$$我们先计算加号左边的部分。$\frac{\partial W}{\partial W}$是矩阵对矩阵求导，其结果是一个四维张量（tensor），如下所示：$$<br>\frac{\partial W}{\partial W}=\left[\begin{matrix}<br>    \frac{\partial w_{11}}{\partial W}&amp;        \frac{\partial w_{12}}{\partial W}&amp;        ···&amp;        \frac{\partial w_{1n}}{\partial W}\\<br>    \frac{\partial w_{21}}{\partial W}&amp;        \frac{\partial w_{22}}{\partial W}&amp;        ···&amp;        \frac{\partial w_{2n}}{\partial W}\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    \frac{\partial w_{n1}}{\partial W}&amp;        \frac{\partial w_{n2}}{\partial W}&amp;        ···&amp;        \frac{\partial w_{nn}}{\partial W}\\<br>\end{matrix}\right]<br>$$$$<br>=\left[\begin{matrix}<br>    \left[\begin{matrix}<br>    \frac{\partial w_{11}}{\partial w_{11}}&amp;        ···&amp;        \frac{\partial w_{11}}{\partial w_{1n}}\\<br>    ···&amp;        ···&amp;        ···\\<br>    \frac{\partial w_{11}}{\partial w_{n1}}&amp;        ···&amp;        \frac{\partial w_{11}}{\partial w_{nn}}\\<br>\end{matrix}\right]&amp;        ···&amp;        ···&amp;        \left[\begin{matrix}<br>    \frac{\partial w_{1n}}{\partial w_{11}}&amp;        ···&amp;        \frac{\partial w_{1n}}{\partial w_{1n}}\\<br>    ···&amp;        ···&amp;        ···\\<br>    \frac{\partial w_{1n}}{\partial w_{n1}}&amp;        ···&amp;        \frac{\partial w_{1n}}{\partial w_{nn}}\\<br>\end{matrix}\right]\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    \left[\begin{matrix}<br>    \frac{\partial w_{n1}}{\partial w_{11}}&amp;        ···&amp;        \frac{\partial w_{n1}}{\partial w_{1n}}\\<br>    ···&amp;        ···&amp;        ···\\<br>    \frac{\partial w_{n1}}{\partial w_{n1}}&amp;        ···&amp;        \frac{\partial w_{n1}}{\partial w_{nn}}\\<br>\end{matrix}\right]&amp;        ···&amp;        ···&amp;        \left[\begin{matrix}<br>    \frac{\partial w_{nn}}{\partial w_{11}}&amp;        ···&amp;        \frac{\partial w_{nn}}{\partial w_{1n}}\\<br>    ···&amp;        ···&amp;        ···\\<br>    \frac{\partial w_{nn}}{\partial w_{n1}}&amp;        ···&amp;        \frac{\partial w_{nn}}{\partial w_{nn}}\\<br>\end{matrix}\right]\\<br>\end{matrix}\right]<br>$$$$<br>=\left[\begin{matrix}<br>    \left[\begin{matrix}<br>    1&amp;        0&amp;        ···&amp;        0\\<br>    0&amp;        0&amp;        ···&amp;        0\\<br>    ···&amp;        ···&amp;        ·&amp;        ···\\<br>    0&amp;        0&amp;        0&amp;        0\\<br>\end{matrix}\right]&amp;        \left[\begin{matrix}<br>    0&amp;        1&amp;        0&amp;        0\\<br>    0&amp;        0&amp;        ···&amp;        0\\<br>    ···&amp;        ···&amp;        ···&amp;        0\\<br>    0&amp;        0&amp;        ···&amp;        0\\<br>\end{matrix}\right]&amp;        ···&amp;        ···\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>\end{matrix}\right]<br>$$接下来，我们知道$s_{t-1=f(net_{t-1})}$，它是一个列向量。我们让上面的四维张量与这个向量相乘，得到了一个三维张量，再左乘行向量$\delta_t^T$，最终得到一个矩阵：$$<br>\delta_{t}^{T}\frac{\partial W}{\partial W}f\left(net_{t-1}\right)=\delta_{t}^{T}\left[\begin{matrix}<br>    \left[\begin{matrix}<br>    1&amp;        0&amp;        ···&amp;        0\\<br>    0&amp;        0&amp;        ···&amp;        0\\<br>    ···&amp;        ···&amp;        ·&amp;        ···\\<br>    0&amp;        0&amp;        0&amp;        0\\<br>\end{matrix}\right]&amp;        \left[\begin{matrix}<br>    0&amp;        1&amp;        0&amp;        0\\<br>    0&amp;        0&amp;        ···&amp;        0\\<br>    ···&amp;        ···&amp;        ···&amp;        0\\<br>    0&amp;        0&amp;        ···&amp;        0\\<br>\end{matrix}\right]&amp;        ···&amp;        ···\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>\end{matrix}\right]\left[\begin{array}{c}<br>    s_{1}^{t-1}\\<br>    s_{2}^{t-1}\\<br>    ···\\<br>    s_{n}^{t-1}\\<br>\end{array}\right]<br>$$$$<br>=\left[\begin{matrix}<br>    \delta_{1}^{t}&amp;        \delta_{2}^{t}&amp;        ···&amp;        \delta_{n}^{t}\\<br>\end{matrix}\right]\left[\begin{matrix}<br>    \left[\begin{array}{c}<br>    s_{1}^{t-1}\\<br>    0\\<br>    ···\\<br>    0\\<br>\end{array}\right]&amp;        \left[\begin{array}{c}<br>    s_{2}^{t-1}\\<br>    0\\<br>    ···\\<br>    0\\<br>\end{array}\right]&amp;        ···&amp;        ···\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>\end{matrix}\right]<br>$$$$<br>=\left[\begin{matrix}<br>    \delta_{1}^{t}s_{1}^{t-1}&amp;        \delta_{1}^{t}s_{2}^{t-1}&amp;        ···&amp;        \delta_{1}^{t}s_{n}^{t-1}\\<br>    \delta_{2}^{t}s_{1}^{t-1}&amp;        \delta_{2}^{t}s_{2}^{t-1}&amp;        ···&amp;        \delta_{2}^{t}s_{n}^{t-1}\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    \delta_{n}^{t}s_{1}^{t-1}&amp;        \delta_{n}^{t}s_{2}^{t-1}&amp;        ···&amp;        \delta_{n}^{t}s_{n}^{t-1}\\<br>\end{matrix}\right]<br>$$$$<br>=\nabla_{W_t}E<br>$$接下来，我们计算加号右边的部分：$$<br>\delta_{t}^{T}W\frac{\partial f\left(net_{t-1}\right)}{\partial W}=\delta_{t}^{T}W\frac{\partial f\left(net_{t-1}\right)}{\partial net_{t-1}}\frac{\partial net_{t-1}}{\partial W}<br>$$$$<br>=\delta_{t}^{T}Wf’\left(net_{t-1}\right)\frac{\partial net_{t-1}}{\partial W}<br>$$$$<br>=\delta_{t}^{T}\frac{\partial net_t}{\partial net_{t-1}}\frac{\partial net_{t-1}}{\partial W}<br>$$$$<br>=\delta_{t-1}^{T}\frac{\partial net_{t-1}}{\partial W}<br>$$我们得到了如下递推公式：$$<br>\nabla_WE=\frac{\partial E}{\partial W}=\nabla_{W_t}E+\delta_{t-1}^{T}\frac{\partial net_{t-1}}{\partial W}<br>$$$$<br>=\nabla_{W_t}E+\nabla_{W_{t-1}}E+\delta_{t-2}^{T}\frac{\partial net_{t-2}}{\partial W}<br>$$$$<br>=\nabla_{W_t}E+\nabla_{W_{t-2}}E+···+\nabla_{W_1}E<br>$$$$<br>=\sum_{k=1}^t{\nabla_{W_k}E}<br>$$</p>
-<p>与权重矩阵$W$类似，我们可以得到权重矩阵$U$的计算方法。$$<br>\nabla_{U_t}E=\left[\begin{matrix}<br>    \delta_{1}^{t}x_{1}^{t}&amp;        \delta_{1}^{t}x_{2}^{t}&amp;        ···&amp;        \delta_{1}^{t}x_{m}^{t}\\<br>    \delta_{2}^{t}x_{1}^{t}&amp;        \delta_{2}^{t}x_{2}^{t}&amp;        ···&amp;        \delta_{2}^{t}x_{m}^{t}\\<br>    ···&amp;        ···&amp;        ···&amp;        ···\\<br>    \delta_{n}^{t}x_{1}^{t}&amp;        \delta_{n}^{t}x_{2}^{t}&amp;        ···&amp;        \delta_{n}^{t}x_{m}^{t}\\<br>\end{matrix}\right]<br>$$它是误差函数在$t$时刻对权重矩阵$U$的梯度。和权重矩阵$W$一样，最终的梯度也是各个时刻的梯度之和：$$<br>\nabla_UE=\sum_{i=1}^t{\nabla_{U_i}E}<br>$$具体地证明与上述类似。</p>
+<p>我们从这个式子开始：<script type="math/tex">net_t=Ux_t+Wf(net_{t-1})</script>因为$Ux_t$与$W$完全无关，我们把它看做常量。现在，考虑第一个式子加号右边的部分，因为$W$和$f(net_{t-1})$都是$W$的函数，所以，对其求偏导得到：</p>
+<script type="math/tex; mode=display">
+\frac{\partial net_t}{\partial W}=\frac{\partial W}{\partial W}f\left(net_{t-1}\right)+W\frac{\partial f\left(net_{t-1}\right)}{\partial W}</script><p>我们最终需要计算的是</p>
+<script type="math/tex; mode=display">
+\nabla_WE=\frac{\partial E}{\partial W}=\frac{\partial E}{\partial net_t}\frac{\partial net_t}{\partial W}=\delta_{t}^{T}\frac{\partial W}{\partial W}f\left(net_{t-1}\right)+\delta_{t}^{T}W\frac{\partial f\left(net_{t-1}\right)}{\partial W}</script><p>我们先计算加号左边的部分。$\frac{\partial W}{\partial W}$是矩阵对矩阵求导，其结果是一个四维张量（tensor），如下所示：</p>
+<script type="math/tex; mode=display">
+\frac{\partial W}{\partial W}=\left[\begin{matrix}
+    \frac{\partial w_{11}}{\partial W}&        \frac{\partial w_{12}}{\partial W}&        ···&        \frac{\partial w_{1n}}{\partial W}\\
+    \frac{\partial w_{21}}{\partial W}&        \frac{\partial w_{22}}{\partial W}&        ···&        \frac{\partial w_{2n}}{\partial W}\\
+    ···&        ···&        ···&        ···\\
+    \frac{\partial w_{n1}}{\partial W}&        \frac{\partial w_{n2}}{\partial W}&        ···&        \frac{\partial w_{nn}}{\partial W}\\
+\end{matrix}\right]</script><script type="math/tex; mode=display">
+=\left[\begin{matrix}
+    \left[\begin{matrix}
+    \frac{\partial w_{11}}{\partial w_{11}}&        ···&        \frac{\partial w_{11}}{\partial w_{1n}}\\
+    ···&        ···&        ···\\
+    \frac{\partial w_{11}}{\partial w_{n1}}&        ···&        \frac{\partial w_{11}}{\partial w_{nn}}\\
+\end{matrix}\right]&        ···&        ···&        \left[\begin{matrix}
+    \frac{\partial w_{1n}}{\partial w_{11}}&        ···&        \frac{\partial w_{1n}}{\partial w_{1n}}\\
+    ···&        ···&        ···\\
+    \frac{\partial w_{1n}}{\partial w_{n1}}&        ···&        \frac{\partial w_{1n}}{\partial w_{nn}}\\
+\end{matrix}\right]\\
+    ···&        ···&        ···&        ···\\
+    ···&        ···&        ···&        ···\\
+    \left[\begin{matrix}
+    \frac{\partial w_{n1}}{\partial w_{11}}&        ···&        \frac{\partial w_{n1}}{\partial w_{1n}}\\
+    ···&        ···&        ···\\
+    \frac{\partial w_{n1}}{\partial w_{n1}}&        ···&        \frac{\partial w_{n1}}{\partial w_{nn}}\\
+\end{matrix}\right]&        ···&        ···&        \left[\begin{matrix}
+    \frac{\partial w_{nn}}{\partial w_{11}}&        ···&        \frac{\partial w_{nn}}{\partial w_{1n}}\\
+    ···&        ···&        ···\\
+    \frac{\partial w_{nn}}{\partial w_{n1}}&        ···&        \frac{\partial w_{nn}}{\partial w_{nn}}\\
+\end{matrix}\right]\\
+\end{matrix}\right]</script><script type="math/tex; mode=display">
+=\left[\begin{matrix}
+    \left[\begin{matrix}
+    1&        0&        ···&        0\\
+    0&        0&        ···&        0\\
+    ···&        ···&        ·&        ···\\
+    0&        0&        0&        0\\
+\end{matrix}\right]&        \left[\begin{matrix}
+    0&        1&        0&        0\\
+    0&        0&        ···&        0\\
+    ···&        ···&        ···&        0\\
+    0&        0&        ···&        0\\
+\end{matrix}\right]&        ···&        ···\\
+    ···&        ···&        ···&        ···\\
+    ···&        ···&        ···&        ···\\
+    ···&        ···&        ···&        ···\\
+\end{matrix}\right]</script><p>接下来，我们知道$s_{t-1=f(net_{t-1})}$，它是一个列向量。我们让上面的四维张量与这个向量相乘，得到了一个三维张量，再左乘行向量$\delta_t^T$，最终得到一个矩阵：</p>
+<script type="math/tex; mode=display">
+\delta_{t}^{T}\frac{\partial W}{\partial W}f\left(net_{t-1}\right)=\delta_{t}^{T}\left[\begin{matrix}
+    \left[\begin{matrix}
+    1&        0&        ···&        0\\
+    0&        0&        ···&        0\\
+    ···&        ···&        ·&        ···\\
+    0&        0&        0&        0\\
+\end{matrix}\right]&        \left[\begin{matrix}
+    0&        1&        0&        0\\
+    0&        0&        ···&        0\\
+    ···&        ···&        ···&        0\\
+    0&        0&        ···&        0\\
+\end{matrix}\right]&        ···&        ···\\
+    ···&        ···&        ···&        ···\\
+    ···&        ···&        ···&        ···\\
+    ···&        ···&        ···&        ···\\
+\end{matrix}\right]\left[\begin{array}{c}
+    s_{1}^{t-1}\\
+    s_{2}^{t-1}\\
+    ···\\
+    s_{n}^{t-1}\\
+\end{array}\right]</script><script type="math/tex; mode=display">
+=\left[\begin{matrix}
+    \delta_{1}^{t}&        \delta_{2}^{t}&        ···&        \delta_{n}^{t}\\
+\end{matrix}\right]\left[\begin{matrix}
+    \left[\begin{array}{c}
+    s_{1}^{t-1}\\
+    0\\
+    ···\\
+    0\\
+\end{array}\right]&        \left[\begin{array}{c}
+    s_{2}^{t-1}\\
+    0\\
+    ···\\
+    0\\
+\end{array}\right]&        ···&        ···\\
+    ···&        ···&        ···&        ···\\
+    ···&        ···&        ···&        ···\\
+    ···&        ···&        ···&        ···\\
+\end{matrix}\right]</script><script type="math/tex; mode=display">
+=\left[\begin{matrix}
+    \delta_{1}^{t}s_{1}^{t-1}&        \delta_{1}^{t}s_{2}^{t-1}&        ···&        \delta_{1}^{t}s_{n}^{t-1}\\
+    \delta_{2}^{t}s_{1}^{t-1}&        \delta_{2}^{t}s_{2}^{t-1}&        ···&        \delta_{2}^{t}s_{n}^{t-1}\\
+    ···&        ···&        ···&        ···\\
+    \delta_{n}^{t}s_{1}^{t-1}&        \delta_{n}^{t}s_{2}^{t-1}&        ···&        \delta_{n}^{t}s_{n}^{t-1}\\
+\end{matrix}\right]</script><script type="math/tex; mode=display">
+=\nabla_{W_t}E</script><p>接下来，我们计算加号右边的部分：</p>
+<script type="math/tex; mode=display">
+\delta_{t}^{T}W\frac{\partial f\left(net_{t-1}\right)}{\partial W}=\delta_{t}^{T}W\frac{\partial f\left(net_{t-1}\right)}{\partial net_{t-1}}\frac{\partial net_{t-1}}{\partial W}</script><script type="math/tex; mode=display">
+=\delta_{t}^{T}Wf'\left(net_{t-1}\right)\frac{\partial net_{t-1}}{\partial W}</script><script type="math/tex; mode=display">
+=\delta_{t}^{T}\frac{\partial net_t}{\partial net_{t-1}}\frac{\partial net_{t-1}}{\partial W}</script><script type="math/tex; mode=display">
+=\delta_{t-1}^{T}\frac{\partial net_{t-1}}{\partial W}</script><p>我们得到了如下递推公式：</p>
+<script type="math/tex; mode=display">
+\nabla_WE=\frac{\partial E}{\partial W}=\nabla_{W_t}E+\delta_{t-1}^{T}\frac{\partial net_{t-1}}{\partial W}</script><script type="math/tex; mode=display">
+=\nabla_{W_t}E+\nabla_{W_{t-1}}E+\delta_{t-2}^{T}\frac{\partial net_{t-2}}{\partial W}</script><script type="math/tex; mode=display">
+=\nabla_{W_t}E+\nabla_{W_{t-2}}E+···+\nabla_{W_1}E</script><script type="math/tex; mode=display">
+=\sum_{k=1}^t{\nabla_{W_k}E}</script><p>与权重矩阵$W$类似，我们可以得到权重矩阵$U$的计算方法。</p>
+<script type="math/tex; mode=display">
+\nabla_{U_t}E=\left[\begin{matrix}
+    \delta_{1}^{t}x_{1}^{t}&        \delta_{1}^{t}x_{2}^{t}&        ···&        \delta_{1}^{t}x_{m}^{t}\\
+    \delta_{2}^{t}x_{1}^{t}&        \delta_{2}^{t}x_{2}^{t}&        ···&        \delta_{2}^{t}x_{m}^{t}\\
+    ···&        ···&        ···&        ···\\
+    \delta_{n}^{t}x_{1}^{t}&        \delta_{n}^{t}x_{2}^{t}&        ···&        \delta_{n}^{t}x_{m}^{t}\\
+\end{matrix}\right]</script><p>它是误差函数在$t$时刻对权重矩阵$U$的梯度。和权重矩阵$W$一样，最终的梯度也是各个时刻的梯度之和：</p>
+<script type="math/tex; mode=display">
+\nabla_UE=\sum_{i=1}^t{\nabla_{U_i}E}</script><p>具体地证明与上述类似。</p>
 <h2 id="六、梯度爆炸与梯度消失"><a href="#六、梯度爆炸与梯度消失" class="headerlink" title="六、梯度爆炸与梯度消失"></a>六、梯度爆炸与梯度消失</h2><p>不幸的是，实践中前面介绍的集中RNNs并不能很好地处理较长的序列。一个主要的原因是，RNN在训练中很容易发生梯度爆炸和梯度消失，这导致训练时梯度不能再较长序列中一直传递下去，从而使RNN无法捕捉到长距离的影响。</p>
-<p>为什么RNN会产生梯度爆炸和梯度消失问题呢？我们根据下式来分析。之前推导过程中得到：$$<br>\delta_{k}^{T}=\delta_{t}^{T}\prod_{i=k}^{t-1}{Wdiag\left[f’\left(net_i\right)\right]}<br>$$$$<br>||\delta_{k}^{T}||\le ||\delta_{t}^{T}||\prod_{i=k}^{t-1}{||W||||diag\left[f’\left(net_i\right)\right]||}<br>$$$$<br>\le ||\delta_{t}^{T}||\left(\beta_W\beta_f\right)^{t-k}<br>$$上式的$\beta$定义为矩阵的模的上界。因为上式是一个指数函数，如果$t-k$很大的话（也就是向前看得很远的时候），会导致对应的误差项的值增长或缩小的非常快，这样就会导致相应的梯度爆炸和梯度消失问题（取决于$\beta$大于1还是小于1）。</p>
+<p>为什么RNN会产生梯度爆炸和梯度消失问题呢？我们根据下式来分析。之前推导过程中得到：</p>
+<script type="math/tex; mode=display">
+\delta_{k}^{T}=\delta_{t}^{T}\prod_{i=k}^{t-1}{Wdiag\left[f'\left(net_i\right)\right]}</script><script type="math/tex; mode=display">
+||\delta_{k}^{T}||\le ||\delta_{t}^{T}||\prod_{i=k}^{t-1}{||W||||diag\left[f'\left(net_i\right)\right]||}</script><script type="math/tex; mode=display">
+\le ||\delta_{t}^{T}||\left(\beta_W\beta_f\right)^{t-k}</script><p>上式的$\beta$定义为矩阵的模的上界。因为上式是一个指数函数，如果$t-k$很大的话（也就是向前看得很远的时候），会导致对应的误差项的值增长或缩小的非常快，这样就会导致相应的梯度爆炸和梯度消失问题（取决于$\beta$大于1还是小于1）。</p>
 <p>通常来说，梯度爆炸更容易处理一些。因为梯度爆炸时，我们的程序会收到NaN的错误。我们也可以设置一个梯度阈值，当梯度超过这个阈值的时候可以直接截取。</p>
 <p>梯度消失更难检测，而且也更难处理一些。总的来说，我们有三种方法应对梯度消失问题：</p>
 <ul>
@@ -499,8 +741,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/25/深度学习系列（5）：长短时记忆网络（LSTM）/" rel="next" title="深度学习系列（5）：长短时记忆网络（LSTM）">
-                <i class="fa fa-chevron-left"></i> 深度学习系列（5）：长短时记忆网络（LSTM）
+              <a href="/2017/04/21/深度学习系列（3）：卷积神经网络/" rel="next" title="深度学习系列（3）：卷积神经网络（CNN）">
+                <i class="fa fa-chevron-left"></i> 深度学习系列（3）：卷积神经网络（CNN）
               </a>
             
           </div>
@@ -509,8 +751,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/21/深度学习系列（3）：卷积神经网络/" rel="prev" title="深度学习系列（3）：卷积神经网络（CNN）">
-                深度学习系列（3）：卷积神经网络（CNN） <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/25/深度学习系列（5）：长短时记忆网络（LSTM）/" rel="prev" title="深度学习系列（5）：长短时记忆网络（LSTM）">
+                深度学习系列（5）：长短时记忆网络（LSTM） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -579,7 +821,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -587,7 +829,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -596,7 +838,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -908,9 +1150,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -922,13 +1187,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

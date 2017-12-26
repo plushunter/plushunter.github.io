@@ -93,8 +93,9 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/07/机器学习算法系列（23）：TF-IDF与余弦相似度/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="TF-IDF(term frequency=inverse document frequency)是一种用于资讯检索与文本挖掘的常用加权技术。TF-IDF是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。TF-IDF加权的各种形式常备搜索引擎应用，作为文件与用户查询之间相">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-07 上午9.19.11.png">
-<meta property="og:updated_time" content="2017-07-07T01:47:13.000Z">
+<meta property="og:updated_time" content="2017-12-26T08:03:44.936Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（23）：TF-IDF与余弦相似度">
 <meta name="twitter:description" content="TF-IDF(term frequency=inverse document frequency)是一种用于资讯检索与文本挖掘的常用加权技术。TF-IDF是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。TF-IDF加权的各种形式常备搜索引擎应用，作为文件与用户查询之间相">
@@ -404,19 +405,23 @@ var _hmt = _hmt || [];
 <p>所以，我们需要一个重要性调整系数，衡量一个词是不是常见词。如果某个词比较少见，但是它在这篇文章中多次出现，那么它很可能就反映了这篇文章的特性，正是我们所需要的关键词。这时就需要祭出逆文档频率(IDF)来解决词语权重的问题。</p>
 <h2 id="1-2-IDF"><a href="#1-2-IDF" class="headerlink" title="1.2 IDF"></a>1.2 IDF</h2><p>用统计学语言表达，就是在词频的基础上，要对每个词分配一个”重要性”权重。最常见的词（”的”、”是”、”在”）给予最小的权重，较常见的词（”中国”）给予较小的权重，较少见的词（”蜜蜂”、”养殖”）给予较大的权重。这个权重叫做”逆文档频率”（Inverse Document Frequency，缩写为IDF），它的大小与一个词的常见程度成反比。</p>
 <p>知道了”词频”（TF）和”逆文档频率”（IDF）以后，将这两个值相乘，就得到了一个词的TF-IDF值。某个词对文章的重要性越高，它的TF-IDF值就越大。所以，排在最前面的几个词，就是这篇文章的关键词。</p>
-<h2 id="1-3-公式化表达"><a href="#1-3-公式化表达" class="headerlink" title="1.3 公式化表达"></a>1.3 公式化表达</h2><p>对于在某一特定文件里的词语$t_i$来说，它的重要性可表示为：$$TF_{i,j}=\frac{n_{i,j}}{\sum_kn_{k,j}}$$以上式子中$n_{i,j}$是该词在文件$d_{j}$中的出现次数而分母则是在文件$d_j$中所有字词的出现次数之和。</p>
-<p>逆向文件频率（inverse document frequency，idf）是一个词语普遍重要性的度量。某一特定词语的idf，可以由总文件数目除以包含该词语之文件的数目，再将得到的商取对数得到：$$IDF_i=log\frac{|D|}{|{j:t_i\in d_j}|}$$其中</p>
+<h2 id="1-3-公式化表达"><a href="#1-3-公式化表达" class="headerlink" title="1.3 公式化表达"></a>1.3 公式化表达</h2><p>对于在某一特定文件里的词语$t_i$来说，它的重要性可表示为：</p>
+<script type="math/tex; mode=display">TF_{i,j}=\frac{n_{i,j}}{\sum_kn_{k,j}}</script><p>以上式子中$n_{i,j}$是该词在文件$d_{j}$中的出现次数而分母则是在文件$d_j$中所有字词的出现次数之和。</p>
+<p>逆向文件频率（inverse document frequency，idf）是一个词语普遍重要性的度量。某一特定词语的idf，可以由总文件数目除以包含该词语之文件的数目，再将得到的商取对数得到：</p>
+<script type="math/tex; mode=display">IDF_i=log\frac{|D|}{|{j:t_i\in d_j}|}</script><p>其中</p>
 <ul>
 <li>$|D|$：语料库中的文件总数</li>
 <li>$|{j:t_i\in d_j}|$：包含词语$t_i$的文件数目（即$n_{i,j}≠0的文件数目$）如果该词语不在语料库中，就会导致分母为零，因此一般情况下使用$1+|{j:t_i\in d_j}|$</li>
 </ul>
-<p>然后$$TF-IDF = TF_{i,j}\times IDF _i$$</p>
-<p>某一特定文件内的高词语频率，以及该词语在整个文件集合中的低文件频率，可以产生出高权重的tf-idf。因此，tf-idf倾向于过滤掉常见的词语，保留重要的词语。</p>
+<p>然后</p>
+<script type="math/tex; mode=display">TF-IDF = TF_{i,j}\times IDF _i</script><p>某一特定文件内的高词语频率，以及该词语在整个文件集合中的低文件频率，可以产生出高权重的tf-idf。因此，tf-idf倾向于过滤掉常见的词语，保留重要的词语。</p>
 <h2 id="1-4-应用"><a href="#1-4-应用" class="headerlink" title="1.4 应用"></a>1.4 应用</h2><p>我们通过Google搜索结果数为例，将含有中文“的”结果数15.8亿作为整个语料库大小，计算一些关键词和停用词的TF-IDF值。为了计算简便，假设全文分词后一共500词，则结果如下：<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-07 上午9.19.11.png" alt="屏幕快照 2017-07-07 上午9.19.11"></p>
 <p>TF-IDF的优点是计算简单，利于理解，性价比极高。但是它也有缺陷，首先单纯依据文章中的TF来衡量重要性，忽略了位置信息。如段首，句首一般权重更高；其次，有的文章可能关键词只出现1-2次，但可能通篇都是围绕其进行阐述和解释，所以单纯靠TF仍然不能解决所有的情况。</p>
 <h2 id="二、余弦相似度"><a href="#二、余弦相似度" class="headerlink" title="二、余弦相似度"></a>二、余弦相似度</h2><p>余弦相似性通过测量两个向量的夹角的余弦值来度量它们之间的相似性。0度角的余弦值是1，而其他任何角度的余弦值都不大于1；并且其最小值是-1。从而两个向量之间的角度的余弦值确定两个向量是否大致指向相同的方向。两个向量有相同的指向时，余弦相似度的值为1；两个向量夹角为90°时，余弦相似度的值为0；两个向量指向完全相反的方向时，余弦相似度的值为-1。这结果是与向量的长度无关的，仅仅与向量的指向方向相关。余弦相似度通常用于正空间，因此给出的值为0到1之间。</p>
 <p>注意这上下界对任何维度的向量空间中都适用，而且余弦相似性最常用于高维正空间。例如在信息检索中，每个词项被赋予不同的维度，而一个文档由一个向量表示，其各个维度上的值对应于该词项在文档中出现的频率。余弦相似度因此可以给出两篇文档在其主题方面的相似度。</p>
-<h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><p>两个向量间的余弦值可以通过使用欧几里得点积公式求出：$$a·b=|a|·|b| cos \theta$$给定两个属性向量$A$和$B$，其余相似性$\theta$由点积和向量长度给出，如下所示：$$similarity = cos(\theta)=\frac{A·B}{|A||B|}=\frac{\sum_{i=1}^nA_i\times B_i}{\sqrt{\sum_{i=1}^n(A_i)^2}\times \sqrt{\sum_{i=1}^n(B_i)^2}}$$这里的$A_i$和$B_i$分别代表向量$A$和$B$的各分量。</p>
+<h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><p>两个向量间的余弦值可以通过使用欧几里得点积公式求出：</p>
+<script type="math/tex; mode=display">a·b=|a|·|b|\ cos \theta</script><p>给定两个属性向量$A$和$B$，其余相似性$\theta$由点积和向量长度给出，如下所示：</p>
+<script type="math/tex; mode=display">similarity = cos(\theta)=\frac{A·B}{|A||B|}=\frac{\sum_{i=1}^nA_i\times B_i}{\sqrt{\sum_{i=1}^n(A_i)^2}\times \sqrt{\sum_{i=1}^n(B_i)^2}}</script><p>这里的$A_i$和$B_i$分别代表向量$A$和$B$的各分量。</p>
 <p>给出的相似性范围从-1到1：-1意味着两个向量指向的方向正好截然相反，1表示它们的指向是完全相同的，0通常表示它们之间是独立的，而在这之间的值则表示中间的相似性或相异性。</p>
 <p>对于文本匹配，属性向量A 和B 通常是文档中的词频向量。余弦相似性，可以被看作是在比较过程中把文件长度正规化的方法。</p>
 <p>在信息检索的情况下，由于一个词的频率（TF-IDF权）不能为负数，所以这两个文档的余弦相似性范围从0到1。并且，两个词的频率向量之间的角度不能大于90°。</p>
@@ -464,8 +469,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/08/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/" rel="next" title="机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法
+              <a href="/2017/07/03/机器学习算法系列（22）：主成分分析/" rel="next" title="机器学习算法系列（22）：主成分分析">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（22）：主成分分析
               </a>
             
           </div>
@@ -474,8 +479,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/05/机器学习算法系列（13）：推荐系统（3）——矩阵分解技术/" rel="prev" title="机器学习算法系列（13）：推荐系统（3）—矩阵分解技术">
-                机器学习算法系列（13）：推荐系统（3）—矩阵分解技术 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/08/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/" rel="prev" title="机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法">
+                机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -544,7 +549,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -552,7 +557,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -561,7 +566,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -873,9 +878,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -887,13 +915,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

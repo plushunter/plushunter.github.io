@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="特征工程,机器学习," />
+  <meta name="keywords" content="机器学习,特征工程," />
 
 
 
@@ -87,17 +87,18 @@
 
 
 <meta name="description" content="特征工程（Feature Engineering）经常被说为机器学习中的black art，这里面包含了很多不可言说的方面。怎么处理好特征，最重要的当然还是对要解决问题的了解。但是，它其实也有很多科学的地方。这篇文章我之所以命名为特征处理（Feature Processing），是因为这里面要介绍的东西只是特征工程中的一小部分。这部分比较基础，比较容易说，所以由此开始。">
-<meta name="keywords" content="特征工程,机器学习">
+<meta name="keywords" content="机器学习,特征工程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习算法系列（33）：特征处理（Feature Processing）">
 <meta property="og:url" content="http://yoursite.com/2017/08/31/机器学习算法系列（33）：特征处理（Feature Processing）/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="特征工程（Feature Engineering）经常被说为机器学习中的black art，这里面包含了很多不可言说的方面。怎么处理好特征，最重要的当然还是对要解决问题的了解。但是，它其实也有很多科学的地方。这篇文章我之所以命名为特征处理（Feature Processing），是因为这里面要介绍的东西只是特征工程中的一小部分。这部分比较基础，比较容易说，所以由此开始。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15041455130654.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15041459283636.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15041459715963.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15041460055828.png">
-<meta property="og:updated_time" content="2017-09-22T14:40:00.000Z">
+<meta property="og:updated_time" content="2017-12-26T08:04:24.376Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（33）：特征处理（Feature Processing）">
 <meta name="twitter:description" content="特征工程（Feature Engineering）经常被说为机器学习中的black art，这里面包含了很多不可言说的方面。怎么处理好特征，最重要的当然还是对要解决问题的了解。但是，它其实也有很多科学的地方。这篇文章我之所以命名为特征处理（Feature Processing），是因为这里面要介绍的东西只是特征工程中的一小部分。这部分比较基础，比较容易说，所以由此开始。">
@@ -409,6 +410,7 @@ var _hmt = _hmt || [];
 <p>本文中我主要介绍针对单个特征的处理方法，虽然也会附带介绍基础的特征组合方法。同时处理多个特征，以及更复杂的特征处理方法介绍，以后我再另外细说。下面我由浅入深地逐渐说明针对这三类特征的常用处理方法。</p>
 <h2 id="一、初级篇"><a href="#一、初级篇" class="headerlink" title="一、初级篇"></a>一、初级篇</h2><p>这节要讲的处理技术，应该刚接触机器学习不久的同学都会知道。</p>
 <h3 id="1-1-连续特征"><a href="#1-1-连续特征" class="headerlink" title="1.1 连续特征"></a>1.1 连续特征</h3><h3 id="1-2-无序特征"><a href="#1-2-无序特征" class="headerlink" title="1.2 无序特征"></a>1.2 无序特征</h3><p>可以使用One-hot（也叫One-of-k）的方法把每个无序特征转化为一个数值向量。比如一个无序特征color有三种取值：red，green，blue。那么可以用一个长度为3的向量来表示它，向量中的各个值分别对应于red，green，blue。如：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -432,9 +434,11 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <p>这种方法在NLP里用的很多，就是所谓的词向量模型。变换后的向量长度对于词典长度，每个词对应于向量中的一个元素。</p>
 <p>机器学习书籍里在讲这个的时候介绍的处理方法可能跟我上面说的有点差别。上面说的表达方式里有一个维度是可以省略的。</p>
 <p>既然我们知道color一定是取3个值中的一个，那么我们知道向量的前两个元素值，就能推断第3个值是多少。所以，其实用下面的方式就可以表达到底是哪种颜色：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -458,10 +462,12 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <p>这样表达的好处是少用了一个维度，降低了转化后特征之间的相关性。但在实际问题中特征基本都或多或少会有些缺失。使用第一种表达方式就可以用全0的向量来表示值缺失，而第二种表达方式是没法表达缺失的。</p>
 <h3 id="1-3-有序特征"><a href="#1-3-有序特征" class="headerlink" title="1.3 有序特征"></a>1.3 有序特征</h3><p>有些特征虽然也像无序特征那样只取限定的几个值，但是这些值之间有顺序的含义。例如一个人的状态status有三种取值：bad, normal, good，显然bad &lt; normal &lt; good。</p>
 <p>当然，对有序特征最简单的处理方式是忽略其中的顺序关系，把它看成无序的，这样我们就可以使用处理无序特征的方式来处理它。在实际问题中，这种处理方式其实用的很多。</p>
 <p>当然有些问题里有序可能会很重要，这时候就不应该把其中的顺序关系丢掉。一般的表达方式如下：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -485,16 +491,18 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <p>上面这种表达方式很巧妙地利用递进表达了值之间的顺序关系。</p>
 <h2 id="二、中级篇"><a href="#二、中级篇" class="headerlink" title="二、中级篇"></a>二、中级篇</h2><p>最容易让人掉以轻心的，往往就是大家觉得最简单的事。在特征处理中，最容易让刚入门同学忽略的，是对连续特征的处理方式。</p>
-<p>以线性分类器Linear Regression (LinearReg)为例，它是通过特征的线性加权来预测因变量y：<br>$$y=w^Tx$$</p>
-<p>但大部分实际情况下，yy与xx都不会是这么简单的线性关系，甚至连单调关系都不会有。举个只有一个特征的例子，如果yy与xx的实际关系如下图：</p>
+<p>以线性分类器Linear Regression (LinearReg)为例，它是通过特征的线性加权来预测因变量y：</p>
+<script type="math/tex; mode=display">y=w^Tx</script><p>但大部分实际情况下，yy与xx都不会是这么简单的线性关系，甚至连单调关系都不会有。举个只有一个特征的例子，如果yy与xx的实际关系如下图：</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/15041455130654.png" alt=""></p>
 <p>那么直接把xx扔进LinearReg模型是怎么也得不到好结果的。很多人会想着既然线性分类器搞不定，那就直接找个非线性的好了，比如高斯核的SVM。我们确实可以通过这种简单换算法的方式解决这个简单的问题。但对于很多实际问题（如广告点击率预测），往往特征非常多，这时候时间约束通常不允许我们使用很复杂的非线性分类器。这也是为什么算法发展这么多年，广告点击率预测最常用的方法还是Logistic Regression (LogisticReg)。</p>
 <p>对于上面这个问题，有没有什么办法使得LinearReg也能处理得不错？当然是有，就是对原始特征x做转化，把原来的非线性关系转化为线性关系。</p>
 <h3 id="2-1-方法一：离散化"><a href="#2-1-方法一：离散化" class="headerlink" title="2.1 方法一：离散化"></a>2.1 方法一：离散化</h3><p>最常用的转化方式是对xx做离散化(discretization)，也就是把原来的值分段，转化成一个取值为0或1的向量。原始值落在某个段里，向量中此段对应的元素就为1，否则为0。</p>
 <p>离散化的目标是y与转化后向量里的每个元素都保持比较好的线性关系。</p>
 <p>比如取离散点{0.5,1.5,2.5}，通过判断xx属于(−∞,0.5)，[0.5,1.5)，[1.5,2.5)，[2.5,+∞)中哪段来把它离散化为4维的向量。下面是一些例子的离散结果：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -521,6 +529,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <p>离散化方法的关键是怎么确定分段中的离散点。下面是常用的选取离散点的方法：</p>
 <blockquote>
 <p>等距离离散：</p>
@@ -540,6 +549,7 @@ var _hmt = _hmt || [];
 <p>上面介绍的这种离散化为0/1向量的方法有个问题，它在离散时不会考虑到具体的xx到离散边界的距离。比如等距离散中取离散点为{0.5,1.5,2.5}{0.5,1.5,2.5}，那么1.499，1.501和2.49分别会离散为(0, 1, 0, 0)，(0, 0, 1, 0)和(0, 0, 1, 0)。1.499和1.501很接近，可是就因为这种强制分段的离散导致它们离散的结果差距很大。</p>
 <p>针对上面这种硬离散的一种改进就是使用软离散，也就是在离散时考虑到xx与附近离散点的距离，离散出来的向量元素值可以是0/1之外的其他值。有兴趣的同学可以去ESL1这本书中找点感觉。</p>
 <h3 id="2-2-函数变换"><a href="#2-2-函数变换" class="headerlink" title="2.2 函数变换"></a>2.2 函数变换</h3><p>函数变换直接把原来的特征通过非线性函数做变换，然后把原来的特征，以及变换后的特征一起加入模型进行训练。常用的变换函数见下表，不过其实你可以尝试任何函数。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -562,9 +572,11 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <p>这个方法操作起来很简单，但记得对新加入的特征做归一化。</p>
 <p>对于我们前面的问题，只要把$x^2$，$x^3$也作为特征加入即可，因为实际上y就是x的一个三次多项式。</p>
 <h2 id="三、高级篇"><a href="#三、高级篇" class="headerlink" title="三、高级篇"></a>三、高级篇</h2><h3 id="3-1-笛卡尔乘积"><a href="#3-1-笛卡尔乘积" class="headerlink" title="3.1 笛卡尔乘积"></a>3.1 笛卡尔乘积</h3><p>我们可以使用笛卡尔乘积的方式来组合2个或更多个特征。比如有两个类别特征color和light，它们分别可以取值为red，green，blue和on, off。这两个特征各自可以离散化为3维和2维的向量。对它们做笛卡尔乘积转化，就可以组合出长度为6的特征，它们分别对应着原始值对(red, on)，(red, off)，(green, on)，(green, off)，(blue, on)，(blue, off)。下面的矩阵表达方式更清楚地说明了这种组合。</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -587,6 +599,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody>
 </table>
+</div>
 <p>对于3个特征的笛卡尔乘积组合，可以表达为立方的形式。更多特征的组合依次类推。这个方法也可以直接用于连续特征与类别特征之间的组合，只要把连续特征看成是1维的类别特征就好了，这时候组合后特征对应的值就不是0/1了，而是连续特征的取值。</p>
 <h3 id="3-2-离散化续篇"><a href="#3-2-离散化续篇" class="headerlink" title="3.2 离散化续篇"></a>3.2 离散化续篇</h3><p>在上节中我已经介绍了一些常用的离散化单个连续特征的方法，其中一个是画图观察趋势。画图观察趋势的好处是直观、可解释性强，坏处是很麻烦。当要离散化的特征很多时，这种方法可操作性较差。</p>
 <p>机器学习中有个很好解释，速度也不错的模型——决策树模型。大白话说决策树模型就是一大堆的if else。它天生就可以对连续特征分段，所以把它用于离散化连续特征合情合理。我称这种方法为决策树离散化方法。例如Gmail在对信件做重要性排序时就使用了决策树离散化方法</p>
@@ -594,7 +607,8 @@ var _hmt = _hmt || [];
 <p>单独用此特征和目标值yy训练一个决策树模型，然后把训练获得的模型内的特征分割点作为离散化的离散点。</p>
 <p>这种方法当然也可以同时离散化多个连续特征，但是操作起来就更复杂了，实际用的不多。</p>
 <h3 id="3-3-核方法"><a href="#3-3-核方法" class="headerlink" title="3.3 核方法"></a>3.3 核方法</h3><p>核方法经常作为线性模型的一种推广出现。以线性回归模型为例，它对应的核方法如下：</p>
-<p>$$f_\theta (x)=\sum_{i=1}^n\theta _iK(x,x_i)$$其中$\{x_i\}^n_{i=1}$为训练样本点，$K(x_i，x_j)$为核函数，比如常用的高斯核函数为：$$K(x_i，x_j)=exp(-\frac{||x_i-x_j||_2^2}{2h^2})$$如果我们把上面模型里的${K(x,x_i)}^n_{i=1}$看成特征，而$θ$看成模型参数的话，上面的模型仍旧是个线性模型。所以可以认为核方法只是特征函数变换的一种方式。</p>
+<script type="math/tex; mode=display">f_\theta (x)=\sum_{i=1}^n\theta _iK(x,x_i)</script><p>其中$\{x_i\}^n_{i=1}$为训练样本点，$K(x_i，x_j)$为核函数，比如常用的高斯核函数为：</p>
+<script type="math/tex; mode=display">K(x_i，x_j)=exp(-\frac{||x_i-x_j||_2^2}{2h^2})</script><p>如果我们把上面模型里的${K(x,x_i)}^n_{i=1}$看成特征，而$θ$看成模型参数的话，上面的模型仍旧是个线性模型。所以可以认为核方法只是特征函数变换的一种方式。</p>
 <p>当然，如果把核函数$K(x_i,x_j)$看成一种相似度的话，那上面的模型就是kNN模型了，或者叫做加权平均模型也可以。</p>
 <p>因为核方法在预测时也要用到训练样本点，耗内存且计算量大，所以在数据量较大的实际问题中用的并不多。</p>
 <p>到此，我已经介绍了不少针对单个特征的处理方法。这些处理方法很难说哪个好哪个不好。有些问题这个好，有些问题那个好，也没什么绝招能直接判断出哪种方法能适合哪些问题。唯一的招就是：Experiment a lot!</p>
@@ -625,9 +639,9 @@ var _hmt = _hmt || [];
       
         <div class="post-tags">
           
-            <a href="/tags/特征工程/" rel="tag"># 特征工程</a>
-          
             <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/特征工程/" rel="tag"># 特征工程</a>
           
         </div>
       
@@ -636,8 +650,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/02/机器学习算法系列（34）：使用Sklearn进行集成学习（理论）/" rel="next" title="机器学习算法系列（34）：使用Sklearn进行集成学习（理论）">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（34）：使用Sklearn进行集成学习（理论）
+              <a href="/2017/08/30/Java学习笔记（12）：单例模式/" rel="next" title="Java学习笔记（12）：单例模式">
+                <i class="fa fa-chevron-left"></i> Java学习笔记（12）：单例模式
               </a>
             
           </div>
@@ -646,8 +660,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/30/Java学习笔记（12）：单例模式/" rel="prev" title="Java学习笔记（12）：单例模式">
-                Java学习笔记（12）：单例模式 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/02/机器学习算法系列（34）：使用Sklearn进行集成学习（理论）/" rel="prev" title="机器学习算法系列（34）：使用Sklearn进行集成学习（理论）">
+                机器学习算法系列（34）：使用Sklearn进行集成学习（理论） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -716,7 +730,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -724,7 +738,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -733,7 +747,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -1045,9 +1059,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -1059,13 +1096,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

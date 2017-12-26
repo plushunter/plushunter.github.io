@@ -93,12 +93,13 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/14/深度学习系列（2）：神经网络MNIST实战/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="近似非常不错 一、数据集与任务介绍MNIST数据集是一个基本的手写字体识别数据集，该数据原本是包含60000个训练图像和10000个测试图像，但这里我们事先对数据进行了划分，从训练样本中抽取10000个数据作为验证集，所以处理后的数据集包含50000个训练样本（training data）、10000个验证样本（validation data）10000个测试样本（test data），都是28乘">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%882.37.37.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%882.53.21.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%883.04.36.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%883.05.16.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%883.13.10.png">
-<meta property="og:updated_time" content="2017-11-10T08:29:08.000Z">
+<meta property="og:updated_time" content="2017-12-26T10:42:43.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（2）：神经网络MNIST实战">
 <meta name="twitter:description" content="近似非常不错 一、数据集与任务介绍MNIST数据集是一个基本的手写字体识别数据集，该数据原本是包含60000个训练图像和10000个测试图像，但这里我们事先对数据进行了划分，从训练样本中抽取10000个数据作为验证集，所以处理后的数据集包含50000个训练样本（training data）、10000个验证样本（validation data）10000个测试样本（test data），都是28乘">
@@ -404,9 +405,9 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 <p>我们可以先将数据集从GitHub上Clone下来：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">➜  fig git:(master) ✗ git clone https://github.com/lisa-lab/DeepLearningTutorials</div></pre></td></tr></table></figure>
-<p>可以从这个<a href="http://www.deeplearning.net/tutorial/gettingstarted.html#gettingstarted" target="_blank" rel="external"><code>链接</code></a>了解对该数据集的加载和处理。</p>
+<p>可以从这个<a href="http://www.deeplearning.net/tutorial/gettingstarted.html#gettingstarted" target="_blank" rel="noopener"><code>链接</code></a>了解对该数据集的加载和处理。</p>
 <p>这里任务就是构建神经网络来实现对于MNIST数据集的手写字体识别分类。从任务和输入就能够得到大概的网络结构：</p>
-<p><div align="center"><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%882.37.37.png" alt="屏幕快照 2017-04-17 下午2.37.37"></div><br>损失函数为平方误差损失函数，激活函数为sigmoid函数。</p>
+<p><div align="center"><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-17%20%E4%B8%8B%E5%8D%882.37.37.png" alt="屏幕快照 2017-04-17 下午2.37.37"><br>损失函数为平方误差损失函数，激活函数为sigmoid函数。</div></p>
 <h2 id="二、读取数据"><a href="#二、读取数据" class="headerlink" title="二、读取数据"></a>二、读取数据</h2><p>读取数据由mnist_loader.py这个文件实现。<br>代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="string">"""</span></div><div class="line">mnist_loader</div><div class="line">~~~~~~~~~~~~</div><div class="line"></div><div class="line">A library to load the MNIST image data.  For details of the data</div><div class="line">structures that are returned, see the doc strings for ``load_data``</div><div class="line">and ``load_data_wrapper``.  In practice, ``load_data_wrapper`` is the</div><div class="line">function usually called by our neural network code.</div><div class="line">"""</div><div class="line"></div><div class="line"><span class="comment">#### Libraries</span></div><div class="line"><span class="comment"># Standard library</span></div><div class="line"><span class="keyword">import</span> cPickle</div><div class="line"><span class="keyword">import</span> gzip</div><div class="line"></div><div class="line"><span class="comment"># Third-party libraries</span></div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="comment">#从数据集中载入数据</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">()</span>:</span></div><div class="line">    f = gzip.open(<span class="string">'../data/mnist.pkl.gz'</span>, <span class="string">'rb'</span>)</div><div class="line">    training_data, validation_data, test_data = cPickle.load(f)</div><div class="line">    f.close()</div><div class="line">    <span class="keyword">return</span> (training_data, validation_data, test_data)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#改变数据集的格式</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data_wrapper</span><span class="params">()</span>:</span></div><div class="line">    tr_d, va_d, te_d = load_data()</div><div class="line">    <span class="comment">#训练集</span></div><div class="line">    training_inputs = [np.reshape(x, (<span class="number">784</span>, <span class="number">1</span>)) <span class="keyword">for</span> x <span class="keyword">in</span> tr_d[<span class="number">0</span>]]</div><div class="line">    training_results = [vectorized_result(y) <span class="keyword">for</span> y <span class="keyword">in</span> tr_d[<span class="number">1</span>]]</div><div class="line">    training_data = zip(training_inputs, training_results)</div><div class="line">    <span class="comment">#验证集</span></div><div class="line">    validation_inputs = [np.reshape(x, (<span class="number">784</span>, <span class="number">1</span>)) <span class="keyword">for</span> x <span class="keyword">in</span> va_d[<span class="number">0</span>]]</div><div class="line">    validation_data = zip(validation_inputs, va_d[<span class="number">1</span>])</div><div class="line">    <span class="comment">#测试集~~~~</span></div><div class="line">    test_inputs = [np.reshape(x, (<span class="number">784</span>, <span class="number">1</span>)) <span class="keyword">for</span> x <span class="keyword">in</span> te_d[<span class="number">0</span>]]</div><div class="line">    test_data = zip(test_inputs, te_d[<span class="number">1</span>])</div><div class="line"></div><div class="line">    <span class="keyword">return</span> (training_data, validation_data, test_data)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">vectorized_result</span><span class="params">(j)</span>:</span></div><div class="line">    <span class="string">"""Return a 10-dimensional unit vector with a 1.0 in the jth</span></div><div class="line">    position and zeroes elsewhere.  This is used to convert a digit</div><div class="line">    (0...9) into a corresponding desired output from the neural</div><div class="line">    network."""</div><div class="line"></div><div class="line">    e = np.zeros((<span class="number">10</span>, <span class="number">1</span>))</div><div class="line">    e[j] = <span class="number">1.0</span></div><div class="line">    <span class="keyword">return</span> e</div></pre></td></tr></table></figure>
 <h3 id="2-1-load-data函数"><a href="#2-1-load-data函数" class="headerlink" title="2.1 load_data函数"></a>2.1 load_data函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_data</span><span class="params">()</span>:</span></div><div class="line">    f = gzip.open(<span class="string">'../data/mnist.pkl.gz'</span>, <span class="string">'rb'</span>)</div><div class="line">    training_data, validation_data, test_data = cPickle.load(f)</div><div class="line">    f.close()</div><div class="line">    <span class="keyword">return</span> (training_data, validation_data, test_data)</div></pre></td></tr></table></figure>
@@ -457,8 +458,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/18/机器学习算法系列（17）：非平衡数据处理/" rel="next" title="机器学习算法系列（17）：非平衡数据处理">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（17）：非平衡数据处理
+              <a href="/2017/04/10/深度学习系列（1）：神经网络与反向传导算法/" rel="next" title="深度学习系列（1）：神经网络与反向传播算法">
+                <i class="fa fa-chevron-left"></i> 深度学习系列（1）：神经网络与反向传播算法
               </a>
             
           </div>
@@ -467,8 +468,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/04/10/深度学习系列（1）：神经网络与反向传导算法/" rel="prev" title="深度学习系列（1）：神经网络与反向传播算法">
-                深度学习系列（1）：神经网络与反向传播算法 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/18/机器学习算法系列（17）：非平衡数据处理/" rel="prev" title="机器学习算法系列（17）：非平衡数据处理">
+                机器学习算法系列（17）：非平衡数据处理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -537,7 +538,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -545,7 +546,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -554,7 +555,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -866,9 +867,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -880,13 +904,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

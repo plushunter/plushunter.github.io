@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/04/数据结构与算法题解（4）：二叉树题解/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="二叉树相关题解java实现。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午10.49.39.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午10.51.43.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-08-01 下午2.54.39.png">
@@ -533,8 +534,7 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">以下面这棵二叉树为例，最多能偷走3+3+1=7的财物    </div><div class="line">     3 </div><div class="line">    / \ </div><div class="line">   2   3 </div><div class="line">    \     \ </div><div class="line">     3     1</div></pre></td></tr></table></figure>
 <p>分析：<br>这个问题乍一看上去可能没什么思路，但是如果是用递归，可以很优雅的解决这个问题，这需要读者对递归有比较深刻的理解。下面给出解决这个问题的java代码： </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">import java.util.HashMap;</div><div class="line">import java.util.Map;</div><div class="line">import common.TreeNode;</div><div class="line"></div><div class="line">public class Solution &#123;</div><div class="line">	//使用一个cache 缓存以每个节点为根节点的rob方法返回值，减少计算量</div><div class="line">    Map&lt;TreeNode, Integer&gt; cache = new HashMap&lt;TreeNode, Integer&gt;();</div><div class="line">    public int rob(TreeNode root) &#123;</div><div class="line">    	//如果当前节点为空 直接返回0</div><div class="line">        if(null == root)&#123;</div><div class="line">            return 0;</div><div class="line">        &#125;</div><div class="line">        //首先查看缓存中有没有这个节点的rob方法返回值</div><div class="line">        if(null != cache.get(root))&#123;</div><div class="line">            return cache.get(root);</div><div class="line">        &#125;</div><div class="line">        //计算当前节点左孩子的rob方法返回值</div><div class="line">        int maxLeft = rob(root.left);</div><div class="line">        //计算当前节点右孩子的rob方法返回值</div><div class="line">        int maxRight = rob(root.right);</div><div class="line">        int maxLeftLeft = 0;</div><div class="line">        int maxLeftRight = 0;</div><div class="line">        //如果当前节点有左孩子</div><div class="line">        if(null != root.left)&#123;</div><div class="line">        	//计算其左孩子的左孩子的rob值</div><div class="line">            maxLeftLeft = rob(root.left.left);</div><div class="line">            //计算其左孩子的右孩子的rob值</div><div class="line">            maxLeftRight = rob(root.left.right);</div><div class="line">        &#125;</div><div class="line">        int maxRightLeft = 0;</div><div class="line">        int maxRightRight = 0;</div><div class="line">        //如果当前节点有右孩子</div><div class="line">        if(null != root.right)&#123;</div><div class="line">        	//计算其右孩子的左孩子的rob值</div><div class="line">            maxRightLeft = rob(root.right.left);</div><div class="line">            //计算其右孩子的右孩子的rob值</div><div class="line">            maxRightRight = rob(root.right.right);</div><div class="line">        &#125;</div><div class="line">        //不偷当前节点能偷到的财物的最大值</div><div class="line">        int notIncludeCurrentNodeMax = maxLeft + maxRight;</div><div class="line">        //偷当前节点能偷到的财物的最大值</div><div class="line">        int includeCurrentNodeMax = maxLeftLeft + maxLeftRight + maxRightLeft + maxRightRight + root.val;</div><div class="line">        //以其中的较大值作为当前节点的rob方法返回值</div><div class="line">        int res = notIncludeCurrentNodeMax &gt; includeCurrentNodeMax ? notIncludeCurrentNodeMax : includeCurrentNodeMax;</div><div class="line">        //缓存当前节点的rob方法返回值</div><div class="line">        cache.put(root, res);</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="面经中出现过的二叉树题："><a href="#面经中出现过的二叉树题：" class="headerlink" title="面经中出现过的二叉树题："></a>面经中出现过的二叉树题：</h2><p>###已整理</p>
-<ul>
+<h2 id="面经中出现过的二叉树题："><a href="#面经中出现过的二叉树题：" class="headerlink" title="面经中出现过的二叉树题："></a>面经中出现过的二叉树题：</h2><h3 id="已整理"><a href="#已整理" class="headerlink" title="已整理"></a>已整理</h3><ul>
 <li>一、给定二叉树的先序跟后序遍历，能不能将二叉树重建（不能，因为先序：父节点-左节点-右节点，后序：左节点-右节点-父节点，两者的拓扑序列是一样的，所以无法建立），如果给出一个二叉搜索树的后续能不能建立（可以，因为只要将遍历结果排序就可以得到中序结果）。</li>
 <li>二、判断一棵树是否是另一棵的子树。</li>
 <li>三、 翻转二叉树 </li>
@@ -584,8 +584,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/05/数据结构与算法题解（5）：剑指offer解题报告/" rel="next" title="数据结构与算法题解（5）：剑指offer解题报告">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（5）：剑指offer解题报告
+              <a href="/2017/08/04/数据结构与算法题解（3）：字符串题解/" rel="next" title="数据结构与算法题解（3）：字符串题解">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（3）：字符串题解
               </a>
             
           </div>
@@ -594,8 +594,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/04/数据结构与算法题解（3）：字符串题解/" rel="prev" title="数据结构与算法题解（3）：字符串题解">
-                数据结构与算法题解（3）：字符串题解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/05/数据结构与算法题解（5）：剑指offer解题报告/" rel="prev" title="数据结构与算法题解（5）：剑指offer解题报告">
+                数据结构与算法题解（5）：剑指offer解题报告 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -664,7 +664,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -672,7 +672,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -681,7 +681,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -723,7 +723,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、重建二叉树（剑6）"><span class="nav-text">一、重建二叉树（剑6）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、二叉树的镜像（剑19）"><span class="nav-text">三、二叉树的镜像（剑19）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、从上往下打印二叉树（剑23）"><span class="nav-text">四、从上往下打印二叉树（剑23）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、二叉搜索树的后序遍历序列（剑24）"><span class="nav-text">五、二叉搜索树的后序遍历序列（剑24）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、二叉树中和为某一值的路径（剑25）"><span class="nav-text">六、二叉树中和为某一值的路径（剑25）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、二叉搜索树与双向链表（剑27）"><span class="nav-text">七、二叉搜索树与双向链表（剑27）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、二叉树的深度（剑39-1）"><span class="nav-text">八、二叉树的深度（剑39.1）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、平衡二叉树（剑39-2）"><span class="nav-text">九、平衡二叉树（剑39.2）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十、二叉搜索树的最低公共祖先（剑50-1）"><span class="nav-text">十、二叉搜索树的最低公共祖先（剑50.1）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十一、普通二叉树的最低公共祖先（剑50-2）"><span class="nav-text">十一、普通二叉树的最低公共祖先（剑50.2）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二、二叉树的下一个结点（剑58）"><span class="nav-text">十二、二叉树的下一个结点（剑58）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三、对称的二叉树（剑59）"><span class="nav-text">十三、对称的二叉树（剑59）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十四、把二叉树打印成多行（剑60）"><span class="nav-text">十四、把二叉树打印成多行（剑60）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十五、按S型打印二叉树（剑61）"><span class="nav-text">十五、按S型打印二叉树（剑61）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十六、序列化与反序列化二叉树（剑62）"><span class="nav-text">十六、序列化与反序列化二叉树（剑62）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十七、二叉搜索树的第K个结点（剑63）"><span class="nav-text">十七、二叉搜索树的第K个结点（剑63）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十八、数据流中的中位数（剑64）"><span class="nav-text">十八、数据流中的中位数（剑64）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十九、-二叉树最大路径和（leetcode-124）"><span class="nav-text">十九、 二叉树最大路径和（leetcode 124）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面经中出现过的二叉树题："><span class="nav-text">面经中出现过的二叉树题：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#未整理"><span class="nav-text">未整理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、重建二叉树（剑6）"><span class="nav-text">一、重建二叉树（剑6）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、二叉树的镜像（剑19）"><span class="nav-text">三、二叉树的镜像（剑19）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、从上往下打印二叉树（剑23）"><span class="nav-text">四、从上往下打印二叉树（剑23）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、二叉搜索树的后序遍历序列（剑24）"><span class="nav-text">五、二叉搜索树的后序遍历序列（剑24）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、二叉树中和为某一值的路径（剑25）"><span class="nav-text">六、二叉树中和为某一值的路径（剑25）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、二叉搜索树与双向链表（剑27）"><span class="nav-text">七、二叉搜索树与双向链表（剑27）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、二叉树的深度（剑39-1）"><span class="nav-text">八、二叉树的深度（剑39.1）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、平衡二叉树（剑39-2）"><span class="nav-text">九、平衡二叉树（剑39.2）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十、二叉搜索树的最低公共祖先（剑50-1）"><span class="nav-text">十、二叉搜索树的最低公共祖先（剑50.1）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十一、普通二叉树的最低公共祖先（剑50-2）"><span class="nav-text">十一、普通二叉树的最低公共祖先（剑50.2）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十二、二叉树的下一个结点（剑58）"><span class="nav-text">十二、二叉树的下一个结点（剑58）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十三、对称的二叉树（剑59）"><span class="nav-text">十三、对称的二叉树（剑59）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十四、把二叉树打印成多行（剑60）"><span class="nav-text">十四、把二叉树打印成多行（剑60）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十五、按S型打印二叉树（剑61）"><span class="nav-text">十五、按S型打印二叉树（剑61）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十六、序列化与反序列化二叉树（剑62）"><span class="nav-text">十六、序列化与反序列化二叉树（剑62）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十七、二叉搜索树的第K个结点（剑63）"><span class="nav-text">十七、二叉搜索树的第K个结点（剑63）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十八、数据流中的中位数（剑64）"><span class="nav-text">十八、数据流中的中位数（剑64）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#十九、-二叉树最大路径和（leetcode-124）"><span class="nav-text">十九、 二叉树最大路径和（leetcode 124）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面经中出现过的二叉树题："><span class="nav-text">面经中出现过的二叉树题：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#已整理"><span class="nav-text">已整理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#未整理"><span class="nav-text">未整理</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -993,9 +993,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -1007,13 +1030,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

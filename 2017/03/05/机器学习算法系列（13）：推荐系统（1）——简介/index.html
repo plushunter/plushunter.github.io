@@ -93,11 +93,12 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/05/机器学习算法系列（13）：推荐系统（1）——简介/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、定义1.1 从搜索引擎说起人们在寻找信息时，常常需要借助搜索引擎，主动地提供准确的关键词来进行相应的搜索，但是当用户无法找到准确描述自己需求的关键字时，搜索引擎就无能为力了。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.03.04.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.08.39.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.08.51.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-27%20%E4%B8%8B%E5%8D%883.10.28.png">
-<meta property="og:updated_time" content="2017-09-25T10:42:31.000Z">
+<meta property="og:updated_time" content="2017-12-26T08:02:50.994Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（13）：推荐系统（1）—简介">
 <meta name="twitter:description" content="一、定义1.1 从搜索引擎说起人们在寻找信息时，常常需要借助搜索引擎，主动地提供准确的关键词来进行相应的搜索，但是当用户无法找到准确描述自己需求的关键字时，搜索引擎就无能为力了。">
@@ -420,22 +421,29 @@ var _hmt = _hmt || [];
 </ul>
 <h3 id="2-2-离线评测指标"><a href="#2-2-离线评测指标" class="headerlink" title="2.2 离线评测指标"></a>2.2 离线评测指标</h3><p>令$R(u)$是根据用户在训练集上的行为给用户作出的推荐列表，而$T(u)$是用户在测试集上的行为列表。</p>
 <ul>
-<li>准确率（Precison）:$$<br>Precision=\frac{\sum_{u\in U}{|R\left(u\right)\cap T\left(u\right)|}}{\sum_{u\in U}{|R\left(u\right)|}}<br>$$</li>
-<li>召回率（Recall）：$$<br>\textrm{Re}call=\frac{\sum_{u\in U}{|R\left(u\right)\cap T\left(u\right)|}}{\sum_{u\in U}{|T\left(u\right)|}}<br>$$</li>
+<li>准确率（Precison）:<script type="math/tex; mode=display">
+Precision=\frac{\sum_{u\in U}{|R\left(u\right)\cap T\left(u\right)|}}{\sum_{u\in U}{|R\left(u\right)|}}</script></li>
+<li>召回率（Recall）：<script type="math/tex; mode=display">
+\textrm{Re}call=\frac{\sum_{u\in U}{|R\left(u\right)\cap T\left(u\right)|}}{\sum_{u\in U}{|T\left(u\right)|}}</script></li>
 <li><p>覆盖率(Coverage)，描述了一个推荐系统对物品长尾的发掘能力，</p>
 <ul>
 <li><p>最简单的定义为推荐系统能够推荐出来的物品占总物品集合的比例</p>
 </li>
-<li><p>信息熵 ：$$<br>H=-\sum_{i=1}^n{p\left(i\right)\log p\left(i\right)}<br>$$</p>
-</li>
-<li>基尼系数：$$<br>Gini=\sum_{i=1}^n{p_i\left(1-p_i\right)}<br>$$</li>
+<li><p>信息熵 :</p>
+<script type="math/tex; mode=display">
+H=-\sum_{i=1}^n{p\left(i\right)\log p\left(i\right)}</script></li>
+<li>基尼系数：<script type="math/tex; mode=display">
+Gini=\sum_{i=1}^n{p_i\left(1-p_i\right)}</script></li>
 <li>马太效应：即强者更强，弱者更弱。若一个系统会增大热门物品和非热门物品的流行度差异，让热门的物品更加热门，不认的物品更加不热门，那么这个系统就有马太效应。推荐系统的初衷是希望消除马太效应，使得各种物品都能被展示给它们感兴趣的某一类人群。但是现在主流的推荐算法都具有马太效应。可以使用基尼系数来评测推荐系统是否具有马太效应。如果G1是从初始用户行为中计算出的物品流行度的基尼系数，G2是从推荐列表中计算出的物品流行度的基尼系数，那么如果G2&gt;G1，就说明推荐系统具有马太效应。</li>
 </ul>
 </li>
 <li><p>多样性：如果推荐列表比较多样，覆盖了用户绝大多数的兴趣点，那么就会增加用户找到感兴趣物品的概率。因此给用户的推荐列表也需要满足用户广泛的兴趣，即多样性。</p>
 <ul>
-<li>多样性描述了推荐列表物品两两之间的不相似性。假设$s(i,j)\in[0,1]$定义了物品$i$和$j$之间的相似度，那么用户$u$的推荐列表$R(u)$的多样性定义如下：$$<br>Diversity\left(R\left(u\right)\right)=1-\frac{\sum_{i,j\in R\left(u\right),i\ne j}{s\left(i,j\right)}}{\frac{1}{2}|R\left(u\right)|\left(|R\left(u\right)-1|\right)}<br>$$ </li>
-<li>而推荐系统整体的多样性可以定义为所有用户推荐列表多样性的平均值：$$<br>Diversity=\frac{1}{|U|}\sum_{u\in U}{Diversity\left(R\left(u\right)\right)}<br>$$</li>
+<li>多样性描述了推荐列表物品两两之间的不相似性。假设$s(i,j)\in[0,1]$定义了物品$i$和$j$之间的相似度，那么用户$u$的推荐列表$R(u)$的多样性定义如下：</li>
+<li><script type="math/tex; mode=display">
+Diversity\left(R\left(u\right)\right)=1-\frac{\sum_{i,j\in R\left(u\right),i\ne j}{s\left(i,j\right)}}{\frac{1}{2}|R\left(u\right)|\left(|R\left(u\right)-1|\right)}</script></li>
+<li>而推荐系统整体的多样性可以定义为所有用户推荐列表多样性的平均值：<script type="math/tex; mode=display">
+Diversity=\frac{1}{|U|}\sum_{u\in U}{Diversity\left(R\left(u\right)\right)}</script></li>
 </ul>
 </li>
 <li><p>新颖性：给用户推荐那些它们以前没有听说过的物品。最简单方法是利用推荐结果的平均流行度，因为越不热门的物品越可能让用户觉得新颖。但是这个指标比较粗略，因为不同用户不知道的东西是不同的。需要用户调查来准确统计新颖性。</p>
@@ -476,8 +484,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/05/机器学习算法系列（13）：推荐系统（2）——基于领域的协同过滤/" rel="next" title="机器学习算法系列（13）：推荐系统（2）—基于领域的协同过滤">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（13）：推荐系统（2）—基于领域的协同过滤
+              <a href="/2017/03/04/机器学习算法系列（12）：SVM（6）——SVM与LR的异同/" rel="next" title="机器学习算法系列（12）：SVM（6）—SVM与LR的异同">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（12）：SVM（6）—SVM与LR的异同
               </a>
             
           </div>
@@ -486,8 +494,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/02/27/机器学习算法系列（12）：SVM（4）——SMO/" rel="prev" title="机器学习算法系列（12）：SVM（4）—SMO">
-                机器学习算法系列（12）：SVM（4）—SMO <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/06/机器学习算法系列（13）：推荐系统（2）——基于领域的协同过滤/" rel="prev" title="机器学习算法系列（13）：推荐系统（2）—基于领域的协同过滤">
+                机器学习算法系列（13）：推荐系统（2）—基于领域的协同过滤 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -556,7 +564,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -564,7 +572,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -573,7 +581,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -885,9 +893,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -899,13 +930,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

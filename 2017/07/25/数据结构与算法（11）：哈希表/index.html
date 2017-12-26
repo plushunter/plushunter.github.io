@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/25/数据结构与算法（11）：哈希表/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、哈希表的基本概念哈希表（Hash Table）是一种特殊的数据结构，它最大的特点就是可以快速实现查找、插入和删除。因为它独有的特点，Hash表经常被用来解决大数据问题，也因此被广大的程序员所青睐。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005228099157.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005228566431.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005228676672.png">
@@ -506,8 +507,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/26/数据结构与算法（12）：排序/" rel="next" title="数据结构与算法（12）：排序">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法（12）：排序
+              <a href="/2017/07/24/数据结构与算法（10）：查找/" rel="next" title="数据结构与算法（10）：查找">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（10）：查找
               </a>
             
           </div>
@@ -516,8 +517,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/24/数据结构与算法（10）：查找/" rel="prev" title="数据结构与算法（10）：查找">
-                数据结构与算法（10）：查找 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/26/数据结构与算法（12）：排序/" rel="prev" title="数据结构与算法（12）：排序">
+                数据结构与算法（12）：排序 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -586,7 +587,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -594,7 +595,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -603,7 +604,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -915,9 +916,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -929,13 +953,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

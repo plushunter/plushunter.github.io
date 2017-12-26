@@ -93,9 +93,10 @@
 <meta property="og:url" content="http://yoursite.com/2017/01/16/机器学习算法系列（5）：随机森林/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、基本原理顾名思义，是用随机的方式建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。在得到森林之后，当有一个新的输入样本进入的时候，就让森林中的每一棵决策树分别进行一下判断，看看这个样本应该属于哪一类（对于分类算法），然后看看哪一类被选择最多，就预测这个样本为那一类。 我们可以这样比喻随机森林算法：每一棵决策树就是一个精通于某一个窄领域的专家（因为我们从M个特征中">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/f69ecd5658ba9557cf97e45f18d19cfd.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-08%20%E4%B8%8B%E5%8D%882.31.19.png">
-<meta property="og:updated_time" content="2017-07-24T13:50:08.000Z">
+<meta property="og:updated_time" content="2017-12-26T08:47:49.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（5）：随机森林">
 <meta name="twitter:description" content="一、基本原理顾名思义，是用随机的方式建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。在得到森林之后，当有一个新的输入样本进入的时候，就让森林中的每一棵决策树分别进行一下判断，看看这个样本应该属于哪一类（对于分类算法），然后看看哪一类被选择最多，就预测这个样本为那一类。 我们可以这样比喻随机森林算法：每一棵决策树就是一个精通于某一个窄领域的专家（因为我们从M个特征中">
@@ -399,9 +400,7 @@ var _hmt = _hmt || [];
         <h2 id="一、基本原理"><a href="#一、基本原理" class="headerlink" title="一、基本原理"></a>一、基本原理</h2><p>顾名思义，是用随机的方式建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。在得到森林之后，当有一个新的输入样本进入的时候，就让森林中的每一棵决策树分别进行一下判断，看看这个样本应该属于哪一类（对于分类算法），然后看看哪一类被选择最多，就预测这个样本为那一类。</p>
 <p>我们可以这样比喻随机森林算法：每一棵决策树就是一个精通于某一个窄领域的专家（因为我们从M个特征中选择m个让每一棵决策树进行学习），这样在随机森林中就有了很多个精通不同领域的专家，对一个新的问题（新的输入数据），可以用不同的角度去看待它，最终由各个专家，投票得到结果。</p>
 <a id="more"></a>
-<p>下图为随机森林算法的示意图：</p>
-<center><img src="http://omu7tit09.bkt.clouddn.com/f69ecd5658ba9557cf97e45f18d19cfd.png" alt=""></center>
-
+<p>下图为随机森林算法的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/f69ecd5658ba9557cf97e45f18d19cfd.png" alt=""></p>
 <p>随机森林算法有很多优点：</p>
 <ul>
 <li>在数据集上表现良好，两个随机性的引入，使得随机森林不容易陷入过拟合</li>
@@ -451,10 +450,7 @@ var _hmt = _hmt || [];
 <li>1）做100次bootstrap，每次得到的数据Di，Di的长度为N</li>
 <li>2）对于每一个Di，使用局部回归(LOESS)拟合一条曲线(图 中灰色线是其中的10条曲线)</li>
 <li>3）将这些曲线取平均，即得到红色的最终拟合曲线</li>
-<li>4）显然，红色的曲线更加稳定，并且没有过拟合明显减弱<center> <img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-08%20%E4%B8%8B%E5%8D%882.31.19.png" alt="屏幕快照 2017-03-08 下午2.31.19"></center>
-
-
-</li>
+<li>4）显然，红色的曲线更加稳定，并且没有过拟合明显减弱<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-08%20%E4%B8%8B%E5%8D%882.31.19.png" alt="屏幕快照 2017-03-08 下午2.31.19"></li>
 </ul>
 
       
@@ -490,8 +486,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/18/机器学习算法系列（6）：AdaBoost/" rel="next" title="机器学习算法系列（6）：AdaBoost">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（6）：AdaBoost
+              <a href="/2017/01/15/机器学习算法系列（4）：决策树/" rel="next" title="机器学习算法系列（4）：决策树">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（4）：决策树
               </a>
             
           </div>
@@ -500,8 +496,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/01/15/机器学习算法系列（4）：决策树/" rel="prev" title="机器学习算法系列（4）：决策树">
-                机器学习算法系列（4）：决策树 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/01/18/机器学习算法系列（6）：AdaBoost/" rel="prev" title="机器学习算法系列（6）：AdaBoost">
+                机器学习算法系列（6）：AdaBoost <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -570,7 +566,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -578,7 +574,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -587,7 +583,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -899,9 +895,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -913,13 +932,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

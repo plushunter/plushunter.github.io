@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/03/数据结构与算法题解（2）：数组题解/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="数组相关题解java实现。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午12.21.28.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 上午10.58.44.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-28 下午6.04.43.png">
@@ -639,7 +640,7 @@ var _hmt = _hmt || [];
 <p>java</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">boolean</span>[] visited=<span class="keyword">new</span> <span class="keyword">boolean</span>[rows*cols];</div><div class="line">        <span class="keyword">return</span> movingCountCore(threshold, rows, cols, <span class="number">0</span>,<span class="number">0</span>,visited);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">movingCountCore</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols,</span></span></div><div class="line">            <span class="keyword">int</span> row,<span class="keyword">int</span> col,<span class="keyword">boolean</span>[] visited) &#123;</div><div class="line">        <span class="keyword">if</span>(row&lt;<span class="number">0</span>||row&gt;=rows||col&lt;<span class="number">0</span>||col&gt;=cols) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> i=row*cols+col;</div><div class="line">        <span class="keyword">if</span>(visited[i]||!checkSum(threshold,row,col)) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        visited[i]=<span class="keyword">true</span>;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>+movingCountCore(threshold, rows, cols,row,col+<span class="number">1</span>,visited)</div><div class="line">                +movingCountCore(threshold, rows, cols,row,col-<span class="number">1</span>,visited)</div><div class="line">                +movingCountCore(threshold, rows, cols,row+<span class="number">1</span>,col,visited)</div><div class="line">                +movingCountCore(threshold, rows, cols,row-<span class="number">1</span>,col,visited);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">checkSum</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> row, <span class="keyword">int</span> col)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> sum=<span class="number">0</span>;</div><div class="line">        <span class="keyword">while</span>(row!=<span class="number">0</span>)&#123;</div><div class="line">            sum+=row%<span class="number">10</span>;</div><div class="line">            row=row/<span class="number">10</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">while</span>(col!=<span class="number">0</span>)&#123;</div><div class="line">            sum+=col%<span class="number">10</span>;</div><div class="line">            col=col/<span class="number">10</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(sum&gt;threshold) <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="二十六、寻找某个值的区间（leetcode-34-Search-for-a-Range）"><a href="#二十六、寻找某个值的区间（leetcode-34-Search-for-a-Range）" class="headerlink" title="二十六、寻找某个值的区间（leetcode 34 Search for a Range）"></a>二十六、寻找某个值的区间（leetcode 34 Search for a Range）</h2><p>主要考查二分查找，如果读者对二分查找不是很熟悉，这里推荐一篇博客：<a href="http://blog.csdn.net/int64ago/article/details/7425727/" target="_blank" rel="external">你真的会二分查找吗？</a>上面讲得非常详细。</p>
+<h2 id="二十六、寻找某个值的区间（leetcode-34-Search-for-a-Range）"><a href="#二十六、寻找某个值的区间（leetcode-34-Search-for-a-Range）" class="headerlink" title="二十六、寻找某个值的区间（leetcode 34 Search for a Range）"></a>二十六、寻找某个值的区间（leetcode 34 Search for a Range）</h2><p>主要考查二分查找，如果读者对二分查找不是很熟悉，这里推荐一篇博客：<a href="http://blog.csdn.net/int64ago/article/details/7425727/" target="_blank" rel="noopener">你真的会二分查找吗？</a>上面讲得非常详细。</p>
 <p>这题要求在一个排好序可能有重复元素的数组里面找到包含某个值的区间范围。要求使用O(log n)的时间，所以我们采用两次二分查找。</p>
 <p>主要实现两个方法：</p>
 <ul>
@@ -686,13 +687,13 @@ var _hmt = _hmt || [];
 </ul>
 <h3 id="未整理"><a href="#未整理" class="headerlink" title="未整理"></a>未整理</h3><p>数组中后面的数减前面的数的差的最大值，要求时间、空间复杂度尽可能底<br>多个有序数组的归并<br>多个有序数组求交集<br>两个有序数组求差集<br>两个数组，求差集<br>两个集合如何求并集，交集；</p>
 <ul>
-<li>leetcode 89 Gray Code<br>leetcode 42 trapping rain water <a href="http://www.cnblogs.com/fuzhe1989/p/3428553.html" target="_blank" rel="external">墙里能装多少水</a></li>
+<li>leetcode 89 Gray Code<br>leetcode 42 trapping rain water <a href="http://www.cnblogs.com/fuzhe1989/p/3428553.html" target="_blank" rel="noopener">墙里能装多少水</a></li>
 </ul>
 <p>有一个数组，让找到两个不重复的连续子序列A,B ，求Max(Sum(A)-Sum(B)。 3分钟解出，10分钟写完代码</p>
 <p>LeetCode原题： 有一个集合A包含了一些数，输入N，求元素个数最小的集合B，使得A并B后内的数组合相加能够组成1到N中的所有数</p>
 <p>给定一个数组，长度已知为N（中等），求中位数，要求时间复杂度尽可能小：快排+丢弃长度小于N/2的部分</p>
 <p>给定数组，要求以最小的时间复杂度求得最大最小值：维护一个小数组，只存放两个数，预定义为min和max，后将剩余N-2个数和它们依次比较，大于max的覆盖max，小于min的覆盖min，其余情形的不更新数组。时间复杂度o(n)。</p>
-<p>然后考了个数据结构，给个数组如何建堆<a href="http://xfhnever.com/categories/算法与数据结构/page/2/" target="_blank" rel="external">http://xfhnever.com/categories/算法与数据结构/page/2/</a></p>
+<p>然后考了个数据结构，给个数组如何建堆<a href="http://xfhnever.com/categories/算法与数据结构/page/2/" target="_blank" rel="noopener">http://xfhnever.com/categories/算法与数据结构/page/2/</a></p>
 <p>一维数组，swap 其中的几对数字（每个数字只属于一次 swap 操作），实现查找（与二分有关）；<br>一个有序数组，其中一个数字发生变异，但不知道变异后会不会影响整体序，如何实现查找；<br>任意交换其中的两数，发现并恢复；</p>
 <p>给定数组，寻找 next big（堆排序有关）；</p>
 <p>数组可能是递增、递减、递减后递增、递增后递减四种情况，递增递减都是非严格的，如果有转折点，返回转折点的值，否则返回-1；</p>
@@ -737,8 +738,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/04/数据结构与算法题解（3）：字符串题解/" rel="next" title="数据结构与算法题解（3）：字符串题解">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（3）：字符串题解
+              <a href="/2017/08/03/数据结构与算法题解（1）：链表题解/" rel="next" title="数据结构与算法题解（1）：链表题解">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（1）：链表题解
               </a>
             
           </div>
@@ -747,8 +748,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/03/数据结构与算法题解（1）：链表题解/" rel="prev" title="数据结构与算法题解（1）：链表题解">
-                数据结构与算法题解（1）：链表题解 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/04/数据结构与算法题解（3）：字符串题解/" rel="prev" title="数据结构与算法题解（3）：字符串题解">
+                数据结构与算法题解（3）：字符串题解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -817,7 +818,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -825,7 +826,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -834,7 +835,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -1146,9 +1147,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -1160,13 +1184,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

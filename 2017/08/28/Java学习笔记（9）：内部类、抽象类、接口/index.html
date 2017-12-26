@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/28/Java学习笔记（9）：内部类、抽象类、接口/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、Java内部类及其实例化在 Java 中，允许在一个类（或方法、语句块）的内部定义另一个类，称为内部类(Inner Class)，有时也称为嵌套类(Nested Class)。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-09-01T06:51:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习笔记（9）：内部类、抽象类、接口">
@@ -405,7 +406,7 @@ var _hmt = _hmt || [];
 </ul>
 <p>请看下面的例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;</div><div class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Inner</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">int</span> counter = <span class="number">10</span>;</div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doStuff</span><span class="params">()</span> </span>&#123;</div><div class="line">            size++;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span> </span>&#123;</div><div class="line">        Demo outer = <span class="keyword">new</span> Demo();</div><div class="line">        Inner inner = outer.new Inner();</div><div class="line">        inner.doStuff();</div><div class="line">        System.out.println(outer.size);</div><div class="line">        System.out.println(inner.counter);</div><div class="line">        <span class="comment">// 编译错误，外部类不能访问内部类的变量</span></div><div class="line"><span class="comment">//        System.out.println(counter);</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这段代码定义了一个外部类 Outer，它包含了一个内部类 Inner。将错误语句注释掉，编译，会生成两个 .class 文件：Outer.class 和 Outer<code>$</code>Inner.class。也就是说，内部类会被编译成独立的字节码文件。内部类是一种编译器现象，与虚拟机无关。编译器将会把内部类翻译成用<code>$</code> 符号分隔外部类名与内部类名的常规类文件，而虚拟机则对此一无所知。<br>注意：必须先有外部类的对象才能生成内部类的对象，因为内部类需要访问外部类中的成员变量，成员变量必须实例化才有意义。</p>
+<p>这段代码定义了一个外部类 Outer，它包含了一个内部类 Inner。将错误语句注释掉，编译，会生成两个 .class 文件：Outer.class 和 Outer<script type="math/tex">`Inner.class。也就是说，内部类会被编译成独立的字节码文件。内部类是一种编译器现象，与虚拟机无关。编译器将会把内部类翻译成用`</script> 符号分隔外部类名与内部类名的常规类文件，而虚拟机则对此一无所知。<br>注意：必须先有外部类的对象才能生成内部类的对象，因为内部类需要访问外部类中的成员变量，成员变量必须实例化才有意义。</p>
 <p>内部类是 Java 1.1 的新增特性，有些程序员认为这是一个值得称赞的进步，但是内部类的语法很复杂，严重破坏了良好的代码结构， 违背了Java要比C++更加简单的设计理念。</p>
 <p>内部类看似增加了—些优美有趣，实属没必要的特性，这是不是也让Java开始走上了许多语言饱受折磨的毁灭性道路呢？本教程并不打算就这个问题给予一个肯定的答案。</p>
 <h1 id="二、内部类的分类"><a href="#二、内部类的分类" class="headerlink" title="二、内部类的分类"></a>二、内部类的分类</h1><p>内部类可以是静态(static)的，可以使用 public、protected 和 private 访问控制符，而外部类只能使用 public，或者默认。</p>
@@ -531,8 +532,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/30/Java学习笔记（10）：QA/" rel="next" title="Java学习笔记（10）：QA">
-                <i class="fa fa-chevron-left"></i> Java学习笔记（10）：QA
+              <a href="/2017/08/27/Java学习笔记（8）：常用库类、向量与哈希/" rel="next" title="Java学习笔记（8）：常用库类、向量与哈希">
+                <i class="fa fa-chevron-left"></i> Java学习笔记（8）：常用库类、向量与哈希
               </a>
             
           </div>
@@ -541,8 +542,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/27/Java学习笔记（8）：常用库类、向量与哈希/" rel="prev" title="Java学习笔记（8）：常用库类、向量与哈希">
-                Java学习笔记（8）：常用库类、向量与哈希 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/30/Java学习笔记（10）：QA/" rel="prev" title="Java学习笔记（10）：QA">
+                Java学习笔记（10）：QA <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -611,7 +612,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -619,7 +620,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -628,7 +629,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -940,9 +941,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -954,13 +978,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

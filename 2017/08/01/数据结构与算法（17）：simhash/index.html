@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/08/01/数据结构与算法（17）：simhash/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、引入随着信息爆炸时代的来临，互联网上充斥着着大量的近重复信息，有效地识别它们是一个很有意义的课题。例如，对于搜索引擎的爬虫系统来说，收录重复的网页是毫无意义的，只会造成存储和计算资源的浪费；同时，展示重复的信息对于用户来说也并不是最好的体验。造成网页近重复的可能原因主要包括：">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15032777664354.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15032779655846.jpg">
 <meta property="og:updated_time" content="2017-09-01T07:08:27.000Z">
@@ -471,8 +472,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/01/数据结构与算法（18）：倒排索引/" rel="next" title="数据结构与算法（18）：倒排索引">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法（18）：倒排索引
+              <a href="/2017/07/30/数据结构与算法（16）：一致性哈希/" rel="next" title="数据结构与算法（16）：一致性哈希">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（16）：一致性哈希
               </a>
             
           </div>
@@ -481,8 +482,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/30/数据结构与算法（16）：一致性哈希/" rel="prev" title="数据结构与算法（16）：一致性哈希">
-                数据结构与算法（16）：一致性哈希 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/01/数据结构与算法（18）：倒排索引/" rel="prev" title="数据结构与算法（18）：倒排索引">
+                数据结构与算法（18）：倒排索引 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -551,7 +552,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -559,7 +560,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -568,7 +569,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -880,9 +881,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -894,13 +918,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

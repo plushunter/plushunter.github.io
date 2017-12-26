@@ -93,7 +93,8 @@
 <meta property="og:url" content="http://yoursite.com/2017/06/09/数据分析系列（1）：SQL查询执行顺序/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="SQL语句有一个让大部分人都感到困惑的特性，就是：SQL语句的执行顺序跟其语句的语法顺序并不一致。SQL语句的执行顺序是：">
-<meta property="og:updated_time" content="2017-10-31T14:35:03.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-26T06:39:31.366Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据分析系列（1）：SQL查询执行顺序">
 <meta name="twitter:description" content="SQL语句有一个让大部分人都感到困惑的特性，就是：SQL语句的执行顺序跟其语句的语法顺序并不一致。SQL语句的执行顺序是：">
@@ -501,8 +502,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/10/数据分析系列（2）：卡方检验/" rel="next" title="数据分析系列（2）：卡方检验">
-                <i class="fa fa-chevron-left"></i> 数据分析系列（2）：卡方检验
+              <a href="/2017/06/05/Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享/" rel="next" title="Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享">
+                <i class="fa fa-chevron-left"></i> Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享
               </a>
             
           </div>
@@ -511,8 +512,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/05/Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享/" rel="prev" title="Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享">
-                Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/10/数据分析系列（2）：卡方检验/" rel="prev" title="数据分析系列（2）：卡方检验">
+                数据分析系列（2）：卡方检验 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -581,7 +582,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -589,7 +590,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -598,7 +599,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -910,9 +911,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -924,13 +948,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 

@@ -93,6 +93,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/05/24/机器学习算法系列（19）：机器学习性能评价指标/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、分类问题的评价指标1.1 混淆矩阵对一个二分类问题，将实例分成正类（postive）或者负类（negative），但在实际分类中，会出现以下四种情况：  True Positive（真正，TP）：将正类预测为正类数 True Negative（真负，TN）：将负类预测为负类数 False Positive（假正，FP）：将负类预测为正类数 False  Negative（假负，FN）：将正类预">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%885.10.54.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8810.06.48.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-29%20%E4%B8%8B%E5%8D%888.44.11.png">
@@ -101,7 +102,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8811.54.03.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8811.54.13.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8811.54.26.png">
-<meta property="og:updated_time" content="2017-06-02T03:09:33.000Z">
+<meta property="og:updated_time" content="2017-12-26T08:03:24.976Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（19）：机器学习性能评价指标">
 <meta name="twitter:description" content="一、分类问题的评价指标1.1 混淆矩阵对一个二分类问题，将实例分成正类（postive）或者负类（negative），但在实际分类中，会出现以下四种情况：  True Positive（真正，TP）：将正类预测为正类数 True Negative（真负，TN）：将负类预测为负类数 False Positive（假正，FP）：将负类预测为正类数 False  Negative（假负，FN）：将正类预">
@@ -413,14 +414,20 @@ var _hmt = _hmt || [];
 <p>从下图可以直观的看出四者的关系：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-29%20%E4%B8%8B%E5%8D%885.10.54.png" alt="屏幕快照 2017-03-29 下午5.10.54"></p>
 <p>混淆矩阵（Confusion matrix）又被称为错误矩阵，它是一种特定的矩阵来呈现算法性能的可视化呈现。其每一列代表预测值，每一行代表的是实际的类别，这个名字来源于他是否可以非常容易的表明多个类别是否有混淆（也就是一个class被预测为另一个class）混淆矩阵的$i$行$j$列是列别$i$被分为类别$j$的样本个数。</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8810.06.48.png" alt="屏幕快照 2017-05-30 上午10.06.48"></p>
-<h3 id="1-2-精确率、召回率与F1值"><a href="#1-2-精确率、召回率与F1值" class="headerlink" title="1.2 精确率、召回率与F1值"></a>1.2 精确率、召回率与F1值</h3><p> 精确率（precision rate）定义为：$$P=\frac{TP}{TP+FP}$$这里需要注意的是精确率（precision）和准确率（accuracy）是不一样的$$ACC=\frac{TP+TN}{TP+TN+FP+FN}$$<br> 在非平衡数据的情况下，准确率这个评价指标有很大的缺陷。比如在互联网广告里面，点击的数量是很少的，一般只有千分之几，如果用Accuracy，即使全部预测成负类（不点击），ACC也达到了99%以上，这就没有意义了。</p>
-<p>召回率（Recall rate）定义为：$$<br>R=\frac{TP}{TP+FN}<br>$$</p>
-<p>此外，还有F1值，它是精确率和召回率的调和均值，即$$<br>\frac{2}{F_1}=\frac{1}{P}+\frac{1}{R}<br>$$$$<br>F_1=\frac{2TP}{2TP+FP+FN}<br>$$精确率与召回率都很高时，$F_1$值也会很高。</p>
+<h3 id="1-2-精确率、召回率与F1值"><a href="#1-2-精确率、召回率与F1值" class="headerlink" title="1.2 精确率、召回率与F1值"></a>1.2 精确率、召回率与F1值</h3><p> 精确率（precision rate）定义为：</p>
+<script type="math/tex; mode=display">P=\frac{TP}{TP+FP}</script><p> 这里需要注意的是精确率（precision）和准确率（accuracy）是不一样的</p>
+<script type="math/tex; mode=display">ACC=\frac{TP+TN}{TP+TN+FP+FN}</script><p> 在非平衡数据的情况下，准确率这个评价指标有很大的缺陷。比如在互联网广告里面，点击的数量是很少的，一般只有千分之几，如果用Accuracy，即使全部预测成负类（不点击），ACC也达到了99%以上，这就没有意义了。</p>
+<p>召回率（Recall rate）定义为：</p>
+<script type="math/tex; mode=display">
+R=\frac{TP}{TP+FN}</script><p>此外，还有F1值，它是精确率和召回率的调和均值，即</p>
+<script type="math/tex; mode=display">
+\frac{2}{F_1}=\frac{1}{P}+\frac{1}{R}</script><script type="math/tex; mode=display">
+F_1=\frac{2TP}{2TP+FP+FN}</script><p>精确率与召回率都很高时，$F_1$值也会很高。</p>
 <h3 id="1-4-通俗理解"><a href="#1-4-通俗理解" class="headerlink" title="1.4 通俗理解"></a>1.4 通俗理解</h3><p>通俗来讲，精确率是针对我们的预测结果而言的，他表示的是预测为正的样本中有多少是对的，那么预测为正就有两种可能了，一种就是把正类预测为正类（TP），另一种就是把负类预测为正类（FP）。</p>
 <p>而召回率是针对我们原来的样本而言的，它表示的是样本中的正例有多少被预测正确了。那也有两种可能，一种是把原来的正类预测成正类（TP），另一种就是把原来的正类预测为负类（FN）。</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-29%20%E4%B8%8B%E5%8D%888.44.11.png" alt="屏幕快照 2017-05-29 下午8.44.11"></p>
-<p>在信息搜索领域，精确率和召回率又被称为查准率和查全率$$查准率=\frac{检索出的相关信息量}{检索出的信息总量}$$$$查全率=\frac{检索出的相关信息量}{系统中的相关信息总量}$$</p>
-<h3 id="1-5-ROC曲线"><a href="#1-5-ROC曲线" class="headerlink" title="1.5 ROC曲线"></a>1.5 ROC曲线</h3><p>ROC曲线首先是由二战中的电子工程师和雷达工程师发明的，用来侦测战场上的敌军载具（飞机、船舰），也就是信号检测理论。之后很快就被引入了心理学来进行信号的知觉检测。数十年来，ROC分析被用于医学、无线电、生物学、犯罪心理学领域中，而且最近在机器学习（machine learning）和数据挖掘（data mining）领域也得到了很好的发展。</p>
+<p>在信息搜索领域，精确率和召回率又被称为查准率和查全率</p>
+<script type="math/tex; mode=display">查准率=\frac{检索出的相关信息量}{检索出的信息总量}</script><script type="math/tex; mode=display">查全率=\frac{检索出的相关信息量}{系统中的相关信息总量}</script><h3 id="1-5-ROC曲线"><a href="#1-5-ROC曲线" class="headerlink" title="1.5 ROC曲线"></a>1.5 ROC曲线</h3><p>ROC曲线首先是由二战中的电子工程师和雷达工程师发明的，用来侦测战场上的敌军载具（飞机、船舰），也就是信号检测理论。之后很快就被引入了心理学来进行信号的知觉检测。数十年来，ROC分析被用于医学、无线电、生物学、犯罪心理学领域中，而且最近在机器学习（machine learning）和数据挖掘（data mining）领域也得到了很好的发展。</p>
 <p>下图是一个ROC曲线的示例图。</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8811.53.33.png" alt="屏幕快照 2017-05-30 上午11.53.33"></p>
 <p>在这个ROC曲线的示例图中，横坐标为false<br> positive rate(FPR)，纵坐标为true positive rate（TPR）。由混淆矩阵可得到横纵轴的计算公式。</p>
@@ -451,9 +458,9 @@ var _hmt = _hmt || [];
 <p>那我们为什么使用ROC曲线呢？</p>
 <p>既然已经有那么多的评价标准，为何还要使用ROC和AUC曲线呢？因为ROC曲线有个很好的特性：当测试集中的正负样本的分布变化的时候，ROC曲线能够保持不变。在实际的数据集中经常会出现非平衡数据的现象，即负样本比正样本多很多（或者相反），而且测试数据中的正负样本的分布也可能随着时间变化。下图是ROC曲线和Precision-Recall曲线的对比：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-05-30%20%E4%B8%8A%E5%8D%8811.54.26.png" alt="屏幕快照 2017-05-30 上午11.54.26"></p>
 <p>在上图中，a和c为ROC曲线，b和d为Precision-Recall曲线。a和b展示的是分类器在原始测试集（正负样本分布平衡）的结果，c和d是将测试集中负样本的数量增加到原来的10倍后，分类器的结果。可以明显的看出，ROC曲线基本保持原貌，而Precision-Recall则变化较大。</p>
-<h2 id="二、回归问题的评价指标"><a href="#二、回归问题的评价指标" class="headerlink" title="二、回归问题的评价指标"></a>二、回归问题的评价指标</h2><h3 id="2-1-平均绝对误差"><a href="#2-1-平均绝对误差" class="headerlink" title="2.1 平均绝对误差"></a>2.1 平均绝对误差</h3><p>平均绝对误差MAE（Mean Absolute Reeor）又被称为L1范数损失（L1-norm loss）：$${\rm MAE}(y, \hat{y})=\frac{1}{n_{\rm samples}}\sum\limits_{i=1}^{n_{\rm samples}}|y_i-\hat{y}_i|$$</p>
-<h3 id="2-2-平均平方误差"><a href="#2-2-平均平方误差" class="headerlink" title="2.2 平均平方误差"></a>2.2 平均平方误差</h3><p>平均平方误差MSE（Mean Squared Error）又被称为L2范数损失（L2-norm loss）:$${\rm MSE}(y, \hat{y})=\frac{1}{n_{\rm samples}}\sum\limits_{i=1}^{n_{\rm samples}}(y_i-\hat{y}_i)^2$$</p>
-
+<h2 id="二、回归问题的评价指标"><a href="#二、回归问题的评价指标" class="headerlink" title="二、回归问题的评价指标"></a>二、回归问题的评价指标</h2><h3 id="2-1-平均绝对误差"><a href="#2-1-平均绝对误差" class="headerlink" title="2.1 平均绝对误差"></a>2.1 平均绝对误差</h3><p>平均绝对误差MAE（Mean Absolute Reeor）又被称为L1范数损失（L1-norm loss）：</p>
+<script type="math/tex; mode=display">{\rm MAE}(y, \hat{y})=\frac{1}{n_{\rm samples}}\sum\limits_{i=1}^{n_{\rm samples}}|y_i-\hat{y}_i|</script><h3 id="2-2-平均平方误差"><a href="#2-2-平均平方误差" class="headerlink" title="2.2 平均平方误差"></a>2.2 平均平方误差</h3><p>平均平方误差MSE（Mean Squared Error）又被称为L2范数损失（L2-norm loss）:</p>
+<script type="math/tex; mode=display">{\rm MSE}(y, \hat{y})=\frac{1}{n_{\rm samples}}\sum\limits_{i=1}^{n_{\rm samples}}(y_i-\hat{y}_i)^2</script>
       
     </div>
 
@@ -495,8 +502,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/05/Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享/" rel="next" title="Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享">
-                <i class="fa fa-chevron-left"></i> Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享
+              <a href="/2017/05/21/深度学习系列（12）：pytorch实现卷积神经网络/" rel="next" title="深度学习系列（12）：pytorch实现卷积神经网络">
+                <i class="fa fa-chevron-left"></i> 深度学习系列（12）：pytorch实现卷积神经网络
               </a>
             
           </div>
@@ -505,8 +512,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/05/20/深度学习系列（11）：神经网络防止过拟合的方法/" rel="prev" title="深度学习系列（11）：神经网络防止过拟合的方法">
-                深度学习系列（11）：神经网络防止过拟合的方法 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/06/05/Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享/" rel="prev" title="Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享">
+                Kaggle系列（1）：Kaggle 数据挖掘比赛经验分享 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -575,7 +582,7 @@ var _hmt = _hmt || [];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">135</span>
+              <span class="site-state-item-count">137</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -583,7 +590,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -592,7 +599,7 @@ var _hmt = _hmt || [];
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">167</span>
+                <span class="site-state-item-count">176</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -904,9 +911,32 @@ var _hmt = _hmt || [];
     $('.popup').click(function(e){
       e.stopPropagation();
     });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config("");
 </script>
 
 <script type="text/x-mathjax-config">
@@ -918,13 +948,10 @@ var _hmt = _hmt || [];
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-
-
-  
   
 
 
