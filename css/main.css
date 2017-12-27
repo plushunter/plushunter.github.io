@@ -1681,7 +1681,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #d5f43e;
+  background: #12ffff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2732,10 +2732,106 @@ hr {
   }
 }
 .header {
-  background-image: url("../images/background.jpg");
+  background: url("../images/background.jpg");
   background-repeat: repeat;
   background-attachment: fixed;
 }
+.site-meta {
+  float: none;
+}
+.menu {
+  float: none;
+}
+.logo-line-before,
+.logo-line-after {
+  display: none;
+}
+.menu .menu-item a {
+  font-size: 15px;
+  color: #707070;
+  border-radius: 0px;
+}
+.site-meta {
+  margin-left: 2px;
+  text-align: left;
+}
+.site-meta .site-title {
+  font-size: 25px;
+  font-family: 'Comic Sans MS', sans-serif;
+  color: #606060;
+}
 .footer {
   background: url("../images/footer.jpg");
+  font-size: 14px;
+}
+.footer-inner {
+  font-family: 'Comic Sans MS', sans-serif;
+  text-align: left;
+  color: #505050;
+}
+.site-author-name {
+  font-size: 16px;
+  margin: 5px 0 0;
+  color: #a0a0a0;
+  font-family: 'Comic Sans MS', sans-serif;
+}
+.links-of-blogroll {
+  font-size: 14px;
+  margin-bottom: 42px;
+}
+.links-of-author {
+  margin-top: 30px;
+  margin-bottom: 58px;
+}
+.sidebar-inner {
+  color: #649ab6;
+}
+.links-of-author {
+  margin-top: 19px;
+}
+.sidebar a:hover {
+  color: #0c0b0b;
+}
+.site-state-item {
+  display: inline-block;
+  padding: 8px 28px;
+  border-left: 1px solid #649ab6;
+}
+.sidebar-nav .sidebar-nav-active {
+  color: #649ab6;
+  border-bottom-color: #649ab6;
+}
+.sidebar-nav li:hover {
+  color: #0c0b0b;
+}
+.post-toc .nav .active>a {
+  color: #4f7e96;
+}
+.post-toc ol a:hover {
+  color: #7784ba;
+}
+.sidebar-nav .sidebar-nav-active:hover {
+  color: #37596c;
+}
+a {
+  border-bottom: none;
+}
+.post-button {
+  margin-top: 30px;
+  text-align: center;
+}
+.post-button .btn {
+  color: #fff;
+  font-size: 15px;
+  background: #686868;
+  border-radius: 16px;
+  line-height: 2;
+  margin: 0 4px 8px 4px;
+  padding: 0 20px;
+}
+.post-button a {
+  border-bottom: 1px solid #666;
+}
+.post-button a:hover {
+  color: #7784ba;
 }
