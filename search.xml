@@ -10,7 +10,7 @@
 <li>解析待补充</li>
 </ul>
 <a id="more"></a>
-<h3 id="一、第一题"><a href="#一、第一题" class="headerlink" title="一、第一题"></a>一、第一题</h3><p>1.1 请说明雷达图和箱线图的基本要点。<br>1.2 下面的数据集为8个同学的数学、语文和英语的成绩，如何利用雷达图和箱线图来描述这个数据集？</p>
+<h3 id="一、第一题【20分】"><a href="#一、第一题【20分】" class="headerlink" title="一、第一题【20分】"></a>一、第一题【20分】</h3><p>1.1 请说明雷达图和箱线图的基本要点。<br>1.2 下面的数据集为8个同学的数学、语文和英语的成绩，如何利用雷达图和箱线图来描述这个数据集？</p>
 <div class="table-container">
 <table>
 <thead>
@@ -73,18 +73,18 @@
 </tbody>
 </table>
 </div>
-<h3 id="二、第二题"><a href="#二、第二题" class="headerlink" title="二、第二题"></a>二、第二题</h3><p>2.1 说明在方差已知的条件下，正态总体均值区间估计的宽度与样本量的关系。</p>
+<h3 id="二、第二题【20分】"><a href="#二、第二题【20分】" class="headerlink" title="二、第二题【20分】"></a>二、第二题【20分】</h3><p>2.1 说明在方差已知的条件下，正态总体均值区间估计的宽度与样本量的关系。</p>
 <p>2.2 现在有一组来自正态总体的随机样本，可以由此得到在方差已知和方差未知两种条件下的置信区间，请分析这两个置信区间的中点和宽度的异同。</p>
-<h3 id="三、第三题"><a href="#三、第三题" class="headerlink" title="三、第三题"></a>三、第三题</h3><p>3.1 给出一个列联表，写出可以描述上述数据的所有的图形，并说明这些图形的用途，<br>3.2 写出可以分析上述数据所有可能的方法，并说明用途。</p>
-<h3 id="四、第四题"><a href="#四、第四题" class="headerlink" title="四、第四题"></a>四、第四题</h3><p>设因变量为$y$ ,自变量为$x_1,x_2,x_3·····x_k$，写出建立多元线性回归建模的基本思路。</p>
-<h3 id="五、第五题"><a href="#五、第五题" class="headerlink" title="五、第五题"></a>五、第五题</h3><p>5.1 方差分析有哪些基本假定？<br>5.2 简要说明检验这些假定的方法。</p>
-<h3 id="六、第六题"><a href="#六、第六题" class="headerlink" title="六、第六题"></a>六、第六题</h3><p>在同一个概率空间中是否存在三个随机事件$A,B,C$使得同时成立下面三个不等式：</p>
-<script type="math/tex; mode=display">P(A|B,C)≤P(A|\bar {B},C) \\\ P(A|B,\bar {C})<P(A|\bar {B}, \bar {C})\\\ P(A|B)>P(A|\bar B)</script><p>如果存在，请列举一个例子；若不存在，证明你的结论。【20分】</p>
-<h3 id="七、第七题"><a href="#七、第七题" class="headerlink" title="七、第七题"></a>七、第七题</h3><p>设$x_1,x_2······,x_n$为一个来自均值为$\mu$，方差为$\sigma^2$的分布的样本，$\mu$和$\sigma ^2$未知，考虑均值$\mu$的线性无偏估计类</p>
+<h3 id="三、第三题【20分】"><a href="#三、第三题【20分】" class="headerlink" title="三、第三题【20分】"></a>三、第三题【20分】</h3><p>3.1 给出一个列联表，写出可以描述上述数据的所有的图形，并说明这些图形的用途，<br>3.2 写出可以分析上述数据所有可能的方法，并说明用途。</p>
+<h3 id="四、第四题【10分】"><a href="#四、第四题【10分】" class="headerlink" title="四、第四题【10分】"></a>四、第四题【10分】</h3><p>设因变量为$y$ ,自变量为$x_1,x_2,x_3·····x_k$，写出建立多元线性回归建模的基本思路。</p>
+<h3 id="五、第五题【20分】"><a href="#五、第五题【20分】" class="headerlink" title="五、第五题【20分】"></a>五、第五题【20分】</h3><p>5.1 方差分析有哪些基本假定？<br>5.2 简要说明检验这些假定的方法。</p>
+<h3 id="六、第六题【20分】"><a href="#六、第六题【20分】" class="headerlink" title="六、第六题【20分】"></a>六、第六题【20分】</h3><p>【20分】在同一个概率空间中是否存在三个随机事件$A,B,C$使得同时成立下面三个不等式：</p>
+<script type="math/tex; mode=display">P(A|B,C)≤P(A|\bar {B},C) \\\ P(A|B,\bar {C})<P(A|\bar {B}, \bar {C})\\\ P(A|B)>P(A|\bar B)</script><p>如果存在，请列举一个例子；若不存在，证明你的结论。</p>
+<h3 id="七、第七题【20分】"><a href="#七、第七题【20分】" class="headerlink" title="七、第七题【20分】"></a>七、第七题【20分】</h3><p>设$x_1,x_2······,x_n$为一个来自均值为$\mu$，方差为$\sigma^2$的分布的样本，$\mu$和$\sigma ^2$未知，考虑均值$\mu$的线性无偏估计类</p>
 <script type="math/tex; mode=display">
 L=\{T\left(X\right)：T\left(X\right)=\sum_{i=1}^n{x_i}.c_i \}  \\\ 其中c_i是常数</script><p>求出$L$中$T(X)$为$\mu$的无偏估计的充要条件，并求出无偏估计类中方差一致最小的估计。</p>
-<h3 id="八、第八题"><a href="#八、第八题" class="headerlink" title="八、第八题"></a>八、第八题</h3><p>设$X$是一个正值随机变量，方差有界，证明：对于$\forall 0&lt;\lambda &lt;1$, 有</p>
-<script type="math/tex; mode=display">P\left\{X>\lambda EX\right\}\geqslant\left(1-\lambda\right)^2\frac{\left(EX\right)^2}{EX^2}</script><h3 id="九、第九题"><a href="#九、第九题" class="headerlink" title="九、第九题"></a>九、第九题</h3><p> 设地区生产总之（亿元）为因变量，固定资产投资（亿元）、社会消费品零售总额（亿元）、出口总额（亿美元）、地方财政收入（亿元）、电力消费量（亿千瓦时）、居民消费水平（元）为自变量，根据32个样本数据得到回归结果如下：</p>
+<h3 id="八、第八题【10分】"><a href="#八、第八题【10分】" class="headerlink" title="八、第八题【10分】"></a>八、第八题【10分】</h3><p>设$X$是一个正值随机变量，方差有界，证明：对于$\forall 0&lt;\lambda &lt;1$, 有</p>
+<script type="math/tex; mode=display">P\left\{X>\lambda EX\right\}\geqslant\left(1-\lambda\right)^2\frac{\left(EX\right)^2}{EX^2}</script><h3 id="九、第九题【10分】"><a href="#九、第九题【10分】" class="headerlink" title="九、第九题【10分】"></a>九、第九题【10分】</h3><p> 设地区生产总之（亿元）为因变量，固定资产投资（亿元）、社会消费品零售总额（亿元）、出口总额（亿美元）、地方财政收入（亿元）、电力消费量（亿千瓦时）、居民消费水平（元）为自变量，根据32个样本数据得到回归结果如下：</p>
 <p>Coefficients </p>
 <div class="table-container">
 <table>
@@ -183,7 +183,7 @@ L=\{T\left(X\right)：T\left(X\right)=\sum_{i=1}^n{x_i}.c_i \}  \\\ 其中c_i是
 </tbody>
 </table>
 </div>
-<p>对该回归模型进行综合分析，评价是否需要改进，并给出思路。</p>
+<p>对该回归模型进行综合分析，评价是否需要改进，并给出思路。【10分】</p>
 ]]></content>
       
         <categories>
