@@ -94,6 +94,10 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、简介SVD实际上是数学专业内容，但它现在已经深入到不同的领域中。SVD的过程不是很好理解，因为它不够直观，但它对矩阵分解的效果却非常好。比如，Netflix（一个提供在线电影租赁的公司）曾经就悬赏100万美金，如果谁能提高他的电影推荐系统评分预测率10%的话。令人惊讶的是，这个目标充满了挑战，来自世界各地的团队运用了各种不同的技术。最终的获胜队伍“BellKor’s Pragmatic Cha">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14990677634208.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14992394690344.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14992307483348.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-05 下午1.04.29.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14990727044929.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14991419233249.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14991423029453.png">
@@ -120,11 +124,11 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14992369530915.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14992372618471.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/14992353583255.png">
-<meta property="og:updated_time" content="2017-12-26T08:32:29.719Z">
+<meta property="og:updated_time" content="2018-01-04T15:02:07.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（21）：SVD">
 <meta name="twitter:description" content="一、简介SVD实际上是数学专业内容，但它现在已经深入到不同的领域中。SVD的过程不是很好理解，因为它不够直观，但它对矩阵分解的效果却非常好。比如，Netflix（一个提供在线电影租赁的公司）曾经就悬赏100万美金，如果谁能提高他的电影推荐系统评分预测率10%的话。令人惊讶的是，这个目标充满了挑战，来自世界各地的团队运用了各种不同的技术。最终的获胜队伍“BellKor’s Pragmatic Cha">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/14990727044929.png">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/14990677634208.jpg">
 
 
 
@@ -425,31 +429,46 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 <p>SVD提供了一种非常便捷的矩阵分解方式，能够发现数据中十分有意思的潜在模式，在这篇文章中，我们将会提供对SVD集合上的理解和一些简单的应用实例。</p>
 <h3 id="1-1-几何意义"><a href="#1-1-几何意义" class="headerlink" title="1.1 几何意义"></a>1.1 几何意义</h3><p>奇异值分解就是把一个线性变换分解成两个线性变换，一个线性变化代表旋转，另一个代表拉伸。</p>
-<p>线性代数中最让人印象深刻的一点是，要将矩阵和空间中的线性变化视为同样的事物。比如对角矩阵$M$作用在任何一个向量上$$<br>\left[\begin{matrix}<br>    3&amp;        0\\<br>    0&amp;        1\\<br>\end{matrix}\right]\left[\begin{array}{c}<br>    x\\<br>    y\\<br>\end{array}\right]=\left[\begin{array}{c}<br>    3x\\<br>    y\\<br>\end{array}\right]</p>
+<p>线性代数中最让人印象深刻的一点是，要将矩阵和空间中的线性变化视为同样的事物。比如对角矩阵$M$作用在任何一个向量上</p>
 <script type="math/tex; mode=display">
-其几何意义为在水平$x$方向上拉伸3倍，$y$方向保持不变的线性变换。换言之对角矩阵起到作用是将水平垂直网格作水平拉伸（或者反射后水平拉伸）的线性变换。
-![](http://omu7tit09.bkt.clouddn.com/14990677634208.jpg)
-如果$M$不是对角矩阵。而是一个对称矩阵：</script><p>M=\left[\begin{matrix}<br>    2&amp;        1\\<br>    1&amp;        2\\<br>\end{matrix}\right]</p>
+\left[\begin{matrix}
+    3&        0\\
+    0&        1\\
+\end{matrix}\right]\left[\begin{array}{c}
+    x\\
+    y\\
+\end{array}\right]=\left[\begin{array}{c}
+    3x\\
+    y\\
+\end{array}\right]</script><p>其几何意义为在水平$x$方向上拉伸3倍，$y$方向保持不变的线性变换。换言之对角矩阵起到作用是将水平垂直网格作水平拉伸（或者反射后水平拉伸）的线性变换。<br><img src="http://omu7tit09.bkt.clouddn.com/14990677634208.jpg" alt=""><br>如果$M$不是对角矩阵。而是一个对称矩阵：</p>
 <script type="math/tex; mode=display">
-
-那么我们也总能找到一组网格线，使得矩阵作用在该网格上仅仅表现为（反射）拉伸变换，而没有发生旋转变换。这个矩阵产生的变换效果如下图所示
-![](http://omu7tit09.bkt.clouddn.com/14992394690344.jpg)
-
-考虑一下更一般的非对称矩阵</script><p>M=\left[\begin{matrix}<br>    1&amp;        1\\<br>    0&amp;        1\\<br>\end{matrix}\right]</p>
+M=\left[\begin{matrix}
+    2&        1\\
+    1&        2\\
+\end{matrix}\right]</script><p>那么我们也总能找到一组网格线，使得矩阵作用在该网格上仅仅表现为（反射）拉伸变换，而没有发生旋转变换。这个矩阵产生的变换效果如下图所示<br><img src="http://omu7tit09.bkt.clouddn.com/14992394690344.jpg" alt=""></p>
+<p>考虑一下更一般的非对称矩阵</p>
 <script type="math/tex; mode=display">
-很遗憾，此时我们再也找不到一组网格，使得矩阵作用在该网格之后只有拉伸变换（找不到背后的数学原因就是对一般非对称矩阵无法保证在实数域上可对角化）。我们退而求其次，找到一组网格，使得矩阵作用在该网格之后允许有拉伸变换和旋转变换，但要保证变换后的网格依旧互相垂直。这是可以做到的![](http://omu7tit09.bkt.clouddn.com/14992307483348.jpg)
-
-
-下面我们就可以自然过渡到奇异值分解的引入。奇异值分解的几何含义为：对于任何的一个矩阵，我们要找到一组两两正交单位向量序列，使得矩阵作用在此向量序列上后得到新的向量序列保持两两正交。下面我们要说明的是，奇异值的几何含义为：这组变换后的新的向量序列的长度。![屏幕快照 2017-07-05 下午1.04.29](http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-05 下午1.04.29.png)
-当矩阵$M$作用在正交单位向量$v_1$和$v_2$上之后，得到$Mv_1$和$Mv_2$也是正交的。令$u_1$和$u_2$分别是$Mv_1$和$Mv_2$方向上的单位向量，即$Mv_1 = \sigma_1u_1$，$Mv_2 = \sigma _2 u_2$，写在一起就是$M[v_1,v_2] = [\sigma_1 u_1 \ \sigma_2 u_2]$，整理得到</script><p>M=M\left[v_1\ v_2\right]\left[\begin{array}{c}<br>    v_{1}^{T}\\<br>    v_{2}^{T}\\<br>\end{array}\right]=\left[\sigma_1u_1 \ \sigma_2u_2\right]\left[\begin{array}{c}<br>    v_{1}^{T}\\<br>    v_{2}^{T}\\<br>\end{array}\right]=\left[u_1\ u_2\right]\left[\begin{matrix}<br>    \sigma_1&amp;        0\\<br>    0&amp;        \sigma_2\\<br>\end{matrix}\right]\left[\begin{array}{c}<br>    v_{1}^{T}\\<br>    v_{2}^{T}\\<br>\end{array}\right]</p>
+M=\left[\begin{matrix}
+    1&        1\\
+    0&        1\\
+\end{matrix}\right]</script><p>很遗憾，此时我们再也找不到一组网格，使得矩阵作用在该网格之后只有拉伸变换（找不到背后的数学原因就是对一般非对称矩阵无法保证在实数域上可对角化）。我们退而求其次，找到一组网格，使得矩阵作用在该网格之后允许有拉伸变换和旋转变换，但要保证变换后的网格依旧互相垂直。这是可以做到的<img src="http://omu7tit09.bkt.clouddn.com/14992307483348.jpg" alt=""></p>
+<p>下面我们就可以自然过渡到奇异值分解的引入。奇异值分解的几何含义为：对于任何的一个矩阵，我们要找到一组两两正交单位向量序列，使得矩阵作用在此向量序列上后得到新的向量序列保持两两正交。下面我们要说明的是，奇异值的几何含义为：这组变换后的新的向量序列的长度。<img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-05 下午1.04.29.png" alt="屏幕快照 2017-07-05 下午1.04.29"><br>当矩阵$M$作用在正交单位向量$v_1$和$v_2$上之后，得到$Mv_1$和$Mv_2$也是正交的。令$u_1$和$u_2$分别是$Mv_1$和$Mv_2$方向上的单位向量，即$Mv_1 = \sigma_1u_1$，$Mv_2 = \sigma _2 u_2$，写在一起就是$M[v_1,v_2] = [\sigma_1 u_1 \ \sigma_2 u_2]$，整理得到</p>
 <script type="math/tex; mode=display">
-这样就得到矩阵$M$的奇异值分解。奇异值$\sigma_1$和$\sigma_2$分别是$Mv_1$和$Mv_2$的长度。很容易可以把结论推广到一般$n$维的情况
-
-
-## 二、、奇异值分解
-### 2.1 特征值分解
-如果方阵对某个向量只产生伸缩，而不产生旋转效果，那么这个向量就称为矩阵的特征向量，伸缩的比例就是对应的特征值。
-$$Ax=\lambda x</script><p><img src="http://omu7tit09.bkt.clouddn.com/14990727044929.png" alt=""></p>
+M=M\left[v_1\ v_2\right]\left[\begin{array}{c}
+    v_{1}^{T}\\
+    v_{2}^{T}\\
+\end{array}\right]=\left[\sigma_1u_1 \ \sigma_2u_2\right]\left[\begin{array}{c}
+    v_{1}^{T}\\
+    v_{2}^{T}\\
+\end{array}\right]=\left[u_1\ u_2\right]\left[\begin{matrix}
+    \sigma_1&        0\\
+    0&        \sigma_2\\
+\end{matrix}\right]\left[\begin{array}{c}
+    v_{1}^{T}\\
+    v_{2}^{T}\\
+\end{array}\right]</script><p>这样就得到矩阵$M$的奇异值分解。奇异值$\sigma_1$和$\sigma_2$分别是$Mv_1$和$Mv_2$的长度。很容易可以把结论推广到一般$n$维的情况</p>
+<h2 id="二、奇异值分解"><a href="#二、奇异值分解" class="headerlink" title="二、奇异值分解"></a>二、奇异值分解</h2><h3 id="2-1-特征值分解"><a href="#2-1-特征值分解" class="headerlink" title="2.1 特征值分解"></a>2.1 特征值分解</h3><p>如果方阵对某个向量只产生伸缩，而不产生旋转效果，那么这个向量就称为矩阵的特征向量，伸缩的比例就是对应的特征值。</p>
+<script type="math/tex; mode=display">Ax=\lambda x</script><p><img src="http://omu7tit09.bkt.clouddn.com/14990727044929.png" alt=""></p>
 <p>所以这其实是在平面上对一个轴进行的拉伸变换（如蓝色的箭头所示），在图中，蓝色的箭头是一个最主要的变化（变化方向可能不止一个），如果我们想要描述好一个变换，那我们描述好这个变换主要的变化方向就好了。反过来看看之前特征值分解的式子，分解得到的$\Sigma$矩阵是一个对角阵，里面的特征值是由大到小排列的，这些特征值所对应的特征向量就是描述这个矩阵变化的方向（从主要的变化到次要的变化排列）。</p>
 <p>当矩阵是高维的情况下，那么这个矩阵就是高维空间下的一个线性变换，这个线性变化可能没法通过图片来表示，但是可以想象，这个变换也同样有很多的变换方向，我们通过特征值分解得到的前N个特征向量，那么就对应了这个矩阵最主要的N个变化方向。我们利用这前N个变化方向，就可以近似这个矩阵变换。也就是之前受的：提取这个矩阵最重要的特征。总结一下，特征值分解可以得到特征值与特征向量，特征值表示的是这个特征到底有多重要，而特征向量表示这个特征是什么，可以将每一个特征向量理解为一个线性的子空间，我们可以利用这些线性的子空间敢很多的事情。不过，特征值分解也有很多的局限，比如说变换的矩阵必须是方阵。</p>
 <p>学线性代数的时候，我们应该都学过这样一个定理：</p>
@@ -543,6 +562,27 @@ P_{r\times m}A_{m\times n}=\tilde{A}_{r\times n}</script><p>这样从一个$m$�
     <div>
       
         
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
     </div>
@@ -587,6 +627,22 @@ P_{r\times m}A_{m\times n}=\tilde{A}_{r\times n}</script><p>这样从一个$m$�
 
 
     <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <span class="jiathis_txt">分享到：</span>
+  <a class="jiathis_button_tools_1"></a>
+  <a class="jiathis_button_tools_2"></a>
+  <a class="jiathis_button_tools_3"></a>
+  <a class="jiathis_button_tools_4"></a>
+  <a href="http://www.jiathis.com/share?uid=2154627" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2154627" charset="utf-8"></script>
+<!-- JiaThis Button END -->
       
     </div>
   </div>
@@ -650,7 +706,7 @@ P_{r\times m}A_{m\times n}=\tilde{A}_{r\times n}</script><p>这样从一个$m$�
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">139</span>
+                  <span class="site-state-item-count">144</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -661,7 +717,7 @@ P_{r\times m}A_{m\times n}=\tilde{A}_{r\times n}</script><p>这样从一个$m$�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -672,7 +728,7 @@ P_{r\times m}A_{m\times n}=\tilde{A}_{r\times n}</script><p>这样从一个$m$�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">181</span>
+                  <span class="site-state-item-count">196</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -732,7 +788,7 @@ P_{r\times m}A_{m\times n}=\tilde{A}_{r\times n}</script><p>这样从一个$m$�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、简介"><span class="nav-text">一、简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-几何意义"><span class="nav-text">1.1 几何意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-奇异值分解"><span class="nav-text">2.2 奇异值分解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、应用实例"><span class="nav-text">三、应用实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-推荐系统"><span class="nav-text">3.1 推荐系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-数据压缩"><span class="nav-text">3.2 数据压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-图像去噪"><span class="nav-text">3.3 图像去噪</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-数据分析"><span class="nav-text">3.4 数据分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-潜在语义索引LSI"><span class="nav-text">3.5 潜在语义索引LSI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-主成分分析"><span class="nav-text">3.6 主成分分析</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、简介"><span class="nav-text">一、简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-几何意义"><span class="nav-text">1.1 几何意义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、奇异值分解"><span class="nav-text">二、奇异值分解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-特征值分解"><span class="nav-text">2.1 特征值分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-奇异值分解"><span class="nav-text">2.2 奇异值分解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、应用实例"><span class="nav-text">三、应用实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-推荐系统"><span class="nav-text">3.1 推荐系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-数据压缩"><span class="nav-text">3.2 数据压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-图像去噪"><span class="nav-text">3.3 图像去噪</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-数据分析"><span class="nav-text">3.4 数据分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-潜在语义索引LSI"><span class="nav-text">3.5 潜在语义索引LSI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-主成分分析"><span class="nav-text">3.6 主成分分析</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -756,7 +812,7 @@ P_{r\times m}A_{m\times n}=\tilde{A}_{r\times n}</script><p>这样从一个$m$�
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
