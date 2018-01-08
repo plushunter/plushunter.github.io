@@ -90,11 +90,11 @@
 <meta name="keywords" content="损失函数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法">
-<meta property="og:url" content="http://yoursite.com/2017/07/08/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/07/09/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/index.html">
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、最速下降法最速下降法，又称为梯度下降法，是无约束最优化领域中最简单的算法，单独就这种算法来看，属于早就“过时”了的一种算法。但是，它的理念是其他某些算法的组成部分，或者说是在其他算法中，也有最速下降法的影子。它是一种迭代算法，每一步需要求解目标函数的梯度向量。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-26T08:03:51.245Z">
+<meta property="og:updated_time" content="2018-01-08T11:18:56.629Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法">
 <meta name="twitter:description" content="一、最速下降法最速下降法，又称为梯度下降法，是无约束最优化领域中最简单的算法，单独就这种算法来看，属于早就“过时”了的一种算法。但是，它的理念是其他某些算法的组成部分，或者说是在其他算法中，也有最速下降法的影子。它是一种迭代算法，每一步需要求解目标函数的梯度向量。">
@@ -106,7 +106,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"left","display":"always"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -196,21 +196,17 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             首页
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
+        <li class="menu-item menu-item-guidang">
+          <a href="/arc" rel="section">
             
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-list"></i> <br />
             
             归档
           </a>
@@ -220,6 +216,8 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-yiyu">
           <a href="/yiyu" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
             呓语
           </a>
         </li>
@@ -227,6 +225,8 @@ var _hmt = _hmt || [];
         
         <li class="menu-item menu-item-movies">
           <a href="/movies" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
             
             电影
           </a>
@@ -236,6 +236,8 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-books">
           <a href="/books" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
             读书
           </a>
         </li>
@@ -243,6 +245,8 @@ var _hmt = _hmt || [];
         
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -254,6 +258,8 @@ var _hmt = _hmt || [];
           
             <a href="javascript:;" class="popup-trigger">
           
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
             
             搜索
           </a>
@@ -298,7 +304,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/08/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/09/机器学习算法系列（25）：最速下降法、牛顿法、拟牛顿法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -335,8 +341,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-08T23:14:45+08:00">
-                2017-07-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-09T23:14:45+08:00">
+                2017-07-09
               </time>
             
 
@@ -570,8 +576,8 @@ $$\alpha=\frac{1}{y^T_ks_k},\beta = -\frac{1}{s^T_kB_ks_k}</script><p>综上，�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/07/07/机器学习算法系列（23）：TF-IDF与余弦相似度/" rel="next" title="机器学习算法系列（23）：TF-IDF与余弦相似度">
-                <i class="fa fa-chevron-left"></i> 机器学习算法系列（23）：TF-IDF与余弦相似度
+              <a href="/2017/07/08/机器学习算法系列（24）：损失函数/" rel="next" title="机器学习算法系列（24）：机器学习中的损失函数">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（24）：机器学习中的损失函数
               </a>
             
           </div>
@@ -580,8 +586,8 @@ $$\alpha=\frac{1}{y^T_ks_k},\beta = -\frac{1}{s^T_kB_ks_k}</script><p>综上，�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/07/08/机器学习算法系列（24）：损失函数/" rel="prev" title="机器学习算法系列（24）：机器学习中的损失函数">
-                机器学习算法系列（24）：机器学习中的损失函数 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/13/机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）/" rel="prev" title="机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）">
+                机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -708,7 +714,7 @@ $$\alpha=\frac{1}{y^T_ks_k},\beta = -\frac{1}{s^T_kB_ks_k}</script><p>综上，�
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="http://omu7tit09.bkt.clouddn.com/WechatIMG4.jpeg" target="_blank" title="微信">
+                  <a href="http://omu7tit09.bkt.clouddn.com/WechatIMG1zhanghua.png" target="_blank" title="微信">
                     
                       <i class="fa fa-fw fa-wechat"></i>微信</a>
                 </span>
@@ -716,19 +722,67 @@ $$\alpha=\frac{1}{y^T_ks_k},\beta = -\frac{1}{s^T_kB_ks_k}</script><p>综上，�
             
           </div>
 
-          
-          
+         
 
           
           
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
 
           
 
         </div>
 
-<div id="music163player">
-   <iframe frameborder="yes" border="10" marginwidth="10" marginheight="10" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=29578009&auto=0&height=66"></iframe>
-</div>
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
       </section>
 
       
@@ -1037,7 +1091,27 @@ $$\alpha=\frac{1}{y^T_ks_k},\beta = -\frac{1}{s^T_kB_ks_k}</script><p>综上，�
         }
       });
     </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -1055,12 +1129,7 @@ $$\alpha=\frac{1}{y^T_ks_k},\beta = -\frac{1}{s^T_kB_ks_k}</script><p>综上，�
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
-  
 
-
-  
-
-  
 
   
 
