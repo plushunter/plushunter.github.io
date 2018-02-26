@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="这篇文章翻译自A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification">
+<meta name="description" content="这篇文章翻译自A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification 近年来，卷积神经网络在句子分类任务上取得了显著的成绩(Kim, 2014;Kalchbrenner et al .,2014)，然而，这些模型要求从业者指定精">
 <meta name="keywords" content="static,word2vec,TextCNN,Dropout,non-static">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自然语言处理系列（7）：TextCNN的调参技巧">
-<meta property="og:url" content="http://yoursite.com/2018/01/26/自然语言处理系列（7）：TextCNN的调参技巧/index.html">
+<meta property="og:title" content="自然语言处理系列（7）：A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification(TextCNN的调参)">
+<meta property="og:url" content="http://yoursite.com/2018/01/26/自然语言处理系列（7）：A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification(TextCNN的调参)/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="这篇文章翻译自A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification">
+<meta property="og:description" content="这篇文章翻译自A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification 近年来，卷积神经网络在句子分类任务上取得了显著的成绩(Kim, 2014;Kalchbrenner et al .,2014)，然而，这些模型要求从业者指定精">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-25 下午9.02.47.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-02-01 下午9.52.55.png">
@@ -114,10 +114,10 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-02-01 下午10.41.32.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-02-01 下午10.44.43.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-02-01 下午10.45.31.png">
-<meta property="og:updated_time" content="2018-02-01T14:53:50.792Z">
+<meta property="og:updated_time" content="2018-02-26T15:36:01.529Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自然语言处理系列（7）：TextCNN的调参技巧">
-<meta name="twitter:description" content="这篇文章翻译自A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification">
+<meta name="twitter:title" content="自然语言处理系列（7）：A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification(TextCNN的调参)">
+<meta name="twitter:description" content="这篇文章翻译自A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification 近年来，卷积神经网络在句子分类任务上取得了显著的成绩(Kim, 2014;Kalchbrenner et al .,2014)，然而，这些模型要求从业者指定精">
 <meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-25 下午9.02.47.png">
 
 
@@ -150,7 +150,7 @@
 
 
 
-  <title> 自然语言处理系列（7）：TextCNN的调参技巧 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 自然语言处理系列（7）：A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification(TextCNN的调参) | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -315,7 +315,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/26/自然语言处理系列（7）：TextCNN的调参技巧/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/26/自然语言处理系列（7）：A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification(TextCNN的调参)/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -339,7 +339,7 @@ var _hmt = _hmt || [];
             
             
               
-                自然语言处理系列（7）：TextCNN的调参技巧
+                自然语言处理系列（7）：A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification(TextCNN的调参)
               
             
           </h1>
@@ -412,8 +412,8 @@ var _hmt = _hmt || [];
 
       
         <p>这篇文章翻译自<a href="https://arxiv.org/pdf/1510.03820.pdf" target="_blank" rel="noopener">A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification</a></p>
-<a id="more"></a>
 <p>近年来，卷积神经网络在句子分类任务上取得了显著的成绩(Kim, 2014;Kalchbrenner et al .,2014)，然而，这些模型要求从业者指定精确的模型结构与模型参数，例如，选择滤波器大小、正则化参数等等。目前尚不清楚对于句子分类的任务，不同的参数设定会对模型性能造成什么样的影响。因此，在这里我们对单层卷积神经网络进行情感分析，探索不同的参数对模型性能的影响；我们的目标是找出对语句分类来说的重要因素和不重要因素。由于一层的CNN结构简单，实验的表现也很好(Kim, 2014)，我们就着重使用这个模型来验证(而不同更复杂的模型)，从我们广泛的实证结果中得到一些了实用的建议，这些结果对于那些有兴趣用CNN对句子分类的人来说很有用。我们的实验结果所证实的一个重要结论是，研究人员应该记录性能差异，因为这可能是由于随机初始化或推理产生的。</p>
+<a id="more"></a>
 <h2 id="一、Introduction"><a href="#一、Introduction" class="headerlink" title="一、Introduction"></a>一、Introduction</h2><p>在这个工作中，我们关注的是情感分类的重要任务。最近，研究表明，神经网络(CNNs)对这项任务的表现很好(Kim, 2014; Kalchbrenner et al., 2014; Wang et al., 2015; Goldberg, 2015; Iyyer et al., 2015)。这类模型利用词的分布式表示，首先将包含每个句子转换成一个向量，从而形成一个矩阵作为输入给CNN(图1)。实证结果令人印象深刻。这些模型不需要太复杂就能实现强大的结果：例如，Kim(2014)提出了一种直接的单层CNN架构，它可以在多个任务中实现一致的(或类似的)结果。因此，现在有了令人信服的支持，更倾向于使用CNN而不是稀疏线性模型来进行句子分类任务。然而，CNN的一个缺点是，它们要求从业者指定要使用的精确模型架构，并设置超参数。同样的，做出这样的决定似乎是一种黑箱操作，特别是因为在模型中有许多“自由参数”可以探索。这与广泛用于文本分类的线性模型形成了鲜明的对比，例如正则化的逻辑回归和线性支持向量机(SVMs) (Joachims, 1998)。这样的模型特征通常是通过对文本的稀疏表示而产生的，并且需要相对较少的调优:通常只需要设置正则化项的系数(即:模型偏差)。使用训练数据进行线性搜索来确定参数是设置超参数的方法。</p>
 <p>最近关于CNN的句子分类的研究，已经提供了用于实现报告结果的设置。然而这些参数设定是通过并非是特定的调参过程。但实际上，搜索CNN的参数空间是极其昂贵的，至少有两个原因:（1）训练这些模型的速度相对较慢，即使使用gpu。例如，在SST-1数据集(Socher et al.， 2013)中使用与(Kim, 2014)类似的配置，进行10倍交叉验证，需要1个小时。可能的模型架构和超参数空间是巨大的。例如，我们所讨论的简单的CNN架构，至少需要指定以下内容:输入的词向量表示;滤波器大小;特征图的数量;激活功能;池化策略;dropout比例(如果有的话);和l2范数的系数(如果有的话)。</p>
 <p>实际上，对所有这些参数进行调优是不可行的，尤其是考虑到参数估计所需的运行时间。因此，我们的目的是要根据经验来确定那些需要花费精力进行调整的参数，以及那些在性能上无关紧要的，或者在特定的数据集上有“最佳”效果的参数。我们从前人对神经模型的经验分析中得到启发，该模型由Coates et al.(2011)和Breuel (Breuel, 2015)进行，研究了非监督特征学习效果的影响因素，以及随机梯度下降(SGD)超参数对训练的影响。在这里，我们考虑了模型结构的配置和单层CNNs的超参数值对句子分类任务的影响。我们报告了大量实验的结果，探索了不同的模型结构，运行了7个句子分类数据集。</p>
@@ -568,8 +568,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/24/自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification/" rel="next" title="自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification">
-                <i class="fa fa-chevron-left"></i> 自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification
+              <a href="/2018/01/24/自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification(TextCNN)/" rel="next" title="自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification(TextCNN)">
+                <i class="fa fa-chevron-left"></i> 自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification(TextCNN)
               </a>
             
           </div>
@@ -657,7 +657,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">155</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -668,7 +668,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -679,7 +679,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">220</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -1,0 +1,1053 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="word2vec," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这篇文章翻译自word2vec Parameter Learning Explained Mikolov等人的word2vec模型和应用在近两年受到了广泛的关注。由word2vec模型学习的单词的向量表示已经被证明具有语义意义，并且在各种NLP任务中都很有用。随着越来越多的研究人员实验word2vec或类似的技术,我注意到缺乏全面解释字嵌入模型的参数学习过程的细节的材料,从而使得非神经网络专家的研">
+<meta name="keywords" content="word2vec">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自然语言处理系列（8）：word2vec Parameter Learning Explained（Word2Vec）">
+<meta property="og:url" content="http://yoursite.com/2018/02/14/自然语言处理系列（8）：word2vec Parameter Learning Explained(Word2Vec)/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="这篇文章翻译自word2vec Parameter Learning Explained Mikolov等人的word2vec模型和应用在近两年受到了广泛的关注。由word2vec模型学习的单词的向量表示已经被证明具有语义意义，并且在各种NLP任务中都很有用。随着越来越多的研究人员实验word2vec或类似的技术,我注意到缺乏全面解释字嵌入模型的参数学习过程的细节的材料,从而使得非神经网络专家的研">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-26T15:35:50.423Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自然语言处理系列（8）：word2vec Parameter Learning Explained（Word2Vec）">
+<meta name="twitter:description" content="这篇文章翻译自word2vec Parameter Learning Explained Mikolov等人的word2vec模型和应用在近两年受到了广泛的关注。由word2vec模型学习的单词的向量表示已经被证明具有语义意义，并且在各种NLP任务中都很有用。随着越来越多的研究人员实验word2vec或类似的技术,我注意到缺乏全面解释字嵌入模型的参数学习过程的细节的材料,从而使得非神经网络专家的研">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 自然语言处理系列（8）：word2vec Parameter Learning Explained（Word2Vec） | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-book-film-music">
+          <a href="/book-film-music" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
+            
+            书影音
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/14/自然语言处理系列（8）：word2vec Parameter Learning Explained(Word2Vec)/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                自然语言处理系列（8）：word2vec Parameter Learning Explained（Word2Vec）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-14T23:14:45+08:00">
+                2018-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自然语言处理/" itemprop="url" rel="index">
+                    <span itemprop="name">自然语言处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇文章翻译自<a href="https://arxiv.org/abs/1411.2738" target="_blank" rel="noopener">word2vec Parameter Learning Explained</a></p>
+<p>Mikolov等人的word2vec模型和应用在近两年受到了广泛的关注。由word2vec模型学习的单词的向量表示已经被证明具有语义意义，并且在各种NLP任务中都很有用。随着越来越多的研究人员实验word2vec或类似的技术,我注意到缺乏全面解释字嵌入模型的参数学习过程的细节的材料,从而使得非神经网络专家的研究人员无法理解此类模型的工作机制。</p>
+<p>本文章提供了word2vec模型参数更新方程的详细推导和解释，包括原始的连续bag-of-word (CBOW)和skip-gram (SG)模型，以及优化技术，包括分层的softmax和负采样。对梯度方程的直观解释也提供了数学推导。</p>
+<p>在附录中，提供了关于神经元网络和反向传播的基础知识的综述。我还创建了一个交互式演示，wevi，以促进对模型的直观理解。</p>
+<a id="more"></a>
+<h2 id="一、Continuous-Bag-of-Word-Model"><a href="#一、Continuous-Bag-of-Word-Model" class="headerlink" title="一、Continuous Bag-of-Word Model"></a>一、Continuous Bag-of-Word Model</h2><h3 id="1-1-One-word-context"><a href="#1-1-One-word-context" class="headerlink" title="1.1 One-word context"></a>1.1 One-word context</h3><p>我们从Mikolov et al. (2013a)中引入的最简单的一种连续的单词模型(CBOW)开始。我们假设每个上下文只考虑一个词，这意味着模型将根据上下文单词来预测一个目标单词，这就像一个三元模型。对于不熟悉神经网络的读者来说，建议通过附录A来快速回顾重要的概念和术语，然后再进一步讨论。</p>
+<p>图1显示了简化的上下文定义下的网络模型。我们设定词汇量大小为V，隐藏层的大小为N。相邻层上的单元是全连接的。输入是一个one-hot编码向量，这意味着对于给定的输入上下文，在V个单元${x_1，·，·，x_V}$中只有一个单元为1，所有其他单元都是0。输入层和输出层之间的权值可以表示为一个$V×N$矩阵$W$。$W$的每一行是与输入层的相关词的N维向量表示$v_w$。形式上，$W$的第$i$行是$v_w^T$。给定一个上下文(一个单词)，假设$x_k=1 $、$x_{k’}=0$（$k≠k$）,我们有</p>
+<script type="math/tex; mode=display">h=W_T·x=W^{T}_{(k,:)}:=v_{w_I}^T······（1）</script><p>本质上就是复制$W$的第k行至$h$。$v_{wI}$是输入词$w_I$的向量表示。这意味着隐含层单元的链接(激活)函数是线性的(即:，直接将其和输入加权求和至下一层。</p>
+<p>从隐层到输出层,有一个不同的权重矩阵$W′= { w_{ij}^′}$，这是一个$N×V$的矩阵。使用这些权重，我们可以计算词库中每个单词的得分$u_j$。</p>
+<script type="math/tex; mode=display">u_j=v_{w_j}^{′T}·h······（2）</script><p>$v^′_w$是矩阵$W^′$的第$j$列，然后我们可以使用softmax，一个对数线性$j$分类模型，来获取单词的后验分布，这是一个多项分布。</p>
+<script type="math/tex; mode=display">p(w_j|w_I) = y_j =  \frac{exp(u_j)}{\sum_{j'=1}^Vexp(u_{j'})} ,······（3）</script><p>其中$y_j$是输出层的第$j$个单元的输出。将(1)和(2)代入(3)，得到。</p>
+<script type="math/tex; mode=display">p(w_j|w_I)=\frac{exp(v_{w_j}'^Tv_{w_I})}{exp(v_{w_j'}'^Tv_{w_I})}······（4）</script><p>注意$v_w$和$v’_w$是词$w$的两种表示。$v_w$来自矩阵$W$的行，是输入层至隐藏层的权重矩阵，$v’_w$来自矩阵$W$的列，是隐藏层到输出层的权重矩阵。在随后的分析中，我们把$v_w$称为“输入向量”，把$v’_w$称为词$w$的“输出向量”。</p>
+<blockquote>
+<p>隐藏层到输出层权重的更新公式</p>
+</blockquote>
+<p>现在让我们推导这个模型的权值更新方程。虽然实际的计算是不切实际的(解释如下)，但我们正在做以下的推导，以获得对这个原始模型的见解，并没有使用任何技巧。有关反向传播的基础知识，请参阅附录a。</p>
+<p>训练目标(一个训练样本)是最大化(4)式，在给定输出上下文单词$w_I$的条件下，观察实际输出单词$w_o$的条件概率。</p>
+<script type="math/tex; mode=display">max p({ w }_{ O }|{ w }_{ I })=max { y }_{ { j }^{ * } }\qquad  (5)\\ \qquad \qquad \qquad = max  log  { y }_{ { j }^{ * } }\qquad (6)\\ \qquad \qquad \qquad \qquad = { u }_{ { j }^{ * } }-log\sum _{ { j }^{ ' }=1 }^{ V }{ exp({ u }_{ { j }^{ ' } }):= -E } \qquad (7)</script><p>其中$E=-log p(w_O|w_I)$是我们的损失函数（我们希望最小化$E$），$j^*$是输出层中的实际输出词的索引。注意，这个损失函数可以理解为两个概率分布之间的交叉熵衡量的一个特例。</p>
+<p>现在让我们推导出隐藏和输出层之间权重的更新方程。求$E$关于第$j$个单位网络输入$u_j$的导数，我们得到：</p>
+<script type="math/tex; mode=display">\frac{\partial E}{\partial u_j}=y_j-t_j := e_j   (8)</script><p>比如$t_j=1(j=j^*)$，只有当第$j$个单元是实际输出词时，$t_j$为1，否则$t_j=0$。注意，这个导数只是输出层的预测误差$e_j$。</p>
+<p>接下来我们对$w’_{ij}$求导获得从隐藏层到输出层的梯度。</p>
+<script type="math/tex; mode=display">\frac{\partial E}{\partial w'_{ij}}=\frac{\partial E}{\partial u_j}·\frac{\partial u_j}{\partial w'_{ij}}=e_j·h_i \qquad (9)</script><p>因此,使用随机梯度下降法,得到隐藏的权重更新方程→输出权值:</p>
+<script type="math/tex; mode=display">w^{'(new)}_{ij}=w^{'(old)_{ij}}-\eta · e_j· h_i \qquad (10 )</script><p>或者</p>
+<script type="math/tex; mode=display">v^{'(new)}_{j}=v^{'(old )}_{w_j}-\eta · e_j · h \qquad for j=1,2,···,V.   \qquad (11 )</script><p>其中$eta&gt;0$为学习率，$e_j=y_j-t_j$，$h_i$是隐藏层的第i个单元。$v’_{w_j}$是$w_j$的输出向量。注意，这个更新方程意味着我们必须遍历词汇表中的每个可能单词，检查它的输出概率$y_j$，并将$y_j$与它的期望输出$t_j$(0或1)进行比较。如果$y_j&gt;t_j$(即高估)，我们就从$v’_{w_j}$移除一部分的隐藏层向量$h$(比如$v_{w_I}$)，使得$v’_{w_j}$远离$v_{w_I}$；如果$y_j&lt;t_j$(即低估，当且仅当$t_j=1$时成立，比如$w_j=w_O$)，我们就添加一些$h$至$v’_{w_O}$，使得$v’_{w_O}$靠近$v_{w_I}$。如果$y_j$非常接近$t_j$，根据更公式，权重只会发生非常小的变化。再次注意，$v_w$(输入向量)和$v’_w$(输出向量)是词$w$两种不同的向量表示。</p>
+<blockquote>
+<p>输入层到隐藏层的权重更新公式</p>
+</blockquote>
+<p>已经获取了$W’$的更新公式，现在我们来看看$W$。我们对$E$求隐藏层的输出的导数，得到：</p>
+<script type="math/tex; mode=display">\frac{\partial E}{\partial h_i}=\sum_{j=1}^V\frac{\partial E}{\partial u_j}·\frac{\partial u_j}{\partial h_i} = \sum_{j=1}^V e_j · w'_{ij}:=EH_i \qquad (12)</script><p>其中$h_i$是隐藏层第i个单元的输出；$u_j$是在(2)式中被定义的，即输出层的第j个单元的网络输入；$e_j=y_j-t_j$是输出层中第j个词的预测误差。$EH$是一个N维的向量，是词库中所有单词的输出向量的预测误差加权求和。</p>
+<p>接下来我们对$E$求$W$的导数，首先，回想一下隐藏层对输入层的值进行线性计算。展开（1）中的向量表示，我们得到</p>
+<script type="math/tex; mode=display">h_i=\sum_{k=1}^Vx_k · w_{k_i}</script><p>现在我们可以求E关于W的每个元素的导数，得到:</p>
+<script type="math/tex; mode=display">\frac{\partial E}{\partial w_{k_i}}=\frac{\partial E}{\partial h_i}· \frac{\partial h_i}{\partial w_{k_i}}=EH_i · x_k \qquad (14)</script><p>这是$x$和$EH$的点积等式，</p>
+<script type="math/tex; mode=display">\frac{\partial E}{\partial W}=x ⊗ EH=xEH^{T} \qquad (15)</script><p>这样我们得到了一个$V×N$的矩阵。因为x向量中只有一个元素非零，$\frac{\partial E}{\partial W}$中只有一行非零，且那一行 的值为$EH^T$，一个N维的向量。我们得到了w的更新公式：</p>
+<script type="math/tex; mode=display">v_{w_I}^{(new)}=v_{w_I}^{(old)}-\eta EH^T\qquad (16)</script><p>其中$v_{w_I}$是$W$的一行，及唯一的上下文词的输入向量，也是唯一的导数不为零的$W$的行，所有其他的$W$的行在迭代后保持不变，因为他们的导数为零。</p>
+<p>从直觉上来看，因为向量$EH$是语料库中所有单词的输出并进行预测误差加权后得到的总和，我们可以将（16）理解成为词汇中的每个输出向量的一部分添加到上下文单词的输入向量中。如果在输出层中，一个单词wj作为输出词的概率被高估$(y_j &gt; t_j)$，那么上下文单词$w_I$的输入向量将倾向于远离$w_j$的输出向量。反之，如果$w_j$作为输出词的概率被低估$(y_j &lt; t_j)$，则输入向量$w_I$将趋向于接近$w_j$的输出向量。如果$w_j$的概率相对准确的预测，那么它对$w_I$的输入向量的改变量很小。$w_I$的输入向量的变动是由词汇中所有向量的预测误差决定的。预测误差越大，一个单词对上下文单词输入向量的变动产生的影响就越大。当我们通过从训练语料库中生成的上下文目标词对来迭代更新模型参数时，对向量的影响将会累积。我们可以想象一个单词w的输出向量被w的相邻邻域的输入向量“拖拽”，就好像w的向量和它的邻域的向量之间有物理的弦。同样，输入向量也可以被认为是被许多输出向量拖拽的。这种解释可以提醒我们注意重力，或者是力向图的布局。每个虚弦的平衡长度与相关的两个单词之间的共存强度以及学习速率有关。经过多次迭代，输入和输出向量的相对位置最终会趋于稳定。</p>
+<h3 id="1-2-Multi-word-context"><a href="#1-2-Multi-word-context" class="headerlink" title="1.2 Multi-word context"></a>1.2 Multi-word context</h3><p>图2显示了带有多词上下文的CBOW模型。当计算隐层输出,而不是直接复制的输入向量输入上下文的话,CBOW模型需要的平均向量的输入上下文的话,和使用的产品输入→隐藏权重矩阵和平均向量作为输出。</p>
+<script type="math/tex; mode=display">h=\frac{1}{C}W^T(x_1+x_2+···+x_C)\qquad (17)\\=\frac{1}{C}(v_{w_1}+v_{w_2}+···+v_{w_C})^T\qquad (18)</script><p>其中$C$是上下文中词汇的数量，$w_1,···,w_C$是上下文的词汇，$v_w$是一个词$w$的输入向量。损失函数为：</p>
+<script type="math/tex; mode=display">E=-log p(w_O|w_{I,1},···,w_{I,C})\qquad (19)\\=-u_{j^*}+log\sum_{j'=1}^Vexp(u'_j)\qquad (20)\\=-v_{w_O}^T·h+log \sum^{V}_{j'=1}exp(v_{w_j}'^T·h)\qquad (21)</script><p>可以看到和（7）式one-word-context模型的目标函数相同，除了$h$不同，将（1）式替换为（18）式。</p>
+<p>从隐藏层到输出层权重更新公式和one-word-context模型保持一致，copy如下：</p>
+<script type="math/tex; mode=display">v^{'(new)}_{j}=v^{'(old )}_{w_j}-\eta · e_j · h \qquad for j=1,2,···,V.   \qquad (22 )</script><p>注意,我们需要对隐藏层→输出层的权重矩阵的每个元素为每个训练实例进行更新。</p>
+<p>输入层到隐藏层的权重更新公式与(16)类似,只是现在我们需要应用下列方程至上下文的每一个词:</p>
+<script type="math/tex; mode=display">v_{w_I}^{(new)}=v_{w_I}^{(old)}-\frac{1}{C}\eta EH^T\qquad for \ j=1,2,···，C\qquad (23)</script><p>其中$v_{w_{I,c}}$是在输入上下文中第c个词的输入向量；$\eta$是一个正的学习率；$EH=\frac{\partial E}{\partial h_i}$由（12）式给出。这个更新公式的直观解释和（16）式类似。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/word2vec/" rel="tag"># word2vec</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/05/《行为经济学讲义——演化论视角》 第二讲/" rel="next" title="《行为经济学讲义——演化论视角》 第一讲   导言">
+                <i class="fa fa-chevron-left"></i> 《行为经济学讲义——演化论视角》 第一讲   导言
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/25/自然语言处理系列（9）：A Convolutional Neural Network for Modelling Sentences(DCNN)/" rel="prev" title="自然语言处理系列（9）：A Convolutional Neural Network for Modelling Sentences(DCNN)">
+                自然语言处理系列（9）：A Convolutional Neural Network for Modelling Sentences(DCNN) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">220</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="箴言">
+                    
+                      <i class="fa fa-fw fa-firefox"></i>箴言</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="阅读">
+                    
+                      <i class="fa fa-fw fa-book"></i>阅读</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Continuous-Bag-of-Word-Model"><span class="nav-text">一、Continuous Bag-of-Word Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-One-word-context"><span class="nav-text">1.1 One-word context</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Multi-word-context"><span class="nav-text">1.2 Multi-word context</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>

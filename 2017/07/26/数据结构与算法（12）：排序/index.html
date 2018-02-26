@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005389746937.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005389874146.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-10%20%E4%B8%8B%E5%8D%8812.50.56.png">
-<meta property="og:updated_time" content="2017-09-01T06:36:47.000Z">
+<meta property="og:updated_time" content="2018-02-05T05:54:33.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（12）：排序">
 <meta name="twitter:description" content="经典排序算法在面试中占有很大的比重，也是基础，在这里整理并用Java实现了几大经典排序算法，包括冒泡排序、插入排序、选择排序、希尔排序、归并排序、快速排序、堆排序、同排序。我们默认将一个无序数列排序成由小到大。">
@@ -421,7 +421,7 @@ var _hmt = _hmt || [];
 <p>时间复杂度：最好$O(n)$；最坏$O(n^2)$；平均$O(n^2)$<br>空间复杂度：$O(1)$<br>稳定性：稳定</p>
 </blockquote>
 <h2 id="二、选择排序（Selection-Sort）"><a href="#二、选择排序（Selection-Sort）" class="headerlink" title="二、选择排序（Selection Sort）"></a>二、选择排序（Selection Sort）</h2><h3 id="2-1-思想"><a href="#2-1-思想" class="headerlink" title="2.1 思想"></a>2.1 思想</h3><p>每个回合都选择出剩下的元素中最大的那个，选择的方法是首先默认第一元素是最大的，如果后面的元素比它大的话，那就更新剩下的最大的元素值，找到剩下元素中最大的之后将它放入到合适的位置就行了。和冒泡排序类似，只是找剩下的元素中最大的方式不同而已。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-09%20%E4%B8%8A%E5%8D%889.15.53.png" alt="屏幕快照 2017-03-09 上午9.15.53">   &lt;/center&gt;</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-09%20%E4%B8%8A%E5%8D%889.15.53.png" alt="屏幕快照 2017-03-09 上午9.15.53">  </p>
 <h3 id="2-2-代码"><a href="#2-2-代码" class="headerlink" title="2.2 代码"></a>2.2 代码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Demo</span></span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">selectionSort</span><span class="params">(<span class="keyword">int</span>[] arr)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> temp, min = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> index = <span class="number">0</span>; index &lt; arr.length - <span class="number">1</span>; ++index) &#123;</div><div class="line">            min = index;</div><div class="line">            <span class="comment">// 循环查找最小值</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = index + <span class="number">1</span>; j &lt; arr.length; ++j) &#123;</div><div class="line">                <span class="keyword">if</span> (arr[min] &gt; arr[j]) &#123;</div><div class="line">                    min = j;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (min != index) &#123;</div><div class="line">                temp = arr[index];</div><div class="line">                arr[index] = arr[min];</div><div class="line">                arr[min] = temp;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span>[] arr = &#123;<span class="number">10</span>,<span class="number">30</span>,<span class="number">20</span>,<span class="number">60</span>,<span class="number">40</span>,<span class="number">50</span>&#125;;</div><div class="line">        Demo.selectionSort(arr);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i:arr)&#123;</div><div class="line">            System.out.print(i+<span class="string">","</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="2-3-时空复杂度"><a href="#2-3-时空复杂度" class="headerlink" title="2.3 时空复杂度"></a>2.3 时空复杂度</h3><p>对具有$n$个数据元素的序列进行排序时，选择排序需要进行$n-1$趟选择。进行第$i$趟选择时，后面已经有$i-1$个数据元素排好序，第$i$趟从剩下的$n-i+1$个数据元素中选择一个关键字最大的数据元素，并将它与第$i$个数据元素交换，这样即可使后面的$i$个数据元素排好序。</p>
 <p>选择排序的关键字比较次数与序列的初始状态无关。对n个数据元素进行排序时，第一趟的比较次数为$n-1$，第$i$趟的比较次数是$n-1$次，第$n-1$趟（最后一趟）的比较次数是1次。因此，总的比较次数为$n(n-1)/2$</p>
@@ -695,7 +695,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">155</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -706,7 +706,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -717,7 +717,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">220</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

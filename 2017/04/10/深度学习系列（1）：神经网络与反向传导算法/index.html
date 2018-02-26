@@ -108,7 +108,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-16%20%E4%B8%8A%E5%8D%8810.29.46.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-16%20%E4%B8%8A%E5%8D%8810.34.07.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-16%20%E4%B8%8A%E5%8D%8810.44.15.png">
-<meta property="og:updated_time" content="2017-12-26T10:41:34.003Z">
+<meta property="og:updated_time" content="2018-02-05T05:53:31.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（1）：神经网络与反向传播算法">
 <meta name="twitter:description" content="一、神经元首先我们从最简单的神经网络——神经元讲起，以下即为一个神经元（Neuron）的图示：">
@@ -411,7 +411,8 @@ var _hmt = _hmt || [];
 <p>这个神经元是一个以$x_1,x_2,···,x_K$以及截距$b$为输入值的运算单元，其输出为</p>
 <script type="math/tex; mode=display">
 \alpha =\sigma\left(w^Ta+b\right)=\sigma\left(w_1a_1+w_2a_2+···+w_Ka_K+b\right)</script><p>其中$w$为权值项，$b$为偏置项，函数$\sigma$被称为“激活函数”。之前在学习感知机的时候，我们知道感知机的激活函数是阶跃函数；而当我们说神经元的时，激活函数往往选择sigmoid函数或tanh函数。激活函数的作用就是将之前加法器输出的函数值$z$进行空间映射，如下图所示：</p>
-<p><div align="center"><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-16%20%E4%B8%8A%E5%8D%8810.50.34.png" alt="屏幕快照 2017-04-16 上午10.50.34"><br>可以看出，这个单一神经元的输入输出的映射关系其实就是一个逻辑回归（logistic regression）。</div></p>
+<p><div align="center"><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-16%20%E4%B8%8A%E5%8D%8810.50.34.png" alt="屏幕快照 2017-04-16 上午10.50.34"></div></p>
+<p>可以看出，这个单一神经元的输入输出的映射关系其实就是一个逻辑回归（logistic regression）。</p>
 <p>关于sigmoid阶跃函数的性质，在逻辑回归中已经了解过了，有一个等式我们会用到：$f^,(z)=f(z)(1-f(z))$。现在我们简要看一下双曲正切函数（tanh）。它的表达式为：</p>
 <script type="math/tex; mode=display">
 f\left(z\right)=\tan\textrm{h}\left(z\right)=\frac{e^z-e^{-z}}{e^z+e^{-z}}</script><p>它们图像为<div align="center"><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-15%20%E4%B8%8A%E5%8D%8811.18.54.png" alt="屏幕快照 2017-04-15 上午11.18.54"><br>tanh（z）函数是sigmoid函数的一种变体，它的取值范围为[-1,1]，而不是sigmoid函数的[0,1]，它的导数为$f^，(z)=1-(f(z))^2$</div></p>
@@ -659,7 +660,7 @@ L\left(\theta\right)=\sum_{n=1}^N{C^n\left(\theta\right)}</script><p>对参数$w
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">155</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -670,7 +671,7 @@ L\left(\theta\right)=\sum_{n=1}^N{C^n\left(\theta\right)}</script><p>对参数$w
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -681,7 +682,7 @@ L\left(\theta\right)=\sum_{n=1}^N{C^n\left(\theta\right)}</script><p>对参数$w
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">220</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

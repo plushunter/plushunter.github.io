@@ -86,13 +86,13 @@
 
 
 
-<meta name="description" content="引言GBDT（Gradient Boosting Decision Tree）是一种迭代的决策树算法，又叫 MART（Multiple Additive Regression Tree)，它通过构造一组弱的学习器（树），并把多颗决策树的结果累加起来作为最终的预测输出。该算法将决策树与集成思想进行了有效的结合。">
+<meta name="description" content="一、引言GBDT（Gradient Boosting Decision Tree）是一种迭代的决策树算法，又叫 MART（Multiple Additive Regression Tree)，它通过构造一组弱的学习器（树），并把多颗决策树的结果累加起来作为最终的预测输出。该算法将决策树与集成思想进行了有效的结合。">
 <meta name="keywords" content="机器学习,GBDT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习算法系列（7）：GBDT">
 <meta property="og:url" content="http://yoursite.com/2017/01/22/机器学习算法系列（7）：GBDT/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="引言GBDT（Gradient Boosting Decision Tree）是一种迭代的决策树算法，又叫 MART（Multiple Additive Regression Tree)，它通过构造一组弱的学习器（树），并把多颗决策树的结果累加起来作为最终的预测输出。该算法将决策树与集成思想进行了有效的结合。">
+<meta property="og:description" content="一、引言GBDT（Gradient Boosting Decision Tree）是一种迭代的决策树算法，又叫 MART（Multiple Additive Regression Tree)，它通过构造一组弱的学习器（树），并把多颗决策树的结果累加起来作为最终的预测输出。该算法将决策树与集成思想进行了有效的结合。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%882.32.52.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%884.29.09.png">
@@ -102,10 +102,10 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%883.44.51.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%885.37.47.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%885.44.57.png">
-<meta property="og:updated_time" content="2017-12-26T08:46:11.095Z">
+<meta property="og:updated_time" content="2018-02-05T05:50:30.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（7）：GBDT">
-<meta name="twitter:description" content="引言GBDT（Gradient Boosting Decision Tree）是一种迭代的决策树算法，又叫 MART（Multiple Additive Regression Tree)，它通过构造一组弱的学习器（树），并把多颗决策树的结果累加起来作为最终的预测输出。该算法将决策树与集成思想进行了有效的结合。">
+<meta name="twitter:description" content="一、引言GBDT（Gradient Boosting Decision Tree）是一种迭代的决策树算法，又叫 MART（Multiple Additive Regression Tree)，它通过构造一组弱的学习器（树），并把多颗决策树的结果累加起来作为最终的预测输出。该算法将决策树与集成思想进行了有效的结合。">
 <meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-31%20%E4%B8%8B%E5%8D%882.32.52.png">
 
 
@@ -399,7 +399,7 @@ var _hmt = _hmt || [];
       
 
       
-        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>GBDT（Gradient Boosting Decision Tree）是一种迭代的决策树算法，又叫 MART（Multiple Additive Regression Tree)，它通过构造一组弱的学习器（树），并把多颗决策树的结果累加起来作为最终的预测输出。该算法将决策树与集成思想进行了有效的结合。</p>
+        <h2 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h2><p>GBDT（Gradient Boosting Decision Tree）是一种迭代的决策树算法，又叫 MART（Multiple Additive Regression Tree)，它通过构造一组弱的学习器（树），并把多颗决策树的结果累加起来作为最终的预测输出。该算法将决策树与集成思想进行了有效的结合。</p>
 <a id="more"></a>
 <p>GBDT的思想使其具有天然优势可以发现多种有区分性的特征以及特征组合。自算法的诞生之初，它就和SVM一起被认为是泛化能力（generalization）较强的算法。近些年来更因为被用于构建搜索排序的机器学习模型而引起广泛的关注。它最早见于yahoo，后被广泛应用在搜索排序、点击率预估上。业界中，Facebook使用其来自动发现有效的特征、特征组合，来作为LR模型中的特征，以提高 CTR预估（Click-Through Rate Prediction）的准确性；GBDT在淘宝的搜索及预测业务上也发挥了重要作用。</p>
 <p>除此之外，GBDT还是目前竞赛中最为常用的一种机器学习算法，因为它不仅可以适用于多种场景，而且相比较于其他算法还有着出众的准确率，如此优异的性能也让GBDT收获了机器学习领域的“屠龙刀”这一赞誉。</p>
@@ -690,7 +690,7 @@ f_m\left(x\right)=f_{m-1}\left(x\right)+\sum_{j=1}^J{c_{mj}I\left(x\in R_{mj}\ri
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">151</span>
+                  <span class="site-state-item-count">155</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -701,7 +701,7 @@ f_m\left(x\right)=f_{m-1}\left(x\right)+\sum_{j=1}^J{c_{mj}I\left(x\in R_{mj}\ri
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -712,7 +712,7 @@ f_m\left(x\right)=f_{m-1}\left(x\right)+\sum_{j=1}^J{c_{mj}I\left(x\in R_{mj}\ri
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">214</span>
+                  <span class="site-state-item-count">220</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -826,7 +826,7 @@ f_m\left(x\right)=f_{m-1}\left(x\right)+\sum_{j=1}^J{c_{mj}I\left(x\in R_{mj}\ri
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Regression-Desicion-Tree：回归树"><span class="nav-text">二、Regression Desicion Tree：回归树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-回归树简介"><span class="nav-text">2.1 回归树简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-回归树的生成"><span class="nav-text">2.2 回归树的生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Boosting-Decision-Tree：提升树"><span class="nav-text">三、Boosting Decision Tree：提升树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-提升树模型"><span class="nav-text">3.1 提升树模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-提升树算法"><span class="nav-text">3.2 提升树算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-提升树实例"><span class="nav-text">3.3 提升树实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Gradient-Boosting-Decision-Tree：梯度提升决策树"><span class="nav-text">四、Gradient Boosting Decision Tree：梯度提升决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-GBDT简介"><span class="nav-text">4.1 GBDT简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-GBDT算法步骤"><span class="nav-text">4.2 GBDT算法步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、关于GBDT的一些问题"><span class="nav-text">五、关于GBDT的一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-为什么xgboost-gbdt在调参时为什么树的深度很少就能达到很高的精度？"><span class="nav-text">5.1 为什么xgboost/gbdt在调参时为什么树的深度很少就能达到很高的精度？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、参考资料"><span class="nav-text">六、参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、引言"><span class="nav-text">一、引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Regression-Desicion-Tree：回归树"><span class="nav-text">二、Regression Desicion Tree：回归树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-回归树简介"><span class="nav-text">2.1 回归树简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-回归树的生成"><span class="nav-text">2.2 回归树的生成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Boosting-Decision-Tree：提升树"><span class="nav-text">三、Boosting Decision Tree：提升树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-提升树模型"><span class="nav-text">3.1 提升树模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-提升树算法"><span class="nav-text">3.2 提升树算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-提升树实例"><span class="nav-text">3.3 提升树实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Gradient-Boosting-Decision-Tree：梯度提升决策树"><span class="nav-text">四、Gradient Boosting Decision Tree：梯度提升决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-GBDT简介"><span class="nav-text">4.1 GBDT简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-GBDT算法步骤"><span class="nav-text">4.2 GBDT算法步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、关于GBDT的一些问题"><span class="nav-text">五、关于GBDT的一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-为什么xgboost-gbdt在调参时为什么树的深度很少就能达到很高的精度？"><span class="nav-text">5.1 为什么xgboost/gbdt在调参时为什么树的深度很少就能达到很高的精度？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、参考资料"><span class="nav-text">六、参考资料</span></a></li></ol></div>
             
 
           </div>
