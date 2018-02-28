@@ -86,21 +86,21 @@
 
 
 
-<meta name="description" content="2018年人大应用统计专业课真题 【解析待补充】">
+<meta name="description" content="2018年人大应用统计专业课真题 【已完成解析】">
 <meta name="keywords" content="人大应统,考研">
 <meta property="og:type" content="article">
 <meta property="og:title" content="日知录（4）：2018年人大应用统计专业课真题">
 <meta property="og:url" content="http://yoursite.com/2017/12/30/日知录（4）：2018年人大应用统计专业课真题及解析/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="2018年人大应用统计专业课真题 【解析待补充】">
+<meta property="og:description" content="2018年人大应用统计专业课真题 【已完成解析】">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15152253704365.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-06 下午4.22.46.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-06 下午4.21.27.png">
-<meta property="og:updated_time" content="2018-01-06T09:40:19.780Z">
+<meta property="og:updated_time" content="2018-02-28T08:20:41.012Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="日知录（4）：2018年人大应用统计专业课真题">
-<meta name="twitter:description" content="2018年人大应用统计专业课真题 【解析待补充】">
+<meta name="twitter:description" content="2018年人大应用统计专业课真题 【已完成解析】">
 <meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15152253704365.jpg">
 
 
@@ -395,7 +395,7 @@ var _hmt = _hmt || [];
 
       
         <p>2018年人大应用统计专业课真题</p>
-<p>【解析待补充】</p>
+<p>【已完成解析】</p>
 <a id="more"></a>
 <h3 id="一、第一题【20分】"><a href="#一、第一题【20分】" class="headerlink" title="一、第一题【20分】"></a>一、第一题【20分】</h3><p>1.1 请说明雷达图和箱线图的基本要点。<br>1.2 下面的数据集为8个同学的数学、语文和英语的成绩，如何利用雷达图和箱线图来描述这个数据集？</p>
 <div class="table-container">
@@ -555,11 +555,50 @@ var _hmt = _hmt || [];
 </li>
 <li><p>方差齐性检验检验：方差齐性的图示法包括箱线图和残差图。检验法包括Bartlett检验和Levene检验等</p>
 </li>
-<li>独立性检验：独立性可以在实验设计之前予以确定，不需要检验<h3 id="六、第六题【20分】"><a href="#六、第六题【20分】" class="headerlink" title="六、第六题【20分】"></a>六、第六题【20分】</h3>在同一个概率空间中是否存在三个随机事件$A,B,C$使得同时成立下面三个不等式：<script type="math/tex; mode=display">P(A|B,C)≤P(A|\bar {B},C) \\\ P(A|B,\bar {C})<P(A|\bar {B}, \bar {C})\\\ P(A|B)>P(A|\bar B)</script>如果存在，请列举一个例子；若不存在，证明你的结论。<h3 id="七、第七题【20分】"><a href="#七、第七题【20分】" class="headerlink" title="七、第七题【20分】"></a>七、第七题【20分】</h3>设$x_1,x_2······,x_n$为一个来自均值为$\mu$，方差为$\sigma^2$的分布的样本，$\mu$和$\sigma ^2$未知，考虑均值$\mu$的线性无偏估计类<script type="math/tex; mode=display">
-L=\{T\left(X\right)：T\left(X\right)=\sum_{i=1}^n{x_i}.c_i \}  \\\ 其中c_i是常数</script>求出$L$中$T(X)$为$\mu$的无偏估计的充要条件，并求出无偏估计类中方差一致最小的估计。</li>
+<li>独立性检验：独立性可以在实验设计之前予以确定，不需要检验<h3 id="六、第六题【20分】"><a href="#六、第六题【20分】" class="headerlink" title="六、第六题【20分】"></a>六、第六题【20分】</h3>在同一个概率空间中是否存在三个随机事件$A,B,C$使得同时成立下面三个不等式：<script type="math/tex; mode=display">P(A|B,C)≤P(A|\bar {B},C) \\\ P(A|B,\bar {C})<P(A|\bar {B}, \bar {C})\\\ P(A|B)>P(A|\bar B)</script>如果存在，请列举一个例子；若不存在，证明你的结论。</li>
 </ol>
 <p>【解答】</p>
+<p>存在。该题实际是考察辛普森悖论，大家可以自行了解一下。作如下假设：</p>
+<p>A事件：被录取<br>B事件：是男生<br>C事件：左撇子</p>
+<p> B事件和C事件同时发生，即是男生，左撇子有1人<br> B事件发生，C事件不发生，即是男生，右撇子有4人<br> B事件不发生，C事件发生，即是女生，左撇子的有4人<br> B事件不发生，C事件不发生，即是女生，右撇子的有1人</p>
+<script type="math/tex; mode=display">P(A|BC)=0</script><script type="math/tex; mode=display">P(A|B\bar C)=\frac{3}{4}</script><script type="math/tex; mode=display">P(A|\bar BC)=\frac{1}{4}</script><script type="math/tex; mode=display">P(A|\bar B \bar C)=1</script><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>男生B</th>
+<th>女生$\bar B$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>左撇子C</td>
+<td>1(录取0人)</td>
+<td>4(录取1人)</td>
+</tr>
+<tr>
+<td>右撇子$\bar C$</td>
+<td>4（录取3人）</td>
+<td>1(录取1人)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p> 那么</p>
+<script type="math/tex; mode=display">P(A|B)=\frac{3}{5}</script><script type="math/tex; mode=display">P(A|\bar B)=\frac {2}{5}</script><p> 所以</p>
+<script type="math/tex; mode=display">P(A|B)>P(A|\bar B)</script><h3 id="七、第七题【20分】"><a href="#七、第七题【20分】" class="headerlink" title="七、第七题【20分】"></a>七、第七题【20分】</h3><p>设$x_1,x_2······,x_n$为一个来自均值为$\mu$，方差为$\sigma^2$的分布的样本，$\mu$和$\sigma ^2$未知，考虑均值为$\mu$的线性无偏估计类</p>
+<script type="math/tex; mode=display">
+L=\{T\left(X\right)：T\left(X\right)=\sum_{i=1}^n{x_i}.c_i \}  \\\ 其中c_i是常数</script><p>求出$L$中$T(X)$为$\mu$的无偏估计的充要条件，并求出无偏估计类中方差一致最小的估计。</p>
+<p>【解答】</p>
+<script type="math/tex; mode=display">E[T(X)]=E(\sum_{i=1}^n x_ic_i)\\=\sum_{i=1}^nEx_ic_i=\sum_{i=1}^nc_i Ex_i\\=\mu \sum_{i=1}^nc_i=\mu</script><p>所以$\sum_{i=1}^nc_i=1$</p>
+<script type="math/tex; mode=display">var[T(X)]=\sum_{i=1}^nc_i^2var(x_i)\\=\sigma ^2 \sum_{i=1}^nc_i^2≥\frac{\sigma^2}{n}</script><p>当且仅当$c_i=\frac{1}{n}, \qquad i=1,2，····，n$时,等号成立，即$var[T(X)]=\frac{1}{n}\sigma^2$<br>所以无偏估计类方差一致最小的估计为$T(X)=\frac{1}{n}\sum_{i=1}^n x_i$</p>
 <h3 id="八、第八题【10分】"><a href="#八、第八题【10分】" class="headerlink" title="八、第八题【10分】"></a>八、第八题【10分】</h3><p>设$X$是一个正值随机变量，方差有界，证明：对于$\forall 0&lt;\lambda &lt;1$, 有</p>
+<script type="math/tex; mode=display">P(X>\lambda EX)\geqslant\left(1-\lambda\right)^2\frac{\left(EX\right)^2}{EX^2}</script><p>【解题】<br>要证明$P(X&gt;\lambda EX)\quad \geqslant\quad { (1-\lambda ) }^{ 2 }\frac { { (EX) }^{ 2 } }{ E{ X }^{ 2 } } $</p>
+<p>即证明$P(X&gt;\lambda EX)·{ EX }^{ 2 }≥\quad { (1-\lambda ) }^{ 2 }·{ (EX) }^{ 2 }$</p>
+<p>不等式左边，根据示性函数$I(X-Y)=\begin{cases} 1\quad X-Y&gt;0 \\ 0\quad X-Y≤0 \end{cases}$和定义$P(X&gt;Y)=E[I(X&gt;Y)]$可得</p>
+<script type="math/tex; mode=display">P(X>\lambda EX)·EX^2 = E[I(X>\lambda EX)]·EX^2 =E[I^2(X>\lambda EX)]·EX^2  \qquad ①</script><p>根据柯西不等式$(EXY)^2≤EX^2·EY^2$，得</p>
+<script type="math/tex; mode=display">①≥{E[X·I(X>\lambda EX)]}^2 \qquad ②</script><p>又因为$X·I(X&gt;\lambda EX)=\begin{cases} X·1\quad X&gt;\lambda EX\quad  \\ X·0\quad X≤\lambda EX \end{cases}≥X-\lambda EX$<br>所以</p>
+<script type="math/tex; mode=display">②≥[E(X-\lambda EX)]^2=(EX-\lambda EX)^2=(1-\lambda)^2(EX)^2  \qquad ③</script><p>综合①和③，得到</p>
 <script type="math/tex; mode=display">P\left\{X>\lambda EX\right\}\geqslant\left(1-\lambda\right)^2\frac{\left(EX\right)^2}{EX^2}</script><h3 id="九、第九题【10分】"><a href="#九、第九题【10分】" class="headerlink" title="九、第九题【10分】"></a>九、第九题【10分】</h3><p> 设地区生产总之（亿元）为因变量，固定资产投资（亿元）、社会消费品零售总额（亿元）、出口总额（亿美元）、地方财政收入（亿元）、电力消费量（亿千瓦时）、居民消费水平（元）为自变量，根据31个样本数据得到回归结果如下：</p>
 <p>Coefficients </p>
 <div class="table-container">
