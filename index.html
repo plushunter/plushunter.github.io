@@ -213,12 +213,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-book-film-music">
-          <a href="/book-film-music" rel="section">
+        <li class="menu-item menu-item-reading">
+          <a href="/reading" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
             
-            书影音
+            书琐记
           </a>
         </li>
       
@@ -284,6 +284,148 @@ var _hmt = _hmt || [];
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/01/自然语言处理系列（10）：Convolutional Neural Network Architectures for Matching Natural Language Sentences/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/03/01/自然语言处理系列（10）：Convolutional Neural Network Architectures for Matching Natural Language Sentences/" itemprop="url">
+                  自然语言处理系列（10）：Convolutional Neural Network Architectures for Matching Natural Language Sentences
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-01T23:14:45+08:00">
+                2018-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自然语言处理/" itemprop="url" rel="index">
+                    <span itemprop="name">自然语言处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>语义匹配是许多自然语言任务的核心[2, 28]。一个成功的匹配算法需要对语言对象的内部结构和它们之间的交互进行充分的建模。为了实现这一目标，通过调整类似于图像和语音的卷积策略，我们提出了卷积神经网络模型来匹配两个句子。所提出的模型不仅可以很好地表示句子的层次结构，而且还可以在不同的层次上捕捉到丰富的匹配模式。我们的模型是相当通用的，不需要预先的语言知识，因此可以应用于不同性质和不同语言的任务。对各种匹配任务的实证研究表明该模型对各种匹配任务的有效性及其对其他模型的优越性。</p>
+<h2 id="1-introduction"><a href="#1-introduction" class="headerlink" title="1 introduction"></a>1 introduction</h2><p>匹配两个潜在的异构语言对象是许多自然语言应用程序的核心。它概括常见的具有相似性（比如语义识别）或者相关性（比如信息检索）的概念,因为它旨在对不同的“语言对象”模型之间并且在不同程度抽象的之间的对应关系进行建模。例如包括机器翻译中的top-k重排序(例如，比较法语和英语的意义[5])与对话(例如，评估对某句话的回答是否恰当[26])。</p>
+<p>自然语言语句有复杂的结构，顺序和层次结构，这是理解它们的必要条件。因此，一个成功的句子匹配算法不仅需要捕捉句子的内部结构，还需要捕捉它们相互作用中的丰富模式。为此，我们提出了深度神经网络模型，将卷积策略（被证明成功运用于图像[11]和语音[1]）应用于自然语言。为了进一步探究表征语句与匹配语句之间的关系，我们设计了一种新的模型，它可以自然地同时容纳语句的层次结构和与相同的卷积结构的匹配模式的简单到复杂的融合。我们的模型是通用的，不需要对自然语言(例如，解析树)的先验知识，对匹配的任务基本上没有限制。这是我们继续努力理解自然语言对象和它们之间的匹配的一小部分[13,26].</p>
+<p>我们的主要贡献可以概括如下。首先，我们设计了一种新的深层卷积网络结构，它可以自然地将 1)通过分层的组合和池化对层次语句建模，2）并在不同的抽象层次上捕获丰富的匹配模式; 其次，我们对不同规模、不同特征的任务进行了广泛的实证研究，论证了所提出的体系结构优于其他竞争方法的优越性。</p>
+<p>Roadmap   我们首先在第2节介绍一个卷积网络作为句子建模的基本架构，以及它与现有的句子模型之间的关系。基于此，在第3节中，我们提出了两个句子匹配的体系结构，并详细讨论了它们之间的关系。在第4节中，我们将简要讨论所提议的体系结构的学习。然后在第5节中，我们报告了我们的实证研究，接着是第6节中有关工作的简要讨论。</p>
+<h2 id="2-Convolutional-Sentence-Model"><a href="#2-Convolutional-Sentence-Model" class="headerlink" title="2 Convolutional Sentence Model"></a>2 Convolutional Sentence Model</h2><p>我们首先提出一个新的卷积结构来对句子进行建模。如图1所示，它将单词的嵌入(通常事先在无监督的方法中预先训练)在句子中按顺序排列，并通过卷积层和池化层来总结语句的含义，直到最后一层达到一个固定长度的向量表示。正如在大多数卷积模型中[11,1]，我们使用卷积单元与局部“感受野”和共享权值，但我们设计了一个大的特征图，以充分地模拟语言组合中丰富的结构。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-01 下午9.12.56.png" alt="屏幕快照 2018-03-01 下午9.12.56"></p>
+<p>卷积层：如图1所示，Layer-1中的卷积作用于单词的滑动窗口(宽度为$k_1$)，更深层次的卷积也以类似的方式定义。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
       
 
@@ -576,7 +718,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/05/《行为经济学讲义——演化论视角》 第二讲/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/10/读书记（5）：《伯林谈话录》摘/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -601,7 +743,146 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2018/02/05/《行为经济学讲义——演化论视角》 第二讲/" itemprop="url">
+                <a class="post-title-link" href="/2018/02/10/读书记（5）：《伯林谈话录》摘/" itemprop="url">
+                  读书记（5）：《伯林谈话录》摘
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-10T20:20:28+08:00">
+                2018-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书记/" itemprop="url" rel="index">
+                    <span itemprop="name">读书记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="其一"><a href="#其一" class="headerlink" title="其一"></a>其一</h3><p>他反对那种以为可以依据科学的、政治的、甚至美学的价值在人世间创造一个乌托邦的主张。鉴于人类历史实际上是各种经常相互碰撞的价值和思想的产生地及其变化发展的实验场所这一事实，伯林追溯多元论在伦理学、政治学和美学等领域的出现。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/02/10/读书记（5）：《伯林谈话录》摘/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/05/《行为经济学讲义：演化论视角》 第二讲/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/02/05/《行为经济学讲义：演化论视角》 第二讲/" itemprop="url">
                   《行为经济学讲义——演化论视角》 第一讲   导言
                 </a>
               
@@ -674,7 +955,7 @@ var _hmt = _hmt || [];
           <p>囚徒困境：<br>故事：两位印第安人在一条狭长河谷里捉兔子，这时它们面临囚徒困境。兔子可以沿着河谷向两端跑，所以必须各有一个印第安人把守。这样两人向中间推进，可使兔子无路可逃。问题是，如果其中一个人先捉到兔子，那么他可以拒绝与另一个人瓜分这只兔子，这是不合作的策略。他也可以与对方平分这只兔子，这是合作的策略。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2018/02/05/《行为经济学讲义——演化论视角》 第二讲/#more" rel="contents">
+            <a class="btn" href="/2018/02/05/《行为经济学讲义：演化论视角》 第二讲/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -715,7 +996,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/04/《行为经济学讲义——演化论视角》 第一讲   导言/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/04/《行为经济学讲义：演化论视角》 第一讲   导言/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -740,7 +1021,7 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2018/02/04/《行为经济学讲义——演化论视角》 第一讲   导言/" itemprop="url">
+                <a class="post-title-link" href="/2018/02/04/《行为经济学讲义：演化论视角》 第一讲   导言/" itemprop="url">
                   《行为经济学讲义——演化论视角》 第一讲   导言
                 </a>
               
@@ -813,7 +1094,7 @@ var _hmt = _hmt || [];
           <p>本书是北大ccer教授汪丁丁2010年在北京大学讲授“行为经济学”课程的课堂讲义，书内汪教授内容旁征博引，涉及心理学、社会学、经济学、博弈论、神经脑科学等，各种各样的知识模块扑面而来，整理至此。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2018/02/04/《行为经济学讲义——演化论视角》 第一讲   导言/#more" rel="contents">
+            <a class="btn" href="/2018/02/04/《行为经济学讲义：演化论视角》 第一讲   导言/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -953,145 +1234,6 @@ var _hmt = _hmt || [];
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2018/01/30/读书记（4）：增长黑客的炼成/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/30/观影录（1）：电影的清单/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="狗皮膏药">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/img/v.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Free Will">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/01/30/观影录（1）：电影的清单/" itemprop="url">
-                  观影录（1）：电影的清单
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-30T20:20:45+08:00">
-                2018-01-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/观影录/" itemprop="url" rel="index">
-                    <span itemprop="name">观影录</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>电影清单</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/01/30/观影录（1）：电影的清单/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1543,146 +1685,6 @@ var _hmt = _hmt || [];
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/20/读书记（2）：阅读月记【2017.12】/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="狗皮膏药">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/img/v.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Free Will">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/01/20/读书记（2）：阅读月记【2017.12】/" itemprop="url">
-                  读书记（2）：读书月记【2017.12】
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-20T22:20:45+08:00">
-                2018-01-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/读书记/" itemprop="url" rel="index">
-                    <span itemprop="name">读书记</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这个月利用上下班乘坐地铁的时间阅读了五本书，分别是波兹曼的《娱乐至死》、黑塞的《悉达多》、菲利普·罗斯的《人性的污秽》和《行话》，还有一本池建强的《MacTalk：人生元编程》。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15167888900590.jpg" alt=""></p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/01/20/读书记（2）：阅读月记【2017.12】/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1737,7 +1739,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">155</span>
+                  <span class="site-state-item-count">156</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1780,21 +1782,21 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="箴言">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="琐记">
                     
-                      <i class="fa fa-fw fa-firefox"></i>箴言</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="阅读">
-                    
-                      <i class="fa fa-fw fa-book"></i>阅读</a>
+                      <i class="fa fa-fw fa-firefox"></i>琐记</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
             
