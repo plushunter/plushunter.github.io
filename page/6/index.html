@@ -294,7 +294,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/14/Java集合学习手册（6）：Java ArrayList/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/25/Java学习笔记（6）：异常处理/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -319,8 +319,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/08/14/Java集合学习手册（6）：Java ArrayList/" itemprop="url">
-                  Java集合学习手册（6）：Java ArrayList
+                <a class="post-title-link" href="/2017/08/25/Java学习笔记（6）：异常处理/" itemprop="url">
+                  Java学习笔记（6）：异常处理
                 </a>
               
             
@@ -334,8 +334,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-14T22:20:45+08:00">
-                2017-08-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-25T22:20:45+08:00">
+                2017-08-25
               </time>
             
 
@@ -389,10 +389,10 @@ var _hmt = _hmt || [];
 
       
         
-          <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>ArrayList可以理解为动态数组，就是Array的复杂版本。与Java中的数组相比，它的容量能动态增长。ArrayList是List接口的可变数组的实现。实现了所有可选列表操作，并允许包括 null 在内的所有元素。除了实现 List 接口外，此类还提供一些方法来操作内部用来存储列表的数组的大小。（此类大致上等同于 Vector 类，除了此类是不同步的。）</p>
+          <h1 id="一、异常处理基础"><a href="#一、异常处理基础" class="headerlink" title="一、异常处理基础"></a>一、异常处理基础</h1><p>Java异常是一个描述在代码段中发生的异常（也就是出错）情况的对象。当异常情况发生，一个代表该异常的对象被创建并且在导致该错误的方法中被抛出（throw）。该方法可以选择自己处理异常或传递该异常。两种情况下，该异常被捕获（catch）并处理。异常可能是由Java运行时系统产生，或者是由你的手工代码产生。被Java抛出的异常与违反语言规范或超出Java执行环境限制的基本错误有关。手工编码产生的异常基本上用于报告方法调用程序的出错状况。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/14/Java集合学习手册（6）：Java ArrayList/#more" rel="contents">
+            <a class="btn" href="/2017/08/25/Java学习笔记（6）：异常处理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -433,7 +433,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/13/Java集合学习手册（5）：Java LinkedHashSet/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/24/Java学习笔记（5）：static、final关键字和Object类/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -458,8 +458,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/08/13/Java集合学习手册（5）：Java LinkedHashSet/" itemprop="url">
-                  Java集合学习手册（5）：Java LinkedHashSet
+                <a class="post-title-link" href="/2017/08/24/Java学习笔记（5）：static、final关键字和Object类/" itemprop="url">
+                  Java学习笔记（5）：static、final关键字和Object类
                 </a>
               
             
@@ -473,8 +473,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-13T20:20:45+08:00">
-                2017-08-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-24T22:20:45+08:00">
+                2017-08-24
               </time>
             
 
@@ -528,10 +528,10 @@ var _hmt = _hmt || [];
 
       
         
-          <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>首先我们需要知道的是它是一个Set的实现，所以它其中存的肯定不是键值对，而是值。此实现与HashSet的不同之处在于，LinkedHashSet维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序可为插入顺序或是访问顺序。</p>
+          <h1 id="一、static关键字"><a href="#一、static关键字" class="headerlink" title="一、static关键字"></a>一、static关键字</h1><p>static 修饰符能够与变量、方法一起使用，表示是“静态”的。静态变量和静态方法能够通过类名来访问，不需要创建一个类的对象来访问该类的静态成员，所以static修饰的成员又称作类变量和类方法。静态变量与实例变量不同，实例变量总是通过对象来访问，因为它们的值在对象和对象之间有所不同。请看下面的例子：</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/13/Java集合学习手册（5）：Java LinkedHashSet/#more" rel="contents">
+            <a class="btn" href="/2017/08/24/Java学习笔记（5）：static、final关键字和Object类/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -572,7 +572,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/12/Java集合学习手册（4）：Java LinkedHashMap/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/23/Java学习笔记（4）：多态/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -597,8 +597,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/08/12/Java集合学习手册（4）：Java LinkedHashMap/" itemprop="url">
-                  Java集合学习手册（4）：Java LinkedHashMap
+                <a class="post-title-link" href="/2017/08/23/Java学习笔记（4）：多态/" itemprop="url">
+                  Java学习笔记（4）：多态
                 </a>
               
             
@@ -612,8 +612,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-12T19:20:45+08:00">
-                2017-08-12
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-23T22:20:45+08:00">
+                2017-08-23
               </time>
             
 
@@ -667,10 +667,10 @@ var _hmt = _hmt || [];
 
       
         
-          <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>HashMap是无序的，HashMap在put的时候是根据key的hashcode进行hash然后放入对应的地方。所以在按照一定顺序put进HashMap中，然后遍历出HashMap的顺序跟put的顺序不同（除非在put的时候key已经按照hashcode排序好了，这种几率非常小）</p>
+          <h1 id="一、多态"><a href="#一、多态" class="headerlink" title="一、多态"></a>一、多态</h1><p>在Java中，父类的变量可以引用父类的实例，也可以引用子类的实例。请读者先看一段代码：</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/12/Java集合学习手册（4）：Java LinkedHashMap/#more" rel="contents">
+            <a class="btn" href="/2017/08/23/Java学习笔记（4）：多态/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -711,7 +711,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/11/Java集合学习手册（3）：Java HashTable/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/Java学习笔记（3）：继承/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -736,8 +736,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/08/11/Java集合学习手册（3）：Java HashTable/" itemprop="url">
-                  Java集合学习手册（3）：Java HashTable
+                <a class="post-title-link" href="/2017/08/22/Java学习笔记（3）：继承/" itemprop="url">
+                  Java学习笔记（3）：继承、覆盖、重载
                 </a>
               
             
@@ -751,8 +751,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-11T18:20:45+08:00">
-                2017-08-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-22T22:20:45+08:00">
+                2017-08-22
               </time>
             
 
@@ -806,10 +806,10 @@ var _hmt = _hmt || [];
 
       
         
-          <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>和HashMap一样，Hashtable也是一个散列表，它存储的内容是键值对。</p>
+          <h1 id="一、继承的概念与实现"><a href="#一、继承的概念与实现" class="headerlink" title="一、继承的概念与实现"></a>一、继承的概念与实现</h1><p>继承是类与类之间的关系，是一个很简单很直观的概念，与现实世界中的继承（例如儿子继承父亲财产）类似。继承可以理解为一个类从另一个类获取方法和属性的过程。如果类B继承于类A，那么B就拥有A的方法和属性。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/11/Java集合学习手册（3）：Java HashTable/#more" rel="contents">
+            <a class="btn" href="/2017/08/22/Java学习笔记（3）：继承/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -850,7 +850,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/10/Java集合学习手册（2）：Java HashSet/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/21/Java学习笔记（2）：类与对象/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -875,8 +875,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/08/10/Java集合学习手册（2）：Java HashSet/" itemprop="url">
-                  Java集合学习手册（2）：Java HashSet
+                <a class="post-title-link" href="/2017/08/21/Java学习笔记（2）：类与对象/" itemprop="url">
+                  Java学习笔记（2）：类与对象
                 </a>
               
             
@@ -890,8 +890,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-10T23:20:45+08:00">
-                2017-08-10
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-21T22:20:45+08:00">
+                2017-08-21
               </time>
             
 
@@ -945,12 +945,10 @@ var _hmt = _hmt || [];
 
       
         
-          <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><blockquote>
-<p>This class implements the Set interface, backed by a hash table (actually a HashMap instance). It makes no guarantees as to the iteration order of the set; in particular, it does not guarantee that the order will remain constant over time. This class permits the null element.</p>
-</blockquote>
+          <h1 id="一、类的定义及其实例化"><a href="#一、类的定义及其实例化" class="headerlink" title="一、类的定义及其实例化"></a>一、类的定义及其实例化</h1><p>类必须先定义才能使用。类是创建对象的模板，创建对象也叫类的实例化。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/10/Java集合学习手册（2）：Java HashSet/#more" rel="contents">
+            <a class="btn" href="/2017/08/21/Java学习笔记（2）：类与对象/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -991,7 +989,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/09/Java集合学习手册（1）：Java HashMap/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/20/Java学习笔记（1）：语法基础/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -1016,8 +1014,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/08/09/Java集合学习手册（1）：Java HashMap/" itemprop="url">
-                  Java集合学习手册（1）：Java HashMap
+                <a class="post-title-link" href="/2017/08/20/Java学习笔记（1）：语法基础/" itemprop="url">
+                  Java学习笔记（1）：语法基础
                 </a>
               
             
@@ -1031,8 +1029,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-09T23:20:45+08:00">
-                2017-08-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-20T22:20:45+08:00">
+                2017-08-20
               </time>
             
 
@@ -1086,10 +1084,10 @@ var _hmt = _hmt || [];
 
       
         
-          <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>从本文你可以学习到：</p>
+          <p>Java是完全面向对象的语言。通过虚拟机的运行机制，实现“跨平台”的理念。一次编译，永久使用。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/09/Java集合学习手册（1）：Java HashMap/#more" rel="contents">
+            <a class="btn" href="/2017/08/20/Java学习笔记（1）：语法基础/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1130,7 +1128,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/09/数据结构与算法题解（10）：0-1背包问题与部分背包问题/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/19/Java集合学习手册（11）：Java HashMap源码全剖析/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -1155,8 +1153,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/08/09/数据结构与算法题解（10）：0-1背包问题与部分背包问题/" itemprop="url">
-                  数据结构与算法题解（10）：0-1背包问题与部分背包问题
+                <a class="post-title-link" href="/2017/08/19/Java集合学习手册（11）：Java HashMap源码全剖析/" itemprop="url">
+                  Java集合学习手册（11）：Java HashMap源码全剖析
                 </a>
               
             
@@ -1170,8 +1168,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-09T20:20:45+08:00">
-                2017-08-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-19T22:20:45+08:00">
+                2017-08-19
               </time>
             
 
@@ -1189,8 +1187,8 @@ var _hmt = _hmt || [];
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -1225,10 +1223,10 @@ var _hmt = _hmt || [];
 
       
         
-          <p>假设我们有n件物品，分别编号为1, 2…n。其中编号为i的物品价值为$v_i$，它的重量为$w_i$。为了简化问题，假定价值和重量都是整数值。现在，假设我们有一个背包，它能够承载的重量是W。现在，我们希望往包里装这些物品，使得包里装的物品价值最大化，那么我们该如何来选择装的东西呢？问题结构如下图所示：</p>
+          <p>HashMap简介 HashMap是基于哈希表实现的，每一个元素都是一个key-value对，其内部通过单链表解决冲突问题，容量不足（超过了阈值）时，同样会自动增长。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/09/数据结构与算法题解（10）：0-1背包问题与部分背包问题/#more" rel="contents">
+            <a class="btn" href="/2017/08/19/Java集合学习手册（11）：Java HashMap源码全剖析/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1269,7 +1267,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/09/数据结构与算法题解（11）：最长回文子串/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/18/Java集合学习手册（10）：hashCode方法与equal方法/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -1294,8 +1292,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/08/09/数据结构与算法题解（11）：最长回文子串/" itemprop="url">
-                  数据结构与算法题解（11）：最长回文子串
+                <a class="post-title-link" href="/2017/08/18/Java集合学习手册（10）：hashCode方法与equal方法/" itemprop="url">
+                  Java集合学习手册（10）：hashCode方法与equal方法
                 </a>
               
             
@@ -1309,8 +1307,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-09T20:20:45+08:00">
-                2017-08-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-18T22:20:45+08:00">
+                2017-08-18
               </time>
             
 
@@ -1328,8 +1326,8 @@ var _hmt = _hmt || [];
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -1364,10 +1362,10 @@ var _hmt = _hmt || [];
 
       
         
-          <p>给定字符串S，求它的最长回文子串。假设S的最长长度为1000，并且仅有唯一的最长回文子串。</p>
+          <p>哈希表这个数据结构想必大多数人都不陌生，而且在很多地方都会利用到hash表来提高查找效率。在Java的Object类中有一个方法:</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/09/数据结构与算法题解（11）：最长回文子串/#more" rel="contents">
+            <a class="btn" href="/2017/08/18/Java集合学习手册（10）：hashCode方法与equal方法/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1408,7 +1406,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/08/数据结构与算法题解（9）：最长公共子序列和最长公共子串/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/17/Java集合学习手册（9）：Java 集合对比/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -1433,8 +1431,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/08/08/数据结构与算法题解（9）：最长公共子序列和最长公共子串/" itemprop="url">
-                  数据结构与算法题解（9）：最长公共子序列和最长公共子串
+                <a class="post-title-link" href="/2017/08/17/Java集合学习手册（9）：Java 集合对比/" itemprop="url">
+                  Java集合学习手册（9）：Java 集合对比
                 </a>
               
             
@@ -1448,8 +1446,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-08T22:20:45+08:00">
-                2017-08-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-17T22:20:45+08:00">
+                2017-08-17
               </time>
             
 
@@ -1467,8 +1465,8 @@ var _hmt = _hmt || [];
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -1503,10 +1501,10 @@ var _hmt = _hmt || [];
 
       
         
-          <h2 id="一、最长公共子序列（LCS）"><a href="#一、最长公共子序列（LCS）" class="headerlink" title="一、最长公共子序列（LCS）"></a>一、最长公共子序列（LCS）</h2><p>求最长公共子序列的数目，注意这里的子序列可以不是连续序列，务必问清楚题意。求『最长』类的题目往往与动态规划有点关系，这里是两个字符串，故应为双序列动态规划。</p>
+          <h1 id="一、HashMap与HashTable的区别"><a href="#一、HashMap与HashTable的区别" class="headerlink" title="一、HashMap与HashTable的区别"></a>一、HashMap与HashTable的区别</h1><p>HashMap和Hashtable的比较是Java面试中的常见问题，用来考验程序员是否能够正确使用集合类以及是否可以随机应变使用多种思路解决问题。HashMap的工作原理、ArrayList与Vector的比较以及这个问题是有关Java 集合框架的最经典的问题。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/08/数据结构与算法题解（9）：最长公共子序列和最长公共子串/#more" rel="contents">
+            <a class="btn" href="/2017/08/17/Java集合学习手册（9）：Java 集合对比/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1547,7 +1545,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/08/数据结构与算法题解（8）：KMP算法/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/16/Java集合学习手册（8）：Java 集合框架/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -1572,8 +1570,8 @@ var _hmt = _hmt || [];
             
               
                 
-                <a class="post-title-link" href="/2017/08/08/数据结构与算法题解（8）：KMP算法/" itemprop="url">
-                  数据结构与算法题解（8）：KMP算法
+                <a class="post-title-link" href="/2017/08/16/Java集合学习手册（8）：Java 集合框架/" itemprop="url">
+                  Java集合学习手册（8）：Java 集合框架
                 </a>
               
             
@@ -1587,8 +1585,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-08T19:20:45+08:00">
-                2017-08-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-16T22:20:45+08:00">
+                2017-08-16
               </time>
             
 
@@ -1606,8 +1604,8 @@ var _hmt = _hmt || [];
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
-                    <span itemprop="name">数据结构与算法</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -1642,10 +1640,10 @@ var _hmt = _hmt || [];
 
       
         
-          <p>KMP算法是三位大牛：D.E.Knuth、J.H.Morris和V.R.Pratt同时发现的。其中第一位就是《计算机程序设计艺术》的作者！</p>
+          <h1 id="一、概念"><a href="#一、概念" class="headerlink" title="一、概念"></a>一、概念</h1><h2 id="1-1-什么是集合？"><a href="#1-1-什么是集合？" class="headerlink" title="1.1 什么是集合？"></a>1.1 什么是集合？</h2><p>Java官方的入门文档是这样描述集合的：</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/08/数据结构与算法题解（8）：KMP算法/#more" rel="contents">
+            <a class="btn" href="/2017/08/16/Java集合学习手册（8）：Java 集合框架/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1681,7 +1679,7 @@ var _hmt = _hmt || [];
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1731,7 +1729,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">156</span>
+                  <span class="site-state-item-count">167</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1742,7 +1740,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1753,7 +1751,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">220</span>
+                  <span class="site-state-item-count">225</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
