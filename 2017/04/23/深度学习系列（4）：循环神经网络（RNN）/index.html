@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%886.11.33.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%889.01.00.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-23%20%E4%B8%8A%E5%8D%8811.08.04.png">
-<meta property="og:updated_time" content="2017-12-26T10:33:53.349Z">
+<meta property="og:updated_time" content="2018-03-07T10:32:51.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（4）：循环神经网络（RNN）">
 <meta name="twitter:description" content="之前学习了全连接神经网络和卷积神经网络，以及它们的训练与应用。它们都只能单独的去处理单个的输入，且前后的输入之间毫无关系。但是，在一些任务中，我们需要更好的去处理序列的信息，即前后的输入之间存在关系。比如，在理解一整句话的过程中，孤立理解组成这句话的词是不够的，我们需要整体的处理由这些词连接起来的整个序列；当我们处理视频时，我们也不能单独地仅仅分析每一帧，而要分析这些帧连接起来的整个序列。这就引出">
@@ -418,7 +418,7 @@ var _hmt = _hmt || [];
 <h2 id="二、基本循环神经网络"><a href="#二、基本循环神经网络" class="headerlink" title="二、基本循环神经网络"></a>二、基本循环神经网络</h2><p>开始前，我们先回顾一下，简单的MLP三层神经网络模型：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%885.06.05.png" alt="屏幕快照 2017-04-22 下午5.06.05"><br>其中x是一个向量，它表示输入层的值（这里面没有画出来表示神经元节点的圆圈）；s是一个向量，它表示隐藏层的值（这里隐藏层面画了一个节点，你也可以想象这一层其实是多个节点，节点数与向量s的维度相同）；U是输入层到隐藏层的权重矩阵；o也是一个向量，它表示输出层的值；V是隐藏层到输出层的权重矩阵。</p>
 <p>再看下图中一个简单的循环神经网络图，它由输入层、一个隐藏层和一个输出层组成。我们可以看到，循环神经网络的隐藏层的值s不仅仅取决于当前这次的输入x，还取决于上一次隐藏层的值s。权重矩阵W就是隐藏层上一次的值作为这一次的输入的权重。<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%885.11.21.png" alt="屏幕快照 2017-04-22 下午5.11.21"><br>如果我们把上面的图展开，循环神经网络也可以画成下面这个样子：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%885.22.35.png" alt="屏幕快照 2017-04-22 下午5.22.35"></p>
 <p>现在看起来就清楚不少了，这个网络在t时刻接收到输入$X_t$之后，隐藏层的值是$S_t$，输出值是$o_t$。关键一点是，$s_t$的值不仅仅取决于$X_t$，还取决于$S_{t-1}$。我们可以使用下面的公式来表示循环神经网络的计算方法：</p>
-<script type="math/tex; mode=display">o_t=g(Vs_t)$$$$s_t=f(Ux_t+Ws_{t-1})</script><p>式1是输出层的计算公式，输出层是一个全连接层，也就是它的每个节点都和隐藏层的每个节点相连。V是输出层的权重矩阵，g是激活函数。式2是隐藏层的计算公式，它是循环层。U是输入x的权重矩阵，W是上一次的值$s_{t-1}$作为这一次的输入的权重矩阵，f是激活函数。</p>
+<script type="math/tex; mode=display">o_t=g(Vs_t)\\s_t=f(Ux_t+Ws_{t-1})</script><p>式1是输出层的计算公式，输出层是一个全连接层，也就是它的每个节点都和隐藏层的每个节点相连。V是输出层的权重矩阵，g是激活函数。式2是隐藏层的计算公式，它是循环层。U是输入x的权重矩阵，W是上一次的值$s_{t-1}$作为这一次的输入的权重矩阵，f是激活函数。</p>
 <p>从上面的公式可以看出，循环层和全连接层的区别就是多了一个权重矩阵W。</p>
 <p>若反复把式2代入带式1，我们将得到：</p>
 <script type="math/tex; mode=display">o_t=g(Vs_t)=g(Vf(Ux_t+Ws_{t-1}))</script><script type="math/tex; mode=display">=g(Vf(Ux_t+Wf(Ux_{t-1}+Ws_{t-2 })))</script><script type="math/tex; mode=display">=g(Vf(Ux_t+Wf(Ux_{t-1}+Wf(Ux_{t-2}+Ws_{t-3 }))))</script><p>从上面可以看出，循环神经网络的输出值$o_t$，是受前面历次输入值$x_{t}$、$x_{t-1}$、$x_{t-2} …$的影响的，这就是为什么循环神经网络可以往前看任意多个输入值的原因。</p>
@@ -428,7 +428,7 @@ var _hmt = _hmt || [];
 </blockquote>
 <p>可以想象，如果我们只看横线前面的词，手机坏了，那么我是打算修一修？换一部新的？还是大哭一场？这些都是无法确定的，但是如果我们也看到了后面的词是“一部新手机”，那么横线上的词填“买”的概率就大很多了。</p>
 <p>而这个在单向循环神经网络是无法建模的，因此我们需要双向循环神经网络，如下图所示：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-22%20%E4%B8%8B%E5%8D%885.54.21.png" alt="屏幕快照 2017-04-22 下午5.54.21"></p>
-<p>我们先考虑$y-2$的计算，从上图可以看出，双向卷积神经网络的隐藏层要保存两个值，一个A参与正向计算，另一个$A’$参与反向计算。最终的输出值$y_2$取决于$A_2$和$A_2’$，其计算方法为：</p>
+<p>我们先考虑$y_2$的计算，从上图可以看出，双向卷积神经网络的隐藏层要保存两个值，一个A参与正向计算，另一个$A’$参与反向计算。最终的输出值$y_2$取决于$A_2$和$A_2’$，其计算方法为：</p>
 <script type="math/tex; mode=display">y_2=g(VA_2+V'A_2')</script><p>$A_2$和$A_2’$则分别计算：</p>
 <script type="math/tex; mode=display">A_2=f(WA_1+Ux_2)</script><script type="math/tex; mode=display">
 A_2'=f(W'A_3'+U'x_2 )</script><p>现在，我们已经可以看出一般的规律：正向计算时，隐藏层的值$s_t$与$s_{t-1}$有关；反向计算时，隐藏层的值$s_t’$与$s_{t+1}’$有关；最终的输出取决于正向和反向计算的加和。现在，我们仿照式1和式2，写出双向循环神经网络的计算方法：</p>
@@ -483,7 +483,7 @@ s_t^{'(1)}=f(U^{'(1)}x_t+W^{'(1)}s_{t+1}')</script><h2 id="五、循环神经网
 \end{array}\right]\right)</script><p>在这里我们用手写体字母表示向量的一个元素，它的下标表示它是这个向量的第几个元素，它的上标表示第几个时刻。例如，$s_j^t$表示向量$s$的第$j$个元素在$t$时刻的值。$u_{ji}$表示输入层第$i$个神经元到循环层第$j$个神经元的权重。$w_{ji}$表示循环层第$t-1$时刻的第$i$个时刻的第$j$个神经元的权重。</p>
 <h3 id="5-2-误差项的计算"><a href="#5-2-误差项的计算" class="headerlink" title="5.2 误差项的计算"></a>5.2 误差项的计算</h3><p>BTPP算法将第$l$层$t$时刻的误差项$\delta _t^l$值沿两个方向传播，一个方向是其传递到上一层网络，得到$\delta _t^{l-1}$，这部分只和权重矩阵$U$有关；另一个方向是将其沿着时间线传递到初始$t_1$时刻，得到$\delta_1^l$，这部分只和权重矩阵$W$有关。</p>
 <p>我们用向量$net_j$表示神经元在$t$时刻的加权输入，因为：</p>
-<script type="math/tex; mode=display">net_j=Ux_t+Ws_{t-1}$$$$s_{t-1}=f(net_{t-1})</script><p>因此：</p>
+<script type="math/tex; mode=display">net_j=Ux_t+Ws_{t-1}\\s_{t-1}=f(net_{t-1})</script><p>因此：</p>
 <script type="math/tex; mode=display">
 \frac{\partial net_t}{\partial net_{t-1}}=\frac{\partial net_t}{\partial s_{t-1}}\frac{\partial s_{t-1}}{\partial net_{t-1}}</script><p>我们用$a$表示列向量，用$a^T$表示行向量。上式的第一项是向量函数对向量求导，其结果为Jacobian矩阵：</p>
 <script type="math/tex; mode=display">
@@ -695,13 +695,13 @@ a_t^{l-1}=f^{l-1}(net_t^{l-1})</script><p>上式中$net_t^l$是第$l$层神经�
 <script type="math/tex; mode=display">
 \delta_{k}^{T}=\delta_{t}^{T}\prod_{i=k}^{t-1}{Wdiag\left[f'\left(net_i\right)\right]}</script><script type="math/tex; mode=display">
 ||\delta_{k}^{T}||\le ||\delta_{t}^{T}||\prod_{i=k}^{t-1}{||W||||diag\left[f'\left(net_i\right)\right]||}</script><script type="math/tex; mode=display">
-\le ||\delta_{t}^{T}||\left(\beta_W\beta_f\right)^{t-k}</script><p>上式的$\beta$定义为矩阵的模的上界。因为上式是一个指数函数，如果$t-k$很大的话（也就是向前看得很远的时候），会导致对应的误差项的值增长或缩小的非常快，这样就会导致相应的梯度爆炸和梯度消失问题（取决于$\beta$大于1还是小于1）。</p>
+\le ||\delta_{t}^{T}||\left(\beta_W\beta_f\right)^{t-k}</script><p>上式的$\beta$定义为矩阵的模的上界。因为上式是一个指数函数，如果$t_k$很大的话（也就是向前看得很远的时候），会导致对应的误差项的值增长或缩小的非常快，这样就会导致相应的梯度爆炸和梯度消失问题（取决于$\beta$大于1还是小于1）。</p>
 <p>通常来说，梯度爆炸更容易处理一些。因为梯度爆炸时，我们的程序会收到NaN的错误。我们也可以设置一个梯度阈值，当梯度超过这个阈值的时候可以直接截取。</p>
 <p>梯度消失更难检测，而且也更难处理一些。总的来说，我们有三种方法应对梯度消失问题：</p>
 <ul>
 <li>1）合理的初始化权重值。初始化权重，使每个神经元尽可能不要取极大或极小值，以躲开梯度消失的区域。</li>
 <li>2）使用ReLu代替sigmoid和tanh作为激活函数。</li>
-<li>3）使用其他结构的RNNs，比如长短时记忆网络（LTSM）和Gated Recurrenr Unit（GRU），这是最流行的做法。</li>
+<li>3）使用其他结构的RNNs，比如长短时记忆网络（LSTM）和Gated Recurrenr Unit（GRU），这是最流行的做法。</li>
 </ul>
 
       
@@ -847,7 +847,7 @@ a_t^{l-1}=f^{l-1}(net_t^{l-1})</script><p>上式中$net_t^l$是第$l$层神经�
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">167</span>
+                  <span class="site-state-item-count">168</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -869,7 +869,7 @@ a_t^{l-1}=f^{l-1}(net_t^{l-1})</script><p>上式中$net_t^l$是第$l$层神经�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">223</span>
+                  <span class="site-state-item-count">225</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -107,7 +107,7 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-25%20%E4%B8%8B%E5%8D%882.33.59.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-25%20%E4%B8%8B%E5%8D%882.41.32.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-25%20%E4%B8%8B%E5%8D%883.08.02.png">
-<meta property="og:updated_time" content="2017-12-26T10:33:56.894Z">
+<meta property="og:updated_time" content="2018-03-08T02:12:52.031Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（5）：长短时记忆网络（LSTM）">
 <meta name="twitter:description" content="一、长期依赖问题（Long-Term Dependencies）循环神经网络（RNN）在实际应用中很难处理长距离依赖的问题。 有的时候，我们仅仅需要知道先前的信息来完成预测任务。例如，我们有一个语言模型用来基于先前的词来预测下一个词，比如我们预测“the clouds are in the sky”最后的词的时候，我们不需要任何其他的上下文，很显然下一个词就是sky。在这种情况下，相关的信息与需要">
@@ -436,10 +436,9 @@ var _hmt = _hmt || [];
 <script type="math/tex; mode=display">\tilde{c}_t=\tan\textrm{h}\left(W_c·\left[h_{t-1},x_t\right]+b_c\right)</script><p>下图是$\tilde{c}_t$的计算：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-25%20%E4%B8%8B%E5%8D%882.01.50.png" alt="屏幕快照 2017-04-25 下午2.01.50"><br>现在，我们计算当前时刻的单元状态$c_t$。它是由上一次的单元状态$c_{t-1}$按元素乘以遗忘门$f_t$，再用当前输入的单元状态$\tilde{c}_t$按元素乘以输入门$i_t$，再将两个积加和产生的：</p>
 <script type="math/tex; mode=display">
 c_t=f_t°c_{t-1}+i_t°\tilde{c}_t</script><p>下图是$c_t$的计算图示：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-25%20%E4%B8%8B%E5%8D%882.06.23.png" alt="屏幕快照 2017-04-25 下午2.06.23"><br>这样，我们就把LSTM关于当前的记忆$\tilde{c}_t$和长期的记忆$c_{t-1}$组合在一起，形成了新的单元状态$c_t$。由于遗忘门的控制，它可以保存很久很久之前的信息，由于输入门的控制，它又可以避免当前无关紧要的内容进入记忆。</p>
-<h3 id="3-3-输出门"><a href="#3-3-输出门" class="headerlink" title="3.3 输出门"></a>3.3 输出门</h3><p>下面，我们要看看输入们，它控制了长期记忆对当前输出的影响：</p>
+<h3 id="3-3-输出门"><a href="#3-3-输出门" class="headerlink" title="3.3 输出门"></a>3.3 输出门</h3><p>下面，我们要看看输入门，它控制了长期记忆对当前输出的影响：</p>
 <script type="math/tex; mode=display">o_t=\sigma(W_o·[h_{t-1},x_t]+b_o)</script><p>下图表示输出门的计算：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-25%20%E4%B8%8B%E5%8D%882.33.59.png" alt="屏幕快照 2017-04-25 下午2.33.59"><br>LSTM最终的输出，是由输出门和单元状态共同确定的：</p>
-<script type="math/tex; mode=display">
-h_t=o_t°\tan\textrm{h}\left(c_t\right)</script><p>下图表示LSTM最终输出的计算：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-25%20%E4%B8%8B%E5%8D%882.41.32.png" alt="屏幕快照 2017-04-25 下午2.41.32"></p>
+<script type="math/tex; mode=display">h_t=o_t°\tan\textrm{h}\left(c_t\right)</script><p>下图表示LSTM最终输出的计算：<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-25%20%E4%B8%8B%E5%8D%882.41.32.png" alt="屏幕快照 2017-04-25 下午2.41.32"></p>
 <h2 id="四、LSTM的训练"><a href="#四、LSTM的训练" class="headerlink" title="四、LSTM的训练"></a>四、LSTM的训练</h2><p>LSTM的训练算法仍然是反向传播算法，它主要有下面三个步骤：</p>
 <ul>
 <li>1）前向计算每个神经元的输出值，对于LSTM来说，即$f_t、i_t、c_t、o_t、h_t$五个向量的值。</li>
@@ -658,7 +657,7 @@ h=\left(1-z_t\right)°h_{t-1}+z_t°\tilde{h}_t</script><p>下图是GRU的示意�
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">167</span>
+                  <span class="site-state-item-count">168</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -680,7 +679,7 @@ h=\left(1-z_t\right)°h_{t-1}+z_t°\tilde{h}_t</script><p>下图是GRU的示意�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">223</span>
+                  <span class="site-state-item-count">225</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

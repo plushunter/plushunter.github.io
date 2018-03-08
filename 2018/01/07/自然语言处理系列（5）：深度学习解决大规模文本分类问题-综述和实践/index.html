@@ -104,11 +104,10 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15152527097581.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15152529123345.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15152530022627.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15152530574023.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15152530698561.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15152530788625.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15152531277605.jpg">
-<meta property="og:updated_time" content="2018-02-26T15:33:10.301Z">
+<meta property="og:updated_time" content="2018-03-08T12:40:23.371Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自然语言处理系列（5）：深度学习解决大规模文本分类问题-综述和实践">
 <meta name="twitter:description" content="这篇文章总结了文本分类领域特别是应用深度学习解决文本分类的相关思路、做法和部分实践的经验。转载自知乎清凇撰写的文章用深度学习（CNN RNN Attention）解决大规模文本分类问题 - 综述和实践  业务问题描述：  淘宝商品的一个经典的例子见下图，图中商品的标题是“夏装雪纺条纹短袖t恤女春半袖衣服夏天中长款大码胖mm显瘦上衣夏”。淘宝网后台是通过树形的多层的类目体系管理商品的，覆盖叶子类目数">
@@ -468,7 +467,8 @@ var _hmt = _hmt || [];
 <h4 id="2-2-5-TextRNN-Attention"><a href="#2-2-5-TextRNN-Attention" class="headerlink" title="2.2.5 TextRNN + Attention"></a>2.2.5 TextRNN + Attention</h4><p>我们参考了这篇文章 <a href="https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf" target="_blank" rel="noopener">Hierarchical Attention Networks for Document Classification</a>，下图是模型的网络结构图，它一方面用层次化的结构保留了文档的结构，另一方面在word-level和sentence-level。淘宝标题场景只需要 word-level 这一层的 Attention 即可。</p>
 <p><img src="http://omu7tit09.bkt.clouddn.com/15152530022627.jpg" alt=""></p>
 <p>加入Attention之后最大的好处自然是能够直观的解释各个句子和词对分类类别的重要性。</p>
-<h4 id="2-2-6-TextRCNN（TextRNN-CNN）"><a href="#2-2-6-TextRCNN（TextRNN-CNN）" class="headerlink" title="2.2.6 TextRCNN（TextRNN + CNN）"></a>2.2.6 TextRCNN（TextRNN + CNN）</h4><p>我们参考的是中科院15年发表在AAAI上的这篇文章 Recurrent Convolutional Neural Networks for Text Classification 的结构：<br><img src="http://omu7tit09.bkt.clouddn.com/15152530574023.jpg" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15152530698561.jpg" alt=""><br>利用前向和后向RNN得到每个词的前向和后向上下文的表示：<br><img src="http://omu7tit09.bkt.clouddn.com/15152530788625.jpg" alt=""></p>
+<h4 id="2-2-6-TextRCNN（TextRNN-CNN）"><a href="#2-2-6-TextRCNN（TextRNN-CNN）" class="headerlink" title="2.2.6 TextRCNN（TextRNN + CNN）"></a>2.2.6 TextRCNN（TextRNN + CNN）</h4><p>我们参考的是中科院15年发表在AAAI上的这篇文章 Recurrent Convolutional Neural Networks for Text Classification 的结构：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15152530698561.jpg" alt=""><br>利用前向和后向RNN得到每个词的前向和后向上下文的表示：<br><img src="http://omu7tit09.bkt.clouddn.com/15152530788625.jpg" alt=""></p>
 <p>这样词的表示就变成词向量和前向后向上下文向量concat起来的形式了，即：<br><img src="http://omu7tit09.bkt.clouddn.com/15152531277605.jpg" alt=""></p>
 <p>最后再接跟TextCNN相同卷积层，pooling层即可，唯一不同的是卷积层 filter_size = 1就可以了，不再需要更大 filter_size 获得更大视野，这里词的表示也可以只用双向RNN输出。</p>
 <h2 id="三、一点经验"><a href="#三、一点经验" class="headerlink" title="三、一点经验"></a>三、一点经验</h2><p>理论和实践之间的Gap往往差异巨大，学术paper更关注的是模型架构设计的新颖性等，更重要的是新的思路；而实践最重要的是在落地场景的效果，关注的点和方法都不一样。这部分简单梳理实际做项目过程中的一点经验教训。</p>
@@ -634,7 +634,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">167</span>
+                  <span class="site-state-item-count">168</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -656,7 +656,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">223</span>
+                  <span class="site-state-item-count">225</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -94,6 +94,7 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="这篇文章翻译自A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification 近年来，卷积神经网络在句子分类任务上取得了显著的成绩(Kim, 2014;Kalchbrenner et al .,2014)，然而，这些模型要求从业者指定精">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-05 下午6.56.34.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-25 下午9.02.47.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-02-01 下午9.52.55.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-25 下午9.40.29.png">
@@ -114,11 +115,11 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-02-01 下午10.41.32.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-02-01 下午10.44.43.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-02-01 下午10.45.31.png">
-<meta property="og:updated_time" content="2018-03-02T04:10:05.764Z">
+<meta property="og:updated_time" content="2018-03-05T10:57:24.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自然语言处理系列（7）：A Sensitivity Analysis of Convolutional Neural Networks for Sentence Classification(TextCNN调参)">
 <meta name="twitter:description" content="这篇文章翻译自A Sensitivity Analysis of (and Practitioners’ Guide to) Convolutional Neural Networks for Sentence Classification 近年来，卷积神经网络在句子分类任务上取得了显著的成绩(Kim, 2014;Kalchbrenner et al .,2014)，然而，这些模型要求从业者指定精">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-25 下午9.02.47.png">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-05 下午6.56.34.png">
 
 
 
@@ -426,6 +427,7 @@ var _hmt = _hmt || [];
 <script type="math/tex; mode=display">o_i = w·A[i:i+h-1 ] \ (1)</script><p>其中，$i=1….s-h+1$，$.$表示子矩阵和滤波器的点积（先对对应元素做乘法，然后求和）,输出序列的长度为$s-h+1$。再加上一个偏置项$b$以及激活函数$f$得到对应的特征图$c\in R^{s-h+1}$：</p>
 <script type="math/tex; mode=display">c_i=f(o_i+b)</script><p>注意，我们可以使用多个滤波器来实现相同的区域大小，目标是每个滤波器从相同的区域学习互补的特性。也可以指定多个不同区域大小的过滤器(例如:“高度”)。</p>
 <p>每个滤波器生成的特征图的维数，正好是句子长度和滤波区域大小的函数。然后，将一个池化函数应用到每个feature map中，以减少需要估计的参数的尺寸和数量。通常，池化操作为1-max池函数(Boureau et al.，2010b)，它从每个feature map生成一个一维特性。或者，可以将池化操作修改为在特征映射中在相同大小的区域内对每个区域对应的显著特征进行编码。每个滤波器映射生成的输出可以被连接到一个“顶部”特征向量，在1-max池的情况下它的大小将独立于单个的句子长度。然后通过一个softmax函数来生成这个表示，以生成最终的分类。在这个softmax层，可以选择应用“dropout策略”(Hinton et al.， 2012)作为正则化方法。这需要在向量中随机设置一些值为0。我们也可以选择施加l2范数约束，当它超过这个值时，将向量的l2范数线性扩展到一个指定的阈值。在训练过程中，最小化的目标是分类的交叉熵损失，估计的参数包括滤波器的权向量(s)、激活函数中的偏置项，以及softmax函数的权向量。请注意，我们可以选择固定词向量(我们将其称为“static”)或作为模型的附加参数，并在模型训练过程中调整(我们将把这种方法称为“non-static”)。我们探索了这两种变体。图1提供了一个简单的示意图，以说明刚刚描述的模型架构。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-05 下午6.56.34.png" alt="屏幕快照 2018-03-05 下午6.56.34"></p>
 <h2 id="三、数据集"><a href="#三、数据集" class="headerlink" title="三、数据集"></a>三、数据集</h2><p>我们使用同样的7个数据集(Kim, 2014)，简要总结如下:</p>
 <ul>
 <li>MR:句子极性数据集(Pang and Lee, 2005)。</li>
@@ -657,7 +659,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">167</span>
+                  <span class="site-state-item-count">168</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -679,7 +681,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">223</span>
+                  <span class="site-state-item-count">225</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
