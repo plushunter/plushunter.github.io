@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="word2vec,static,TextCNN,Dropout,non-static," />
+  <meta name="keywords" content="word2vec,FastText," />
 
 
 
@@ -86,22 +86,25 @@
 
 
 
-<meta name="description" content="这篇文章翻译自卷积神经网络用于文本分类的开山之作Convolutional Neural Networks for Sentence Classification，并相应的对其实现代码进行讲解。 我们进行了一系列关于卷积神经网络(CNN)的实验，这些实验是基于预先训练的词向量训练的，用于句子级别的分类任务。我们得到了一个简单的参数微调的以及静态矢量的CNN在多个基准上取得了优异的结果。通过微调学习">
-<meta name="keywords" content="word2vec,static,TextCNN,Dropout,non-static">
+<meta name="description" content="这篇文章翻译自Bag of Tricks for Efficient Text Classification 本文探讨了一个简单而有效的文本分类baseline。我们的实验表明，快速文本分类器在精度上通常与深度学习分类器相当，并且在训练和评估方面的速度要快得多。我们可以在不到10分钟的时间内使用标准的多核CPU对超过10亿单词的快速文本进行训练，在不到一分钟的时间内对312000类的50万个句子进">
+<meta name="keywords" content="word2vec,FastText">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification(TextCNN)">
-<meta property="og:url" content="http://yoursite.com/2018/01/24/自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification(TextCNN)/index.html">
+<meta property="og:title" content="自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText）">
+<meta property="og:url" content="http://yoursite.com/2018/03/09/自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification—FastText/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="这篇文章翻译自卷积神经网络用于文本分类的开山之作Convolutional Neural Networks for Sentence Classification，并相应的对其实现代码进行讲解。 我们进行了一系列关于卷积神经网络(CNN)的实验，这些实验是基于预先训练的词向量训练的，用于句子级别的分类任务。我们得到了一个简单的参数微调的以及静态矢量的CNN在多个基准上取得了优异的结果。通过微调学习">
+<meta property="og:description" content="这篇文章翻译自Bag of Tricks for Efficient Text Classification 本文探讨了一个简单而有效的文本分类baseline。我们的实验表明，快速文本分类器在精度上通常与深度学习分类器相当，并且在训练和评估方面的速度要快得多。我们可以在不到10分钟的时间内使用标准的多核CPU对超过10亿单词的快速文本进行训练，在不到一分钟的时间内对312000类的50万个句子进">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.08.25.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.09.28.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.42.43.png">
-<meta property="og:updated_time" content="2018-03-06T02:53:31.281Z">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 上午11.03.29.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.29.39.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.33.57.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.38.52.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.56.32.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.57.00.png">
+<meta property="og:updated_time" content="2018-03-12T11:12:27.433Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification(TextCNN)">
-<meta name="twitter:description" content="这篇文章翻译自卷积神经网络用于文本分类的开山之作Convolutional Neural Networks for Sentence Classification，并相应的对其实现代码进行讲解。 我们进行了一系列关于卷积神经网络(CNN)的实验，这些实验是基于预先训练的词向量训练的，用于句子级别的分类任务。我们得到了一个简单的参数微调的以及静态矢量的CNN在多个基准上取得了优异的结果。通过微调学习">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.08.25.png">
+<meta name="twitter:title" content="自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText）">
+<meta name="twitter:description" content="这篇文章翻译自Bag of Tricks for Efficient Text Classification 本文探讨了一个简单而有效的文本分类baseline。我们的实验表明，快速文本分类器在精度上通常与深度学习分类器相当，并且在训练和评估方面的速度要快得多。我们可以在不到10分钟的时间内使用标准的多核CPU对超过10亿单词的快速文本进行训练，在不到一分钟的时间内对312000类的50万个句子进">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 上午11.03.29.png">
 
 
 
@@ -133,7 +136,7 @@
 
 
 
-  <title> 自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification(TextCNN) | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText） | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -298,7 +301,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/24/自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification(TextCNN)/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/09/自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification—FastText/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -322,7 +325,7 @@ var _hmt = _hmt || [];
             
             
               
-                自然语言处理系列（6）：Convolutional Neural Networks for Sentence Classification(TextCNN)
+                自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText）
               
             
           </h1>
@@ -335,8 +338,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-24T23:14:45+08:00">
-                2018-01-24
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-09T23:14:45+08:00">
+                2018-03-09
               </time>
             
 
@@ -394,84 +397,47 @@ var _hmt = _hmt || [];
       
 
       
-        <p>这篇文章翻译自卷积神经网络用于文本分类的开山之作<a href="https://arxiv.org/abs/1408.5882" target="_blank" rel="noopener">Convolutional Neural Networks for Sentence Classification</a>，并相应的对其实现代码进行讲解。</p>
-<p>我们进行了一系列关于卷积神经网络(CNN)的实验，这些实验是基于预先训练的词向量训练的，用于句子级别的分类任务。我们得到了一个简单的参数微调的以及静态矢量的CNN在多个基准上取得了优异的结果。通过微调学习任务特定的向量可以进一步提高性能。我们还建议对体系结构进行简单的修改，以允许使用特定于任务的和静态的向量。CNN在这里讨论了7项任务中4项的改进，包括情绪分析和问题分类。</p>
+        <p>这篇文章翻译自<a href="https://arxiv.org/pdf/1607.01759.pdf" target="_blank" rel="noopener">Bag of Tricks for Efficient Text Classification</a></p>
+<p>本文探讨了一个简单而有效的文本分类baseline。我们的实验表明，快速文本分类器在精度上通常与深度学习分类器相当，并且在训练和评估方面的速度要快得多。我们可以在不到10分钟的时间内使用标准的多核CPU对超过10亿单词的快速文本进行训练，在不到一分钟的时间内对312000类的50万个句子进行分类。</p>
 <a id="more"></a>
-<h2 id="一、导语"><a href="#一、导语" class="headerlink" title="一、导语"></a>一、导语</h2><p>近年来，深度学习模式在计算机视觉(Krizhevsky et al.， 2012)和语音识别(Graves et al.， 2013)中取得了显著的成绩。在自然语言处理中，许多深度学习方法都涉及通过神经语言模型学习词向量表示(Bengio et al.， 2003;Yih et al .,2011;Mikolov et al.， 2013)，并通过学习的词向量进行分类(bert et al.， 2011)。词向量，在单词中从一个稀疏的1- V编码(这里V是词汇量)到一个较低维度的向量空间，通过一个隐藏层，本质上是特征提取器，在它们的维度中编码词汇的语义特征。在这样稠密的表示法中，语义上相近的词在欧几里得或余弦距离上也同样接近（低维向量空间）。</p>
-<p>卷积神经网络(CNN)利用具有卷积滤波器的层来应用于局部特征(LeCun等人，1998)。开端于计算机视觉的CNN模型后来被证明在自然语言处理中也很有效，在语义解析(Yih et al .,2014)、搜索查询检索(沈et al .,2014)、句子建模(Kalch -布伦纳et al .,2014)和其他传统NLP任务(Collobert et al .,2011)都取得了非常好的效果。</p>
-<p>在目前的工作中，我们训练了一个简单的CNN，它只有一层卷积层，前面连接由无监督的神经语言模型训练的的词向量。这些向量是由Mikolov等人(2013)在谷歌新闻的1000亿字上进行训练得到，并已经公开了。我们首先保持向量静态，只学习模型的其他参数。即使对超参数进行了微调，这个简单的模型在多个基准上也都取得了出色的结果，这表明预先训练的词向量是“通用”的特征构造器，它们可以用于各种分类任务。通过微调，学习特定任务的向量可以得到进一步的改进。我们最后描述了对体系结构的一个简单的修改，允许使用多个通道来使用预先训练的和任务特定的向量。</p>
-<p>我们的工作与Razavian et al.(2014)类似，它表明，对于图像分类，从预先训练的深度学习模型获得的特征提取器在各种任务中都表现良好，包括与最初的任务不同的任务，这些任务的特征提取器是经过训练的。</p>
-<h2 id="二、模型"><a href="#二、模型" class="headerlink" title="二、模型"></a>二、模型</h2><p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.08.25.png" alt="屏幕快照 2018-01-24 下午4.08.25"></p>
-<p>图1所示的模型架构是CNN架构的一个小变体。$x_i\in R^k$表示一个句子中第$i$个词的$k$维词向量。一个长度为$n$的句子（可以padding）表示为</p>
-<script type="math/tex; mode=display">x_{1:n}=x_1⊕x_2⊕...⊕x_n \ (1)</script><p>其中⊕是连接操作符。一般来讲，$x_{i:i+j}$表示词$x_i,x_{i+1}···，x_{i+j}$的连接。卷积运算涉及到一个滤波器，它被应用到一些单词的窗口，以产生一个新特征。比如，特征$c_i$产生于一个词汇窗口$x_{i:i+h-1}$，计算公式为：</p>
-<script type="math/tex; mode=display">c_i=f(w·x_{i:i+h-1}+b) \ (2)</script><p>$b∈R$是偏置项，$f$是一个非线性函数,例如双曲正切函数。该滤波器应用在句子中${x_{1∶ h}, x_{2∶h+1},…,x_{n+h-1∶n}}$每一个可能的单词窗口从而产生一个特征映射： </p>
-<script type="math/tex; mode=display">c=[c_1,c_2,…,c_{n+h-1}]</script><p>这里$c∈R^{n-h+1}$。然后我们对特征映射采用最大池化策略（Collobert et al.， 2011）即取最大的值$\hat c=max{c}$作为对应此滤波器的特征。此思路是去捕获最重要的特征——每个特征映射中最大的值。最大池化可以处理不同的句子长度。 </p>
-<p>我们已经说明了通过一个滤波器抽取一个特征的过程。当然使用多个滤波器（不同的窗口大小）可以获取多个特征。这些特征组成了倒数第二层并且传给全连接的softmax层，输出标签的概率分布。 </p>
-<p>在其中一个模型变种中，我们做了将词向量分两个“通道”的实验，一个通道中的词向量在模型训练的过程中保持不变，另一个通过BP算法（3.2节）进行细粒度的调节。在多通道架构中，如图1所示，每个滤波器应用在两个通道，再把结果加起来，然后用等式（2）计算$c_i$。除此之外模型等价于单通道的架构。 </p>
-<h3 id="2-1-正则化"><a href="#2-1-正则化" class="headerlink" title="2.1 正则化"></a>2.1 正则化</h3><p>为了解决过拟合的问题，我们采用正则化的方法，在倒数第二层我们使用dropout机制，并且使用L-2范数来约束权重向量。Ｄropout机制可以防止隐藏层的过拟合，通过随机的dropout：例如在反向传播的过程中将p部分的隐藏单元设置为０。即，已知，倒数第二层的特征向量z=[C1,……，Cm]　(表示这里我们有m个滤波器)。经典的情况神经元的输出应该是：</p>
-<script type="math/tex; mode=display">y=w·z+b  (4)</script><p>在前向传播中对输出单元y，dropout使用的是：</p>
-<script type="math/tex; mode=display">y = w · (z ◦ r) + b \ (5)</script><p>这里∘表示按元素逐个相乘操作，$r∈R^m$是一个“掩盖”向量，向量中的元素都是一个伯努利随机变量，有p的概率变为1。梯度仅仅可以通过非掩盖的单元反向传播。在测试阶段，权重向量通过因子p缩减例如$\hat w=pw$,并且$\hat w$被用来（没有使用dropout）给掩盖的句子打分。我们另外限制权重向量的二范式，在每一步梯度下降之后，如果$‖w‖_2&gt;s$，重新将w的二范式设置为$‖w‖_2=s$。</p>
-<h2 id="三、数据集和实验步骤"><a href="#三、数据集和实验步骤" class="headerlink" title="三、数据集和实验步骤"></a>三、数据集和实验步骤</h2><p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.09.28.png" alt="屏幕快照 2018-01-24 下午4.09.28"></p>
-<p>表1：分词之后的数据集的简要统计。C：目标类的个数。l：平均句子长度。N：数据集大小。|V|：单词总数。|V_pre |：出现在预训练词向量中词的个数。Test：测试集的大小（CV意味没有标准的训练/测试集并且采用十折交叉验证的方法）</p>
-<p>我们在不同的基准上测试我们的模型。数据集的简要统计如表1所示。</p>
-<ul>
-<li>MR: 一句话的电影评论。分类标签分为积极/消极的评论（Pang and Lee, 2005）。</li>
-<li>SST-1：斯坦福情感树库——MR数据的扩展，但是包含train/dev/test数据集的划分及细粒度的标签（非常积极、积极、中立、消极、非常消极），被Socher et al.（2013）重新标记。</li>
-<li>SST-2: 和SST-1一样，但是没有中立的评论，只有积极和消极两种标签。</li>
-<li>Subj：主观数据集，任务是去划分一个句子是主观性的还是客观性的（Pang and Lee. 2004）。</li>
-<li>TREC：TREC问题数据集——任务涉及到将一个问题划分为六种问题类型（人，位置，数值信息等）（Li and Roth, 2002）。</li>
-<li>CR：不同产品（照相机、MP3s等等）的客户评论。任务是预测积极/消极的评论（Hu and Liu, 2004）。</li>
-<li>MPQA：MPQA数据集（Wiebe et al., 2005）的观点极性检测子任务。</li>
-</ul>
-<h3 id="3-1-超参数和训练过程"><a href="#3-1-超参数和训练过程" class="headerlink" title="3.1 超参数和训练过程"></a>3.1 超参数和训练过程</h3><p>我们在所有的数据集中都采用下列参数：</p>
-<ul>
-<li>对于所有的数据集我们使用修正线性单元(Rectified linear units)；</li>
-<li>滤波器窗口大小h为3、4、5， 每种滤波器个数为100。；</li>
-<li>dropout的比例为0.5；</li>
-<li>l2正则化限制权值的大小为３；</li>
-<li>mini-batch大小为50；</li>
-<li>这些值都是在SST-2 验证数据集上通过网格搜索选择得到的。 </li>
-</ul>
-<p>我们除了在验证集上进行early stpping外没有另外进行任何特定数据集的调节，对于没有标准验证集的数据集，我们从训练数据集中随机选择10%的数据作为验证集。通过采用Adadelta更新参数（Zeiler, 2012）及随机mini-batches策略的随机梯度下降算法进行训练。 </p>
-<h3 id="3-2-预训练的词向量"><a href="#3-2-预训练的词向量" class="headerlink" title="3.2 预训练的词向量"></a>3.2 预训练的词向量</h3><p>在没有大量监督训练集（Colobert et al., 2011; Socher et al., 2011; Iyyer et al., 2014）的情况下，使用从非监督神经语言模型训练得到的词向量进行初始化是用来提升结果的流行方法。我们使用公用的、由10亿Google 新闻数据中训练出来的Word2vec词向量。此向量的维度是300并且是采用连续的词袋架构（Mikolov et al., 2013）训练出来的。而将没有出现在预训练词向量中的单词随机初始化。 </p>
-<h3 id="3-3-模型变种"><a href="#3-3-模型变种" class="headerlink" title="3.3 模型变种"></a>3.3 模型变种</h3><p>我们使用以下模型变种进行实验。</p>
-<ul>
-<li>CNN-rand：我们的基准模型，所有的词被随机初始化，并在训练的工程中进行调节。</li>
-<li>CNN-static：使用预训练的词向量——Word2vec。所有的词——包括随机初始化的未出现在预训练词向量中的词——保持不变而仅仅调节模型其它的参数。</li>
-<li>CNN-non-static：和CNN-static相似，但是预训练的词向量在每个任务中会有细粒度的调节。</li>
-<li>CNN-multichannel：有两个词向量集合的模型。将每个向量集合看作一个“通道”并且每个滤波器应用在所有的通道，但是梯度只能通过其中一个通道进行反向传播。因此，模型能够细粒度的调节其中一个向量集合，而保持另外一个不变。 </li>
-</ul>
-<p>为了探究上述变种对其它随机因子的影响，我们消除了其它随机化的影响——交叉验证次数赋值，未知词向量的初始化，CNN模型参数的初始化——在每个数据集上保持一致。</p>
-<h2 id="四、结果和讨论"><a href="#四、结果和讨论" class="headerlink" title="四、结果和讨论"></a>四、结果和讨论</h2><p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.42.43.png" alt="屏幕快照 2018-01-24 下午4.42.43"></p>
-<ul>
-<li>RAE：由维基百科(Socher et al.， 2011)中得到预先训练的词向量的递归自编码器。</li>
-<li>MV-RNN：句法分析树的矩阵-向量递归神经网络(Socher et al.， 2012)。</li>
-<li>RNTN：递归神经张量网络，具有基于时态的特征函数和句法分析树(Socher et al.， 2013)</li>
-<li>DCNN: k-max汇聚的动态卷积神经网络(Kalchbrenner et al.， 2014)</li>
-<li>Paragraph-Vec：在段落向量之上的逻辑回归(Le and Mikolov, 2014)</li>
-<li>CCAE: 组合类自动编码器与组合类语法运算符(Hermann and Blunsom, 2013)</li>
-<li>Sent-Parser::情绪分析特定解析器(Dong et al.， 2014)</li>
-<li>NBSVM, MNB: 朴素贝叶斯SVM和多项朴素贝叶斯。</li>
-<li>G-Dropout, F-Dropout: 高斯Dropout和快速Dropout</li>
-<li>Tree-CRF: 条件随机场依赖树(中川等，2010)</li>
-<li>CRF-PR：后正则化条件随机场(Yang and Cardie, 2014)</li>
-<li>SVMS: SVM使用uni-bi-trigrams、wh word、head word、POS、parser、hypernyms和60个手工编码的规则作为特性。</li>
-</ul>
-<p>表2为我们模型和其它模型的结果对比。我们随机化所有词向量的基准模型（CNN-rand）就其本身而言表现的不是很好。然而我们期望通过预训练的词向量来提升效果的模型，我们对效果提升的幅度感到很吃惊。即使使用静态向量的简单模型（CNN-static）表现的相当好，产生了与利用复杂池化模式的复杂深度学习模型（Kalchbrenner et al., 2014）和需要提前计算解析树的模型（Socher et al., 2013）可抗衡的结果。这些结果说明预训练的词向量是好的，它可以作为“通用”的特征抽取器，并且可以跨数据集使用。对每个任务细粒度的调节词向量可以进一步提升结果（CNN-non-static）。 </p>
-<h3 id="4-1-多通道与单通道模型比较"><a href="#4-1-多通道与单通道模型比较" class="headerlink" title="4.1 多通道与单通道模型比较"></a>4.1 多通道与单通道模型比较</h3><p>我们一开始期望多通道的架构可以避免过拟合（通过确保学到词向量不会偏离初始值太远），并且比单通道的模型效果好，尤其在更小的数据集上。然而，结果是含混的，进一步的微调工作是有必要的。例如，与其使用非静态部分的额外通道，还可以维护单个通道，但使用额外的维度，在训练期间允许修改。</p>
-<h3 id="4-2-静态与非静态表示比较"><a href="#4-2-静态与非静态表示比较" class="headerlink" title="4.2 静态与非静态表示比较"></a>4.2 静态与非静态表示比较</h3><p>与单通道非静态模型一样，多通道模型能够对非静态通道进行微调，以使其更特定于任务。例如，good在word2vec中最类似于bad，大概是因为它们(几乎)在语法上是等价的。但是对于在SST-2数据集上的非静态信道中的向量来说，情况并不是如此(表3)。同样地，可以说在表达情感上，nice和great相比，与good更相近，这在训练的词向量中被真实的反映出来。 </p>
-<p>对于（随机初始化）不在预训练向量集合中的词，细粒度的调节允许它们学到更有意义的表示：网络训练得到感叹号经常与热情洋溢的表达联系在一起，并且逗号经常和连接副词联系在一起。 </p>
-<h3 id="4-3-进一步观察"><a href="#4-3-进一步观察" class="headerlink" title="4.3 进一步观察"></a>4.3 进一步观察</h3><p>我们做了进一步的实验和观察。 </p>
-<ul>
-<li>Kalchbrenner et al.（2014）使用和我们单通道架构相同的CNN架构，但是却得到了不好的结果。例如，他们采用随机初始化词向量的Max-TDNN（时间延迟神经网络）模型在SST-1数据集上获得的结果是37.4%，和我们模型获得的45%相比。我们将此差异归因于我们的CNN有更大的容量（多个滤波器和特征映射）。 </li>
-<li>Dropout是如此好的正则化方法以致于用在一个比必要网络更大的网络上并且仅仅使用dropout去正则化效果是好的。</li>
-<li>Dropout一般可以将结果提升2%-4%。 </li>
-<li>当随机初始化不在Word2vec集合中的单词时，向量的每一维从U[-a,a]采样，结果获得了微小的提升，这里的a的选择要使随机初始化的词向量的方差和预训练的词向量有相同的方差。在初始化的过程中，尝试应用更复杂的方法反映预训练词向量的分布，看能否使结果得到提升是很有意思的事情。 </li>
-<li>我们在Collobert et al.（2011）通过维基百科训练的、另一个公用的词向量上进行试验，并且发现使用Word2vec的结果要远远优于它。目前不清楚是因为Mikovlov et al.（2013）的架构还是因为10亿的Google新闻数据集。</li>
-<li>Adadelta（Zeiler，2012）和Adagrad（Duchi et al., 2011）的结果相似，但是需要更少的训练次数。</li>
-</ul>
-<h2 id="五、结论"><a href="#五、结论" class="headerlink" title="五、结论"></a>五、结论</h2><p>在这篇论文中，我们使用卷积神经网络和Word2vec进行了一系列的实验。尽管微小的超参数调节，具有一个卷积层的简单CNN就表现的非常好。我们的实验再次证明：将深度学习应用在NLP领域，非监督预训练的词向量是一个非常重要的因素。 </p>
-<h2 id="六、代码解释"><a href="#六、代码解释" class="headerlink" title="六、代码解释"></a>六、代码解释</h2><p>待完成</p>
+<h2 id="一、Introduction"><a href="#一、Introduction" class="headerlink" title="一、Introduction"></a>一、Introduction</h2><p>文本分类是自然语言处理中的一项重要任务，它有很多应用，比如web搜索、信息检索、排序和文档分类等。最近，基于神经网络的模型变得越来越流行(Kim, 2014; Zhang and LeCun, 2015; Conneau et al., 2016)。虽然这些模型在实践中取得了很好的性能，但是它们在训练和测试时都比较慢，这限制了它们在非常大的数据集上的使用。</p>
+<p>与此同时，线性分类器通常被认为是文本分类问题的强大baseline(Joachims, 1998; McCallum and Nigam, 1998; Fan et al., 2008)。尽管它们很简单，但如果使用正确的特性，它们通常会获得最先进的性能(Wang and Manning, 2012)。它们也有可能扩展到非常大的语料库。</p>
+<p>在这篇文章中，我们探讨了在文本分类的背景下，将这些baseline扩展到一个很大的输出空间的大型语料库。受最近的高效词汇表示法的启发(Mikolov et al.， 2013;Levy et al.， 2015)，我们展示了具有秩约束和快速损失逼近的线性模型，它在10分钟内可以训练10亿个单词，同时达到与最先进的水平相同的性能。我们在两个不同的任务上评价我们的方法FastText的质量，即标记预测和情绪分析。</p>
+<h2 id="二、Model-architecture"><a href="#二、Model-architecture" class="headerlink" title="二、Model architecture"></a>二、Model architecture</h2><p>一个简单而有效的文本分类baseline是将文本描述成bag of word (BoW)，训练一个线性分类器，例如，逻辑回归或SVM(Joachims, 1998; Fan et al., 2008)。然而，线性分类器并不在特征和类别之间共享参数。这可能限制了它们在大的输出空间环境中的泛化，在这个大的输出空间中，一些类别的样本可能非常少。解决这个问题的常用方法是将线性分类器分解成低秩矩阵(Schutze, 1992;Mikolov et al., 2013)或者使用多层神经网络 （Collobert and Weston, 2008 ; Zhang et al., 2015)。</p>
+<p>图1显示了一个具有秩约束的简单线性模型。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 上午11.03.29.png" alt="屏幕快照 2018-03-09 上午11.03.29"><br>第一个权重矩阵A是对单词的查找表。然后对文本的中所有词向量求平均得到一个文本的表示，依次进入线性分类器。这些文本表示是一个潜在的可重用的隐藏变量。这个架构类似于Mikolov et al.(2013)的cbow模型，只是它中间的单词被一个标签代替。我们使用将$softmax$函数$f$计算预定义类的概率分布。对一组N个文档，最小化负对数似然函数</p>
+<script type="math/tex; mode=display">-\frac{1}{N}\sum_{n=1}^Ny_nlog(f(BAx_n))</script><p>其中$x_n$是第$n$个文档的标准化特征，$y_n$是类别标签，$A$和$B$是权重矩阵。该模型通过随机梯度下降和线性衰减学习率在多个cpu上进行异步训练。</p>
+<h3 id="2-1-Hierarchical-softmax"><a href="#2-1-Hierarchical-softmax" class="headerlink" title="2.1 Hierarchical softmax"></a>2.1 Hierarchical softmax</h3><p>当类的数量很大时，计算线性分类器的计算代价很高。更准确地说，计算复杂度是$O(kh)$，$k$是类的数量，$h$是文本表示的维度。为了提高我们的运行时间，我们在Huffman编码树(Mikolov et al.， 2013)的基础上使用了一个分层的softmax (Goodman, 2001)。在训练过程中，计算复杂度下降到$O(h log_2(k))$。在搜索最有可能的类时，分层的softmax在测试时也是有利的。每个节点都与从根到该节点的路径的概率相关。如果深度$l+1$的节点，它的父节点为$n_1$、$n_2$、$n_l$，则它的概率为</p>
+<script type="math/tex; mode=display">P(n_{l+1})=\prod _{i=1}^lP(n_i)</script><p>这意味着子节点的概率总是低于其父节点的概率。探索树的深度优先搜索和跟踪最大概率的叶子允许我们丢弃任何与一个小概率相关的分支。在实践中，我们观察到在测试时将复杂度降低到$O(hlog_2(k))$。使用二进制堆，这种方法进一步扩展到以$O(log(T))$的代价计算T-top目标。</p>
+<h3 id="2-2-N-gram-features"><a href="#2-2-N-gram-features" class="headerlink" title="2.2 N-gram features"></a>2.2 N-gram features</h3><p>词袋中的词顺序是固定的，但明确地把这个顺序考虑进去通常是非常昂贵的。相反，我们使用一个n-grams作为额外的特征，以获取关于局部词序的部分信息。这在实践中非常有效，同时实现了与明确使用顺序的方法(Wang and Manning, 2012)差不多的结果。</p>
+<p>我们通过一个哈希（hashing）技巧维持了快速且有效的 n-gram 映射（Weinberger et al., 2009），这个哈希技巧带有与 Mikolov et al.（2011）论文中相同的哈希函数和 10M bins（如果我们仅使用 bigram 的话），否则就需要 100M bin.</p>
+<h2 id="三、Experiments"><a href="#三、Experiments" class="headerlink" title="三、Experiments"></a>三、Experiments</h2><p>我们在两个不同的任务上评估fastText。首先，我们将其与现有的文本分类器对情绪分析问题进行比较。然后，我们评估其在标记预测数据集上扩展到大的输出空间的能力。请注意,我们的模型可以用Vowpal Wabbit库来实现,但是在实践中我们看到,我们的实现至少有2到5倍的提升。</p>
+<h3 id="3-1-Sentiment-analysis"><a href="#3-1-Sentiment-analysis" class="headerlink" title="3.1 Sentiment analysis"></a>3.1 Sentiment analysis</h3><blockquote>
+<p>Datasets and baselines</p>
+</blockquote>
+<p>我们采用了同样的8个数据集，并采用了Zhangetal(2015)的评价协议。我们比较了了Zhang et al.(2015)的n-gram和TF-IDF 的baseline，以及Zhang and LeCun(2015)的字符级卷积模型(char-cnn)，基于字符的卷积循环网络(char-CRNN) (Xiao and Cho, 2016)和Conneau等人(2016)的深度卷积网络(VDCNN)。我们还比较了Tang等人(2015)的评估方案。我们比较了他们的主要baseline，以及基于循环网络的两种方法(Conv-GRNN和LSTM-GRNN)。</p>
+<blockquote>
+<p>Results</p>
+</blockquote>
+<p>我们在图1中展示了结果。我们使用10个隐藏单元，并在5个epochs中运行fastText，其学习率从{0.05,0.1,0.25,0.5}中选择。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.29.39.png" alt="屏幕快照 2018-03-09 下午4.29.39"></p>
+<p>在这个任务中，添加bigram信息可以提高1-4%的性能。总体而言，我们的准确性略好于char-CNN和char-CRNN，差于VDCNN。请注意，我们可以通过使用更多的n-gram来略微提高精确度，例如使用trigrams，在搜狗数据集上的性能达到了97.1%。最后，图3显示了我们的方法与Tang et al.(2015)中的方法相竞争。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.33.57.png" alt="屏幕快照 2018-03-09 下午4.33.57"></p>
+<p>我们对验证集上的超参数进行调优，并观察到使用n-grams达到5时性能最佳。与Tang et al.(2015)不同，fastText不使用预先训练的词嵌入，这可以解释1%的准确性差异。</p>
+<blockquote>
+<p>Training time</p>
+</blockquote>
+<p>CNN和VDCNN都用NVIDIA Tesla K40 GPU训练，而我们的模型在CPU上使用了20个线程。表2显示使用卷积的方法比fastText慢几个数量级。虽然利用10倍的速度提升的CUDA来加速char-CNN的训练，FastText花了不到一分钟的训练。Tang et al.(2015)的GRNNs方法在CPU上以单个线程的时间为12小时左右。随着数据量增加，与神经网络方法相比，我们的模型加速至少达到了15000倍</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.38.52.png" alt="屏幕快照 2018-03-09 下午4.38.52"></p>
+<h3 id="3-2-Tag-prediction"><a href="#3-2-Tag-prediction" class="headerlink" title="3.2 Tag prediction"></a>3.2 Tag prediction</h3><blockquote>
+<p>Dataset and baselines.</p>
+</blockquote>
+<p>为了测试我们的方法的可扩展性，在YFCC100M数据集(Thomee et al.， 2016)上进行了进一步的评估，该数据集包含了近1亿张带有说明、标题和标签的图像。我们专注于根据标题和标题预测标签(我们不使用图像)。我们删除了出现少于100次的单词和标记，并将数据分成训练集、验证集和测试集。该训练集包含91,188,648个样本(1.5B tokens)。验证集有930497个样本，测试集有543,424个样本。词汇量为297,141，有312,116个独特的标签。我们将发布一个脚本，重新创建这个数据集，以便可以复制我们的数据。我们报告的精度为1。</p>
+<p>我们考虑一个基于频率的baseline，它预测最频繁的标记。我们也比较了Tagspace (Weston et al.， 2014)，这是一个类似于我们的标签预测模型，但是基于Weston et al.(2011)的Wsabie模型。虽然Tagspace模型是使用卷积来描述的，但是我们考虑的是线性版本，它实现了类似的性能，但是速度要快得多。</p>
+<blockquote>
+<p>Results and training time</p>
+</blockquote>
+<p>表5给出了fastText和baseline的比较。我们运行5个epochs的fastText，并将其与隐藏层的两个不同尺寸的Tagspace进行比较，即50和200。这两种模型都实现了一种类似的性能，它有一个隐藏的小层，但是添加了bigrams，这就大大提高了精度。在测试时，Tagspace需要计算所有类的分数，这使得它相对较慢，而我们的快速推理在类的数量很大(这里超过300K)时，会有显著的加速增长。总的来说，我们的模型速度超过了一个数量级，且获得了更高质量的效果。测试的加速阶段更显著(600倍加速)。表4显示了一些定性的例子。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.56.32.png" alt="屏幕快照 2018-03-09 下午4.56.32"><br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.57.00.png" alt="屏幕快照 2018-03-09 下午4.57.00"></p>
+<h2 id="四、Discussion-and-conclusion"><a href="#四、Discussion-and-conclusion" class="headerlink" title="四、Discussion and conclusion"></a>四、Discussion and conclusion</h2><p>在本文中，我们提出了一种简单的文本分类baseline方法。不像从word2vec中训练出来的不受监督的单词向量，我们的单词特征可以被平均起来组成一个好的句子表示。在一些任务中，fastText获得的性能与最近提出的以深度学习为灵感的方法相比，速度更快。虽然深层神经网络在理论上比浅层模型具有更高的表征能力，但尚不清楚简单的文本分类问题，如情绪分析是否是正确的评价方法。我们将发布我们的代码，以便研究社区能够轻松地构建我们的工作。</p>
 
       
     </div>
@@ -518,13 +484,7 @@ var _hmt = _hmt || [];
           
             <a href="/tags/word2vec/" rel="tag"># word2vec</a>
           
-            <a href="/tags/static/" rel="tag"># static</a>
-          
-            <a href="/tags/TextCNN/" rel="tag"># TextCNN</a>
-          
-            <a href="/tags/Dropout/" rel="tag"># Dropout</a>
-          
-            <a href="/tags/non-static/" rel="tag"># non-static</a>
+            <a href="/tags/FastText/" rel="tag"># FastText</a>
           
         </div>
       
@@ -533,8 +493,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/23/读书记（10）：高宣扬讲存在主义（四）/" rel="next" title="读书记（10）：高宣扬讲存在主义（四）">
-                <i class="fa fa-chevron-left"></i> 读书记（10）：高宣扬讲存在主义（四）
+              <a href="/2018/03/08/自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification—RCNN/" rel="next" title="自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification（RCNN）">
+                <i class="fa fa-chevron-left"></i> 自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification（RCNN）
               </a>
             
           </div>
@@ -543,8 +503,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/01/25/读书记（11）：存在主义书单/" rel="prev" title="读书记（11）：存在主义书单">
-                读书记（11）：存在主义书单 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/04/04/人大应统部落（2）：2018级中国人民大学应用统计专业硕士经验贴合集/" rel="prev" title="人大应统部落（2）：2018年人大应统专业硕士经验贴合集">
+                人大应统部落（2）：2018年人大应统专业硕士经验贴合集 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -762,7 +722,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、导语"><span class="nav-text">一、导语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、模型"><span class="nav-text">二、模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-正则化"><span class="nav-text">2.1 正则化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、数据集和实验步骤"><span class="nav-text">三、数据集和实验步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-超参数和训练过程"><span class="nav-text">3.1 超参数和训练过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-预训练的词向量"><span class="nav-text">3.2 预训练的词向量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-模型变种"><span class="nav-text">3.3 模型变种</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、结果和讨论"><span class="nav-text">四、结果和讨论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-多通道与单通道模型比较"><span class="nav-text">4.1 多通道与单通道模型比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-静态与非静态表示比较"><span class="nav-text">4.2 静态与非静态表示比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-进一步观察"><span class="nav-text">4.3 进一步观察</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、结论"><span class="nav-text">五、结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、代码解释"><span class="nav-text">六、代码解释</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Introduction"><span class="nav-text">一、Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Model-architecture"><span class="nav-text">二、Model architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Hierarchical-softmax"><span class="nav-text">2.1 Hierarchical softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-N-gram-features"><span class="nav-text">2.2 N-gram features</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Experiments"><span class="nav-text">三、Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Sentiment-analysis"><span class="nav-text">3.1 Sentiment analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Tag-prediction"><span class="nav-text">3.2 Tag prediction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Discussion-and-conclusion"><span class="nav-text">四、Discussion and conclusion</span></a></li></ol></div>
             
 
           </div>

@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="word2vec,FastText," />
+  <meta name="keywords" content="word2vec,CNN,RCNN,LSTM," />
 
 
 
@@ -86,25 +86,20 @@
 
 
 
-<meta name="description" content="这篇文章翻译自Bag of Tricks for Efficient Text Classification 本文探讨了一个简单而有效的文本分类baseline。我们的实验表明，快速文本分类器在精度上通常与深度学习分类器相当，并且在训练和评估方面的速度要快得多。我们可以在不到10分钟的时间内使用标准的多核CPU对超过10亿单词的快速文本进行训练，在不到一分钟的时间内对312000类的50万个句子进">
-<meta name="keywords" content="word2vec,FastText">
+<meta name="description" content="这篇文章翻译自Recurrent Convolutional Neural Networks for Text Classification 文本分类是许多NLP应用的基础任务。传统的文本分类器通常依赖于许多人设计的特性，如字典、知识库和特殊的树内核。与传统的方法相比，我们引入了一个递归的卷积神经网络来进行文本分类，而没有人为设计的特征。在我们的模型中，我们应用了一个经常的结构，在学习单词表示法时">
+<meta name="keywords" content="word2vec,CNN,RCNN,LSTM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText）">
-<meta property="og:url" content="http://yoursite.com/2018/03/09/自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText）/index.html">
+<meta property="og:title" content="自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification（RCNN）">
+<meta property="og:url" content="http://yoursite.com/2018/03/08/自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification—RCNN/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="这篇文章翻译自Bag of Tricks for Efficient Text Classification 本文探讨了一个简单而有效的文本分类baseline。我们的实验表明，快速文本分类器在精度上通常与深度学习分类器相当，并且在训练和评估方面的速度要快得多。我们可以在不到10分钟的时间内使用标准的多核CPU对超过10亿单词的快速文本进行训练，在不到一分钟的时间内对312000类的50万个句子进">
+<meta property="og:description" content="这篇文章翻译自Recurrent Convolutional Neural Networks for Text Classification 文本分类是许多NLP应用的基础任务。传统的文本分类器通常依赖于许多人设计的特性，如字典、知识库和特殊的树内核。与传统的方法相比，我们引入了一个递归的卷积神经网络来进行文本分类，而没有人为设计的特征。在我们的模型中，我们应用了一个经常的结构，在学习单词表示法时">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 上午11.03.29.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.29.39.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.33.57.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.38.52.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.56.32.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.57.00.png">
-<meta property="og:updated_time" content="2018-03-12T11:12:27.433Z">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-08 下午7.47.01.png">
+<meta property="og:updated_time" content="2018-03-09T02:48:13.451Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText）">
-<meta name="twitter:description" content="这篇文章翻译自Bag of Tricks for Efficient Text Classification 本文探讨了一个简单而有效的文本分类baseline。我们的实验表明，快速文本分类器在精度上通常与深度学习分类器相当，并且在训练和评估方面的速度要快得多。我们可以在不到10分钟的时间内使用标准的多核CPU对超过10亿单词的快速文本进行训练，在不到一分钟的时间内对312000类的50万个句子进">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 上午11.03.29.png">
+<meta name="twitter:title" content="自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification（RCNN）">
+<meta name="twitter:description" content="这篇文章翻译自Recurrent Convolutional Neural Networks for Text Classification 文本分类是许多NLP应用的基础任务。传统的文本分类器通常依赖于许多人设计的特性，如字典、知识库和特殊的树内核。与传统的方法相比，我们引入了一个递归的卷积神经网络来进行文本分类，而没有人为设计的特征。在我们的模型中，我们应用了一个经常的结构，在学习单词表示法时">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-08 下午7.47.01.png">
 
 
 
@@ -136,7 +131,7 @@
 
 
 
-  <title> 自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText） | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification（RCNN） | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -301,7 +296,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/09/自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText）/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/08/自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification—RCNN/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -325,7 +320,7 @@ var _hmt = _hmt || [];
             
             
               
-                自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText）
+                自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification（RCNN）
               
             
           </h1>
@@ -338,8 +333,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-09T23:14:45+08:00">
-                2018-03-09
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-08T23:14:45+08:00">
+                2018-03-08
               </time>
             
 
@@ -397,48 +392,33 @@ var _hmt = _hmt || [];
       
 
       
-        <p>这篇文章翻译自<a href="https://arxiv.org/pdf/1607.01759.pdf" target="_blank" rel="noopener">Bag of Tricks for Efficient Text Classification</a></p>
-<p>本文探讨了一个简单而有效的文本分类baseline。我们的实验表明，快速文本分类器在精度上通常与深度学习分类器相当，并且在训练和评估方面的速度要快得多。我们可以在不到10分钟的时间内使用标准的多核CPU对超过10亿单词的快速文本进行训练，在不到一分钟的时间内对312000类的50万个句子进行分类。</p>
+        <p>这篇文章翻译自<a href="http://www.nlpr.ia.ac.cn/cip/~liukang/liukangPageFile/Recurrent%20Convolutional%20Neural%20Networks%20for%20Text%20Classification.pdf" target="_blank" rel="noopener">Recurrent Convolutional Neural Networks for Text Classification</a></p>
+<p>文本分类是许多NLP应用的基础任务。传统的文本分类器通常依赖于许多人设计的特性，如字典、知识库和特殊的树内核。与传统的方法相比，我们引入了一个递归的卷积神经网络来进行文本分类，而没有人为设计的特征。在我们的模型中，我们应用了一个经常的结构，在学习单词表示法时尽可能地捕捉上下文信息，这可能大大减少了与传统的基于窗口的神经网络相比的噪音。我们还使用了一个自动判断哪些单词在文本分类中扮演关键角色，以在文本中捕获关键组件的方法。我们对四个常用的数据集进行实验。实验结果表明，该方法在多组数据集上优于最先进的方法。</p>
 <a id="more"></a>
-<h2 id="一、Introduction"><a href="#一、Introduction" class="headerlink" title="一、Introduction"></a>一、Introduction</h2><p>文本分类是自然语言处理中的一项重要任务，它有很多应用，比如web搜索、信息检索、排序和文档分类等。最近，基于神经网络的模型变得越来越流行(Kim, 2014; Zhang and LeCun, 2015; Conneau et al., 2016)。虽然这些模型在实践中取得了很好的性能，但是它们在训练和测试时都比较慢，这限制了它们在非常大的数据集上的使用。</p>
-<p>与此同时，线性分类器通常被认为是文本分类问题的强大baseline(Joachims, 1998; McCallum and Nigam, 1998; Fan et al., 2008)。尽管它们很简单，但如果使用正确的特性，它们通常会获得最先进的性能(Wang and Manning, 2012)。它们也有可能扩展到非常大的语料库。</p>
-<p>在这篇文章中，我们探讨了在文本分类的背景下，将这些baseline扩展到一个很大的输出空间的大型语料库。受最近的高效词汇表示法的启发(Mikolov et al.， 2013;Levy et al.， 2015)，我们展示了具有秩约束和快速损失逼近的线性模型，它在10分钟内可以训练10亿个单词，同时达到与最先进的水平相同的性能。我们在两个不同的任务上评价我们的方法FastText的质量，即标记预测和情绪分析。</p>
-<h2 id="二、Model-architecture"><a href="#二、Model-architecture" class="headerlink" title="二、Model architecture"></a>二、Model architecture</h2><p>一个简单而有效的文本分类baseline是将文本描述成bag of word (BoW)，训练一个线性分类器，例如，逻辑回归或SVM(Joachims, 1998; Fan et al., 2008)。然而，线性分类器并不在特征和类别之间共享参数。这可能限制了它们在大的输出空间环境中的泛化，在这个大的输出空间中，一些类别的样本可能非常少。解决这个问题的常用方法是将线性分类器分解成低秩矩阵(Schutze, 1992;Mikolov et al., 2013)或者使用多层神经网络 （Collobert and Weston, 2008 ; Zhang et al., 2015)。</p>
-<p>图1显示了一个具有秩约束的简单线性模型。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 上午11.03.29.png" alt="屏幕快照 2018-03-09 上午11.03.29"><br>第一个权重矩阵A是对单词的查找表。然后对文本的中所有词向量求平均得到一个文本的表示，依次进入线性分类器。这些文本表示是一个潜在的可重用的隐藏变量。这个架构类似于Mikolov et al.(2013)的cbow模型，只是它中间的单词被一个标签代替。我们使用将$softmax$函数$f$计算预定义类的概率分布。对一组N个文档，最小化负对数似然函数</p>
-<script type="math/tex; mode=display">-\frac{1}{N}\sum_{n=1}^Ny_nlog(f(BAx_n))</script><p>其中$x_n$是第$n$个文档的标准化特征，$y_n$是类别标签，$A$和$B$是权重矩阵。该模型通过随机梯度下降和线性衰减学习率在多个cpu上进行异步训练。</p>
-<h3 id="2-1-Hierarchical-softmax"><a href="#2-1-Hierarchical-softmax" class="headerlink" title="2.1 Hierarchical softmax"></a>2.1 Hierarchical softmax</h3><p>当类的数量很大时，计算线性分类器的计算代价很高。更准确地说，计算复杂度是$O(kh)$，$k$是类的数量，$h$是文本表示的维度。为了提高我们的运行时间，我们在Huffman编码树(Mikolov et al.， 2013)的基础上使用了一个分层的softmax (Goodman, 2001)。在训练过程中，计算复杂度下降到$O(h log_2(k))$。在搜索最有可能的类时，分层的softmax在测试时也是有利的。每个节点都与从根到该节点的路径的概率相关。如果深度$l+1$的节点，它的父节点为$n_1$、$n_2$、$n_l$，则它的概率为</p>
-<script type="math/tex; mode=display">P(n_{l+1})=\prod _{i=1}^lP(n_i)</script><p>这意味着子节点的概率总是低于其父节点的概率。探索树的深度优先搜索和跟踪最大概率的叶子允许我们丢弃任何与一个小概率相关的分支。在实践中，我们观察到在测试时将复杂度降低到$O(hlog_2(k))$。使用二进制堆，这种方法进一步扩展到以$O(log(T))$的代价计算T-top目标。</p>
-<h3 id="2-2-N-gram-features"><a href="#2-2-N-gram-features" class="headerlink" title="2.2 N-gram features"></a>2.2 N-gram features</h3><p>词袋中的词顺序是固定的，但明确地把这个顺序考虑进去通常是非常昂贵的。相反，我们使用一个n-grams作为额外的特征，以获取关于局部词序的部分信息。这在实践中非常有效，同时实现了与明确使用顺序的方法(Wang and Manning, 2012)差不多的结果。</p>
-<p>我们通过一个哈希（hashing）技巧维持了快速且有效的 n-gram 映射（Weinberger et al., 2009），这个哈希技巧带有与 Mikolov et al.（2011）论文中相同的哈希函数和 10M bins（如果我们仅使用 bigram 的话），否则就需要 100M bin.</p>
-<h2 id="三、Experiments"><a href="#三、Experiments" class="headerlink" title="三、Experiments"></a>三、Experiments</h2><p>我们在两个不同的任务上评估fastText。首先，我们将其与现有的文本分类器对情绪分析问题进行比较。然后，我们评估其在标记预测数据集上扩展到大的输出空间的能力。请注意,我们的模型可以用Vowpal Wabbit库来实现,但是在实践中我们看到,我们的实现至少有2到5倍的提升。</p>
-<h3 id="3-1-Sentiment-analysis"><a href="#3-1-Sentiment-analysis" class="headerlink" title="3.1 Sentiment analysis"></a>3.1 Sentiment analysis</h3><blockquote>
-<p>Datasets and baselines</p>
-</blockquote>
-<p>我们采用了同样的8个数据集，并采用了Zhangetal(2015)的评价协议。我们比较了了Zhang et al.(2015)的n-gram和TF-IDF 的baseline，以及Zhang and LeCun(2015)的字符级卷积模型(char-cnn)，基于字符的卷积循环网络(char-CRNN) (Xiao and Cho, 2016)和Conneau等人(2016)的深度卷积网络(VDCNN)。我们还比较了Tang等人(2015)的评估方案。我们比较了他们的主要baseline，以及基于循环网络的两种方法(Conv-GRNN和LSTM-GRNN)。</p>
-<blockquote>
-<p>Results</p>
-</blockquote>
-<p>我们在图1中展示了结果。我们使用10个隐藏单元，并在5个epochs中运行fastText，其学习率从{0.05,0.1,0.25,0.5}中选择。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.29.39.png" alt="屏幕快照 2018-03-09 下午4.29.39"></p>
-<p>在这个任务中，添加bigram信息可以提高1-4%的性能。总体而言，我们的准确性略好于char-CNN和char-CRNN，差于VDCNN。请注意，我们可以通过使用更多的n-gram来略微提高精确度，例如使用trigrams，在搜狗数据集上的性能达到了97.1%。最后，图3显示了我们的方法与Tang et al.(2015)中的方法相竞争。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.33.57.png" alt="屏幕快照 2018-03-09 下午4.33.57"></p>
-<p>我们对验证集上的超参数进行调优，并观察到使用n-grams达到5时性能最佳。与Tang et al.(2015)不同，fastText不使用预先训练的词嵌入，这可以解释1%的准确性差异。</p>
-<blockquote>
-<p>Training time</p>
-</blockquote>
-<p>CNN和VDCNN都用NVIDIA Tesla K40 GPU训练，而我们的模型在CPU上使用了20个线程。表2显示使用卷积的方法比fastText慢几个数量级。虽然利用10倍的速度提升的CUDA来加速char-CNN的训练，FastText花了不到一分钟的训练。Tang et al.(2015)的GRNNs方法在CPU上以单个线程的时间为12小时左右。随着数据量增加，与神经网络方法相比，我们的模型加速至少达到了15000倍</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.38.52.png" alt="屏幕快照 2018-03-09 下午4.38.52"></p>
-<h3 id="3-2-Tag-prediction"><a href="#3-2-Tag-prediction" class="headerlink" title="3.2 Tag prediction"></a>3.2 Tag prediction</h3><blockquote>
-<p>Dataset and baselines.</p>
-</blockquote>
-<p>为了测试我们的方法的可扩展性，在YFCC100M数据集(Thomee et al.， 2016)上进行了进一步的评估，该数据集包含了近1亿张带有说明、标题和标签的图像。我们专注于根据标题和标题预测标签(我们不使用图像)。我们删除了出现少于100次的单词和标记，并将数据分成训练集、验证集和测试集。该训练集包含91,188,648个样本(1.5B tokens)。验证集有930497个样本，测试集有543,424个样本。词汇量为297,141，有312,116个独特的标签。我们将发布一个脚本，重新创建这个数据集，以便可以复制我们的数据。我们报告的精度为1。</p>
-<p>我们考虑一个基于频率的baseline，它预测最频繁的标记。我们也比较了Tagspace (Weston et al.， 2014)，这是一个类似于我们的标签预测模型，但是基于Weston et al.(2011)的Wsabie模型。虽然Tagspace模型是使用卷积来描述的，但是我们考虑的是线性版本，它实现了类似的性能，但是速度要快得多。</p>
-<blockquote>
-<p>Results and training time</p>
-</blockquote>
-<p>表5给出了fastText和baseline的比较。我们运行5个epochs的fastText，并将其与隐藏层的两个不同尺寸的Tagspace进行比较，即50和200。这两种模型都实现了一种类似的性能，它有一个隐藏的小层，但是添加了bigrams，这就大大提高了精度。在测试时，Tagspace需要计算所有类的分数，这使得它相对较慢，而我们的快速推理在类的数量很大(这里超过300K)时，会有显著的加速增长。总的来说，我们的模型速度超过了一个数量级，且获得了更高质量的效果。测试的加速阶段更显著(600倍加速)。表4显示了一些定性的例子。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.56.32.png" alt="屏幕快照 2018-03-09 下午4.56.32"><br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-09 下午4.57.00.png" alt="屏幕快照 2018-03-09 下午4.57.00"></p>
-<h2 id="四、Discussion-and-conclusion"><a href="#四、Discussion-and-conclusion" class="headerlink" title="四、Discussion and conclusion"></a>四、Discussion and conclusion</h2><p>在本文中，我们提出了一种简单的文本分类baseline方法。不像从word2vec中训练出来的不受监督的单词向量，我们的单词特征可以被平均起来组成一个好的句子表示。在一些任务中，fastText获得的性能与最近提出的以深度学习为灵感的方法相比，速度更快。虽然深层神经网络在理论上比浅层模型具有更高的表征能力，但尚不清楚简单的文本分类问题，如情绪分析是否是正确的评价方法。我们将发布我们的代码，以便研究社区能够轻松地构建我们的工作。</p>
-
+<h2 id="一、Introduction"><a href="#一、Introduction" class="headerlink" title="一、Introduction"></a>一、Introduction</h2><p>文本分类是许多应用的重要组成部分，如web搜索、信息过滤和情绪分析(Aggarwal和Zhai 2012)。因此，它引起了许多研究者的关注。</p>
+<p>文本分类中的一个关键问题是特征表示，这通常是基于单词bagof -words (BoW)模型，其中的unigrams、bigrams、n-grams或一些精心设计的模式通常被提取为特征。此外，还应用了频率、MI (Cover and Thomas 2012)、pLSA (Cai and Hofmann 2003)、LDA (Hingmire et al. 2013)等几种特征选择方法，以选择更具鉴别性的特征。</p>
+<p>然而，传统的特征表示方法往往忽略文本中的上下文信息或词序，对于捕捉词的语义仍然不满意。例如，在句中，“沿着南岸的夕阳漫步提供了一系列令人惊叹的优势。”当我们分析“Bank”(unigram)这个词时，我们可能不知道它是指金融机构还是河旁。此外，“South Bank”(bigram)，尤其是考虑到两个大写字母，可能会误导那些对伦敦不太了解的人，把它当作金融机构。当我们获得更大的上下文“沿着南岸漫步”(5-gram)，我们就能很容易地辨别出它的意思。虽然高阶n-grams和更复杂的特性(如树内核(Post和Bergsma 2013))被设计用于捕获更多的上下文信息和单词序列，但它们仍然存在数据稀疏问题，这严重影响了分类的准确性。近年来，经过预先训练的word embedding和深层神经网络的快速发展，给各种NLP任务带来了新的启发。word embedding是单词的一种分布式表示，极大地缓解了数据稀疏问题(Bengio et al. 2003)。Mikolov、Yih和Zweig(2013)表明，预先训练的词嵌入可以捕捉有意义的句法和语义规律性。在word embedding的帮助下，人们提出了一些基于合成的方法来获取文本的语义表示。</p>
+<p>Socher et al .(2011 a;2011 b;2013年提出递归神经网络(RecursiveNN)，在构建句子表示方面已被证明是有效的。然而，递归通过树结构捕获了一个句子的语义。它的性能很大程度上取决于文本树结构的性能。此外，构造这样一种文本树的时间复杂度至少为$O(n^2)$，其中n为文本的长度。当模型遇到长句或文档时，这将是非常耗时的。此外，两个句子之间的关系很难用树结构来表示。因此，递归不适合对长句或文档建模。</p>
+<p>另一种模型，循环神经网络（RNN），模型时间复杂度为$O(n)$。该模型通过逐字分析一个文本单词，并将所有先前文本的语义存储在一个固定大小的隐藏层中(Elman 1990)。RNN的优点是能够更好地捕捉上下文信息。这可能有利于捕获长文本的语义。然而，RNN是一个有偏倚的模型，在这个模型中，后面的单词比先前的单词更具优势。因此，当它被用于捕获整个文档的语义时，它可能会降低效率，因为关键组件可能出现在文档中的任何地方，而不是最后。为了解决偏置问题，我们引入了卷积神经网络(CNN)，将一个不带偏见的模型引入到NLP任务中，它可以很好地确定文本中带有最大池化层的识别性短语。因此，与递归或循环神经网络相比，CNN可以更好地捕捉文本的语义。CNN的时间复杂度也是$O(n)$。然而，以前对CNNs的研究倾向于使用简单的卷积核，如固定窗(bert et al. 2011;Kalchbrenner和Blunsom 2013)。使用这样的内核时，很难确定窗口大小:小窗口大小可能导致一些关键信息的丢失，而大的窗口会导致巨大的参数空间(这可能很难训练)。因此，它提出了一个问题:我们能否比传统的基于窗口的神经网络学习更多的上下文信息，更准确地表示文本的语义。</p>
+<p>为了解决上述模型的局限性，我们提出了一个循环卷积神经网络(RCNN)，并将其应用于文本分类的任务。首先，我们应用一个双向的循环结构，与传统的基于窗口的神经网络相比，它可以大大减少噪声，从而最大程度地捕捉上下文信息。此外，该模型在学习文本表示时可以保留更大范围的词序。其次，我们使用了一个可以自动判断哪些特性在文本分类中扮演关键角色的池化层，以捕获文本中的关键组件。我们的模型结合了RNN的结构和最大池化层，利用了循环神经模型和卷积神经模型的优点。此外，我们的模型显示了$O(n)$的时间复杂度，它与文本长度的长度是线性相关的。</p>
+<p>我们用英语和汉语四种不同的任务来比较我们的模型和以前的最先进的方法。类别分类包含主题分类,情感分类和写作风格分类。实验表明，我们的模型在四种常用数据集的三种情况下比以往的先进方法更出色。</p>
+<h2 id="二、Related-Work"><a href="#二、Related-Work" class="headerlink" title="二、Related Work"></a>二、Related Work</h2><h3 id="2-1-Text-Classification"><a href="#2-1-Text-Classification" class="headerlink" title="2.1 Text Classification"></a>2.1 Text Classification</h3><p>传统的文本分类工作主要集中在三个主题:特征工程、特征选择和不同类型的机器学习算法。对于特征工程来说，最广泛使用的功能是bag-of-words。此外，还设计了一些更复杂的功能，比如词性标签、名词短语(Lewis 1992)和tree kernels (Post and Bergsma 2013)。特征选择旨在删除噪声特征，提高分类性能。最常见的特征选择方法是去停词(例如，“The”)。先进的方法使用信息增益、相互信息(Cover和Thomas 2012)或L1正则化(Ng 2004)以选择有用的特性。机器学习算法常用分类器，如逻辑回归(LR)、朴素贝叶斯(NB)和支持向量机(SVM)。然而，这些方法都存在数据稀疏问题。</p>
+<h3 id="2-2-Deep-neural-networks"><a href="#2-2-Deep-neural-networks" class="headerlink" title="2.2 Deep neural networks"></a>2.2 Deep neural networks</h3><p>最近，深度神经网络(Hinton and Salakhutdinov 2006)和表示学习(Bengio, Courville，和Vincent 2013)提出了解决数据问题的新思路，并提出了许多学习单词表示的神经模型(Bengio et al. 2003;Mnih and Hinton 2007;Mikolov 2012;Collobert et al . 2011;huanget al . 2012;Mikolov et al . 2013)。一个单词的神经表示被称为单词嵌入，它是一个实值向量。“嵌入”一词使我们能够简单地利用两个嵌入向量之间的距离来测量单词的相关性。通过预先训练的词嵌入，神经网络在许多NLP任务中表现出色。Socher等人(2011b)使用半监督递归自动编码器来预测句子的情绪。Socher等(2011a)提出了一种用循环神经网络进行语义检测的方法。Socher等人(2013)引入递归神经张量网络分析短语和句子的情绪。Mikolov(2012)利用循环神经网络构建语言模型。Kalchbrenner和Blunsom(2013)提出了一个新的对话行为分类网络。conbert等人(2011)引入了卷积神经网络的语义角色标记。</p>
+<h2 id="三、Model"><a href="#三、Model" class="headerlink" title="三、Model"></a>三、Model</h2><p>我们提出了一个深度神经模型来捕获文本的语义。图1显示了我们模型的网络结构。网络的输入是一个文档$D$，它是一个序列的单词$w_1, w_2…w_n$。网络的输出为类别。我们使用$p(k|D，θ)$来表示文档类别$k$的概率,$θ$是网络参数。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-03-08 下午7.47.01.png" alt="屏幕快照 2018-03-08 下午7.47.01"></p>
+<h3 id="3-1-Word-Representation-Learning"><a href="#3-1-Word-Representation-Learning" class="headerlink" title="3.1 Word Representation Learning"></a>3.1 Word Representation Learning</h3><p>我们结合一个词和它的上下文来呈现一个词。语境帮助我们获得更准确的词义。在我们的模型中，我们使用一个循环结构，它是一个双向的循环神经网络，用来捕获上下文。我们将$c_l(w_i)$定义为词$w_i$左边的文本，将$c_r(w_i)$定义为词$w_i$右边的文本。$c_l(w_i)$和$c_r(w_i)$都是具有|c|个实值元素的稠密向量。使用式（1）来计算词$w_i$左边的文本，$e(w_{i-1})$是词$w_{i-1}$的词嵌入，它是一个长度为$|e|$的实值向量。$c_l(w_{i-1})$是上一个词$w_{i-1}$的左半部分文本。任何文档的第一个词的左半边文本使用相同的参数$c_l(w_1)$。$W^{(l)}$是一个将隐藏层(context)转换为下一个隐藏层的矩阵。$W^{(sl)}$是一个矩阵，用来将当前单词的语义与下一个单词的左上下文结合起来。$f$是非线性激活函数。右半边文本$c_r{(w_i)}$用相同的方式计算，如公式（2）所示。一个文档的最后一个词的右半边文本共享参数$c_r(w_n)$</p>
+<script type="math/tex; mode=display">c_l(w_i)=f(W^{(l)}c_l(w_{i-1})+W^{(sl)}e(w_{i-1})) \qquad (1)\\c_r(w_i)=f(W^{(r)}c_r(w_{i+1})+W^{(sr)}e(w_{i+1})) \qquad (2)</script><p>如式(1)和(2)所示，上下文向量捕获了所有左和右上下文的语义。例如，在图1中，$c_l (w_7)$编码了左侧上下文的语义“沿着南方漫步”以及前面的所有文本，$c_r (w_7)$编码了右侧上下文的语义“提供了一个……””。然后，我们定义单词$w_i$的表示形式为式(3)，即左侧上下文向量$c_l(w_i)$，词嵌入表示$e(w_i)$和右侧上下文向量$c_r(w_i)$的连接。用这种方式，我们的模型可以更好地消除“$w_i$”这个词的含糊含义，而不是只使用固定窗口的传统神经模型，（例如他们只使用关于文本的部分信息）</p>
+<script type="math/tex; mode=display">x_i=[c_l(w_i);e(w_i);c_r(w_i)]\qquad (3)</script><p>循环结构可以在文本的向前扫描时获取所有的$c_l$，在反向扫描时获取所有的$c_r$。时间复杂度为$O(n)$。当我们获得了单词$w_i$的表示$x_i$后，我们将一个线性变换与tanh激活函数一起应用到$x_i$，并将结果传递到下一层。</p>
+<script type="math/tex; mode=display">y_i^{(2)}=tanh(W^{(2)}x_i+b^{(2)})\qquad (4)</script><p>$y$是一个潜在的语义向量，每一个语义因素都将被分析，以确定代表文本的最有用的因素。</p>
+<h3 id="3-2-Text-Representation-Learning"><a href="#3-2-Text-Representation-Learning" class="headerlink" title="3.2 Text Representation Learning"></a>3.2 Text Representation Learning</h3><p>我们模型中的卷积神经网络是用来表示文本的。从卷积神经网络的角度来看，我们以前所提到的重复结构是卷积层。当计算所有单词的表示时，我们应用一个max-pooling层。</p>
+<script type="math/tex; mode=display">y^{(3)}=max_{i=1}^ny_i^{(2)}\qquad (5)</script><p>max函数是一个按元素的函数。$y^{(3)}$的第k个元素是$y_i^{(2)}$的所有向量的第k个元素的最大值。池化层将不同长度的文本转换为固定长度的向量。通过使用池化层，我们可以在整个文本中捕获信息。还有其他类型的池层，比如平均池层(Collobert et al. 2011)。我们这里不使用平均池，因为这里只有几个单词和它们的组合对于捕获文档的含义非常有用。在文档中，最大池化层试图找到最重要的潜在语义因素。池化层接受循环结构的输出作为输入。池化层的时间复杂度为$O(n)$。整体模型是一个循环结构和一个最大池化层的级联，因此，我们的模型的时间复杂度仍然是$O(n)$。我们模型的最后一部分是一个输出层。与传统的神经网络相似，它被定义为</p>
+<script type="math/tex; mode=display">y^{(4)}=W^{(4)}y^{(3)}+b^{(4)}\qquad (6)</script><p>最后，将$softmax$函数应用于$y^{(4)}$。它可以把输出数字转换成概率。</p>
+<script type="math/tex; mode=display">p_i=\frac{exp(y_i^{(4)})}{\sum_{k=1}^nexp(y_k^{(4)})}\qquad (7)</script><h2 id="四、Training"><a href="#四、Training" class="headerlink" title="四、Training"></a>四、Training</h2><h3 id="4-1-Training-Network-parameters"><a href="#4-1-Training-Network-parameters" class="headerlink" title="4.1 Training Network parameters"></a>4.1 Training Network parameters</h3><p>我们定义的所有训练参数为$θ$。</p>
+<script type="math/tex; mode=display">\theta =\{E,b^{(4)},c_l(w_1),c_r(w_n),W^{(2)},W^{(4)},W^{(l)},W^{(r)},W^{(sl)},W^{(sr)}\}</script><p>具体来说，参数$E\in R^{|e|×|V|}$是词嵌入，偏差向量$b^{(2)}\in R^{|H|}$,$b^{(4)}\in R^O$，初始文本$c_l(w_1),c_r(w_n)\in R^{(H×(|e|+2c))}$，转换矩阵$W^{(2)}\in R^{H×(|e|+2|c|)}$,$W^{(4)}\in R^{O×H}$,$W^{(4)}\in R^{(O×H)}$,$W^{(l)},W^{(r)}\in R^{|c|×|c|}$,$W^{(sl)},W^{(sr)}\in R^{|e|×|c|}$，其中$|V|$是词库中词的数量，$H$是隐藏层的规格，$O$是文档类别数。</p>
+<p>网络的训练目标是使得$\theta$满足对数似然最大化：</p>
+<script type="math/tex; mode=display">\theta  →\sum_{D\in D}log p(class_D|D,\theta) \qquad(9)</script><p>其中$D$是训练文档集，$class_D$是文档$D$的真实类别。</p>
+<p>我们使用随机梯度下降法(Bottou 1991)来优化训练目标。在每一步中，我们随机选择一个样本(D, classD)进行一次梯度下降：</p>
+<script type="math/tex; mode=display">\theta ← \theta+\alpha\frac{\partial log p(class_D|D,\theta)}{\partial \theta}\qquad(10)</script><p>其中$\alpha$是学习率。<br>在训练神经网络的训练过程中，我们采用了一种常用的方法来训练神经网络。我们将神经网络中的所有参数服从均匀分布初始化。最大或最小值的大小等于“fan-in”的平方根(Plaut和Hinton 1987)。数值是我们模型中前面一层的网络节点。该层的学习速率除以“fan-in”。</p>
+<h3 id="4-2-Pre-training-Word-Embedding"><a href="#4-2-Pre-training-Word-Embedding" class="headerlink" title="4.2 Pre-training Word Embedding"></a>4.2 Pre-training Word Embedding</h3><h2 id="五、Experiments"><a href="#五、Experiments" class="headerlink" title="五、Experiments"></a>五、Experiments</h2><h3 id="5-1-Datasets"><a href="#5-1-Datasets" class="headerlink" title="5.1 Datasets"></a>5.1 Datasets</h3><h3 id="5-2-Experiment-Settings"><a href="#5-2-Experiment-Settings" class="headerlink" title="5.2 Experiment Settings"></a>5.2 Experiment Settings</h3><h3 id="5-3-Comparison-of-Methods"><a href="#5-3-Comparison-of-Methods" class="headerlink" title="5.3 Comparison of Methods"></a>5.3 Comparison of Methods</h3><h3 id="5-4-Results-and-Discussion"><a href="#5-4-Results-and-Discussion" class="headerlink" title="5.4 Results and Discussion"></a>5.4 Results and Discussion</h3><h3 id="5-5-Contextual-Information"><a href="#5-5-Contextual-Information" class="headerlink" title="5.5 Contextual Information"></a>5.5 Contextual Information</h3><h2 id="六、Conclusion"><a href="#六、Conclusion" class="headerlink" title="六、Conclusion"></a>六、Conclusion</h2>
       
     </div>
 
@@ -484,7 +464,11 @@ var _hmt = _hmt || [];
           
             <a href="/tags/word2vec/" rel="tag"># word2vec</a>
           
-            <a href="/tags/FastText/" rel="tag"># FastText</a>
+            <a href="/tags/CNN/" rel="tag"># CNN</a>
+          
+            <a href="/tags/RCNN/" rel="tag"># RCNN</a>
+          
+            <a href="/tags/LSTM/" rel="tag"># LSTM</a>
           
         </div>
       
@@ -493,8 +477,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/03/08/自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification（RCNN）/" rel="next" title="自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification（RCNN）">
-                <i class="fa fa-chevron-left"></i> 自然语言处理系列（11）：Recurrent Convolutional Neural Networks for Text Classification（RCNN）
+              <a href="/2018/03/02/日知录（5）：认知偏误列表/" rel="next" title="日知录（5）：认知偏误列表">
+                <i class="fa fa-chevron-left"></i> 日知录（5）：认知偏误列表
               </a>
             
           </div>
@@ -503,8 +487,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/04/04/人大应统部落（2）：2018级中国人民大学应用统计专业硕士经验贴合集/" rel="prev" title="人大应统部落（2）：2018年人大应统专业硕士经验贴合集">
-                人大应统部落（2）：2018年人大应统专业硕士经验贴合集 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/09/自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification—FastText/" rel="prev" title="自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText）">
+                自然语言处理系列（12）：Bag of Tricks for Efficient Text Classification（FastText） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -722,7 +706,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Introduction"><span class="nav-text">一、Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Model-architecture"><span class="nav-text">二、Model architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Hierarchical-softmax"><span class="nav-text">2.1 Hierarchical softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-N-gram-features"><span class="nav-text">2.2 N-gram features</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Experiments"><span class="nav-text">三、Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Sentiment-analysis"><span class="nav-text">3.1 Sentiment analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Tag-prediction"><span class="nav-text">3.2 Tag prediction</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Discussion-and-conclusion"><span class="nav-text">四、Discussion and conclusion</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Introduction"><span class="nav-text">一、Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Related-Work"><span class="nav-text">二、Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Text-Classification"><span class="nav-text">2.1 Text Classification</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Deep-neural-networks"><span class="nav-text">2.2 Deep neural networks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Model"><span class="nav-text">三、Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Word-Representation-Learning"><span class="nav-text">3.1 Word Representation Learning</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Text-Representation-Learning"><span class="nav-text">3.2 Text Representation Learning</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Training"><span class="nav-text">四、Training</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Training-Network-parameters"><span class="nav-text">4.1 Training Network parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Pre-training-Word-Embedding"><span class="nav-text">4.2 Pre-training Word Embedding</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、Experiments"><span class="nav-text">五、Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-Datasets"><span class="nav-text">5.1 Datasets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-Experiment-Settings"><span class="nav-text">5.2 Experiment Settings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-Comparison-of-Methods"><span class="nav-text">5.3 Comparison of Methods</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-Results-and-Discussion"><span class="nav-text">5.4 Results and Discussion</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-Contextual-Information"><span class="nav-text">5.5 Contextual Information</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、Conclusion"><span class="nav-text">六、Conclusion</span></a></li></ol></div>
             
 
           </div>
