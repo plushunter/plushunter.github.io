@@ -116,7 +116,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/2256672-958f31b01695b085.gif">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-18%20%E4%B8%8B%E5%8D%889.50.46.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-18%20%E4%B8%8B%E5%8D%889.49.10.png">
-<meta property="og:updated_time" content="2017-12-26T10:33:48.250Z">
+<meta property="og:updated_time" content="2018-05-06T01:18:17.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（3）：卷积神经网络（CNN）">
 <meta name="twitter:description" content="本文将要介绍一种更适合图像、语音识别任务的神经网络结构——卷积神经网络(Convolutional Neural Network, CNN)。说卷积神经网络是最重要的一种神经网络也不为过，它在最近几年大放异彩，几乎所有图像、语音识别领域的重要突破都是卷积神经网络取得的。它在 2012 年崭露头角，Alex Krizhevsky 凭借它们赢得了那一年的 ImageNet 挑战赛（大体上相当于计算机视">
@@ -463,7 +463,7 @@ a_{0,0}=f\left(\sum_{m=0}^2{\sum_{n=0}^2{w_{m,n}x_{m+0,n+0}}}+w_b\right)=Relu\le
 <script type="math/tex; mode=display">P=\frac{(N_f-1)S+F-N}{2}=\frac{(5-1)×1+3-5}{2}=1</script><p>到此我们讲了深度为1的卷积层的计算方法，如果深度大于1怎么计算呢？其实也是类似的。如果卷积前的图像深度为$D$，那么相应的filter的深度也必须为$D$。我们扩展一些之前的式子，得到深度为$D$的卷积计算公式：</p>
 <script type="math/tex; mode=display">
 a_{i,j}=f\left(\sum_{d=0}^{D-1}{\sum_{m=0}^{M-1}{\sum_{n=0}^{N-1}{w_{d,m,n}x_{d,m+i,n+j}}}}+w_b\right)</script><p>该式中，$D$为深度；$w_{d,m,n }$表示filter的第d层第m行第n列的权重；$a_{d,i,j }$表示图像的第d层第i行第j列像素。<br>我们前面还曾提到，每个卷积层可以有多个filterr。每个filter和原始图像进行卷积之后，都可以得到一个Feature Map。因此，卷积后Feature Map的深度和卷积层的filter个数是相同的。</p>
-<p>下面的动画显示了包含两个filter的卷积层的计算。我们可以看到7×7×3的输入，经过两个3×3×3filter的卷积，其步幅为2，得到了3×3×2的输出，另外我们也会看到下图的Zero Padding是1，也就是在输入元素的周围补了一圈0。Zero Padding对图像边缘部分的特征提取是很有帮助的。<img src="http://upload-images.jianshu.io/upload_images/2256672-958f31b01695b085.gif" alt=""></p>
+<p>下面的动画显示了包含两个filter的卷积层的计算。我们可以看到7×7×3的输入，经过两个3×3×3filter的卷积，其步幅为2，得到了3×3×2的输出，另外我们也会看到下图的Zero Padding是1，也就是在输入元素的周围补了一圈0。Zero Padding对图像边缘部分的特征提取是很有帮助的。<br><img src="http://upload-images.jianshu.io/upload_images/2256672-958f31b01695b085.gif" alt=""></p>
 <p>以上就是卷积层的计算方法。这里面体现了局部连接和权值共享：每层神经元只和上一层部分神经元相连（卷积计算规则），且filter的权值对于上一层所有神经元都是一样的。对于包含两个3×3×3的filter的卷积层来说，其参数数量仅有$(3×3×3+1)×2=56$个，且参数数量与上一层神经元个数无关。与全连接神经网络相比，其参数数量大大减少了。</p>
 <h4 id="2-1-2-用卷积公式来表达卷积层计算"><a href="#2-1-2-用卷积公式来表达卷积层计算" class="headerlink" title="2.1.2 用卷积公式来表达卷积层计算"></a>2.1.2 用卷积公式来表达卷积层计算</h4><p>之前计算卷积层输出的式子很繁冗，最好可以简化一下</p>
 <h3 id="2-2-池化层（Pooling-layer）"><a href="#2-2-池化层（Pooling-layer）" class="headerlink" title="2.2  池化层（Pooling layer）"></a>2.2  池化层（Pooling layer）</h3><p>Pooling层的主要作用就是通过下采样，去掉Feature Map中不重要的样本，进一步减少参数数量，降低了计算成本，而且可以控制过拟合（overfitting）。池化层并不会对Feature map的深度有影响，即还是会保持原来的深度。<img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-18%20%E4%B8%8B%E5%8D%889.50.46.png" alt="屏幕快照 2017-04-18 下午9.50.46"></p>
@@ -625,7 +625,7 @@ a_{i,j}=f\left(\sum_{d=0}^{D-1}{\sum_{m=0}^{M-1}{\sum_{n=0}^{N-1}{w_{d,m,n}x_{d,
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">173</span>
+                  <span class="site-state-item-count">175</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -647,7 +647,7 @@ a_{i,j}=f\left(\sum_{d=0}^{D-1}{\sum_{m=0}^{M-1}{\sum_{n=0}^{N-1}{w_{d,m,n}x_{d,
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">245</span>
+                  <span class="site-state-item-count">248</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
