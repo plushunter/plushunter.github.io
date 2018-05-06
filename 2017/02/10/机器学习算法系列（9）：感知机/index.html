@@ -1,0 +1,1093 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习,感知机," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Introduction感知机（perceptron）是二类分类的线性分类模型，输入为实例的特征向量，输出为实例的类别，取+1和-1二值。 感知机对应于输入空间（特征空间）中将实例划分为正负两类的分离超平面，导入基于误分类的损失函数，利用梯度下降对损失函数进行极小化，求得感知机模型，属于判别模型 感知机学习算法简单易于实现，分为原始形式和对偶形式。1957年由Rosenblatt提出，是神经网络和">
+<meta name="keywords" content="机器学习,感知机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法系列（9）：感知机">
+<meta property="og:url" content="http://yoursite.com/2017/02/10/机器学习算法系列（9）：感知机/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="Introduction感知机（perceptron）是二类分类的线性分类模型，输入为实例的特征向量，输出为实例的类别，取+1和-1二值。 感知机对应于输入空间（特征空间）中将实例划分为正负两类的分离超平面，导入基于误分类的损失函数，利用梯度下降对损失函数进行极小化，求得感知机模型，属于判别模型 感知机学习算法简单易于实现，分为原始形式和对偶形式。1957年由Rosenblatt提出，是神经网络和">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20161128125137360">
+<meta property="og:updated_time" content="2018-02-05T05:52:44.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习算法系列（9）：感知机">
+<meta name="twitter:description" content="Introduction感知机（perceptron）是二类分类的线性分类模型，输入为实例的特征向量，输出为实例的类别，取+1和-1二值。 感知机对应于输入空间（特征空间）中将实例划分为正负两类的分离超平面，导入基于误分类的损失函数，利用梯度下降对损失函数进行极小化，求得感知机模型，属于判别模型 感知机学习算法简单易于实现，分为原始形式和对偶形式。1957年由Rosenblatt提出，是神经网络和">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161128125137360">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 机器学习算法系列（9）：感知机 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/10/机器学习算法系列（9）：感知机/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习算法系列（9）：感知机
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-10T23:14:45+08:00">
+                2017-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>感知机（perceptron）是二类分类的线性分类模型，输入为实例的特征向量，输出为实例的类别，取+1和-1二值。</p>
+<p>感知机对应于输入空间（特征空间）中将实例划分为正负两类的分离超平面，导入基于误分类的损失函数，利用梯度下降对损失函数进行极小化，求得感知机模型，属于判别模型</p>
+<p>感知机学习算法简单易于实现，分为原始形式和对偶形式。1957年由Rosenblatt提出，是神经网络和支持向量机的基础</p>
+<a id="more"></a>
+<p>本章框架如下：</p>
+<ul>
+<li>感知机模型</li>
+<li>感知机的学习策略（损失函数）</li>
+<li>感知机学习算法（原始形式与对偶形式），并证明算法的收敛性</li>
+</ul>
+<h2 id="一、-感知机模型"><a href="#一、-感知机模型" class="headerlink" title="一、 感知机模型"></a>一、 感知机模型</h2><h3 id="1-1-感知机模型"><a href="#1-1-感知机模型" class="headerlink" title="1.1 感知机模型"></a>1.1 感知机模型</h3><p>感知机是一种线性分类器，属于判别模型。</p>
+<p>假设我们的输入空间（特征空间）是$\chi \subseteq R^{\boldsymbol{n}}$，输出空间是$\boldsymbol{y}=\left\{ +1,-1 \right\}$。输入$\boldsymbol{x}\in \boldsymbol{\chi }$表示实例的特征向量，对应于输入空间（特征空间）的点；输出$y\in \boldsymbol{y}$表示实例的类别。由输入空间到输出空间的函数</p>
+<script type="math/tex; mode=display">
+f\left( x \right) =\mathrm{sign}\left( \boldsymbol{w}·x+\boldsymbol{b}\right)</script><p>其中，$\boldsymbol{w}\in \boldsymbol{R}^{\boldsymbol{n}}$为权值或权值向量，$\boldsymbol{b}\in \boldsymbol{R}^{\boldsymbol{n}}$叫做偏置，$\mathrm{sign}$是符号函数，即</p>
+<script type="math/tex; mode=display">
+\mathrm{sign}\left( \mathrm{x} \right) =\left\{ \begin{array}{l}
+    +1\mathrm{，\ x}\geqslant 0\\
+    -1\mathrm{，\ x}<0\\
+\end{array} \right.</script><p>它的假设空间为：函数集合</p>
+<script type="math/tex; mode=display">
+\left\{ f|f\left( x \right) =w·x+b \right\}</script><p>感知机学习就是由训练数据集（实例的特征向量及类别）求得感知机模型，即求得模型参数$w,b$。<br> 感知机预测即为通过学习得到的感知机模型，对新的输入实例给出其对应的输出类别。</p>
+<h3 id="1-2-感知机的几何解释"><a href="#1-2-感知机的几何解释" class="headerlink" title="1.2 感知机的几何解释"></a>1.2 感知机的几何解释</h3><p>线性方程$w·x+b=0$对应于特征空间$R^{\boldsymbol{n}}$中的一个超平面$S$，其中$w$是超平面的法向量，$b$是超平面的截距，超平面将特征空间划分为两个部分。两部分的特征向量被分为正、负两类，超平面$S$也称为分离超平面。</p>
+<p><img src="http://img.blog.csdn.net/20161128125137360" alt="感知机模型"></p>
+<h2 id="二、感知机学习策略"><a href="#二、感知机学习策略" class="headerlink" title="二、感知机学习策略"></a>二、感知机学习策略</h2><h3 id="2-1-数据集的线性可分性"><a href="#2-1-数据集的线性可分性" class="headerlink" title="2.1 数据集的线性可分性"></a>2.1 数据集的线性可分性</h3><p>给定一个数据集</p>
+<script type="math/tex; mode=display">
+T=\left\{ \left( x_1,y_1 \right) ,\left( x_2,y_2 \right) ,···,\left( x_N,y_N \right) \right\}</script><p>若存在某个超平面$S$</p>
+<script type="math/tex; mode=display">
+w·x+b=0</script><p>能够将数据集的正实例点和负实例点完全正确的划分到超平面的两侧，即对所有的$y_i=+1$的实例，有$w·x+b&gt;0$；对所有的$y_i=-1$的实例，有$w·x+b&lt;0$。则数据集$T$为线性可分数据集；否则称数据集线性不可分。</p>
+<h3 id="2-2-感知机学习策略"><a href="#2-2-感知机学习策略" class="headerlink" title="2.2 感知机学习策略"></a>2.2 感知机学习策略</h3><p>我们选择将误分类点到超平面$S$的总距离作为感知机模型的损失函数</p>
+<p>由几何解释可以清楚地看到，任一点到超平面$S$的距离为:</p>
+<script type="math/tex; mode=display">
+\frac{1}{||w||}|w·x_0+b|</script><p>而我们对于误分类点的定义为：</p>
+<script type="math/tex; mode=display">
+-y_i\left( w·x_0+b \right) >0</script><p>误分类点到超平面的距离：</p>
+<script type="math/tex; mode=display">
+-\frac{1}{||w||}y_i\left( w·x+b \right)</script><p>则误分类点到超平面的总距离：</p>
+<script type="math/tex; mode=display">
+-\frac{1}{||w||}\sum_{x_i\in M}{y_i\left( w·x_i+b \right)}</script><p>据上述我们定义损失函数为:</p>
+<script type="math/tex; mode=display">
+L\left( w,b \right) =-\sum_{x_i\in M}{y_i\left( w·x_i+b \right)}</script><p>其中$M$为误分类点的集合，此即为感知机学习的经验风险函数。一个特定样本点的损失函数，在误分类时是参数$w,b$的线性函数，在正确分类时是0.因此，给定训练数据集$T$，损失函数$L(w,b)$是$w,b$的连续可导函数。感知机学习的策略就是在假设空间中选取使损失函数最小的模型参数，即感知机模型。</p>
+<h2 id="三、感知机学习算法"><a href="#三、感知机学习算法" class="headerlink" title="三、感知机学习算法"></a>三、感知机学习算法</h2><p>这样我们就把感知机的学习问题转化为求解损失函数的最优化问题，最优化的方法是随机梯度下降法。</p>
+<h3 id="3-1-感知机学习算法"><a href="#3-1-感知机学习算法" class="headerlink" title="3.1 感知机学习算法"></a>3.1 感知机学习算法</h3><p>首先我们确定要求解的最优化问题是：</p>
+<script type="math/tex; mode=display">\min_{w,b}L\left( w,b \right) =-\sum_{x_i\in M}{y_i\left( w·x_i+b \right)}</script><p>通过随机梯度下降法来求解最优化问题。首先，任意选择一个超平面$w_0,b_0$，然后用梯度下降法不断地极小化目标函数，一次随机选取一个误分类点使其梯度下降，而不是一次使$M$中所有误分类点的梯度下降。</p>
+<p>计算得到梯度为：</p>
+<script type="math/tex; mode=display">
+\nabla _wL\left( w,b \right) =-\sum_{x_i\in M}{y_ix_i}</script><script type="math/tex; mode=display">
+\nabla _bL\left( w,b \right) =-\sum_{x_i\in M}{y_i}</script><p>对权值进行更新：</p>
+<script type="math/tex; mode=display">
+w\gets w+\eta y_ix_i</script><script type="math/tex; mode=display">
+b\gets b+\eta y_i</script><p>其中$\eta$称为学习率，通过迭代可以期待损失函数不断减小，直到为0.</p>
+<p>对于上述算法过程，我们可以有一个直观的解释：当一个实例点被误分类，则调整$w,b$的值，使分离超平面向该误分类点的一侧移动，以较少该误分类点与超平面的距离，直至超平面越过该误分类点使其被正确分类。当然感知机学习算法由于采用不同的初值或选取不同的误分类点，解可以不同。</p>
+<h3 id="3-2-对偶形式"><a href="#3-2-对偶形式" class="headerlink" title="3.2 对偶形式"></a>3.2 对偶形式</h3><p>对偶形式的基本想法是，将$w$和$b$表示为实例$x_i$和标记$y_i$的线性组合的形式，通过求解其系数而求得$w$和$b$，我们假设初始值$w_0$和$b_0$均为0。对误分类点($x_i$,$y_i$)通过</p>
+<script type="math/tex; mode=display">
+w\gets w+\eta y_ix_i</script><script type="math/tex; mode=display">
+b\gets b+\eta y_i</script><p>逐步修改$w,b$,设修改$n$次，则最后学习到的$w,b$可以分别表示为</p>
+<script type="math/tex; mode=display">
+w=\sum_{i=1}^N{n_i\eta y_ix_i}=\sum_{i=1}^N{a_iy_ix_i}</script><script type="math/tex; mode=display">
+b=\sum_{i=1}^N{a_iy_i}</script><p>当$\eta =1$时，表示第$i$个实例点由于误分而进行更新的次数。实例点更新次数越多，意味着它距离分离超平面越近，也就越难正确分类、换句话说，这样的实例对学习结果影响最大。</p>
+<p>因为对偶形式的训练实例仅以内积的形式出现。为了方便，可预先将训练实例间的内积计算出来并以矩阵的形式存储，这个矩阵就是所谓的Gram矩阵。</p>
+<script type="math/tex; mode=display">G=\left[ x_i·x_j \right] _{N\times N}</script><p>与原始形式一样，感知机学习算法的对偶形式迭代是收敛的，存在多个解。</p>
+<p>总结感知机学习算法的对偶形式如下：</p>
+<p>输入：线性可分的数据集训练数据集$T=\left\{ \left( x_1,y_1 \right) ,\left( x_2,y_2 \right) ,···,\left( x_N,y_N \right) \right\} $，其中$x_i\in \chi =\boldsymbol{R}^{\boldsymbol{n}}$<br>$y_i\in \boldsymbol{y}=\left\{ -1,+1 \right\} ,i=1,2,···,N $，学习率$<br>\eta \left( 0&lt;\eta \le 1 \right) $；</p>
+<p>输出：$a,b$；感知机模型</p>
+<script type="math/tex; mode=display">
+f\left( x \right) =sign\left( \sum_{j=1}^N{a_jy_jx_j}·x+b \right)</script><p>其中$a=\left( a_1,a_2,···,a_N \right) ^T$</p>
+<ul>
+<li>1）$<br>a\gets 0,b\gets 0<br>$</li>
+<li>2）在训练集中选取数据$<br>\left( x_i,y_i \right)<br>$</li>
+<li>3）如果$<br>y_i\left( \sum_{j=1}^N{a_jy_jx_j·x_i+b} \right) \le 0<br>$<script type="math/tex; mode=display">
+a_i\gets a_i+\eta</script><script type="math/tex; mode=display">
+b\gets b+\eta y_i</script></li>
+<li>4）转至(2)直到没有误分类数据</li>
+</ul>
+<h2 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h2><p>李航《统计学习方法》</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/感知机/" rel="tag"># 感知机</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/30/笑忘录（7）：观影清单/" rel="next" title="笑忘录（7）：观影清单">
+                <i class="fa fa-chevron-left"></i> 笑忘录（7）：观影清单
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/15/机器学习算法系列（10）：朴素贝叶斯/" rel="prev" title="机器学习算法系列（10）：朴素贝叶斯">
+                机器学习算法系列（10）：朴素贝叶斯 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">175</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">248</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、-感知机模型"><span class="nav-text">一、 感知机模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-感知机模型"><span class="nav-text">1.1 感知机模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-感知机的几何解释"><span class="nav-text">1.2 感知机的几何解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、感知机学习策略"><span class="nav-text">二、感知机学习策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-数据集的线性可分性"><span class="nav-text">2.1 数据集的线性可分性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-感知机学习策略"><span class="nav-text">2.2 感知机学习策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、感知机学习算法"><span class="nav-text">三、感知机学习算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-感知机学习算法"><span class="nav-text">3.1 感知机学习算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-对偶形式"><span class="nav-text">3.2 对偶形式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、参考资料"><span class="nav-text">四、参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>

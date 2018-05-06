@@ -1,0 +1,1074 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习,朴素贝叶斯," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="朴素贝叶斯（Naive Bayes）是基于贝叶斯定理与特征条件假设的分类方法。 对于给定的训练数据集，首先基于特征条件独立假设学习输入、输出的联合分布；然后基于此模型，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。 朴素贝叶斯实现简单，学习与预测的效率都很高，是一种常用的方法。">
+<meta name="keywords" content="机器学习,朴素贝叶斯">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法系列（10）：朴素贝叶斯">
+<meta property="og:url" content="http://yoursite.com/2017/02/15/机器学习算法系列（10）：朴素贝叶斯/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="朴素贝叶斯（Naive Bayes）是基于贝叶斯定理与特征条件假设的分类方法。 对于给定的训练数据集，首先基于特征条件独立假设学习输入、输出的联合分布；然后基于此模型，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。 朴素贝叶斯实现简单，学习与预测的效率都很高，是一种常用的方法。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-22%20%E4%B8%8A%E5%8D%8811.58.54.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-22%20%E4%B8%8A%E5%8D%8811.20.01.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-22%20%E4%B8%8A%E5%8D%8811.20.16.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-22%20%E4%B8%8A%E5%8D%8811.37.46.png">
+<meta property="og:updated_time" content="2017-12-26T08:43:57.448Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习算法系列（10）：朴素贝叶斯">
+<meta name="twitter:description" content="朴素贝叶斯（Naive Bayes）是基于贝叶斯定理与特征条件假设的分类方法。 对于给定的训练数据集，首先基于特征条件独立假设学习输入、输出的联合分布；然后基于此模型，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。 朴素贝叶斯实现简单，学习与预测的效率都很高，是一种常用的方法。">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-22%20%E4%B8%8A%E5%8D%8811.58.54.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 机器学习算法系列（10）：朴素贝叶斯 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/15/机器学习算法系列（10）：朴素贝叶斯/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习算法系列（10）：朴素贝叶斯
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-15T23:14:45+08:00">
+                2017-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>朴素贝叶斯（Naive Bayes）是基于贝叶斯定理与特征条件假设的分类方法。</p>
+<p>对于给定的训练数据集，首先基于特征条件独立假设学习输入、输出的联合分布；然后基于此模型，对给定的输入$x$，利用贝叶斯定理求出后验概率最大的输出$y$。</p>
+<p>朴素贝叶斯实现简单，学习与预测的效率都很高，是一种常用的方法。</p>
+<a id="more"></a>
+<h2 id="一、朴素贝叶斯的学习与分类"><a href="#一、朴素贝叶斯的学习与分类" class="headerlink" title="一、朴素贝叶斯的学习与分类"></a>一、朴素贝叶斯的学习与分类</h2><h3 id="1-1贝叶斯定理"><a href="#1-1贝叶斯定理" class="headerlink" title="1.1贝叶斯定理"></a>1.1贝叶斯定理</h3><p>先看什么是条件概率</p>
+<p>$P(A|B$表示事件$B已经发生的前提下，事件$A发生的概率，叫做事件$B$<br>发生下事件$A$的条件概率。其基本求解公式为</p>
+<script type="math/tex; mode=display">
+P\left(A|B\right)=\frac{P\left(AB\right)}{P\left(B\right)}</script><p>贝叶斯定理便是基于条件概率，通过$P(A|B)$来求$P(B|A)$：</p>
+<script type="math/tex; mode=display">
+P\left(B|A\right)=\frac{P\left(A|B\right)·P\left(B\right)}{P\left(A\right)}</script><p>顺便提一下，上式中的分母，可以根据全概率公式分解为：</p>
+<script type="math/tex; mode=display">
+P\left(A\right)=\sum_{i=1}^n{P\left(B_i\right)P\left(A|B_i\right)}</script><h3 id="1-2-特征条件独立假设"><a href="#1-2-特征条件独立假设" class="headerlink" title="1.2 特征条件独立假设"></a>1.2 特征条件独立假设</h3><p>这一部分开始朴素贝叶斯的理论推导，从中你会深刻地理解什么是特征条件独立假设。</p>
+<p>给定训练数据集$(X,Y)$，其中每个样本$X$都包括$n$维特征，即$x=(x_1,x_2,···,x_n)$，类标记集合含有$K$种类别，即$y=(y_1,y_2,···,y_k)$</p>
+<p>如果现在来了一个新样本$x$我们要怎么判断它的类别?从概率的角度来看，这个问题就是给定$x$，它属于哪个类别的概率更大。那么问题就转化为求解$P(y_1|x),P(y_2|x),P(y_k|x)$中最大的那个，即求后验概率最大的输出：$<br>arg\underset{y_k}{\max}P\left(y_k|x\right)<br>$</p>
+<p>那$P(y_k|x)$怎么求解？答案就是贝叶斯定理：</p>
+<script type="math/tex; mode=display">
+P\left(y_k|x\right)=\frac{P\left(x|y_k\right)·P\left(y_k\right)}{P\left(x\right)}</script><p>根据全概率公式，可以进一步分解上式中的分母：</p>
+<script type="math/tex; mode=display">
+P\left(y_k|x\right)=\frac{P\left(x|y_k\right)·P\left(y_k\right)}{\sum_{i=1}^n{P\left(x|y_k\right)P\left(y_k\right)}}
+（公式1）</script><p>先不管分母，分子中的$P(y_k)$是先验概率，根据训练集就可以简单地计算出来，而条件概率$P(x|y_k)=P(x_1,x_2,···,x_n|y_k)$，它的参数规模是指数数量级别的，假设第$i$维特征$x_i$可取值的个数有$S_i$个，类别取值个数为$k$个，那么参数个数为$<br>k\prod_{j=1}^n{S_j}<br>$</p>
+<p>这显然是不可行的。针对这个问题，朴素贝叶斯算法对条件概率分布做了独立性的假设，通俗地讲就是说假设各个维度的特征$x_1,x_2,···,x_n$互相独立，由于这是一个较强的假设，朴素贝叶斯算法也因此得名。在这个假设的前提上，条件概率可以转化为：</p>
+<script type="math/tex; mode=display">
+P\left(x|y_i\right)=P\left(x_1,x_2,···,x_n|y_i\right)=\prod_{i=1}^n{P\left(x_i|y_i\right)}
+    （公式2）</script><p>这样参数规模就降到了$<br>\sum_{i=1}^n{S_ik}<br>$</p>
+<p>以上就是针对条件概率所作出的特征条件独立性假设，至此，先验概率$P(y_k)$和条件概率$P(x|y_k)$的求解问题就都解决了，那么我们是不是可以求解我们所需要的后验概率$P(y_k|x)$了</p>
+<p>答案是肯定的。我们继续上面关于$P(y_k|x)$的推导，将公式2代入公式1中得到：</p>
+<script type="math/tex; mode=display">
+P\left(y_k|x\right)=\frac{P\left(y_k\right)\prod_{i=1}^n{P\left(x_i|y_k\right)}}{\sum_k{P\left(y_k\right)\prod_{i=1}^n{P\left(x_i|y_k\right)}}}</script><p>于是朴素贝叶斯分类器可表示为：</p>
+<script type="math/tex; mode=display">
+f\left(x\right)=arg\underset{y_k}{\max}P\left(y_k|x\right)=arg\underset{y_k}{\max}\frac{P\left(y_k\right)\prod_{i=1}^n{P\left(x_i|y_k\right)}}{\sum_k{P\left(y_k\right)\prod_{i=1}^n{P\left(x_i|y_k\right)}}}</script><p>因为对于所有的$y_k$，上式中的分母的值都是一样的（为什么？注意到全加符号就容易理解了），所以可以忽略分母部分，朴素贝叶斯分裂期最终表示为：</p>
+<script type="math/tex; mode=display">
+f\left(x\right)=arg\underset{y_k}{\max}P\left(y_k\right)\prod_{i=1}^n{P\left(x_i|y_k\right)}</script><h2 id="二、朴素贝叶斯法的参数估计"><a href="#二、朴素贝叶斯法的参数估计" class="headerlink" title="二、朴素贝叶斯法的参数估计"></a>二、朴素贝叶斯法的参数估计</h2><h3 id="2-1-极大似然估计"><a href="#2-1-极大似然估计" class="headerlink" title="2.1 极大似然估计"></a>2.1 极大似然估计</h3><p>根据上述，可知朴素贝叶斯要学习的东西就是$P(Y=c_k)$和$P(X^{j}=a_{jl}|Y=c_k)$，可以应用极大似然估计法估计相应的概率（简单讲，就是用样本来推断模型的参数，或者说是使得似然函数最大的参数）。</p>
+<p>先验概率$P(Y=c_k)$的极大似然估计是</p>
+<script type="math/tex; mode=display">
+P\left(Y=c_k\right)=\frac{\sum_{i=1}^N{I\left(y_i=c_k\right)}}{N},\,\,k=1,2,···,K</script><p>也就是用样本中$c_k$的出现次数除以样本容量。</p>
+<p>推导如下：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-22%20%E4%B8%8A%E5%8D%8811.58.54.png" alt="屏幕快照 2017-03-22 上午11.58.54"></p>
+<p>设第$j$个特征$x^{(j)}$可能取值的集合为${a_{j1},a_{j2},···,a_{jl}}$，条件概率$P(X^{j}=a_{jl}|Y=c_k)$的极大似然估计是：</p>
+<script type="math/tex; mode=display">
+P\left(X^{\left(j\right)}=a_{jl}|Y=c_k\right)=\frac{\sum_{i=1}^N{I\left(x_{i}^{\left(j\right)}=a_{jl},y_{i=}c_k\right)}}{\sum_{i=1}^N{I\left(y_i=c_k\right)}}</script><p>式中，$x_i^{j}$是第$i$个样本的第$j$个特征。</p>
+<p>例题如下：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-22%20%E4%B8%8A%E5%8D%8811.20.01.png" alt="屏幕快照 2017-03-22 上午11.20.01"><br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-22%20%E4%B8%8A%E5%8D%8811.20.16.png" alt="屏幕快照 2017-03-22 上午11.20.16"></p>
+<h3 id="2-2-贝叶斯估计"><a href="#2-2-贝叶斯估计" class="headerlink" title="2.2 贝叶斯估计"></a>2.2 贝叶斯估计</h3><p>极大似然估计有一个隐患，假设训练数据中没有出现某种参数与类别的组合怎么办？比如上例中当$Y=1$对应的$X^{(1)}$的取值只有$1$和$2$。这样可能会出现所要估计的概率值为0的情况，但是这不代表真实数据中就没有这样的组合。这时会影响到后验概率的计算结果，使分类产生偏差。解决办法是贝叶斯估计。</p>
+<p>条件概率的贝叶斯估计：</p>
+<script type="math/tex; mode=display">
+P_{\lambda}\left(X^{\left(j\right)}=a_{jl}\parallel Y=c_k\right)=\frac{\sum_{i=1}^N{I\left(x_{i}^{\left(j\right)}=a_{jl},y_{i=}c_k\right)}+\lambda}{\sum_{i=1}^N{I\left(y_i=c_k\right)}+S_j\lambda}</script><p>其中$\lambda≥0$，$S_j$表示$x_j$可能取值的中数。分子和分母分别比极大似然估计多了一点东西，其意义为在随机变量各个取值的频数上赋予一个正数$\lambda≥0$。当$\lambda=0$时就是极大似然估计。常取$\lambda=1$，这时称为拉普拉斯平滑。</p>
+<p>先验概率的贝叶斯估计：</p>
+<script type="math/tex; mode=display">
+P_{\lambda}\left(Y=c_k\right)=\frac{\sum_{i=1}^N{I\left(y_i=c_k\right)}+\lambda}{N+K\lambda}</script><p>例题如下：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-22%20%E4%B8%8A%E5%8D%8811.37.46.png" alt="屏幕快照 2017-03-22 上午11.37.46"></p>
+<h2 id="三、python代码实现"><a href="#三、python代码实现" class="headerlink" title="三、python代码实现"></a>三、python代码实现</h2><h3 id="3-1-朴素贝叶斯文档分类"><a href="#3-1-朴素贝叶斯文档分类" class="headerlink" title="3.1 朴素贝叶斯文档分类"></a>3.1 朴素贝叶斯文档分类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="string">"""</span></div><div class="line">Created on 下午5:28 22 03 2017</div><div class="line">bayes algorithm: classify a words as good or bad   [text classify]</div><div class="line">@author: plushunter</div><div class="line">"""</div><div class="line"></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Naive_Bayes</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self._creteria = <span class="string">"NB"</span></div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">#创建不重复词集</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_creatVocabList</span><span class="params">(self,dataSet)</span>:</span></div><div class="line">        vocabSet = set([])  <span class="comment"># 创建一个空的SET</span></div><div class="line">        <span class="keyword">for</span> document <span class="keyword">in</span> dataSet:</div><div class="line">            vocabSet = vocabSet | set(document)  <span class="comment"># 并集</span></div><div class="line">        <span class="keyword">return</span> list(vocabSet)  <span class="comment"># 返回不重复词表（SET的特性）</span></div><div class="line"></div><div class="line">    <span class="comment">#文档词集向量模型</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_setOfWordToVec</span><span class="params">(self,vocabList, inputSet)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        功能:给定一行词向量inputSet，将其映射至词库向量vocabList，出现则标记为1，否则标记为0.</div><div class="line">        """</div><div class="line">        returnVec = [<span class="number">0</span>] * len(vocabList)</div><div class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> inputSet:</div><div class="line">            <span class="keyword">if</span> word <span class="keyword">in</span> vocabList:</div><div class="line">                returnVec[vocabList.index(word)] = <span class="number">1</span></div><div class="line">        <span class="keyword">return</span> returnVec</div><div class="line"></div><div class="line">    <span class="comment">#文档词袋模型</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_bagOfsetOfWordToVec</span><span class="params">(self,vocabList, inputSet)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        功能：对每行词使用第二种统计策略，统计单个词的个数，然后映射到此库中</div><div class="line">        输出：一个n维向量，n为词库的长度，每个取值为单词出现的次数</div><div class="line">        """</div><div class="line">        returnVec = [<span class="number">0</span>] * len(vocabList)</div><div class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> inputSet:</div><div class="line">            <span class="keyword">if</span> word <span class="keyword">in</span> vocabList:</div><div class="line">                returnVec[vocabList.index(word)] += <span class="number">1</span> <span class="comment">#更新此处代码</span></div><div class="line">        <span class="keyword">return</span> returnVec</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_trainNB0</span><span class="params">(self,trainMatrix, trainCategory)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        输入：训练词矩阵trainMatrix与类别标签trainCategory,格式为Numpy矩阵格式</div><div class="line">        功能：计算条件概率p0Vect、p1Vect和类标签概率pAbusive</div><div class="line">        """</div><div class="line">        numTrainDocs = len(trainMatrix)<span class="comment">#样本个数</span></div><div class="line">        numWords = len(trainMatrix[<span class="number">0</span>])<span class="comment">#特征个数，此处为词库长度</span></div><div class="line">        pAbusive = sum(trainCategory) / float(numTrainDocs)<span class="comment">#计算负样本出现概率（先验概率）</span></div><div class="line">        p0Num = ones(numWords)<span class="comment">#初始词的出现次数为1，以防条件概率为0，影响结果</span></div><div class="line">        p1Num = ones(numWords)<span class="comment">#同上</span></div><div class="line">        p0Denom = <span class="number">2.0</span><span class="comment">#类标记为2，使用拉普拉斯平滑法,</span></div><div class="line">        p1Denom = <span class="number">2.0</span></div><div class="line">        <span class="comment">#按类标记进行聚合各个词向量</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(numTrainDocs):</div><div class="line">            <span class="keyword">if</span> trainCategory[i] == <span class="number">0</span>:</div><div class="line">                p0Num += trainMatrix[i]</div><div class="line">                p0Denom += sum(trainMatrix[i])</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                p1Num += trainMatrix[i]</div><div class="line">                p1Denom += sum(trainMatrix[i])</div><div class="line">        p1Vect = log(p1Num / p1Denom)<span class="comment">#计算给定类标记下，词库中出现某个单词的概率</span></div><div class="line">        p0Vect = log(p0Num / p0Denom)<span class="comment">#取log对数，防止条件概率乘积过小而发生下溢</span></div><div class="line">        <span class="keyword">return</span> p0Vect, p1Vect, pAbusive</div><div class="line"></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_classifyNB</span><span class="params">(self,vec2Classify, p0Vec, p1Vec, pClass1)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        该算法包含四个输入:</div><div class="line">        vec2Classify表示待分类的样本在词库中的映射集合，</div><div class="line">        p0Vec表示条件概率P(wi|c=0)P(wi|c=0)，</div><div class="line">        p1Vec表示条件概率P(wi|c=1)P(wi|c=1)，</div><div class="line">        pClass1表示类标签为1时的概率P(c=1)P(c=1)。</div><div class="line"></div><div class="line">        p1=ln[p(w1|c=1)p(w2|c=1)…p(wn|c=1)p(c=1)]</div><div class="line">        p0=ln[p(w1|c=0)p(w2|c=0)…p(wn|c=0)p(c=0)]</div><div class="line">        log取对数为防止向下溢出</div><div class="line"></div><div class="line">        功能:使用朴素贝叶斯进行分类,返回结果为0/1</div><div class="line">        """</div><div class="line">        p1 = sum(vec2Classify * p1Vec) + log(pClass1)</div><div class="line">        p0 = sum(vec2Classify * p0Vec) + log(<span class="number">1</span> - pClass1)</div><div class="line">        <span class="keyword">if</span> p1 &gt; p0:</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="comment">#test</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">testingNB</span><span class="params">(self,testSample)</span>:</span></div><div class="line">        <span class="string">"step1：加载数据集与类标号"</span></div><div class="line">        listOPosts, listClasses = loadDataSet()</div><div class="line">        <span class="string">"step2：创建词库"</span></div><div class="line">        vocabList = self._creatVocabList(listOPosts)</div><div class="line">        <span class="string">"step3：计算每个样本在词库中出现的情况"</span></div><div class="line">        trainMat = []</div><div class="line">        <span class="keyword">for</span> postinDoc <span class="keyword">in</span> listOPosts:</div><div class="line">            trainMat.append(self._bagOfsetOfWordToVec(vocabList, postinDoc))</div><div class="line">        p0V, p1V, pAb = self._trainNB0(trainMat, listClasses)</div><div class="line">        <span class="string">"step4：测试"</span></div><div class="line">        thisDoc = array(self._bagOfsetOfWordToVec(vocabList, testSample))</div><div class="line">        result=self._classifyNB(thisDoc, p0V, p1V, pAb)</div><div class="line">        <span class="keyword">print</span> testSample, <span class="string">'classified as:'</span>, result</div><div class="line">        <span class="comment"># return result</span></div><div class="line"></div><div class="line"><span class="comment">###</span></div><div class="line"><span class="comment"># 加载数据集</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadDataSet</span><span class="params">()</span>:</span></div><div class="line">    postingList = [[<span class="string">'my'</span>, <span class="string">'dog'</span>, <span class="string">'has'</span>, <span class="string">'flea'</span>, <span class="string">'problems'</span>, <span class="string">'help'</span>, <span class="string">'please'</span>],</div><div class="line">                   [<span class="string">'maybe'</span>, <span class="string">'not'</span>, <span class="string">'take'</span>, <span class="string">'him'</span>, <span class="string">'to'</span>, <span class="string">'dog'</span>, <span class="string">'park'</span>, <span class="string">'stupid'</span>],</div><div class="line">                   [<span class="string">'my'</span>, <span class="string">'dalmation'</span>, <span class="string">'is'</span>, <span class="string">'so'</span>, <span class="string">'cute'</span>, <span class="string">'I'</span>, <span class="string">'love'</span>, <span class="string">'him'</span>],</div><div class="line">                   [<span class="string">'stop'</span>, <span class="string">'posting'</span>, <span class="string">'stupid'</span>, <span class="string">'worthless'</span>, <span class="string">'garbage'</span>],</div><div class="line">                   [<span class="string">'mr'</span>, <span class="string">'licks'</span>, <span class="string">'ate'</span>, <span class="string">'my'</span>, <span class="string">'steak'</span>, <span class="string">'how'</span>, <span class="string">'to'</span>, <span class="string">'stop'</span>, <span class="string">'him'</span>],</div><div class="line">                   [<span class="string">'quit'</span>, <span class="string">'buying'</span>, <span class="string">'worthless'</span>, <span class="string">'dog'</span>, <span class="string">'food'</span>, <span class="string">'stupid'</span>]]</div><div class="line">    classVec = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">1</span>]  <span class="comment"># 1 is abusive, 0 not</span></div><div class="line">    <span class="keyword">return</span> postingList, classVec</div><div class="line"></div><div class="line"><span class="comment">#测试</span></div><div class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</div><div class="line">    clf = Naive_Bayes()</div><div class="line">    testEntry = [[<span class="string">'love'</span>, <span class="string">'my'</span>, <span class="string">'girl'</span>, <span class="string">'friend'</span>],</div><div class="line">                 [<span class="string">'stupid'</span>, <span class="string">'garbage'</span>],</div><div class="line">                 [<span class="string">'Haha'</span>, <span class="string">'I'</span>, <span class="string">'really'</span>, <span class="string">"Love"</span>, <span class="string">"You"</span>],</div><div class="line">                 [<span class="string">'This'</span>, <span class="string">'is'</span>, <span class="string">"my"</span>, <span class="string">"dog"</span>],</div><div class="line">                 [<span class="string">'maybe'</span>,<span class="string">'stupid'</span>,<span class="string">'worthless'</span>]]</div><div class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> testEntry:</div><div class="line">        clf.testingNB(item)</div></pre></td></tr></table></figure>
+<h3 id="3-2-使用朴素贝叶斯过滤垃圾邮件"><a href="#3-2-使用朴素贝叶斯过滤垃圾邮件" class="headerlink" title="3.2 使用朴素贝叶斯过滤垃圾邮件"></a>3.2 使用朴素贝叶斯过滤垃圾邮件</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"><span class="string">"""</span></div><div class="line">Created on 下午8:47 22 03 2017</div><div class="line">Email_Classify </div><div class="line">@author: plushunter </div><div class="line">"""</div><div class="line"></div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> Bayes</div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="comment"># mysent='This book is the best book on Python or M.L I have ever laid eyes upon.'</span></div><div class="line"><span class="comment"># regEx = re.compile('\\W*')</span></div><div class="line"><span class="comment"># listOfTokens=regEx.split(mysent)</span></div><div class="line"><span class="comment"># tok=[tok.upper() for tok in listOfTokens if len(tok)&gt;0]</span></div><div class="line"><span class="comment"># print tok</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># emailText=open('email/ham/6.txt').read()</span></div><div class="line"><span class="comment"># listOfTokens=regEx.split(emailText)</span></div><div class="line"><span class="comment"># print listOfTokens</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">textParse</span><span class="params">(bigString)</span>:</span></div><div class="line">    <span class="keyword">import</span> re</div><div class="line">    listOfTokens=re.split(<span class="string">r'\w*'</span>,bigString)</div><div class="line">    <span class="keyword">return</span> [tok.lower() <span class="keyword">for</span> tok <span class="keyword">in</span> listOfTokens <span class="keyword">if</span> len(tok)&gt;<span class="number">2</span>]</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">spamTest</span><span class="params">()</span>:</span></div><div class="line">    clf = Bayes.Naive_Bayes()</div><div class="line">    docList=[]</div><div class="line">    classList=[]</div><div class="line">    fullText=[]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">26</span>):</div><div class="line">        wordList=textParse(open(<span class="string">'email/spam/%d.txt'</span>%i).read())</div><div class="line">        docList.append(wordList)</div><div class="line">        fullText.extend(wordList)</div><div class="line">        classList.append(<span class="number">1</span>)</div><div class="line">        wordList=textParse(open(<span class="string">'email/ham/%i.txt'</span>%i).read())</div><div class="line">        docList.append(wordList)</div><div class="line">        fullText.extend(wordList)</div><div class="line">        classList.append(<span class="number">0</span>)</div><div class="line">    vocabList=clf._creatVocabList(docList)</div><div class="line">    trainingSet=range(<span class="number">50</span>);testSet=[]</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div><div class="line">        randIndex=int(random.uniform(<span class="number">0</span>,len(trainingSet)))</div><div class="line">        testSet.append(trainingSet[randIndex])</div><div class="line">        <span class="keyword">del</span>(trainingSet[randIndex])</div><div class="line">    trainMatix=[];trainClasses=[]</div><div class="line">    <span class="keyword">for</span> docIndex <span class="keyword">in</span> trainingSet:</div><div class="line">        trainMatix.append(clf._bagOfsetOfWordToVec(vocabList,docList[docIndex]))</div><div class="line">        trainClasses.append(classList[docIndex])</div><div class="line">    p0V,p1V,pSpam=clf._trainNB0(array(trainMatix),array(trainClasses))</div><div class="line">    errorCount = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> docIndex <span class="keyword">in</span> testSet:</div><div class="line">        wordVector = clf._bagOfsetOfWordToVec(vocabList,docList[docIndex])</div><div class="line">        <span class="keyword">if</span> clf._classifyNB(array(wordVector), p0V, p1V, pSpam)!=classList[docIndex]:</div><div class="line">            errorCount+=<span class="number">1</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'the error rate is :'</span>,float(errorCount)/len(testSet)</div></pre></td></tr></table></figure>
+<h2 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h2><p><a href="http://omu7tit09.bkt.clouddn.com/%282%29%E5%88%A4%E5%88%AB%E6%A8%A1%E5%9E%8B%E3%80%81%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E4%B8%8E%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%96%B9%E6%B3%95.pdf" target="_blank" rel="noopener"><code>判别模型·生成模型·朴素贝叶斯方法</code></a><br><a href="https://en.wikipedia.org/wiki/Naive_Bayes_classifier#Sex_classification]" target="_blank" rel="noopener"><code>维基百科：Naive Bayes classifier</code></a><br><a href="http://blog.csdn.net/pongba/article/details/2958094" target="_blank" rel="noopener"><code>数学之美番外篇：平凡而又神奇的贝叶斯方法</code></a><br><a href="http://blog.csdn.net/u012162613/article/details/48323777" target="_blank" rel="noopener"><code>朴素贝叶斯理论推导与三种常见模型</code></a><br><a href="https://book.douban.com/subject/24703171/" target="_blank" rel="noopener"><code>机器学习实战</code></a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/朴素贝叶斯/" rel="tag"># 朴素贝叶斯</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/10/机器学习算法系列（9）：感知机/" rel="next" title="机器学习算法系列（9）：感知机">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（9）：感知机
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/20/机器学习算法系列（11）：聚类（1）/" rel="prev" title="机器学习算法系列（11）：聚类（1）—简介">
+                机器学习算法系列（11）：聚类（1）—简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">175</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">248</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、朴素贝叶斯的学习与分类"><span class="nav-text">一、朴素贝叶斯的学习与分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1贝叶斯定理"><span class="nav-text">1.1贝叶斯定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-特征条件独立假设"><span class="nav-text">1.2 特征条件独立假设</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、朴素贝叶斯法的参数估计"><span class="nav-text">二、朴素贝叶斯法的参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-极大似然估计"><span class="nav-text">2.1 极大似然估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-贝叶斯估计"><span class="nav-text">2.2 贝叶斯估计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、python代码实现"><span class="nav-text">三、python代码实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-朴素贝叶斯文档分类"><span class="nav-text">3.1 朴素贝叶斯文档分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-使用朴素贝叶斯过滤垃圾邮件"><span class="nav-text">3.2 使用朴素贝叶斯过滤垃圾邮件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、参考资料"><span class="nav-text">四、参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>

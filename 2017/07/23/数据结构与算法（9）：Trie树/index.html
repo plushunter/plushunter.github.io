@@ -1,0 +1,1097 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构,Trie树," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Trie树是一种非常重要的数据结构，它在信息检索，字符串匹配等领域有广泛的应用，同时，它也是很多算法和复杂数据结构的基础，如后缀树，AC自动机等，因此，掌握Trie树这种数据结构，对于一名IT人员，显得非常基础且必要！">
+<meta name="keywords" content="数据结构,Trie树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法（9）：Trie树">
+<meta property="og:url" content="http://yoursite.com/2017/07/23/数据结构与算法（9）：Trie树/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="Trie树是一种非常重要的数据结构，它在信息检索，字符串匹配等领域有广泛的应用，同时，它也是很多算法和复杂数据结构的基础，如后缀树，AC自动机等，因此，掌握Trie树这种数据结构，对于一名IT人员，显得非常基础且必要！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15022924407569.png">
+<meta property="og:updated_time" content="2017-09-01T06:36:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法（9）：Trie树">
+<meta name="twitter:description" content="Trie树是一种非常重要的数据结构，它在信息检索，字符串匹配等领域有广泛的应用，同时，它也是很多算法和复杂数据结构的基础，如后缀树，AC自动机等，因此，掌握Trie树这种数据结构，对于一名IT人员，显得非常基础且必要！">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15022924407569.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 数据结构与算法（9）：Trie树 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/23/数据结构与算法（9）：Trie树/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构与算法（9）：Trie树
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-23T20:20:45+08:00">
+                2017-07-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Trie树是一种非常重要的数据结构，它在信息检索，字符串匹配等领域有广泛的应用，同时，它也是很多算法和复杂数据结构的基础，如后缀树，AC自动机等，因此，掌握Trie树这种数据结构，对于一名IT人员，显得非常基础且必要！</p>
+<a id="more"></a>
+<h2 id="一、什么是Trie树"><a href="#一、什么是Trie树" class="headerlink" title="一、什么是Trie树"></a>一、什么是Trie树</h2><p>Trie树，又叫字典树、前缀树（Prefix Tree）、单词查找树或键树，是一种多叉树结构。</p>
+<p>字典树（Trie）可以保存一些字符串-&gt;值的对应关系。基本上，它跟 Java 的 HashMap 功能相同，都是 key-value 映射，只不过 Trie 的 key 只能是字符串。是一种哈希树的变种</p>
+<p>如下图：<br><img src="http://omu7tit09.bkt.clouddn.com/15022924407569.png" alt=""></p>
+<p>上图是一棵Trie树，表示了关键字集合{“a”,”to”,”tea”,”ted”,”ten”,”i”,”in”,”inn”}。从上图可以归纳出Trie树的基本性质：</p>
+<ol>
+<li>根节点不包含字符，除节结点外的每一个节点都包含一个字符。</li>
+<li>从根节点到某一个节点，路径上经过的字符连接起来，为该节点对应的字符串。</li>
+<li>每个节点的所有子节点包含的字符互不相同。</li>
+</ol>
+<p>通常在实现的时候，会在节点结构中设置一个标志，用来标记该结点处是否构成一个单词（关键字）。</p>
+<p>可以看出，Trie树的关键字一般都是字符串，而且Trie树把每个关键字保存在一条路径上，而不是一个结点中。另外，两个有公共前缀的关键字，在Trie树中前缀部分的路径相同，所以Trie树又叫做前缀树（Prefix Tree）。</p>
+<h2 id="二、Trie的优缺点"><a href="#二、Trie的优缺点" class="headerlink" title="二、Trie的优缺点"></a>二、Trie的优缺点</h2><p>Trie的核心思想是空间换时间。利用字符串的公共前缀来降低查询时间的开销以达到提高效率的目的。</p>
+<h3 id="2-1-优点"><a href="#2-1-优点" class="headerlink" title="2.1 优点"></a>2.1 优点</h3><p>Trie的强大之处就在于它的时间复杂度，插入和查询的效率很高，都为$O(K)$，其中 $K$ 是待插入/查询的字符串的长度，而与Trie中保存了多少个元素无关。</p>
+<p>关于查询，会有人说 hash 表时间复杂度是$O(1)$不是更快？但是，哈希搜索的效率通常取决于 hash 函数的好坏，若一个坏的 hash 函数导致很多的冲突，效率并不一定比Trie树高。</p>
+<p>而Trie树中不同的关键字就不会产生冲突。它只有在允许一个关键字关联多个值的情况下才有类似hash碰撞发生。</p>
+<p>此外，Trie树不用求 hash 值，对短字符串有更快的速度。因为通常，求hash值也是需要遍历字符串的。</p>
+<p>Trie树可以对关键字按字典序排序。</p>
+<h3 id="2-2-缺点"><a href="#2-2-缺点" class="headerlink" title="2.2 缺点"></a>2.2 缺点</h3><p>当然，当 hash 函数很好时，Trie树的查找效率会低于哈希搜索。</p>
+<p>其次因为Trie的核心思想是空间换时间，利用字符串的公共前缀来降低查询时间的开销以达到提高效率的目的。所以它的空间消耗比较大。</p>
+<h2 id="三、Trie树的应用"><a href="#三、Trie树的应用" class="headerlink" title="三、Trie树的应用"></a>三、Trie树的应用</h2><p>典型应用是用于统计和排序大量的字符串（但不仅限于字符串），所以经常被搜索引擎系统用于文本词频统计。它的优点是：最大限度地减少无谓的字符串比较，查询效率比哈希表高。</p>
+<h3 id="3-1-字符串检索"><a href="#3-1-字符串检索" class="headerlink" title="3.1 字符串检索"></a>3.1 字符串检索</h3><p>给出N个单词组成的熟词表，以及一篇全用小写英文书写的文章，请你按最早出现的顺序写出所有不在熟词表中的生词。</p>
+<p>检索/查询功能是Trie树最原始的功能。给定一组字符串，查找某个字符串是否出现过，思路就是从根节点开始一个一个字符进行比较：</p>
+<ul>
+<li>如果沿路比较，发现不同的字符，则表示该字符串在集合中不存在。</li>
+<li>如果所有的字符全部比较完并且全部相同，还需判断最后一个节点的标志位（标记该节点是否代表一个关键字）。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">struct trie_node</div><div class="line">&#123;</div><div class="line">    bool isKey;   // 标记该节点是否代表一个关键字</div><div class="line">    trie_node *children[26]; // 各个子节点 </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="3-2-词频统计"><a href="#3-2-词频统计" class="headerlink" title="3.2 词频统计"></a>3.2 词频统计</h3><p>Trie树常被搜索引擎系统用于文本词频统计 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">struct trie_node</div><div class="line">&#123;</div><div class="line">    int count;   // 记录该节点代表的单词的个数</div><div class="line">    trie_node *children[26]; // 各个子节点 </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>思路：为了实现词频统计，我们修改了节点结构，用一个整型变量count来计数。对每一个关键字执行插入操作，若已存在，计数加1，若不存在，插入后count置1。</p>
+<h3 id="3-3-排序"><a href="#3-3-排序" class="headerlink" title="3.3 排序"></a>3.3 排序</h3><p>Trie树可以对大量字符串按字典序进行排序，思路也很简单：<br>给定N个互不相同的仅由一个单词构成的英文名，让你将他们按字典序从小到大输出。用字典树进行排序，采用数组的方式创建字典树，这棵树的每个结点的所有儿子很显然地按照其字母大小排序。对这棵树进行先序遍历即可。</p>
+<h3 id="3-4-前缀匹配"><a href="#3-4-前缀匹配" class="headerlink" title="3.4 前缀匹配"></a>3.4 前缀匹配</h3><p>例如：找出一个字符串集合中所有以ab开头的字符串。我们只需要用所有字符串构造一个trie树，然后输出以$a-&gt;b-&gt;$开头的路径上的关键字即可。</p>
+<p>trie树前缀匹配常用于搜索提示。如当输入一个网址，可以自动搜索出可能的选择。当没有完全匹配的搜索结果，可以返回前缀最相似的可能</p>
+<h3 id="3-5-最长公共前缀"><a href="#3-5-最长公共前缀" class="headerlink" title="3.5 最长公共前缀"></a>3.5 最长公共前缀</h3><p>查找一组字符串的最长公共前缀，只需要将这组字符串构建成Trie树，然后从跟节点开始遍历，直到出现多个节点为止（即出现分叉）。</p>
+<p>举例说明：给出N 个小写英文字母串，以及Q 个询问，即询问某两个串的最长公共前缀的长度是多少？</p>
+<p>解决方案：首先对所有的串建立其对应的字母树。此时发现，对于两个串的最长公共前缀的长度即它们所在结点的公共祖先个数，于是，问题就转化为了离线（Offline）的最近公共祖先（Least Common Ancestor，简称LCA）问题。而最近公共祖先问题同样是一个经典问题，可以用下面几种方法：</p>
+<ol>
+<li>利用并查集（Disjoint Set），可以采用采用经典的Tarjan 算法；</li>
+<li>求出字母树的欧拉序列（Euler Sequence ）后，就可以转为经典的最小值查询（Range Minimum Query，简称RMQ）问题了；</li>
+</ol>
+<p>关于并查集，Tarjan算法，RMQ问题，网上有很多资料。</p>
+<h3 id="3-6-作为辅助结构"><a href="#3-6-作为辅助结构" class="headerlink" title="3.6 作为辅助结构"></a>3.6 作为辅助结构</h3><p>如后缀树，AC自动机等。</p>
+<h3 id="3-7-应用实例"><a href="#3-7-应用实例" class="headerlink" title="3.7 应用实例"></a>3.7 应用实例</h3><ol>
+<li>一个文本文件，大约有一万行，每行一个词，要求统计出其中最频繁出现的前10个词，请给出思想，给出时间复杂度分析。<ul>
+<li>之前在此文：海量数据处理面试题集锦与Bit-map详解中给出的参考答案：用trie树统计每个词出现的次数，时间复杂度是$O(n<em>le)$（le表示单词的平均长度），然后是找出出现最频繁的前10个词。也可以用堆来实现（具体的操作可参考第三章、寻找最小的k个数），时间复杂度是$O(n</em>lg10)$。所以总的时间复杂度，是$O(n<em>le)$与$O(n</em>lg10)$中较大的哪一个。</li>
+</ul>
+</li>
+<li>有一个1G大小的一个文件，里面每一行是一个词，词的大小不超过16字节，内存限制大小是1M。返回频数最高的100个词。</li>
+<li>1000万字符串，其中有些是重复的，需要把重复的全部去掉，保留没有重复的字符串。请怎么设计和实现？</li>
+<li>一个文本文件，大约有一万行，每行一个词，要求统计出其中最频繁出现的前10个词，请给出思想，给出时间复杂度分析。</li>
+<li>寻找热门查询：搜索引擎会通过日志文件把用户每次检索使用的所有检索串都记录下来，每个查询串的长度为1-255字节。假设目前有一千万个记录，这些查询串的重复读比较高，虽然总数是1千万，但是如果去除重复和，不超过3百万个。一个查询串的重复度越高，说明查询它的用户越多，也就越热门。请你统计最热门的10个查询串，要求使用的内存不能超过1G。<ul>
+<li>(1) 请描述你解决这个问题的思路；</li>
+<li>(2) 请给出主要的处理流程，算法，以及算法的复杂度。</li>
+</ul>
+</li>
+</ol>
+<h2 id="四、Trie树的实现"><a href="#四、Trie树的实现" class="headerlink" title="四、Trie树的实现"></a>四、Trie树的实现</h2><p>Trie树的插入、删除、查找的操作都是一样的，只需要简单的对树进行一遍遍历即可，时间复杂度：O（n）（n是字符串的长度）。</p>
+<p>trie树每一层的节点数是$26^i$级别的。所以为了节省空间，对于Tried树的实现可以使用数组和链表两种方式。空间的花费，不会超过单词数×单词长度。</p>
+<ol>
+<li><p>数组：由于我们知道一个Tried树节点的子节点的数量是固定26个（针对不同情况会不同，比如兼容数字，则是36等），所以可以使用固定长度的数组来保存节点的子节点</p>
+<ul>
+<li>优点：在对子节点进行查找时速度快</li>
+<li>缺点：浪费空间，不管子节点有多少个，总是需要分配26个空间</li>
+</ul>
+</li>
+<li><p>链表：使用链表的话我们需要在每个子节点中保存其兄弟节点的链接，当我们在一个节点的子节点中查找是否存在一个字符时，需要先找到其子节点，然后顺着子节点的链表从左往右进行遍历</p>
+<ul>
+<li>优点：节省空间，有多少个子节点就占用多少空间，不会造成空间浪费</li>
+<li>缺点：对子节点进行查找相对较慢，需要进行链表遍历，同时实现也较数组麻烦</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>java</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.ArrayList;</div><div class="line"><span class="keyword">import</span> java.util.List;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 单词查找树</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Trie</span> </span>&#123;</div><div class="line">	<span class="comment">/** 单词查找树根节点，根节点为一个空的节点 */</span></div><div class="line">	<span class="keyword">private</span> Vertex root = <span class="keyword">new</span> Vertex();</div><div class="line">	<span class="comment">/** 单词查找树的节点(内部类) */</span></div><div class="line">	<span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">Vertex</span> </span>&#123;</div><div class="line">		<span class="comment">/** 单词出现次数统计 */</span></div><div class="line">		<span class="keyword">int</span> wordCount;</div><div class="line">		<span class="comment">/** 以某个前缀开头的单词，它的出现次数 */</span></div><div class="line">		<span class="keyword">int</span> prefixCount;</div><div class="line">		<span class="comment">/** 子节点用数组表示 */</span></div><div class="line">		Vertex[] vertexs = <span class="keyword">new</span> Vertex[<span class="number">26</span>];</div><div class="line">		<span class="comment">/**</span></div><div class="line">		 * 树节点的构造函数</div><div class="line">		 */</div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="title">Vertex</span><span class="params">()</span> </span>&#123;</div><div class="line">			wordCount = <span class="number">0</span>;</div><div class="line">			prefixCount = <span class="number">0</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 单词查找树构造函数</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span> </span>&#123;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 向单词查找树添加一个新单词</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> word</div><div class="line">	 *            单词</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addWord</span><span class="params">(String word)</span> </span>&#123;</div><div class="line">		addWord(root, word.toLowerCase());</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 向单词查找树添加一个新单词</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> root</div><div class="line">	 *            单词查找树节点</div><div class="line">	 * <span class="doctag">@param</span> word</div><div class="line">	 *            单词</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addWord</span><span class="params">(Vertex vertex, String word)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (word.length() == <span class="number">0</span>) &#123;</div><div class="line">			vertex.wordCount++;</div><div class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (word.length() &gt; <span class="number">0</span>) &#123;</div><div class="line">			vertex.prefixCount++;</div><div class="line">			<span class="keyword">char</span> c = word.charAt(<span class="number">0</span>);</div><div class="line">			<span class="keyword">int</span> index = c - <span class="string">'a'</span>;</div><div class="line">			<span class="keyword">if</span> (<span class="keyword">null</span> == vertex.vertexs[index]) &#123;</div><div class="line">				vertex.vertexs[index] = <span class="keyword">new</span> Vertex();</div><div class="line">			&#125;</div><div class="line">			addWord(vertex.vertexs[index], word.substring(<span class="number">1</span>));</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 统计某个单词出现次数</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> word</div><div class="line">	 *            单词</div><div class="line">	 * <span class="doctag">@return</span> 出现次数</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countWord</span><span class="params">(String word)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> countWord(root, word);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 统计某个单词出现次数</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> root</div><div class="line">	 *            单词查找树节点</div><div class="line">	 * <span class="doctag">@param</span> word</div><div class="line">	 *            单词</div><div class="line">	 * <span class="doctag">@return</span> 出现次数</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">countWord</span><span class="params">(Vertex vertex, String word)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (word.length() == <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> vertex.wordCount;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">char</span> c = word.charAt(<span class="number">0</span>);</div><div class="line">			<span class="keyword">int</span> index = c - <span class="string">'a'</span>;</div><div class="line">			<span class="keyword">if</span> (<span class="keyword">null</span> == vertex.vertexs[index]) &#123;</div><div class="line">				<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				<span class="keyword">return</span> countWord(vertex.vertexs[index], word.substring(<span class="number">1</span>));</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 统计以某个前缀开始的单词，它的出现次数</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> word</div><div class="line">	 *            前缀</div><div class="line">	 * <span class="doctag">@return</span> 出现次数</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">countPrefix</span><span class="params">(String word)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> countPrefix(root, word);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 统计以某个前缀开始的单词，它的出现次数(前缀本身不算在内)</div><div class="line">	 * </div><div class="line">	 * <span class="doctag">@param</span> root</div><div class="line">	 *            单词查找树节点</div><div class="line">	 * <span class="doctag">@param</span> word</div><div class="line">	 *            前缀</div><div class="line">	 * <span class="doctag">@return</span> 出现次数</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">countPrefix</span><span class="params">(Vertex vertex, String prefixSegment)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (prefixSegment.length() == <span class="number">0</span>) &#123;</div><div class="line">			<span class="keyword">return</span> vertex.prefixCount;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			<span class="keyword">char</span> c = prefixSegment.charAt(<span class="number">0</span>);</div><div class="line">			<span class="keyword">int</span> index = c - <span class="string">'a'</span>;</div><div class="line">			<span class="keyword">if</span> (<span class="keyword">null</span> == vertex.vertexs[index]) &#123;</div><div class="line">				<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				<span class="keyword">return</span> countPrefix(vertex.vertexs[index], prefixSegment.substring(<span class="number">1</span>));</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 调用深度递归算法得到所有单词</div><div class="line">	 * <span class="doctag">@return</span> 单词集合</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">listAllWords</span><span class="params">()</span> </span>&#123;</div><div class="line">		List&lt;String&gt; allWords = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">		<span class="keyword">return</span> depthSearchWords(allWords, root, <span class="string">""</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">/**</span></div><div class="line">	 * 递归生成所有单词</div><div class="line">	 * <span class="doctag">@param</span> allWords 单词集合</div><div class="line">	 * <span class="doctag">@param</span> vertex 单词查找树的节点</div><div class="line">	 * <span class="doctag">@param</span> wordSegment 单词片段</div><div class="line">	 * <span class="doctag">@return</span> 单词集合</div><div class="line">	 */ </div><div class="line">	<span class="function"><span class="keyword">private</span> List&lt;String&gt; <span class="title">depthSearchWords</span><span class="params">(List&lt;String&gt; allWords, Vertex vertex,</span></span></div><div class="line">			String wordSegment) &#123;</div><div class="line">		Vertex[] vertexs = vertex.vertexs;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; vertexs.length; i++) &#123;</div><div class="line">			<span class="keyword">if</span> (<span class="keyword">null</span> != vertexs[i]) &#123;</div><div class="line">				<span class="keyword">if</span> (vertexs[i].wordCount &gt; <span class="number">0</span>) &#123;</div><div class="line">					allWords.add(wordSegment + (<span class="keyword">char</span>)(i + <span class="string">'a'</span>));</div><div class="line">					<span class="keyword">if</span>(vertexs[i].prefixCount &gt; <span class="number">0</span>)&#123;</div><div class="line">						depthSearchWords(allWords, vertexs[i], wordSegment + (<span class="keyword">char</span>)(i + <span class="string">'a'</span>));</div><div class="line">					&#125;</div><div class="line">				&#125; <span class="keyword">else</span> &#123;</div><div class="line">					depthSearchWords(allWords, vertexs[i], wordSegment + (<span class="keyword">char</span>)(i + <span class="string">'a'</span>));</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> allWords;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Trie trie = <span class="keyword">new</span> Trie();</div><div class="line">		trie.addWord(<span class="string">"abc"</span>);</div><div class="line">		trie.addWord(<span class="string">"abcd"</span>);</div><div class="line">		trie.addWord(<span class="string">"abcde"</span>);</div><div class="line">		trie.addWord(<span class="string">"abcdef"</span>);</div><div class="line">		System.out.println(trie.countPrefix(<span class="string">"abc"</span>));</div><div class="line">		System.out.println(trie.countWord(<span class="string">"abc"</span>));</div><div class="line">		System.out.println(trie.listAllWords());</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/Trie树/" rel="tag"># Trie树</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/23/机器学习算法系列（29）：Sparsity and Some Basics of L1 Regularization/" rel="next" title="机器学习算法系列（29）：Sparsity and Some Basics of L1 Regularization">
+                <i class="fa fa-chevron-left"></i> 机器学习算法系列（29）：Sparsity and Some Basics of L1 Regularization
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/23/机器学习算法系列（30）：Scikit-Learn总结/" rel="prev" title="机器学习算法系列（30）：Scikit-Learn总结">
+                机器学习算法系列（30）：Scikit-Learn总结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">175</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">248</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、什么是Trie树"><span class="nav-text">一、什么是Trie树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Trie的优缺点"><span class="nav-text">二、Trie的优缺点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-优点"><span class="nav-text">2.1 优点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-缺点"><span class="nav-text">2.2 缺点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Trie树的应用"><span class="nav-text">三、Trie树的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-字符串检索"><span class="nav-text">3.1 字符串检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-词频统计"><span class="nav-text">3.2 词频统计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-排序"><span class="nav-text">3.3 排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-前缀匹配"><span class="nav-text">3.4 前缀匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-最长公共前缀"><span class="nav-text">3.5 最长公共前缀</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-作为辅助结构"><span class="nav-text">3.6 作为辅助结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-应用实例"><span class="nav-text">3.7 应用实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Trie树的实现"><span class="nav-text">四、Trie树的实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>

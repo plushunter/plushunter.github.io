@@ -1,0 +1,1053 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="词向量,Skip-gram,CBOW,Wiki,jieba," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="要通过计算机进行自然语言处理，首先就需要将这些文本数字化，目前用的最广泛的方法是词向量，根据训练使用算法的不同，目前主要有Word2Vec和GloVe两大方法，本文主要讲述通过这两个方法分别训练中文维基百科语料库的词向量。 1.">
+<meta name="keywords" content="词向量,Skip-gram,CBOW,Wiki,jieba">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自然语言处理系列（2）：中文Wiki语料库词向量的训练">
+<meta property="og:url" content="http://yoursite.com/2017/12/09/自然语言处理系列（2）：中文Wiki语料库词向量的训练/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="要通过计算机进行自然语言处理，首先就需要将这些文本数字化，目前用的最广泛的方法是词向量，根据训练使用算法的不同，目前主要有Word2Vec和GloVe两大方法，本文主要讲述通过这两个方法分别训练中文维基百科语料库的词向量。 1.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-17T10:03:25.918Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自然语言处理系列（2）：中文Wiki语料库词向量的训练">
+<meta name="twitter:description" content="要通过计算机进行自然语言处理，首先就需要将这些文本数字化，目前用的最广泛的方法是词向量，根据训练使用算法的不同，目前主要有Word2Vec和GloVe两大方法，本文主要讲述通过这两个方法分别训练中文维基百科语料库的词向量。 1.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 自然语言处理系列（2）：中文Wiki语料库词向量的训练 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/12/09/自然语言处理系列（2）：中文Wiki语料库词向量的训练/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                自然语言处理系列（2）：中文Wiki语料库词向量的训练
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-09T23:14:45+08:00">
+                2017-12-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自然语言处理/" itemprop="url" rel="index">
+                    <span itemprop="name">自然语言处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>要通过计算机进行自然语言处理，首先就需要将这些文本数字化，目前用的最广泛的方法是词向量，根据训练使用算法的不同，目前主要有Word2Vec和GloVe两大方法，本文主要讲述通过这两个方法分别训练中文维基百科语料库的词向量。</p>
+<h5 id="1"><a href="#1" class="headerlink" title="1. "></a>1. <img src="" alt="WechatIMG1zhanghua"></h5><a id="more"></a>
+<h2 id="一、获取并处理中文维基百科语料库"><a href="#一、获取并处理中文维基百科语料库" class="headerlink" title="一、获取并处理中文维基百科语料库"></a>一、获取并处理中文维基百科语料库</h2><h3 id="1-1-下载"><a href="#1-1-下载" class="headerlink" title="1.1 下载"></a>1.1 下载</h3><p>中文维基百科语料库的下载链接为：<a href="https://dumps.wikimedia.org/zhwiki/" target="_blank" rel="noopener">https://dumps.wikimedia.org/zhwiki/</a>，本试验下载的是最新的<a href="https://dumps.wikimedia.org/zhwiki/latest/zhwiki-latest-pages-articles.xml.bz2" target="_blank" rel="noopener">zhwiki-latest-pages-articles.xml.bz2</a>。这个压缩包里面存的是标题、正文部分，该目录下还包括了其他类型的语料库，如仅包含标题，摘要等。</p>
+<h3 id="1-2-抽取内容"><a href="#1-2-抽取内容" class="headerlink" title="1.2 抽取内容"></a>1.2 抽取内容</h3><p>Wikipedia Extractor是一个开源的用于抽取维基百科语料库的工具，由python携程，通过这个工具可以很容易地从语料库中抽取相关内容。使用方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/attardi/wikiextractor.git wikiextractor</div><div class="line">$ wikiextractor/WikiExtractor.py  -b 2000M -o zhwiki_extracted zhwiki-latest-pages-articles.xml.bz2</div></pre></td></tr></table></figure>
+<p>由于这个工具就是一个python脚本，因此无需安装，<code>-b</code>参数指对提取出来的内容进行切片后每个文件的大小，如果要将所有内容保存在同一个文件，那么就需要把这个参数设置地大一点，<code>-o</code>的参数指提取出来的文件放置的目录，抽取出来的文件的路径为<code>zhwiki_extract/AA/wiki_00</code>。更多的参数可参考其github主页的说明。</p>
+<p>抽取后的内容格式为每篇文章被一对<code>&lt;doc&gt;&lt;/doc&gt;</code>包起来，而<code>&lt;doc&gt;</code>中的包含了属性有文章的id、url和title属性，如<code>&lt;doc id=&quot;13&quot; url=&quot;https://zh.wikipedia.org/wiki?curid=13&quot; title=&quot;数学&quot;&gt;</code></p>
+<h3 id="1-3-繁简转换"><a href="#1-3-繁简转换" class="headerlink" title="1.3 繁简转换"></a>1.3 繁简转换</h3><p>由上一步提取出来的中文维基百科中的语料中既有繁体字也有简体字，这里需要将其统一变为简体字，采用的工具也是开源的<a href="https://github.com/BYVoid/OpenCC" target="_blank" rel="noopener">OpenCC</a>转换器。安装使用方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; &lt; /dev/null 2&gt; /dev/null</div><div class="line">$ brew install opencc</div><div class="line">$ cd OpenCC</div><div class="line">$ opencc -i /Users/HuaZhang/Desktop/zhwiki_extracted/AA/zhwiki_extract/AA/wiki_00 -o zhwiki_extract/zhs_wiki -c /Users/HuaZhang/OpenCC/data/config/t2s.json</div></pre></td></tr></table></figure>
+<p>其中<code>-i</code>表示输入文件路径，<code>-o</code>表示输出的文件，<code>-c</code>表示转换的配置文件，这里使用的繁体转简体的配置文件，OpenCC自带了一系列的转换配置文件，可以参考其github主页的说明。</p>
+<h3 id="1-4-去除标点"><a href="#1-4-去除标点" class="headerlink" title="1.4 去除标点"></a>1.4 去除标点</h3><p>去除标点符号有两个问题需要解决，一个是像下面这种为了解决各地术语，名称不同的问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">他的主要成就包括Emacs及後來的GNU Emacs，GNU C 編譯器及-&#123;zh-hant:GNU 除錯器;zh-hans:GDB 调试器&#125;-。</div></pre></td></tr></table></figure>
+<p>另外一个就是将所有标点符号替换成空字符，通过正则表达式均可解决这两个问题，下面是具体实现的python代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*- </span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="keyword">import</span> io</div><div class="line"></div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(<span class="string">'utf-8'</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">pre_process</span><span class="params">(input_file, output_file)</span>:</span></div><div class="line">    multi_version = re.compile(<span class="string">ur'-\&#123;.*?(zh-hans|zh-cn):([^;]*?)(;.*?)?\&#125;-'</span>)</div><div class="line">    punctuation = re.compile(<span class="string">u"[-~!@#$%^&amp;*()_+`=\[\]\\\&#123;\&#125;\"|;':,./&lt;&gt;?·！@#￥%……&amp;*（）——+【】、；‘：“”，。、《》？「『」』]"</span>)</div><div class="line">    <span class="keyword">with</span> io.open(output_file, mode = <span class="string">'w'</span>, encoding = <span class="string">'utf-8'</span>) <span class="keyword">as</span> outfile:</div><div class="line">        <span class="keyword">with</span> io.open(input_file, mode = <span class="string">'r'</span>, encoding =<span class="string">'utf-8'</span>) <span class="keyword">as</span> infile:</div><div class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> infile:</div><div class="line">                line = multi_version.sub(<span class="string">ur'\2'</span>, line)</div><div class="line">                line = punctuation.sub(<span class="string">''</span>, line.decode(<span class="string">'utf8'</span>))</div><div class="line">                outfile.write(line)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">if</span> len(sys.argv) != <span class="number">3</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">"Usage: python script.py input_file output_file"</span></div><div class="line">        sys.exit()</div><div class="line">    input_file, output_file = sys.argv[<span class="number">1</span>], sys.argv[<span class="number">2</span>]</div><div class="line">    pre_process(input_file, output_file)</div></pre></td></tr></table></figure>
+<p>经过该步骤处理之后，得到了简体中文的纯净文本，如下所示：</p>
+<p>&gt;<br>doc id13 urlhttpszhwikipediaorgwikicurid13 title数学<br>数学<br>数学是利用符号语言研究数量结构变化以及空间等概念的一门学科从某种角度看属于形式科学的一种数学透过抽象化和逻辑推理的使用由计数计算量度和对物体形状及运动的观察而产生数学家们拓展这些概念为了公式化新的猜想以及从选定的公理及定义中建立起严谨推导出的定理<br>·······<br>数学奖通常和其他科学的奖项分开数学上最有名的奖为菲尔兹奖创立于1936年每四年颁奖一次它通常被认为是数学的诺贝尔奖另一个国际上主要的奖项为阿贝尔奖创立于2003年两者都颁奖于特定的工作主题包括数学新领域的创新或已成熟领域中未解决问题的解答著名的23个问题称为希尔伯特的23个问题于1900年由德国数学家大卫希尔伯特所提出这一连串的问题在数学家之间有著极高的名望且至少有九个问题已经被解答了出来另一新的七个重要问题称为千禧年大奖难题发表于2000年对其每一个问题的解答都有著一百万美元的奖金而当中只有一个问题黎曼猜想和希尔伯特的问题重复<br>doc</p>
+<h3 id="1-5-jieba分词"><a href="#1-5-jieba分词" class="headerlink" title="1.5 jieba分词"></a>1.5 jieba分词</h3><p>下面需要对其进行分词并且整理成每行一篇文本的格式，从而方便后续的处理。</p>
+<p>分词采用 python 的分词工具 <a href="https://github.com/fxsjy/jieba" target="_blank" rel="noopener">jieba</a>，通过 <code>pip install jieba</code>安装即可。且将一篇文章分词后的结果存储在一行，由前面可知，每篇文章存储在一对<code>&lt;doc&gt;&lt;/doc&gt;</code>标签中，由于前面去掉了标点，所以现在变成了<code>doc doc</code>,所以只要判断当前行为doc时即可认为文章结束，从而开始在新的一行记录下一篇文章的分词结果。实现的python代码如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="comment"># -*- coding: utf-8 -*-</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> io</div><div class="line"><span class="keyword">import</span> jieba</div><div class="line"></div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(<span class="string">'utf-8'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">cut_words</span><span class="params">(input_file, output_file)</span>:</span></div><div class="line">    count = <span class="number">0</span></div><div class="line">    <span class="keyword">with</span> io.open(output_file, mode = <span class="string">'w'</span>, encoding = <span class="string">'utf-8'</span>) <span class="keyword">as</span> outfile:</div><div class="line">        <span class="keyword">with</span> io.open(input_file, mode = <span class="string">'r'</span>, encoding = <span class="string">'utf-8'</span>) <span class="keyword">as</span> infile:</div><div class="line">            <span class="keyword">for</span> line <span class="keyword">in</span> infile:</div><div class="line">                line = line.strip()</div><div class="line">                <span class="keyword">if</span> len(line) &lt; <span class="number">1</span>:  <span class="comment"># empty line</span></div><div class="line">                    <span class="keyword">continue</span></div><div class="line">                <span class="keyword">if</span> line.startswith(<span class="string">'doc'</span>): <span class="comment"># start or end of a passage</span></div><div class="line">                    <span class="keyword">if</span> line == <span class="string">'doc'</span>: <span class="comment"># end of a passage</span></div><div class="line">                        outfile.write(<span class="string">u'\n'</span>)</div><div class="line">                        count = count + <span class="number">1</span></div><div class="line">                        <span class="keyword">if</span>(count % <span class="number">1000</span> == <span class="number">0</span>):</div><div class="line">                            print(<span class="string">'%s articles were finished.......'</span> %count)</div><div class="line">                    <span class="keyword">continue</span></div><div class="line">                <span class="keyword">for</span> word <span class="keyword">in</span> jieba.cut(line):</div><div class="line">                    outfile.write(word + <span class="string">' '</span>)</div><div class="line">    print(<span class="string">'%s articles were finished.......'</span> %count)</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</div><div class="line">    <span class="keyword">if</span> len(sys.argv) &lt; <span class="number">3</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">"Usage: python script.py input_file output_file"</span></div><div class="line">        sys.exit()</div><div class="line">    input_file, output_file = sys.argv[<span class="number">1</span>], sys.argv[<span class="number">2</span>]</div><div class="line">    cut_words(input_file, output_file)</div></pre></td></tr></table></figure>
+<h2 id="二、通过Word2Vec训练词向量"><a href="#二、通过Word2Vec训练词向量" class="headerlink" title="二、通过Word2Vec训练词向量"></a>二、通过Word2Vec训练词向量</h2><p>Word2vec中包含了两种训练词向量的方法：Continuous Bag of Words(CBOW)和Skip-gram。CBOW的目标是根据上下文来预测当前词语的概率。Skip-gram刚好相反，根据当前词语来预测上下文的概率。这两种方法都利用人工神经网络作为它们的分类算法。起初，每个单词都是一个随机N维向量。训练时，该算法利用CBOW或者Skip-gram的方法获得了每个单词的最优向量。</p>
+<p>最初 Google 开源的 Word2Vec 是用C来写的，后面陆续有了Python ，Java 等语言的版本，这里采用的是 Python 版本的 gensim。通过 gensim 提供的 API 可以比较容易地进行词向量的训练。gensim的建议通过<code>conda install gensim</code>安装</p>
+<p>下面是对上面处理后的语料库进行训练的一个简单例子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">#!/usr/bin/python</div><div class="line"># -*- coding: utf-8 -*-</div><div class="line"></div><div class="line">import os, sys</div><div class="line">import multiprocessing</div><div class="line">import gensim  </div><div class="line"></div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(&apos;utf-8&apos;)</div><div class="line"></div><div class="line"></div><div class="line">def word2vec_train(input_file, output_file):</div><div class="line">    sentences = gensim.models.word2vec.LineSentence(input_file)</div><div class="line">    model = gensim.models.Word2Vec(sentences, size=300, min_count=10, sg=0, workers=multiprocessing.cpu_count())</div><div class="line">    model.save(output_file)</div><div class="line">    model.wv.save_word2vec_format(output_file + &apos;.vector&apos;, binary=True)</div><div class="line"></div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    if len(sys.argv) &lt; 3:</div><div class="line">        print &quot;Usage: python script.py infile outfile&quot;</div><div class="line">        sys.exit()</div><div class="line">    input_file, output_file = sys.argv[1], sys.argv[2]</div><div class="line">    word2vec_train(input_file, output_file)</div></pre></td></tr></table></figure>
+<p>上面的训练过程首先将输入的文件转为 <code>gensim</code>内部的 <code>LineSentence</code>对象，要求输入的文件的格式为每行一篇文章，每篇文章的词语以空格隔开。</p>
+<p>然后通过<code>gensim.models.Word2Vec</code>初始化一个<code>Word2Vec</code>模型，<code>size</code>参数表示训练的向量的维数；<code>min_count</code>表示忽略那些出现次数小于这个数值的词语，认为他们是没有意义的词语，一般的取值范围为（0，100）；<code>sg</code>表示采用何种算法进行训练，取0时表示采用<code>CBOW</code>模型，取1表示采用<code>skip-gram</code>模型；<code>workers</code>表示开多少个进程进行训练，采用多进程训练可以加快训练过程，这里开的进程数与CPU的核数相等。</p>
+<p>假设我们训练好了一个语料库的词向量，当一些新的文章加入这个语料库时，如何训练这些新增的文章从而更新我们的语料库？将全部文章再进行一次训练显然是费时费力的，gensim提供了一种类似于“增量训练”的方法。即可在原来的model基础上仅对新增的文章进行训练。如下所示为一个简单的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">model = gensim.models.Word2Vec.load(exist_model)</div><div class="line">model.train(new_sentences)</div></pre></td></tr></table></figure>
+<p>上面的代码先加载了一个已经训练好的词向量模型，然后再添加新的文章进行训练，同样新增的文章的格式也要满足每行一篇文章，每篇文章的词语通过空格分开的格式。这里需要注意的是加载的模型只能 是通过<code>model.save()</code>存储的模型，从<code>model.save_word2vec_format()</code>恢复过来的模型只能用于查询.</p>
+<h2 id="三、使用词向量模型"><a href="#三、使用词向量模型" class="headerlink" title="三、使用词向量模型"></a>三、使用词向量模型</h2><p>训练好的词向量可以供后续的多项自然语言处理工作使用，下面是通过gensim加载训练好的词向量模型并进行查询的例子：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 加载模型</span></div><div class="line"><span class="keyword">import</span> gensim</div><div class="line">model = gensim.models.KeyedVectors.load_word2vec_format(<span class="string">'/Users/HuaZhang/Desktop/zhwiki_extracted/output_word2vec.vector'</span>,binary = <span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment"># 词向量维度</span></div><div class="line">len(model[<span class="string">u'黑格尔'</span>])</div><div class="line"></div><div class="line"><span class="comment"># 相似度</span></div><div class="line">model.similarity(<span class="string">u'叔本华'</span>,<span class="string">u'康德'</span>)</div><div class="line"><span class="number">0.62428547493158093</span></div><div class="line"></div><div class="line"><span class="comment"># 找出相似度最高的词</span></div><div class="line">words = model.most_similar(<span class="string">u"哈耶克"</span>)</div><div class="line"><span class="keyword">for</span> word <span class="keyword">in</span> words:</div><div class="line">    <span class="keyword">print</span> word[<span class="number">0</span>],word[<span class="number">1</span>]</div><div class="line">    </div><div class="line">米塞斯 <span class="number">0.776977062225</span></div><div class="line">叔本华 <span class="number">0.731572449207</span></div><div class="line">黑格尔 <span class="number">0.723797023296</span></div><div class="line">巴维克 <span class="number">0.723039865494</span></div><div class="line">门格尔 <span class="number">0.719911754131</span></div><div class="line">谢林 <span class="number">0.714867889881</span></div><div class="line">波普尔 <span class="number">0.714080870152</span></div><div class="line">马克思 <span class="number">0.711268663406</span></div><div class="line">尼采 <span class="number">0.710071563721</span></div><div class="line">博姆 <span class="number">0.705146193504</span></div><div class="line"></div><div class="line"><span class="comment"># 找出最不相关的词汇</span></div><div class="line"><span class="keyword">print</span>  model.doesnt_match(<span class="string">u"莎士比亚 卡夫卡 卢梭 爱因斯坦"</span>.split())</div><div class="line">爱因斯坦</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/词向量/" rel="tag"># 词向量</a>
+          
+            <a href="/tags/Skip-gram/" rel="tag"># Skip-gram</a>
+          
+            <a href="/tags/CBOW/" rel="tag"># CBOW</a>
+          
+            <a href="/tags/Wiki/" rel="tag"># Wiki</a>
+          
+            <a href="/tags/jieba/" rel="tag"># jieba</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/08/自然语言处理系列（1）：词向量与统计语言模型/" rel="next" title="自然语言处理系列（1）：词向量与统计语言模型">
+                <i class="fa fa-chevron-left"></i> 自然语言处理系列（1）：词向量与统计语言模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/10/日知录（2）：前景理论/" rel="prev" title="日知录（2）：前景理论">
+                日知录（2）：前景理论 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">175</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">248</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1"><span class="nav-text">1. </span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、获取并处理中文维基百科语料库"><span class="nav-text">一、获取并处理中文维基百科语料库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-下载"><span class="nav-text">1.1 下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-抽取内容"><span class="nav-text">1.2 抽取内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-繁简转换"><span class="nav-text">1.3 繁简转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-去除标点"><span class="nav-text">1.4 去除标点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-jieba分词"><span class="nav-text">1.5 jieba分词</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、通过Word2Vec训练词向量"><span class="nav-text">二、通过Word2Vec训练词向量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、使用词向量模型"><span class="nav-text">三、使用词向量模型</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>

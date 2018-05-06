@@ -1,0 +1,1228 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="EDA,特征工程,kaggle,可视化," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、比赛简介1.1 比赛目的这个kaggle比赛是由Sigma和RentHop两家公司共同推出的比赛。比赛的数据来自于RentHop的租房信息，大概的思路就是根据出租房的一系列特征，比如地理位置（经纬度、街道地址）、发布时间、房间设施（浴室、卧室数量）、描述信息、发布的图片信息、价格等来预测消费者对出租房的喜好程度。 这样可以帮助RentHop公司更好地处理欺诈事件，让房主和中介更加理解租客的需求">
+<meta name="keywords" content="EDA,特征工程,kaggle,可视化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kaggle系列（2）：Rental Listing Inquiries（一）：EDA">
+<meta property="og:url" content="http://yoursite.com/2017/06/13/kaggle系列（2）：Rental Listing Inquiries（一）：EDA/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="一、比赛简介1.1 比赛目的这个kaggle比赛是由Sigma和RentHop两家公司共同推出的比赛。比赛的数据来自于RentHop的租房信息，大概的思路就是根据出租房的一系列特征，比如地理位置（经纬度、街道地址）、发布时间、房间设施（浴室、卧室数量）、描述信息、发布的图片信息、价格等来预测消费者对出租房的喜好程度。 这样可以帮助RentHop公司更好地处理欺诈事件，让房主和中介更加理解租客的需求">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%884.48.02.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%884.48.20.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/fsvg.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%885.23.17.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%885.24.02.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/dfrgv.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%885.30.15.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%885.37.33.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%885.42.29.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.07.07.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.10.31.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.21.21.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.24.59.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.25.37.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%8810.03.35.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%8810.01.10.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.52.55.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.55.02.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.57.13.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.59.05.png">
+<meta property="og:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%8810.00.21.png">
+<meta property="og:updated_time" content="2017-12-26T06:38:57.163Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="kaggle系列（2）：Rental Listing Inquiries（一）：EDA">
+<meta name="twitter:description" content="一、比赛简介1.1 比赛目的这个kaggle比赛是由Sigma和RentHop两家公司共同推出的比赛。比赛的数据来自于RentHop的租房信息，大概的思路就是根据出租房的一系列特征，比如地理位置（经纬度、街道地址）、发布时间、房间设施（浴室、卧室数量）、描述信息、发布的图片信息、价格等来预测消费者对出租房的喜好程度。 这样可以帮助RentHop公司更好地处理欺诈事件，让房主和中介更加理解租客的需求">
+<meta name="twitter:image" content="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%884.48.02.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> kaggle系列（2）：Rental Listing Inquiries（一）：EDA | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/13/kaggle系列（2）：Rental Listing Inquiries（一）：EDA/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                kaggle系列（2）：Rental Listing Inquiries（一）：EDA
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-13T20:14:45+08:00">
+                2017-06-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kaggle/" itemprop="url" rel="index">
+                    <span itemprop="name">Kaggle</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、比赛简介"><a href="#一、比赛简介" class="headerlink" title="一、比赛简介"></a>一、比赛简介</h2><h3 id="1-1-比赛目的"><a href="#1-1-比赛目的" class="headerlink" title="1.1 比赛目的"></a>1.1 比赛目的</h3><p>这个kaggle比赛是由Sigma和RentHop两家公司共同推出的比赛。比赛的数据来自于RentHop的租房信息，大概的思路就是根据出租房的一系列特征，比如地理位置（经纬度、街道地址）、发布时间、房间设施（浴室、卧室数量）、描述信息、发布的图片信息、价格等来预测消费者对出租房的喜好程度。</p>
+<p>这样可以帮助RentHop公司更好地处理欺诈事件，让房主和中介更加理解租客的需求与偏好，做出更加合理的决策。</p>
+<a id="more"></a>
+<h3 id="1-2-数据集"><a href="#1-2-数据集" class="headerlink" title="1.2 数据集"></a>1.2 数据集</h3><p>在这个比赛中，房源的数据来自于renthop网站，这些公寓都位于纽约市。其目的之前已经提到过了，就是基于一系列特征预测公寓房源的受欢迎程度，其目标变量是：<code>interest_level</code>，它是指从在网站上发布房源起始的时间内，房源的询问次数。</p>
+<p>其中，比赛一共给了五个数据文件，分别是：</p>
+<ul>
+<li>train.json：训练集</li>
+<li>test.json：测试集</li>
+<li>sample_submission.csv：格式正确的提交示例</li>
+<li>images_sample.zip：租房图片集（只抽取了100个图片集）</li>
+<li>kaggle-renthop.7z：所有的租房图片集，一共有78.5GB的压缩文件。</li>
+</ul>
+<p>给出的特征的含义：</p>
+<ul>
+<li>bathrooms: 浴室的数量</li>
+<li>bedrooms: 卧室的数量</li>
+<li>building_id：</li>
+<li>created：发布时间</li>
+<li>description：一些描述</li>
+<li>display_address：展出地址</li>
+<li>features: 公寓的一些特征</li>
+<li>latitude：纬度</li>
+<li>listing_id</li>
+<li>longitude：经度</li>
+<li>manager_id：管理ID</li>
+<li>photos: 租房图片集</li>
+<li>price: 美元</li>
+<li>street_address：街道地址</li>
+<li>interest_level: 目标变量，受欢迎程度. 有三个类: ‘high’, ‘medium’, ‘low’</li>
+</ul>
+<h3 id="1-3-提交要求"><a href="#1-3-提交要求" class="headerlink" title="1.3 提交要求"></a>1.3 提交要求</h3><p>这个比赛使用的是多分类对数似然损失函数来评价模型。因为每一个房源都有一个对应的最准确的类别，对每一个房源，需要提交它属于每一类的概率值，它的计算公式如下：</p>
+<script type="math/tex; mode=display">
+\log loss=-\frac{1}{N}\sum_{i=1}^N{\sum_{j=1}^M{y_{ij}\log\left(p_{ij}\right)}}</script><p>其中$N$是测试集中的样本数量，$M$是类别的数量（3类：high、medium、low）,$log$是自然对数，$y_{ij}$表示样本$i$属于$j$类则为1，否则为0.$p_{ij}$表示样本$i$属于类别$j$的预测概率值。</p>
+<p>一个样本的属于三个类别的预测可能性不需要加和为1，因为已经预先归一化了。为避免对数函数的极端情况，预测概率被替代为$max(min(p,1-10^{-15}),10^{-15})$</p>
+<p>最后提交的文件为csv格式，它包含对每一类的预测概率值，行的顺序没有要求，文件必须要有一个表头，看起来像下面的示例：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>listing_id</th>
+<th>high</th>
+<th>medium</th>
+<th>low</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7065104</td>
+<td>0.07743</td>
+<td>0.23002</td>
+<td>0.69254</td>
+</tr>
+<tr>
+<td>7089035</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="二、Exploratory-Data-Analysis"><a href="#二、Exploratory-Data-Analysis" class="headerlink" title="二、Exploratory Data Analysis"></a>二、Exploratory Data Analysis</h2><p>在进行建模之前，我们都会对原始数据进行一些可视化探索，以便更快地熟悉数据，更有效进行之后的特征工程和建模。</p>
+<p>我们先导入一些EDA过程中所需要的包：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np </div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd </div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</div><div class="line"><span class="keyword">import</span> json</div><div class="line">color = sns.color_palette() <span class="comment"># 调色板</span></div><div class="line"></div><div class="line">%matplotlib inline</div><div class="line"></div><div class="line">pd.options.mode.chained_assignment = <span class="keyword">None</span> <span class="comment"># default = 'warn'</span></div></pre></td></tr></table></figure>
+<p>其中numpy和pandas是数据分析处理中最流行的包，matplotlib和seaborn两个包用来绘制可视化图像，使用%matplotlib命令可以将matplotlib的图表直接嵌入到Notebook之中（%是魔术命令）。</p>
+<h3 id="2-1-数据初探"><a href="#2-1-数据初探" class="headerlink" title="2.1 数据初探"></a>2.1 数据初探</h3><p>使用pandas打开训练集文件train.json，取前两行观测：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">train_df = pd.read_json(<span class="string">'data/train.json'</span>)</div><div class="line">train_df.head(<span class="number">8</span>)</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%884.48.02.png" alt="屏幕快照 2017-06-19 下午4.48.02"><br><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%884.48.20.png" alt="屏幕快照 2017-06-19 下午4.48.20"></p>
+<p>我们可以看到给定的数据中包含各种类型的特征，按照其特征可以分为以下几个类别：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>特征类型</th>
+<th>特征</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数值型</td>
+<td>bathrooms、bedrooms、price</td>
+</tr>
+<tr>
+<td>高势集类别</td>
+<td>building_id、display_address、manager_id、street_address</td>
+</tr>
+<tr>
+<td>时间型</td>
+<td>created</td>
+</tr>
+<tr>
+<td>地理位置型特征</td>
+<td>longitude、latitude</td>
+</tr>
+<tr>
+<td>文本</td>
+<td>description</td>
+</tr>
+<tr>
+<td>稀疏特征</td>
+<td>features</td>
+</tr>
+<tr>
+<td>id型特征</td>
+<td>listing_id、index</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>看一下训练集和测试集分别有多少</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">print</span> <span class="string">"Train Rows:"</span>,train_df.shape[<span class="number">0</span>]</div><div class="line"><span class="keyword">print</span> <span class="string">"Test Rows:"</span>,test_df.shape[<span class="number">0</span>]</div></pre></td></tr></table></figure>
+<p>Train Rows: 49352<br>Test Rows: 74659</p>
+<p>训练集有49352个样例，测试集有74659个样例。</p>
+<p>接下来我们一一对这些特征进行探索。</p>
+<h3 id="2-2-目标变量"><a href="#2-2-目标变量" class="headerlink" title="2.2 目标变量"></a>2.2 目标变量</h3><p>在深入探索之前，我们先看看目标变量Interest level</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">int_level = train_df[<span class="string">'interest_level'</span>].value_counts()</div><div class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">5</span>))</div><div class="line">sns.barplot(int_level.index,int_level.values,alpha=<span class="number">0.8</span>,color=color[<span class="number">2</span>])</div><div class="line">plt.xlabel(<span class="string">"number of occurrences"</span>,fontsize = <span class="number">12</span>)</div><div class="line">plt.ylabel(<span class="string">"Interest Level"</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/fsvg.png" alt="fsvg"></p>
+<p>兴趣度在大多数情况下都是低的，其次是中等，只有少部分的样例为高分。</p>
+<h3 id="2-3-数值型特征"><a href="#2-3-数值型特征" class="headerlink" title="2.3 数值型特征"></a>2.3 数值型特征</h3><h4 id="2-3-1-浴室（bathrooms）"><a href="#2-3-1-浴室（bathrooms）" class="headerlink" title="2.3.1 浴室（bathrooms）"></a>2.3.1 浴室（bathrooms）</h4><p>先看看浴室的数量分布<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cnt_srs = train_df[<span class="string">'bathrooms'</span>].value_counts()</div><div class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">5</span>))</div><div class="line">sns.barplot(cnt_srs.index,cnt_srs.values,alpha=<span class="number">0.8</span>,color=color[<span class="number">2</span>])</div><div class="line">plt.xlabel(<span class="string">"number of occurrences"</span>,fontsize = <span class="number">12</span>)</div><div class="line">plt.ylabel(<span class="string">"bathrooms"</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure></p>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%885.23.17.png" alt="屏幕快照 2017-06-19 下午5.23.17"></p>
+<p>可以看到绝大多数的样例的浴室数量为1，其次为2个浴室。</p>
+<p>再看看不同兴趣程度的浴室数量分布，运用小提琴图来呈现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#浴室数量大于3的记为3</span></div><div class="line">train_df[<span class="string">'bathrooms'</span>].loc[train_df[<span class="string">'bathrooms'</span>]&gt;<span class="number">3</span>]=<span class="number">3</span></div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>))</div><div class="line">sns.violinplot(x = <span class="string">'interest_level'</span>,y = <span class="string">'bathrooms'</span>,data= train_df,alpha=<span class="number">0.8</span>)</div><div class="line">plt.xlabel(<span class="string">"interest level"</span>,fontsize = <span class="number">12</span>)</div><div class="line">plt.ylabel(<span class="string">"bathrooms"</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%885.24.02.png" alt="屏幕快照 2017-06-19 下午5.24.02"></p>
+<p>可以看到在不同的兴趣程度上，浴室数量的分布差不多。</p>
+<h4 id="2-3-2-卧室（bedrooms）"><a href="#2-3-2-卧室（bedrooms）" class="headerlink" title="2.3.2 卧室（bedrooms）"></a>2.3.2 卧室（bedrooms）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cnt_bedrooms = train_df[<span class="string">'bedrooms'</span>].value_counts()</div><div class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">5</span>))</div><div class="line">sns.barplot(cnt_bedrooms.index,cnt_bedrooms.values,alpha=<span class="number">0.8</span>,color=color[<span class="number">3</span>])</div><div class="line">plt.ylabel(<span class="string">"number of occurrences"</span>,fontsize = <span class="number">12</span>)</div><div class="line">plt.xlabel(<span class="string">"bedrooms"</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/dfrgv.png" alt="dfrgv"></p>
+<p>卧室数量基本集中在1和2，也有不少没有卧室，3个卧室的房子也不少。</p>
+<p>看看不同兴趣程度的卧室数量分布，同样也用小提琴图来呈现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>))</div><div class="line">sns.countplot(x=<span class="string">'bedrooms'</span>,hue=<span class="string">'interest_level'</span>,data=train_df)</div><div class="line">plt.ylabel(<span class="string">"number of occurrences"</span>,fontsize = <span class="number">12</span>)</div><div class="line">plt.xlabel(<span class="string">"bedrooms"</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%885.30.15.png" alt="屏幕快照 2017-06-19 下午5.30.15"></p>
+<h4 id="2-3-3-价格（price）"><a href="#2-3-3-价格（price）" class="headerlink" title="2.3.3 价格（price）"></a>2.3.3 价格（price）</h4><p>对价格排序，看一下价格的分布：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">5</span>))</div><div class="line">plt.scatter(range(train_df.shape[<span class="number">0</span>]),np.sort(train_df.price.values))</div><div class="line">plt.xlabel(<span class="string">'index'</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.ylabel(<span class="string">'price'</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%885.37.33.png" alt="屏幕快照 2017-06-19 下午5.37.33"></p>
+<p>可以观察到有几个价格格外的高，视为异常值，我们把它们移除掉，然后再绘制分布直方图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#99%分位数</span></div><div class="line">ulimit = np.percentile(train_df.price.values,<span class="number">99</span>)</div><div class="line">train_df[<span class="string">'price'</span>].loc[train_df[<span class="string">'price'</span>]&gt;ulimit]=ulimit</div><div class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">5</span>))</div><div class="line">sns.distplot(train_df.price.values,bins=<span class="number">50</span>,kde=<span class="keyword">True</span>,color=color[<span class="number">3</span>])</div><div class="line">plt.xlabel(<span class="string">'price'</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%885.42.29.png" alt="屏幕快照 2017-06-19 下午5.42.29"></p>
+<p>可以观察到分布略微有点右偏。</p>
+<h3 id="2-4-地理位置型"><a href="#2-4-地理位置型" class="headerlink" title="2.4 地理位置型"></a>2.4 地理位置型</h3><h4 id="2-4-1-纬度（latitude）"><a href="#2-4-1-纬度（latitude）" class="headerlink" title="2.4.1 纬度（latitude）"></a>2.4.1 纬度（latitude）</h4><p>先看看纬度的分布情况</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#避免极端情况</span></div><div class="line">llimit = np.percentile(train_df.latitude.values,<span class="number">1</span>)</div><div class="line">ulimit = np.percentile(train_df.latitude.values,<span class="number">99</span>)</div><div class="line"></div><div class="line">train_df[<span class="string">'latitude'</span>].loc[train_df[<span class="string">'latitude'</span>]&lt;llimit]=llimit</div><div class="line">train_df[<span class="string">'latitude'</span>].loc[train_df[<span class="string">'latitude'</span>]&gt;ulimit]=ulimit</div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">10</span>,<span class="number">5</span>))</div><div class="line">sns.distplot(train_df.latitude.values,bins=<span class="number">50</span>,kde=<span class="keyword">True</span>,color=color[<span class="number">3</span>])</div><div class="line">plt.xlabel(<span class="string">'latitude'</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.07.07.png" alt="屏幕快照 2017-06-19 下午9.07.07"></p>
+<p>由图可知，纬度基本上介于40.6到40.9之间</p>
+<h4 id="2-4-2-经度（longitude）"><a href="#2-4-2-经度（longitude）" class="headerlink" title="2.4.2 经度（longitude）"></a>2.4.2 经度（longitude）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#避免极端情况</span></div><div class="line">llimit = np.percentile(train_df.longitude.values,<span class="number">1</span>)</div><div class="line">ulimit = np.percentile(train_df.longitude.values,<span class="number">99</span>)</div><div class="line"></div><div class="line">train_df[<span class="string">'longitude'</span>].loc[train_df[<span class="string">'longitude'</span>]&lt;llimit]=llimit</div><div class="line">train_df[<span class="string">'longitude'</span>].loc[train_df[<span class="string">'longitude'</span>]&gt;ulimit]=ulimit</div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>))</div><div class="line">sns.distplot(train_df.longitude.values,bins=<span class="number">50</span>)</div><div class="line">plt.xlabel(<span class="string">'longitude'</span>,fontsize=<span class="number">14</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.10.31.png" alt="屏幕快照 2017-06-19 下午9.10.31"></p>
+<p>经度介于-73.8和-74.02之间。<br>接下来，我们尝试把经纬度对应到地图上，绘制成热图，也就是房源在地理位置上的分布密度图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> mpl_toolkits.basemap <span class="keyword">import</span> Basemap</div><div class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> cm</div><div class="line">west,south,east,north =<span class="number">-74.02</span>,<span class="number">40.64</span>,<span class="number">-73.85</span>,<span class="number">40.86</span></div><div class="line">fig =plt.figure(figsize=(<span class="number">16</span>,<span class="number">12</span>))</div><div class="line">ax = fig.add_subplot(<span class="number">111</span>)</div><div class="line">m=Basemap(projection=<span class="string">'merc'</span>,</div><div class="line">          llcrnrlat=south,urcrnrlat=north,</div><div class="line">          llcrnrlon=west,urcrnrlon=east,</div><div class="line">          lat_ts=south,resolution=<span class="string">'i'</span>)</div><div class="line">x,y=m(train_df[<span class="string">'longitude'</span>].values,train_df[<span class="string">'latitude'</span>].values)</div><div class="line">m.hexbin(x,y,gridsize=<span class="number">200</span>,bins=<span class="string">'log'</span>,cmap=cm.YlOrRd_r)</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E4%B8%8B%E8%BD%BD.png" alt="下载"><br>基本和纽约市的城市热图相匹配。</p>
+<h3 id="2-5-时间型"><a href="#2-5-时间型" class="headerlink" title="2.5 时间型"></a>2.5 时间型</h3><h4 id="2-5-1-发布时间（Created）"><a href="#2-5-1-发布时间（Created）" class="headerlink" title="2.5.1 发布时间（Created）"></a>2.5.1 发布时间（Created）</h4><p>先看一下不同时间的分布状况。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">train_df[<span class="string">'created'</span>]=pd.to_datetime(train_df[<span class="string">'created'</span>])</div><div class="line">train_df[<span class="string">'date_created'</span>]=train_df[<span class="string">'created'</span>].dt.date</div><div class="line">cnt_srs = train_df[<span class="string">'date_created'</span>].value_counts()</div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">14</span>,<span class="number">7</span>))</div><div class="line">ax = plt.subplot(<span class="number">111</span>)</div><div class="line">ax.bar(cnt_srs.index,cnt_srs.values,alpha=<span class="number">0.8</span>)</div><div class="line">ax.xaxis_date()</div><div class="line">plt.xticks(rotation=<span class="string">'vertical'</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.21.21.png" alt="屏幕快照 2017-06-19 下午9.21.21"></p>
+<p>从图中观察到发布时间是从2016年的4月至6月，当然这是训练集的情况，对应的，再看看测试集的发布时间状况。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">test_df[<span class="string">'created'</span>]=pd.to_datetime(test_df[<span class="string">'created'</span>])</div><div class="line">test_df[<span class="string">'date_created'</span>]=test_df[<span class="string">'created'</span>].dt.date</div><div class="line">cnt_srs = test_df[<span class="string">'date_created'</span>].value_counts()</div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>))</div><div class="line">ax = plt.subplot(<span class="number">111</span>)</div><div class="line">ax.bar(cnt_srs.index,cnt_srs.values,alpha=<span class="number">0.8</span>)</div><div class="line">ax.xaxis_date()</div><div class="line">plt.xticks(rotation=<span class="string">'vertical'</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.24.59.png" alt="屏幕快照 2017-06-19 下午9.24.59"></p>
+<p>可知，测试集的时间分布和训练集类似。</p>
+<p>再看看不同时刻的样本分布情况：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">train_df[<span class="string">'hour_created'</span>] = train_df[<span class="string">'created'</span>].dt.hour</div><div class="line">cnt_srs = train_df[<span class="string">'hour_created'</span>].value_counts()</div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">14</span>,<span class="number">7</span>))</div><div class="line">sns.barplot(cnt_srs.index,cnt_srs.values,alpha=<span class="number">0.8</span>,color=color[<span class="number">4</span>])</div><div class="line">plt.xticks(rotation=<span class="string">'vertical'</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.25.37.png" alt="屏幕快照 2017-06-19 下午9.25.37"></p>
+<p>看起来像是一天中比较早的几个小时创建的比较多。可能是那个时候流量不拥挤，数据就更新了。</p>
+<h3 id="2-6-其他类型特征"><a href="#2-6-其他类型特征" class="headerlink" title="2.6 其他类型特征"></a>2.6 其他类型特征</h3><h4 id="2-6-1-展示地址（Display-Address）"><a href="#2-6-1-展示地址（Display-Address）" class="headerlink" title="2.6.1 展示地址（Display Address）"></a>2.6.1 展示地址（Display Address）</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cnt_srs = train_df.groupby(<span class="string">'display_address'</span>)[<span class="string">'display_address'</span>].count()</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> [<span class="number">2</span>,<span class="number">10</span>,<span class="number">50</span>,<span class="number">100</span>,<span class="number">500</span>]:</div><div class="line">    <span class="keyword">print</span> <span class="string">"Display_address that appear less than &#123;&#125; \</span></div><div class="line">    times:&#123;&#125;%".format(i,round((cnt_srs&lt;i).mean()*<span class="number">100</span>,<span class="number">2</span>))</div></pre></td></tr></table></figure>
+<p>上述代码中（cnt_srs&lt;i）返回的是布尔值True | False。再求一个<br>得到的结果为：<br>Display_address that appear less than 2     times:63.22%<br>Display_address that appear less than 10     times:89.6%<br>Display_address that appear less than 50     times:97.73%<br>Display_address that appear less than 100     times:99.26%<br>Display_address that appear less than 500     times:100.0%</p>
+<p>绘制展示地址频次分布直方图：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>))</div><div class="line">plt.hist(cnt_srs.values,bins=<span class="number">150</span>,log=<span class="keyword">True</span>,alpha=<span class="number">0.9</span>)</div><div class="line">plt.xlabel(<span class="string">'Number of times display_adress appeared'</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.ylabel(<span class="string">'log(Count)'</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%8810.03.35.png" alt="屏幕快照 2017-06-19 下午10.03.35"></p>
+<p>大部分的展览地址出现次数在给定的数据集中少于100次。没有超过500次的。</p>
+<p>再看看展示地址的词云图：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># wordcloud for display address</span></div><div class="line">plt.figure(figsize=(<span class="number">12</span>,<span class="number">6</span>))</div><div class="line">wordcloud = WordCloud(background_color=<span class="string">'white'</span>, width=<span class="number">600</span>, height=<span class="number">300</span>, max_font_size=<span class="number">50</span>, max_words=<span class="number">40</span>).generate(text_da)</div><div class="line">wordcloud.recolor(random_state=<span class="number">0</span>)</div><div class="line">plt.imshow(wordcloud)</div><div class="line">plt.title(<span class="string">"Wordcloud for Display Address"</span>, fontsize=<span class="number">30</span>)</div><div class="line">plt.axis(<span class="string">"off"</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%8810.01.10.png" alt="屏幕快照 2017-06-19 下午10.01.10"></p>
+<h4 id="2-6-2-照片数量（Photos）"><a href="#2-6-2-照片数量（Photos）" class="headerlink" title="2.6.2 照片数量（Photos）"></a>2.6.2 照片数量（Photos）</h4><p>这个比赛也有巨大的照片数据。让我们先看看照片的数量:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">train_df[<span class="string">"num_photos"</span>] = train_df[<span class="string">"photos"</span>].apply(len)</div><div class="line">cnt_srs = train_df[<span class="string">'num_photos'</span>].value_counts()</div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">14</span>,<span class="number">7</span>))</div><div class="line">sns.barplot(x=cnt_srs.index,y=cnt_srs.values,alpha=<span class="number">0.8</span>)</div><div class="line">plt.xlabel(<span class="string">"number of photos"</span>,fontsize=<span class="number">14</span>)</div><div class="line">plt.ylabel(<span class="string">'number of occurrences'</span>,fontsize=<span class="number">14</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.52.55.png" alt="屏幕快照 2017-06-19 下午9.52.55"></p>
+<p>大多数样例的照片数量集中在3~8张。</p>
+<p>再来看看不同兴趣程度下的照片数量分布：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">train_df[<span class="string">'num_photos'</span>].loc[train_df[<span class="string">'num_photos'</span>]&gt;<span class="number">12</span>]=<span class="number">12</span></div><div class="line">plt.figure(figsize=(<span class="number">14</span>,<span class="number">7</span>))</div><div class="line">sns.violinplot(x=<span class="string">'num_photos'</span>,y=<span class="string">'interest_level'</span>,data=train_df,order=[<span class="string">'low'</span>,<span class="string">'medium'</span>,<span class="string">'high'</span>])</div><div class="line">plt.xlabel(<span class="string">'Number of photos'</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.ylabel(<span class="string">"Interest Level"</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.55.02.png" alt="屏幕快照 2017-06-19 下午9.55.02"></p>
+<h4 id="2-6-3-描述特征的数量（features）"><a href="#2-6-3-描述特征的数量（features）" class="headerlink" title="2.6.3 描述特征的数量（features）"></a>2.6.3 描述特征的数量（features）</h4><p>每一个房源都对应一个features列，它描述了该样例的特征，比如位于市中心呀、能养猫呀、可以肆意遛狗，类似于这种亲民的特点。有的时候，这种利民条件越多，或许会提高消费者的兴趣，当然也不一定，可以先来看看特征数量的分布：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">train_df[<span class="string">'num_features'</span>] = train_df[<span class="string">'features'</span>].apply(len)</div><div class="line">cnt_srs = train_df[<span class="string">'num_features'</span>].value_counts()</div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">14</span>,<span class="number">7</span>))</div><div class="line">sns.barplot(x=cnt_srs.index,y=cnt_srs.values,alpha=<span class="number">0.8</span>)</div><div class="line">plt.ylabel(<span class="string">'Number of Occurrences'</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.xlabel(<span class="string">'Number of features'</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure></p>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.57.13.png" alt="屏幕快照 2017-06-19 下午9.57.13"></p>
+<p>再看看不同兴趣程度下的描述特征数量分布：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#避免极端情况</span></div><div class="line">train_df[<span class="string">'num_features'</span>].loc[train_df[<span class="string">'num_features'</span>]&gt;<span class="number">17</span>]=<span class="number">17</span></div><div class="line"></div><div class="line">plt.figure(figsize=(<span class="number">14</span>,<span class="number">7</span>))</div><div class="line">sns.violinplot(y=<span class="string">'num_features'</span>,x=<span class="string">'interest_level'</span>,\</div><div class="line">               data=train_df,order=[<span class="string">'low'</span>,<span class="string">'medium'</span>,<span class="string">'high'</span>])</div><div class="line">plt.xlabel(<span class="string">'Interest Level'</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.ylabel(<span class="string">'Number of features'</span>,fontsize=<span class="number">12</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%889.59.05.png" alt="屏幕快照 2017-06-19 下午9.59.05"></p>
+<p>也可以看看描述特征的词云：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> wordcloud <span class="keyword">import</span> WordCloud</div><div class="line">text = <span class="string">''</span></div><div class="line">text_da = <span class="string">''</span></div><div class="line"><span class="keyword">for</span> index,row <span class="keyword">in</span> train_df.iterrows():</div><div class="line">    <span class="keyword">for</span> feature <span class="keyword">in</span> row[<span class="string">'features'</span>]:</div><div class="line">        text = <span class="string">' '</span>.join([text,<span class="string">"_"</span>.join(feature.strip().split(<span class="string">" "</span>))])</div><div class="line">        text_da = <span class="string">" "</span>.join([text_da,<span class="string">"_"</span>.join(row[<span class="string">'display_address'</span>].strip().split(<span class="string">" "</span>))])</div><div class="line">text = text.strip()</div><div class="line">text_da = text_da.strip()</div><div class="line">plt.figure(figsize=(<span class="number">14</span>,<span class="number">7</span>))</div><div class="line">wordcloud = WordCloud(background_color=<span class="string">'white'</span>,width=<span class="number">600</span>,                     height=<span class="number">300</span>,max_font_size=<span class="number">50</span>,max_words=<span class="number">40</span>).generate(text)</div><div class="line">wordcloud.recolor(random_state=<span class="number">0</span>)</div><div class="line">plt.imshow(wordcloud)</div><div class="line">plt.title(<span class="string">"Wordcloud for features"</span>,fontsize=<span class="number">30</span>)</div><div class="line">plt.axis(<span class="string">"off"</span>)</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://orsw4brg1.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-06-19%20%E4%B8%8B%E5%8D%8810.00.21.png" alt="屏幕快照 2017-06-19 下午10.00.21"></p>
+<p>以上这些探索性分析只是对原始数据初步的认识与了解，完了就可以建立一个base model。随着之后的特征工程对其进行更深层次的探索挖掘，不断迭代，使得我们的模型的预测效果越来越好。下一篇就开始着手建立一些base model。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/EDA/" rel="tag"># EDA</a>
+          
+            <a href="/tags/特征工程/" rel="tag"># 特征工程</a>
+          
+            <a href="/tags/kaggle/" rel="tag"># kaggle</a>
+          
+            <a href="/tags/可视化/" rel="tag"># 可视化</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/11/数据分析系列（3）：数据倾斜/" rel="next" title="数据分析系列（3）：数据倾斜">
+                <i class="fa fa-chevron-left"></i> 数据分析系列（3）：数据倾斜
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/13/kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost/" rel="prev" title="kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost">
+                kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">175</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">248</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、比赛简介"><span class="nav-text">一、比赛简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-比赛目的"><span class="nav-text">1.1 比赛目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-数据集"><span class="nav-text">1.2 数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-提交要求"><span class="nav-text">1.3 提交要求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Exploratory-Data-Analysis"><span class="nav-text">二、Exploratory Data Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-数据初探"><span class="nav-text">2.1 数据初探</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-目标变量"><span class="nav-text">2.2 目标变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-数值型特征"><span class="nav-text">2.3 数值型特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-浴室（bathrooms）"><span class="nav-text">2.3.1 浴室（bathrooms）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-卧室（bedrooms）"><span class="nav-text">2.3.2 卧室（bedrooms）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3-价格（price）"><span class="nav-text">2.3.3 价格（price）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-地理位置型"><span class="nav-text">2.4 地理位置型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-1-纬度（latitude）"><span class="nav-text">2.4.1 纬度（latitude）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-经度（longitude）"><span class="nav-text">2.4.2 经度（longitude）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-时间型"><span class="nav-text">2.5 时间型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-1-发布时间（Created）"><span class="nav-text">2.5.1 发布时间（Created）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-其他类型特征"><span class="nav-text">2.6 其他类型特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-1-展示地址（Display-Address）"><span class="nav-text">2.6.1 展示地址（Display Address）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-2-照片数量（Photos）"><span class="nav-text">2.6.2 照片数量（Photos）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-3-描述特征的数量（features）"><span class="nav-text">2.6.3 描述特征的数量（features）</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>

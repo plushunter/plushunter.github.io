@@ -1,0 +1,1153 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="L1正则,L2正则," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="之前讨论了机器学习中的偏差-方差权衡。机器学习里的损失函数（代价函数）可以用来描述模型与真模型（ground truth）之间的差距，因此可以解决“偏差”的问题。但是仅有损失函数，我们无法解决方差的问题，因而会有过拟合风险。">
+<meta name="keywords" content="L1正则,L2正则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法系列（28）：L1、L2正则化">
+<meta property="og:url" content="http://yoursite.com/2017/07/22/机器学习算法系列（28）：L1、L2正则化/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="之前讨论了机器学习中的偏差-方差权衡。机器学习里的损失函数（代价函数）可以用来描述模型与真模型（ground truth）之间的差距，因此可以解决“偏差”的问题。但是仅有损失函数，我们无法解决方差的问题，因而会有过拟合风险。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008845934277.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008845171281.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008831241254.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008831886499.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008832011388.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008832214560.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008832817463.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008832999831.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008835165358.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008835341132.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008835458006.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008835638203.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008836000503.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008836178996.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008836391269.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008836498017.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008836608354.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15008840329778.png">
+<meta property="og:updated_time" content="2017-12-26T08:27:56.295Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习算法系列（28）：L1、L2正则化">
+<meta name="twitter:description" content="之前讨论了机器学习中的偏差-方差权衡。机器学习里的损失函数（代价函数）可以用来描述模型与真模型（ground truth）之间的差距，因此可以解决“偏差”的问题。但是仅有损失函数，我们无法解决方差的问题，因而会有过拟合风险。">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15008845934277.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 机器学习算法系列（28）：L1、L2正则化 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/22/机器学习算法系列（28）：L1、L2正则化/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习算法系列（28）：L1、L2正则化
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-22T23:14:45+08:00">
+                2017-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前讨论了机器学习中的偏差-方差权衡。机器学习里的损失函数（代价函数）可以用来描述模型与真模型（ground truth）之间的差距，因此可以解决“偏差”的问题。但是仅有损失函数，我们无法解决方差的问题，因而会有过拟合风险。</p>
+<a id="more"></a>
+<p>这次我们讨论损失函数的反面——正则项，看看L1正则项和L2正则项是如何使机器学习模型避免过拟合的。</p>
+<p>我们希望选择或学习一个合适的模型。若在空间中存在“真模型”，那我们所选择的模型要与真模型的参数个数相同，所选择的模型的参数向量与真模型的参数向量相近。</p>
+<p>过拟合指的是我们以为追求提高模型对训练数据的预测能力，所选模型的复杂度往往会比真模型更高。即学习时选择的模型所包含的参数过多，以致于出现这一模型对已知数据预测得很好，但对未知数据预测得很差的现象。</p>
+<h2 id="一、从经验风险最小化到结构经验最小化"><a href="#一、从经验风险最小化到结构经验最小化" class="headerlink" title="一、从经验风险最小化到结构经验最小化"></a>一、从经验风险最小化到结构经验最小化</h2><p>经验风险最小化（empirical risk minimization）认为经验风险最小的模型是最优的模型，即求解最优化问题：</p>
+<script type="math/tex; mode=display">
+\underset{f\in\mathscr{F}}{\min}\frac{1}{N}\sum_{i=1}^N{L\left(y_i,f\left(x_i\right)\right)}</script><p>当样本容量足够大的时候，经验风险最小化学习效果良好。比如极大似然估计，当模型是条件概率分布，损失函数是对数损失函数时，经验风险最小化就等价于极大似然估计。</p>
+<p>但是当样本容量很小时，经验风险最小化学习会产生过拟合（over-fitting）的现象。这就引出了结构风险最小化，它等价于正则化（regularization）。结构风险在经验风险上加上表示模型复杂度的正则化项（regularizer）或罚项（penalty term），它的定义为：</p>
+<script type="math/tex; mode=display">
+R_{srm}\left(f\right)=\frac{1}{N}\sum_{i=1}^N{L\left(y_i,f\left(x_i\right)\right)}+\lambda J\left(f\right)</script><p>其中$J(f)$为模型的复杂度，模型$f$越复杂，复杂度$J(f)$就越大；反之，模型越简单，复杂度$J(f)$就越小，即复杂度表示了对复杂模型的惩罚。$\lambda≥0$是系数，用以权衡经验风险和模型复杂度。结构风险小需要经验风险和模型复杂度同时小。结构风险小的模型往往对训练数据以及未知的测试数据都有较好的预测。比如贝叶斯估计中的最大后验概率估计就是结构风险最小化的一个例子。当模型是条件概率分布、损失函数是对数损失函数、模型复杂度由模型的先验概率表示时，结构风险最小化就等价于最大后验概率估计。<br>结构风险最小化的策略认为结构风险最小的模型是最优的模型，求解最优模型即求解最优化问题：</p>
+<script type="math/tex; mode=display">
+\min_{f\in\mathscr{F}}\frac{1}{N}\sum_{i=1}^N{L\left(y_i,f\left(x_i\right)\right)}+\lambda J\left(f\right)</script><p>这样，监督学习问题变成了经验风险或结构风险函数的最优化问题。</p>
+<p>其中正则化是结构风险最小化策略的实现，是在经验风险上加一个正则化项或罚项。正则化项一般是模型复杂度的单调递增函数，模型越复杂，正则化值就越大。比如，正则化项可以是模型参数向量的范数。它的一般形式如下：</p>
+<script type="math/tex; mode=display">
+\min_{f\in\mathscr{F}}\frac{1}{N}\sum_{i=1}^N{L\left(y_i,f\left(x_i\right)\right)}+\lambda J\left(f\right)</script><p>第一项是经验风险，第二项是正则化项，$\lambda≥0$为调整两者之间关系的系数。</p>
+<h2 id="二、范数与正则项"><a href="#二、范数与正则项" class="headerlink" title="二、范数与正则项"></a>二、范数与正则项</h2><p>在线性代数、函数分析等数学分支中，范数（Norm）是一个函数，其赋予某个向量空间（或矩阵）中的每个向量以长度或大小。对于零向量，另其长度为零。直观的说，向量或矩阵的范数越大，则我们可以说这个向量或矩阵也就越大。有时范数有很多更为常见的叫法，如绝对值其实便是一维向量空间中实数或复数的范数，而Euclidean距离也是一种范数。</p>
+<p>范数满足通常意义上长度的三个基本性质：</p>
+<ul>
+<li>非负性：$||\vec{x}||≥0$</li>
+<li>齐次性：$||c·\vec{x}||=|c|||\vec{x}||$</li>
+<li>三角不等式：$||\vec{x}+\vec{y}||≤||\vec{x}||+||\vec{y}||$</li>
+</ul>
+<p>在这里，我们需要关注的最主要是范数的「非负性」。我们刚才讲，损失函数通常是一个有下确界的函数。而这个性质保证了我们可以对损失函数做最优化求解。如果我们要保证目标函数依然可以做最优化求解，那么我们就必须让正则项也有一个下界。非负性无疑提供了这样的下界，而且它是一个下确界——由齐次性保证（当 c=0 时）。</p>
+<p>因此，我们说，范数的性质使得它天然地适合作为机器学习的正则项。而范数需要的向量，则是机器学习的学习目标——参数向量。</p>
+<p>范数的一般化定义：设$p≥1$的实数，$p-norm$定义为：</p>
+<script type="math/tex; mode=display">||x||_p:=(\sum_{i=1}^n|x_i|^p)^{\frac{1}{p}}  \ \ \  \ （1）</script><p>机器学习中有几个常用的范数，分别是：</p>
+<ul>
+<li>$L_1-$范数：$||x⃗ ||=∑^d_{i=1}| x_i|$;</li>
+<li>$L_2-$范数：$||x⃗ ||_2=(∑^d_{i=1}x^2_i)^{1/2}$；</li>
+<li>$L_p-$范数：$||x||_p=(\sum_{i=1}^n|x_i|^p)^{\frac{1}{p}}$</li>
+<li>$L_∞-$范数：$||x⃗ ||_∞=lim_{p→+∞}(∑^d_{i=1}x^p_i)^{1/p}$。</li>
+</ul>
+<p>当p=1时，我们称之为taxicab Norm，也叫Manhattan Norm。其来源是曼哈顿的出租车司机在四四方方的曼哈顿街道中从一点到另一点所需要走过的距离。也即我们所要讨论的l1范数。其表示某个向量中所有元素绝对值的和。</p>
+<p>而当p=2时，则是我们最为常见的Euclidean norm。也称为Euclidean distance。也即我们要讨论的l2范数。 </p>
+<p>而当p=0时，因其不再满足三角不等性，严格的说此时p已不算是范数了，但很多人仍然称之为l0范数。 这三个范数有很多非常有意思的特征，尤其是在机器学习中的正则化（Regularization）以及稀疏编码（Sparse Coding）有非常有趣的应用。</p>
+<p>下图给出了一个Lp球的形状随着P的减少的可视化图。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15008845934277.png" alt=""></p>
+<p>在机器学习中，如果使用了$||\vec{w}||_p作为正则项$，则我们说，该机器学习任务引入了$L_p-$正则项。</p>
+<h3 id="2-1-L-0-与-L-1-正则项（LASSO-regularizer）"><a href="#2-1-L-0-与-L-1-正则项（LASSO-regularizer）" class="headerlink" title="2.1 $L_0$与$L_1-$正则项（LASSO regularizer）"></a>2.1 $L_0$与$L_1-$正则项（LASSO regularizer）</h3><p>在机器学习里，最简单的学习算法可能是所谓的线性回归模型</p>
+<script type="math/tex; mode=display">F(x⃗ ;w⃗ ,b)=∑_{i=1}^nw_i⋅x_i+b</script><p>我们考虑这样一种普遍的情况，即：预测目标背后的真是规律，可能只和某几个维度的特征有关；而其它维度的特征，要不然作用非常小，要不然纯粹是噪声。在这种情况下，除了这几个维度的特征对应的参数之外，其它维度的参数应该为零。若不然，则当其它维度的特征存在噪音时，模型的行为会发生预期之外的变化，导致过拟合。</p>
+<p>于是，我们得到了避免过拟合的第一个思路：使尽可能多的参数为零。为此，最直观地我们可以引入$L_0$-范数。令</p>
+<script type="math/tex; mode=display">Ω(F(x⃗ ;w⃗ ))\overset{def}=ℓ_0\frac{∥w⃗ ∥_0}{n},ℓ_0>0</script><p>这意味着，我们希望绝大多数$\vec{w}$的分量为零。</p>
+<p>通过引入 $L_0-$正则项，我们实际上引入了一种「惩罚」机制，即：若要增加模型复杂度以加强模型的表达能力降低损失函数，则每次使得一个参数非零，则引入 $ℓ_0$ 的惩罚系数。也就是说，如果使得一个参数非零得到的收益（损失函数上的收益）不足 $ℓ_0$；那么增加这样的复杂度是得不偿失的。</p>
+<p>通过引入$L_0-$正则项，我们可以使模型稀疏化且易于解释，并且在某种意义上实现了「特征选择」。这看起来很美好，但是 $L_0-$正则项也有绕不过去坎：</p>
+<ul>
+<li>非连续</li>
+<li>非凸</li>
+<li>不可求导</li>
+</ul>
+<p>因此，$L_0$正则项虽好，但是求解这样的最优化问题，难以在多项式时间内找到有效解（NP-Hard 问题）。于是，我们转而考虑 L0L0-范数最紧的凸放松（tightest convex relaxation）：L1-范数。令</p>
+<script type="math/tex; mode=display">Ω(F(x⃗ ;w⃗ ))\overset{def}{=}ℓ_1\frac{∥w⃗ ∥_1}{n},ℓ_1>0</script><p>我们来看一下参数更新的过程，有哪些变化。考虑目标函数</p>
+<script type="math/tex; mode=display">Obj(F)=L(F)+γ⋅ℓ_1\frac{∥w⃗ ∥_1}{n}</script><p>对参数$w_i$求偏导数</p>
+<script type="math/tex; mode=display">\frac{∂Obj}{∂w_i}=\frac{∂L}{∂w_i}+\frac{γℓ_1}{n}sgn(w_i)</script><p>因此参数更新的过程为</p>
+<script type="math/tex; mode=display">w_i→w′_i\overset{def}{=}w_i−η\frac{∂L}{∂w_i}−η\frac{γℓ_1}{n}sgn(w_i)</script><p>因为$η\frac{γℓ_1}{n}&gt;0$所以多出的项$η\frac{γℓ_1}{n}sgn(w_i)$使得$w_i→0$，实现稀疏化。</p>
+<h3 id="2-2-L-2-正则项（Ridge-Regularizer）"><a href="#2-2-L-2-正则项（Ridge-Regularizer）" class="headerlink" title="2.2 $L_2$正则项（Ridge Regularizer）"></a>2.2 $L_2$正则项（Ridge Regularizer）</h3><p>让我们回过头，考虑多项式模型，它的一般形式为：</p>
+<script type="math/tex; mode=display">F=∑_{i=1}^nw_i⋅x^i+b</script><p>我们注意到，当多项式模型过拟合时，函数曲线倾向于靠近噪声点。这意味着，函数曲线会在噪声点之间来回扭曲跳跃。这也就是说，在某些局部，函数曲线的切线斜率会非常高（函数导数的绝对值非常大）。对于多项式模型来说，函数导数的绝对值，实际上就是多项式系数的一个线性加和。这也就是说，过拟合的多项式模型，它的参数的绝对值会非常大（至少某几个参数分量的绝对值非常大）。因此，如果我们有办法使得这些参数的值，比较稠密均匀地集中在0附近，就能有效地避免过拟合。</p>
+<p>于是我们引入$L_2-$正则项，令</p>
+<script type="math/tex; mode=display">Ω(F(x⃗ ;w⃗ ))\overset{def}=ℓ_2\frac{∥w⃗ ∥_2 }{2n},ℓ_2>0</script><p>因此有目标函数</p>
+<script type="math/tex; mode=display">Obj(F)=L(F)+γ⋅ℓ_2\frac{∥w⃗ ∥_2 }{2n}</script><p>对参数$w_i$求偏导数，有</p>
+<script type="math/tex; mode=display">\frac{∂Obj}{∂w_i}=\frac{∂L}{∂w_i}+\frac{γℓ_2}{n}w_i</script><p>再有参数更新</p>
+<script type="math/tex; mode=display">w_i→w′_i\overset{def}{=}w_i−η\frac{∂L}{∂w_i}−η\frac{γℓ_2}{n}w_i=(1−η\frac{γℓ_2}n)w_i−η\frac{∂L}{∂w_i}</script><p>考虑到$η\frac{γℓ_2}{n}&gt;0$，因此，引入$L_2-$正则项之后，相当于衰减了（decay）参数的权重，使参数趋近于0。</p>
+<h3 id="2-3-L-1-正则项与-L-2-正则项的区别"><a href="#2-3-L-1-正则项与-L-2-正则项的区别" class="headerlink" title="2.3 $L_1-$正则项与$L_2-$正则项的区别"></a>2.3 $L_1-$正则项与$L_2-$正则项的区别</h3><p>现在，我们考虑这样一个问题：为什么使用$L-1-$正则项，会倾向于使得参数稀疏化；而使用$L_2-$正则项，会倾向于使得参数稠密地接近于0？</p>
+<p>这里引用一张来自周志华老师的著作，《机器学习》（西瓜书）里的插图，尝试解释这个问题。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15008845171281.png" alt=""></p>
+<p>为了简便起见，我们只考虑模型有两个参数$w_1$和$w_2$的情形。</p>
+<p>在图中，我们有三组等值线，位于同一条等值线上的$w_1$与$w_2$映射到相同的平方损失项、$L_1-$范数和$L_2-$范数。并且，对于三组等值线来说，当$(w_1,w_2)$沿着等值线法线方向，向外扩张，则对应的值增大；反之，若沿着法线向内收缩，则对应的值减小。</p>
+<p>因此，对于目标函数$Obj(F)$来说，实际上是要在正则项的等值线与损失函数的等值线中寻找一个交点，使得二者的和最小。</p>
+<p>对于$L_1-$正则项来说，因为$L_1-$正则项是一组菱形，这些交点容易落在坐标轴上。因此，另一个参数的值在这个交点上就是0，从而实现了稀疏化。</p>
+<p>对于 $L_2-$正则项来说，因为 $L_2-$正则项的等值线是一组圆形。所以，这些交点可能落在整个平面的任意位置。所以它不能实现「稀疏化」。但是，另一方面，由于 $(w_1,w_2)$ 落在圆上，所以它们的值会比较接近。这就是为什么 $L_2-$正则项可以使得参数在零附近稠密而平滑。</p>
+<h2 id="三、贝叶斯先验"><a href="#三、贝叶斯先验" class="headerlink" title="三、贝叶斯先验"></a>三、贝叶斯先验</h2><p>从贝叶斯的角度来看，正则化等价于对模型参数引入先验分布。</p>
+<h3 id="3-1-Linear-Regression"><a href="#3-1-Linear-Regression" class="headerlink" title="3.1 Linear Regression"></a>3.1 Linear Regression</h3><p>我们先看下最原始的线性回归：<br><img src="http://omu7tit09.bkt.clouddn.com/15008831241254.png" alt=""></p>
+<script type="math/tex; mode=display">\begin{align*}
+ & p(\epsilon^{(i)})  = \frac{1}{\sqrt{2\pi}\delta}exp\left(  -\frac{(\epsilon^{(i)})^2}{2\delta^2} \right)\\
+ \Rightarrow & p(y^{(i)}|x^{(i)};\theta) = \frac{1}{\sqrt{2\pi}\delta}exp\left( -\frac{(y^{(i)} - w^Tx^{(i)})^2}{2\delta^2}  \right)
+\end{align*}</script><p>由最大似然估计（MLE）：</p>
+<script type="math/tex; mode=display">\begin{align*}
+L(w) & = p(\vec{y}|X;w)\\
+& = \prod_{i=1}^{m} p(y^{(i)}|x^{(i)};\theta)\\
+& = \prod_{i=1}^{m} \frac{1}{\sqrt{2\pi}\delta}exp\left( -\frac{(y^{(i)} - w^Tx^{(i)})^2}{2\delta^2}  \right)
+\end{align*}</script><p>取对数：</p>
+<script type="math/tex; mode=display">\begin{align*}
+l(w) & = \log L(w)\\
+& =\log \prod_{i=1}^{m} \frac{1}{\sqrt{2\pi}\delta}exp\left( -\frac{(y^{(i)} - w^Tx^{(i)})}{2\delta^2}  \right)\\
+& = \sum_{i=1}^{m} \log \frac{1}{\sqrt{2\pi}\delta}exp\left( -\frac{(y^{(i)} - w^Tx^{(i)})^2}{2\delta^2}  \right)\\
+& = m \log \frac{1}{\sqrt{2\pi}\delta} - \frac{1}{\delta^2}\cdot \frac{1}{2} \sum_{i=1}^{m} (y^{(i)} - w^Tx^{(i)})^2
+\end{align*}</script><p>即</p>
+<script type="math/tex; mode=display">w_{MLE} = \arg \underset{w}{\min} \sum_{i=1}^{m} (y^{(i)} - w^Tx^{(i)})^2</script><p>这就导出了我们最原始的$least-squares$损失函数，但这是在我们对参数$w$没有加入任何先验分布的情况下。在数据维度很高的情况下，我们的模型参数很多，模型复杂度高，容易发生过拟合。</p>
+<p>比如我们常说的 “small n, large p problem”。（我们一般用 n 表示数据点的个数，用 p 表示变量的个数 ，即数据维度。当  的时候，不做任何其他假设或者限制的话，学习问题基本上是没法进行的。因为如果用上所有变量的话， p 越大，通常会导致模型越复杂，但是反过来 n 又很小，于是就会出现很严重的 overfitting 问题。Linear regression一般只对low dimension适用，比如n=50, p=5，而且这五个变量还不存在multicolinearity.<br><img src="http://omu7tit09.bkt.clouddn.com/15008831886499.png" alt=""></p>
+<p>这个时候，我们可以对参数$w$引入先验分布，降低模型复杂度。</p>
+<h3 id="3-2-Ridge-Regression"><a href="#3-2-Ridge-Regression" class="headerlink" title="3.2 Ridge Regression"></a>3.2 Ridge Regression</h3><p>Ridge Regression的提出就是为了解决multicolinearity的，加一个L2 penalty term也是因为算起来方便。然而它并不能shrink parameters to 0.所以没法做variable selection。</p>
+<p>我们对参数 w 引入协方差为 $\alpha$ 的零均值高斯先验。<br><img src="http://omu7tit09.bkt.clouddn.com/15008832011388.jpg" alt=""></p>
+<p>取对数：<br><img src="http://omu7tit09.bkt.clouddn.com/15008832214560.jpg" alt=""></p>
+<p>等价于：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15008832817463.jpg" alt=""><br>这不就是Ridge Regression吗？<br><img src="http://omu7tit09.bkt.clouddn.com/15008832999831.png" alt=""><br>看我们得到的参数，在零附近是不是很密集，老实说 ridge regression 并不具有产生稀疏解的能力，也就是说参数并不会真出现很多零。假设我们的预测结果与两个特征相关，L2正则倾向于综合两者的影响，给影响大的特征赋予高的权重；而L1正则倾向于选择影响较大的参数，而舍弃掉影响较小的那个。实际应用中 L2正则表现往往会优于 L1正则，但 L1正则会大大降低我们的计算量。</p>
+<blockquote>
+<p>Typically ridge or ℓ2 penalties are <strong>much better</strong> for minimizing prediction error rather than ℓ1 penalties. The reason for this is that when two predictors are highly correlated, ℓ1 regularizer will simply pick one of the two predictors. In contrast, the ℓ2 regularizer will keep both of them and jointly shrink the corresponding coefficients a little bit. Thus, while the ℓ1 penalty can certainly reduce overfitting, you may also experience a loss in predictive power.</p>
+</blockquote>
+<p>那现在我们知道了，对参数引入 高斯先验 等价于L2正则化。</p>
+<h3 id="3-3-LASSO"><a href="#3-3-LASSO" class="headerlink" title="3.3 LASSO"></a>3.3 LASSO</h3><p>LASSO是针对Ridge Regression的没法做variable selection的问题提出来的，L1 penalty虽然算起来麻烦，没有解析解，但是可以把某些系数shrink到0。</p>
+<p>在Ridge Regression中，我们对 w 引入了高斯分布，那么拉普拉斯分布(Laplace distribution)呢？</p>
+<p>注：LASSO - least absolute shrinkage and selection operator.<br><img src="http://omu7tit09.bkt.clouddn.com/15008835165358.png" alt=""></p>
+<p>我们看下拉普拉斯分布长啥样：<br><img src="http://omu7tit09.bkt.clouddn.com/15008835341132.jpg" alt=""></p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15008835458006.png" alt=""><br>关于拉普拉斯和正态分布的渊源，大家可以参见 正态分布的前世今生。<br>重复之前的推导过程我们很容易得到：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15008835638203.jpg" alt=""><br>该问题通常被称为 LASSO (least absolute shrinkage and selection operator) 。LASSO 仍然是一个 convex optimization 问题，不具有解析解。它的优良性质是能产生稀疏性，导致 w 中许多项变成零。</p>
+<p>再次总结下，对参数引入 拉普拉斯先验 等价于 L1正则化。</p>
+<h3 id="3-4-Elastic-Net"><a href="#3-4-Elastic-Net" class="headerlink" title="3.4 Elastic Net"></a>3.4 Elastic Net</h3><p>然而LASSO虽然可以做variable selection，但是不consistent啊，而且当n很小时至多只能选出n个变量；而且不能做group selection。</p>
+<p>可能有同学会想，既然 L1和 L2正则各自都有自己的优势，那我们能不能将他们 combine 起来？</p>
+<p>于是有了在L1和L2 penalty之间做个权重就是elastic net</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15008836000503.png" alt=""><br>因为lasso在解决之前提到的“small n, large p problem”存在一定缺陷。<br><img src="http://omu7tit09.bkt.clouddn.com/15008836178996.png" alt=""></p>
+<p>得到结果：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15008836391269.jpg" alt=""></p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15008836498017.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15008836608354.png" alt=""></p>
+<p>此外针对不consistent有了adaptive lasso，针对不能做group selection有了group lasso, 在graphical models里有了graphical lasso。然后有人说unbiasedness, sparsity and continuity这三条都满足多好，于是有了MCP和SCAD同时满足这三条性质。还有很多penalized regression的方法。</p>
+<h3 id="3-5-总结"><a href="#3-5-总结" class="headerlink" title="3.5 总结"></a>3.5 总结</h3><p><img src="http://omu7tit09.bkt.clouddn.com/15008840329778.png" alt=""></p>
+<p>正则化参数等价于对参数引入 先验分布，使得 模型复杂度 变小（缩小解空间），对于噪声以及 outliers 的鲁棒性增强（泛化能力）。整个最优化问题从贝叶斯观点来看是一种贝叶斯最大后验估计，其中 正则化项对应后验估计中的先验信息，损失函数对应后验估计中的似然函数，两者的乘积即对应贝叶斯最大后验估计的形式。</p>
+<p>这篇文章从理论推导讲到算法实现。除了高斯先验、拉普拉斯先验，还讲了其他先验：<br>Lazy Sparse Stochastic Gradient Descent for Regularized Mutlinomial Logistic Regression</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/L1正则/" rel="tag"># L1正则</a>
+          
+            <a href="/tags/L2正则/" rel="tag"># L2正则</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/21/数据结构与算法（7）：数据库索引原理及优化/" rel="next" title="数据结构与算法（7）：数据库索引原理及优化">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（7）：数据库索引原理及优化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/22/数据结构与算法（8）：红黑树/" rel="prev" title="数据结构与算法（8）：红黑树">
+                数据结构与算法（8）：红黑树 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">175</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">248</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、从经验风险最小化到结构经验最小化"><span class="nav-text">一、从经验风险最小化到结构经验最小化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、范数与正则项"><span class="nav-text">二、范数与正则项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-L-0-与-L-1-正则项（LASSO-regularizer）"><span class="nav-text">2.1 $L_0$与$L_1-$正则项（LASSO regularizer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-L-2-正则项（Ridge-Regularizer）"><span class="nav-text">2.2 $L_2$正则项（Ridge Regularizer）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-L-1-正则项与-L-2-正则项的区别"><span class="nav-text">2.3 $L_1-$正则项与$L_2-$正则项的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、贝叶斯先验"><span class="nav-text">三、贝叶斯先验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Linear-Regression"><span class="nav-text">3.1 Linear Regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Ridge-Regression"><span class="nav-text">3.2 Ridge Regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-LASSO"><span class="nav-text">3.3 LASSO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-Elastic-Net"><span class="nav-text">3.4 Elastic Net</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-总结"><span class="nav-text">3.5 总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>

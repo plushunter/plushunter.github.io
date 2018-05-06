@@ -1,0 +1,1094 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习,逻辑斯谛回归," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：">
+<meta name="keywords" content="机器学习,逻辑斯谛回归">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法系列（3）：逻辑斯谛回归">
+<meta property="og:url" content="http://yoursite.com/2017/01/12/机器学习算法系列（3）：逻辑斯谛回归/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%888.55.00.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%20%E4%B8%8B%E5%8D%8811.55.11.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-07%20%E4%B8%8A%E5%8D%8812.00.18.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15009922005058.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午11.18.05.png">
+<meta property="og:updated_time" content="2017-12-26T08:04:49.703Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习算法系列（3）：逻辑斯谛回归">
+<meta name="twitter:description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%888.55.00.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 机器学习算法系列（3）：逻辑斯谛回归 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/12/机器学习算法系列（3）：逻辑斯谛回归/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                机器学习算法系列（3）：逻辑斯谛回归
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-12T23:14:45+08:00">
+                2017-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、逻辑斯谛分布"><a href="#一、逻辑斯谛分布" class="headerlink" title="一、逻辑斯谛分布"></a>一、逻辑斯谛分布</h2><p>介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：</p>
+<a id="more"></a>
+<script type="math/tex; mode=display">
+F\left(x\right)=P\left(X\le x\right)=\frac{1}{1+e^{-\left(x-\mu\right)/\gamma}}</script><script type="math/tex; mode=display">
+f\left(x\right)=F^,\left(x\right)=\frac{e^{-\left(x-\mu\right)/\gamma}}{\gamma\left(1+e^{-\left(x-\mu\right)/\gamma}\right)^2}</script><p>式中，$\mu$为位置参数，$\gamma&gt;0 $为形状参数。逻辑斯谛的分布的密度函数$f(x)$和分布函数$F(x)$的图形如下图所示。其中分布函数属于逻辑斯谛函数，其图形为一条$S$形曲线。该曲线以点$(\mu,\frac{1}{2})$为中心对称，即满足</p>
+<script type="math/tex; mode=display">
+F\left(-x+\mu\right)-\frac{1}{2}=-F\left(x+\mu\right)+\frac{1}{2}</script><p>曲线在中心附近增长较快，在两端增长速度较慢。形状参数$\gamma$的值越小，曲线在中心附近增长得越快。<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%888.55.00.png" alt="屏幕快照 2017-04-04 下午8.55.00"></p>
+<h2 id="二、逻辑斯谛回归模型"><a href="#二、逻辑斯谛回归模型" class="headerlink" title="二、逻辑斯谛回归模型"></a>二、逻辑斯谛回归模型</h2><p>线性回归的应用场合大多是回归分析，一般不用在分类问题上。原因可以概括为以下两个：</p>
+<ul>
+<li>1）回归模型是连续型模型，即预测出的值都是连续值（实数值），非离散值；</li>
+<li>2）预测结果受样本噪声的影响比较大。</li>
+</ul>
+<h3 id="2-1-LR模型表达式"><a href="#2-1-LR模型表达式" class="headerlink" title="2.1 LR模型表达式"></a>2.1 LR模型表达式</h3><p>LR模型表达式为参数化的逻辑斯谛函数（默认参数$\mu=0,\gamma=1$）,即</p>
+<script type="math/tex; mode=display">
+h_{\theta}\left(x\right)=\frac{1}{1+e^{-\theta^Tx}}</script><p>其中$h_\theta{(x)}$作为事件结果$y=1$的概率取值。这里,$x\in R^{n+1},y\in \{1,0\},\theta\in R^{n+1}$是权值向量。其中权值向量$w$中包含偏置项，即$w=(w_0,w_1,···,w_n)，x=(1,x_1,x_2,···,x_n)$</p>
+<h3 id="2-2-理解LR模型"><a href="#2-2-理解LR模型" class="headerlink" title="2.2 理解LR模型"></a>2.2 理解LR模型</h3><h4 id="2-2-1-对数几率"><a href="#2-2-1-对数几率" class="headerlink" title="2.2.1 对数几率"></a>2.2.1 对数几率</h4><p>一个事件发生的几率（odds）是指该事件发生的概率与该事件不发生的概率的比值。如果事件发生的概率是$p$，那么该事件的几率为$\frac{p}{1-p}$，该事件的对数几率（log odds）或logit函数是：</p>
+<script type="math/tex; mode=display">
+logit\left(p\right)=\log\frac{p}{1-p}</script><p>对LR而言，根据模型表达式可以得到：</p>
+<script type="math/tex; mode=display">
+\log\frac{h_{\theta}\left(x\right)}{1-h_{\theta}\left(x\right)}=\theta^Tx</script><p>即在LR模型中，输出$y=1$的对数几率是输入$x$的线性函数。或者说输出$y=1$的对数几率是由输入$x$的线性函数表示的模型，即LR模型</p>
+<h4 id="2-2-2-函数映射"><a href="#2-2-2-函数映射" class="headerlink" title="2.2.2 函数映射"></a>2.2.2 函数映射</h4><p>除了从对数几率的角度理解LR外，从函数映射也可以理解LR模型。</p>
+<p>考虑对输入实例$x$进行分类的线性表达式$\theta^T$，其值域为实数域。通过LR模型表达式可以将线性函数$\theta^Tx$的结果映射到(0,1)区间，取值表示为结果为1的概率（在二分类场景中）。</p>
+<p>线性函数的值越接近于正无穷大，概率值就越接近1；反之，其值越接近于负无穷，概率值就越接近0。这样的模型就是LR模型。</p>
+<p>LR本质上还是线性回归，知识特征到结果的映射过程中加了一层函数映射（即sigmoid函数），即先把特征线性求和，然后使用sigmoid函数将线性和约束至（0，1）之间，结果值用于二分或回归预测。</p>
+<h4 id="2-2-3-概率解释"><a href="#2-2-3-概率解释" class="headerlink" title="2.2.3 概率解释"></a>2.2.3 概率解释</h4><p>LR模型多用于解决二分类问题，如广告是否被点击（是/否）、商品是否被购买（是/否）等互联网领域中常见的应用场景。但是实际场景中，我们又不把它处理成“绝对的”分类问题，而是用其预测值作为事件发生的概率。</p>
+<p>这里从事件、变量以及结果的角度给予解释。</p>
+<p>我们所能拿到的训练数据统称为观测样本。问题：样本是如何生成的？</p>
+<p>一个样本可以理解为发生的一次事件，样本生成的过程即事件发生的过程。对于0/1分类问题来讲，产生的结果有两种可能，符合伯努利试验的概率假设。因此，我们可以说样本的生成过程即为伯努利试验过程，产生的结果（0/1）服从伯努利分布。这里我们假设结果为1的概率为$h_\theta{(x)}$，结果为0的概率为$1-h_\theta{(x)}$。</p>
+<p>那么对于第$i$个样本，概率公式表示如下：</p>
+<script type="math/tex; mode=display">P(y^{(i)}=1|x^{(i)};\theta )=h_\theta{(x^{(i)})}$$$$P(y^{(i)}=0  |x^{(i)};\theta )=1- h_\theta{(x^{(i)})}</script><p>将上面两个公式合并在一起，可得到第$i$个样本正确预测的概率：</p>
+<script type="math/tex; mode=display">P(y^{(i)}|x^{(i)};\theta)=(h_\theta(x^{(i)})^{y(i)})·（1-h_\theta(x^{(i)}))^{1-y(i)}</script><p>上式是对一个样本进行建模的数据表达。对于所有的样本，假设每条样本生成过程独立，在整个样本空间中（N个样本）的概率分布（即似然函数）为：</p>
+<script type="math/tex; mode=display">
+P\left(Y|X;\theta\right)=\prod_{i=1}^N{\left(h_{\theta}\left(x^{\left(i\right)}\right)^{y^{\left(i\right)}}\left(1-h_{\theta}\left(x^{\left(i\right)}\right)^{1-y^{\left(i\right)}}\right)\right)}</script><p>通过极大似然估计（Maximum Likelihood Evaluation，简称MLE）方法求概率参数。具体地，第三节给出了通过随机梯度下降法（SGD）求参数。</p>
+<h2 id="三、模型参数估计"><a href="#三、模型参数估计" class="headerlink" title="三、模型参数估计"></a>三、模型参数估计</h2><h3 id="3-1-Sigmoid函数"><a href="#3-1-Sigmoid函数" class="headerlink" title="3.1 Sigmoid函数"></a>3.1 Sigmoid函数</h3><p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-06%20%E4%B8%8B%E5%8D%8811.55.11.png" alt="屏幕快照 2017-04-06 下午11.55.11"></p>
+<p>上图所示即为sigmoid函数，它的输入范围为$-\infty\rightarrow +\infty$，而值域刚好为$(0,1)$，正好满足概率分布为$(0,1)$的要求。用概率去描述分类器，自然要比阈值要来的方便。而且它是一个单调上升的函数，具有良好的连续性，不存在不连续点。</p>
+<p>此外非常重要的，sigmoid函数求导后为：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-07%20%E4%B8%8A%E5%8D%8812.00.18.png" alt="屏幕快照 2017-04-07 上午12.00.18"><br>以下的推导中会用到，带来了很大的便利。</p>
+<h3 id="3-2-参数估计推导"><a href="#3-2-参数估计推导" class="headerlink" title="3.2 参数估计推导"></a>3.2 参数估计推导</h3><p>上一节的公式不仅可以理解为在已观测的样本空间中的概率分布表达式。如果从统计学的角度可以理解为参数$\theta$似然性的函数表达式（即似然函数表达式）。就是利用已知的样本分布，找到最有可能（即最大概率）导致这种分布的参数值；或者说什么样的参数才能使我们观测到目前这组数据的概率最大。参数在整个样本空间的似然函数可表示为：</p>
+<script type="math/tex; mode=display">
+L\left(\theta\right)=P\left(\overrightarrow{Y}|X;\theta\right)</script><script type="math/tex; mode=display">
+=\prod_{i=1}^N{P\left(y^{\left(i\right)}\parallel x^{\left(i\right)};\theta\right)}</script><script type="math/tex; mode=display">
+=\prod_{i=1}^N{\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)^{y\left(i\right)}\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)^{1-y^{\left(i\right)}}}</script><p>为了方便参数求解，对这个公式取对数，可得对数似然函数：</p>
+<script type="math/tex; mode=display">
+l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script type="math/tex; mode=display">
+=\sum_{i=1}^N{y^{\left(i\right)}\log\left(h_{\theta}\left(x^{\left(i\right)}\right)\right)+\left(1-y^{\left(i\right)}\right)\log\left(1-h_{\theta}\left(x^{\left(i\right)}\right)\right)}</script><p>最大化对数似然函数其实就是最小化交叉熵误差（Cross Entropy Error）。<br>先不考虑累加和，我们针对每一个参数$w_j$求偏导：</p>
+<script type="math/tex; mode=display">
+\frac{\partial}{\partial\theta_j}l\left(\theta\right)=\left(y\frac{1}{h_{\theta}\left(x\right)}-\left(1-y\right)\frac{1}{1-h_{\theta}\left(x\right)}\right)\frac{\partial}{\partial\theta_j}h_{\theta}\left(x\right)</script><script type="math/tex; mode=display">
+=\left(\frac{y\left(1-h_{\theta}\left(x\right)\right)-\left(1-y\right)h_{\theta}\left(x\right)}{h_{\theta}\left(x\right)\left(1-h_{\theta}\left(x\right)\right)}\right)h_{\theta}\left(x\right)\left(1-h_{\theta}\left(x\right)\right)\frac{\partial}{\partial\theta_j}\theta^Tx</script><script type="math/tex; mode=display">
+=\left(y-h_{\theta}\left(x\right)\right)x_j</script><p>最后，通过扫描样本，迭代下述公式可求得参数：</p>
+<script type="math/tex; mode=display">
+\theta_j:=\theta_j+a\left(y^{\left(i\right)}-h_{\theta}\left(x^{\left(i\right)}\right)\right)x_{j}^{\left(i\right)}</script><p>其中$a$表示学习率，又称学习步长。此外还有Batch GD，共轭梯度，拟牛顿法（LBFGS），ADMM分布学习算法等都可以用来求解参数。另作优化算法一章进行补充。</p>
+<p>以上的推导是LR模型的核心部分，在机器学习相关面试中，LR模型公式推导可能是考察频次最高的一个点。要将其熟练推导。</p>
+<h3 id="3-3-分类边界"><a href="#3-3-分类边界" class="headerlink" title="3.3 分类边界"></a>3.3 分类边界</h3><p>知道如何求解参数后，我们看一下模型得到的最后结果是什么样的。<br>假设我们的决策函数为：</p>
+<script type="math/tex; mode=display">y^∗=1, \ \ if \ \ P(y=1|x)>0.5</script><p>选择0.5作为阈值是一个一般的做法，实际应用时特定的情况可以选择不同阈值，如果对正例的判别准确性要求高，可以选择阈值大一些，对正例的召回要求高，则可以选择阈值小一些。<br>很容易看出，当$\theta ^Tx&gt;0$时，$y=1$，否则$y=0$。$\theta ^Tx=0$是模型隐含的分类平面（在高维空间中，我们说是超平面）。所以说逻辑回归本质上是一个线性模型，但是这不意味着只有线性可分的数据能通过LR求解，实际上，我们可以通过特征变换的方式把低维空间转换到高维空间（kernel trick），而在低维空间不可分的数据，到高维空间中线性可分的几率会高一些。下面两个图的对比说明了线性分类曲线和非线性曲线（通过特征映射）。<br><img src="http://omu7tit09.bkt.clouddn.com/15009922005058.png" alt=""><br>左图是一个线性可分的数据集，右图在原始空间中线性不可分，但是在特征转换$[x_1,x_2]=&gt;[x_1,x_2,x_1^2,x_2^2,x_1x_2]$后的空间是线性可分的，对应的原始空间中分类边界为一条椭圆曲线。</p>
+<p>不过，通常使用的kernel都是隐式的，也就是找不到显式地把数据从低维映射到高维的函数，而只能计算高维空间中的数据点的内积。在这种情况下，logistic regression模型就不能再表示成$w^Tx+b$的形式（原始形式primal form），而只能表示成$\sum_ia_i<x_i,x>+b$的形式（对偶形式dual form）。忽略b，则原始形式的模型蚕食只有$w$，只需要一个数据点那么多的存储量；而对偶形式的模型不仅需要存储各个$a_i$，还要存储训练数据$x_i$本身，这个存储量就大了。</x_i,x></p>
+<p>SVM也具有原始形式和对偶形式，相比之下，SVM的对偶形式是稀疏的，即只有支持向量的$a_i$才非零，才需要存储相应的$x_i$，所以，在非线性可分的情况下，SVM用的更多。</p>
+<h2 id="四、延伸"><a href="#四、延伸" class="headerlink" title="四、延伸"></a>四、延伸</h2><h3 id="4-1-生成模型与判别模型"><a href="#4-1-生成模型与判别模型" class="headerlink" title="4. 1 生成模型与判别模型"></a>4. 1 生成模型与判别模型</h3><p>逻辑回归是一种判别模型，表现为直接对条件概率$P(y|x)$建模，而不关心背后的数据分布$P(x,y)$。而高斯贝叶斯（Gaussian Naive Bayes）是一种生成模型，先对数据的联合分布建模，再通过贝叶斯公式来计算属于各个类别的后验概率，即：</p>
+<script type="math/tex; mode=display">p(y|x)=\frac{P(x|y)P(y)}{\sum P(x|y)P(y)}</script><p>通常假设$P(x|y)$是高斯分布，$P(y)$是多项式分布，相应的参数可以通过最大似然估计得到。如果我们考虑二分类问题，通过简单的变化可以得到：</p>
+<script type="math/tex; mode=display">log\frac{P(y=1|x)}{P(y=0|x)}=log\frac{P(x|y=1)}{P(x|y=0)}+log\frac{P(y=1)}{P(y=0)}=-\frac{(x-\mu_1)^2}{2\sigma_1^2}+\frac{(x-\mu_0)^2}{2\sigma_0^2}+\theta_0</script><p>如果$\sigma_1=\sigma_0$，二次项会抵消，我们得到一个简单的线性关系：</p>
+<script type="math/tex; mode=display">log\frac{P(y=1|x)}{P(y=0|x)}=\theta^Tx</script><p>上式进一步可以得到：</p>
+<script type="math/tex; mode=display">P(y=1|x)=\frac{e^{\theta^Tx}}{1+e^{e^Tx}}=\frac{1}{1+e^{-\theta^Tx}}</script><p>可以看到，这个概率和逻辑回归中的形式是一样的，这种情况下高斯贝叶斯和LR会学习到同一个模型。实际上，在更一般的假设（P(x|y)的分布属于指数分布族）下，我们都可以得到类似的结论。</p>
+<h3 id="4-2-多分类"><a href="#4-2-多分类" class="headerlink" title="4.2 多分类"></a>4.2 多分类</h3><p>如果$y$不是在$[0,1]$中取值，而是在$K$个类别中取值，这时问题就变为一个多分类问题。有两种方式可以出处理该类问题：一种是我们对每个类别训练一个二元分类器（One-vs-all），当$K$个类别不是互斥的时候，比如用户会购买哪种品类，这种方法是合适的。如果$K$个类别是互斥的，即 $y=i$ 的时候意味着 $y$ 不能取其他的值，比如用户的年龄段，这种情况下 Softmax 回归更合适一些。Softmax 回归是直接对逻辑回归在多分类的推广，相应的模型也可以叫做多元逻辑回归（Multinomial Logistic Regression）。模型通过 softmax 函数来对概率建模，具体形式如下：</p>
+<script type="math/tex; mode=display">P(y=i|x,\theta)=\frac{^{e^{\theta^T_ix}}}{\sum_j^K e^{\theta_j^Tx}}$$而决策函数为：$$y^*=argmax_iP(y=i|x,\theta )</script><p>对于的损失函数为</p>
+<script type="math/tex; mode=display">J(\theta)=-\frac{1}{N}\sum_i^N\sum_j^KP(y_i=j)log\frac{e^{\theta_i^Tx}}{\sum e^{\theta_k^Tx}}</script><p>类似的，我们也可以通过梯度下降或其他高阶方法来求解该问题，这里不再赘述。</p>
+<h3 id="4-3-应用"><a href="#4-3-应用" class="headerlink" title="4.3 应用"></a>4.3 应用</h3><p>这里以预测用户对品类的购买偏好为例，介绍一下美团是如何用逻辑回归解决工作中问题的。该问题可以转换为预测用户在未来某个时间段是否会购买某个品类，如果把会购买标记为1，不会购买标记为0，就转换为一个二分类问题。我们用到的特征包括用户在美团的浏览，购买等历史信息，见下表：<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午11.18.05.png" alt="屏幕快照 2017-07-25 下午11.18.05"><br>其中提取的特征的时间跨度为30天，标签为2天。生成的训练数据大约在7000万量级（美团一个月有过行为的用户），我们人工把相似的小品类聚合起来，最后有18个较为典型的品类集合。如果用户在给定的时间内购买某一品类集合，就作为正例。有了训练数据后，使用Spark版的LR算法对每个品类训练一个二分类模型，迭代次数设为100次的话模型训练需要40分钟左右，平均每个模型2分钟，测试集上的AUC也大多在0.8以上。训练好的模型会保存下来，用于预测在各个品类上的购买概率。预测的结果则会用于推荐等场景。</p>
+<p>由于不同品类之间正负例分布不同，有些品类正负例分布很不均衡，我们还尝试了不同的采样方法，最终目标是提高下单率等线上指标。经过一些参数调优，品类偏好特征为推荐和排序带来了超过1%的下单率提升。</p>
+<p>此外，由于LR模型的简单高效，易于实现，可以为后续模型优化提供一个不错的baseline，我们在排序等服务中也使用了LR模型。</p>
+<p>逻辑回归的数学模型和求解都相对比较简洁，实现相对简单。通过对特征做离散化和其他映射，逻辑回归也可以处理非线性问题，是一个非常强大的分类器。因此在实际应用中，当我们能够拿到许多低层次的特征时，可以考虑使用逻辑回归来解决我们的问题。</p>
+<h3 id="4-4-LR与SVM"><a href="#4-4-LR与SVM" class="headerlink" title="4.4 LR与SVM"></a>4.4 LR与SVM</h3><p>两种方法都是常见的分类算法，从目标函数来看，区别在于逻辑回归采用的是logistical loss，svm采用的是hinge loss。这两个损失函数的目的都是增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。SVM的处理方法是只考虑support vectors，也就是和分类最相关的少数点，去学习分类器。而逻辑回归通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重。两者的根本目的都是一样的。此外，根据需要，两个方法都可以增加不同的正则化项，如l1,l2等等。所以在很多实验中，两种算法的结果是很接近的。但是逻辑回归相对来说模型更简单，好理解，实现起来，特别是大规模线性分类时比较方便。而SVM的理解和优化相对来说复杂一些。但是SVM的理论基础更加牢固，有一套结构化风险最小化的理论基础，虽然一般使用的人不太会去关注。还有很重要的一点，SVM转化为对偶问题后，分类只需要计算与少数几个支持向量的距离，这个在进行复杂核函数计算时优势很明显，能够大大简化模型和计算量。</p>
+<p>两者对异常的敏感度也不一样。同样的线性分类情况下，如果异常点较多的话，无法剔除，首先LR，LR中每个样本都是有贡献的，最大似然后会自动压制异常的贡献，SVM+软间隔对异常还是比较敏感，因为其训练只需要支持向量，有效样本本来就不高，一旦被干扰，预测结果难以预料。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://www.cnblogs.com/jerrylead/archive/2011/03/05/1971867.html" target="_blank" rel="noopener"><code>对线性回归，logistic回归和一般回归的认识</code></a></p>
+<p><a href="https://tech.meituan.com/intro_to_logistic_regression.html" target="_blank" rel="noopener">Logistic Regression 模型简介</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/逻辑斯谛回归/" rel="tag"># 逻辑斯谛回归</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/10/笑忘录（5）：离别/" rel="next" title="笑忘录（5）：离别记">
+                <i class="fa fa-chevron-left"></i> 笑忘录（5）：离别记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/15/笑忘录（6）：胡乱记/" rel="prev" title="笑忘录（6）：胡乱记">
+                笑忘录（6）：胡乱记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">175</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">248</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、逻辑斯谛分布"><span class="nav-text">一、逻辑斯谛分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、逻辑斯谛回归模型"><span class="nav-text">二、逻辑斯谛回归模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-LR模型表达式"><span class="nav-text">2.1 LR模型表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-理解LR模型"><span class="nav-text">2.2 理解LR模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-对数几率"><span class="nav-text">2.2.1 对数几率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-函数映射"><span class="nav-text">2.2.2 函数映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-概率解释"><span class="nav-text">2.2.3 概率解释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、模型参数估计"><span class="nav-text">三、模型参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Sigmoid函数"><span class="nav-text">3.1 Sigmoid函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-参数估计推导"><span class="nav-text">3.2 参数估计推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-分类边界"><span class="nav-text">3.3 分类边界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、延伸"><span class="nav-text">四、延伸</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-生成模型与判别模型"><span class="nav-text">4. 1 生成模型与判别模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-多分类"><span class="nav-text">4.2 多分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-应用"><span class="nav-text">4.3 应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-LR与SVM"><span class="nav-text">4.4 LR与SVM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>
