@@ -1,0 +1,1054 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Java,数据结构,HashMap," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="HashMap简介 HashMap是基于哈希表实现的，每一个元素都是一个key-value对，其内部通过单链表解决冲突问题，容量不足（超过了阈值）时，同样会自动增长。">
+<meta name="keywords" content="Java,数据结构,HashMap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java集合学习手册（11）：Java HashMap源码全剖析">
+<meta property="og:url" content="http://yoursite.com/Java集合学习手册（11）：Java HashMap源码全剖析">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="HashMap简介 HashMap是基于哈希表实现的，每一个元素都是一个key-value对，其内部通过单链表解决冲突问题，容量不足（超过了阈值）时，同样会自动增长。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15032354567744.jpg">
+<meta property="og:updated_time" content="2017-12-26T08:18:00.062Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java集合学习手册（11）：Java HashMap源码全剖析">
+<meta name="twitter:description" content="HashMap简介 HashMap是基于哈希表实现的，每一个元素都是一个key-value对，其内部通过单链表解决冲突问题，容量不足（超过了阈值）时，同样会自动增长。">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15032354567744.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> Java集合学习手册（11）：Java HashMap源码全剖析 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java集合学习手册（11）：Java HashMap源码全剖析">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Java集合学习手册（11）：Java HashMap源码全剖析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-19T22:20:45+08:00">
+                2017-08-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>HashMap简介 HashMap是基于哈希表实现的，每一个元素都是一个key-value对，其内部通过单链表解决冲突问题，容量不足（超过了阈值）时，同样会自动增长。</p>
+<a id="more"></a>
+<p>HashMap是非线程安全的，只是用于单线程环境下，多线程环境下可以采用concurrent并发包下的concurrentHashMap。</p>
+<p>HashMap实现了Serializable接口，因此它支持序列化，实现了Cloneable接口，能被克隆。</p>
+<h2 id="一、HashMap源码剖析"><a href="#一、HashMap源码剖析" class="headerlink" title="一、HashMap源码剖析"></a>一、HashMap源码剖析</h2><p>HashMap的源码如下（加入了比较详细的注释）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div><div class="line">455</div><div class="line">456</div><div class="line">457</div><div class="line">458</div><div class="line">459</div><div class="line">460</div><div class="line">461</div><div class="line">462</div><div class="line">463</div><div class="line">464</div><div class="line">465</div><div class="line">466</div><div class="line">467</div><div class="line">468</div><div class="line">469</div><div class="line">470</div><div class="line">471</div><div class="line">472</div><div class="line">473</div><div class="line">474</div><div class="line">475</div><div class="line">476</div><div class="line">477</div><div class="line">478</div><div class="line">479</div><div class="line">480</div><div class="line">481</div><div class="line">482</div><div class="line">483</div><div class="line">484</div><div class="line">485</div><div class="line">486</div><div class="line">487</div><div class="line">488</div><div class="line">489</div><div class="line">490</div><div class="line">491</div><div class="line">492</div><div class="line">493</div><div class="line">494</div><div class="line">495</div><div class="line">496</div><div class="line">497</div><div class="line">498</div><div class="line">499</div><div class="line">500</div><div class="line">501</div><div class="line">502</div><div class="line">503</div><div class="line">504</div><div class="line">505</div><div class="line">506</div><div class="line">507</div><div class="line">508</div><div class="line">509</div><div class="line">510</div><div class="line">511</div><div class="line">512</div><div class="line">513</div><div class="line">514</div><div class="line">515</div><div class="line">516</div><div class="line">517</div><div class="line">518</div><div class="line">519</div><div class="line">520</div><div class="line">521</div><div class="line">522</div><div class="line">523</div><div class="line">524</div><div class="line">525</div><div class="line">526</div><div class="line">527</div><div class="line">528</div><div class="line">529</div><div class="line">530</div><div class="line">531</div><div class="line">532</div><div class="line">533</div><div class="line">534</div><div class="line">535</div><div class="line">536</div><div class="line">537</div><div class="line">538</div><div class="line">539</div><div class="line">540</div><div class="line">541</div><div class="line">542</div><div class="line">543</div><div class="line">544</div><div class="line">545</div><div class="line">546</div><div class="line">547</div><div class="line">548</div><div class="line">549</div><div class="line">550</div><div class="line">551</div><div class="line">552</div><div class="line">553</div><div class="line">554</div><div class="line">555</div><div class="line">556</div><div class="line">557</div><div class="line">558</div><div class="line">559</div><div class="line">560</div><div class="line">561</div><div class="line">562</div><div class="line">563</div><div class="line">564</div><div class="line">565</div><div class="line">566</div><div class="line">567</div><div class="line">568</div><div class="line">569</div><div class="line">570</div><div class="line">571</div><div class="line">572</div><div class="line">573</div><div class="line">574</div><div class="line">575</div><div class="line">576</div><div class="line">577</div><div class="line">578</div><div class="line">579</div><div class="line">580</div><div class="line">581</div><div class="line">582</div><div class="line">583</div><div class="line">584</div><div class="line">585</div><div class="line">586</div><div class="line">587</div><div class="line">588</div><div class="line">589</div><div class="line">590</div><div class="line">591</div><div class="line">592</div><div class="line">593</div><div class="line">594</div><div class="line">595</div><div class="line">596</div><div class="line">597</div><div class="line">598</div><div class="line">599</div><div class="line">600</div><div class="line">601</div><div class="line">602</div><div class="line">603</div><div class="line">604</div><div class="line">605</div><div class="line">606</div><div class="line">607</div><div class="line">608</div><div class="line">609</div><div class="line">610</div><div class="line">611</div><div class="line">612</div><div class="line">613</div><div class="line">614</div><div class="line">615</div><div class="line">616</div><div class="line">617</div><div class="line">618</div><div class="line">619</div><div class="line">620</div><div class="line">621</div><div class="line">622</div><div class="line">623</div><div class="line">624</div><div class="line">625</div><div class="line">626</div><div class="line">627</div><div class="line">628</div><div class="line">629</div><div class="line">630</div><div class="line">631</div><div class="line">632</div><div class="line">633</div><div class="line">634</div><div class="line">635</div><div class="line">636</div><div class="line">637</div><div class="line">638</div><div class="line">639</div><div class="line">640</div><div class="line">641</div><div class="line">642</div><div class="line">643</div><div class="line">644</div><div class="line">645</div><div class="line">646</div><div class="line">647</div><div class="line">648</div><div class="line">649</div><div class="line">650</div><div class="line">651</div><div class="line">652</div><div class="line">653</div><div class="line">654</div><div class="line">655</div><div class="line">656</div><div class="line">657</div><div class="line">658</div><div class="line">659</div><div class="line">660</div><div class="line">661</div><div class="line">662</div><div class="line">663</div><div class="line">664</div><div class="line">665</div><div class="line">666</div><div class="line">667</div><div class="line">668</div><div class="line">669</div><div class="line">670</div><div class="line">671</div><div class="line">672</div><div class="line">673</div><div class="line">674</div><div class="line">675</div><div class="line">676</div><div class="line">677</div><div class="line">678</div><div class="line">679</div><div class="line">680</div><div class="line">681</div><div class="line">682</div><div class="line">683</div><div class="line">684</div><div class="line">685</div><div class="line">686</div><div class="line">687</div><div class="line">688</div><div class="line">689</div><div class="line">690</div><div class="line">691</div><div class="line">692</div><div class="line">693</div><div class="line">694</div><div class="line">695</div><div class="line">696</div><div class="line">697</div><div class="line">698</div><div class="line">699</div><div class="line">700</div><div class="line">701</div><div class="line">702</div><div class="line">703</div><div class="line">704</div><div class="line">705</div><div class="line">706</div><div class="line">707</div><div class="line">708</div><div class="line">709</div><div class="line">710</div><div class="line">711</div><div class="line">712</div><div class="line">713</div><div class="line">714</div><div class="line">715</div><div class="line">716</div><div class="line">717</div><div class="line">718</div><div class="line">719</div><div class="line">720</div><div class="line">721</div><div class="line">722</div><div class="line">723</div><div class="line">724</div><div class="line">725</div><div class="line">726</div><div class="line">727</div><div class="line">728</div><div class="line">729</div><div class="line">730</div><div class="line">731</div><div class="line">732</div><div class="line">733</div><div class="line">734</div><div class="line">735</div><div class="line">736</div><div class="line">737</div><div class="line">738</div><div class="line">739</div><div class="line">740</div><div class="line">741</div><div class="line">742</div><div class="line">743</div><div class="line">744</div><div class="line">745</div><div class="line">746</div><div class="line">747</div><div class="line">748</div><div class="line">749</div><div class="line">750</div><div class="line">751</div><div class="line">752</div><div class="line">753</div><div class="line">754</div></pre></td><td class="code"><pre><div class="line">package java.util;    </div><div class="line">import java.io.*;    </div><div class="line">   </div><div class="line">public class HashMap&lt;K,V&gt;    </div><div class="line">    extends AbstractMap&lt;K,V&gt;    </div><div class="line">    implements Map&lt;K,V&gt;, Cloneable, Serializable    </div><div class="line">&#123;    </div><div class="line">   </div><div class="line">    // 默认的初始容量（容量为HashMap中槽的数目）是16，且实际容量必须是2的整数次幂。    </div><div class="line">    static final int DEFAULT_INITIAL_CAPACITY = 16;    </div><div class="line">   </div><div class="line">    // 最大容量（必须是2的幂且小于2的30次方，传入容量过大将被这个值替换）    </div><div class="line">    static final int MAXIMUM_CAPACITY = 1 &lt;&lt; 30;    </div><div class="line">   </div><div class="line">    // 默认加载因子为0.75   </div><div class="line">    static final float DEFAULT_LOAD_FACTOR = 0.75f;    </div><div class="line">   </div><div class="line">    // 存储数据的Entry数组，长度是2的幂。    </div><div class="line">    // HashMap采用链表法解决冲突，每一个Entry本质上是一个单向链表    </div><div class="line">    transient Entry[] table;    </div><div class="line">   </div><div class="line">    // HashMap的底层数组中已用槽的数量    </div><div class="line">    transient int size;    </div><div class="line">   </div><div class="line">    // HashMap的阈值，用于判断是否需要调整HashMap的容量（threshold = 容量*加载因子）    </div><div class="line">    int threshold;    </div><div class="line">   </div><div class="line">    // 加载因子实际大小    </div><div class="line">    final float loadFactor;    </div><div class="line">   </div><div class="line">    // HashMap被改变的次数    </div><div class="line">    transient volatile int modCount;    </div><div class="line">   </div><div class="line">    // 指定“容量大小”和“加载因子”的构造函数    </div><div class="line">    public HashMap(int initialCapacity, float loadFactor) &#123;    </div><div class="line">        if (initialCapacity &lt; 0)    </div><div class="line">            throw new IllegalArgumentException(&quot;Illegal initial capacity: &quot; +    </div><div class="line">                                               initialCapacity);    </div><div class="line">        // HashMap的最大容量只能是MAXIMUM_CAPACITY    </div><div class="line">        if (initialCapacity &gt; MAXIMUM_CAPACITY)    </div><div class="line">            initialCapacity = MAXIMUM_CAPACITY;    </div><div class="line">        //加载因此不能小于0  </div><div class="line">        if (loadFactor &lt;= 0 || Float.isNaN(loadFactor))    </div><div class="line">            throw new IllegalArgumentException(&quot;Illegal load factor: &quot; +    </div><div class="line">                                               loadFactor);    </div><div class="line">   </div><div class="line">        // 找出“大于initialCapacity”的最小的2的幂    </div><div class="line">        int capacity = 1;    </div><div class="line">        while (capacity &lt; initialCapacity)    </div><div class="line">            capacity &lt;&lt;= 1;    </div><div class="line">   </div><div class="line">        // 设置“加载因子”    </div><div class="line">        this.loadFactor = loadFactor;    </div><div class="line">        // 设置“HashMap阈值”，当HashMap中存储数据的数量达到threshold时，就需要将HashMap的容量加倍。    </div><div class="line">        threshold = (int)(capacity * loadFactor);    </div><div class="line">        // 创建Entry数组，用来保存数据    </div><div class="line">        table = new Entry[capacity];    </div><div class="line">        init();    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">   </div><div class="line">    // 指定“容量大小”的构造函数    </div><div class="line">    public HashMap(int initialCapacity) &#123;    </div><div class="line">        this(initialCapacity, DEFAULT_LOAD_FACTOR);    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 默认构造函数。    </div><div class="line">    public HashMap() &#123;    </div><div class="line">        // 设置“加载因子”为默认加载因子0.75    </div><div class="line">        this.loadFactor = DEFAULT_LOAD_FACTOR;    </div><div class="line">        // 设置“HashMap阈值”，当HashMap中存储数据的数量达到threshold时，就需要将HashMap的容量加倍。    </div><div class="line">        threshold = (int)(DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR);    </div><div class="line">        // 创建Entry数组，用来保存数据    </div><div class="line">        table = new Entry[DEFAULT_INITIAL_CAPACITY];    </div><div class="line">        init();    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 包含“子Map”的构造函数    </div><div class="line">    public HashMap(Map&lt;? extends K, ? extends V&gt; m) &#123;    </div><div class="line">        this(Math.max((int) (m.size() / DEFAULT_LOAD_FACTOR) + 1,    </div><div class="line">                      DEFAULT_INITIAL_CAPACITY), DEFAULT_LOAD_FACTOR);    </div><div class="line">        // 将m中的全部元素逐个添加到HashMap中    </div><div class="line">        putAllForCreate(m);    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    //求hash值的方法，重新计算hash值  </div><div class="line">    static int hash(int h) &#123;    </div><div class="line">        h ^= (h &gt;&gt;&gt; 20) ^ (h &gt;&gt;&gt; 12);    </div><div class="line">        return h ^ (h &gt;&gt;&gt; 7) ^ (h &gt;&gt;&gt; 4);    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 返回h在数组中的索引值，这里用&amp;代替取模，旨在提升效率   </div><div class="line">    // h &amp; (length-1)保证返回值的小于length    </div><div class="line">    static int indexFor(int h, int length) &#123;    </div><div class="line">        return h &amp; (length-1);    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    public int size() &#123;    </div><div class="line">        return size;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    public boolean isEmpty() &#123;    </div><div class="line">        return size == 0;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 获取key对应的value    </div><div class="line">    public V get(Object key) &#123;    </div><div class="line">        if (key == null)    </div><div class="line">            return getForNullKey();    </div><div class="line">        // 获取key的hash值    </div><div class="line">        int hash = hash(key.hashCode());    </div><div class="line">        // 在“该hash值对应的链表”上查找“键值等于key”的元素    </div><div class="line">        for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];    </div><div class="line">             e != null;    </div><div class="line">             e = e.next) &#123;    </div><div class="line">            Object k;    </div><div class="line">            //判断key是否相同  </div><div class="line">            if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))    </div><div class="line">                return e.value;    </div><div class="line">        &#125;  </div><div class="line">        //没找到则返回null  </div><div class="line">        return null;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 获取“key为null”的元素的值    </div><div class="line">    // HashMap将“key为null”的元素存储在table[0]位置，但不一定是该链表的第一个位置！    </div><div class="line">    private V getForNullKey() &#123;    </div><div class="line">        for (Entry&lt;K,V&gt; e = table[0]; e != null; e = e.next) &#123;    </div><div class="line">            if (e.key == null)    </div><div class="line">                return e.value;    </div><div class="line">        &#125;    </div><div class="line">        return null;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // HashMap是否包含key    </div><div class="line">    public boolean containsKey(Object key) &#123;    </div><div class="line">        return getEntry(key) != null;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 返回“键为key”的键值对    </div><div class="line">    final Entry&lt;K,V&gt; getEntry(Object key) &#123;    </div><div class="line">        // 获取哈希值    </div><div class="line">        // HashMap将“key为null”的元素存储在table[0]位置，“key不为null”的则调用hash()计算哈希值    </div><div class="line">        int hash = (key == null) ? 0 : hash(key.hashCode());    </div><div class="line">        // 在“该hash值对应的链表”上查找“键值等于key”的元素    </div><div class="line">        for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];    </div><div class="line">             e != null;    </div><div class="line">             e = e.next) &#123;    </div><div class="line">            Object k;    </div><div class="line">            if (e.hash == hash &amp;&amp;    </div><div class="line">                ((k = e.key) == key || (key != null &amp;&amp; key.equals(k))))    </div><div class="line">                return e;    </div><div class="line">        &#125;    </div><div class="line">        return null;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 将“key-value”添加到HashMap中    </div><div class="line">    public V put(K key, V value) &#123;    </div><div class="line">        // 若“key为null”，则将该键值对添加到table[0]中。    </div><div class="line">        if (key == null)    </div><div class="line">            return putForNullKey(value);    </div><div class="line">        // 若“key不为null”，则计算该key的哈希值，然后将其添加到该哈希值对应的链表中。    </div><div class="line">        int hash = hash(key.hashCode());    </div><div class="line">        int i = indexFor(hash, table.length);    </div><div class="line">        for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) &#123;    </div><div class="line">            Object k;    </div><div class="line">            // 若“该key”对应的键值对已经存在，则用新的value取代旧的value。然后退出！    </div><div class="line">            if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;    </div><div class="line">                V oldValue = e.value;    </div><div class="line">                e.value = value;    </div><div class="line">                e.recordAccess(this);    </div><div class="line">                return oldValue;    </div><div class="line">            &#125;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        // 若“该key”对应的键值对不存在，则将“key-value”添加到table中    </div><div class="line">        modCount++;  </div><div class="line">        //将key-value添加到table[i]处  </div><div class="line">        addEntry(hash, key, value, i);    </div><div class="line">        return null;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // putForNullKey()的作用是将“key为null”键值对添加到table[0]位置    </div><div class="line">    private V putForNullKey(V value) &#123;    </div><div class="line">        for (Entry&lt;K,V&gt; e = table[0]; e != null; e = e.next) &#123;    </div><div class="line">            if (e.key == null) &#123;    </div><div class="line">                V oldValue = e.value;    </div><div class="line">                e.value = value;    </div><div class="line">                e.recordAccess(this);    </div><div class="line">                return oldValue;    </div><div class="line">            &#125;    </div><div class="line">        &#125;    </div><div class="line">        // 如果没有存在key为null的键值对，则直接题阿见到table[0]处!    </div><div class="line">        modCount++;    </div><div class="line">        addEntry(0, null, value, 0);    </div><div class="line">        return null;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 创建HashMap对应的“添加方法”，    </div><div class="line">    // 它和put()不同。putForCreate()是内部方法，它被构造函数等调用，用来创建HashMap    </div><div class="line">    // 而put()是对外提供的往HashMap中添加元素的方法。    </div><div class="line">    private void putForCreate(K key, V value) &#123;    </div><div class="line">        int hash = (key == null) ? 0 : hash(key.hashCode());    </div><div class="line">        int i = indexFor(hash, table.length);    </div><div class="line">   </div><div class="line">        // 若该HashMap表中存在“键值等于key”的元素，则替换该元素的value值    </div><div class="line">        for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) &#123;    </div><div class="line">            Object k;    </div><div class="line">            if (e.hash == hash &amp;&amp;    </div><div class="line">                ((k = e.key) == key || (key != null &amp;&amp; key.equals(k)))) &#123;    </div><div class="line">                e.value = value;    </div><div class="line">                return;    </div><div class="line">            &#125;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        // 若该HashMap表中不存在“键值等于key”的元素，则将该key-value添加到HashMap中    </div><div class="line">        createEntry(hash, key, value, i);    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 将“m”中的全部元素都添加到HashMap中。    </div><div class="line">    // 该方法被内部的构造HashMap的方法所调用。    </div><div class="line">    private void putAllForCreate(Map&lt;? extends K, ? extends V&gt; m) &#123;    </div><div class="line">        // 利用迭代器将元素逐个添加到HashMap中    </div><div class="line">        for (Iterator&lt;? extends Map.Entry&lt;? extends K, ? extends V&gt;&gt; i = m.entrySet().iterator(); i.hasNext(); ) &#123;    </div><div class="line">            Map.Entry&lt;? extends K, ? extends V&gt; e = i.next();    </div><div class="line">            putForCreate(e.getKey(), e.getValue());    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 重新调整HashMap的大小，newCapacity是调整后的容量    </div><div class="line">    void resize(int newCapacity) &#123;    </div><div class="line">        Entry[] oldTable = table;    </div><div class="line">        int oldCapacity = oldTable.length;   </div><div class="line">        //如果就容量已经达到了最大值，则不能再扩容，直接返回  </div><div class="line">        if (oldCapacity == MAXIMUM_CAPACITY) &#123;    </div><div class="line">            threshold = Integer.MAX_VALUE;    </div><div class="line">            return;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        // 新建一个HashMap，将“旧HashMap”的全部元素添加到“新HashMap”中，    </div><div class="line">        // 然后，将“新HashMap”赋值给“旧HashMap”。    </div><div class="line">        Entry[] newTable = new Entry[newCapacity];    </div><div class="line">        transfer(newTable);    </div><div class="line">        table = newTable;    </div><div class="line">        threshold = (int)(newCapacity * loadFactor);    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 将HashMap中的全部元素都添加到newTable中    </div><div class="line">    void transfer(Entry[] newTable) &#123;    </div><div class="line">        Entry[] src = table;    </div><div class="line">        int newCapacity = newTable.length;    </div><div class="line">        for (int j = 0; j &lt; src.length; j++) &#123;    </div><div class="line">            Entry&lt;K,V&gt; e = src[j];    </div><div class="line">            if (e != null) &#123;    </div><div class="line">                src[j] = null;    </div><div class="line">                do &#123;    </div><div class="line">                    Entry&lt;K,V&gt; next = e.next;    </div><div class="line">                    int i = indexFor(e.hash, newCapacity);    </div><div class="line">                    e.next = newTable[i];    </div><div class="line">                    newTable[i] = e;    </div><div class="line">                    e = next;    </div><div class="line">                &#125; while (e != null);    </div><div class="line">            &#125;    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 将&quot;m&quot;的全部元素都添加到HashMap中    </div><div class="line">    public void putAll(Map&lt;? extends K, ? extends V&gt; m) &#123;    </div><div class="line">        // 有效性判断    </div><div class="line">        int numKeysToBeAdded = m.size();    </div><div class="line">        if (numKeysToBeAdded == 0)    </div><div class="line">            return;    </div><div class="line">   </div><div class="line">        // 计算容量是否足够，    </div><div class="line">        // 若“当前阀值容量 &lt; 需要的容量”，则将容量x2。    </div><div class="line">        if (numKeysToBeAdded &gt; threshold) &#123;    </div><div class="line">            int targetCapacity = (int)(numKeysToBeAdded / loadFactor + 1);    </div><div class="line">            if (targetCapacity &gt; MAXIMUM_CAPACITY)    </div><div class="line">                targetCapacity = MAXIMUM_CAPACITY;    </div><div class="line">            int newCapacity = table.length;    </div><div class="line">            while (newCapacity &lt; targetCapacity)    </div><div class="line">                newCapacity &lt;&lt;= 1;    </div><div class="line">            if (newCapacity &gt; table.length)    </div><div class="line">                resize(newCapacity);    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        // 通过迭代器，将“m”中的元素逐个添加到HashMap中。    </div><div class="line">        for (Iterator&lt;? extends Map.Entry&lt;? extends K, ? extends V&gt;&gt; i = m.entrySet().iterator(); i.hasNext(); ) &#123;    </div><div class="line">            Map.Entry&lt;? extends K, ? extends V&gt; e = i.next();    </div><div class="line">            put(e.getKey(), e.getValue());    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 删除“键为key”元素    </div><div class="line">    public V remove(Object key) &#123;    </div><div class="line">        Entry&lt;K,V&gt; e = removeEntryForKey(key);    </div><div class="line">        return (e == null ? null : e.value);    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 删除“键为key”的元素    </div><div class="line">    final Entry&lt;K,V&gt; removeEntryForKey(Object key) &#123;    </div><div class="line">        // 获取哈希值。若key为null，则哈希值为0；否则调用hash()进行计算    </div><div class="line">        int hash = (key == null) ? 0 : hash(key.hashCode());    </div><div class="line">        int i = indexFor(hash, table.length);    </div><div class="line">        Entry&lt;K,V&gt; prev = table[i];    </div><div class="line">        Entry&lt;K,V&gt; e = prev;    </div><div class="line">   </div><div class="line">        // 删除链表中“键为key”的元素    </div><div class="line">        // 本质是“删除单向链表中的节点”    </div><div class="line">        while (e != null) &#123;    </div><div class="line">            Entry&lt;K,V&gt; next = e.next;    </div><div class="line">            Object k;    </div><div class="line">            if (e.hash == hash &amp;&amp;    </div><div class="line">                ((k = e.key) == key || (key != null &amp;&amp; key.equals(k)))) &#123;    </div><div class="line">                modCount++;    </div><div class="line">                size--;    </div><div class="line">                if (prev == e)    </div><div class="line">                    table[i] = next;    </div><div class="line">                else   </div><div class="line">                    prev.next = next;    </div><div class="line">                e.recordRemoval(this);    </div><div class="line">                return e;    </div><div class="line">            &#125;    </div><div class="line">            prev = e;    </div><div class="line">            e = next;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        return e;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 删除“键值对”    </div><div class="line">    final Entry&lt;K,V&gt; removeMapping(Object o) &#123;    </div><div class="line">        if (!(o instanceof Map.Entry))    </div><div class="line">            return null;    </div><div class="line">   </div><div class="line">        Map.Entry&lt;K,V&gt; entry = (Map.Entry&lt;K,V&gt;) o;    </div><div class="line">        Object key = entry.getKey();    </div><div class="line">        int hash = (key == null) ? 0 : hash(key.hashCode());    </div><div class="line">        int i = indexFor(hash, table.length);    </div><div class="line">        Entry&lt;K,V&gt; prev = table[i];    </div><div class="line">        Entry&lt;K,V&gt; e = prev;    </div><div class="line">   </div><div class="line">        // 删除链表中的“键值对e”    </div><div class="line">        // 本质是“删除单向链表中的节点”    </div><div class="line">        while (e != null) &#123;    </div><div class="line">            Entry&lt;K,V&gt; next = e.next;    </div><div class="line">            if (e.hash == hash &amp;&amp; e.equals(entry)) &#123;    </div><div class="line">                modCount++;    </div><div class="line">                size--;    </div><div class="line">                if (prev == e)    </div><div class="line">                    table[i] = next;    </div><div class="line">                else   </div><div class="line">                    prev.next = next;    </div><div class="line">                e.recordRemoval(this);    </div><div class="line">                return e;    </div><div class="line">            &#125;    </div><div class="line">            prev = e;    </div><div class="line">            e = next;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        return e;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 清空HashMap，将所有的元素设为null    </div><div class="line">    public void clear() &#123;    </div><div class="line">        modCount++;    </div><div class="line">        Entry[] tab = table;    </div><div class="line">        for (int i = 0; i &lt; tab.length; i++)    </div><div class="line">            tab[i] = null;    </div><div class="line">        size = 0;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 是否包含“值为value”的元素    </div><div class="line">    public boolean containsValue(Object value) &#123;    </div><div class="line">    // 若“value为null”，则调用containsNullValue()查找    </div><div class="line">    if (value == null)    </div><div class="line">            return containsNullValue();    </div><div class="line">   </div><div class="line">    // 若“value不为null”，则查找HashMap中是否有值为value的节点。    </div><div class="line">    Entry[] tab = table;    </div><div class="line">        for (int i = 0; i &lt; tab.length ; i++)    </div><div class="line">            for (Entry e = tab[i] ; e != null ; e = e.next)    </div><div class="line">                if (value.equals(e.value))    </div><div class="line">                    return true;    </div><div class="line">    return false;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 是否包含null值    </div><div class="line">    private boolean containsNullValue() &#123;    </div><div class="line">    Entry[] tab = table;    </div><div class="line">        for (int i = 0; i &lt; tab.length ; i++)    </div><div class="line">            for (Entry e = tab[i] ; e != null ; e = e.next)    </div><div class="line">                if (e.value == null)    </div><div class="line">                    return true;    </div><div class="line">    return false;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 克隆一个HashMap，并返回Object对象    </div><div class="line">    public Object clone() &#123;    </div><div class="line">        HashMap&lt;K,V&gt; result = null;    </div><div class="line">        try &#123;    </div><div class="line">            result = (HashMap&lt;K,V&gt;)super.clone();    </div><div class="line">        &#125; catch (CloneNotSupportedException e) &#123;    </div><div class="line">            // assert false;    </div><div class="line">        &#125;    </div><div class="line">        result.table = new Entry[table.length];    </div><div class="line">        result.entrySet = null;    </div><div class="line">        result.modCount = 0;    </div><div class="line">        result.size = 0;    </div><div class="line">        result.init();    </div><div class="line">        // 调用putAllForCreate()将全部元素添加到HashMap中    </div><div class="line">        result.putAllForCreate(this);    </div><div class="line">   </div><div class="line">        return result;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // Entry是单向链表。    </div><div class="line">    // 它是 “HashMap链式存储法”对应的链表。    </div><div class="line">    // 它实现了Map.Entry 接口，即实现getKey(), getValue(), setValue(V value), equals(Object o), hashCode()这些函数    </div><div class="line">    static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;    </div><div class="line">        final K key;    </div><div class="line">        V value;    </div><div class="line">        // 指向下一个节点    </div><div class="line">        Entry&lt;K,V&gt; next;    </div><div class="line">        final int hash;    </div><div class="line">   </div><div class="line">        // 构造函数。    </div><div class="line">        // 输入参数包括&quot;哈希值(h)&quot;, &quot;键(k)&quot;, &quot;值(v)&quot;, &quot;下一节点(n)&quot;    </div><div class="line">        Entry(int h, K k, V v, Entry&lt;K,V&gt; n) &#123;    </div><div class="line">            value = v;    </div><div class="line">            next = n;    </div><div class="line">            key = k;    </div><div class="line">            hash = h;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        public final K getKey() &#123;    </div><div class="line">            return key;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        public final V getValue() &#123;    </div><div class="line">            return value;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        public final V setValue(V newValue) &#123;    </div><div class="line">            V oldValue = value;    </div><div class="line">            value = newValue;    </div><div class="line">            return oldValue;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        // 判断两个Entry是否相等    </div><div class="line">        // 若两个Entry的“key”和“value”都相等，则返回true。    </div><div class="line">        // 否则，返回false    </div><div class="line">        public final boolean equals(Object o) &#123;    </div><div class="line">            if (!(o instanceof Map.Entry))    </div><div class="line">                return false;    </div><div class="line">            Map.Entry e = (Map.Entry)o;    </div><div class="line">            Object k1 = getKey();    </div><div class="line">            Object k2 = e.getKey();    </div><div class="line">            if (k1 == k2 || (k1 != null &amp;&amp; k1.equals(k2))) &#123;    </div><div class="line">                Object v1 = getValue();    </div><div class="line">                Object v2 = e.getValue();    </div><div class="line">                if (v1 == v2 || (v1 != null &amp;&amp; v1.equals(v2)))    </div><div class="line">                    return true;    </div><div class="line">            &#125;    </div><div class="line">            return false;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        // 实现hashCode()    </div><div class="line">        public final int hashCode() &#123;    </div><div class="line">            return (key==null   ? 0 : key.hashCode()) ^    </div><div class="line">                   (value==null ? 0 : value.hashCode());    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        public final String toString() &#123;    </div><div class="line">            return getKey() + &quot;=&quot; + getValue();    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        // 当向HashMap中添加元素时，绘调用recordAccess()。    </div><div class="line">        // 这里不做任何处理    </div><div class="line">        void recordAccess(HashMap&lt;K,V&gt; m) &#123;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        // 当从HashMap中删除元素时，绘调用recordRemoval()。    </div><div class="line">        // 这里不做任何处理    </div><div class="line">        void recordRemoval(HashMap&lt;K,V&gt; m) &#123;    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 新增Entry。将“key-value”插入指定位置，bucketIndex是位置索引。    </div><div class="line">    void addEntry(int hash, K key, V value, int bucketIndex) &#123;    </div><div class="line">        // 保存“bucketIndex”位置的值到“e”中    </div><div class="line">        Entry&lt;K,V&gt; e = table[bucketIndex];    </div><div class="line">        // 设置“bucketIndex”位置的元素为“新Entry”，    </div><div class="line">        // 设置“e”为“新Entry的下一个节点”    </div><div class="line">        table[bucketIndex] = new Entry&lt;K,V&gt;(hash, key, value, e);    </div><div class="line">        // 若HashMap的实际大小 不小于 “阈值”，则调整HashMap的大小    </div><div class="line">        if (size++ &gt;= threshold)    </div><div class="line">            resize(2 * table.length);    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 创建Entry。将“key-value”插入指定位置。    </div><div class="line">    void createEntry(int hash, K key, V value, int bucketIndex) &#123;    </div><div class="line">        // 保存“bucketIndex”位置的值到“e”中    </div><div class="line">        Entry&lt;K,V&gt; e = table[bucketIndex];    </div><div class="line">        // 设置“bucketIndex”位置的元素为“新Entry”，    </div><div class="line">        // 设置“e”为“新Entry的下一个节点”    </div><div class="line">        table[bucketIndex] = new Entry&lt;K,V&gt;(hash, key, value, e);    </div><div class="line">        size++;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // HashIterator是HashMap迭代器的抽象出来的父类，实现了公共了函数。    </div><div class="line">    // 它包含“key迭代器(KeyIterator)”、“Value迭代器(ValueIterator)”和“Entry迭代器(EntryIterator)”3个子类。    </div><div class="line">    private abstract class HashIterator&lt;E&gt; implements Iterator&lt;E&gt; &#123;    </div><div class="line">        // 下一个元素    </div><div class="line">        Entry&lt;K,V&gt; next;    </div><div class="line">        // expectedModCount用于实现fast-fail机制。    </div><div class="line">        int expectedModCount;    </div><div class="line">        // 当前索引    </div><div class="line">        int index;    </div><div class="line">        // 当前元素    </div><div class="line">        Entry&lt;K,V&gt; current;    </div><div class="line">   </div><div class="line">        HashIterator() &#123;    </div><div class="line">            expectedModCount = modCount;    </div><div class="line">            if (size &gt; 0) &#123; // advance to first entry    </div><div class="line">                Entry[] t = table;    </div><div class="line">                // 将next指向table中第一个不为null的元素。    </div><div class="line">                // 这里利用了index的初始值为0，从0开始依次向后遍历，直到找到不为null的元素就退出循环。    </div><div class="line">                while (index &lt; t.length &amp;&amp; (next = t[index++]) == null)    </div><div class="line">                    ;    </div><div class="line">            &#125;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        public final boolean hasNext() &#123;    </div><div class="line">            return next != null;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        // 获取下一个元素    </div><div class="line">        final Entry&lt;K,V&gt; nextEntry() &#123;    </div><div class="line">            if (modCount != expectedModCount)    </div><div class="line">                throw new ConcurrentModificationException();    </div><div class="line">            Entry&lt;K,V&gt; e = next;    </div><div class="line">            if (e == null)    </div><div class="line">                throw new NoSuchElementException();    </div><div class="line">   </div><div class="line">            // 注意！！！    </div><div class="line">            // 一个Entry就是一个单向链表    </div><div class="line">            // 若该Entry的下一个节点不为空，就将next指向下一个节点;    </div><div class="line">            // 否则，将next指向下一个链表(也是下一个Entry)的不为null的节点。    </div><div class="line">            if ((next = e.next) == null) &#123;    </div><div class="line">                Entry[] t = table;    </div><div class="line">                while (index &lt; t.length &amp;&amp; (next = t[index++]) == null)    </div><div class="line">                    ;    </div><div class="line">            &#125;    </div><div class="line">            current = e;    </div><div class="line">            return e;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">        // 删除当前元素    </div><div class="line">        public void remove() &#123;    </div><div class="line">            if (current == null)    </div><div class="line">                throw new IllegalStateException();    </div><div class="line">            if (modCount != expectedModCount)    </div><div class="line">                throw new ConcurrentModificationException();    </div><div class="line">            Object k = current.key;    </div><div class="line">            current = null;    </div><div class="line">            HashMap.this.removeEntryForKey(k);    </div><div class="line">            expectedModCount = modCount;    </div><div class="line">        &#125;    </div><div class="line">   </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // value的迭代器    </div><div class="line">    private final class ValueIterator extends HashIterator&lt;V&gt; &#123;    </div><div class="line">        public V next() &#123;    </div><div class="line">            return nextEntry().value;    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // key的迭代器    </div><div class="line">    private final class KeyIterator extends HashIterator&lt;K&gt; &#123;    </div><div class="line">        public K next() &#123;    </div><div class="line">            return nextEntry().getKey();    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // Entry的迭代器    </div><div class="line">    private final class EntryIterator extends HashIterator&lt;Map.Entry&lt;K,V&gt;&gt; &#123;    </div><div class="line">        public Map.Entry&lt;K,V&gt; next() &#123;    </div><div class="line">            return nextEntry();    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 返回一个“key迭代器”    </div><div class="line">    Iterator&lt;K&gt; newKeyIterator()   &#123;    </div><div class="line">        return new KeyIterator();    </div><div class="line">    &#125;    </div><div class="line">    // 返回一个“value迭代器”    </div><div class="line">    Iterator&lt;V&gt; newValueIterator()   &#123;    </div><div class="line">        return new ValueIterator();    </div><div class="line">    &#125;    </div><div class="line">    // 返回一个“entry迭代器”    </div><div class="line">    Iterator&lt;Map.Entry&lt;K,V&gt;&gt; newEntryIterator()   &#123;    </div><div class="line">        return new EntryIterator();    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // HashMap的Entry对应的集合    </div><div class="line">    private transient Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet = null;    </div><div class="line">   </div><div class="line">    // 返回“key的集合”，实际上返回一个“KeySet对象”    </div><div class="line">    public Set&lt;K&gt; keySet() &#123;    </div><div class="line">        Set&lt;K&gt; ks = keySet;    </div><div class="line">        return (ks != null ? ks : (keySet = new KeySet()));    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // Key对应的集合    </div><div class="line">    // KeySet继承于AbstractSet，说明该集合中没有重复的Key。    </div><div class="line">    private final class KeySet extends AbstractSet&lt;K&gt; &#123;    </div><div class="line">        public Iterator&lt;K&gt; iterator() &#123;    </div><div class="line">            return newKeyIterator();    </div><div class="line">        &#125;    </div><div class="line">        public int size() &#123;    </div><div class="line">            return size;    </div><div class="line">        &#125;    </div><div class="line">        public boolean contains(Object o) &#123;    </div><div class="line">            return containsKey(o);    </div><div class="line">        &#125;    </div><div class="line">        public boolean remove(Object o) &#123;    </div><div class="line">            return HashMap.this.removeEntryForKey(o) != null;    </div><div class="line">        &#125;    </div><div class="line">        public void clear() &#123;    </div><div class="line">            HashMap.this.clear();    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 返回“value集合”，实际上返回的是一个Values对象    </div><div class="line">    public Collection&lt;V&gt; values() &#123;    </div><div class="line">        Collection&lt;V&gt; vs = values;    </div><div class="line">        return (vs != null ? vs : (values = new Values()));    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // “value集合”    </div><div class="line">    // Values继承于AbstractCollection，不同于“KeySet继承于AbstractSet”，    </div><div class="line">    // Values中的元素能够重复。因为不同的key可以指向相同的value。    </div><div class="line">    private final class Values extends AbstractCollection&lt;V&gt; &#123;    </div><div class="line">        public Iterator&lt;V&gt; iterator() &#123;    </div><div class="line">            return newValueIterator();    </div><div class="line">        &#125;    </div><div class="line">        public int size() &#123;    </div><div class="line">            return size;    </div><div class="line">        &#125;    </div><div class="line">        public boolean contains(Object o) &#123;    </div><div class="line">            return containsValue(o);    </div><div class="line">        &#125;    </div><div class="line">        public void clear() &#123;    </div><div class="line">            HashMap.this.clear();    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 返回“HashMap的Entry集合”    </div><div class="line">    public Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet() &#123;    </div><div class="line">        return entrySet0();    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 返回“HashMap的Entry集合”，它实际是返回一个EntrySet对象    </div><div class="line">    private Set&lt;Map.Entry&lt;K,V&gt;&gt; entrySet0() &#123;    </div><div class="line">        Set&lt;Map.Entry&lt;K,V&gt;&gt; es = entrySet;    </div><div class="line">        return es != null ? es : (entrySet = new EntrySet());    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // EntrySet对应的集合    </div><div class="line">    // EntrySet继承于AbstractSet，说明该集合中没有重复的EntrySet。    </div><div class="line">    private final class EntrySet extends AbstractSet&lt;Map.Entry&lt;K,V&gt;&gt; &#123;    </div><div class="line">        public Iterator&lt;Map.Entry&lt;K,V&gt;&gt; iterator() &#123;    </div><div class="line">            return newEntryIterator();    </div><div class="line">        &#125;    </div><div class="line">        public boolean contains(Object o) &#123;    </div><div class="line">            if (!(o instanceof Map.Entry))    </div><div class="line">                return false;    </div><div class="line">            Map.Entry&lt;K,V&gt; e = (Map.Entry&lt;K,V&gt;) o;    </div><div class="line">            Entry&lt;K,V&gt; candidate = getEntry(e.getKey());    </div><div class="line">            return candidate != null &amp;&amp; candidate.equals(e);    </div><div class="line">        &#125;    </div><div class="line">        public boolean remove(Object o) &#123;    </div><div class="line">            return removeMapping(o) != null;    </div><div class="line">        &#125;    </div><div class="line">        public int size() &#123;    </div><div class="line">            return size;    </div><div class="line">        &#125;    </div><div class="line">        public void clear() &#123;    </div><div class="line">            HashMap.this.clear();    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // java.io.Serializable的写入函数    </div><div class="line">    // 将HashMap的“总的容量，实际容量，所有的Entry”都写入到输出流中    </div><div class="line">    private void writeObject(java.io.ObjectOutputStream s)    </div><div class="line">        throws IOException    </div><div class="line">    &#123;    </div><div class="line">        Iterator&lt;Map.Entry&lt;K,V&gt;&gt; i =    </div><div class="line">            (size &gt; 0) ? entrySet0().iterator() : null;    </div><div class="line">   </div><div class="line">        // Write out the threshold, loadfactor, and any hidden stuff    </div><div class="line">        s.defaultWriteObject();    </div><div class="line">   </div><div class="line">        // Write out number of buckets    </div><div class="line">        s.writeInt(table.length);    </div><div class="line">   </div><div class="line">        // Write out size (number of Mappings)    </div><div class="line">        s.writeInt(size);    </div><div class="line">   </div><div class="line">        // Write out keys and values (alternating)    </div><div class="line">        if (i != null) &#123;    </div><div class="line">            while (i.hasNext()) &#123;    </div><div class="line">            Map.Entry&lt;K,V&gt; e = i.next();    </div><div class="line">            s.writeObject(e.getKey());    </div><div class="line">            s.writeObject(e.getValue());    </div><div class="line">            &#125;    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">   </div><div class="line">    private static final long serialVersionUID = 362498820763181265L;    </div><div class="line">   </div><div class="line">    // java.io.Serializable的读取函数：根据写入方式读出    </div><div class="line">    // 将HashMap的“总的容量，实际容量，所有的Entry”依次读出    </div><div class="line">    private void readObject(java.io.ObjectInputStream s)    </div><div class="line">         throws IOException, ClassNotFoundException    </div><div class="line">    &#123;    </div><div class="line">        // Read in the threshold, loadfactor, and any hidden stuff    </div><div class="line">        s.defaultReadObject();    </div><div class="line">   </div><div class="line">        // Read in number of buckets and allocate the bucket array;    </div><div class="line">        int numBuckets = s.readInt();    </div><div class="line">        table = new Entry[numBuckets];    </div><div class="line">   </div><div class="line">        init();  // Give subclass a chance to do its thing.    </div><div class="line">   </div><div class="line">        // Read in size (number of Mappings)    </div><div class="line">        int size = s.readInt();    </div><div class="line">   </div><div class="line">        // Read the keys and values, and put the mappings in the HashMap    </div><div class="line">        for (int i=0; i&lt;size; i++) &#123;    </div><div class="line">            K key = (K) s.readObject();    </div><div class="line">            V value = (V) s.readObject();    </div><div class="line">            putForCreate(key, value);    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">   </div><div class="line">    // 返回“HashMap总的容量”    </div><div class="line">    int   capacity()     &#123; return table.length; &#125;    </div><div class="line">    // 返回“HashMap的加载因子”    </div><div class="line">    float loadFactor()   &#123; return loadFactor;   &#125;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="二、HashMap细节剖析"><a href="#二、HashMap细节剖析" class="headerlink" title="二、HashMap细节剖析"></a>二、HashMap细节剖析</h2><h3 id="2-1-存储结构"><a href="#2-1-存储结构" class="headerlink" title="2.1 存储结构"></a>2.1 存储结构</h3><p> 首先要清楚HashMap的存储结构，如下图所示：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15032354567744.jpg" alt=""></p>
+<p>图中，紫色部分即代表哈希表，也称为哈希数组，数组的每个元素都是一个单链表的头节点，链表是用来解决冲突的，如果不同的key映射到了数组的同一位置处，就将其放入单链表中。</p>
+<h3 id="2-2-链表节点的数据结构"><a href="#2-2-链表节点的数据结构" class="headerlink" title="2.2 链表节点的数据结构"></a>2.2 链表节点的数据结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">// Entry是单向链表。    </div><div class="line">// 它是 “HashMap链式存储法”对应的链表。    </div><div class="line">// 它实现了Map.Entry 接口，即实现getKey(), getValue(), setValue(V value), equals(Object o), hashCode()这些函数    </div><div class="line">static class Entry&lt;K,V&gt; implements Map.Entry&lt;K,V&gt; &#123;    </div><div class="line">    final K key;    </div><div class="line">    V value;    </div><div class="line">    // 指向下一个节点    </div><div class="line">    Entry&lt;K,V&gt; next;    </div><div class="line">    final int hash;    </div><div class="line">  </div><div class="line">    // 构造函数。    </div><div class="line">    // 输入参数包括&quot;哈希值(h)&quot;, &quot;键(k)&quot;, &quot;值(v)&quot;, &quot;下一节点(n)&quot;    </div><div class="line">    Entry(int h, K k, V v, Entry&lt;K,V&gt; n) &#123;    </div><div class="line">        value = v;    </div><div class="line">        next = n;    </div><div class="line">        key = k;    </div><div class="line">        hash = h;    </div><div class="line">    &#125;    </div><div class="line">  </div><div class="line">    public final K getKey() &#123;    </div><div class="line">        return key;    </div><div class="line">    &#125;    </div><div class="line">  </div><div class="line">    public final V getValue() &#123;    </div><div class="line">        return value;    </div><div class="line">    &#125;    </div><div class="line">  </div><div class="line">    public final V setValue(V newValue) &#123;    </div><div class="line">        V oldValue = value;    </div><div class="line">        value = newValue;    </div><div class="line">        return oldValue;    </div><div class="line">    &#125;    </div><div class="line">  </div><div class="line">    // 判断两个Entry是否相等    </div><div class="line">    // 若两个Entry的“key”和“value”都相等，则返回true。    </div><div class="line">    // 否则，返回false    </div><div class="line">    public final boolean equals(Object o) &#123;    </div><div class="line">        if (!(o instanceof Map.Entry))    </div><div class="line">            return false;    </div><div class="line">        Map.Entry e = (Map.Entry)o;    </div><div class="line">        Object k1 = getKey();    </div><div class="line">        Object k2 = e.getKey();    </div><div class="line">        if (k1 == k2 || (k1 != null &amp;&amp; k1.equals(k2))) &#123;    </div><div class="line">            Object v1 = getValue();    </div><div class="line">            Object v2 = e.getValue();    </div><div class="line">            if (v1 == v2 || (v1 != null &amp;&amp; v1.equals(v2)))    </div><div class="line">                return true;    </div><div class="line">        &#125;    </div><div class="line">        return false;    </div><div class="line">    &#125;    </div><div class="line">  </div><div class="line">    // 实现hashCode()    </div><div class="line">    public final int hashCode() &#123;    </div><div class="line">        return (key==null   ? 0 : key.hashCode()) ^    </div><div class="line">               (value==null ? 0 : value.hashCode());    </div><div class="line">    &#125;    </div><div class="line">  </div><div class="line">    public final String toString() &#123;    </div><div class="line">        return getKey() + &quot;=&quot; + getValue();    </div><div class="line">    &#125;    </div><div class="line">  </div><div class="line">    // 当向HashMap中添加元素时，绘调用recordAccess()。    </div><div class="line">    // 这里不做任何处理    </div><div class="line">    void recordAccess(HashMap&lt;K,V&gt; m) &#123;    </div><div class="line">    &#125;    </div><div class="line">  </div><div class="line">    // 当从HashMap中删除元素时，会调用recordRemoval()。    </div><div class="line">    // 这里不做任何处理    </div><div class="line">    void recordRemoval(HashMap&lt;K,V&gt; m) &#123;    </div><div class="line">    &#125;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>它的结构元素除了key、value、hash外，还有next，next指向下一个节点。另外，这里覆写了equals和hashCode方法来保证键值对的独一无二。</p>
+<h3 id="2-3-构造方法"><a href="#2-3-构造方法" class="headerlink" title="2.3 构造方法"></a>2.3 构造方法</h3><p>HashMap共有四个构造方法。构造方法中提到了两个很重要的参数：初始容量和加载因子。这两个参数是影响HashMap性能的重要参数，其中容量表示哈希表中槽的数量（即哈希数组的长度），初始容量是创建哈希表时的容量（从构造函数中可以看出，如果不指明，则默认为16），加载因子是哈希表在其容量自动增加之前可以达到多满的一种尺度，当哈希表中的条目数超出了加载因子与当前容量的乘积时，则要对该哈希表进行 resize 操作（即扩容）。</p>
+<p>下面说下加载因子，如果加载因子越大，对空间的利用更充分，但是查找效率会降低（链表长度会越来越长）；如果加载因子太小，那么表中的数据将过于稀疏（很多空间还没用，就开始扩容了），对空间造成严重浪费。如果我们在构造方法中不指定，则系统默认加载因子为0.75，这是一个比较理想的值，一般情况下我们是无需修改的。</p>
+<p>另外，无论我们指定的容量为多少，构造方法都会将实际容量设为不小于指定容量的2的次方的一个数，且最大值不能超过2的30次方</p>
+<h3 id="2-4-HashMap中key和value都允许为null。"><a href="#2-4-HashMap中key和value都允许为null。" class="headerlink" title="2.4 HashMap中key和value都允许为null。"></a>2.4 HashMap中key和value都允许为null。</h3><h3 id="2-5-重点分析put和get"><a href="#2-5-重点分析put和get" class="headerlink" title="2.5 重点分析put和get"></a>2.5 重点分析put和get</h3><p>要重点分析下HashMap中用的最多的两个方法put和get。先从比较简单的get方法着手，源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">// 获取key对应的value    </div><div class="line">public V get(Object key) &#123;    </div><div class="line">    if (key == null)    </div><div class="line">        return getForNullKey();    </div><div class="line">    // 获取key的hash值    </div><div class="line">    int hash = hash(key.hashCode());    </div><div class="line">    // 在“该hash值对应的链表”上查找“键值等于key”的元素    </div><div class="line">    for (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];    </div><div class="line">         e != null;    </div><div class="line">         e = e.next) &#123;    </div><div class="line">        Object k;    </div><div class="line">/判断key是否相同  </div><div class="line">        if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))    </div><div class="line">            return e.value;    </div><div class="line">    &#125;  </div><div class="line">没找到则返回null  </div><div class="line">    return null;    </div><div class="line">&#125;    </div><div class="line">  </div><div class="line">// 获取“key为null”的元素的值    </div><div class="line">// HashMap将“key为null”的元素存储在table[0]位置，但不一定是该链表的第一个位置！    </div><div class="line">private V getForNullKey() &#123;    </div><div class="line">    for (Entry&lt;K,V&gt; e = table[0]; e != null; e = e.next) &#123;    </div><div class="line">        if (e.key == null)    </div><div class="line">            return e.value;    </div><div class="line">    &#125;    </div><div class="line">    return null;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>首先，如果key为null，则直接从哈希表的第一个位置table[0]对应的链表上查找。记住，key为null的键值对永远都放在以table[0]为头结点的链表中，当然不一定是存放在头结点table[0]中。</p>
+<p>如果key不为null，则先求的key的hash值，根据hash值找到在table中的索引，在该索引对应的单链表中查找是否有键值对的key与目标key相等，有就返回对应的value，没有则返回null。</p>
+<p>put方法稍微复杂些，代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">  // 将“key-value”添加到HashMap中    </div><div class="line">  public V put(K key, V value) &#123;    </div><div class="line">      // 若“key为null”，则将该键值对添加到table[0]中。    </div><div class="line">      if (key == null)    </div><div class="line">          return putForNullKey(value);    </div><div class="line">      // 若“key不为null”，则计算该key的哈希值，然后将其添加到该哈希值对应的链表中。    </div><div class="line">      int hash = hash(key.hashCode());    </div><div class="line">      int i = indexFor(hash, table.length);    </div><div class="line">      for (Entry&lt;K,V&gt; e = table[i]; e != null; e = e.next) &#123;    </div><div class="line">          Object k;    </div><div class="line">          // 若“该key”对应的键值对已经存在，则用新的value取代旧的value。然后退出！    </div><div class="line">          if (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;    </div><div class="line">              V oldValue = e.value;    </div><div class="line">              e.value = value;    </div><div class="line">              e.recordAccess(this);    </div><div class="line">              return oldValue;    </div><div class="line">          &#125;    </div><div class="line">      &#125;    </div><div class="line">  </div><div class="line">      // 若“该key”对应的键值对不存在，则将“key-value”添加到table中    </div><div class="line">      modCount++;  </div><div class="line">//将key-value添加到table[i]处  </div><div class="line">      addEntry(hash, key, value, i);    </div><div class="line">      return null;    </div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>如果key为null，则将其添加到table[0]对应的链表中，putForNullKey的源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// putForNullKey()的作用是将“key为null”键值对添加到table[0]位置    </div><div class="line">private V putForNullKey(V value) &#123;    </div><div class="line">    for (Entry&lt;K,V&gt; e = table[0]; e != null; e = e.next) &#123;    </div><div class="line">        if (e.key == null) &#123;    </div><div class="line">            V oldValue = e.value;    </div><div class="line">            e.value = value;    </div><div class="line">            e.recordAccess(this);    </div><div class="line">            return oldValue;    </div><div class="line">        &#125;    </div><div class="line">    &#125;    </div><div class="line">    // 如果没有存在key为null的键值对，则直接题阿见到table[0]处!    </div><div class="line">    modCount++;    </div><div class="line">    addEntry(0, null, value, 0);    </div><div class="line">    return null;    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果key不为null，则同样先求出key的hash值，根据hash值得出在table中的索引，而后遍历对应的单链表，如果单链表中存在与目标key相等的键值对，则将新的value覆盖旧的value，比将旧的value返回，如果找不到与目标key相等的键值对，或者该单链表为空，则将该键值对插入到改单链表的头结点位置（每次新插入的节点都是放在头结点的位置），该操作是有addEntry方法实现的，它的源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">// 新增Entry。将“key-value”插入指定位置，bucketIndex是位置索引。    </div><div class="line">void addEntry(int hash, K key, V value, int bucketIndex) &#123;    </div><div class="line">    // 保存“bucketIndex”位置的值到“e”中    </div><div class="line">    Entry&lt;K,V&gt; e = table[bucketIndex];    </div><div class="line">    // 设置“bucketIndex”位置的元素为“新Entry”，    </div><div class="line">    // 设置“e”为“新Entry的下一个节点”    </div><div class="line">    table[bucketIndex] = new Entry&lt;K,V&gt;(hash, key, value, e);    </div><div class="line">    // 若HashMap的实际大小 不小于 “阈值”，则调整HashMap的大小    </div><div class="line">    if (size++ &gt;= threshold)    </div><div class="line">        resize(2 * table.length);    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意这里倒数第三行的构造方法，将key-value键值对赋给table[bucketIndex]，并将其next指向元素e，这便将key-value放到了头结点中，并将之前的头结点接在了它的后面。该方法也说明，每次put键值对的时候，总是将新的该键值对放在table[bucketIndex]处（即头结点处）。</p>
+<p>两外注意最后两行代码，每次加入键值对时，都要判断当前已用的槽的数目是否大于等于阀值（容量*加载因子），如果大于等于，则进行扩容，将容量扩为原来容量的2倍。</p>
+<h3 id="2-6-关于扩容"><a href="#2-6-关于扩容" class="headerlink" title="2.6 关于扩容"></a>2.6 关于扩容</h3><p>上面我们看到了扩容的方法，resize方法，它的源码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">// 重新调整HashMap的大小，newCapacity是调整后的单位    </div><div class="line">void resize(int newCapacity) &#123;    </div><div class="line">    Entry[] oldTable = table;    </div><div class="line">    int oldCapacity = oldTable.length;    </div><div class="line">    if (oldCapacity == MAXIMUM_CAPACITY) &#123;    </div><div class="line">        threshold = Integer.MAX_VALUE;    </div><div class="line">        return;    </div><div class="line">    &#125;    </div><div class="line">  </div><div class="line">    // 新建一个HashMap，将“旧HashMap”的全部元素添加到“新HashMap”中，    </div><div class="line">    // 然后，将“新HashMap”赋值给“旧HashMap”。    </div><div class="line">    Entry[] newTable = new Entry[newCapacity];    </div><div class="line">    transfer(newTable);    </div><div class="line">    table = newTable;    </div><div class="line">    threshold = (int)(newCapacity * loadFactor);    </div><div class="line">&#125;   </div><div class="line">``` </div><div class="line">很明显，是新建了一个HashMap的底层数组，而后调用transfer方法，将就HashMap的全部元素添加到新的HashMap中（要重新计算元素在新的数组中的索引位置）。transfer方法的源码如下：</div></pre></td></tr></table></figure>
+<p>// 将HashMap中的全部元素都添加到newTable中<br>void transfer(Entry[] newTable) {<br>    Entry[] src = table;<br>    int newCapacity = newTable.length;<br>    for (int j = 0; j &lt; src.length; j++) {<br>        Entry<k,v> e = src[j];<br>        if (e != null) {<br>            src[j] = null;<br>            do {<br>                Entry<k,v> next = e.next;<br>                int i = indexFor(e.hash, newCapacity);<br>                e.next = newTable[i];<br>                newTable[i] = e;<br>                e = next;<br>            } while (e != null);<br>        }<br>    }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">很明显，扩容是一个相当耗时的操作，因为它需要重新计算这些元素在新的数组中的位置并进行复制处理。因此，我们在用HashMap的时，最好能提前预估下HashMap中元素的个数，这样有助于提高HashMap的性能。</div><div class="line"></div><div class="line">### 2..7 containsKey方法和containsValue方法。</div><div class="line"></div><div class="line">注意containsKey方法和containsValue方法。前者直接可以通过key的哈希值将搜索范围定位到指定索引对应的链表，而后者要对哈希数组的每个链表进行搜索。</div><div class="line"></div><div class="line">### 2.8 求hash值和索引值的方法</div><div class="line"></div><div class="line">我们重点来分析下求hash值和索引值的方法，这两个方法便是HashMap设计的最为核心的部分，二者结合能保证哈希表中的元素尽可能均匀地散列。</div><div class="line"></div><div class="line">计算哈希值的方法如下：</div></pre></td></tr></table></figure></k,v></k,v></p>
+<p>static int hash(int h) {<br>        h ^= (h &gt;&gt;&gt; 20) ^ (h &gt;&gt;&gt; 12);<br>        return h ^ (h &gt;&gt;&gt; 7) ^ (h &gt;&gt;&gt; 4);<br>    }  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">它只是一个数学公式，IDK这样设计对hash值的计算，自然有它的好处，至于为什么这样设计，我们这里不去追究，只要明白一点，用的位的操作使hash值的计算效率很高。</div><div class="line"></div><div class="line">由hash值找到对应索引的方法如下：</div></pre></td></tr></table></figure>
+<p>static int indexFor(int h, int length) {<br>        return h &amp; (length-1);<br>    }<br>```<br>这个我们要重点说下，我们一般对哈希表的散列很自然地会想到用hash值对length取模（即除法散列法），Hashtable中也是这样实现的，这种方法基本能保证元素在哈希表中散列的比较均匀，但取模会用到除法运算，效率很低，HashMap中则通过h&amp;(length-1)的方法来代替取模，同样实现了均匀的散列，但效率要高很多，这也是HashMap对Hashtable的一个改进。</p>
+<p>接下来，我们分析下为什么哈希表的容量一定要是2的整数次幂。首先，length为2的整数次幂的话，h&amp;(length-1)就相当于对length取模，这样便保证了散列的均匀，同时也提升了效率；其次，length为2的整数次幂的话，为偶数，这样length-1为奇数，奇数的最后一位是1，这样便保证了h&amp;(length-1)的最后一位可能为0，也可能为1（这取决于h的值），即与后的结果可能为偶数，也可能为奇数，这样便可以保证散列的均匀性，而如果length为奇数的话，很明显length-1为偶数，它的最后一位是0，这样h&amp;(length-1)的最后一位肯定为0，即只能为偶数，这样任何hash值都只会被散列到数组的偶数下标位置上，这便浪费了近一半的空间，因此，length取2的整数次幂，是为了使不同hash值发生碰撞的概率较小，这样就能使元素在哈希表中均匀地散列。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/HashMap/" rel="tag"># HashMap</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Java集合学习手册（10）：hashCode方法与equal方法" rel="next" title="Java集合学习手册（10）：hashCode方法与equal方法">
+                <i class="fa fa-chevron-left"></i> Java集合学习手册（10）：hashCode方法与equal方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Java学习笔记（1）：语法基础" rel="prev" title="Java学习笔记（1）：语法基础">
+                Java学习笔记（1）：语法基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">175</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">248</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、HashMap源码剖析"><span class="nav-text">一、HashMap源码剖析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、HashMap细节剖析"><span class="nav-text">二、HashMap细节剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-存储结构"><span class="nav-text">2.1 存储结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-链表节点的数据结构"><span class="nav-text">2.2 链表节点的数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-构造方法"><span class="nav-text">2.3 构造方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-HashMap中key和value都允许为null。"><span class="nav-text">2.4 HashMap中key和value都允许为null。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-重点分析put和get"><span class="nav-text">2.5 重点分析put和get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-关于扩容"><span class="nav-text">2.6 关于扩容</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>

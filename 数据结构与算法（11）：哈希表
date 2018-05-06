@@ -1,0 +1,1096 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="数据结构,算法,哈希表," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="一、哈希表的基本概念哈希表（Hash Table）是一种特殊的数据结构，它最大的特点就是可以快速实现查找、插入和删除。因为它独有的特点，Hash表经常被用来解决大数据问题，也因此被广大的程序员所青睐。">
+<meta name="keywords" content="数据结构,算法,哈希表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法（11）：哈希表">
+<meta property="og:url" content="http://yoursite.com/数据结构与算法（11）：哈希表">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="一、哈希表的基本概念哈希表（Hash Table）是一种特殊的数据结构，它最大的特点就是可以快速实现查找、插入和删除。因为它独有的特点，Hash表经常被用来解决大数据问题，也因此被广大的程序员所青睐。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005228099157.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005228566431.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005228676672.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005233364103.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005233651325.png">
+<meta property="og:updated_time" content="2017-09-01T07:09:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法（11）：哈希表">
+<meta name="twitter:description" content="一、哈希表的基本概念哈希表（Hash Table）是一种特殊的数据结构，它最大的特点就是可以快速实现查找、插入和删除。因为它独有的特点，Hash表经常被用来解决大数据问题，也因此被广大的程序员所青睐。">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15005228099157.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 数据结构与算法（11）：哈希表 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/数据结构与算法（11）：哈希表">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据结构与算法（11）：哈希表
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-25T22:20:45+08:00">
+                2017-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构与算法/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构与算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、哈希表的基本概念"><a href="#一、哈希表的基本概念" class="headerlink" title="一、哈希表的基本概念"></a>一、哈希表的基本概念</h2><p>哈希表（Hash Table）是一种特殊的数据结构，它最大的特点就是可以快速实现查找、插入和删除。因为它独有的特点，Hash表经常被用来解决大数据问题，也因此被广大的程序员所青睐。</p>
+<a id="more"></a>
+<p>我们知道，数组的最大特点就是：寻址容易，插入和删除困难；而链表正好相反，寻址困难，而插入和删除操作容易。那么如果能够结合两者的优点，做出一种寻址、插入和删除操作同样快速容易的数据结构，那该有多好。这就是哈希表创建的基本思想，而实际上哈希表也实现了这样的一个“夙愿”，哈希表就是这样一个集查找、插入和删除操作于一身的数据结构。</p>
+<p>哈希表（Hash Table）：也叫散列表，是根据关键码值（key-value）而直接进行访问的数据结构，也就是我们常用到的map。</p>
+<p>哈希函数：也称为是散列函数，是Hash表的映射函数，它可以把任意长度的输入变换成固定长度的输出，该输出就是哈希值。哈希函数能使对一个数据序列的访问过程变得更加迅速有效，通过哈希函数，数据元素能够被很快的进行定位。</p>
+<p>哈希表和哈希函数的标准定义：若关键字为k，则其值存放在h(k)的存储位置上。由此，不需比较便可直接取得所查记录。称这个对应关系f为哈希函数，按这个思想建立的表为哈希表。</p>
+<p>设所有可能出现的关键字集合记为U(简称全集)。实际发生(即实际存储)的关键字集合记为K（|K|比|U|小得多）。</p>
+<p>散列方法是使用函数h将U映射到表T[0..m-1]的下标上（m=O(|U|)）。这样以U中关键字为自变量，以h为函数的运算结果就是相应结点的存储地址。从而达到在O(1)时间内就可完成查找。<br>其中：</p>
+<ol>
+<li>h：U→{0，1，2，…，m-1} ，通常称h为哈希函数(Hash Function)。哈希函数h的作用是压缩待处理的下标范围，使待处理的|U|个值减少到m个值，从而降低空间开销。</li>
+<li>T为哈希表(Hash Table)。</li>
+<li>$h(K_i)(K_i∈U)$是关键字为Ki结点存储地址(亦称散列值或散列地址)。</li>
+<li>将结点按其关键字的哈希地址存储到哈希表中的过程称为散列(Hashing)</li>
+</ol>
+<p>设计出一个简单、均匀、存储利用率高的散列函数是散列技术中最关键的问题。<br>但是，一般散列函数都面临着冲突的问题。两个不同的关键字，由于散列函数值相同，因而被映射到同一表位置上。该现象称为冲突(Collision)或碰撞。发生冲突的两个关键字称为该散列函数的同义词(Synonym)。</p>
+<p>最理想的解决冲突的方法是安全避免冲突。要做到这一点必须满足两个条件：其一是$|U|≤m$，其二是选择合适的散列函数。这只适用于|U|较小，且关键字均事先已知的情况，此时经过精心设计散列函数h有可能完全避免冲突。</p>
+<p>但通常情况下，h是一个压缩映像。虽然$|K|≤m$，但$|U|&gt;m$，故无论怎样设计h，也不可能完全避免冲突。因此，只能在设计h时尽可能使冲突最少。同时还需要确定解决冲突的方法，使发生冲突的同义词能够存储到表中。</p>
+<p>冲突的频繁程度除了与h相关外，还与表的填满程度相关。设m和n分别表示表长和表中填入的结点数，则将α=n/m定义为散列表的装填因子(Load Factor)。α越大，表越满，冲突的机会也越大。通常取α≤1。 </p>
+<h2 id="二、哈希表的实现方法"><a href="#二、哈希表的实现方法" class="headerlink" title="二、哈希表的实现方法"></a>二、哈希表的实现方法</h2><p>我们之前说了，哈希表是一个集查找、插入和删除操作于一身的数据结构。那这么完美的数据结构到底是怎么实现的呢？哈希表有很多种不同的实现方法，为了实现哈希表的创建，这些所有的方法都离不开两个问题——“定址”和“解决冲突”。</p>
+<p>在这里，我们通过详细地介绍哈希表最常用的方法——取余法（定值）+拉链法（解决冲突），来一起窥探一下哈希表强大的优点。</p>
+<p>取余法大家一定不会感觉陌生，就是我们经常说的取余数的操作。</p>
+<p>拉链法是什么，“拉链”说白了就是“链表数组”。我这么一解释，大家更晕了，啥是“链表数组”啊？为了更好地解释“链表数组”，我们用下图进行解释：图中的主干部分是一个顺序存储结构数组，但是有的数组元素为空，有的对应一个值，有的对应的是一个链表，这就是“链表数组”。比如数组0的位置对应一个链表，链表有两个元素“496”和“896”，这说明元素“496”和“896”有着同样的Hash地址，这就是我们上边介绍的“冲突”或者“碰撞”。但是“链表数组”的存储方式很好地解决了Hash表中的冲突问题，发生冲突的元素会被存在一个对应Hash地址指向的链表中。实际上，“链表数组”就是一个指针数组，每一个指针指向一个链表的头结点，链表可能为空，也可能不为空。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15005228099157.png" alt=""></p>
+<p>说完这些，大家肯定已经理解了“链表数组”的概念，那我们就一起看看Hash表是如何根据“取余法+拉链法”构建的吧。</p>
+<p>将所有关键字为同义词的结点链接在同一个链表中。若选定的散列表长度为m，则可将散列表定义为一个由m个头指针组成的指针数组$T[0..m-1]$。凡是散列地址为i的结点，均插入到以$T[i]$为头指针的单链表中。T中各分量的初值均应为空指针。在拉链法中，装填因子$α$可以大于1，但一般均取$α≤1$。</p>
+<p>举例说明拉链法的执行过程，设有一组关键字为(26，36，41，38，44，15，68，12，6，51)，用取余法构造散列函数，初始情况如下图所示：<br><img src="http://omu7tit09.bkt.clouddn.com/15005228566431.png" alt=""><br>最终结果如下图所示：<br><img src="http://omu7tit09.bkt.clouddn.com/15005228676672.png" alt=""><br>理解了Hash表的创建，那根据建立的Hash表进行查找就很容易被理解了。</p>
+<p>查找操作，如果理解了插入和删除，查找操作就比较简单了，令待查找的关键字是x，也可分为几种情况：</p>
+<ul>
+<li>1）x所属的Hash地址未被占用，即不存在与x相同的Hash地址关键字，当然也不存在x了；</li>
+<li>2）x所属的Hash地址被占用了，但它所存的关键不属于这个Hash地址，与1）相同，不存在与x相同Hash地址的关键字；</li>
+<li>3）x所属的Hash地址被占用了，且它所存的关键属于这个Hash地址，即存在与x相同sHash地址的关键字，只是不知这个关键字是不是x，需要进一步查找。</li>
+</ul>
+<p>由此可见，Hash表插入、删除和插入操作的效率都相当的高。</p>
+<p>思考一个问题：如果关键字是字符串怎么办？我们怎么根据字符串建立Hash表？</p>
+<p>通常都是将元素的key转换为数字进行散列，如果key本身就是整数，那么散列函数可以采用keymod tablesize（要保证tablesize是质数）。而在实际工作中经常用字符串作为关键字，例如身姓名、职位等等。这个时候需要设计一个好的散列函数进程处理关键字为字符串的元素。参考《数据结构与算法分析》第5章，有以下几种处理方法：</p>
+<ul>
+<li>方法1：将字符串的所有的字符的ASCII码值进行相加，将所得和作为元素的关键字。此方法的缺点是不能有效的分布元素，例如假设关键字是有8个字母构成的字符串，散列表的长度为10007。字母最大的ASCII码为127，按照方法1可得到关键字对应的最大数值为127×8=1016，也就是说通过散列函数映射时只能映射到散列表的槽0-1016之间，这样导致大部分槽没有用到，分布不均匀，从而效率低下。</li>
+<li>方法2：假设关键字至少有三个字母构成，散列函数只是取前三个字母进行散列。该方法只是取字符串的前三个字符的ASCII码进行散列，最大的得到的数值是2851，如果散列的长度为10007，那么只有28%的空间被用到，大部分空间没有用到。因此如果散列表太大，就不太适用。</li>
+<li>方法3：借助Horner’s 规则，构造一个质数（通常是37）的多项式，（非常的巧妙，不知道为何是37）。计算公式为:$key[keysize-i-1]*37^i, 0≤i&lt;keysize$求和。该方法存在的问题是如果字符串关键字比较长，散列函数的计算过程就变长，有可能导致计算的hashVal溢出。针对这种情况可以采取字符串的部分字符进行计算，例如计算偶数或者奇数位的字符。</li>
+</ul>
+<h2 id="三、哈希表定址与解决冲突"><a href="#三、哈希表定址与解决冲突" class="headerlink" title="三、哈希表定址与解决冲突"></a>三、哈希表定址与解决冲突</h2><h3 id="3-1-哈希表“定址的方法”"><a href="#3-1-哈希表“定址的方法”" class="headerlink" title="3.1 哈希表“定址的方法”"></a>3.1 哈希表“定址的方法”</h3><p>其实常用的“定址”的手法有“五种”：</p>
+<ol>
+<li>直接定址法：很容易理解，key=Value+C；这个“C”是常量。Value+C其实就是一个简单的哈希函数。</li>
+<li>除法取余法：key=value%C</li>
+<li>数字分析法：这种蛮有意思，比如有一组value1=112233，value2=112633，value3=119033，针对这样的数我们分析数中间两个数比较波动，其他数不变。那么我们取key的值就可以是key1=22,key2=26,key3=90。</li>
+<li>平方取中法</li>
+<li>折叠法：举个例子，比如value=135790，要求key是2位数的散列值。那么我们将value变为13+57+90=160，然后去掉高位“1”,此时key=60，哈哈，这就是他们的哈希关系，这样做的目的就是key与每一位value都相关，来做到“散列地址”尽可能分散的目地。</li>
+</ol>
+<p>影响哈希查找效率的一个重要因素是哈希函数本身。当两个不同的数据元素的哈希值相同时，就会发生冲突。为减少发生冲突的可能性，哈希函数应该将数据尽可能分散地映射到哈希表的每一个表项中。</p>
+<h3 id="3-2-哈希表“解决冲突”的方法"><a href="#3-2-哈希表“解决冲突”的方法" class="headerlink" title="3.2 哈希表“解决冲突”的方法"></a>3.2 哈希表“解决冲突”的方法</h3><p>Hash表解决冲突的方法主要有以下几种：</p>
+<p>链接地址法：<br>将哈希值相同的数据元素存放在一个链表中，在查找哈希表的过程中，当查找到这个链表时，必须采用线性查找方法。</p>
+<p>开放定址法：<br>如果两个数据元素的哈希值相同，则在哈希表中为后插入的数据元素另外选择一个表项。当程序查找哈希表时，如果没有在第一个对应的哈希表项中找到符合查找要求的数据元素，程序就会继续往后查找，直到找到一个符合查找要求的数据元素，或者遇到一个空的表项。线性探测带来的最大问题就是冲突的堆积，你把别人预定的坑占了，别人也就要像你一样去找坑。改进的办法有二次方探测法和随机数探测法。开放地址法包括线性探测、二次探测以及双重散列等方法。其中线性探测法示意图如下：<br><img src="http://omu7tit09.bkt.clouddn.com/15005233364103.png" alt="">散列过程如下图所示：<img src="http://omu7tit09.bkt.clouddn.com/15005233651325.png" alt=""></p>
+<p>再散列函数法：<br>发生冲突时就换一个散列函数计算，总会有一个可以把冲突解决掉，它能够使得关键字不产生聚集，但相应地增加了计算的时间。</p>
+<p>公共溢出区法：<br>其实就是为所有的冲突，额外开辟一块存储空间。如果相对基本表而言，冲突的数据很少的时候，使用这种方法比较合适。</p>
+<h3 id="3-3-哈希表“定址”和“解决冲突”之间的权衡"><a href="#3-3-哈希表“定址”和“解决冲突”之间的权衡" class="headerlink" title="3.3 哈希表“定址”和“解决冲突”之间的权衡"></a>3.3 哈希表“定址”和“解决冲突”之间的权衡</h3><p>虽然哈希表是在关键字和存储位置之间建立了对应关系，但是由于冲突的发生，哈希表的查找仍然是一个和关键字比较的过程，不过哈希表平均查找长度比顺序查找要小得多，比二分查找也小。</p>
+<p>查找过程中需和给定值进行比较的关键字个数取决于下列三个因素：哈希函数、处理冲突的方法和哈希表的装填因子。</p>
+<p>哈希函数的”好坏”首先影响出现冲突的频繁程度，但如果哈希函数是均匀的，则一般不考虑它对平均查找长度的影响。</p>
+<p>对同一组关键字，设定相同的哈希函数，但使用不同的冲突处理方法，会得到不同的哈希表，它们的平均查找长度也不同。</p>
+<p>一般情况下，处理冲突方法相同的哈希表，其平均查找长度依赖于哈希表的装填因子α。显然，α越小，产生冲突的机会就越大；但α过小，空间的浪费就过多。通过选择一个合适的装填因子α，可以将平均查找长度限定在一个范围内。</p>
+<p>总而言之，哈希表“定址”和“解决冲突”之间的权衡决定了哈希表的性能。</p>
+<h2 id="四、实现Hashmap"><a href="#四、实现Hashmap" class="headerlink" title="四、实现Hashmap"></a>四、实现Hashmap</h2><p>假设我们要设计的是一个用来保存某大学所有在校学生个人信息的数据表。因为在校学生数量也不是特别巨大(8W?)，每个学生的学号是唯一的,因此，我们可以简单的应用直接定址法，声明一个10W大小的数组，每个学生的学号作为主键。然后每次要添加或者查找学生，只需要根据需要去操作即可。</p>
+<p>但是，显然这样做是很脑残的。这样做系统的可拓展性和复用性就非常差了，比如有一天人数超过10W了？如果是用来保存别的数据呢？或者我只需要保存20条记录呢？声明大小为10W的数组显然是太浪费了的。</p>
+<p>如果我们是用来保存大数据量（比如银行的用户数，4大的用户数都应该有3-5亿了吧？），这时候我们计算出来的HashCode就很可能会有冲突了， 我们的系统应该有“处理冲突”的能力，此处我们通过挂链法“处理冲突”。</p>
+<p>如果我们的数据量非常巨大，并且还持续在增加，如果我们仅仅只是通过挂链法来处理冲突，可能我们的链上挂了上万个数据后，这个时候再通过静态搜索来查找链表，显然性能也是非常低的。所以我们的系统应该还能实现自动扩容，当容量达到某比例后，即自动扩容，使装载因子保存在一个固定的水平上。</p>
+<p>综上所述，我们对这个Hash容器的基本要求应该有如下几点：</p>
+<ul>
+<li>满足Hash表的查找要求</li>
+<li>能支持从小数据量到大数据量的自动转变（自动扩容）</li>
+<li>使用挂链法解决冲突</li>
+</ul>
+<p>代码详见hashmap源码剖析</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/哈希表/" rel="tag"># 哈希表</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/数据结构与算法（10）：查找" rel="next" title="数据结构与算法（10）：查找">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法（10）：查找
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/数据结构与算法（12）：排序" rel="prev" title="数据结构与算法（12）：排序">
+                数据结构与算法（12）：排序 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">175</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">248</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、哈希表的基本概念"><span class="nav-text">一、哈希表的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、哈希表的实现方法"><span class="nav-text">二、哈希表的实现方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、哈希表定址与解决冲突"><span class="nav-text">三、哈希表定址与解决冲突</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-哈希表“定址的方法”"><span class="nav-text">3.1 哈希表“定址的方法”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-哈希表“解决冲突”的方法"><span class="nav-text">3.2 哈希表“解决冲突”的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-哈希表“定址”和“解决冲突”之间的权衡"><span class="nav-text">3.3 哈希表“定址”和“解决冲突”之间的权衡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、实现Hashmap"><span class="nav-text">四、实现Hashmap</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>
