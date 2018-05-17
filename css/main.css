@@ -727,9 +727,7 @@ pre .javascript .function {
   float: left;
 }
 .page-post-detail .post-body .group-picture-column {
-  float: none;
   margin-top: 10px;
-  width: auto !important;
 }
 .page-post-detail .post-body .group-picture-column img {
   margin: 0 auto;
@@ -1815,7 +1813,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #145796;
+  background: #ffffed;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -1940,21 +1938,21 @@ pre .javascript .function {
 }
 .with-love {
   display: inline-block;
-  margin: 10px;
+  margin: 2px;
 }
 .powered-by,
 .theme-info {
   display: inline-block;
 }
 .powered-by {
-  margin-right: 10px;
+  margin-right: 2px;
 }
 .powered-by::after {
   content: "|";
-  padding-left: 10px;
+  padding-left: 2px;
 }
 .cc-license {
-  margin-top: 10px;
+  margin-top: 2px;
   text-align: center;
 }
 .cc-license .cc-opacity {
