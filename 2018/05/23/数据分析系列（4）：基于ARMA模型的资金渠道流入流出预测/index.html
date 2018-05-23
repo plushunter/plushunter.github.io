@@ -1,0 +1,1080 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="时间序列,ARMA," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="该数据为某资金渠道从2017/01/01至2017/07/29这段时间内的清算金额汇总信息，每5分钟按流入流出汇总交易数据，type为SE表示流入，type为RE表示流出，其中2017/01/01至2017/07/23这段时间的每天各时段的流入流出汇总数据是齐全的，而2017/07/24至2017/07/29这六天时间只有0点到早上10点的数据。现在要求我们根据这些数据来预测这六天每天从当日0点到">
+<meta name="keywords" content="时间序列,ARMA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据分析系列（4）：基于ARMA模型的资金渠道流入流出预测">
+<meta property="og:url" content="http://yoursite.com/2018/05/23/数据分析系列（4）：基于ARMA模型的资金渠道流入流出预测/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="该数据为某资金渠道从2017/01/01至2017/07/29这段时间内的清算金额汇总信息，每5分钟按流入流出汇总交易数据，type为SE表示流入，type为RE表示流出，其中2017/01/01至2017/07/23这段时间的每天各时段的流入流出汇总数据是齐全的，而2017/07/24至2017/07/29这六天时间只有0点到早上10点的数据。现在要求我们根据这些数据来预测这六天每天从当日0点到">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15261985846825.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15261974529979.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15262026757996.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15261978277574.jpg">
+<meta property="og:updated_time" content="2018-05-23T07:18:52.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据分析系列（4）：基于ARMA模型的资金渠道流入流出预测">
+<meta name="twitter:description" content="该数据为某资金渠道从2017/01/01至2017/07/29这段时间内的清算金额汇总信息，每5分钟按流入流出汇总交易数据，type为SE表示流入，type为RE表示流出，其中2017/01/01至2017/07/23这段时间的每天各时段的流入流出汇总数据是齐全的，而2017/07/24至2017/07/29这六天时间只有0点到早上10点的数据。现在要求我们根据这些数据来预测这六天每天从当日0点到">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15261985846825.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 数据分析系列（4）：基于ARMA模型的资金渠道流入流出预测 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/23/数据分析系列（4）：基于ARMA模型的资金渠道流入流出预测/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数据分析系列（4）：基于ARMA模型的资金渠道流入流出预测
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-23T23:14:45+08:00">
+                2018-05-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据分析/" itemprop="url" rel="index">
+                    <span itemprop="name">数据分析</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>该数据为某资金渠道从2017/01/01至2017/07/29这段时间内的清算金额汇总信息，每5分钟按流入流出汇总交易数据，type为SE表示流入，type为RE表示流出，其中2017/01/01至2017/07/23这段时间的每天各时段的流入流出汇总数据是齐全的，而2017/07/24至2017/07/29这六天时间只有0点到早上10点的数据。现在要求我们根据这些数据来预测这六天每天从当日0点到24点的流入流出轧差值（总流入-总流出）。</p>
+<a id="more"></a>
+<p>通过观察我们可以得知这些资金流入流出数据是各时间点上形成的数值序列，而时间序列分析就是通过观察历史数据预测未来的值，适用于我们这次预测。</p>
+<p>自回归移动平均模型(ARMA(p，q))是时间序列中最为重要的模型之一，它主要由两部分组成： AR代表p阶自回归过程，MA代表q阶移动平均过程，其公式如下：<script type="math/tex">Z_t=\varphi _1z_{t-1}+\varphi _2z_{t-2 }+···+\varphi _pz_{t-p}+a_t-\theta_1a_{t-1}-···-\theta_qa_{t-q}</script>可以对其简化：<script type="math/tex">\varphi_p(B)z_t=\theta_q(B)a_t\\其中\varphi_p(B)=1-\varphi_1B-\varphi_2B^2-···-\varphi_pB^p\\\theta_q(B)=1-\theta_1B-\theta_2B^2-···-\theta_qB^p</script></p>
+<h2 id="一、分析过程"><a href="#一、分析过程" class="headerlink" title="一、分析过程"></a>一、分析过程</h2><h3 id="1-1-数据预处理"><a href="#1-1-数据预处理" class="headerlink" title="1.1 数据预处理"></a>1.1 数据预处理</h3><p>首先要对数据进行转换处理，type为SE的amount保持不变，type为RE的amount取负数，对缺失值记为0，这样可以方便之后处理，将数据存入字典中，key为时间，value为资金（有正负）。处理脚本如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Data_Process</span><span class="params">(input_file,header= True)</span>:</span></div><div class="line">    amount_dict=&#123;&#125;</div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> open(input_file):</div><div class="line">        term = line.strip().split(<span class="string">','</span>)   </div><div class="line">        <span class="keyword">if</span> header:</div><div class="line">            header =<span class="keyword">False</span></div><div class="line">            <span class="keyword">continue</span></div><div class="line">        <span class="keyword">if</span> term[<span class="number">1</span>]==<span class="string">'SE'</span>: </div><div class="line">            <span class="keyword">if</span> term[<span class="number">2</span>] ==<span class="string">''</span>:</div><div class="line">                amount =<span class="number">0</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                amount = float(term[<span class="number">2</span>])</div><div class="line">        <span class="keyword">elif</span> term[<span class="number">1</span>]==<span class="string">'RE'</span>:</div><div class="line">            <span class="keyword">if</span> term[<span class="number">2</span>] ==<span class="string">''</span>:</div><div class="line">                amount =<span class="number">0</span></div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                amount = <span class="number">-1</span>*float(term[<span class="number">2</span>])</div><div class="line">        time = datetime.strftime(datetime.strptime(term[<span class="number">0</span>],<span class="string">'%Y/%m/%d %H:%M'</span>),<span class="string">'%Y/%m/%d %H:%M'</span>)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> time <span class="keyword">in</span> amount_dict:</div><div class="line">            amount_dict[time] = round(amount,<span class="number">2</span>)</div><div class="line">        <span class="keyword">elif</span> time <span class="keyword">in</span> amount_dict:</div><div class="line">            amount_dict[time]+=round(amount,<span class="number">2</span>)</div><div class="line">    <span class="keyword">return</span>  amount_dict</div></pre></td></tr></table></figure>
+<p>因为我们要对天级别的数据进行预测，可以对资金按天进行聚合：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">dataframe_trans_series</span><span class="params">(amount_dict,freq=<span class="string">'D'</span>)</span>:</span></div><div class="line">    data_dict=&#123;&#125;</div><div class="line">    data_dict[<span class="string">'amount'</span>] = amount_dict</div><div class="line">    data = pd.DataFrame(data_dict)</div><div class="line">    data.index = pd.to_datetime(data.index) </div><div class="line">    df = pd.DataFrame(data[<span class="string">'amount'</span>].resample(freq).sum())</div><div class="line">    time_series =  df[<span class="string">'amount'</span>]</div><div class="line">    <span class="keyword">return</span> time_series</div></pre></td></tr></table></figure>
+<p>得到的中间数据如下所示，每一天对应一条数据，表示这一天的流入流出轧差值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">2017-01-01    123081.02</div><div class="line">2017-01-02    150143.02</div><div class="line">2017-01-03    161112.42</div><div class="line">2017-01-04    138823.62</div><div class="line">2017-01-05    130364.32</div><div class="line">2017-01-06     85308.56</div><div class="line">2017-01-07     77484.16</div><div class="line">2017-01-08     93860.22</div><div class="line">······</div></pre></td></tr></table></figure>
+<h3 id="1-2-绘制时序图"><a href="#1-2-绘制时序图" class="headerlink" title="1.2 绘制时序图"></a>1.2 绘制时序图</h3><p>按天聚合之后，我们可以简单看一下时序图、移动平均时序图和加权移动平均时序图：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">def draw_trend(timeSeries, size):</div><div class="line">    f = plt.figure(facecolor=&apos;white&apos;)</div><div class="line">    </div><div class="line">    rol_mean = timeSeries.rolling(window=size).mean()</div><div class="line">    rol_weighted_mean = pd.ewma(timeSeries, span=size)</div><div class="line">    timeSeries.plot(color=&apos;blue&apos;, label=&apos;Original&apos;)</div><div class="line">    plt.legend(loc=&apos;best&apos;)</div><div class="line">    plt.title(&apos;Original&apos;)    </div><div class="line">    rol_mean.plot(color=&apos;red&apos;, label=&apos;Rolling Mean&apos;)</div><div class="line">    plt.legend(loc=&apos;best&apos;)</div><div class="line">    plt.title(&apos;Rolling Mean&apos;)    </div><div class="line">    rol_weighted_mean.plot(color=&apos;black&apos;, label=&apos;Weighted Rolling Mean&apos;)</div><div class="line">    plt.legend(loc=&apos;best&apos;)</div><div class="line">    plt.title(&apos;Weighted Rolling Mean&apos;)    </div><div class="line">    plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15261985846825.jpg" alt=""></p>
+<p>可以从时序图看出，该时间序列存在着波动，尚无法确定是否平稳，需要进一步的统计检验。</p>
+<h3 id="1-3-平稳性检验"><a href="#1-3-平稳性检验" class="headerlink" title="1.3 平稳性检验"></a>1.3 平稳性检验</h3><p>序列的平稳性是进行时间序列分析的前提条件，单位根检验（ADF）是一种常用的平稳性检验方法，他的原假设为序列具有单位根，即非平稳，对于一个平稳的时序数据，就需要在给定的置信水平上显著，拒绝原假设。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_Stationarity</span><span class="params">(ts)</span>:</span></div><div class="line">    test = adfuller(ts)</div><div class="line">    output = pd.Series(test[<span class="number">0</span>:<span class="number">4</span>], index=[<span class="string">'Test Statistic'</span>,<span class="string">'p-value'</span>,<span class="string">'Lags Used'</span>,<span class="string">'Number of Observations Used'</span>])</div><div class="line">    <span class="keyword">for</span> key,value <span class="keyword">in</span> test[<span class="number">4</span>].items():</div><div class="line">        output[<span class="string">'Critical Value (%s)'</span>%key] = value</div><div class="line">    <span class="keyword">return</span> output</div></pre></td></tr></table></figure>
+<p>以下为检验结果，其p值小于0.01，说明拒绝原假设，得出此序列具有平稳性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Test Statistic                  -3.779937</div><div class="line">p-value                          0.003119</div><div class="line">Lags Used                        2.000000</div><div class="line">Number of Observations Used    201.000000</div><div class="line">Critical Value (5%)             -2.876029</div><div class="line">Critical Value (1%)             -3.463309</div><div class="line">Critical Value (10%)            -2.574493</div></pre></td></tr></table></figure>
+<p>当然也可以观察其自相关图，可以看到，其自相关图快速衰减，体现了平稳性序列的特点，可认为他是平稳序列。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_acf_pacf</span><span class="params">(ts, lags=<span class="number">31</span>)</span>:</span></div><div class="line">    f = plt.figure(figsize=(<span class="number">12</span>,<span class="number">12</span>),facecolor=<span class="string">'white'</span>)</div><div class="line">    ax1 = f.add_subplot(<span class="number">211</span>)</div><div class="line">    plot_acf(ts, lags=<span class="number">31</span>, ax=ax1)</div><div class="line">    ax2 = f.add_subplot(<span class="number">212</span>)</div><div class="line">    plot_pacf(ts, lags=<span class="number">31</span>, ax=ax2)</div><div class="line">    plt.show()</div></pre></td></tr></table></figure>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15261974529979.jpg" alt=""></p>
+<h3 id="1-4-对数处理"><a href="#1-4-对数处理" class="headerlink" title="1.4 对数处理"></a>1.4 对数处理</h3><p>对数变换主要是为了减小数据的振动幅度，使其线性规律更加明显。对数变换相当于增加了一个惩罚机制，数据越大其惩罚越大，数据越小惩罚越小。虽然上一步我们验证了序列是平稳的，取对数也可以在该数据集上使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">def Log_Process(time_series):</div><div class="line">    return np.log(time_series+1)</div></pre></td></tr></table></figure>
+<h3 id="1-5-纯随机性检验"><a href="#1-5-纯随机性检验" class="headerlink" title="1.5 纯随机性检验"></a>1.5 纯随机性检验</h3><p>经过平稳性检验之后，我们得到该序列为平稳性序列，接下来对其进行纯随机性检验，只有当时间序列不是一个白噪声即纯随机序列的时候，我们才可以对该序列做进一步的分析：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_stochastic</span><span class="params">(ts)</span>:</span></div><div class="line">    p_value = acorr_ljungbox(ts, lags=<span class="number">1</span>)[<span class="number">1</span>] </div><div class="line">    <span class="keyword">return</span> p_value</div></pre></td></tr></table></figure>
+<p>得到的p值如下，可知，该序列为非白噪声序列。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">6.09097901e-21</div></pre></td></tr></table></figure>
+<h3 id="1-6-确定ARMA的阶数"><a href="#1-6-确定ARMA的阶数" class="headerlink" title="1.6 确定ARMA的阶数"></a>1.6 确定ARMA的阶数</h3><p>由前面的平稳性检验和纯随机性检验可知，该序列为平稳序列且非白噪声序列，我们可以用ARMA(p,q)模型对其建模，这里关键的是p和q的定阶，我们可以通过观察自相关图ACF和偏自相关图PACF来识别，也可以借助AIC、BIC统计量来确定。</p>
+<h4 id="1-6-1-BIC识别"><a href="#1-6-1-BIC识别" class="headerlink" title="1.6.1 BIC识别"></a>1.6.1 BIC识别</h4><p>以下是根据设定的maxlag，循环对p、q赋值，选出拟合BIC最小的p、q值作为模型的参数，并输出BIC最小的模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">choose_better_model</span><span class="params">(time_series, maxLag=<span class="number">5</span>)</span>:</span></div><div class="line">    init_bic = sys.maxint</div><div class="line">    init_p = <span class="number">0</span></div><div class="line">    init_q = <span class="number">0</span></div><div class="line">    init_properModel = <span class="keyword">None</span></div><div class="line">    <span class="keyword">for</span> p <span class="keyword">in</span> np.arange(maxLag):</div><div class="line">        <span class="keyword">for</span> q <span class="keyword">in</span> np.arange(maxLag):</div><div class="line">            model = ARMA(time_series, order=(p, q))</div><div class="line">            <span class="keyword">try</span>:</div><div class="line">                results_ARMA = model.fit(disp=<span class="number">-1</span>, method=<span class="string">'css'</span>)</div><div class="line">            <span class="keyword">except</span>:</div><div class="line">                <span class="keyword">continue</span></div><div class="line">            bic = results_ARMA.bic</div><div class="line">            <span class="keyword">if</span> bic &lt; init_bic:</div><div class="line">                init_p = p</div><div class="line">                init_q = q</div><div class="line">                init_properModel = results_ARMA</div><div class="line">                init_bic = bic</div><div class="line">    <span class="keyword">return</span> init_bic, init_p, init_q, init_properModel</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">init_bic = 33.0754219416592  init_p = 1  init_q = 1</div></pre></td></tr></table></figure>
+<p>得到使BIC最小的模型，bic = 33.1，p、q分别为1。</p>
+<h4 id="1-6-2-ACF、BCF识别"><a href="#1-6-2-ACF、BCF识别" class="headerlink" title="1.6.2 ACF、BCF识别"></a>1.6.2 ACF、BCF识别</h4><p>通过观察自相关图ACF和偏自相关图PACF来识别。观察下图，发现自相关和偏相系数都存在拖尾的特点，并且他们都具有明显的一阶相关性，所以我们设定p=1, q=1。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15262026757996.jpg" alt=""></p>
+<h3 id="1-7-拟合ARAM模型"><a href="#1-7-拟合ARAM模型" class="headerlink" title="1.7 拟合ARAM模型"></a>1.7 拟合ARAM模型</h3><p>选出BIC最小的模型，对训练集进行拟合。这里添加了一步将对数处理和差分处理还原的操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">bic, p, q, properModel = choose_better_model(time_series_diff)    </div><div class="line">predict_time_series = properModel.predict()</div><div class="line">predict_time_series = recover(predict_time_series, time_series_train, best_diff)</div></pre></td></tr></table></figure>
+<h3 id="1-8-训练集的拟合优度"><a href="#1-8-训练集的拟合优度" class="headerlink" title="1.8 训练集的拟合优度"></a>1.8 训练集的拟合优度</h3><p>用拟合好的模型对训练集进行预测，并使用均方根误差对效果进行衡量：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">original_time_series = time_series[predict_time_series.index]  </div><div class="line">plt.figure(facecolor=<span class="string">'white'</span>)</div><div class="line">predict_time_series.plot(color=<span class="string">'blue'</span>, label=<span class="string">'Predict'</span>)</div><div class="line">original_time_series.plot(color=<span class="string">'red'</span>, label=<span class="string">'Original'</span>)    </div><div class="line">RMSE = np.sqrt(sum((predict_time_series-original_time_series)**<span class="number">2</span>)/original_time_series.size)</div><div class="line">plt.title(<span class="string">'RMSE: %.4f'</span>% RMSE)</div><div class="line">plt.show()</div><div class="line">print(<span class="string">"训练集的RMSE为："</span>+str(RMSE))</div></pre></td></tr></table></figure>
+<p>训练集预测值和真实值拟合图如下：<img src="http://omu7tit09.bkt.clouddn.com/15261978277574.jpg" alt="">训练集的均方根误差为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">训练集的RMSE为：<span class="number">40024.97</span></div></pre></td></tr></table></figure>
+<h3 id="1-9-预测结果"><a href="#1-9-预测结果" class="headerlink" title="1.9 预测结果"></a>1.9 预测结果</h3><p>用拟合好的模型对测试集进行预测：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">test_predict = properModel.predict(start=&apos;2017-07-24&apos;, end=&apos;2017-07-29&apos;)</div><div class="line">test_predict = recover(test_predict, time_series_train, best_diff)</div><div class="line">print test_predict</div></pre></td></tr></table></figure>
+<p>得到最终的结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">2017-07-24    244854.689637</div><div class="line">2017-07-25    222634.079094</div><div class="line">2017-07-26    206351.989143</div><div class="line">2017-07-27    194213.093708</div><div class="line">2017-07-28    185037.296689</div><div class="line">2017-07-29    178024.480144</div></pre></td></tr></table></figure>
+<h2 id="二、问题"><a href="#二、问题" class="headerlink" title="二、问题"></a>二、问题</h2><h3 id="2-1-请给出你的分析过程、预测结果、建模脚本（要求可复现），包含必要的说明以及截图"><a href="#2-1-请给出你的分析过程、预测结果、建模脚本（要求可复现），包含必要的说明以及截图" class="headerlink" title="2.1 请给出你的分析过程、预测结果、建模脚本（要求可复现），包含必要的说明以及截图"></a>2.1 请给出你的分析过程、预测结果、建模脚本（要求可复现），包含必要的说明以及截图</h3><p>分析过程和预测结果如上所示，建模脚本见百度网盘，包括两个文件，一个为jupyter notebook【SERE_PREDICT.ipynb】，一个为python脚本【SERE_PREDICT.py】，两者均可复现。实验环境为python2.7，实验所依赖的package包括：</p>
+<ul>
+<li>pandas</li>
+<li>numpy</li>
+<li>datetime</li>
+<li>matplotlib</li>
+<li>statsmodels</li>
+</ul>
+<p>链接:<a href="https://pan.baidu.com/s/1zPYrhyxNjVmlwht27ot01w" target="_blank" rel="noopener">https://pan.baidu.com/s/1zPYrhyxNjVmlwht27ot01w</a>  密码:9okf</p>
+<h3 id="2-2-你认为你的模型预测结果如何，附上关键说明和截图"><a href="#2-2-你认为你的模型预测结果如何，附上关键说明和截图" class="headerlink" title="2.2 你认为你的模型预测结果如何，附上关键说明和截图"></a>2.2 你认为你的模型预测结果如何，附上关键说明和截图</h3><p>在本实验中，我使用均方根误差来评价模型预测效果，得到在训练集上的训练集的均方根误差为：40024.97。因为该数据集的数值均较大，日流入流出均达到了十万级别，这样的均方根误差相对来说效果较好，但有较大的提升空间。在分析过程中已有具体的呈现和说明。</p>
+<h3 id="2-3-如果需要提高预测准确率，可以从哪些方面入手，简单列举即可"><a href="#2-3-如果需要提高预测准确率，可以从哪些方面入手，简单列举即可" class="headerlink" title="2.3 如果需要提高预测准确率，可以从哪些方面入手，简单列举即可"></a>2.3 如果需要提高预测准确率，可以从哪些方面入手，简单列举即可</h3><ol>
+<li><p>在时间序列中存在的噪声，会干扰序列中每个点的波动，给预测造成难度，可以使用卡尔曼滤波来过滤这个噪声。将卡尔曼滤波算法与ARMA模型结合时，卡尔曼滤波算法可以在当获得一个新的数据点时，递归地更新状态变量（预测值）的信息，可以起到对ARMA模型的修正作用，在一定程度上提高ARMA模型的预测精度。</p>
+</li>
+<li><p>注意到我们需要预测的那几天在0点至10点是存在资金流动数据的，我们可以将这一部分数据作为我们预测全天数据的先验信息，提高预测精度。</p>
+</li>
+<li><p>如果我们具有有关资金流动的其他信息，诸如资金流动的来源、股市波动信息、宏观政策的变动、市场波动的信息等等，就可以构建一个特征集，用LSTM（长短时循环神经网络）来对序列进行建模。当然要是没有这些信息，也可以直接用历史记录 $[y_{t-1}, y_{t-2},…]$ 以及他们的各种统计量如均值、最大最小值、一阶差分、二阶差分等对 $x_t$ 做特征工程，以此丰富其维度，再使用LSTM对其进行建模。</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/时间序列/" rel="tag"># 时间序列</a>
+          
+            <a href="/tags/ARMA/" rel="tag"># ARMA</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/02/自然语言处理系列（10）：自然语言处理的发展与趋势/" rel="next" title="自然语言处理系列（10）：自然语言处理的发展与趋势">
+                <i class="fa fa-chevron-left"></i> 自然语言处理系列（10）：自然语言处理的发展与趋势
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">173</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">249</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、分析过程"><span class="nav-text">一、分析过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-数据预处理"><span class="nav-text">1.1 数据预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-绘制时序图"><span class="nav-text">1.2 绘制时序图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-平稳性检验"><span class="nav-text">1.3 平稳性检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-对数处理"><span class="nav-text">1.4 对数处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-纯随机性检验"><span class="nav-text">1.5 纯随机性检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-确定ARMA的阶数"><span class="nav-text">1.6 确定ARMA的阶数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-1-BIC识别"><span class="nav-text">1.6.1 BIC识别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-2-ACF、BCF识别"><span class="nav-text">1.6.2 ACF、BCF识别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-拟合ARAM模型"><span class="nav-text">1.7 拟合ARAM模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-训练集的拟合优度"><span class="nav-text">1.8 训练集的拟合优度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-预测结果"><span class="nav-text">1.9 预测结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、问题"><span class="nav-text">二、问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-请给出你的分析过程、预测结果、建模脚本（要求可复现），包含必要的说明以及截图"><span class="nav-text">2.1 请给出你的分析过程、预测结果、建模脚本（要求可复现），包含必要的说明以及截图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-你认为你的模型预测结果如何，附上关键说明和截图"><span class="nav-text">2.2 你认为你的模型预测结果如何，附上关键说明和截图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-如果需要提高预测准确率，可以从哪些方面入手，简单列举即可"><span class="nav-text">2.3 如果需要提高预测准确率，可以从哪些方面入手，简单列举即可</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>
