@@ -1,0 +1,1150 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="LeNet,AlexNet,VGGNet,GoogLeNet,ResNet,DenseNet," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="ImageNet Large Scale Visual Recognition Challenge，简称ILSVRC，它是图像分类领域的比赛，每年举办一次，下图为每年的得奖模型及其top-5错误率，这篇文章主要梳理一下这些模型的结构：">
+<meta name="keywords" content="LeNet,AlexNet,VGGNet,GoogLeNet,ResNet,DenseNet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机视觉系列（1）：从LeNet到DenseNet">
+<meta property="og:url" content="http://yoursite.com/2018/03/21/计算机视觉系列（1）：从LeNet到DenseNet/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="ImageNet Large Scale Visual Recognition Challenge，简称ILSVRC，它是图像分类领域的比赛，每年举办一次，下图为每年的得奖模型及其top-5错误率，这篇文章主要梳理一下这些模型的结构：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309420500223.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-05-28 下午6.21.32.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-05-28 下午6.18.00.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-05-28 下午6.58.52.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/1041527908463_.pic_hd.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15279112446518.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15279114581250.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15279116151588.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15279117977701.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309398227239.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309400522807.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309402630277.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309403995213.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309403639180.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309403720288.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309403770874.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309308732790.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309309330003.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309317415559.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15309313107650.jpg">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-07-07 下午12.15.05.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-07-07 下午12.17.12.png">
+<meta property="og:updated_time" content="2018-07-07T06:01:13.111Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机视觉系列（1）：从LeNet到DenseNet">
+<meta name="twitter:description" content="ImageNet Large Scale Visual Recognition Challenge，简称ILSVRC，它是图像分类领域的比赛，每年举办一次，下图为每年的得奖模型及其top-5错误率，这篇文章主要梳理一下这些模型的结构：">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15309420500223.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 计算机视觉系列（1）：从LeNet到DenseNet | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/21/计算机视觉系列（1）：从LeNet到DenseNet/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                计算机视觉系列（1）：从LeNet到DenseNet
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-21T21:14:45+08:00">
+                2018-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机视觉/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机视觉</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ImageNet Large Scale Visual Recognition Challenge，简称ILSVRC，它是图像分类领域的比赛，每年举办一次，下图为每年的得奖模型及其top-5错误率，这篇文章主要梳理一下这些模型的结构：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15309420500223.png" alt=""></p>
+<a id="more"></a>
+<h2 id="一、LeNet-5"><a href="#一、LeNet-5" class="headerlink" title="一、LeNet-5"></a>一、LeNet-5</h2><p>LeNet-5是LeCun等人于1998年在论文 <a href="http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf" target="_blank" rel="noopener">Gradient-based learning applied to document recognition</a> 提出的一个用于手写字体识别的卷积神经网络模型，是卷积神经网络的开山之作。它的模型结构相对于现在流行的网络来说略显简单，但其组成部分卷积层、池化层、全连接层都是后来的CNN网络的一部分。但在当时由于计算能力的局限且与支持向量机分类能力旗鼓相当，没有引起大范围的深入研究和关注。先看一下它的结构示意图：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-05-28 下午6.21.32.png" alt="屏幕快照 2018-05-28 下午6.21.32"></p>
+<ul>
+<li>INPUT：输入为32×32的的单通道图片像素数值矩阵；</li>
+<li>C1：卷积层，共6个卷积核，卷积核大小均为5×5，卷积操作步长为1，得到6×28×28的feature maps；</li>
+<li>S2：池化层，池化窗口大小为2×2，最大池化，得到6×14×14的maps；</li>
+<li>C3：卷积层，卷积核大小均为5×5，卷积操作步长为1，关键的地方是S2是6层，而C3有16层，中间是怎么变换过去的呢？这里有一个Locally Connect的方法；</li>
+</ul>
+<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-05-28 下午6.18.00.png" alt="屏幕快照 2018-05-28 下午6.18.00"><br>举几个例子，C3层的第0个map是有S2层的第0、1、2个map经过3个滤波器后相加得到，以此类推。</p>
+<ul>
+<li>S4：池化层，池化窗口大小为2×2，最大池化，得到16×5×5的maps；</li>
+<li>C5：卷积层，卷积核大小均为5×5，卷积操作步长为1，得到120个1*1的maps；</li>
+<li>F6：全连接层，84个神经元。</li>
+<li>OUTPUT：输出层神经元核函数(作用函数)是高斯函数，对输入信息进行空间映射的变换，最后输出属于各个类别（一共是10个）的分布。</li>
+</ul>
+<p><a href="https://www.zhihu.com/question/44328472" target="_blank" rel="noopener">RBF神经网络和BP神经网络有什么区别？</a></p>
+<h2 id="二、AlexNet"><a href="#二、AlexNet" class="headerlink" title="二、AlexNet"></a>二、AlexNet</h2><p>AlexNet是深度学习从沉寂走向繁盛的一个关节点，在2012年的ImageNet图像分类竞赛上，相比上一年的冠军，AlexNet的top-5错误率下降了十个百分点，远远超过当年的第二名。它的网络结构示意图如下所示：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-05-28 下午6.58.52.png" alt="屏幕快照 2018-05-28 下午6.58.52"></p>
+<p>网络结构的简化版如下所示：<br><img src="http://omu7tit09.bkt.clouddn.com/1041527908463_.pic_hd.jpg" alt="1041527908463_.pic_hd"></p>
+<p>AlexNet 之所以能够成功，深度学习之所以能够重回历史舞台，原因在于：</p>
+<ol>
+<li><a href="https://plushunter.github.io/2017/05/12/深度学习系列（8）：激活函数/" target="_blank" rel="noopener">ReLU</a></li>
+<li><a href="https://plushunter.github.io/2017/05/20/深度学习系列（11）：神经网络防止过拟合的方法/" target="_blank" rel="noopener">Dropout</a></li>
+<li><a href="https://plushunter.github.io/2017/05/20/深度学习系列（11）：神经网络防止过拟合的方法/" target="_blank" rel="noopener">Data augmentation</a></li>
+<li>局部响应归一化层（Local Response Normalization Layer）:存在于第一层卷积层和第二层卷积层的激活函数后面，引入这一层的主要目的，主要是为了防止过拟合，增加模型的泛化能力。对当前层的输出结果做平滑处理。这个策略贡献了1.2%的Top-5错误率。前后几层（对应位置的点）对中间这一层做一下平滑约束，计算方法是：<img src="http://omu7tit09.bkt.clouddn.com/15279112446518.jpg" alt=""></li>
+<li>重叠池化（Overlapping Pooling）：Overlapping的意思是有重叠，即Pooling的步长比Pooling Kernel的对应边要小。这个策略贡献了0.3%的Top-5错误率。</li>
+<li>大数据训练：百万级ImageNet图像数据</li>
+<li>多GPU训练：每个GPU上并行地、分别地运行AlexNet的一部分（例如将4096个神经元的全连接层拆分为两个并行的2048个神经元的全连接层，第一个卷积层有96个feature map而在一块GPU上只有48个feature map等），两块GPU只在特定的层上有交互。</li>
+<li>学习率衰减：</li>
+</ol>
+<h2 id="三、VGGNet"><a href="#三、VGGNet" class="headerlink" title="三、VGGNet"></a>三、VGGNet</h2><p>网络结构如下所示：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15279114581250.jpg" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15279116151588.jpg" alt=""><br>VGGNet与AlexNet不同的地方主要在于卷积核大小、卷积步数以及网络深度。</p>
+<p>VGGNet将小卷积核带入人们的视线，AlexNet中第一个卷积层使用的kernel大小为 $11\times11$  ，stride为4，C3和C5层中使用的都是 $5\times5$ 的卷积核；而出现在VGGNet中大多数的卷积核都是大小为$3\times3 $，stride为1的。</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15279117977701.jpg" alt=""></p>
+<p>直观上我们会觉得大的卷积核更好，因为它可以提取到更大区域内的信息，但是实际上，大卷积核可以用多个小卷积核进行代替。例如，一个 $5\times5$ 的卷积核就可以用两个串联的 $3\times3$ 卷积核来代替，一个 $7\times7$ 的卷积核就可以用三个串联的 $3\times3$ 卷积核来代替。这样的替代方式有两点好处：</p>
+<ol>
+<li>减少了参数个数：两个串联的小卷积核需要$3\times3\times2=18$ 个参数，一个 $5\times5 $的卷积核则有25个参数；三个串联的小卷积核需要$3\times3\times3=27$个参数，一个 $7\times7$的卷积核则有49个参数。大大减少了参数的数量。</li>
+<li>引入了更多的非线性：多少个串联的小卷积核就对应着多少次激活(activation)的过程，而一个大的卷积核就只有一次激活的过程。引入了更多的非线性变换，也就意味着模型的表达能力会更强，可以去拟合更高维的分布。</li>
+</ol>
+<p>值得一提的是，VGGNet结构的C里面还用到了 $1\times1 $的卷积核。但是这里对这种卷积核的使用并不是像Inception里面拿来对通道进行整合，模拟升维和降维，这里并没有改变通道数，所以可以理解为是进一步的引入非线性。</p>
+<p>VGGNet的出现让我们知道CNN的潜力无穷，并且越深的网络在分类问题上表现出来的性能越好，并不是越大的卷积核就越好，也不是越小的就越好，就VGGNet来看， $3\times3$ 卷积核是最合理的。</p>
+<h2 id="四、GoogLeNet"><a href="#四、GoogLeNet" class="headerlink" title="四、GoogLeNet"></a>四、GoogLeNet</h2><p>GoogLeNet的核心思想是：将全连接，甚至卷积中的局部连接，全部替换为稀疏连接。这样既能保持网络结构的稀疏性，又能利用密集矩阵计算的高效性的方法。大量研究表明，可以将稀疏矩阵聚类为较为密集的子矩阵来提高计算性能，Inception应运而生。Inception结构如下所示：<br><img src="http://omu7tit09.bkt.clouddn.com/15309398227239.jpg" alt=""></p>
+<p>这里的稀疏性是指卷积运算过程中，kernel的尺寸远远小于图片的尺寸，一个feature map仅与少数的输入单元相连接；而密集矩阵计算是指在Inception模块中的四个分支可以看作是较为稀疏的部分，但是拼接之后又成为一个大的密集矩阵。这种基本模块使用了3种不同的卷积核，那么提取到的应该是3种不同尺度的特征，既有较为宏观的特征又有较为微观的特征，增加了特征的多样性。池化层则保留较为原始的输入信息。在模块的输出端将提取到的各种特征在channel维度上进行拼接，得到多尺度的特征。</p>
+<p>GoogleNet将上述模块进行堆积，整个GoogleNet的网络结构如下所示：<br><img src="http://omu7tit09.bkt.clouddn.com/15309400522807.jpg" alt=""></p>
+<p>此外，还有升级版本的Inception，如下所示：</p>
+<ul>
+<li>Inception v2 &amp; v3</li>
+</ul>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15309402630277.jpg" alt=""></p>
+<ul>
+<li>Inception-v4 &amp;Inception-ResNet-v2</li>
+</ul>
+<div class="group-picture"><div class="group-picture-container"><div class="group-picture-row"><div class="group-picture-column" style="width: 100%;"><img src="http://omu7tit09.bkt.clouddn.com/15309403995213.jpg"></div></div><div class="group-picture-row"><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="http://omu7tit09.bkt.clouddn.com/15309403639180.jpg"></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="http://omu7tit09.bkt.clouddn.com/15309403720288.jpg"></div><div class="group-picture-column" style="width: 33.333333333333336%;"><img src="http://omu7tit09.bkt.clouddn.com/15309403770874.jpg"></div></div></div></div>
+<h2 id="五、ResNet"><a href="#五、ResNet" class="headerlink" title="五、ResNet"></a>五、ResNet</h2><p>ResNet，深度残差网络，在top-5上的错误率为3.6%，是2015年ILSVRC的冠军，其网络结构如下所示：<br><img src="http://omu7tit09.bkt.clouddn.com/15309308732790.jpg" alt=""></p>
+<p>残差网络的设计理念归纳起来就是：</p>
+<ul>
+<li>保持简洁</li>
+<li>VGG-style</li>
+<li>没有最深，只有更深，目前已突破1k层<br><img src="http://omu7tit09.bkt.clouddn.com/15309309330003.jpg" alt=""></li>
+</ul>
+<p>接下来讲讲网络中最关键的残差结构：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15309317415559.jpg" alt=""><br>如上图所示，这个网络的提出本质上还是要解决层次比较深的时候无法训练的问题。它借鉴了Highway Network的思想，在旁边专门开个通道使得输入可以直达输出，而优化的目标由原来的拟合输出H(x)变成输出和输入的差H(x)-x，其中H(X)是某一层原始的的期望映射输出，x是输入，箭头称作shortcut connection。</p>
+<p>作者的解读是这样的：</p>
+<ul>
+<li>if identity were optimal,easy to set weights as 0;</li>
+<li>if optimal mapping is closer to identity,easier to find small fluctuations</li>
+</ul>
+<p>如果identity是最优的，它就是我们想要的理想映射，那么我们可以直接将F(x)的参数全部置零；如果identity和H(x)很相近，那么我们就可以通过学习残差来修正这种差别。</p>
+<p>但为什么深度残差网络没有因为网络的加深而带来梯度消失或者梯度爆炸的问题呢？下面这篇文章分析了其为何性能优越，而且提出了一种新的残差单元，并且比较了各种残差单元的性能优劣，如下图所示：<br><img src="http://omu7tit09.bkt.clouddn.com/15309313107650.jpg" alt=""></p>
+<p><a href="https://arxiv.org/abs/1603.05027" target="_blank" rel="noopener">Identity Mappings in Deep Residual Networks</a></p>
+<p>归纳地说就是因为残差结构的特殊性，在由loss对输入求导的时候，导数项会被分解为两个，而有一个直接对输入的导数项并不会消失，所以梯度一直存在。</p>
+<h2 id="六、DenseNet"><a href="#六、DenseNet" class="headerlink" title="六、DenseNet"></a>六、DenseNet</h2><p>众所周知，最近几年卷积神经网络提高效果的方向，要么深（比如ResNet，解决了网络深时候的梯度消失问题）要么宽（比如GoogleNet的Inception），而作者则是从feature入手，通过对feature的极致利用达到更好的效果和更少的参数。归纳起来，DenseNet有以下几个优点：</p>
+<ol>
+<li>减轻了vanishing-gradient（梯度消失） </li>
+<li>加强了feature的传递 </li>
+<li>更有效地利用了feature </li>
+<li>一定程度上较少了参数数量</li>
+</ol>
+<p>DenseNet保证网络中层与层之间最大程度的信息传输的前提下，直接将所有层连接起来。在传统的卷积神经网络中，如果你有L层，那么就会有L个连接，但是在DenseNet中，会有L(L+1)/2个连接。简单讲，就是每一层的输入来自前面所有层的输出。如下图：$x_0$是input，$H_1$的输入是$x_0$（input），$H_2$的输入是$x_0$和$x_1$（$x_1$是$H_1$的输出）<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-07-07 下午12.15.05.png" alt="屏幕快照 2018-07-07 下午12.15.05"></p>
+<p>梯度消失问题在网络深度越深的时候越容易出现，原因就是输入信息和梯度信息在很多层之间传递导致的，而现在这种dense connection相当于每一层都直接连接input和loss，因此就可以减轻梯度消失现象，这样更深网络不是问题。另外作者还观察到这种dense connection有正则化的效果，因此对于过拟合有一定的抑制作用。</p>
+<p>文章与ResNet进行了对比，如下：</p>
+<ul>
+<li>ResNet：$X_l= H(x_{l-1})+x_{l-1}$</li>
+</ul>
+<p>这里的l表示层，$x_l$表示l层的输出，$H_l$表示一个非线性变换。所以对于ResNet而言，l层的输出是$l-1$层的输出加上对$l-1$层输出的非线性变换。</p>
+<ul>
+<li>DenseNet：$x_l = H_l([x_0,x_1,···,x_{l-1}])$</li>
+</ul>
+<p>$[x_0,x_1,…,x_{l-1}]$表示将0到l-1层的输出feature map做concatenation。concatenation是做通道的合并，就像Inception那样。而前面ResNet是值的相加，通道数是不变的。</p>
+<p>下图是整个网络结构，这个结构图中包含了3个Dense Block，其中加入了bottleneck layer和transition layer操作，每个dense block的3×3卷积前面都包含了一个1×1的卷积操作，就是所谓的bottleneck layer，目的是减少输入的feature map数量，既能降维减少计算量，又能融合各个通道的特征；另外作者为了进一步压缩参数，在每两个dense block之间又增加了1×1的卷积操作，表示增加了这个Translation layer，该层的1×1卷积的输出channel默认是输入channel到一半。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-07-07 下午12.17.12.png" alt="屏幕快照 2018-07-07 下午12.17.12"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>绝佳的介绍文章：<a href="https://zhuanlan.zhihu.com/p/31006686" target="_blank" rel="noopener">从LeNet-5到DenseNet</a></li>
+<li>LeNet-5：<a href="http://yann.lecun.com/exdb/publis/pdf/lecun-01a.pdf" target="_blank" rel="noopener">Gradient-based learning applied to document recognition</a> </li>
+<li>AlexNet：<a href="https://link.zhihu.com/?target=https%3A//papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf" target="_blank" rel="noopener">ImageNet Classification with Deep Convolutional Neural Networks</a></li>
+<li>VGGNet：<a href="https://arxiv.org/abs/1409.1556v6" target="_blank" rel="noopener">Very Deep Convolutional Networks for Large-Scale Image Recognition</a></li>
+<li>VGGNet：<a href="https://link.zhihu.com/?target=https%3A//arxiv.org/pdf/1512.00567v3.pdf" target="_blank" rel="noopener">Rethinking the Inception Architecture for Computer Vision</a></li>
+<li>GoogleNet：<a href="https://arxiv.org/abs/1409.4842" target="_blank" rel="noopener">Going Deeper with Convolutions</a></li>
+<li>ResNet：<a href="https://arxiv.org/abs/1512.03385" target="_blank" rel="noopener">Deep Residual Learning for Image Recognition</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LeNet/" rel="tag"># LeNet</a>
+          
+            <a href="/tags/AlexNet/" rel="tag"># AlexNet</a>
+          
+            <a href="/tags/VGGNet/" rel="tag"># VGGNet</a>
+          
+            <a href="/tags/GoogLeNet/" rel="tag"># GoogLeNet</a>
+          
+            <a href="/tags/ResNet/" rel="tag"># ResNet</a>
+          
+            <a href="/tags/DenseNet/" rel="tag"># DenseNet</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/08/自然语言处理系列（8）：RCNN/" rel="next" title="自然语言处理系列（8）：RCNN">
+                <i class="fa fa-chevron-left"></i> 自然语言处理系列（8）：RCNN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/25/自然语言处理系列（9）：DCNN/" rel="prev" title="自然语言处理系列（9）：DCNN">
+                自然语言处理系列（9）：DCNN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">174</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">255</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、LeNet-5"><span class="nav-text">一、LeNet-5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、AlexNet"><span class="nav-text">二、AlexNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、VGGNet"><span class="nav-text">三、VGGNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、GoogLeNet"><span class="nav-text">四、GoogLeNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、ResNet"><span class="nav-text">五、ResNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、DenseNet"><span class="nav-text">六、DenseNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>
