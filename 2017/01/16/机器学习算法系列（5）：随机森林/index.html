@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/f69ecd5658ba9557cf97e45f18d19cfd.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-08%20%E4%B8%8B%E5%8D%882.31.19.png">
-<meta property="og:updated_time" content="2017-12-26T08:47:49.814Z">
+<meta property="og:updated_time" content="2018-07-20T02:46:04.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（5）：随机森林">
 <meta name="twitter:description" content="一、基本原理顾名思义，是用随机的方式建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。在得到森林之后，当有一个新的输入样本进入的时候，就让森林中的每一棵决策树分别进行一下判断，看看这个样本应该属于哪一类（对于分类算法），然后看看哪一类被选择最多，就预测这个样本为那一类。 我们可以这样比喻随机森林算法：每一棵决策树就是一个精通于某一个窄领域的专家（因为我们从M个特征中">
@@ -422,8 +422,7 @@ var _hmt = _hmt || [];
 </ul>
 <p>减小特征选择个数m，树的相关性和分类能力也会相应的降低；增大m，两者也会随之增大。所以关键问题是如何选择最优的m（或者是范围），这也是随机森林唯一的一个参数。</p>
 <h3 id="2-3-袋外误差率"><a href="#2-3-袋外误差率" class="headerlink" title="2.3 袋外误差率"></a>2.3 袋外误差率</h3><p>如何选择最优的特征个数m，要解决这个问题，我们主要依据计算得到的袋外错误率oob error（out-of-bag error）。</p>
-<p>随机森林有一个重要的优点就是，没有必要对它进行交叉验证或者用一个独立的测试集来获得误差的一个无偏估计。它可以在内部进行评估，也就是说在生成的过程中就可以对误差建立一个无偏估计。</p>
-<p>我们知道，在构建每棵树时，我们对训练集使用了不同的bootstrap sample（随机且有放回地抽取）。所以对于每棵树而言，部分训练实例没有参与这棵树的生成，它们称为第k棵树的oob样本。</p>
+<p>对于一个样本，它在某一次含m个样本的训练集的随机采样中，每次被采集到的概率是$\frac{1}{m}$。不被采集到的概率为$1-\frac{1}{m}$。如果m次采样都没有被采集中的概率是$(1−\frac{1}{m})^m$，当$m→∞$<br>时，$(1−\frac{1}{m})m→\frac{1}{e}≃0.368$。也就是说，在bagging的每轮随机采样中，训练集中大约有36.8%的数据没有被采样集采集中。对于这部分大约36.8%的没有被采样到的数据，我们常常称之为袋外数据(Out Of Bag, 简称OOB)。这些数据没有参与训练集模型的拟合，因此可以用来检测模型的泛化能力。</p>
 <p>袋外错误率（oob error）计算方式如下：</p>
 <ul>
 <li>1）对每个样本计算它作为oob样本的树对它的分类情况</li>
