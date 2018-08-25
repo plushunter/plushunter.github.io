@@ -389,9 +389,12 @@ var _hmt = _hmt || [];
 
       
         
-          <h2 id="一、row-number-over-排序功能："><a href="#一、row-number-over-排序功能：" class="headerlink" title="一、row_number() over()排序功能："></a>一、row_number() over()排序功能：</h2><h3 id="1-1-row-number-over-无分组排序"><a href="#1-1-row-number-over-无分组排序" class="headerlink" title="1.1 row_number( ) over( )无分组排序"></a>1.1 row_number( ) over( )无分组排序</h3><p>若不对其进行分组，则此时row_number() over()的功能与rownum一致，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">SELECT </div><div class="line">    empno,</div><div class="line">    WORKDEPT,</div><div class="line">    SALARY, </div><div class="line">    Row_Number() OVER (ORDER BY salary desc) rank </div><div class="line">FROM </div><div class="line">    employee   </div><div class="line">--------------------------------------  </div><div class="line">000010  A00 152750  1  </div><div class="line">000030  C01 98250   2  </div><div class="line">000070  D21 96170   3  </div><div class="line">000020  B01 94250   4  </div><div class="line">000090  E11 89750   5  </div><div class="line">000100  E21 86150   6  </div><div class="line">000050  E01 80175   7  </div><div class="line">000130  C01 73800   8  </div><div class="line">000060  D11 72250   9</div></pre></td></tr></table></figure>
-<p>但row_number() over()更强大的地方在于可以进行分组排序。</p>
+          <p>这篇文章梳理了几个关于分组排序的SQL语句，在查询的时候常会遇到分组排序的场景，比如找出每个群体中中排名前十的用户，找出某一类商品销量最高的几个商品等等。它们分别是：</p>
+<ul>
+<li>row_number() over()</li>
+<li>rank( ) over( )</li>
+<li>dense_rank( ) over( )</li>
+</ul>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2018/08/25/数据分析系列（5）：从row_number() over() 引申开来/#more" rel="contents">
