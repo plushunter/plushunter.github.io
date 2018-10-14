@@ -1,0 +1,1077 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="word2vec,DCNN," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="这篇文章翻译自A Convolutional Neural Network for Modelling Sentences 准确地表达句子的能力是语言理解的核心。我们描述了一个被称为动态卷积神经网络(DCNN)的卷积结构，我们采用的是句子的语义模型。该网络使用动态k-Max池，一个通过线性序列的全局池操作。该网络处理不同长度的输入句子，并在句子中归纳出一个特征图，可以明确地捕捉短和长期的关系。该网">
+<meta name="keywords" content="word2vec,DCNN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自然语言处理系列（9）：DCNN">
+<meta property="og:url" content="http://yoursite.com/2018/03/25/自然语言处理系列（9）：DCNN/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="这篇文章翻译自A Convolutional Neural Network for Modelling Sentences 准确地表达句子的能力是语言理解的核心。我们描述了一个被称为动态卷积神经网络(DCNN)的卷积结构，我们采用的是句子的语义模型。该网络使用动态k-Max池，一个通过线性序列的全局池操作。该网络处理不同长度的输入句子，并在句子中归纳出一个特征图，可以明确地捕捉短和长期的关系。该网">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-02-26 下午3.56.08.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15196537776652.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15196537346867.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15196537403531.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15196537452129.png">
+<meta property="og:updated_time" content="2018-05-09T12:50:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自然语言处理系列（9）：DCNN">
+<meta name="twitter:description" content="这篇文章翻译自A Convolutional Neural Network for Modelling Sentences 准确地表达句子的能力是语言理解的核心。我们描述了一个被称为动态卷积神经网络(DCNN)的卷积结构，我们采用的是句子的语义模型。该网络使用动态k-Max池，一个通过线性序列的全局池操作。该网络处理不同长度的输入句子，并在句子中归纳出一个特征图，可以明确地捕捉短和长期的关系。该网">
+<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-02-26 下午3.56.08.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 自然语言处理系列（9）：DCNN | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-read-books">
+          <a href="/read-books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书记
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/25/自然语言处理系列（9）：DCNN/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                自然语言处理系列（9）：DCNN
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-25T23:14:45+08:00">
+                2018-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/自然语言处理/" itemprop="url" rel="index">
+                    <span itemprop="name">自然语言处理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇文章翻译自<a href="http://www.cs.wayne.edu/~mdong/Kalchbrenner_DCNN_ACL14.pdf" target="_blank" rel="noopener">A Convolutional Neural Network for Modelling Sentences</a></p>
+<p>准确地表达句子的能力是语言理解的核心。我们描述了一个被称为动态卷积神经网络(DCNN)的卷积结构，我们采用的是句子的语义模型。该网络使用动态k-Max池，一个通过线性序列的全局池操作。该网络处理不同长度的输入句子，并在句子中归纳出一个特征图，可以明确地捕捉短和长期的关系。该网络不依赖于解析树，并且很容易适用于任何语言。我们在四个实验中对DCNN进行了测试:小尺度二进制和多类情绪预测，六道问题分类和远程监控的推特情绪预测。该网络在前三项任务中取得了出色的性能，并且在最后一项任务中，在最强大的Baseline上减少了25%的错误。</p>
+<a id="more"></a>
+<h2 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h2><p>句子模型的目的是为了分析和表征句子的语义内容，以达到分类或生成的目的。句子建模问题是许多涉及到一定程度的自然语言理解的任务的核心。这些任务包括情绪分析、意译、识别、总结、语篇分析、机器翻译、基础语言学习和图像检索。由于个别句子很少被观察到或根本没有被观察到，所以一个句子必须根据经常被观察到的句子中的单词和短的n-grams来表示一个句子。句子模型的核心是一个特征函数，它定义了从单词或n-grams的特征中提取句子特征的过程。</p>
+<p>各种各样的模型方法已经被提出来了。基于组合的方法已经应用于从共现统计中得到的单词意义的向量表示，从而获得更长的短语的向量。在某些情况下，组合是由代数运算来定义的，而不是词义向量来生成句子的意思 (Erk and Pado ́, 2008; Mitchell and Lapata, 2008; Mitchell and Lapata, 2010; Tur- ney, 2012; Erk, 2012; Clarke, 2012).。在其他情况下，一个复合函数被学习，或者与特定的句法关系有关(Guevara, 2010; Zanzotto et al., 2010) 或特定的词类型相关联(Baroni and Zamparelli, 2010; Coecke et al., 2010; Grefenstette and Sadrzadeh, 2011; Kart- saklis and Sadrzadeh, 2013; Grefenstette, 2013)。另一种方法是用自动提取的逻辑形式来表示句子的意义 (Zettlemoyer and Collins, 2005)。</p>
+<p>核心模型是基于神经网络的模型。这些范围从基本的神经词袋或n-grams模型到更结构化的递归神经网络，以及基于卷积运算的时滞神经网络(Collobert and Weston, 2008; Socher et al., 2011; Kalchbrenner and Blunsom, 2013b)。神经网络句模型有很多优点。他们可以通过预测，例如，利用单词和短语的上下文，来获得单词和短语的一般向量。通过监督训练，神经网络句模型可以将这些向量调整为特定于某项任务的信息。除了将强大的分类器作为其体系结构的一部分之外，还可以使用神经句模型来建立一个神经语言模型来逐字生成句子 (Schwenk, 2012; Mikolov and Zweig, 2012; Kalchbrenner and Blunsom, 2013a)。</p>
+<p>我们定义了一个卷积神经网络结构，并将其应用于句子的语义建模。该网络处理不同长度的输入序列。在网络中，层间层交织着一维的卷积层和动态k-max池化层。动态k-max池是最大池操作的一般化。最大池操作符是一个非线性的子采样函数，它返回一组值的最大值 (LeCun et al., 1998)。该算子在两个方面是广义的。首先，k-max在一个线性序列上集合，返回序列中k最大值的子序列，而不是单个最大值。其次，可以通过将k作为网络的另一种功能或输入来动态选择池参数k。</p>
+<p>卷积层在句子矩阵的每一列特征上都应用了一个可编辑的过滤器。在句子中的每一个位置上，将相同的过滤器与n-gram进行卷积，使得这些特征可以独立于句子中的位置提取出来。一个卷积层接着是一个动态池层和一个非线性形式的feature map。就像在对象识别的卷积网络中，我们通过对输入语句应用不同的过滤器来计算多个特征映射来丰富第一层的表示。后续层还具有多个特征映射，这些特征映射通过与下面一层的所有映射进行卷积来计算。这些层的权值构成一个四维张量。由此产生的结构被称为动态卷积神经网络。</p>
+<p>卷积和动态池操作的多层结构会在输入语句中引入结构化特征图。图1展示了这样一个图。在较高层次的小筛选器可以捕获在输入句中相隔很远的非连续短语之间的句法或语义关系。特征图引入了一种类似于语法分析树的层次结构。这种结构与纯句法关系无关，是神经网络的内部结构。</p>
+<p>我们在四种环境中进行网络实验。前两个实验包括预测电影评论的情绪(Socher et al., 2013b)。该网络在二进制和多类实验中都优于其他方法。第三个实验涉及在TREC的数据集下的六个问题类型的分类 (Li and Roth, 2002)。该网络与其他基于大量工程特性和手工编码的知识资源的先进方法的准确性相一致。第四项实验是通过远程监控来预测Twitter帖子的人气(Go et al., 2009)。该网络接受了160万条推文，根据出现在他们身上的表情符号自动标记。在手工标记的测试集上，在Go et al.(2009)中所报告的最强的unigram和bigram基线的预测误差中，该网络减少了超过25%。</p>
+<p>论文的提纲如下。第2节描述了DCNN的背景，包括中心概念和相关的神经句模型。第3节定义了相关的操作符和网络的层。第4节介绍了网络的诱导特征图和其他属性。第5节讨论了实验，并考察了学习的特征检测器。</p>
+<h2 id="2-Background"><a href="#2-Background" class="headerlink" title="2 Background"></a>2 Background</h2><p>DCNN的层是由一个卷积操作和一个池化操作形成的。我们首先回顾一下相关的神经网络句模型。然后描述了一维卷积和经典时滞神经网络的运算(TDNN) (Hinton, 1989; Waibel et al., 1990)。通过在网络中加入一个最大池化层，TDNN可以被作为一个句子模型来使用(conbert and Weston, 2008)。</p>
+<h3 id="2-1-Related-Neural-Sentence-Models"><a href="#2-1-Related-Neural-Sentence-Models" class="headerlink" title="2.1 Related Neural Sentence Models"></a>2.1 Related Neural Sentence Models</h3><p>各种各样的神经网络语言模型已经被提出。基本句型模型的一般类型是神经网络词汇(NBoW)模型。这些通常包括一个投影层，将单词、子字单元或n-grams映射到高维的嵌入。然后将组件与操作(如求和)组合在一起。所产生的组合向量通过一个或多个全连接层进行分类。</p>
+<p>采用外部解析树提供的更一般结构的模型是递归神经网络 (RecNN) (Pollack, 1990; Ku ̈chler and Goller, 1996; Socher et al., 2011; Hermann and Blunsom, 2013)。在树的每个节点上，节点的左右子节点都由一个经典层组合起来。该层的权值在树的所有节点上共享。在顶部节点计算的层给出了这个句子的表示。递归神经网络(RNN)是递归网络的一种特殊情况，它所遵循的结构是一个简单的线性链(Gers and Schmidhuber, 2001; Mikolov et al., 2011)。RNN主要作为一种语言模型，但也可以被看作是一个线性结构的句子模型。在最后一个单词中计算的层代表这个句子。最后，基于卷积运算和TDNN架构，进一步构建了一类神经语句模型 (Collobert and Weston, 2008; Kalchbrenner and Blunsom, 2013b)。这些模型中使用的某些概念是DCNN的核心，接下来我们将描述它们。</p>
+<h3 id="2-2-Convolution"><a href="#2-2-Convolution" class="headerlink" title="2.2 Convolution"></a>2.2 Convolution</h3><p>一维卷积是一个权重向量$m\in R^m$和一个被视为序列的输入向量$s\in R^s$之间的运算。向量m是卷积的滤波器。具体地说，我们认为s是输入语句，$s_i$是与句子中第i个单词相关的单一特征值。一维卷积背后的思想是在句子中求每个m-gram与向量m的点积，从而获得另一个序列$c$：</p>
+<script type="math/tex; mode=display">c_j = m^T s_{j−m+1:j}\qquad (1)</script><p>根据j的取值范围，公式1给出了两种类型的卷积。窄卷积要求$s≥m$，序列$c\in R^{s-m+1}$的j的范围是$m$到$s$。宽卷积对s或m没有大小要求，序列$c\in R^{s-m+1}$的索引j的范围是1到$s+m-1$。超出范围($i<1或者i>s$)的输入值$s_i$会被设为零，狭义卷积的结果是广义卷积结果的子序列。两种一维卷积在图2中得到了说明。</1或者i></p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-02-26 下午3.56.08.png" alt="屏幕快照 2018-02-26 下午3.56.08"></p>
+<p>过滤器m中训练的权重相当于一个语言特征检测器，它学习对一个特定的n-gram进行编码，这些n-grams为大小n≤m,m是滤波器的宽度。在一个宽的卷积中应用权重m比在一个窄的卷积中应用它们有一些优势。一个宽卷积可以确保过滤器中的所有权重达到整个句子，包括边缘的单词。当m被设置为相对较大的值(比如8或10)时，这是非常重要的。此外，宽卷积保证了滤波器m对输入语句的应用总是产生一个有效的非空结果c，独立于宽度m和句子长度s。我们接下来描述一个TDNN的经典卷积层。</p>
+<h3 id="2-3-Time-Delay-Neural-Networks"><a href="#2-3-Time-Delay-Neural-Networks" class="headerlink" title="2.3 Time-Delay Neural Networks"></a>2.3 Time-Delay Neural Networks</h3><p>TDNN将一系列的输入序列与一组权重m进行卷积。在语音识别的TDNN (Waibel et al.， 1990)中，序列s被视为具有时间维度，而卷积应用于时间维度。每一个$s_j$往往不只是一个单一的值，而是一个d个数字组成的向量，因此$s\in R^{d×s}$。同样,m是一个大小为d×m权重矩阵。每一行m与相应的s行卷积，卷积通常是窄类型的。将生成的序列c作为输入到下一层，可以叠加多个卷积层。</p>
+<p>Max-TDNN句子模型是基于TDNN的体系结构 (Collobert and Weston, 2008)。在模型中，窄卷积被应用到句子矩阵s上，其中每一列对应句子中的一个词的特征向量$w_i\in R^d$</p>
+<script type="math/tex; mode=display">s=[w_1 ... w_s] \qquad (2)</script><p>为了解决不同的句子长度问题，Max-TDNN在生成的矩阵c中取每一行的最大值，从而产生一个d个数组成的向量。</p>
+<script type="math/tex; mode=display">{ C }_{ max }=\begin{bmatrix} max({ c }_{ 1,: }) \\ ··· \\ max({ c }_{ d,: }) \end{bmatrix}\qquad (3)</script><p>目标是捕捉最相关的特性，即对于生成的矩阵c的d行中的每一个具有最高值的特性。然后将固定大小的向量cmax作为输入，用全连接层进行分类。</p>
+<p>Max-TDNN模型有许多可取的特性。它对句子中单词的顺序很敏感，它不依赖于外部语言特定的特性，如依赖关系或选区解析树。它对句子中每个单词的信号都有很大程度的统一的重要性，除了边缘上的单词，在计算窄卷积时次数更少。但该模型也有一些局限性。特征检测器的范围仅限于权重的跨度m。增加m或叠加多卷积层的窄类型使特征检测器的范围更大。与此同时，它也加剧了对句子边缘的忽视，增加了卷积所需要的输入语句的最小规格s。由于这个原因，高阶和远程特性检测器不能很容易地并入模型中。最大池操作也有一些缺点。它无法区分一个行中的相关特性是否只发生一次或多次，它会忘记特征发生的顺序。更普遍的是,池因子的减少信号矩阵的对应于s−m + 1。即使是对于中等的s，池因子也可能是过量的。下一节的目的是在保留优势的同时解决这些限制。</p>
+<h2 id="3-Convolutional-Neural-Networks-with-Dynamic-k-Max-Pooling"><a href="#3-Convolutional-Neural-Networks-with-Dynamic-k-Max-Pooling" class="headerlink" title="3 Convolutional Neural Networks with Dynamic k-Max Pooling"></a>3 Convolutional Neural Networks with Dynamic k-Max Pooling</h2><p>我们使用一个卷积结构来建模句子，它通过动态的k-max池来交替使用宽卷积层和动态池层。在网络中，中间层特征图的宽度取决于输入句子的长度。所得到的体系结构是动态卷积神经网络。图3表示一个DCNN。我们开始详细描述这个网络。<br><img src="http://omu7tit09.bkt.clouddn.com/15196537776652.png" alt=""></p>
+<h3 id="3-1-Wide-Convolution"><a href="#3-1-Wide-Convolution" class="headerlink" title="3.1 Wide Convolution"></a>3.1 Wide Convolution</h3><p>给定一个输入句子，获得DCNN的第一层，其中，我们得到每个句子的每个词的词嵌入表示$w_i\in R^d$，然后构造一个句子矩阵$s\in R^{d×s}$，如（2）式所示。嵌入的值$w_i$是在训练期间优化的参数。网络中的卷积层是通过对权值矩阵$m$和下一层的激活矩阵进行卷积操作得到的。例如，第二层是通过将卷积应用到句子矩阵s本身来获得的。维度d和滤波器宽度m是网络的超参数。我们让这些操作是一维宽卷积，如第2.2节所述。由此产生的矩阵c的维度为$d×(s + m−1)$</p>
+<h3 id="3-2-k-Max-Pooling"><a href="#3-2-k-Max-Pooling" class="headerlink" title="3.2 k-Max Pooling"></a>3.2 k-Max Pooling</h3><p>接下来我们描述的是一个池化操作，它是在Max-TDNN语言模型中的关于时间维度的最大池化操作的一般化，不同于用于目标检测的卷积网络中使用的局部最大池化操作 (LeCun et al., 1998)。给定一个值k，和一个长度为$p$的序列$p\in R^p$ (p&gt;k)，$k-max pooling$选择了一个由向量p中最大的数值组成的子序列$p_{max}^k$。$p^k_{max}$中值的顺序对应于它们在p中的原始顺序。</p>
+<p>k-max池操作使得选出在p中的k个最活跃特征成为可能，它们位于一些不同的位置。它保留了特征的顺序，但对它们的特定位置不敏感。它还可以更精细地分辨出在p中，特征被高度激活的次数，以及在p上的特征变化的被高度激活的状况。将k-max池运算符应用于最顶层卷积层后的网络中。这保证了全连接层的输入独立于输入句子的长度。但是，正如我们接下来看到的，在中间卷积层中，池参数k不是固定的，而是动态选择的，以便能够平滑地提取更高阶和更长的特性。</p>
+<h3 id="3-3-Dynamic-k-Max-Pooling"><a href="#3-3-Dynamic-k-Max-Pooling" class="headerlink" title="3.3 Dynamic k-Max Pooling"></a>3.3 Dynamic k-Max Pooling</h3><p>一个动态k-max池操作是一个k-max池操作，我们让k成为句子长度和网络深度的函数。虽然可能有很多函数，但我们只是简单地将池参数建模如下：</p>
+<script type="math/tex; mode=display">K_{l}=\max \left( k_{top}, \left \lceil \frac {L-l}{L} s \right \rceil \right)\qquad (4)</script><p>其中l表示当前卷积的层数（即第几个卷积层），L是网络中总共卷积层的层数；$k_{top}$为最顶层的卷积层pooling对应的k值，是一个固定的值。举个例子，例如网络中有三个卷积层，$k_{top}=3$，输入的句子长度$s=18$；那么，对于第一层卷积层下面的pooling参数$k_1=12$，而第二层卷积层的pooling参数$k_2=6$，第三层有固定的池化参数$k_3=k_{top}=3$。方程4是描述第l部分的序列的相关部分在长度为s的句子上的相关部分所需要的数值数量的模型。对于情绪预测中的一个例子，根据方程，在长度s的句子中，一阶特征，例如一个正数，大多数出现$k_1$次，而另一个二阶特征，如否定句或子句，最多出现$k_2$次。</p>
+<h3 id="3-4-Non-linear-Feature-Function"><a href="#3-4-Non-linear-Feature-Function" class="headerlink" title="3.4 Non-linear Feature Function"></a>3.4 Non-linear Feature Function</h3><p>在动态池化应用于卷积的结果之后，一个偏置项$b\in R^d$和一个非线性函数$g$被应用于被池化的矩阵的每一个元素。每个集合矩阵的每一行都有一个单偏差值。如果我们暂时忽略池化层，我们可以说明在卷积层和非线性层后如何计算矩阵$a$中的d维的列a。定义M为对角矩阵。</p>
+<script type="math/tex; mode=display">M=[diag(m:,1),···,diag(m:,m)] \qquad (5)</script><p>其中m为宽卷积的d维滤波器的权值。然后，在第一对卷积和一个非线性层之后，矩阵a中的每一列a得到如下所示，对于一些索引j：</p>
+<script type="math/tex; mode=display">a=g\left( M\begin{bmatrix} { w }_{ j } \\ ··· \\ { w }_{ j+m-1 } \end{bmatrix}+b \right) \qquad (6)</script><p>这里a是一列的一级特征。二阶特征也类似于将公式（6）应用于一个序列的一阶特性$a_j,…a_{j + m′−1}$与另一个权重矩阵$m′$。除了池，公式（6）是特征提取函数的核心，它有一个一般形式。特征函数与池化才操作引入了位置不变性，使高阶特征变量的范围变大。</p>
+<h3 id="3-5-Multiple-Feature-Maps"><a href="#3-5-Multiple-Feature-Maps" class="headerlink" title="3.5 Multiple Feature Maps"></a>3.5 Multiple Feature Maps</h3><p>到目前为止，我们已经描述了如何应用一个宽卷积，一个(动态的)k-max池化层和一个非线性函数到输入句子的矩阵来获得一阶特征图。这三种操作可以重复，以生成递增顺序的特征图和增加深度的网络。我们用$F_i$来表示第i阶的特征图。在对目标识别的卷积网络中，为了增加特定顺序的学习特征检测器的数量，可以在同一层并行计算多个特征映射。每一个特征映射$F_j^i$是通过不同的滤波器来对矩阵$m_{j,k}^i$和第$i-1$阶的特征映射$F_k^{i-1}$进行卷积操作，并把结果加和：</p>
+<script type="math/tex; mode=display">F_j^i=\sum^n_{k=1}m^i_{j,k}*F_k^{i-1}\qquad (7)</script><p>其中∗表示宽卷积。权重$m^i_{j,k}$构成一个4阶张量。在宽卷积之后，首先进行动态k-max池化，然后将非线性函数分别应用于每个映射。</p>
+<h3 id="3-6-Folding"><a href="#3-6-Folding" class="headerlink" title="3.6 Folding"></a>3.6 Folding</h3><p>到目前为止，在网络的形成过程中，应用于句子矩阵的单个行的特征检测器可以有多种顺序，并在多个特征映射的同一行中创建复杂的依赖关系。然而，不同行的特征检测器相互独立，直到顶部的全连接层。可以通过在Eq. 5中使M变成满矩阵来实现完全依赖于不同的行，而不是一个稀疏矩阵的对角线。在这里，我们探索一种更简单的方法，称为折叠，它不引入任何其他参数。在一个卷积层之后，动态k-Max池化之前，将一个feature map组件中的每两行相加。对于d行的映射，折叠返回d/2行的映射，从而使表示的大小减半。使用折叠层之后，第i层的特征探测器现在依赖于更低的第$i-1$层的两行特征值。这样我们结束了对DCNN的描述。</p>
+<h2 id="4-Properties-of-the-Sentence-Model"><a href="#4-Properties-of-the-Sentence-Model" class="headerlink" title="4 Properties of the Sentence Model"></a>4 Properties of the Sentence Model</h2><p>我们描述了基于DCNN的句子模型的一些属性。我们描述了由卷积和池化层的继承而导致的特征图的概念。我们简单地将这些性质与其他神经句模型的性质联系起来。</p>
+<h3 id="4-1-Word-and-n-Gram-Order"><a href="#4-1-Word-and-n-Gram-Order" class="headerlink" title="4.1 Word and n-Gram Order"></a>4.1 Word and n-Gram Order</h3><p>其中一个基本属性是对输入句子中单词顺序的敏感性。对于大多数应用，为了学习细粒度的特性检测器，对于模型来说，能够区分输入中是否存在特定的n-gram是有益的。同样，对于模型来说，能够分辨出最相关的n-grams的相对位置是有益的。该网络旨在捕捉这两个方面。第一层的宽卷积的滤波器m可以学习识别具有小于或等于滤波器宽度m的特定n-grams。正如我们在实验中看到的，在第一层中，m通常被设置为一个相对较大的值，比如10。由广义池操作提取的n-grams子序列，将不变性引入到绝对位置，但维持了它们的顺序和相对位置。至于其他的神经句模型，NBoW模型的类根据定义对词序不敏感的。一个基于递归神经网络的句子模型对词序很敏感，但它倾向于将其作为输入的最新单词 (Mikolov et al., 2011)。这使得RNN在语言建模方面表现出色，但在输入句中，它是在记忆n-grams时是最不理想的。类似地，递归神经网络对词序很敏感，但对树中最顶层的节点有偏倚。浅树可以在一定程度上缓解这种影响 (Socher et al., 2013a)。在第2.3节中，max - tdnn对词序是敏感的，但是max池只在句子矩阵的每一行中选出一个单一的n-grams特征。</p>
+<h3 id="4-2-Induced-Feature-Graph"><a href="#4-2-Induced-Feature-Graph" class="headerlink" title="4.2  Induced Feature Graph"></a>4.2  Induced Feature Graph</h3><p>模型不需要任何的先验知识，例如句法依存树等，并且模型考虑了句子中相隔较远的词语之间的语义信息；</p>
+<h2 id="5-Experiments"><a href="#5-Experiments" class="headerlink" title="5 Experiments"></a>5 Experiments</h2><blockquote>
+<p>模型训练及参数</p>
+</blockquote>
+<ul>
+<li>输出层是一个类别概率分布（即softmax），与倒数第二层全连接；</li>
+<li>代价函数为交叉熵，训练目标是最小化代价函数；</li>
+<li>L2正则化；</li>
+<li>优化方法：mini-batch + gradient-based (使用Adagrad update rule, Duchi et al., 2011)</li>
+</ul>
+<blockquote>
+<p>实验结果</p>
+</blockquote>
+<p>在三个数据集上进行了实验，分别是(1)电影评论数据集上的情感识别，(2)TREC问题分类，以及(3)Twitter数据集上的情感识别。结果如下图：</p>
+<p><img src="http://omu7tit09.bkt.clouddn.com/15196537346867.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15196537403531.png" alt=""><br><img src="http://omu7tit09.bkt.clouddn.com/15196537452129.png" alt=""></p>
+<p>可以看出，DCNN的性能非常好，几乎不逊色于传统的模型；而且，DCNN的好处在于不需要任何的先验信息输入，也不需要构造非常复杂的人工特征。</p>
+<h2 id="6-Conclusion"><a href="#6-Conclusion" class="headerlink" title="6 Conclusion"></a>6 Conclusion</h2><p>我们描述了一个动态的卷积神经网络，它使用动态k-max池化运算符作为非线性的子采样函数。网络所引起的特征图能够捕获不同大小的单词关系。该网络在问题和情绪分类上获得了很高的性能，而不需要由解析器或其他资源提供外部特性。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/word2vec/" rel="tag"># word2vec</a>
+          
+            <a href="/tags/DCNN/" rel="tag"># DCNN</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/21/计算机视觉系列（1）：从LeNet到DenseNet/" rel="next" title="计算机视觉系列（1）：从LeNet到DenseNet">
+                <i class="fa fa-chevron-left"></i> 计算机视觉系列（1）：从LeNet到DenseNet
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/04/人大应统部落（2）：2018级中国人民大学应用统计专业硕士经验贴合集/" rel="prev" title="人大应统部落（2）：2018年人大应统专业硕士经验贴合集">
+                人大应统部落（2）：2018年人大应统专业硕士经验贴合集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">163</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">244</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
+                    
+                      <i class="fa fa-fw fa-book"></i>读书</a>
+                </span>
+              
+            
+          </div>
+
+         
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://developers.googleblog.cn" title="Google Developers" target="_blank">Google Developers</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Introduction"><span class="nav-text">1 Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Background"><span class="nav-text">2 Background</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Related-Neural-Sentence-Models"><span class="nav-text">2.1 Related Neural Sentence Models</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Convolution"><span class="nav-text">2.2 Convolution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Time-Delay-Neural-Networks"><span class="nav-text">2.3 Time-Delay Neural Networks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Convolutional-Neural-Networks-with-Dynamic-k-Max-Pooling"><span class="nav-text">3 Convolutional Neural Networks with Dynamic k-Max Pooling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Wide-Convolution"><span class="nav-text">3.1 Wide Convolution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-k-Max-Pooling"><span class="nav-text">3.2 k-Max Pooling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-Dynamic-k-Max-Pooling"><span class="nav-text">3.3 Dynamic k-Max Pooling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-Non-linear-Feature-Function"><span class="nav-text">3.4 Non-linear Feature Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-Multiple-Feature-Maps"><span class="nav-text">3.5 Multiple Feature Maps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-Folding"><span class="nav-text">3.6 Folding</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Properties-of-the-Sentence-Model"><span class="nav-text">4 Properties of the Sentence Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Word-and-n-Gram-Order"><span class="nav-text">4.1 Word and n-Gram Order</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Induced-Feature-Graph"><span class="nav-text">4.2  Induced Feature Graph</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Experiments"><span class="nav-text">5 Experiments</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-Conclusion"><span class="nav-text">6 Conclusion</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>
