@@ -99,7 +99,9 @@
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-07%20%E4%B8%8A%E5%8D%8812.00.18.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15009922005058.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午11.18.05.png">
-<meta property="og:updated_time" content="2017-12-26T08:04:49.703Z">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午11.18.05.png">
+<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/11.png">
+<meta property="og:updated_time" content="2018-09-03T15:11:04.597Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（3）：逻辑斯谛回归">
 <meta name="twitter:description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：">
@@ -459,7 +461,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
 <h3 id="4-2-多分类"><a href="#4-2-多分类" class="headerlink" title="4.2 多分类"></a>4.2 多分类</h3><p>如果$y$不是在$[0,1]$中取值，而是在$K$个类别中取值，这时问题就变为一个多分类问题。有两种方式可以出处理该类问题：一种是我们对每个类别训练一个二元分类器（One-vs-all），当$K$个类别不是互斥的时候，比如用户会购买哪种品类，这种方法是合适的。如果$K$个类别是互斥的，即 $y=i$ 的时候意味着 $y$ 不能取其他的值，比如用户的年龄段，这种情况下 Softmax 回归更合适一些。Softmax 回归是直接对逻辑回归在多分类的推广，相应的模型也可以叫做多元逻辑回归（Multinomial Logistic Regression）。模型通过 softmax 函数来对概率建模，具体形式如下：</p>
 <script type="math/tex; mode=display">P(y=i|x,\theta)=\frac{^{e^{\theta^T_ix}}}{\sum_j^K e^{\theta_j^Tx}}$$而决策函数为：$$y^*=argmax_iP(y=i|x,\theta )</script><p>对于的损失函数为</p>
 <script type="math/tex; mode=display">J(\theta)=-\frac{1}{N}\sum_i^N\sum_j^KP(y_i=j)log\frac{e^{\theta_i^Tx}}{\sum e^{\theta_k^Tx}}</script><p>类似的，我们也可以通过梯度下降或其他高阶方法来求解该问题，这里不再赘述。</p>
-<h3 id="4-3-应用"><a href="#4-3-应用" class="headerlink" title="4.3 应用"></a>4.3 应用</h3><p>这里以预测用户对品类的购买偏好为例，介绍一下美团是如何用逻辑回归解决工作中问题的。该问题可以转换为预测用户在未来某个时间段是否会购买某个品类，如果把会购买标记为1，不会购买标记为0，就转换为一个二分类问题。我们用到的特征包括用户在美团的浏览，购买等历史信息，见下表：<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午11.18.05.png" alt="屏幕快照 2017-07-25 下午11.18.05"><br>其中提取的特征的时间跨度为30天，标签为2天。生成的训练数据大约在7000万量级（美团一个月有过行为的用户），我们人工把相似的小品类聚合起来，最后有18个较为典型的品类集合。如果用户在给定的时间内购买某一品类集合，就作为正例。有了训练数据后，使用Spark版的LR算法对每个品类训练一个二分类模型，迭代次数设为100次的话模型训练需要40分钟左右，平均每个模型2分钟，测试集上的AUC也大多在0.8以上。训练好的模型会保存下来，用于预测在各个品类上的购买概率。预测的结果则会用于推荐等场景。</p>
+<h3 id="4-3-应用"><a href="#4-3-应用" class="headerlink" title="4.3 应用"></a>4.3 应用</h3><p>这里以预测用户对品类的购买偏好为例，介绍一下美团是如何用逻辑回归解决工作中问题的。该问题可以转换为预测用户在未来某个时间段是否会购买某个品类，如果把会购买标记为1，不会购买标记为0，就转换为一个二分类问题。我们用到的特征包括用户在美团的浏览，购买等历史信息，见下表：<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午11.18.05.png" alt="屏幕快照 2017-07-25 下午11.18.05"><br>其中提取的特征的时间跨度为30天，标签为2天。生成的训练数据大约在7000万量级（美团一个月有过行为的用户），我们人工把相似的小品类聚合起来，最后有18个较为典型的品类集合。如果用户在给定的时间内购买某一品类集合，就作为正例。有了训练数据后，使用Spark版的LR算法对每个品类训练一个二分类模型，迭代次数设为100次的话模型训练需要40分钟左右，平均每个模型2分钟，测试集上的AUC也大多在0.8以上。训练好的模型会保存下来，用于预测在各个品类上的购买概率。预测的结果则会用于推荐等场景。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-25 下午11.18.05.png" alt="屏幕快照 2017-07-25 下午11.18.05"><br><img src="http://omu7tit09.bkt.clouddn.com/11.png" alt="11"></p>
 <p>由于不同品类之间正负例分布不同，有些品类正负例分布很不均衡，我们还尝试了不同的采样方法，最终目标是提高下单率等线上指标。经过一些参数调优，品类偏好特征为推荐和排序带来了超过1%的下单率提升。</p>
 <p>此外，由于LR模型的简单高效，易于实现，可以为后续模型优化提供一个不错的baseline，我们在排序等服务中也使用了LR模型。</p>
 <p>逻辑回归的数学模型和求解都相对比较简洁，实现相对简单。通过对特征做离散化和其他映射，逻辑回归也可以处理非线性问题，是一个非常强大的分类器。因此在实际应用中，当我们能够拿到许多低层次的特征时，可以考虑使用逻辑回归来解决我们的问题。</p>
@@ -611,7 +613,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">175</span>
+                  <span class="site-state-item-count">100</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -622,7 +624,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -633,7 +635,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">260</span>
+                  <span class="site-state-item-count">158</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
