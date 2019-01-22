@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、java异常异常指不期而至的各种状况，如：文件找不到、网络连接失败、非法参数等。异常是一个事件，它发生在程序运行期间，干扰了正常的指令流程。Java通 过API中Throwable类的众多子类描述各种不同的异常。因而，Java异常都是对象，是Throwable子类的实例，描述了出现在一段编码中的 错误条件。当条件生成时，错误将引发异常。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15032841166891.jpg">
-<meta property="og:updated_time" content="2017-09-01T06:50:28.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwxn0cvo74j31100lg3zm.jpg">
+<meta property="og:updated_time" content="2018-11-05T16:11:51.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习笔记（7）：深入理解java异常处理机制">
 <meta name="twitter:description" content="一、java异常异常指不期而至的各种状况，如：文件找不到、网络连接失败、非法参数等。异常是一个事件，它发生在程序运行期间，干扰了正常的指令流程。Java通 过API中Throwable类的众多子类描述各种不同的异常。因而，Java异常都是对象，是Throwable子类的实例，描述了出现在一段编码中的 错误条件。当条件生成时，错误将引发异常。">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15032841166891.jpg">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwxn0cvo74j31100lg3zm.jpg">
 
 
 
@@ -215,12 +215,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -228,7 +228,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -238,7 +238,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -394,8 +394,7 @@ var _hmt = _hmt || [];
       
         <h2 id="一、java异常"><a href="#一、java异常" class="headerlink" title="一、java异常"></a>一、java异常</h2><p>异常指不期而至的各种状况，如：文件找不到、网络连接失败、非法参数等。异常是一个事件，它发生在程序运行期间，干扰了正常的指令流程。Java通 过API中Throwable类的众多子类描述各种不同的异常。因而，Java异常都是对象，是Throwable子类的实例，描述了出现在一段编码中的 错误条件。当条件生成时，错误将引发异常。</p>
 <a id="more"></a>
-<p>Java异常类层次结构图：</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15032841166891.jpg" alt=""></p>
+<p>Java异常类层次结构图：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwxn0cvo74j31100lg3zm.jpg" alt=""></p>
 <p> 在 Java 中，所有的异常都有一个共同的祖先 Throwable（可抛出）。Throwable 指定代码中可用异常传播机制通过 Java 应用程序传输的任何问题的共性。</p>
 <h3 id="1-1-Exception（异常）和-Error（错误）"><a href="#1-1-Exception（异常）和-Error（错误）" class="headerlink" title="1.1 Exception（异常）和 Error（错误）"></a>1.1 Exception（异常）和 Error（错误）</h3><ul>
 <li>Throwable： 有两个重要的子类：Exception（异常）和 Error（错误），二者都是 Java 异常处理的重要子类，各自都包含大量子类。<ul>
@@ -484,7 +483,7 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">public class TestException &#123;  </div><div class="line">    public static void main(String args[]) &#123;  </div><div class="line">        int i = 0;  </div><div class="line">        String greetings[] = &#123; &quot; Hello world !&quot;, &quot; Hello World !! &quot;,  </div><div class="line">                &quot; HELLO WORLD !!!&quot; &#125;;  </div><div class="line">        while (i &lt; 4) &#123;  </div><div class="line">            try &#123;  </div><div class="line">                // 特别注意循环控制变量i的设计，避免造成无限循环  </div><div class="line">                System.out.println(greetings[i++]);  </div><div class="line">            &#125; catch (ArrayIndexOutOfBoundsException e) &#123;  </div><div class="line">                System.out.println(&quot;数组下标越界异常&quot;);  </div><div class="line">            &#125; finally &#123;  </div><div class="line">                System.out.println(&quot;--------------------------&quot;);  </div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>运行结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Hello world !</div><div class="line">--------------------------</div><div class="line">Hello World !!</div><div class="line">--------------------------</div><div class="line">HELLO WORLD !!!</div><div class="line">--------------------------</div><div class="line">数组下标越界异常</div><div class="line">--------------------------</div></pre></td></tr></table></figure></p>
 <pre><code> 在例5中，请特别注意try子句中语句块的设计，如果设计为如下，将会出现死循环。如果设计为：
-</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">try &#123;  </div><div class="line">      System.out.println (greetings[i]); i++;  </div><div class="line">&#125; </div><div class="line">``` </div><div class="line"></div><div class="line">小结：</div><div class="line"></div><div class="line">try 块：用于捕获异常。其后可接零个或多个catch块，如果没有catch块，则必须跟一个finally块。</div><div class="line">catch 块：用于处理try捕获到的异常。</div><div class="line">finally 块：无论是否捕获或处理异常，finally块里的语句都会被执行。当在try块或catch块中遇到return语句时，finally语句块将</div><div class="line">在方法返回之前被执行。在以下4种特殊情况下，finally块不会被执行：</div><div class="line"></div><div class="line">1. 在finally语句块中发生了异常。</div><div class="line">2. 在前面的代码中用了System.exit()退出程序。</div><div class="line">3. 程序所在的线程死亡。</div><div class="line">4. 关闭CPU。</div><div class="line"></div><div class="line">#### 2.1.3 try-catch-finally 规则</div><div class="line"></div><div class="line">1. 必须在 try 之后添加 catch 或 finally 块。try 块后可同时接 catch 和 finally 块，但至少有一个块。</div><div class="line">2. 必须遵循块顺序：若代码同时使用 catch 和 finally 块，则必须将 catch 块放在 try 块之后。</div><div class="line">3. catch 块与相应的异常类的类型相关。</div><div class="line">4. 一个 try 块可能有多个 catch 块。若如此，则执行第一个匹配块。即Java虚拟机会把实际抛出的异常对象依次和各个catch代码块声明的异常类型匹配，如果异常对象为某个异常类型或其子类的实例，就执行这个catch代码块，不会再执行其他的 catch代码块</div><div class="line">5. 可嵌套 try-catch-finally 结构。</div><div class="line">6. 在 try-catch-finally 结构中，可重新抛出异常。</div><div class="line">7. 除了下列情况，总将执行 finally 做为结束：JVM 过早终止（调用 System.exit(int)）；在 finally 块中抛出一个未处理的异常；计算机断电、失火、或遭遇病毒攻击。</div><div class="line"></div><div class="line">#### 2.1.4 try、catch、finally语句块的执行顺序</div><div class="line"></div><div class="line"></div><div class="line">1. 当try没有捕获到异常时：try语句块中的语句逐一被执行，程序将跳过catch语句块，执行finally语句块和其后的语句；</div><div class="line"></div><div class="line">2. 当try捕获到异常，catch语句块里没有处理此异常的情况：当try语句块里的某条语句出现异常时，而没有处理此异常的catch语句块时，此异常将会抛给JVM处理，finally语句块里的语句还是会被执行，但finally语句块后的语句不会被执行；</div><div class="line"></div><div class="line">3. 当try捕获到异常，catch语句块里有处理此异常的情况：在try语句块中是按照顺序来执行的，当执行到某一条语句出现异常时，程序将跳到catch语句块，并与catch语句块逐一匹配，找到与之对应的处理程序，其他的catch语句块将不会被执行，而try语句块中，出现异常之后的语句也不会被执行，catch语句块执行完后，执行finally语句块里的语句，最后执行finally语句块后的语句；</div><div class="line"></div><div class="line">如下图所示：</div><div class="line"></div><div class="line">![](http://omu7tit09.bkt.clouddn.com/15032852537063.jpg)</div><div class="line"></div><div class="line"></div><div class="line">### 2.2 抛出异常</div><div class="line">任何Java代码都可以抛出异常，如：自己编写的代码、来自Java开发环境包中代码，或者Java运行时系统。无论是谁，都可以通过Java的throw语句抛出异常。从方法中抛出的任何异常都必须使用throws子句。</div><div class="line"></div><div class="line">#### 2.2.1 throws抛出异常</div><div class="line"></div><div class="line">如果一个方法可能会出现异常，但没有能力处理这种异常，可以在方法声明处用throws子句来声明抛出异常。例如汽车在运行时可能会出现故障，汽车本身没办法处理这个故障，那就让开车的人来处理。</div><div class="line"></div><div class="line">throws语句用在方法定义时声明该方法要抛出的异常类型，如果抛出的是Exception异常类型，则该方法被声明为抛出所有的异常。多个异常可使用逗号分割。throws语句的语法格式为：</div></pre></td></tr></table></figure>
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">try &#123;  </div><div class="line">      System.out.println (greetings[i]); i++;  </div><div class="line">&#125; </div><div class="line">``` </div><div class="line"></div><div class="line">小结：</div><div class="line"></div><div class="line">try 块：用于捕获异常。其后可接零个或多个catch块，如果没有catch块，则必须跟一个finally块。</div><div class="line">catch 块：用于处理try捕获到的异常。</div><div class="line">finally 块：无论是否捕获或处理异常，finally块里的语句都会被执行。当在try块或catch块中遇到return语句时，finally语句块将</div><div class="line">在方法返回之前被执行。在以下4种特殊情况下，finally块不会被执行：</div><div class="line"></div><div class="line">1. 在finally语句块中发生了异常。</div><div class="line">2. 在前面的代码中用了System.exit()退出程序。</div><div class="line">3. 程序所在的线程死亡。</div><div class="line">4. 关闭CPU。</div><div class="line"></div><div class="line">#### 2.1.3 try-catch-finally 规则</div><div class="line"></div><div class="line">1. 必须在 try 之后添加 catch 或 finally 块。try 块后可同时接 catch 和 finally 块，但至少有一个块。</div><div class="line">2. 必须遵循块顺序：若代码同时使用 catch 和 finally 块，则必须将 catch 块放在 try 块之后。</div><div class="line">3. catch 块与相应的异常类的类型相关。</div><div class="line">4. 一个 try 块可能有多个 catch 块。若如此，则执行第一个匹配块。即Java虚拟机会把实际抛出的异常对象依次和各个catch代码块声明的异常类型匹配，如果异常对象为某个异常类型或其子类的实例，就执行这个catch代码块，不会再执行其他的 catch代码块</div><div class="line">5. 可嵌套 try-catch-finally 结构。</div><div class="line">6. 在 try-catch-finally 结构中，可重新抛出异常。</div><div class="line">7. 除了下列情况，总将执行 finally 做为结束：JVM 过早终止（调用 System.exit(int)）；在 finally 块中抛出一个未处理的异常；计算机断电、失火、或遭遇病毒攻击。</div><div class="line"></div><div class="line">#### 2.1.4 try、catch、finally语句块的执行顺序</div><div class="line"></div><div class="line"></div><div class="line">1. 当try没有捕获到异常时：try语句块中的语句逐一被执行，程序将跳过catch语句块，执行finally语句块和其后的语句；</div><div class="line"></div><div class="line">2. 当try捕获到异常，catch语句块里没有处理此异常的情况：当try语句块里的某条语句出现异常时，而没有处理此异常的catch语句块时，此异常将会抛给JVM处理，finally语句块里的语句还是会被执行，但finally语句块后的语句不会被执行；</div><div class="line"></div><div class="line">3. 当try捕获到异常，catch语句块里有处理此异常的情况：在try语句块中是按照顺序来执行的，当执行到某一条语句出现异常时，程序将跳到catch语句块，并与catch语句块逐一匹配，找到与之对应的处理程序，其他的catch语句块将不会被执行，而try语句块中，出现异常之后的语句也不会被执行，catch语句块执行完后，执行finally语句块里的语句，最后执行finally语句块后的语句；</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">### 2.2 抛出异常</div><div class="line">任何Java代码都可以抛出异常，如：自己编写的代码、来自Java开发环境包中代码，或者Java运行时系统。无论是谁，都可以通过Java的throw语句抛出异常。从方法中抛出的任何异常都必须使用throws子句。</div><div class="line"></div><div class="line">#### 2.2.1 throws抛出异常</div><div class="line"></div><div class="line">如果一个方法可能会出现异常，但没有能力处理这种异常，可以在方法声明处用throws子句来声明抛出异常。例如汽车在运行时可能会出现故障，汽车本身没办法处理这个故障，那就让开车的人来处理。</div><div class="line"></div><div class="line">throws语句用在方法定义时声明该方法要抛出的异常类型，如果抛出的是Exception异常类型，则该方法被声明为抛出所有的异常。多个异常可使用逗号分割。throws语句的语法格式为：</div></pre></td></tr></table></figure>
 <p>methodname throws Exception1,Exception2,..,ExceptionN<br>                    {<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">方法名后的throws Exception1,Exception2,...,ExceptionN 为声明要抛出的异常列表。当方法抛出异常列表的异常时，方法将不对这些类型及其子类类型的异常作处理，而抛向调用该方法的方法，由他去处理。例如：</div></pre></td></tr></table></figure></p>
 <p>import java.lang.Exception;<br>public class TestException {<br>    static void pop() throws NegativeArraySizeException {<br>        // 定义方法并抛出NegativeArraySizeException异常<br>        int[] arr = new int[-3]; // 创建数组<br>    }  </p>
 <pre><code>public static void main(String[] args) { // 主方法  
@@ -596,6 +595,7 @@ var _hmt = _hmt || [];
 
 
       
+
     </div>
 
 
@@ -634,6 +634,8 @@ var _hmt = _hmt || [];
 
       
       
+      
+
     </footer>
   </article>
 
@@ -711,7 +713,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -733,7 +735,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -754,27 +756,27 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -881,7 +883,7 @@ var _hmt = _hmt || [];
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

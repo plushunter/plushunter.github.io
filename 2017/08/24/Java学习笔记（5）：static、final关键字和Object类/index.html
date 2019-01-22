@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、static关键字static 修饰符能够与变量、方法一起使用，表示是“静态”的。静态变量和静态方法能够通过类名来访问，不需要创建一个类的对象来访问该类的静态成员，所以static修饰的成员又称作类变量和类方法。静态变量与实例变量不同，实例变量总是通过对象来访问，因为它们的值在对象和对象之间有所不同。请看下面的例子：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15025432513037.png">
-<meta property="og:updated_time" content="2017-09-01T06:50:40.000Z">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwxn1tg594j307608w0sl.jpg">
+<meta property="og:updated_time" content="2018-11-05T16:12:43.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习笔记（5）：static、final关键字和Object类">
 <meta name="twitter:description" content="一、static关键字static 修饰符能够与变量、方法一起使用，表示是“静态”的。静态变量和静态方法能够通过类名来访问，不需要创建一个类的对象来访问该类的静态成员，所以static修饰的成员又称作类变量和类方法。静态变量与实例变量不同，实例变量总是通过对象来访问，因为它们的值在对象和对象之间有所不同。请看下面的例子：">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15025432513037.png">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwxn1tg594j307608w0sl.jpg">
 
 
 
@@ -215,12 +215,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -228,7 +228,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -238,7 +238,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -402,7 +402,7 @@ var _hmt = _hmt || [];
 <p>运行结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">obj1.i=10, obj1.j=20</div><div class="line">obj2.i=10, obj2.j=0</div></pre></td></tr></table></figure>
 <p>注意：静态变量虽然也可以通过对象来访问，但是不被提倡，编译器也会产生警告。</p>
-<p>上面的代码中，i 是静态变量，通过 obj1 改变 i 的值，会影响到 obj2；j 是实例变量，通过 obj1 改变 j 的值，不会影响到 obj2。这是因为 obj1.i 和 obj2.i 指向同一个内存空间，而 obj1.j 和 obj2.j 指向不同的内存空间，请看下图：<br><img src="http://omu7tit09.bkt.clouddn.com/15025432513037.png" alt=""></p>
+<p>上面的代码中，i 是静态变量，通过 obj1 改变 i 的值，会影响到 obj2；j 是实例变量，通过 obj1 改变 j 的值，不会影响到 obj2。这是因为 obj1.i 和 obj2.i 指向同一个内存空间，而 obj1.j 和 obj2.j 指向不同的内存空间，请看下图：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwxn1tg594j307608w0sl.jpg" alt=""></p>
 <p>注意：static 的变量是在类装载的时候就会被初始化。也就是说，只要类被装载，不管你是否使用了这个static 变量，它都会被初始化。</p>
 <p>小结：类变量(class variables)用关键字 static 修饰，在类加载的时候，分配类变量的内存，以后再生成类的实例对象时，将共享这块内存（类变量），任何一个对象对类变量的修改，都会影响其它对象。外部有两种访问方式：通过对象来访问或通过类名来访问。</p>
 <h2 id="1-2-静态方法"><a href="#1-2-静态方法" class="headerlink" title="1.2 静态方法"></a>1.2 静态方法</h2><p>静态方法是一种不能向对象实施操作的方法。例如，Math 类的 pow() 方法就是一个静态方法，语法为 Math.pow(x, a)，用来计算 x 的 a 次幂，在使用时无需创建任何 Math 对象。</p>
@@ -537,6 +537,7 @@ var _hmt = _hmt || [];
 
 
       
+
     </div>
 
 
@@ -579,6 +580,8 @@ var _hmt = _hmt || [];
 
       
       
+      
+
     </footer>
   </article>
 
@@ -656,7 +659,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -678,7 +681,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -699,27 +702,27 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -826,7 +829,7 @@ var _hmt = _hmt || [];
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

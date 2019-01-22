@@ -95,12 +95,12 @@
 <meta property="og:description" content="一、概述从本文你可以学习到：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15023464953825.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15023557536340.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv2wq3mycj30wc0gajtb.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15023472197345.png">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15023478436620.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15023478667595.png">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv2wqjck3j30eg02j0ss.jpg">
 <meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15023479367792.png">
-<meta property="og:updated_time" content="2017-09-01T07:04:38.000Z">
+<meta property="og:updated_time" content="2018-11-03T11:08:53.109Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合学习手册（1）：Java HashMap">
 <meta name="twitter:description" content="一、概述从本文你可以学习到：">
@@ -220,12 +220,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -233,7 +233,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -243,7 +243,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -445,7 +445,7 @@ var _hmt = _hmt || [];
 <p>总结下put的过程：</p>
 <p>当程序试图将一个key-value对放入HashMap中时，程序首先根据该 key 的 hashCode() 返回值决定该 Entry 的存储位置， 该位置就是此对象准备往数组中存放的位置。</p>
 <p>如果该位置没有对象存在，就将此对象直接放进数组当中；如果该位置已经有对象存在了，则顺着此存在的对象的链开始寻找(为了判断是否是否值相同，map不允许<key,value>键值对重复)， 使用 equals方法进行比较，如果对此链上的 key 通过 equals 比较有一个返回 true，新添加 Entry 的 value 将覆盖集合中原有 Entry 的 value，但key不会覆盖；如果对此链上的每个对象的 equals 方法比较都为 false，则将该对象放到数组当中，然后将数组中该位置以前存在的那个对象链接到此对象的后面，即新值存放在数组中，旧值在新值的链表上。</key,value></p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15023557536340.jpg" alt=""></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv2wq3mycj30wc0gajtb.jpg" alt=""></p>
 <h3 id="3-2-get-方法"><a href="#3-2-get-方法" class="headerlink" title="3.2 get()方法"></a>3.2 get()方法</h3><p>在理解了put之后，get就很简单了。大致思路如下：</p>
 <ol>
 <li>bucket里的第一个节点，直接命中；</li>
@@ -482,7 +482,7 @@ var _hmt = _hmt || [];
 <p>&gt;<br>Initializes or doubles table size. If null, allocates in accord with initial capacity target held in field threshold. Otherwise, because we are using power-of-two expansion, the elements from each bin must either stay at same index, or move with a power of two offset in the new table.</p>
 <p>大致意思就是说，当超过限制的时候会resize，然而又因为我们使用的是2次幂的扩展(指长度扩为原来2倍)，所以，元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置。</p>
 <p>怎么理解呢？例如我们从16扩展为32时，具体的变化如下所示：<br><img src="http://omu7tit09.bkt.clouddn.com/15023478436620.png" alt=""></p>
-<p>因此元素在重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit(红色)，因此新的index就会发生这样的变化：<br><img src="http://omu7tit09.bkt.clouddn.com/15023478667595.png" alt=""></p>
+<p>因此元素在重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit(红色)，因此新的index就会发生这样的变化：<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv2wqjck3j30eg02j0ss.jpg" alt=""></p>
 <p>因此，我们在扩充HashMap的时候，不需要重新计算hash，只需要看看原来的hash值新增的那个bit是1还是0就好了，是0的话索引没变，是1的话索引变成“原索引+oldCap”。可以看看下图为16扩充为32的resize示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15023479367792.png" alt=""></p>
 <p>这个设计确实非常的巧妙，既省去了重新计算hash值的时间，而且同时，由于新增的1bit是0还是1可以认为是随机的，因此resize的过程，均匀的把之前的冲突的节点分散到新的bucket了。</p>
 <p>下面是代码的具体实现：</p>
@@ -594,6 +594,7 @@ var _hmt = _hmt || [];
 
 
       
+
     </div>
 
 
@@ -616,8 +617,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/09/数据结构与算法题解（10）：0-1背包问题与部分背包问题/" rel="next" title="数据结构与算法题解（10）：0-1背包问题与部分背包问题">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（10）：0-1背包问题与部分背包问题
+              <a href="/2017/08/09/数据结构与算法题解（11）：最长回文子串/" rel="next" title="数据结构与算法题解（11）：最长回文子串">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（11）：最长回文子串
               </a>
             
           </div>
@@ -636,6 +637,8 @@ var _hmt = _hmt || [];
 
       
       
+      
+
     </footer>
   </article>
 
@@ -713,7 +716,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -735,7 +738,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -756,27 +759,27 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -883,7 +886,7 @@ var _hmt = _hmt || [];
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

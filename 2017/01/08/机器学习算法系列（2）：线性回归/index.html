@@ -94,17 +94,17 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、线性回归模型线性回归假设特征和结果满足线性关系。其实线性关系的表达能力非常强大，每个特征对结果的影响强弱可以由前面的参数体现，而且每个特征变量可以首先映射到一个函数，然后再参与线性计算。这样就可以表达特征与结果之间的非线性关系。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.02.35.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.03.23.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.36.09.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.40.55.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/2222.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.51.43.png">
-<meta property="og:updated_time" content="2018-02-05T05:48:56.306Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0klnhwnj30dr0a0gon.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv0km4b3zj30cx09jgol.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0kmirfdj30i305lq3z.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0knhyq0j30e20b6jtg.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0koe5jwj30g406vmy5.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0kozo3vj30hk07vdlu.jpg">
+<meta property="og:updated_time" content="2018-11-03T09:54:25.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（2）：线性回归">
 <meta name="twitter:description" content="一、线性回归模型线性回归假设特征和结果满足线性关系。其实线性关系的表达能力非常强大，每个特征对结果的影响强弱可以由前面的参数体现，而且每个特征变量可以首先映射到一个函数，然后再参与线性计算。这样就可以表达特征与结果之间的非线性关系。">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.02.35.png">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0klnhwnj30dr0a0gon.jpg">
 
 
 
@@ -220,12 +220,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -233,7 +233,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -243,7 +243,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -462,11 +462,11 @@ J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\ri
 <li>1）首先对$\theta$赋值，这个值可以是随机的，也可是让$\theta$是一个全零的向量；</li>
 <li>2）改变$\theta$的值，使得$J(\theta)$按梯度下降的方向进行减少。</li>
 </ul>
-<p>为了更清楚，给出下面的图：<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.02.35.png" alt="屏幕快照 2017-04-04 下午6.02.35"></p>
+<p>为了更清楚，给出下面的图：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0klnhwnj30dr0a0gon.jpg" alt="屏幕快照 2017-04-04 下午6.02.35"></p>
 <p>这是一个表示参数$\theta$与目标函数$J(\theta)$的关系图，红色的部分是表示$J(\theta)$有比较高的取值，我们需要的是，能够让$J(\theta)$的值尽量的低。也就是深蓝色的部分。$\theta_0$和$\theta_1$表示$\theta$向量的两个维度。</p>
 <p>在上面提到梯度下降法的第一步是给$\theta$一个初值，假设随机给的初值是在图上的十字点。然后我们将$\theta$按照梯度下降的方向进行调整，就会使得$J(\theta)$往更低的方向进行变化，如图所示，算法的结束将是在$\theta$下降到无法继续下降为止。</p>
 <p>当然，可能梯度下降的最终点并非是全局最小点，可能是一个局部最小点，比如下面这张图中描述的就是一个局部最小点，这是我们重新选择了一个初始点得到的，看来我们这个算法会在很大程度上被初始点的选择影响而陷入局部最小点。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.03.23.png" alt="屏幕快照 2017-04-04 下午6.03.23"></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv0km4b3zj30cx09jgol.jpg" alt="屏幕快照 2017-04-04 下午6.03.23"></p>
 <p>下面对于目标函数$J(\theta)$求偏导数：</p>
 <script type="math/tex; mode=display">
 \frac{\partial}{\partial\theta_j}J\left(\theta\right)=\frac{\partial}{\partial\theta_j}\frac{1}{2}\left(h_{\theta}\left(x\right)-y\right)^2</script><script type="math/tex; mode=display">
@@ -483,12 +483,12 @@ J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\ri
     \frac{\partial}{\partial\theta_n}J\\
 \end{array}\right]</script><script type="math/tex; mode=display">
 \theta :=\theta +a\nabla_{\theta}J</script><p>将梯度下降法应用到线性回归有三种方式：批处理梯度下降法、随机梯度下降法。</p>
-<h4 id="3-2-1-批量梯度下降法（BGD）"><a href="#3-2-1-批量梯度下降法（BGD）" class="headerlink" title="3.2.1 批量梯度下降法（BGD）"></a>3.2.1 批量梯度下降法（BGD）</h4><p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.36.09.png" alt="屏幕快照 2017-04-04 下午6.36.09"></p>
+<h4 id="3-2-1-批量梯度下降法（BGD）"><a href="#3-2-1-批量梯度下降法（BGD）" class="headerlink" title="3.2.1 批量梯度下降法（BGD）"></a>3.2.1 批量梯度下降法（BGD）</h4><p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0kmirfdj30i305lq3z.jpg" alt="屏幕快照 2017-04-04 下午6.36.09"></p>
 <p>可以看出，参数$\theta$的值每更新一次都要遍历样本集中的所有的样本，得到新的$\theta_j$，看是否满足阈值要求，若满足，则迭代结束，根据此值就可以得到；否则继续迭代。注意到，虽然梯度下降法易受到极小值的影响，但是一般的线性规划问题只有一个极小值，所以梯度下降法一般可以收敛到全局的最小值。例如，$J$是二次凸函数，则梯度下降法的示意图为：</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.40.55.png" alt="屏幕快照 2017-04-04 下午6.40.55"></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0knhyq0j30e20b6jtg.jpg" alt="屏幕快照 2017-04-04 下午6.40.55"></p>
 <p>图中，一圈上表示目标函数的函数值类似于地理上的等高线，从外圈开始逐渐迭代，最终收敛全局最小值。</p>
-<h4 id="3-2-2-随机梯度下降算法（SGD）"><a href="#3-2-2-随机梯度下降算法（SGD）" class="headerlink" title="3.2.2 随机梯度下降算法（SGD）"></a>3.2.2 随机梯度下降算法（SGD）</h4><p><img src="http://omu7tit09.bkt.clouddn.com/2222.png" alt="屏幕快照 2017-04-04 下午6.43.06"><br>在这个算法中，我们每次更新只用到一个训练样本，若根据当前严格不能进行迭代得到一个，此时会得到一个，有新样本进来之后，在此基础上继续迭代，又得到一组新的和，以此类推。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-04-04%20%E4%B8%8B%E5%8D%886.51.43.png" alt="屏幕快照 2017-04-04 下午6.51.43"><br>批量梯度下降法，每更新一次，需要用到样本集中的所有样本；随机梯度下降法，每更新一次，只用到训练集中的一个训练样本，所以一般来说，随机梯度下降法能更快地使目标函数达到最小值（新样本的加入，随机梯度下降法有可能会使目标函数突然变大，迭代过程中在变小。所以是在全局最小值附近徘徊，但对于实际应用俩说，误差完全能满足要求）。另外，对于批量梯度下降法，如果样本集增加了一些训练样本，就要重新开始迭代。由于以上原因，当训练样本集较大时，一般使用随机梯度下降法。</p>
+<h4 id="3-2-2-随机梯度下降算法（SGD）"><a href="#3-2-2-随机梯度下降算法（SGD）" class="headerlink" title="3.2.2 随机梯度下降算法（SGD）"></a>3.2.2 随机梯度下降算法（SGD）</h4><p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0koe5jwj30g406vmy5.jpg" alt="屏幕快照 2017-04-04 下午6.43.06"><br>在这个算法中，我们每次更新只用到一个训练样本，若根据当前严格不能进行迭代得到一个，此时会得到一个，有新样本进来之后，在此基础上继续迭代，又得到一组新的和，以此类推。</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0kozo3vj30hk07vdlu.jpg" alt="屏幕快照 2017-04-04 下午6.51.43"><br>批量梯度下降法，每更新一次，需要用到样本集中的所有样本；随机梯度下降法，每更新一次，只用到训练集中的一个训练样本，所以一般来说，随机梯度下降法能更快地使目标函数达到最小值（新样本的加入，随机梯度下降法有可能会使目标函数突然变大，迭代过程中在变小。所以是在全局最小值附近徘徊，但对于实际应用俩说，误差完全能满足要求）。另外，对于批量梯度下降法，如果样本集增加了一些训练样本，就要重新开始迭代。由于以上原因，当训练样本集较大时，一般使用随机梯度下降法。</p>
 <h2 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h2><p><a href="http://www.cnblogs.com/jerrylead/archive/2011/03/05/1971867.html" target="_blank" rel="noopener"><code>对线性回归，logistic回归和一般回归的认识</code></a></p>
 
       
@@ -527,6 +527,7 @@ J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\ri
 
 
       
+
     </div>
 
 
@@ -565,6 +566,8 @@ J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\ri
 
       
       
+      
+
     </footer>
   </article>
 
@@ -642,7 +645,7 @@ J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\ri
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -664,7 +667,7 @@ J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\ri
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -685,27 +688,27 @@ J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\ri
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -812,7 +815,7 @@ J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\ri
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

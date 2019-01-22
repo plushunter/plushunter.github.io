@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="转载自pluskid的个人博客Sparsity 是当今机器学习领域中的一个重要话题。John Lafferty 和 Larry Wasserman 在 2006 年的一篇评论中提到：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-24 下午5.47.44.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-24 下午7.12.33.png">
-<meta property="og:updated_time" content="2017-12-26T08:04:05.758Z">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwvsk1vnbqj30k70d6dgr.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwvsjuf1dyj317e0rmdhs.jpg">
+<meta property="og:updated_time" content="2018-11-04T01:52:06.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（29）：Sparsity and Some Basics of L1 Regularization">
 <meta name="twitter:description" content="转载自pluskid的个人博客Sparsity 是当今机器学习领域中的一个重要话题。John Lafferty 和 Larry Wasserman 在 2006 年的一篇评论中提到：">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-24 下午5.47.44.png">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwvsk1vnbqj30k70d6dgr.jpg">
 
 
 
@@ -216,12 +216,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -229,7 +229,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -239,7 +239,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -413,8 +413,8 @@ var _hmt = _hmt || [];
 <script type="math/tex; mode=display">J_L(w)=\frac{1}{n}||y-Xw||^2+\lambda ||w||_1</script><p>该问题通常被称为LASSO（least absolute shrinkage and selection operator）。LASSO 仍然是一个 convex optimization 问题，不过不再具有解析解。它的优良性质是能产生稀疏性，导致$w$中许多项变成零。</p>
 <p>可是，为什么它能产生稀疏性呢？这也是一直让我挺感兴趣的一个问题，事实上在之前申请学校的时候一次电话面试中我也被问到了这个问题。我当时的回答是背后的理论我并不是很清楚，但是我知道一个直观上的理解。下面我们就先来看一下这个直观上的理解。</p>
 <p>首先，和 ridge regression 类似，上面形式的 LASSO 问题也等价于如下形式：</p>
-<script type="math/tex; mode=display">\underset {w}{min }\frac{1}{n}||y-Xw||^2, \ \ \ s.t. ||w||_1≤C</script><p>也就是说，我们将模型空间限制在$w$的一个 $\ell_1$-ball中。为了便于可视化，我们考虑两维的情况，在 $(w^1,w^2)$平面上可以画出目标函数的等高线，而约束条件则成为平面上半径为$C$的一个 norm ball 。等高线与 norm ball 首次相交的地方就是最优解。如图 所示：</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-24 下午5.47.44.png" alt="屏幕快照 2017-07-24 下午5.47.44"></p>
+<script type="math/tex; mode=display">\underset {w}{min }\frac{1}{n}||y-Xw||^2, \ \ \ s.t. ||w||_1≤C</script><p>也就是说，我们将模型空间限制在$w$的一个 $\ell_1$-ball中。为了便于可视化，我们考虑两维的情况，在 $(w^1,w^2)$平面上可以画出目标函数的等高线，而约束条件则成为平面上半径为$C$的一个 norm ball 。等高线与 norm ball 首次相交的地方就是最优解。如图所示：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwvsk1vnbqj30k70d6dgr.jpg" alt=""></p>
 <p>可以看到，$\ell_1-ball$与$\ell_2-ball$的不同就在于他和每个坐标轴相交的地方都有“角”出现，而目标函数的测地线除非位置摆得非常好，大部分时候都会在角的地方相交。注意到在角的位置为产生稀疏性，例如图中的相交点就有$w^1=0$  ，而更高维的时候（想象一下三维的 $\ell_1 $-ball 是什么样的？）除了角点以外，还有很多边的轮廓也是既有很大的概率成为第一次相交的地方，又会产生稀疏性。</p>
 <p>相比之下，$\ell_2 $-ball 就没有这样的性质，因为没有角，所以第一次相交的地方出现在具有稀疏性的位置的概率就变得非常小了。这就从直观上来解释了为什么$\ell_1$  regularization 能产生稀疏性，而$\ell_2$regularization 不行的原因了。</p>
 <p>不过，如果只限于 intuitive 的解释的话，就不那么好玩了，但是背后完整的理论又不是那么容易能够搞清楚的，既然这次的标题是 Basics ，我们就先来看一个简单的特殊情况好了。</p>
@@ -440,7 +440,7 @@ var _hmt = _hmt || [];
 <script type="math/tex; mode=display">|\hat{w}^j|=\frac{\lambda}{2}|e_0|≤\frac{\lambda}{2}</script><p>又因为$\bar{w}^j=0$，所以这个时候式子也可以统一为</p>
 <script type="math/tex; mode=display">\bar{w}^j=sign(\hat{w}^j)(|\hat{w}^j|-\frac{\lambda}{2})_+</script><p>的形式。 </p>
 <p>如此一来，在 orthonormal design 的情况下，LASSO 的最优解就可以写为</p>
-<script type="math/tex; mode=display">\bar{w}^j=sign(\hat{w}^j)(|\hat{w}^j|-\frac{\lambda}{2})_+</script><p>可以用图形象地表达出来。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-24 下午7.12.33.png" alt="屏幕快照 2017-07-24 下午7.12.33"></p>
+<script type="math/tex; mode=display">\bar{w}^j=sign(\hat{w}^j)(|\hat{w}^j|-\frac{\lambda}{2})_+</script><p>可以用图形象地表达出来。<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwvsjuf1dyj317e0rmdhs.jpg" alt=""></p>
 <p>图上画了原始的 least square 解，LASSO 的解以及 ridge regression 的解，用上面同样的方法（不过由于 ridge regularizer 是 smooth 的，所以过程却简单得多）可以得知 ridge regression 的解是如下形式</p>
 <script type="math/tex; mode=display">\frac{n}{1+n\lambda}\hat{w}^j</script><p>可以认为ridge regression 只是做了一个全局缩放，而 LASSO 则是做了一个 soft thresholding ：将绝对值小于$\frac{\lambda}{2}$的那些系数直接变成零了，这也就更加令人信服地解释了 LASSO 为何能够产生稀疏解了。</p>
 
@@ -480,6 +480,7 @@ var _hmt = _hmt || [];
 
 
       
+
     </div>
 
 
@@ -518,6 +519,8 @@ var _hmt = _hmt || [];
 
       
       
+      
+
     </footer>
   </article>
 
@@ -586,7 +589,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -608,7 +611,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -629,27 +632,27 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -740,7 +743,7 @@ var _hmt = _hmt || [];
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

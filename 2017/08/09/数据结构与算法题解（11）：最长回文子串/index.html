@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="给定字符串S，求它的最长回文子串。假设S的最长长度为1000，并且仅有唯一的最长回文子串。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15047510886053.png">
-<meta property="og:updated_time" content="2017-12-16T14:30:14.000Z">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2qfx50bj305r08tjrb.jpg">
+<meta property="og:updated_time" content="2018-11-03T11:08:53.046Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法题解（11）：最长回文子串">
 <meta name="twitter:description" content="给定字符串S，求它的最长回文子串。假设S的最长长度为1000，并且仅有唯一的最长回文子串。">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15047510886053.png">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2qfx50bj305r08tjrb.jpg">
 
 
 
@@ -215,12 +215,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -228,7 +228,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -238,7 +238,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -410,7 +410,7 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">class Solution &#123;</div><div class="line">    public String longestPalindrome(String s) &#123;</div><div class="line">      int n = s.length();</div><div class="line">      String res = null;</div><div class="line">      boolean[][] dp = new boolean[n][n];</div><div class="line">      for (int i = n - 1; i &gt;= 0; i--) &#123;</div><div class="line">        for (int j = i; j &lt; n; j++) &#123;</div><div class="line">          dp[i][j] = s.charAt(i) == s.charAt(j) &amp;&amp; (j - i &lt; 3 || dp[i + 1][j - 1]);</div><div class="line">          if (dp[i][j] &amp;&amp; (res == null || j - i + 1 &gt; res.length())) &#123;</div><div class="line">            res = s.substring(i, j + 1);</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">      return res;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="三、中心扩散法"><a href="#三、中心扩散法" class="headerlink" title="三、中心扩散法"></a>三、中心扩散法</h2><p>动态规划虽然优化了时间，但也浪费了空间。实际上我们并不需要一直存储所有子字符串的回文情况，我们需要知道的只是中心对称的较小一层是否是回文。所以如果我们从小到大连续以某点为个中心的所有子字符串进行计算，就能省略这个空间。  这种解法中，外层循环遍历的是子字符串的中心点，内层循环则是从中心扩散，一旦不是回文就不再计算其他以此为中心的较大的字符串。由于中心对称有两种情况，一是奇数个字母以某个字母对称，而是偶数个字母以两个字母中间为对称，所以我们要分别计算这两种对称情况。</p>
 <ul>
-<li>复杂度：时间 O(n^2) 空间 O(1)<br><img src="http://omu7tit09.bkt.clouddn.com/15047510886053.png" alt=""></li>
+<li>复杂度：时间 O(n^2) 空间 O(1)<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2qfx50bj305r08tjrb.jpg" alt=""></li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public class Solution &#123;</div><div class="line">    private int max = 0;</div><div class="line">    private String res = &quot;&quot;;</div><div class="line">    public String longestPalindrome(String s) &#123;</div><div class="line">        if (s.length() == 1) &#123; return s; &#125;</div><div class="line">        for (int i = 0; i &lt; s.length()-1; i++) &#123;</div><div class="line">            checkPalindromeExpand(s,i,i);</div><div class="line">            checkPalindromeExpand(s,i,i+1);</div><div class="line">        &#125;</div><div class="line">        return res;</div><div class="line">    &#125;</div><div class="line">    public void checkPalindromeExpand(String s, int low, int high) &#123;</div><div class="line">        while (low &gt;= 0 &amp;&amp; high &lt; s.length()) &#123;</div><div class="line">            if (s.charAt(low) == s.charAt(high)) &#123;</div><div class="line">                if (high - low + 1 &gt; max) &#123;</div><div class="line">                    max = high - low + 1;</div><div class="line">                    res = s.substring(low,high+1);</div><div class="line">                &#125;</div><div class="line">                low--; high++;</div><div class="line">            &#125; else &#123;</div><div class="line">                return;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="四、马拉车算法"><a href="#四、马拉车算法" class="headerlink" title="四、马拉车算法"></a>四、马拉车算法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(s.length()&lt;=<span class="number">1</span>)&#123;</div><div class="line">            <span class="keyword">return</span> s;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 预处理字符串，避免奇偶问题</span></div><div class="line">        String str = preProcess(s);</div><div class="line">        <span class="comment">// idx是当前能够向右延伸的最远的回文串中心点，随着迭代而更新</span></div><div class="line">        <span class="comment">// max是当前最长回文串在总字符串中所能延伸到的最右端的位置</span></div><div class="line">        <span class="comment">// maxIdx是当前已知的最长回文串中心点</span></div><div class="line">        <span class="comment">// maxSpan是当前已知的最长回文串向左或向右能延伸的长度</span></div><div class="line">        <span class="keyword">int</span> idx = <span class="number">0</span>, max = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> maxIdx = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> maxSpan = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span>[] p = <span class="keyword">new</span> <span class="keyword">int</span>[str.length()];</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> curr = <span class="number">1</span>; curr &lt; str.length(); curr++)&#123;</div><div class="line">            <span class="comment">// 找出当前下标相对于idx的对称点</span></div><div class="line">            <span class="keyword">int</span> symmetryOfCurr = <span class="number">2</span> * idx - curr;</div><div class="line">            <span class="comment">// 如果当前已知延伸的最右端大于当前下标，我们可以用对称点的P值，否则记为1等待检查</span></div><div class="line">            p[curr] = max &gt; curr? Math.min(p[symmetryOfCurr], max - curr):<span class="number">1</span>;</div><div class="line">            <span class="comment">// 检查并更新当前下标为中心的回文串最远延伸的长度</span></div><div class="line">            <span class="keyword">while</span>((curr+p[curr])&lt;str.length() &amp;&amp; str.charAt(curr+p[curr])==str.charAt(curr-p[curr]))&#123;</div><div class="line">                p[curr]++;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 检查并更新当前已知能够延伸最远的回文串信息</span></div><div class="line">            <span class="keyword">if</span>(curr+p[curr]&gt;max)&#123;</div><div class="line">                max = p[curr] + curr;</div><div class="line">                idx = curr;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// 检查并更新当前已知的最长回文串信息</span></div><div class="line">            <span class="keyword">if</span>(p[curr]&gt;maxSpan)&#123;</div><div class="line">                maxSpan = p[curr];</div><div class="line">                maxIdx = curr;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//去除占位符</span></div><div class="line">        <span class="keyword">return</span> s.substring((maxIdx-maxSpan)/<span class="number">2</span>,(maxSpan+maxIdx)/<span class="number">2</span>-<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// 预处理，如ABC,变为$#A#B#C#</span></div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">preProcess</span><span class="params">(String s)</span></span>&#123;</div><div class="line">        </div><div class="line">        StringBuilder sb = <span class="keyword">new</span> StringBuilder();</div><div class="line">        sb.append(<span class="string">"$"</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length(); i++)&#123;</div><div class="line">            sb.append(<span class="string">"#"</span>);</div><div class="line">            sb.append(s.charAt(i));</div><div class="line">        &#125;</div><div class="line">        sb.append(<span class="string">"#"</span>);</div><div class="line">        <span class="keyword">return</span> sb.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -451,6 +451,7 @@ var _hmt = _hmt || [];
 
 
       
+
     </div>
 
 
@@ -471,8 +472,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/08/数据结构与算法题解（9）：最长公共子序列和最长公共子串/" rel="next" title="数据结构与算法题解（9）：最长公共子序列和最长公共子串">
-                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（9）：最长公共子序列和最长公共子串
+              <a href="/2017/08/09/数据结构与算法题解（10）：0-1背包问题与部分背包问题/" rel="next" title="数据结构与算法题解（10）：0-1背包问题与部分背包问题">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法题解（10）：0-1背包问题与部分背包问题
               </a>
             
           </div>
@@ -481,8 +482,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/09/数据结构与算法题解（10）：0-1背包问题与部分背包问题/" rel="prev" title="数据结构与算法题解（10）：0-1背包问题与部分背包问题">
-                数据结构与算法题解（10）：0-1背包问题与部分背包问题 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/09/Java集合学习手册（1）：Java HashMap/" rel="prev" title="Java集合学习手册（1）：Java HashMap">
+                Java集合学习手册（1）：Java HashMap <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -491,6 +492,8 @@ var _hmt = _hmt || [];
 
       
       
+      
+
     </footer>
   </article>
 
@@ -568,7 +571,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -590,7 +593,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -611,27 +614,27 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -738,7 +741,7 @@ var _hmt = _hmt || [];
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

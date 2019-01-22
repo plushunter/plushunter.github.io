@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、基本原理顾名思义，是用随机的方式建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。在得到森林之后，当有一个新的输入样本进入的时候，就让森林中的每一棵决策树分别进行一下判断，看看这个样本应该属于哪一类（对于分类算法），然后看看哪一类被选择最多，就预测这个样本为那一类。 我们可以这样比喻随机森林算法：每一棵决策树就是一个精通于某一个窄领域的专家（因为我们从M个特征中">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/f69ecd5658ba9557cf97e45f18d19cfd.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-08%20%E4%B8%8B%E5%8D%882.31.19.png">
-<meta property="og:updated_time" content="2018-07-20T02:46:04.723Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv30znot6j30go06amxb.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv310lr5yj30hs0cwwfs.jpg">
+<meta property="og:updated_time" content="2018-11-03T11:08:53.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（5）：随机森林">
 <meta name="twitter:description" content="一、基本原理顾名思义，是用随机的方式建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。在得到森林之后，当有一个新的输入样本进入的时候，就让森林中的每一棵决策树分别进行一下判断，看看这个样本应该属于哪一类（对于分类算法），然后看看哪一类被选择最多，就预测这个样本为那一类。 我们可以这样比喻随机森林算法：每一棵决策树就是一个精通于某一个窄领域的专家（因为我们从M个特征中">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/f69ecd5658ba9557cf97e45f18d19cfd.png">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv30znot6j30go06amxb.jpg">
 
 
 
@@ -216,12 +216,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -229,7 +229,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -239,7 +239,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -396,7 +396,7 @@ var _hmt = _hmt || [];
         <h2 id="一、基本原理"><a href="#一、基本原理" class="headerlink" title="一、基本原理"></a>一、基本原理</h2><p>顾名思义，是用随机的方式建立一个森林，森林里面有很多的决策树组成，随机森林的每一棵决策树之间是没有关联的。在得到森林之后，当有一个新的输入样本进入的时候，就让森林中的每一棵决策树分别进行一下判断，看看这个样本应该属于哪一类（对于分类算法），然后看看哪一类被选择最多，就预测这个样本为那一类。</p>
 <p>我们可以这样比喻随机森林算法：每一棵决策树就是一个精通于某一个窄领域的专家（因为我们从M个特征中选择m个让每一棵决策树进行学习），这样在随机森林中就有了很多个精通不同领域的专家，对一个新的问题（新的输入数据），可以用不同的角度去看待它，最终由各个专家，投票得到结果。</p>
 <a id="more"></a>
-<p>下图为随机森林算法的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/f69ecd5658ba9557cf97e45f18d19cfd.png" alt=""></p>
+<p>下图为随机森林算法的示意图：<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv30znot6j30go06amxb.jpg" alt=""></p>
 <p>随机森林算法有很多优点：</p>
 <ul>
 <li>在数据集上表现良好，两个随机性的引入，使得随机森林不容易陷入过拟合</li>
@@ -445,7 +445,7 @@ var _hmt = _hmt || [];
 <li>1）做100次bootstrap，每次得到的数据Di，Di的长度为N</li>
 <li>2）对于每一个Di，使用局部回归(LOESS)拟合一条曲线(图 中灰色线是其中的10条曲线)</li>
 <li>3）将这些曲线取平均，即得到红色的最终拟合曲线</li>
-<li>4）显然，红色的曲线更加稳定，并且没有过拟合明显减弱<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-08%20%E4%B8%8B%E5%8D%882.31.19.png" alt="屏幕快照 2017-03-08 下午2.31.19"></li>
+<li>4）显然，红色的曲线更加稳定，并且没有过拟合明显减弱<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv310lr5yj30hs0cwwfs.jpg" alt="屏幕快照 2017-03-08 下午2.31.19"></li>
 </ul>
 
       
@@ -484,6 +484,7 @@ var _hmt = _hmt || [];
 
 
       
+
     </div>
 
 
@@ -522,6 +523,8 @@ var _hmt = _hmt || [];
 
       
       
+      
+
     </footer>
   </article>
 
@@ -599,7 +602,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -621,7 +624,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -642,27 +645,27 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -769,7 +772,7 @@ var _hmt = _hmt || [];
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

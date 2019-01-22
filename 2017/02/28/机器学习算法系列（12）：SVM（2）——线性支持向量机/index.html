@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="当训练数据近似线性可分时，通过软间隔最大化学习一个线性的分类器，即线性支持向量机，又称为软间隔支持向量机。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8810.22.45.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-08 下午6.11.53.png">
-<meta property="og:updated_time" content="2017-12-26T08:55:16.009Z">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwvs1u4qzyj30zc0ogtch.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwvs205w8tj30gy07odfu.jpg">
+<meta property="og:updated_time" content="2018-11-04T01:34:47.225Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（12）：SVM（2）—线性支持向量机">
 <meta name="twitter:description" content="当训练数据近似线性可分时，通过软间隔最大化学习一个线性的分类器，即线性支持向量机，又称为软间隔支持向量机。">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8810.22.45.png">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwvs1u4qzyj30zc0ogtch.jpg">
 
 
 
@@ -216,12 +216,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -229,7 +229,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -239,7 +239,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -410,7 +410,7 @@ a^*=\left( a_{1}^{*},a_{2}^{*},···,a_{N}^{*} \right) ^T</script><p>然后计�
 w^*=\sum_{i=1}^N{a_{i}^{*}y_ix_i}</script><p>选择$a^<em>$的一个分量$a_i^</em>$适合约束条件$0&lt;a_i&lt;C$,计算</p>
 <script type="math/tex; mode=display">
 b^*=y_j-\sum_{i=1}^N{a_{i}^{*}y_i⟨x_i·x_j ⟩}</script><p>对任一适合条件都可求得一个$b^*$，但是由于原始问题对$b$的求解并不唯一，所以实际计算时可以取在所有符合条件的样本点上的平均值。</p>
-<h3 id="2-2-支持向量"><a href="#2-2-支持向量" class="headerlink" title="2.2 支持向量"></a>2.2 支持向量</h3><p>再现性不可分的情况下，将对偶问题的解中对应于$a_i^*&gt;0$的样本点$(x_i,y_i)$的实例$x_i$称为支持向量（软间隔的支持向量）。如图所示，这时的支持向量要比线性可分时的情况复杂一些。<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-20%20%E4%B8%8A%E5%8D%8810.22.45.png" alt="屏幕快照 2017-03-20 上午10.22.45"></p>
+<h3 id="2-2-支持向量"><a href="#2-2-支持向量" class="headerlink" title="2.2 支持向量"></a>2.2 支持向量</h3><p>再现性不可分的情况下，将对偶问题的解中对应于$a_i^*&gt;0$的样本点$(x_i,y_i)$的实例$x_i$称为支持向量（软间隔的支持向量）。如图所示，这时的支持向量要比线性可分时的情况复杂一些。<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwvs1u4qzyj30zc0ogtch.jpg" alt=""></p>
 <p>图中，分离超平面由实线表示，间隔边界由虚线表示。正例点由$。$表示，负例点由$×$表示。图中还标出了实例$x_i$到间隔边界的距离$<br>\frac{\xi _i}{||w||}<br>$。</p>
 <p>软间隔的支持向量$x_i$要么在间隔边界上，要么在间隔边界与分离超平面之间，要么在分离超平面误分类一侧。</p>
 <p>若$a_i^*&lt;C$，则$<br>\xi _i=0<br>$，支持向量恰好落在间隔边界上；</p>
@@ -433,7 +433,7 @@ s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script
 <script type="math/tex; mode=display">\underset{w,b}{min }\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2</script><p>先令$[1-y_i(w·x_i+b)]_+=\xi_i$，则$\xi_i≥0$，第二个约束条件成立；由$[1-y_i(w·x_i+b)]_+=\xi_i$，当$1-y_i(w·x_i+b)&gt;0$时，有$y_i(w·x_i+b)=1-\xi_i$;当$1-y_i(w·x_i+b)≤0$时，$\xi_i=0$，有$y_i(w·x_i+b)≥1-\xi_i$，所以第一个约束条件成立。所以两个约束条件都满足，最优化问题可以写作</p>
 <script type="math/tex; mode=display">\underset{w,b}{min}\sum_{i=1}^N\xi_i+\lambda||w||^2</script><p>若取$\lambda =\frac{1}{2C}$则<script type="math/tex">\underset{w,b}{min} \frac{1}{C}(\frac{1}{2} ||w||^2+C\sum_{i=1}^N \xi_i)</script>与原始最优化问题等价。</p>
 <p>合页损失函数图像如图所示，横轴是函数间隔$y(w·x+b)$，纵轴是损失。由于函数形状像一个合页，故名合页损失函数。</p>
-<p>图中还画出了0-1损失函数，可以认为它是一个二类分类问题的真正的损失函数，而合页损失函数是0-1损失函数的上界。由于0-1损失函数不是连续可导的，直接优化其构成的目标函数比较困难，可以认为线性支持向量机是优化由0-1损失函数的上界（合页损失函数）构成的目标函数。这时的上界损失函数又称为代理损失函数（surrogate function）。<br><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2017-07-08 下午6.11.53.png" alt="屏幕快照 2017-07-08 下午6.11.53"><br>图中虚线显示的是感知机的损失函数$[-y_i(w·x_i+b)]_+$。这时当样本点$(x_i,y_i)$被正确分类时，损失是0，否则损失是$-y_i(w·x_i+b)$，相比之下，合页损失函数不仅要分类正确，而且确信度足够高时损失才是0，也就是说，合页损失函数对学习有更高的要求</p>
+<p>图中还画出了0-1损失函数，可以认为它是一个二类分类问题的真正的损失函数，而合页损失函数是0-1损失函数的上界。由于0-1损失函数不是连续可导的，直接优化其构成的目标函数比较困难，可以认为线性支持向量机是优化由0-1损失函数的上界（合页损失函数）构成的目标函数。这时的上界损失函数又称为代理损失函数（surrogate function）。<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwvs205w8tj30gy07odfu.jpg" alt=""><br>图中虚线显示的是感知机的损失函数$[-y_i(w·x_i+b)]_+$。这时当样本点$(x_i,y_i)$被正确分类时，损失是0，否则损失是$-y_i(w·x_i+b)$，相比之下，合页损失函数不仅要分类正确，而且确信度足够高时损失才是0，也就是说，合页损失函数对学习有更高的要求</p>
 
       
     </div>
@@ -471,6 +471,7 @@ s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script
 
 
       
+
     </div>
 
 
@@ -511,6 +512,8 @@ s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script
 
       
       
+      
+
     </footer>
   </article>
 
@@ -588,7 +591,7 @@ s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -610,7 +613,7 @@ s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -631,27 +634,27 @@ s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -758,7 +761,7 @@ s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

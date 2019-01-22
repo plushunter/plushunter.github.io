@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、K近邻算法K近邻算法简单、直观。首先给出一张图，根据这张图来理解最近邻分类器。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-23%20%E4%B8%8B%E5%8D%883.26.59.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-23%20%E4%B8%8B%E5%8D%883.27.22.png">
-<meta property="og:updated_time" content="2018-04-13T00:38:06.909Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0jfy04ij309k08qgmn.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0jgv7pej309y0750th.jpg">
+<meta property="og:updated_time" content="2018-11-03T09:54:25.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（1）：K近邻">
 <meta name="twitter:description" content="一、K近邻算法K近邻算法简单、直观。首先给出一张图，根据这张图来理解最近邻分类器。">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-23%20%E4%B8%8B%E5%8D%883.26.59.png">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0jfy04ij309k08qgmn.jpg">
 
 
 
@@ -216,12 +216,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -229,7 +229,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -239,7 +239,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -395,7 +395,7 @@ var _hmt = _hmt || [];
       
         <h2 id="一、K近邻算法"><a href="#一、K近邻算法" class="headerlink" title="一、K近邻算法"></a>一、K近邻算法</h2><p>K近邻算法简单、直观。首先给出一张图，根据这张图来理解最近邻分类器。</p>
 <a id="more"></a>
-<p><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-23%20%E4%B8%8B%E5%8D%883.26.59.png" alt="屏幕快照 2017-03-23 下午3.26.59"></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0jfy04ij309k08qgmn.jpg" alt="屏幕快照 2017-03-23 下午3.26.59"></p>
 <p>根据上图所示，有两类不同的样本数据，分别用蓝色的小正方形和红色的小三角形表示，而图正中间的那个绿色的圆所标示的数据则是待分类的数据。也就是说，现在，我们不知道中间那个绿色的数据是从属于哪一类（蓝色小正方形或者红色小三角形），下面，我们就要解决这个问题：给这个绿色的圆分类。</p>
 <p>我们常说，物以类聚，人以群分，判别一个人是一个什么样的人，常常可以从他身边的朋友入手，所谓观其友，而识其人。我们不是要判别上图中那个绿色的圆是属于那一类数据么，好说，从他的另据下手。但一次性看多少个邻居呢？从上图中，你还可以看到：</p>
 <ul>
@@ -440,7 +440,7 @@ d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( \frac{x_i-y_i}{s} \right) ^2}}</s
 \cos \left( \theta \right) =\frac{a·b}{|a|·|b|}</script><h3 id="2-3-K值的选择"><a href="#2-3-K值的选择" class="headerlink" title="2.3 K值的选择"></a>2.3 K值的选择</h3><p>K值得选择会对K近邻法的结果产生重大影响。</p>
 <p>如果选择较小的K值，就相当于用较小的领域中的训练实例进行预测，“学习”近似误差会减小，只有与输入实例较近或相似的训练实例才会对预测结果起作用，与此同时带来的问题是“学习”的估计误差会增大，换句话说，K值得减小就意味着整体模型变得复杂，容易发生过拟合（容易受到训练数据的噪声而产生的过拟合的影响）。</p>
 <p>如果选择较大的K值，就相当于用较大领域中的训练实例进行预测，其优点是可以减小学习的估计误差，但缺点是学习的近似误差会增大。这时候，与输入实例较远的训练实例也会对预测器作用，使预测发生错误，且K值得增大就意味着整体的模型变得简单。</p>
-<p>如果K=N。那么无论输入实例是什么，都将简单地预测它属于在训练实例中最多的类。这时，模型过于简单，完全忽略训练实例中的大量有用信息，是不可取的（最近邻列表中可能包含远离其近邻的数据点），如下图所示。<br><img src="http://omu7tit09.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-03-23%20%E4%B8%8B%E5%8D%883.27.22.png" alt="11"><br>在实际应用中，K值一般取一个比较小的数值。通常采用交叉验证法来选取最优的K值（经验规则：K一般低于训练样本数的平方根）。</p>
+<p>如果K=N。那么无论输入实例是什么，都将简单地预测它属于在训练实例中最多的类。这时，模型过于简单，完全忽略训练实例中的大量有用信息，是不可取的（最近邻列表中可能包含远离其近邻的数据点），如下图所示。<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0jgv7pej309y0750th.jpg" alt="11"><br>在实际应用中，K值一般取一个比较小的数值。通常采用交叉验证法来选取最优的K值（经验规则：K一般低于训练样本数的平方根）。</p>
 <h3 id="2-4-分类决策规则"><a href="#2-4-分类决策规则" class="headerlink" title="2.4 分类决策规则"></a>2.4 分类决策规则</h3><p>K近邻法中的分类决策规则往往是多数表决，即由输入实例的K个邻近的训练实例中的多数类决定输入实例的类。</p>
 <h2 id="三、K近邻的优缺点"><a href="#三、K近邻的优缺点" class="headerlink" title="三、K近邻的优缺点"></a>三、K近邻的优缺点</h2><h3 id="3-1-优点"><a href="#3-1-优点" class="headerlink" title="3.1 优点"></a>3.1 优点</h3><ul>
 <li>简单、易于理解、易于实现、无需估计参数、无需训练。</li>
@@ -494,6 +494,7 @@ d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( \frac{x_i-y_i}{s} \right) ^2}}</s
 
 
       
+
     </div>
 
 
@@ -532,6 +533,8 @@ d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( \frac{x_i-y_i}{s} \right) ^2}}</s
 
       
       
+      
+
     </footer>
   </article>
 
@@ -609,7 +612,7 @@ d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( \frac{x_i-y_i}{s} \right) ^2}}</s
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -631,7 +634,7 @@ d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( \frac{x_i-y_i}{s} \right) ^2}}</s
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -652,27 +655,27 @@ d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( \frac{x_i-y_i}{s} \right) ^2}}</s
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -779,7 +782,7 @@ d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( \frac{x_i-y_i}{s} \right) ^2}}</s
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

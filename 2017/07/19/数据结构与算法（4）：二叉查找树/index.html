@@ -94,17 +94,17 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、定义二叉排序树（Binary Sort Tree）又称为二叉查找树（Binary Search Tree）、二叉搜索树。它是特殊的二叉树：对于二叉树，假设x为二叉树中的任意一个结点，x节点包含关键字key，节点x的$key$值记为$key[x]$。如果y是x的左子树中的一个结点，则$key[y]&amp;lt;= key[x]$；如果y是x的右子树的一个结点，则$key[y] &amp;gt;= key[x]">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006200093921.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005146123186.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005146249207.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005146461446.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15004265816210.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15004290403634.png">
-<meta property="og:updated_time" content="2017-08-26T02:38:46.000Z">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3dldiifj30gu0aj755.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3dts135j30fw05pdg7.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwvavqwls5j30gz05ut8r.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3duq334j30fd044q36.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3dv7psij30fz0bzwfg.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3dw5830j30hs089gmw.jpg">
+<meta property="og:updated_time" content="2018-11-03T15:40:40.063Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（4）：二叉查找树">
 <meta name="twitter:description" content="一、定义二叉排序树（Binary Sort Tree）又称为二叉查找树（Binary Search Tree）、二叉搜索树。它是特殊的二叉树：对于二叉树，假设x为二叉树中的任意一个结点，x节点包含关键字key，节点x的$key$值记为$key[x]$。如果y是x的左子树中的一个结点，则$key[y]&amp;lt;= key[x]$；如果y是x的右子树的一个结点，则$key[y] &amp;gt;= key[x]">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15006200093921.jpg">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3dldiifj30gu0aj755.jpg">
 
 
 
@@ -220,12 +220,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -233,7 +233,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -243,7 +243,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -400,7 +400,7 @@ var _hmt = _hmt || [];
         <h2 id="一、定义"><a href="#一、定义" class="headerlink" title="一、定义"></a>一、定义</h2><p>二叉排序树（Binary Sort Tree）又称为二叉查找树（Binary Search Tree）、二叉搜索树。它是特殊的二叉树：对于二叉树，假设x为二叉树中的任意一个结点，x节点包含关键字key，节点x的$key$值记为$key[x]$。如果y是x的左子树中的一个结点，则$key[y]&lt;= key[x]$；如果y是x的右子树的一个结点，则$key[y] &gt;= key[x]$。那么，这棵树就是二叉查找树。</p>
 <a id="more"></a>
 <p>二叉查找树是先对待查找的数据进行生成树，确保树的左分支的值小于右分支的值，然后再就行和每个节点的父节点比较大小，查找最合适的范围。这个算法的效率查找效率很高，但是如果使用这种查找方法要首先创建树。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15006200093921.jpg" alt=""><br>它或者是一颗空树，或者是具有下列性质的二叉树：</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3dldiifj30gu0aj755.jpg" alt=""><br>它或者是一颗空树，或者是具有下列性质的二叉树：</p>
 <ol>
 <li>若任意节点的左子树不为空，则左子树上的所有节点的值均小于它的根结点的值；</li>
 <li>若任意节点的右子树不为空，则左子树上所有节点的值均小于它的根结点的值；</li>
@@ -432,15 +432,15 @@ var _hmt = _hmt || [];
 <ul>
 <li>1) p为叶子节点，直接删除该节点，再修改其父节点的指针（注意分是根节点和不是根节点），如图a;</li>
 </ul>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15005146123186.png" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3dts135j30fw05pdg7.jpg" alt=""></p>
 <ul>
 <li>p为单支节点（即只有左子树或右子树）。让p的子树与p的父亲节点相连，删除p即可（注意分是根节点和不是根节点），如图b;</li>
 </ul>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15005146249207.png" alt=""></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwvavqwls5j30gz05ut8r.jpg" alt=""></p>
 <ul>
 <li>p的左子树和右子树均不空。找到p的后继y，因为y一定没有左子树，所以可以删除y，并让y的父亲节点成为y的右子树的父亲节点，并用y的值代替p的值；或者方法二是找到p的前驱x，x一定没有右子树，所以可以删除x，并让x的父亲节点成为y的左子树的父亲节点。如图c。</li>
 </ul>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15005146461446.png" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3duq334j30fd044q36.jpg" alt=""></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**删除元素*/</span>  </div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">(T t)</span>  </span></div><div class="line">   &#123;  </div><div class="line">       rootTree = remove(t,rootTree);  </div><div class="line">   &#125; <span class="comment">/**在某个位置开始判断删除某个结点*/</span>  </div><div class="line">   <span class="function"><span class="keyword">public</span> BinaryNode&lt;T&gt; <span class="title">remove</span><span class="params">(T t,BinaryNode&lt;T&gt; node)</span>  </span></div><div class="line">   &#123;  </div><div class="line">       <span class="keyword">if</span>(node == <span class="keyword">null</span>)  </div><div class="line">           <span class="keyword">return</span> node;<span class="comment">//没有找到,doNothing  </span></div><div class="line">       <span class="keyword">int</span> result = t.compareTo(node.data);  </div><div class="line">       <span class="keyword">if</span>(result&gt;<span class="number">0</span>)  </div><div class="line">           node.right = remove(t,node.right);  </div><div class="line">       <span class="keyword">else</span> <span class="keyword">if</span>(result&lt;<span class="number">0</span>)  </div><div class="line">           node.left = remove(t,node.left);  </div><div class="line">       <span class="keyword">else</span> <span class="keyword">if</span>(node.left!=<span class="keyword">null</span>&amp;&amp;node.right!=<span class="keyword">null</span>)  </div><div class="line">       &#123;  </div><div class="line">           node.data = findMin(node.right).data;  </div><div class="line">           node.right = remove(node.data,node.right);  </div><div class="line">       &#125;  </div><div class="line">       <span class="keyword">else</span>  </div><div class="line">           node = (node.left!=<span class="keyword">null</span>)?node.left:node.right;  </div><div class="line">       <span class="keyword">return</span> node;  </div><div class="line">             </div><div class="line">   &#125;</div></pre></td></tr></table></figure>
 <h3 id="2-4-总结"><a href="#2-4-总结" class="headerlink" title="2.4 总结"></a>2.4 总结</h3><p>二叉排序树总结：</p>
 <ul>
@@ -449,9 +449,9 @@ var _hmt = _hmt || [];
 <li>给定一个元素集合，可以构造不同的二叉排序树，当它同时是一个完全二叉树的时候，查找的时间复杂度为$O(log(n))$，近似于二分查找。</li>
 <li>当出现最极端的斜树时，时间复杂度为$O(n)$，等同于顺序查找，效果最差。</li>
 </ul>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15004265816210.jpg" alt=""></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3dv7psij30fz0bzwfg.jpg" alt=""></p>
 <p>下图为二叉树查找和顺序查找以及二分查找性能的对比图：</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15004290403634.png" alt=""><br>基于二叉查找树进行优化，进而可以得到其他的树表查找算法，比如平衡树、红黑树等高效算法。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3dw5830j30hs089gmw.jpg" alt=""><br>基于二叉查找树进行优化，进而可以得到其他的树表查找算法，比如平衡树、红黑树等高效算法。</p>
 
       
     </div>
@@ -489,6 +489,7 @@ var _hmt = _hmt || [];
 
 
       
+
     </div>
 
 
@@ -531,6 +532,8 @@ var _hmt = _hmt || [];
 
       
       
+      
+
     </footer>
   </article>
 
@@ -608,7 +611,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -630,7 +633,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -651,27 +654,27 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -778,7 +781,7 @@ var _hmt = _hmt || [];
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

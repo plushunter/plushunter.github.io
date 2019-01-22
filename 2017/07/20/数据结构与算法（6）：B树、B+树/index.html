@@ -94,16 +94,16 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="具体讲解之前，有一点，再次强调下：B-树，即为B树。因为B树的原英文名称为B-tree，而国内很多人喜欢把B-tree译作B-树，其实，这是个非常不好的直译，很容易让人产生误解。如人们可能会以为B-树是一种树，而B树又是一种一种树。而事实上是，B-tree就是指的B树。特此说明。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005176551496.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005176765359.gif">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005180938867.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005181702417.gif">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15005182105086.jpg">
-<meta property="og:updated_time" content="2017-08-26T02:43:33.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2zezmknj30hc07gwf9.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2zlutezg30qm06d4qq.gif">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv2zpz9t7g30qm06d4qq.gif">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv2ztosx7g30qm06d4qq.gif">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2zwgjcjg30rz05i7wi.gif">
+<meta property="og:updated_time" content="2018-11-03T11:08:53.145Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（6）：B树、B+树">
 <meta name="twitter:description" content="具体讲解之前，有一点，再次强调下：B-树，即为B树。因为B树的原英文名称为B-tree，而国内很多人喜欢把B-tree译作B-树，其实，这是个非常不好的直译，很容易让人产生误解。如人们可能会以为B-树是一种树，而B树又是一种一种树。而事实上是，B-tree就是指的B树。特此说明。">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15005176551496.jpg">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2zezmknj30hc07gwf9.jpg">
 
 
 
@@ -219,12 +219,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -232,7 +232,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -242,7 +242,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -411,7 +411,7 @@ var _hmt = _hmt || [];
 <li>非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；</li>
 <li>所有叶子结点位于同一层；</li>
 </ul>
-<p>如下图为一个M=3的B树示例：<br><img src="http://omu7tit09.bkt.clouddn.com/15005176551496.jpg" alt=""><br>B树创建的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15005176765359.gif" alt=""></p>
+<p>如下图为一个M=3的B树示例：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2zezmknj30hc07gwf9.jpg" alt=""><br>B树创建的示意图：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2zlutezg30qm06d4qq.gif" alt=""></p>
 <h2 id="二、B-树"><a href="#二、B-树" class="headerlink" title="二、B+树"></a>二、B+树</h2><p>B+树是B树的变体，也是一种多路搜索树，其定义基本与B-树相同，除了：</p>
 <ul>
 <li>1）非叶子结点的子树指针与关键字个数相同；</li>
@@ -419,7 +419,7 @@ var _hmt = _hmt || [];
 <li>3）为所有叶子结点增加一个链指针；</li>
 <li>4）所有关键字都在叶子结点出现；</li>
 </ul>
-<p>下图为M=3的B+树的示意图：<img src="http://omu7tit09.bkt.clouddn.com/15005180938867.jpg" alt=""></p>
+<p>下图为M=3的B+树的示意图：<img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv2zpz9t7g30qm06d4qq.gif" alt=""></p>
 <p>B+树的搜索与B树也基本相同，区别是B+树只有达到叶子结点才命中（B树可以在非叶子结点命中），其性能也等价于在关键字全集做一次二分查找；</p>
 <p>B+树的性质：</p>
 <ul>
@@ -428,9 +428,9 @@ var _hmt = _hmt || [];
 <li>3.非叶子结点相当于是叶子结点的索引（稀疏索引），叶子结点相当于是存储（关键字）数据的数据层；</li>
 <li>4.更适合文件索引系统。</li>
 </ul>
-<p>下面为一个B+树创建的示意图：<br><img src="http://omu7tit09.bkt.clouddn.com/15005181702417.gif" alt=""></p>
+<p>下面为一个B+树创建的示意图：<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv2ztosx7g30qm06d4qq.gif" alt=""></p>
 <h2 id="三、B-树"><a href="#三、B-树" class="headerlink" title="三、B*树"></a>三、B*树</h2><p>$B^*$树是B+树的变体，在B+树的非根和非叶子结点再增加指向兄弟的指针，将结点的最低利用率从1/2提高到2/3。</p>
-<p>$B^*$树如下图所示：<img src="http://omu7tit09.bkt.clouddn.com/15005182105086.jpg" alt=""></p>
+<p>$B^*$树如下图所示：<img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2zwgjcjg30rz05i7wi.gif" alt=""></p>
 <p>$B^*$树定义了非叶子结点关键字个数至少为$\frac{2}{3}M$，即块的最低使用率为2/3（代替B+树的1/2）；</p>
 <p>B+树的分裂：当一个结点满时，分配一个新的结点，并将原结点中1/2的数据复制到新结点，最后在父结点中增加新结点的指针；B+树的分裂只影响原结点和父结点，而不会影响兄弟结点，所以它不需要指向兄弟的指针；</p>
 <p>$B^*$树的分裂：当一个结点满时，如果它的下一个兄弟结点未满，那么将一部分数据移到兄弟结点中，再在原结点插入关键字，最后修改父结点中兄弟结点的关键字（因为兄弟结点的关键字范围改变了）；如果兄弟也满了，则在原结点与兄弟结点之间增加新结点，并各复制1/3的数据到新结点，最后在父结点增加新结点的指针；</p>
@@ -472,6 +472,7 @@ var _hmt = _hmt || [];
 
 
       
+
     </div>
 
 
@@ -514,6 +515,8 @@ var _hmt = _hmt || [];
 
       
       
+      
+
     </footer>
   </article>
 
@@ -591,7 +594,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -613,7 +616,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -634,27 +637,27 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -761,7 +764,7 @@ var _hmt = _hmt || [];
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

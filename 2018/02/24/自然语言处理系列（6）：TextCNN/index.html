@@ -94,14 +94,14 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="这篇文章翻译自卷积神经网络用于文本分类的开山之作Convolutional Neural Networks for Sentence Classification，并相应的对其实现代码进行讲解。 我们进行了一系列关于卷积神经网络(CNN)的实验，这些实验是基于预先训练的词向量训练的，用于句子级别的分类任务。我们得到了一个简单的参数微调的以及静态矢量的CNN在多个基准上取得了优异的结果。通过微调学习">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.08.25.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.09.28.png">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.42.43.png">
-<meta property="og:updated_time" content="2018-05-09T12:50:23.000Z">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv4l4e186j30qd0cjmxx.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv4lc1g1pj30f507wgm7.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv4lhq5igj30tq0hcdii.jpg">
+<meta property="og:updated_time" content="2018-11-03T12:03:17.243Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自然语言处理系列（6）：TextCNN">
 <meta name="twitter:description" content="这篇文章翻译自卷积神经网络用于文本分类的开山之作Convolutional Neural Networks for Sentence Classification，并相应的对其实现代码进行讲解。 我们进行了一系列关于卷积神经网络(CNN)的实验，这些实验是基于预先训练的词向量训练的，用于句子级别的分类任务。我们得到了一个简单的参数微调的以及静态矢量的CNN在多个基准上取得了优异的结果。通过微调学习">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.08.25.png">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv4l4e186j30qd0cjmxx.jpg">
 
 
 
@@ -217,12 +217,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -230,7 +230,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -240,7 +240,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -401,7 +401,7 @@ var _hmt = _hmt || [];
 <p>卷积神经网络(CNN)利用具有卷积滤波器的层来应用于局部特征(LeCun等人，1998)。开端于计算机视觉的CNN模型后来被证明在自然语言处理中也很有效，在语义解析(Yih et al .,2014)、搜索查询检索(沈et al .,2014)、句子建模(Kalch -布伦纳et al .,2014)和其他传统NLP任务(Collobert et al .,2011)都取得了非常好的效果。</p>
 <p>在目前的工作中，我们训练了一个简单的CNN，它只有一层卷积层，前面连接由无监督的神经语言模型训练的的词向量。这些向量是由Mikolov等人(2013)在谷歌新闻的1000亿字上进行训练得到，并已经公开了。我们首先保持向量静态，只学习模型的其他参数。即使对超参数进行了微调，这个简单的模型在多个基准上也都取得了出色的结果，这表明预先训练的词向量是“通用”的特征构造器，它们可以用于各种分类任务。通过微调，学习特定任务的向量可以得到进一步的改进。我们最后描述了对体系结构的一个简单的修改，允许使用多个通道来使用预先训练的和任务特定的向量。</p>
 <p>我们的工作与Razavian et al.(2014)类似，它表明，对于图像分类，从预先训练的深度学习模型获得的特征提取器在各种任务中都表现良好，包括与最初的任务不同的任务，这些任务的特征提取器是经过训练的。</p>
-<h2 id="二、模型"><a href="#二、模型" class="headerlink" title="二、模型"></a>二、模型</h2><p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.08.25.png" alt="屏幕快照 2018-01-24 下午4.08.25"></p>
+<h2 id="二、模型"><a href="#二、模型" class="headerlink" title="二、模型"></a>二、模型</h2><p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv4l4e186j30qd0cjmxx.jpg" alt=""></p>
 <p>图1所示的模型架构是CNN架构的一个小变体。$x_i\in R^k$表示一个句子中第$i$个词的$k$维词向量。一个长度为$n$的句子（可以padding）表示为</p>
 <script type="math/tex; mode=display">x_{1:n}=x_1⊕x_2⊕...⊕x_n \ (1)</script><p>其中⊕是连接操作符。一般来讲，$x_{i:i+j}$表示词$x_i,x_{i+1}···，x_{i+j}$的连接。卷积运算涉及到一个滤波器，它被应用到一些单词的窗口，以产生一个新特征。比如，特征$c_i$产生于一个词汇窗口$x_{i:i+h-1}$，计算公式为：</p>
 <script type="math/tex; mode=display">c_i=f(w·x_{i:i+h-1}+b) \ (2)</script><p>$b∈R$是偏置项，$f$是一个非线性函数,例如双曲正切函数。该滤波器应用在句子中${x_{1∶ h}, x_{2∶h+1},…,x_{n+h-1∶n}}$每一个可能的单词窗口从而产生一个特征映射： </p>
@@ -411,7 +411,7 @@ var _hmt = _hmt || [];
 <h3 id="2-1-正则化"><a href="#2-1-正则化" class="headerlink" title="2.1 正则化"></a>2.1 正则化</h3><p>为了解决过拟合的问题，我们采用正则化的方法，在倒数第二层我们使用dropout机制，并且使用L-2范数来约束权重向量。Ｄropout机制可以防止隐藏层的过拟合，通过随机的dropout：例如在反向传播的过程中将p部分的隐藏单元设置为０。即，已知，倒数第二层的特征向量z=[C1,……，Cm]　(表示这里我们有m个滤波器)。经典的情况神经元的输出应该是：</p>
 <script type="math/tex; mode=display">y=w·z+b  (4)</script><p>在前向传播中对输出单元y，dropout使用的是：</p>
 <script type="math/tex; mode=display">y = w · (z ◦ r) + b \ (5)</script><p>这里∘表示按元素逐个相乘操作，$r∈R^m$是一个“掩盖”向量，向量中的元素都是一个伯努利随机变量，有p的概率变为1。梯度仅仅可以通过非掩盖的单元反向传播。在测试阶段，权重向量通过因子p缩减例如$\hat w=pw$,并且$\hat w$被用来（没有使用dropout）给掩盖的句子打分。我们另外限制权重向量的二范式，在每一步梯度下降之后，如果$‖w‖_2&gt;s$，重新将w的二范式设置为$‖w‖_2=s$。</p>
-<h2 id="三、数据集和实验步骤"><a href="#三、数据集和实验步骤" class="headerlink" title="三、数据集和实验步骤"></a>三、数据集和实验步骤</h2><p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.09.28.png" alt="屏幕快照 2018-01-24 下午4.09.28"></p>
+<h2 id="三、数据集和实验步骤"><a href="#三、数据集和实验步骤" class="headerlink" title="三、数据集和实验步骤"></a>三、数据集和实验步骤</h2><p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv4lc1g1pj30f507wgm7.jpg" alt=""></p>
 <p>表1：分词之后的数据集的简要统计。C：目标类的个数。l：平均句子长度。N：数据集大小。|V|：单词总数。|V_pre |：出现在预训练词向量中词的个数。Test：测试集的大小（CV意味没有标准的训练/测试集并且采用十折交叉验证的方法）</p>
 <p>我们在不同的基准上测试我们的模型。数据集的简要统计如表1所示。</p>
 <ul>
@@ -442,7 +442,7 @@ var _hmt = _hmt || [];
 <li>CNN-multichannel：有两个词向量集合的模型。将每个向量集合看作一个“通道”并且每个滤波器应用在所有的通道，但是梯度只能通过其中一个通道进行反向传播。因此，模型能够细粒度的调节其中一个向量集合，而保持另外一个不变。 </li>
 </ul>
 <p>为了探究上述变种对其它随机因子的影响，我们消除了其它随机化的影响——交叉验证次数赋值，未知词向量的初始化，CNN模型参数的初始化——在每个数据集上保持一致。</p>
-<h2 id="四、结果和讨论"><a href="#四、结果和讨论" class="headerlink" title="四、结果和讨论"></a>四、结果和讨论</h2><p><img src="http://omu7tit09.bkt.clouddn.com/屏幕快照 2018-01-24 下午4.42.43.png" alt="屏幕快照 2018-01-24 下午4.42.43"></p>
+<h2 id="四、结果和讨论"><a href="#四、结果和讨论" class="headerlink" title="四、结果和讨论"></a>四、结果和讨论</h2><p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv4lhq5igj30tq0hcdii.jpg" alt=""></p>
 <ul>
 <li>RAE：由维基百科(Socher et al.， 2011)中得到预先训练的词向量的递归自编码器。</li>
 <li>MV-RNN：句法分析树的矩阵-向量递归神经网络(Socher et al.， 2012)。</li>
@@ -509,6 +509,7 @@ var _hmt = _hmt || [];
 
 
       
+
     </div>
 
 
@@ -553,6 +554,8 @@ var _hmt = _hmt || [];
 
       
       
+      
+
     </footer>
   </article>
 
@@ -630,7 +633,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -652,7 +655,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -673,27 +676,27 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -800,7 +803,7 @@ var _hmt = _hmt || [];
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

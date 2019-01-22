@@ -94,17 +94,17 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="BFS和DFS是两种十分重要的搜索算法，BFS适合查找最优解，DFS适合查找是否存在解(或者说能找到任意一个可行解)。用这两种算法即可以解决大部分树和图的问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006043606972.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006043873870.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006046826509.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006047122696.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006052024122.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15006053431729.jpg">
-<meta property="og:updated_time" content="2017-09-01T06:36:57.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwvb28yn1nj30y60oygnd.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwvb2x3bu4j30zq0rs427.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwvb5c6sprj30q00qwwgg.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3crelzoj308f0a0gm5.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwvb614wm6j30ou0nqwh4.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwvb6fghnoj30qg0latbo.jpg">
+<meta property="og:updated_time" content="2018-11-03T15:51:05.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（13）：深度优先搜索和广度优先搜索">
 <meta name="twitter:description" content="BFS和DFS是两种十分重要的搜索算法，BFS适合查找最优解，DFS适合查找是否存在解(或者说能找到任意一个可行解)。用这两种算法即可以解决大部分树和图的问题。">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15006043606972.jpg">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwvb28yn1nj30y60oygnd.jpg">
 
 
 
@@ -220,12 +220,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -233,7 +233,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -243,7 +243,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -401,7 +401,7 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 <h2 id="一、深度优先搜索（DFS）"><a href="#一、深度优先搜索（DFS）" class="headerlink" title="一、深度优先搜索（DFS）"></a>一、深度优先搜索（DFS）</h2><h3 id="1-1-介绍"><a href="#1-1-介绍" class="headerlink" title="1.1 介绍"></a>1.1 介绍</h3><p>图的深度优先搜索（Depth First Search），和树的先序遍历比较类似。<br>它的思想：假设初始状态是图中所有顶点均未被访问，则从某个顶点V出发，首先访问该顶点，然后依次从它的各个未被访问的邻接点出发深度优先搜索遍历图，直至图中所有和V有路径相通的顶点都被访问到。若此时尚有其他顶点未被访问到，则另选一个未被访问的顶点作起始点，重复上述过程，直至图中所有顶点都被访问到为止。</p>
 <p>显然，深度优先搜索是一个递归的过程。</p>
-<h3 id="1-2-图解"><a href="#1-2-图解" class="headerlink" title="1.2 图解"></a>1.2 图解</h3><h4 id="1-2-1-无向图的深度优先搜索"><a href="#1-2-1-无向图的深度优先搜索" class="headerlink" title="1.2.1 无向图的深度优先搜索"></a>1.2.1 无向图的深度优先搜索</h4><p>下面以“无向图”为例，来对深度优先搜索进行演示。<br><img src="http://omu7tit09.bkt.clouddn.com/15006043606972.jpg" alt=""><br>对上面的图G1进行深度优先遍历，从顶点A开始。<br><img src="http://omu7tit09.bkt.clouddn.com/15006043873870.jpg" alt=""></p>
+<h3 id="1-2-图解"><a href="#1-2-图解" class="headerlink" title="1.2 图解"></a>1.2 图解</h3><h4 id="1-2-1-无向图的深度优先搜索"><a href="#1-2-1-无向图的深度优先搜索" class="headerlink" title="1.2.1 无向图的深度优先搜索"></a>1.2.1 无向图的深度优先搜索</h4><p>下面以“无向图”为例，来对深度优先搜索进行演示。<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwvb28yn1nj30y60oygnd.jpg" alt=""><br>对上面的图G1进行深度优先遍历，从顶点A开始。<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwvb2x3bu4j30zq0rs427.jpg" alt=""></p>
 <ul>
 <li>第1步：访问A</li>
 <li>第2步：访问（A的邻接点）C。在第一步访问A之后，接下来应该访问的是A的邻接点，即“C/D/F”中的一个。但在本文的实现中，顶点ABCDEFG是按照顺序存储，C在“D和F的前面，因此，先访问C。”</li>
@@ -412,7 +412,7 @@ var _hmt = _hmt || [];
 <li>第7步：访问(G的邻接点)E。</li>
 </ul>
 <p>因此访问顺序是：$A=&gt;C=&gt;=&gt;B=&gt;D=&gt;F=&gt;G=&gt;E$</p>
-<h4 id="1-2-2-有向图的深度优先搜索"><a href="#1-2-2-有向图的深度优先搜索" class="headerlink" title="1.2.2 有向图的深度优先搜索"></a>1.2.2 有向图的深度优先搜索</h4><p>下面以“有向图”为例，来对深度优先搜索进行演示。<br><img src="http://omu7tit09.bkt.clouddn.com/15006046826509.jpg" alt=""><br>对上面的图G2进行深度优先遍历，从顶点A开始。<br><img src="http://omu7tit09.bkt.clouddn.com/15006047122696.jpg" alt=""></p>
+<h4 id="1-2-2-有向图的深度优先搜索"><a href="#1-2-2-有向图的深度优先搜索" class="headerlink" title="1.2.2 有向图的深度优先搜索"></a>1.2.2 有向图的深度优先搜索</h4><p>下面以“有向图”为例，来对深度优先搜索进行演示。<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwvb5c6sprj30q00qwwgg.jpg" alt=""><br>对上面的图G2进行深度优先遍历，从顶点A开始。<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3crelzoj308f0a0gm5.jpg" alt=""></p>
 <ul>
 <li>第1步：访问A。 </li>
 <li>第2步：访问B。在访问了A之后，接下来应该访问的是A的出边的另一个顶点，即顶点B。 </li>
@@ -427,7 +427,7 @@ var _hmt = _hmt || [];
 <p>它的思想是：从图中某顶点V出发，在访问了V之后依次访问V的各个未曾访问过的邻接点，然后分别从这些邻接点出发依次访问他们的邻接点，并使得“先被访问的顶点的邻接点先于后被访问的顶点的邻接点被访问”，直至图中所有已被访问的顶点的邻接点都被访问到。如果此时图中尚有顶点未被访问，则需要另选一个未曾被访问的顶点作为新的起始点，重复上述过程，知道图中所有顶点都被访问到为止。</p>
 <p>换句话说，广度优先搜索遍历图的过程是以V为起点，由近至远，依次访问和V有路径相同且路径长度为1、2、3……的顶点。</p>
 <h3 id="2-2-图解"><a href="#2-2-图解" class="headerlink" title="2.2 图解"></a>2.2 图解</h3><h4 id="2-2-1-无向图的广度优先搜索"><a href="#2-2-1-无向图的广度优先搜索" class="headerlink" title="2.2.1 无向图的广度优先搜索"></a>2.2.1 无向图的广度优先搜索</h4><p>下面以“无向图”为例，来对广度优先搜索进行演示。还是以上面的图G1为例进行说明。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15006052024122.jpg" alt=""></p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwvb614wm6j30ou0nqwh4.jpg" alt=""></p>
 <ul>
 <li>第1步：访问A。 </li>
 <li>第2步：依次访问C,D,F。在访问了A之后，接下来访问A的邻接点。前面已经说过，在本文实现中，顶点ABCDEFG按照顺序存储的，C在”D和F”的前面，因此，先访问C。再访问完C之后，再依次访问D,F。 </li>
@@ -435,7 +435,7 @@ var _hmt = _hmt || [];
 <li>第4步：访问E。在第3步访问完B,G之后，再依次访问它们的邻接点。只有G有邻接点E，因此访问G的邻接点E。</li>
 </ul>
 <p>因此访问顺序是：$A =&gt; C =&gt; D =&gt; F =&gt; B =&gt; G =&gt; E$</p>
-<h4 id="2-2-2-有向图的广度优先搜索"><a href="#2-2-2-有向图的广度优先搜索" class="headerlink" title="2.2.2 有向图的广度优先搜索"></a>2.2.2 有向图的广度优先搜索</h4><p>下面以“有向图”为例，来对广度优先搜索进行演示。还是以上面的图G2为例进行说明。<br><img src="http://omu7tit09.bkt.clouddn.com/15006053431729.jpg" alt=""></p>
+<h4 id="2-2-2-有向图的广度优先搜索"><a href="#2-2-2-有向图的广度优先搜索" class="headerlink" title="2.2.2 有向图的广度优先搜索"></a>2.2.2 有向图的广度优先搜索</h4><p>下面以“有向图”为例，来对广度优先搜索进行演示。还是以上面的图G2为例进行说明。<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwvb6fghnoj30qg0latbo.jpg" alt=""></p>
 <ul>
 <li>第1步：访问A。 </li>
 <li>第2步：访问B。 </li>
@@ -481,6 +481,7 @@ var _hmt = _hmt || [];
 
 
       
+
     </div>
 
 
@@ -525,6 +526,8 @@ var _hmt = _hmt || [];
 
       
       
+      
+
     </footer>
   </article>
 
@@ -602,7 +605,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -624,7 +627,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -645,27 +648,27 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -772,7 +775,7 @@ var _hmt = _hmt || [];
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

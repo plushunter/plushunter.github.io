@@ -94,15 +94,15 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="该数据为某资金渠道从2017/01/01至2017/07/29这段时间内的清算金额汇总信息，每5分钟按流入流出汇总交易数据，type为SE表示流入，type为RE表示流出，其中2017/01/01至2017/07/23这段时间的每天各时段的流入流出汇总数据是齐全的，而2017/07/24至2017/07/29这六天时间只有0点到早上10点的数据。现在要求我们根据这些数据来预测这六天每天从当日0点到">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15261985846825.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15261974529979.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15262026757996.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15261978277574.jpg">
-<meta property="og:updated_time" content="2018-07-10T15:34:15.412Z">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0q1d0dij30kc0dp0v0.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0q29qnrj30jy0jf3zu.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0q2thrrj30jy0jf3zu.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0q372ucj30kc0dp40m.jpg">
+<meta property="og:updated_time" content="2018-11-03T09:54:25.854Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据分析系列（4）：基于ARMA模型的资金渠道流入流出预测">
 <meta name="twitter:description" content="该数据为某资金渠道从2017/01/01至2017/07/29这段时间内的清算金额汇总信息，每5分钟按流入流出汇总交易数据，type为SE表示流入，type为RE表示流出，其中2017/01/01至2017/07/23这段时间的每天各时段的流入流出汇总数据是齐全的，而2017/07/24至2017/07/29这六天时间只有0点到早上10点的数据。现在要求我们根据这些数据来预测这六天每天从当日0点到">
-<meta name="twitter:image" content="http://omu7tit09.bkt.clouddn.com/15261985846825.jpg">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0q1d0dij30kc0dp0v0.jpg">
 
 
 
@@ -218,12 +218,12 @@ var _hmt = _hmt || [];
         </li>
       
         
-        <li class="menu-item menu-item-read-books">
-          <a href="/read-books" rel="section">
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
             
-            读书记
+            林中路
           </a>
         </li>
       
@@ -231,7 +231,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-on-earth">
           <a href="/on-earth" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-firefox"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
             
             人间事
           </a>
@@ -241,7 +241,7 @@ var _hmt = _hmt || [];
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
             
             关于我
           </a>
@@ -408,7 +408,7 @@ var _hmt = _hmt || [];
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="number">2017</span><span class="number">-01</span><span class="number">-01</span>    <span class="number">123081.02</span></div><div class="line"><span class="number">2017</span><span class="number">-01</span><span class="number">-02</span>    <span class="number">150143.02</span></div><div class="line"><span class="number">2017</span><span class="number">-01</span><span class="number">-03</span>    <span class="number">161112.42</span></div><div class="line"><span class="number">2017</span><span class="number">-01</span><span class="number">-04</span>    <span class="number">138823.62</span></div><div class="line"><span class="number">2017</span><span class="number">-01</span><span class="number">-05</span>    <span class="number">130364.32</span></div><div class="line"><span class="number">2017</span><span class="number">-01</span><span class="number">-06</span>     <span class="number">85308.56</span></div><div class="line"><span class="number">2017</span><span class="number">-01</span><span class="number">-07</span>     <span class="number">77484.16</span></div><div class="line"><span class="number">2017</span><span class="number">-01</span><span class="number">-08</span>     <span class="number">93860.22</span></div><div class="line">······</div></pre></td></tr></table></figure>
 <h3 id="1-2-绘制时序图"><a href="#1-2-绘制时序图" class="headerlink" title="1.2 绘制时序图"></a>1.2 绘制时序图</h3><p>按天聚合之后，我们可以简单看一下时序图、移动平均时序图和加权移动平均时序图：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_trend</span><span class="params">(timeSeries, size)</span>:</span></div><div class="line">    f = plt.figure(facecolor=<span class="string">'white'</span>)</div><div class="line">    </div><div class="line">    rol_mean = timeSeries.rolling(window=size).mean()</div><div class="line">    rol_weighted_mean = pd.ewma(timeSeries, span=size)</div><div class="line">    timeSeries.plot(color=<span class="string">'blue'</span>, label=<span class="string">'Original'</span>)</div><div class="line">    plt.legend(loc=<span class="string">'best'</span>)</div><div class="line">    plt.title(<span class="string">'Original'</span>)    </div><div class="line">    rol_mean.plot(color=<span class="string">'red'</span>, label=<span class="string">'Rolling Mean'</span>)</div><div class="line">    plt.legend(loc=<span class="string">'best'</span>)</div><div class="line">    plt.title(<span class="string">'Rolling Mean'</span>)    </div><div class="line">    rol_weighted_mean.plot(color=<span class="string">'black'</span>, label=<span class="string">'Weighted Rolling Mean'</span>)</div><div class="line">    plt.legend(loc=<span class="string">'best'</span>)</div><div class="line">    plt.title(<span class="string">'Weighted Rolling Mean'</span>)    </div><div class="line">    plt.show()</div></pre></td></tr></table></figure>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15261985846825.jpg" alt=""></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0q1d0dij30kc0dp0v0.jpg" alt=""></p>
 <p>可以从时序图看出，该时间序列存在着波动，尚无法确定是否平稳，需要进一步的统计检验。</p>
 <h3 id="1-3-平稳性检验"><a href="#1-3-平稳性检验" class="headerlink" title="1.3 平稳性检验"></a>1.3 平稳性检验</h3><p>序列的平稳性是进行时间序列分析的前提条件，单位根检验（ADF）是一种常用的平稳性检验方法，他的原假设为序列具有单位根，即非平稳，对于一个平稳的时序数据，就需要在给定的置信水平上显著，拒绝原假设。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">test_Stationarity</span><span class="params">(ts)</span>:</span></div><div class="line">    test = adfuller(ts)</div><div class="line">    output = pd.Series(test[<span class="number">0</span>:<span class="number">4</span>], index=[<span class="string">'Test Statistic'</span>,<span class="string">'p-value'</span>,<span class="string">'Lags Used'</span>,<span class="string">'Number of Observations Used'</span>])</div><div class="line">    <span class="keyword">for</span> key,value <span class="keyword">in</span> test[<span class="number">4</span>].items():</div><div class="line">        output[<span class="string">'Critical Value (%s)'</span>%key] = value</div><div class="line">    <span class="keyword">return</span> output</div></pre></td></tr></table></figure>
@@ -416,7 +416,7 @@ var _hmt = _hmt || [];
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Test Statistic                  <span class="number">-3.779937</span></div><div class="line">p-value                          <span class="number">0.003119</span></div><div class="line">Lags Used                        <span class="number">2.000000</span></div><div class="line">Number of Observations Used    <span class="number">201.000000</span></div><div class="line">Critical Value (<span class="number">5</span>%)             <span class="number">-2.876029</span></div><div class="line">Critical Value (<span class="number">1</span>%)             <span class="number">-3.463309</span></div><div class="line">Critical Value (<span class="number">10</span>%)            <span class="number">-2.574493</span></div></pre></td></tr></table></figure>
 <p>当然也可以观察其自相关图，可以看到，其自相关图快速衰减，体现了平稳性序列的特点，可认为他是平稳序列。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">draw_acf_pacf</span><span class="params">(ts, lags=<span class="number">31</span>)</span>:</span></div><div class="line">    f = plt.figure(figsize=(<span class="number">12</span>,<span class="number">12</span>),facecolor=<span class="string">'white'</span>)</div><div class="line">    ax1 = f.add_subplot(<span class="number">211</span>)</div><div class="line">    plot_acf(ts, lags=<span class="number">31</span>, ax=ax1)</div><div class="line">    ax2 = f.add_subplot(<span class="number">212</span>)</div><div class="line">    plot_pacf(ts, lags=<span class="number">31</span>, ax=ax2)</div><div class="line">    plt.show()</div></pre></td></tr></table></figure>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15261974529979.jpg" alt=""></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0q29qnrj30jy0jf3zu.jpg" alt=""></p>
 <h3 id="1-4-对数处理"><a href="#1-4-对数处理" class="headerlink" title="1.4 对数处理"></a>1.4 对数处理</h3><p>对数变换主要是为了减小数据的振动幅度，使其线性规律更加明显。对数变换相当于增加了一个惩罚机制，数据越大其惩罚越大，数据越小惩罚越小。虽然上一步我们验证了序列是平稳的，取对数也可以在该数据集上使用。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">Log_Process</span><span class="params">(time_series)</span>:</span></div><div class="line">    <span class="keyword">return</span> np.log(time_series+<span class="number">1</span>)</div></pre></td></tr></table></figure>
 <h3 id="1-5-纯随机性检验"><a href="#1-5-纯随机性检验" class="headerlink" title="1.5 纯随机性检验"></a>1.5 纯随机性检验</h3><p>经过平稳性检验之后，我们得到该序列为平稳性序列，接下来对其进行纯随机性检验，只有当时间序列不是一个白噪声即纯随机序列的时候，我们才可以对该序列做进一步的分析：</p>
@@ -429,12 +429,12 @@ var _hmt = _hmt || [];
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">init_bic = <span class="number">33.0754219416592</span>  init_p = <span class="number">1</span>  init_q = <span class="number">1</span></div></pre></td></tr></table></figure>
 <p>得到使BIC最小的模型，bic = 33.1，p、q分别为1。</p>
 <h4 id="1-6-2-ACF、BCF识别"><a href="#1-6-2-ACF、BCF识别" class="headerlink" title="1.6.2 ACF、BCF识别"></a>1.6.2 ACF、BCF识别</h4><p>通过观察自相关图ACF和偏自相关图PACF来识别。观察下图，发现自相关和偏相系数都存在拖尾的特点，并且他们都具有明显的一阶相关性，所以我们设定p=1, q=1。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15262026757996.jpg" alt=""></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0q2thrrj30jy0jf3zu.jpg" alt=""></p>
 <h3 id="1-7-拟合ARAM模型"><a href="#1-7-拟合ARAM模型" class="headerlink" title="1.7 拟合ARAM模型"></a>1.7 拟合ARAM模型</h3><p>选出BIC最小的模型，对训练集进行拟合。这里添加了一步将对数处理和差分处理还原的操作：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">bic, p, q, properModel = choose_better_model(time_series_diff)    </div><div class="line">predict_time_series = properModel.predict()</div><div class="line">predict_time_series = recover(predict_time_series, time_series_train, best_diff)</div></pre></td></tr></table></figure>
 <h3 id="1-8-训练集的拟合优度"><a href="#1-8-训练集的拟合优度" class="headerlink" title="1.8 训练集的拟合优度"></a>1.8 训练集的拟合优度</h3><p>用拟合好的模型对训练集进行预测，并使用均方根误差对效果进行衡量：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">original_time_series = time_series[predict_time_series.index]  </div><div class="line">plt.figure(facecolor=<span class="string">'white'</span>)</div><div class="line">predict_time_series.plot(color=<span class="string">'blue'</span>, label=<span class="string">'Predict'</span>)</div><div class="line">original_time_series.plot(color=<span class="string">'red'</span>, label=<span class="string">'Original'</span>)    </div><div class="line">RMSE = np.sqrt(sum((predict_time_series-original_time_series)**<span class="number">2</span>)/original_time_series.size)</div><div class="line">plt.title(<span class="string">'RMSE: %.4f'</span>% RMSE)</div><div class="line">plt.show()</div><div class="line">print(<span class="string">"训练集的RMSE为："</span>+str(RMSE))</div></pre></td></tr></table></figure>
-<p>训练集预测值和真实值拟合图如下：<img src="http://omu7tit09.bkt.clouddn.com/15261978277574.jpg" alt="">训练集的均方根误差为：</p>
+<p>训练集预测值和真实值拟合图如下：<img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0q372ucj30kc0dp40m.jpg" alt="">训练集的均方根误差为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">训练集的RMSE为：<span class="number">40024.97</span></div></pre></td></tr></table></figure>
 <h3 id="1-9-预测结果"><a href="#1-9-预测结果" class="headerlink" title="1.9 预测结果"></a>1.9 预测结果</h3><p>用拟合好的模型对测试集进行预测：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">test_predict = properModel.predict(start=<span class="string">'2017-07-24'</span>, end=<span class="string">'2017-07-29'</span>)</div><div class="line">test_predict = recover(test_predict, time_series_train, best_diff)</div><div class="line"><span class="keyword">print</span> test_predict</div></pre></td></tr></table></figure>
@@ -494,6 +494,7 @@ var _hmt = _hmt || [];
 
 
       
+
     </div>
 
 
@@ -522,8 +523,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/08/25/数据分析系列（5）：窗口函数/" rel="prev" title="数据分析系列（5）：窗口函数">
-                数据分析系列（5）：窗口函数 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/05/23/数据分析系列（6）：常用的HIVE函数/" rel="prev" title="数据分析系列（6）：常用的HIVE函数">
+                数据分析系列（6）：常用的HIVE函数 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -532,6 +533,8 @@ var _hmt = _hmt || [];
 
       
       
+      
+
     </footer>
   </article>
 
@@ -609,7 +612,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">184</span>
+                  <span class="site-state-item-count">189</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -631,7 +634,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">271</span>
+                  <span class="site-state-item-count">277</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -652,27 +655,27 @@ var _hmt = _hmt || [];
             
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/yiyu/" target="_blank" title="絮语">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
                     
                       <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/movies/" target="_blank" title="电影">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
                     
                       <i class="fa fa-fw fa-film"></i>电影</a>
-                </span>
-              
-                <span class="links-of-author-item">
-                  <a href="https://plushunter.github.io/books/" target="_blank" title="读书">
-                    
-                      <i class="fa fa-fw fa-book"></i>读书</a>
                 </span>
               
                 <span class="links-of-author-item">
                   <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
                     
                       <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hua-28-4/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
                 </span>
               
             
@@ -779,7 +782,7 @@ var _hmt = _hmt || [];
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2018</span>
+  <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
