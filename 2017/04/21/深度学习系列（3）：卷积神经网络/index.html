@@ -636,7 +636,7 @@ a_{i,j}=f\left(\sum_{d=0}^{D-1}{\sum_{m=0}^{M-1}{\sum_{n=0}^{N-1}{w_{d,m,n}x_{d,
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">198</span>
+                  <span class="site-state-item-count">199</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1103,7 +1103,24 @@ a_{i,j}=f\left(\sum_{d=0}^{D-1}{\sum_{m=0}^{M-1}{\sum_{n=0}^{N-1}{w_{d,m,n}x_{d,
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
-</script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
   
