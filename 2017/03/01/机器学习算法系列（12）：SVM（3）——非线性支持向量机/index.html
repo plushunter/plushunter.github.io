@@ -94,16 +94,12 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv0jpahruj3082069t98.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015514050397.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015532285157.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015532573289.jpg">
-<meta property="og:image" content="http://omu7tit09.bkt.clouddn.com/15015532782016.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.578Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-060840.jpg">
+<meta property="og:updated_time" content="2019-05-18T06:09:24.376Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（12）：SVM（3）—非线性支持向量机">
 <meta name="twitter:description" content="当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。">
-<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv0jpahruj3082069t98.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-060840.jpg">
 
 
 
@@ -381,7 +377,7 @@ var _hmt = _hmt || [];
         <p>当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。</p>
 <a id="more"></a>
 <h2 id="三、非线性支持向量机与核函数"><a href="#三、非线性支持向量机与核函数" class="headerlink" title="三、非线性支持向量机与核函数"></a>三、非线性支持向量机与核函数</h2><h4 id="3-1-核技巧"><a href="#3-1-核技巧" class="headerlink" title="3.1 核技巧"></a>3.1 核技巧</h4><p>前面我们介绍了线性情况下的支持向量机，他通过寻找一个现行的超平面来达到对数据线性分类的目的。不过，由于是线性方法，所以对非线性的数据就没有办法处理了。</p>
-<p>例如图中的两类数据，分别分布为两个圆圈的形状，不论是任何高级的分类器，只要他是线性的，就没有办法处理，SVM也不行。因为这样的数据本身就是线性不可分的。<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv0jpahruj3082069t98.jpg" alt="屏幕快照 2017-03-20 上午11.03.17"></p>
+<p>例如图中的两类数据，分别分布为两个圆圈的形状，不论是任何高级的分类器，只要他是线性的，就没有办法处理，SVM也不行。因为这样的数据本身就是线性不可分的。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-060840.jpg" alt="屏幕快照 2017-03-20 上午11.03.17"></p>
 <p>此数据集为两个半径不同的圆圈加上了少量的噪音得到，所以一个理想的分界应该是一个圆圈而不是一条直线。如果用$X_1和X_2$来表示这个二维平面的两个坐标的话，则此方程可以写作</p>
 <script type="math/tex; mode=display">
 a_1X_1+a_2X_{1}^{2}+a_3X_2+a_4X_{2}^{2}+a_5X_1X_2+a_6=0</script><p>注意上面的形式，如果我们构造另外一个无谓的空间，其中五个坐标的值分别为$Z_1=X_1,Z_2=X_1^2,Z_3=X_2,Z_4=X_2^2,Z_5=X_1·X_2$</p>
@@ -404,11 +400,12 @@ sign\left( \sum_{i=1}^N{a_{i}^{*}y_iK⟨ x_i,x⟩}+b \right)</script><p>在核�
 K\left( x,z \right) =\left( x·z+1 \right) ^p</script>对应的支持向量机是一个p次多项式分类器。在此情形下，分类决策函数成为<script type="math/tex; mode=display">f\left( x \right) =sign\left( \sum_{i=1}^N{a_iy_i\left( x_i·x+1 \right) ^p+b} \right)</script></li>
 </ol>
 <ol>
-<li>高斯核函数<code>gaussian kernel function</code><script type="math/tex; mode=display">
-K\left( x,z \right) =\exp \left( -\frac{||x-z||^2}{2\sigma ^2} \right)</script>这个核就是会将原始空间映射为无穷维空间的那个家伙。不过如果$\sigma$选得很大的话，高次特征上的权重实际上衰减的非常快，所以实际上相当于一个低维的子空间；反过来，如果$\sigma$选得很小，则可以将任意的数据映射为线性可分，当然，这并不一定是好事，因为随之而来的可能是非常严重的过拟合问题。不过，总的来说，通过调控参数$\sigma$，高斯核实际上具有相当高的灵活性，也是使用最为广泛的核函数之一。它对应的支持向量机是高斯径向基函数分类器，在此情形下，分类决策函数称为<br><script type="math/tex">f\left( x \right) =sign\left( \sum_{i=1}^N{a_iy_i\exp \left( -\frac{||x-z||^2}{2\sigma ^2} \right) +b} \right)</script><img src="http://omu7tit09.bkt.clouddn.com/15015514050397.jpg" alt=""></li>
-</ol>
-<ol>
-<li>字符串核函数：核函数不仅可以定义在欧式空间上，还可以定义在离散数据的集合上，比如，字符串核实定义在字符串集合上的核函数，字符串核函数在文本分类、信息检索、生物信息学等方面都有应用。</li>
+<li><p>高斯核函数<code>gaussian kernel function</code></p>
+<script type="math/tex; mode=display">
+K\left( x,z \right) =\exp \left( -\frac{||x-z||^2}{2\sigma ^2} \right)</script><p>这个核就是会将原始空间映射为无穷维空间的那个家伙。不过如果$\sigma$选得很大的话，高次特征上的权重实际上衰减的非常快，所以实际上相当于一个低维的子空间；反过来，如果$\sigma$选得很小，则可以将任意的数据映射为线性可分，当然，这并不一定是好事，因为随之而来的可能是非常严重的过拟合问题。不过，总的来说，通过调控参数$\sigma$，高斯核实际上具有相当高的灵活性，也是使用最为广泛的核函数之一。它对应的支持向量机是高斯径向基函数分类器，在此情形下，分类决策函数称为<br><script type="math/tex">f\left( x \right) =sign\left( \sum_{i=1}^N{a_iy_i\exp \left( -\frac{||x-z||^2}{2\sigma ^2} \right) +b} \right)</script>!</p>
+</li>
+<li><p>字符串核函数：核函数不仅可以定义在欧式空间上，还可以定义在离散数据的集合上，比如，字符串核实定义在字符串集合上的核函数，字符串核函数在文本分类、信息检索、生物信息学等方面都有应用。</p>
+</li>
 <li>线性核 $κ(x_1,x_2)=⟨x_1,x_2⟩$ ，这实际上就是原始空间中的内积。这个核存在的主要目的是使得“映射后空间中的问题”和“映射前空间中的问题”两者在形式上统一起来了。</li>
 </ol>
 <p>最后，总结一下：对于非线性的情况，SVM 的处理方法是选择一个核函数 κ(⋅,⋅) ，通过将数据映射到高维空间，来解决在原始空间中线性不可分的问题。由于核函数的优良品质，这样的非线性扩展在计算量上并没有比原来复杂多少，这一点是非常难得的。当然，这要归功于核方法——除了 SVM 之外，任何将计算表示为数据点的内积的方法，都可以使用核方法进行非线性扩展。</p>
@@ -429,15 +426,6 @@ b^*=y_j-\sum_{i=1}^N{y_ia_{i}^{*}K\left( x_i·x_j \right)}</script></li>
 f(X)=sign\left( \sum_{i=1}^N{a_{i}^{*}y_iK\left( x_i,x \right)}+b \right)</script><p>当$K(x,z)$是正定核函数时，该问题为凸二次规划问题，解是存在的。</p>
 </li>
 </ol>
-<h3 id="3-3-感性认识"><a href="#3-3-感性认识" class="headerlink" title="3.3 感性认识"></a>3.3 感性认识</h3><p>比如我们有一个一维的数据分布是如下图的样子，你想把它用一个直线来分开，你发现是不可能的，因为他们是间隔的。所以不论你画在哪，比如绿色竖线，都不可能把两个类分开。</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15015532285157.jpg" alt=""><br>但是我们使用一个简单的升维的方法，把原来一维的空间投射到二维中，$x-&gt;(x, x^2)<br>$。比如:</p>
-<p>0-&gt;(0,0)<br>1-&gt;(1,1)<br>2-&gt;(2,4)</p>
-<p>这时候就线性可分了</p>
-<p><img src="http://omu7tit09.bkt.clouddn.com/15015532573289.jpg" alt=""></p>
-<p>再举个例子，在一个二维平面里面，这样的情况是不可能只用一个平面来分类的，但是只要把它投射到三维的球体上，就可能很轻易地分类。<br><img src="http://omu7tit09.bkt.clouddn.com/15015532782016.jpg" alt=""></p>
-<p>理论上，由于train set是有限的，当你把data投射到无限维度的空间上是一定可以在train set上完美分类的，至于在test set上就不一定了。</p>
-<p>在实用中，很多使用者都是盲目地试验各种核函数，并扫描其中的参数，选择效果最好的，来“避免过拟合”。至于什么样的核函数适用于什么样的问题，大多数人都不懂。核函数要满足的条件称为Mercer’s condition。使用SVM的很多人甚至都不知道这个条件，也不关心它；有些不满足该条件的函数也被拿来当核函数用。</p>
-<p><a href="http://www.svms.org/mercer/" target="_blank" rel="noopener">Mercer’s Condition</a><br><a href="https://www.zhihu.com/question/24627666/answer/35507744" target="_blank" rel="noopener">机器学习有很多关于核函数的说法，核函数的定义和作用是什么？</a></p>
 
       
     </div>
@@ -595,7 +583,7 @@ f(X)=sign\left( \sum_{i=1}^N{a_{i}^{*}y_iK\left( x_i,x \right)}+b \right)</scrip
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -606,7 +594,7 @@ f(X)=sign\left( \sum_{i=1}^N{a_{i}^{*}y_iK\left( x_i,x \right)}+b \right)</scrip
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -617,7 +605,7 @@ f(X)=sign\left( \sum_{i=1}^N{a_{i}^{*}y_iK\left( x_i,x \right)}+b \right)</scrip
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -746,7 +734,7 @@ f(X)=sign\left( \sum_{i=1}^N{a_{i}^{*}y_iK\left( x_i,x \right)}+b \right)</scrip
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#三、非线性支持向量机与核函数"><span class="nav-text">三、非线性支持向量机与核函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-核技巧"><span class="nav-text">3.1 核技巧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-常用核函数"><span class="nav-text">3.2 常用核函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-感性认识"><span class="nav-text">3.3 感性认识</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#三、非线性支持向量机与核函数"><span class="nav-text">三、非线性支持向量机与核函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-核技巧"><span class="nav-text">3.1 核技巧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-常用核函数"><span class="nav-text">3.2 常用核函数</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

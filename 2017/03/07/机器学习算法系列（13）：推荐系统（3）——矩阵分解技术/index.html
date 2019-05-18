@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="随着Netflix Prize推荐比赛的成功举办，近年来隐语义模型（Latent Factor MOdel，LFM）受到越来越多的关注。隐语义模型最早在文本挖掘领域被提出，用于寻找文本的隐含语义，相关的模型常见的有潜在语义分析（Latent Semantic Analysis,LSA）、LDA（Latent Dirichlet Allocation）的主题模型（Topic Model）、矩阵分解（">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0joe0m6j30xw09qdi2.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.578Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042551.jpg">
+<meta property="og:updated_time" content="2019-05-18T04:25:59.359Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（13）：推荐系统（3）—矩阵分解技术">
 <meta name="twitter:description" content="随着Netflix Prize推荐比赛的成功举办，近年来隐语义模型（Latent Factor MOdel，LFM）受到越来越多的关注。隐语义模型最早在文本挖掘领域被提出，用于寻找文本的隐含语义，相关的模型常见的有潜在语义分析（Latent Semantic Analysis,LSA）、LDA（Latent Dirichlet Allocation）的主题模型（Topic Model）、矩阵分解（">
-<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0joe0m6j30xw09qdi2.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042551.jpg">
 
 
 
@@ -402,7 +402,7 @@ var _hmt = _hmt || [];
 <p>可以看出这种方法简单直接，似乎很有吸引力。但是有一个很大的问题我们忽略了，就是SVD分解要求矩阵是稠密的，也就是说矩阵的所有位置不能有空白。有空白时我们的MM是没法直接去SVD分解的。大家会说，如果这个矩阵是稠密的，那不就是说我们都已经找到所有用户物品的评分了嘛，那还要SVD干嘛! 的确，这是一个问题，传统SVD采用的方法是对评分矩阵中的缺失值进行简单的补全，比如用全局平均值或者用用户物品平均值补全，得到补全后的矩阵。接着可以用SVD分解并降维。但填充本身会造成很多问题，其一，填充大大增加了数据量，增加了算法复杂度。其二，简单粗暴的数据填充很容易造成数据失真。</p>
 <p>虽然有了上面的补全策略，我们的传统SVD在推荐算法上还是较难使用。因为我们的用户数和物品一般都是超级大，随便就成千上万了。这么大一个矩阵做SVD分解是非常耗时的。那么有没有简化版的矩阵分解可以用呢？我们下面来看看实际可以用于推荐系统的矩阵分解。</p>
 <h2 id="二、Funk-SVD算法"><a href="#二、Funk-SVD算法" class="headerlink" title="二、Funk-SVD算法"></a>二、<a href="http://sifter.org/~simon/journal/20061211.html" target="_blank" rel="noopener">Funk-SVD算法</a></h2><h3 id="2-1-基本思想"><a href="#2-1-基本思想" class="headerlink" title="2.1 基本思想"></a>2.1 基本思想</h3><p>Funk-SVD的核心思想认为用户的兴趣只受少数几个因素的影响，因此将稀疏且高维的User-Item评分矩阵分解为两个低维矩阵，即通过User、Item评分信息来学习到的用户特征矩阵P和物品特征矩阵Q，通过重构的低维矩阵预测用户对产品的评分。由于用户和物品的特征向量维度比较低，因而可以通过梯度下降(Gradient Descend)的方法高效地求解，分解示意图如下所示。</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0joe0m6j30xw09qdi2.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042551.jpg" alt=""></p>
 <h3 id="2-2-Funk-SVD"><a href="#2-2-Funk-SVD" class="headerlink" title="2.2 Funk-SVD"></a>2.2 Funk-SVD</h3><p>Simon Funk在博客上公开发表了一个只考虑已有评分记录的矩阵分解方法，称为Funk-SCD，也就是被Yehuda Koren称为隐语义模型的矩阵分解方法。</p>
 <p>它的出发点为，既然将一个矩阵做SVD分解成3个矩阵很耗时，同时还面临稀疏的问题，那么我们能不能避开稀疏问题，同时只分解成两个矩阵呢？也就是说，现在期望我们的矩阵M这样进行分解：</p>
 <script type="math/tex; mode=display">M_{m\times n}=P^T_{m\times k}Q_{k\times n}</script><p>我们知道SVD分解已经很成熟了，但是Funk-SVD如何将矩阵M分解成为P和Q呢？这里采用了线性回归的思想。我们的目标是让用户的评分和用矩阵乘积得到的评分残差尽可能的小，也就是说，可以用均方差作为损失函数，来寻找最终的P和Q。</p>
@@ -596,7 +596,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -607,7 +607,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -618,7 +618,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

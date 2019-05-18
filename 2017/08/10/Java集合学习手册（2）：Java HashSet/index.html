@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、概述 This class implements the Set interface, backed by a hash table (actually a HashMap instance). It makes no guarantees as to the iteration order of the set; in particular, it does not guarantee th">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwvba2pqjjj30x80y8jvd.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.591Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-160043.jpg">
+<meta property="og:updated_time" content="2019-05-17T16:00:51.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合学习手册（2）：Java HashSet">
 <meta name="twitter:description" content="一、概述 This class implements the Set interface, backed by a hash table (actually a HashMap instance). It makes no guarantees as to the iteration order of the set; in particular, it does not guarantee th">
-<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwvba2pqjjj30x80y8jvd.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-160043.jpg">
 
 
 
@@ -399,7 +399,7 @@ var _hmt = _hmt || [];
 <p>HashSet实现Set接口，由哈希表（实际上是一个HashMap实例）支持。它不保证set 的迭代顺序；特别是它不保证该顺序恒久不变。此类允许使用null元素。</p>
 <p>HashSet是基于HashMap来实现的，操作很简单，更像是对HashMap做了一次“封装”，而且只使用了HashMap的key来实现各种特性，我们先来感性的认识一下这个结构：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">HashSet&lt;String&gt; set = new HashSet&lt;String&gt;();</div><div class="line">set.add(&quot;语文&quot;);</div><div class="line">set.add(&quot;数学&quot;);</div><div class="line">set.add(&quot;英语&quot;);</div><div class="line">set.add(&quot;历史&quot;);</div><div class="line">set.add(&quot;政治&quot;);</div><div class="line">set.add(&quot;地理&quot;);</div><div class="line">set.add(&quot;生物&quot;);</div><div class="line">set.add(&quot;化学&quot;);</div></pre></td></tr></table></figure>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwvba2pqjjj30x80y8jvd.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-160043.jpg" alt=""></p>
 <p>通过HashSet最简单的构造函数和几个成员变量来看一下，证明咱们上边说的，其底层是HashMap：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">transient</span> HashMap&lt;E,Object&gt; map;</div><div class="line"></div><div class="line"><span class="comment">// Dummy value to associate with an Object in the backing Map</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Object PRESENT = <span class="keyword">new</span> Object();</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Constructs a new, empty set; the backing &lt;tt&gt;HashMap&lt;/tt&gt; instance has</div><div class="line"> * default initial capacity (16) and load factor (0.75).</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="title">HashSet</span><span class="params">()</span> </span>&#123;</div><div class="line">    map = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>其实在英文注释中已经说的比较明确了。首先有一个HashMap的成员变量，我们在HashSet的构造函数中将其初始化，默认情况下采用的是initial capacity为16，load factor为0.75。</p>
@@ -563,7 +563,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -574,7 +574,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -585,7 +585,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -94,16 +94,15 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0r8db4nj30f2055jru.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0r8uyfbj30cs0bv0to.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv0ra9aprj30cq06h3zh.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0rbsmmej30ff0fddix.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3wj098kj30ed065wej.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.712Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-062207.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021708.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021715.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021744.jpg">
+<meta property="og:updated_time" content="2019-05-18T06:22:16.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（3）：逻辑斯谛回归">
 <meta name="twitter:description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0r8db4nj30f2055jru.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-062207.jpg">
 
 
 
@@ -402,7 +401,7 @@ var _hmt = _hmt || [];
 F\left(x\right)=P\left(X\le x\right)=\frac{1}{1+e^{-\left(x-\mu\right)/\gamma}}</script><script type="math/tex; mode=display">
 f\left(x\right)=F^,\left(x\right)=\frac{e^{-\left(x-\mu\right)/\gamma}}{\gamma\left(1+e^{-\left(x-\mu\right)/\gamma}\right)^2}</script><p>式中，$\mu$为位置参数，$\gamma&gt;0 $为形状参数。逻辑斯谛的分布的密度函数$f(x)$和分布函数$F(x)$的图形如下图所示。其中分布函数属于逻辑斯谛函数，其图形为一条$S$形曲线。该曲线以点$(\mu,\frac{1}{2})$为中心对称，即满足</p>
 <script type="math/tex; mode=display">
-F\left(-x+\mu\right)-\frac{1}{2}=-F\left(x+\mu\right)+\frac{1}{2}</script><p>曲线在中心附近增长较快，在两端增长速度较慢。形状参数$\gamma$的值越小，曲线在中心附近增长得越快。<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0r8db4nj30f2055jru.jpg" alt="屏幕快照 2017-04-04 下午8.55.00"></p>
+F\left(-x+\mu\right)-\frac{1}{2}=-F\left(x+\mu\right)+\frac{1}{2}</script><p>曲线在中心附近增长较快，在两端增长速度较慢。形状参数$\gamma$的值越小，曲线在中心附近增长得越快。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-062207.jpg" alt="屏幕快照 2017-04-04 下午8.55.00"></p>
 <h2 id="二、逻辑斯谛回归模型"><a href="#二、逻辑斯谛回归模型" class="headerlink" title="二、逻辑斯谛回归模型"></a>二、逻辑斯谛回归模型</h2><p>线性回归的应用场合大多是回归分析，一般不用在分类问题上。原因可以概括为以下两个：</p>
 <ul>
 <li>1）回归模型是连续型模型，即预测出的值都是连续值（实数值），非离散值；</li>
@@ -429,9 +428,9 @@ logit\left(p\right)=\log\frac{p}{1-p}</script><p>对LR而言，根据模型表�
 <script type="math/tex; mode=display">P(y^{(i)}|x^{(i)};\theta)=(h_\theta(x^{(i)})^{y(i)})·（1-h_\theta(x^{(i)}))^{1-y(i)}</script><p>上式是对一个样本进行建模的数据表达。对于所有的样本，假设每条样本生成过程独立，在整个样本空间中（N个样本）的概率分布（即似然函数）为：</p>
 <script type="math/tex; mode=display">
 P\left(Y|X;\theta\right)=\prod_{i=1}^N{\left(h_{\theta}\left(x^{\left(i\right)}\right)^{y^{\left(i\right)}}\left(1-h_{\theta}\left(x^{\left(i\right)}\right)^{1-y^{\left(i\right)}}\right)\right)}</script><p>通过极大似然估计（Maximum Likelihood Evaluation，简称MLE）方法求概率参数。具体地，第三节给出了通过随机梯度下降法（SGD）求参数。</p>
-<h2 id="三、模型参数估计"><a href="#三、模型参数估计" class="headerlink" title="三、模型参数估计"></a>三、模型参数估计</h2><h3 id="3-1-Sigmoid函数"><a href="#3-1-Sigmoid函数" class="headerlink" title="3.1 Sigmoid函数"></a>3.1 Sigmoid函数</h3><p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv0r8uyfbj30cs0bv0to.jpg" alt="屏幕快照 2017-04-06 下午11.55.11"></p>
+<h2 id="三、模型参数估计"><a href="#三、模型参数估计" class="headerlink" title="三、模型参数估计"></a>三、模型参数估计</h2><h3 id="3-1-Sigmoid函数"><a href="#3-1-Sigmoid函数" class="headerlink" title="3.1 Sigmoid函数"></a>3.1 Sigmoid函数</h3><p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021708.jpg" alt="屏幕快照 2017-04-06 下午11.55.11"></p>
 <p>上图所示即为sigmoid函数，它的输入范围为$-\infty\rightarrow +\infty$，而值域刚好为$(0,1)$，正好满足概率分布为$(0,1)$的要求。用概率去描述分类器，自然要比阈值要来的方便。而且它是一个单调上升的函数，具有良好的连续性，不存在不连续点。</p>
-<p>此外非常重要的，sigmoid函数求导后为：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv0ra9aprj30cq06h3zh.jpg" alt="屏幕快照 2017-04-07 上午12.00.18"><br>以下的推导中会用到，带来了很大的便利。</p>
+<p>此外非常重要的，sigmoid函数求导后为：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021715.jpg" alt="屏幕快照 2017-04-07 上午12.00.18"><br>以下的推导中会用到，带来了很大的便利。</p>
 <h3 id="3-2-参数估计推导"><a href="#3-2-参数估计推导" class="headerlink" title="3.2 参数估计推导"></a>3.2 参数估计推导</h3><p>上一节的公式不仅可以理解为在已观测的样本空间中的概率分布表达式。如果从统计学的角度可以理解为参数$\theta$似然性的函数表达式（即似然函数表达式）。就是利用已知的样本分布，找到最有可能（即最大概率）导致这种分布的参数值；或者说什么样的参数才能使我们观测到目前这组数据的概率最大。参数在整个样本空间的似然函数可表示为：</p>
 <script type="math/tex; mode=display">
 L\left(\theta\right)=P\left(\overrightarrow{Y}|X;\theta\right)</script><script type="math/tex; mode=display">
@@ -448,7 +447,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
 \theta_j:=\theta_j+a\left(y^{\left(i\right)}-h_{\theta}\left(x^{\left(i\right)}\right)\right)x_{j}^{\left(i\right)}</script><p>其中$a$表示学习率，又称学习步长。此外还有Batch GD，共轭梯度，拟牛顿法（LBFGS），ADMM分布学习算法等都可以用来求解参数。另作优化算法一章进行补充。</p>
 <p>以上的推导是LR模型的核心部分，在机器学习相关面试中，LR模型公式推导可能是考察频次最高的一个点。要将其熟练推导。</p>
 <h3 id="3-3-分类边界"><a href="#3-3-分类边界" class="headerlink" title="3.3 分类边界"></a>3.3 分类边界</h3><p>知道如何求解参数后，我们看一下模型得到的最后结果是什么样的。<br>假设我们的决策函数为：</p>
-<script type="math/tex; mode=display">y^∗=1, \ \ if \ \ P(y=1|x)>0.5</script><p>选择0.5作为阈值是一个一般的做法，实际应用时特定的情况可以选择不同阈值，如果对正例的判别准确性要求高，可以选择阈值大一些，对正例的召回要求高，则可以选择阈值小一些。<br>很容易看出，当$\theta ^Tx&gt;0$时，$y=1$，否则$y=0$。$\theta ^Tx=0$是模型隐含的分类平面（在高维空间中，我们说是超平面）。所以说逻辑回归本质上是一个线性模型，但是这不意味着只有线性可分的数据能通过LR求解，实际上，我们可以通过特征变换的方式把低维空间转换到高维空间（kernel trick），而在低维空间不可分的数据，到高维空间中线性可分的几率会高一些。下面两个图的对比说明了线性分类曲线和非线性曲线（通过特征映射）。<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv0rbsmmej30ff0fddix.jpg" alt=""><br>左图是一个线性可分的数据集，右图在原始空间中线性不可分，但是在特征转换$[x_1,x_2]=&gt;[x_1,x_2,x_1^2,x_2^2,x_1x_2]$后的空间是线性可分的，对应的原始空间中分类边界为一条椭圆曲线。</p>
+<script type="math/tex; mode=display">y^∗=1, \ \ if \ \ P(y=1|x)>0.5</script><p>选择0.5作为阈值是一个一般的做法，实际应用时特定的情况可以选择不同阈值，如果对正例的判别准确性要求高，可以选择阈值大一些，对正例的召回要求高，则可以选择阈值小一些。<br>很容易看出，当$\theta ^Tx&gt;0$时，$y=1$，否则$y=0$。$\theta ^Tx=0$是模型隐含的分类平面（在高维空间中，我们说是超平面）。所以说逻辑回归本质上是一个线性模型，但是这不意味着只有线性可分的数据能通过LR求解，实际上，我们可以通过特征变换的方式把低维空间转换到高维空间（kernel trick），而在低维空间不可分的数据，到高维空间中线性可分的几率会高一些。</p>
 <p>不过，通常使用的kernel都是隐式的，也就是找不到显式地把数据从低维映射到高维的函数，而只能计算高维空间中的数据点的内积。在这种情况下，logistic regression模型就不能再表示成$w^Tx+b$的形式（原始形式primal form），而只能表示成$\sum_ia_i<x_i,x>+b$的形式（对偶形式dual form）。忽略b，则原始形式的模型蚕食只有$w$，只需要一个数据点那么多的存储量；而对偶形式的模型不仅需要存储各个$a_i$，还要存储训练数据$x_i$本身，这个存储量就大了。</x_i,x></p>
 <p>SVM也具有原始形式和对偶形式，相比之下，SVM的对偶形式是稀疏的，即只有支持向量的$a_i$才非零，才需要存储相应的$x_i$，所以，在非线性可分的情况下，SVM用的更多。</p>
 <h2 id="四、延伸"><a href="#四、延伸" class="headerlink" title="四、延伸"></a>四、延伸</h2><h3 id="4-1-生成模型与判别模型"><a href="#4-1-生成模型与判别模型" class="headerlink" title="4. 1 生成模型与判别模型"></a>4. 1 生成模型与判别模型</h3><p>逻辑回归是一种判别模型，表现为直接对条件概率$P(y|x)$建模，而不关心背后的数据分布$P(x,y)$。而高斯贝叶斯（Gaussian Naive Bayes）是一种生成模型，先对数据的联合分布建模，再通过贝叶斯公式来计算属于各个类别的后验概率，即：</p>
@@ -459,7 +458,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
 <h3 id="4-2-多分类"><a href="#4-2-多分类" class="headerlink" title="4.2 多分类"></a>4.2 多分类</h3><p>如果$y$不是在$[0,1]$中取值，而是在$K$个类别中取值，这时问题就变为一个多分类问题。有两种方式可以出处理该类问题：一种是我们对每个类别训练一个二元分类器（One-vs-all），当$K$个类别不是互斥的时候，比如用户会购买哪种品类，这种方法是合适的。如果$K$个类别是互斥的，即 $y=i$ 的时候意味着 $y$ 不能取其他的值，比如用户的年龄段，这种情况下 Softmax 回归更合适一些。Softmax 回归是直接对逻辑回归在多分类的推广，相应的模型也可以叫做多元逻辑回归（Multinomial Logistic Regression）。模型通过 softmax 函数来对概率建模，具体形式如下：</p>
 <script type="math/tex; mode=display">P(y=i|x,\theta)=\frac{^{e^{\theta^T_ix}}}{\sum_j^K e^{\theta_j^Tx}}$$而决策函数为：$$y^*=argmax_iP(y=i|x,\theta )</script><p>对于的损失函数为</p>
 <script type="math/tex; mode=display">J(\theta)=-\frac{1}{N}\sum_i^N\sum_j^KP(y_i=j)log\frac{e^{\theta_i^Tx}}{\sum e^{\theta_k^Tx}}</script><p>类似的，我们也可以通过梯度下降或其他高阶方法来求解该问题，这里不再赘述。</p>
-<h3 id="4-3-应用"><a href="#4-3-应用" class="headerlink" title="4.3 应用"></a>4.3 应用</h3><p>这里以预测用户对品类的购买偏好为例，介绍一下美团是如何用逻辑回归解决工作中问题的。该问题可以转换为预测用户在未来某个时间段是否会购买某个品类，如果把会购买标记为1，不会购买标记为0，就转换为一个二分类问题。我们用到的特征包括用户在美团的浏览，购买等历史信息，见下表：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3wj098kj30ed065wej.jpg" alt=""><br>其中提取的特征的时间跨度为30天，标签为2天。生成的训练数据大约在7000万量级（美团一个月有过行为的用户），我们人工把相似的小品类聚合起来，最后有18个较为典型的品类集合。如果用户在给定的时间内购买某一品类集合，就作为正例。有了训练数据后，使用Spark版的LR算法对每个品类训练一个二分类模型，迭代次数设为100次的话模型训练需要40分钟左右，平均每个模型2分钟，测试集上的AUC也大多在0.8以上。训练好的模型会保存下来，用于预测在各个品类上的购买概率。预测的结果则会用于推荐等场景。</p>
+<h3 id="4-3-应用"><a href="#4-3-应用" class="headerlink" title="4.3 应用"></a>4.3 应用</h3><p>这里以预测用户对品类的购买偏好为例，介绍一下美团是如何用逻辑回归解决工作中问题的。该问题可以转换为预测用户在未来某个时间段是否会购买某个品类，如果把会购买标记为1，不会购买标记为0，就转换为一个二分类问题。我们用到的特征包括用户在美团的浏览，购买等历史信息，见下表：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021744.jpg" alt=""><br>其中提取的特征的时间跨度为30天，标签为2天。生成的训练数据大约在7000万量级（美团一个月有过行为的用户），我们人工把相似的小品类聚合起来，最后有18个较为典型的品类集合。如果用户在给定的时间内购买某一品类集合，就作为正例。有了训练数据后，使用Spark版的LR算法对每个品类训练一个二分类模型，迭代次数设为100次的话模型训练需要40分钟左右，平均每个模型2分钟，测试集上的AUC也大多在0.8以上。训练好的模型会保存下来，用于预测在各个品类上的购买概率。预测的结果则会用于推荐等场景。</p>
 <p>由于不同品类之间正负例分布不同，有些品类正负例分布很不均衡，我们还尝试了不同的采样方法，最终目标是提高下单率等线上指标。经过一些参数调优，品类偏好特征为推荐和排序带来了超过1%的下单率提升。</p>
 <p>此外，由于LR模型的简单高效，易于实现，可以为后续模型优化提供一个不错的baseline，我们在排序等服务中也使用了LR模型。</p>
 <p>逻辑回归的数学模型和求解都相对比较简洁，实现相对简单。通过对特征做离散化和其他映射，逻辑回归也可以处理非线性问题，是一个非常强大的分类器。因此在实际应用中，当我们能够拿到许多低层次的特征时，可以考虑使用逻辑回归来解决我们的问题。</p>
@@ -622,7 +621,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -633,7 +632,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -644,7 +643,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

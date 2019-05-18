@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="这篇文章翻译自Recurrent Convolutional Neural Networks for Text Classification 文本分类是许多NLP应用的基础任务。传统的文本分类器通常依赖于许多人设计的特性，如字典、知识库和特殊的树内核。与传统的方法相比，我们引入了一个递归的卷积神经网络来进行文本分类，而没有人为设计的特征。在我们的模型中，我们应用了一个经常的结构，在学习单词表示法时">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv4kkm6wzj30v10dtwgb.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.565Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094229.jpg">
+<meta property="og:updated_time" content="2019-05-14T09:42:37.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自然语言处理系列（8）：RCNN">
 <meta name="twitter:description" content="这篇文章翻译自Recurrent Convolutional Neural Networks for Text Classification 文本分类是许多NLP应用的基础任务。传统的文本分类器通常依赖于许多人设计的特性，如字典、知识库和特殊的树内核。与传统的方法相比，我们引入了一个递归的卷积神经网络来进行文本分类，而没有人为设计的特征。在我们的模型中，我们应用了一个经常的结构，在学习单词表示法时">
-<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv4kkm6wzj30v10dtwgb.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094229.jpg">
 
 
 
@@ -404,7 +404,7 @@ var _hmt = _hmt || [];
 <p>我们用英语和汉语四种不同的任务来比较我们的模型和以前的最先进的方法。类别分类包含主题分类,情感分类和写作风格分类。实验表明，我们的模型在四种常用数据集的三种情况下比以往的先进方法更出色。</p>
 <h2 id="二、Related-Work"><a href="#二、Related-Work" class="headerlink" title="二、Related Work"></a>二、Related Work</h2><h3 id="2-1-Text-Classification"><a href="#2-1-Text-Classification" class="headerlink" title="2.1 Text Classification"></a>2.1 Text Classification</h3><p>传统的文本分类工作主要集中在三个主题:特征工程、特征选择和不同类型的机器学习算法。对于特征工程来说，最广泛使用的功能是bag-of-words。此外，还设计了一些更复杂的功能，比如词性标签、名词短语(Lewis 1992)和tree kernels (Post and Bergsma 2013)。特征选择旨在删除噪声特征，提高分类性能。最常见的特征选择方法是去停词(例如，“The”)。先进的方法使用信息增益、相互信息(Cover和Thomas 2012)或L1正则化(Ng 2004)以选择有用的特性。机器学习算法常用分类器，如逻辑回归(LR)、朴素贝叶斯(NB)和支持向量机(SVM)。然而，这些方法都存在数据稀疏问题。</p>
 <h3 id="2-2-Deep-neural-networks"><a href="#2-2-Deep-neural-networks" class="headerlink" title="2.2 Deep neural networks"></a>2.2 Deep neural networks</h3><p>最近，深度神经网络(Hinton and Salakhutdinov 2006)和表示学习(Bengio, Courville，和Vincent 2013)提出了解决数据问题的新思路，并提出了许多学习单词表示的神经模型(Bengio et al. 2003;Mnih and Hinton 2007;Mikolov 2012;Collobert et al . 2011;huanget al . 2012;Mikolov et al . 2013)。一个单词的神经表示被称为单词嵌入，它是一个实值向量。“嵌入”一词使我们能够简单地利用两个嵌入向量之间的距离来测量单词的相关性。通过预先训练的词嵌入，神经网络在许多NLP任务中表现出色。Socher等人(2011b)使用半监督递归自动编码器来预测句子的情绪。Socher等(2011a)提出了一种用循环神经网络进行语义检测的方法。Socher等人(2013)引入递归神经张量网络分析短语和句子的情绪。Mikolov(2012)利用循环神经网络构建语言模型。Kalchbrenner和Blunsom(2013)提出了一个新的对话行为分类网络。conbert等人(2011)引入了卷积神经网络的语义角色标记。</p>
-<h2 id="三、Model"><a href="#三、Model" class="headerlink" title="三、Model"></a>三、Model</h2><p>我们提出了一个深度神经模型来捕获文本的语义。图1显示了我们模型的网络结构。网络的输入是一个文档$D$，它是一个序列的单词$w_1, w_2…w_n$。网络的输出为类别。我们使用$p(k|D，θ)$来表示文档类别$k$的概率,$θ$是网络参数。<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv4kkm6wzj30v10dtwgb.jpg" alt=""></p>
+<h2 id="三、Model"><a href="#三、Model" class="headerlink" title="三、Model"></a>三、Model</h2><p>我们提出了一个深度神经模型来捕获文本的语义。图1显示了我们模型的网络结构。网络的输入是一个文档$D$，它是一个序列的单词$w_1, w_2…w_n$。网络的输出为类别。我们使用$p(k|D，θ)$来表示文档类别$k$的概率,$θ$是网络参数。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094229.jpg" alt=""></p>
 <h3 id="3-1-Word-Representation-Learning"><a href="#3-1-Word-Representation-Learning" class="headerlink" title="3.1 Word Representation Learning"></a>3.1 Word Representation Learning</h3><p>我们结合一个词和它的上下文来呈现一个词。语境帮助我们获得更准确的词义。在我们的模型中，我们使用一个循环结构，它是一个双向的循环神经网络，用来捕获上下文。我们将$c_l(w_i)$定义为词$w_i$左边的文本，将$c_r(w_i)$定义为词$w_i$右边的文本。$c_l(w_i)$和$c_r(w_i)$都是具有|c|个实值元素的稠密向量。使用式（1）来计算词$w_i$左边的文本，$e(w_{i-1})$是词$w_{i-1}$的词嵌入，它是一个长度为$|e|$的实值向量。$c_l(w_{i-1})$是上一个词$w_{i-1}$的左半部分文本。任何文档的第一个词的左半边文本使用相同的参数$c_l(w_1)$。$W^{(l)}$是一个将隐藏层(context)转换为下一个隐藏层的矩阵。$W^{(sl)}$是一个矩阵，用来将当前单词的语义与下一个单词的左上下文结合起来。$f$是非线性激活函数。右半边文本$c_r{(w_i)}$用相同的方式计算，如公式（2）所示。一个文档的最后一个词的右半边文本共享参数$c_r(w_n)$</p>
 <script type="math/tex; mode=display">c_l(w_i)=f(W^{(l)}c_l(w_{i-1})+W^{(sl)}e(w_{i-1})) \qquad (1)\\c_r(w_i)=f(W^{(r)}c_r(w_{i+1})+W^{(sr)}e(w_{i+1})) \qquad (2)</script><p>如式(1)和(2)所示，上下文向量捕获了所有左和右上下文的语义。例如，在图1中，$c_l (w_7)$编码了左侧上下文的语义“沿着南方漫步”以及前面的所有文本，$c_r (w_7)$编码了右侧上下文的语义“提供了一个……””。然后，我们定义单词$w_i$的表示形式为式(3)，即左侧上下文向量$c_l(w_i)$，词嵌入表示$e(w_i)$和右侧上下文向量$c_r(w_i)$的连接。用这种方式，我们的模型可以更好地消除“$w_i$”这个词的含糊含义，而不是只使用固定窗口的传统神经模型，（例如他们只使用关于文本的部分信息）</p>
 <script type="math/tex; mode=display">x_i=[c_l(w_i);e(w_i);c_r(w_i)]\qquad (3)</script><p>循环结构可以在文本的向前扫描时获取所有的$c_l$，在反向扫描时获取所有的$c_r$。时间复杂度为$O(n)$。当我们获得了单词$w_i$的表示$x_i$后，我们将一个线性变换与tanh激活函数一起应用到$x_i$，并将结果传递到下一层。</p>
@@ -488,8 +488,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/03/21/计算机视觉系列（1）：从LeNet到DenseNet/" rel="prev" title="计算机视觉系列（1）：从LeNet到DenseNet">
-                计算机视觉系列（1）：从LeNet到DenseNet <i class="fa fa-chevron-right"></i>
+              <a href="/2018/03/25/自然语言处理系列（9）：DCNN/" rel="prev" title="自然语言处理系列（9）：DCNN">
+                自然语言处理系列（9）：DCNN <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -577,7 +577,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -588,7 +588,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -599,7 +599,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

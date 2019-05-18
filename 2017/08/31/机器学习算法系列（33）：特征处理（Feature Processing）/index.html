@@ -94,15 +94,15 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="特征工程（Feature Engineering）经常被说为机器学习中的black art，这里面包含了很多不可言说的方面。怎么处理好特征，最重要的当然还是对要解决问题的了解。但是，它其实也有很多科学的地方。这篇文章我之所以命名为特征处理（Feature Processing），是因为这里面要介绍的东西只是特征工程中的一小部分。这部分比较基础，比较容易说，所以由此开始。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3bah2dhj30a70bxq3a.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv3bazbvfj30a70bx74o.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwvqukin0nj30iu0km0sz.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3bbx377j30a70bx3z0.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.691Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023447.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023457.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023503.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023523.jpg">
+<meta property="og:updated_time" content="2019-05-18T02:36:02.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（33）：特征处理（Feature Processing）">
 <meta name="twitter:description" content="特征工程（Feature Engineering）经常被说为机器学习中的black art，这里面包含了很多不可言说的方面。怎么处理好特征，最重要的当然还是对要解决问题的了解。但是，它其实也有很多科学的地方。这篇文章我之所以命名为特征处理（Feature Processing），是因为这里面要介绍的东西只是特征工程中的一小部分。这部分比较基础，比较容易说，所以由此开始。">
-<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3bah2dhj30a70bxq3a.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023447.jpg">
 
 
 
@@ -491,9 +491,9 @@ var _hmt = _hmt || [];
 <p>上面这种表达方式很巧妙地利用递进表达了值之间的顺序关系。</p>
 <h2 id="二、中级篇"><a href="#二、中级篇" class="headerlink" title="二、中级篇"></a>二、中级篇</h2><p>最容易让人掉以轻心的，往往就是大家觉得最简单的事。在特征处理中，最容易让刚入门同学忽略的，是对连续特征的处理方式。</p>
 <p>以线性分类器Linear Regression (LinearReg)为例，它是通过特征的线性加权来预测因变量y：</p>
-<script type="math/tex; mode=display">y=w^Tx</script><p>但大部分实际情况下，yy与xx都不会是这么简单的线性关系，甚至连单调关系都不会有。举个只有一个特征的例子，如果yy与xx的实际关系如下图：</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3bah2dhj30a70bxq3a.jpg" alt=""></p>
-<p>那么直接把xx扔进LinearReg模型是怎么也得不到好结果的。很多人会想着既然线性分类器搞不定，那就直接找个非线性的好了，比如高斯核的SVM。我们确实可以通过这种简单换算法的方式解决这个简单的问题。但对于很多实际问题（如广告点击率预测），往往特征非常多，这时候时间约束通常不允许我们使用很复杂的非线性分类器。这也是为什么算法发展这么多年，广告点击率预测最常用的方法还是Logistic Regression (LogisticReg)。</p>
+<script type="math/tex; mode=display">y=w^Tx</script><p>但大部分实际情况下，y与x都不会是这么简单的线性关系，甚至连单调关系都不会有。举个只有一个特征的例子，如果y与x的实际关系如下图：</p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023447.jpg" alt=""></p>
+<p>那么直接把x扔进LinearReg模型是怎么也得不到好结果的。很多人会想着既然线性分类器搞不定，那就直接找个非线性的好了，比如高斯核的SVM。我们确实可以通过这种简单换算法的方式解决这个简单的问题。但对于很多实际问题（如广告点击率预测），往往特征非常多，这时候时间约束通常不允许我们使用很复杂的非线性分类器。这也是为什么算法发展这么多年，广告点击率预测最常用的方法还是Logistic Regression (LogisticReg)。</p>
 <p>对于上面这个问题，有没有什么办法使得LinearReg也能处理得不错？当然是有，就是对原始特征x做转化，把原来的非线性关系转化为线性关系。</p>
 <h3 id="2-1-方法一：离散化"><a href="#2-1-方法一：离散化" class="headerlink" title="2.1 方法一：离散化"></a>2.1 方法一：离散化</h3><p>最常用的转化方式是对xx做离散化(discretization)，也就是把原来的值分段，转化成一个取值为0或1的向量。原始值落在某个段里，向量中此段对应的元素就为1，否则为0。</p>
 <p>离散化的目标是y与转化后向量里的每个元素都保持比较好的线性关系。</p>
@@ -531,17 +531,17 @@ var _hmt = _hmt || [];
 <p>等距离离散：</p>
 </blockquote>
 <p>顾名思义，就是离散点选取等距点。我们上面对xx取离散点{0.5,1.5,2.5}就是一种等距离散，见下图。图中垂直的灰线代表离散点。</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv3bazbvfj30a70bx74o.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023457.jpg" alt=""></p>
 <blockquote>
 <p>等样本点离散</p>
 </blockquote>
 <p>选取的离散点保证落在每段里的样本点数量大致相同，见下图。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwvqukin0nj30iu0km0sz.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023503.jpg" alt=""></p>
 <blockquote>
 <p>画图观察趋势</p>
 </blockquote>
-<p>以xx为横坐标，yy为纵坐标，画图，看曲线的趋势和拐点。通过观察下面的图我们发现可以利用3条直线（红色直线）来逐段近似原来的曲线。把离散点设为两条直线相交的各个点，我们就可以把xx离散化为长度为3的向量。</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3bbx377j30a70bx3z0.jpg" alt=""></p>
+<p>以x为横坐标，y为纵坐标，画图，看曲线的趋势和拐点。通过观察下面的图我们发现可以利用3条直线（红色直线）来逐段近似原来的曲线。把离散点设为两条直线相交的各个点，我们就可以把xx离散化为长度为3的向量。</p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023523.jpg" alt=""></p>
 <p>上面介绍的这种离散化为0/1向量的方法有个问题，它在离散时不会考虑到具体的xx到离散边界的距离。比如等距离散中取离散点为{0.5,1.5,2.5}{0.5,1.5,2.5}，那么1.499，1.501和2.49分别会离散为(0, 1, 0, 0)，(0, 0, 1, 0)和(0, 0, 1, 0)。1.499和1.501很接近，可是就因为这种强制分段的离散导致它们离散的结果差距很大。</p>
 <p>针对上面这种硬离散的一种改进就是使用软离散，也就是在离散时考虑到xx与附近离散点的距离，离散出来的向量元素值可以是0/1之外的其他值。有兴趣的同学可以去ESL1这本书中找点感觉。</p>
 <h3 id="2-2-函数变换"><a href="#2-2-函数变换" class="headerlink" title="2.2 函数变换"></a>2.2 函数变换</h3><p>函数变换直接把原来的特征通过非线性函数做变换，然后把原来的特征，以及变换后的特征一起加入模型进行训练。常用的变换函数见下表，不过其实你可以尝试任何函数。</p>
@@ -767,7 +767,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -778,7 +778,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -789,7 +789,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

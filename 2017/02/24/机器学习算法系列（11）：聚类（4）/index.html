@@ -94,18 +94,18 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="五、密度最大值聚类5.1 引言2014年6月，Alex Rodriguez和Alessandro Laio在$Science$上发表了一篇名为《Clustering by fast search and find of density peaks》的文章，提供了一种简洁而优美的聚类算法，是一种基于密度的聚类方法，可以识别各种形状的类簇，并且参数很容易确定。它克服了DBSCAN中不同类的密度差别大、">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3a840gwj30en0awmxx.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwvszkmm1ij315q0v20vw.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3a9y1osj30gb0cuwf0.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3aafmyvj30g70f2js4.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3aayyhkj30vh0cvq6k.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3abdxcpj30ed0ckaac.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3acc6bxj30gn0antai.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.658Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061021.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061034.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061041.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061051.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061059.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061108.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061117.jpg">
+<meta property="og:updated_time" content="2019-05-18T06:11:22.770Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（11）：聚类（4）—密度最大值聚类">
 <meta name="twitter:description" content="五、密度最大值聚类5.1 引言2014年6月，Alex Rodriguez和Alessandro Laio在$Science$上发表了一篇名为《Clustering by fast search and find of density peaks》的文章，提供了一种简洁而优美的聚类算法，是一种基于密度的聚类方法，可以识别各种形状的类簇，并且参数很容易确定。它克服了DBSCAN中不同类的密度差别大、">
-<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3a840gwj30en0awmxx.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061021.jpg">
 
 
 
@@ -411,19 +411,19 @@ var _hmt = _hmt || [];
 </ul>
 <h3 id="5-3-聚类过程"><a href="#5-3-聚类过程" class="headerlink" title="5.3 聚类过程"></a>5.3 聚类过程</h3><p>这个聚类实例摘自作者的PPT讲演，在一个二维空间中对数据进行聚类，具体步骤如下：</p>
 <ul>
-<li><p>1、首先计算每一个点的局部密度$\rho_i$，如图中，$\rho_1=7,\rho_8=5,\rho_{10}=4$<img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3a840gwj30en0awmxx.jpg" alt="屏幕快照 2017-03-25 下午5.46.16"></p>
+<li><p>1、首先计算每一个点的局部密度$\rho_i$，如图中，$\rho_1=7,\rho_8=5,\rho_{10}=4$<img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061021.jpg" alt="屏幕快照 2017-03-25 下午5.46.16"></p>
 </li>
-<li><p>2、然后对于每一个点$i$计算在局部密度高于对象$i$的所有对象中，到对象$i$<br>最近的距离$\delta$<img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwvszkmm1ij315q0v20vw.jpg" alt=""></p>
+<li><p>2、然后对于每一个点$i$计算在局部密度高于对象$i$的所有对象中，到对象$i$<br>最近的距离$\delta$<img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061034.jpg" alt=""></p>
 </li>
-<li>3、对每一个点，绘制出局部密度与高局部密度点距离的关系散点图<img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3a9y1osj30gb0cuwf0.jpg" alt="屏幕快照 2017-03-25 下午5.46.46"></li>
-<li>4、图上的异常点即为簇中心。如图所示，1和10两点的局部密度和高局部密度距离都很大，将其作为簇中心。<img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3aafmyvj30g70f2js4.jpg" alt="屏幕快照 2017-03-25 下午5.58.36"></li>
-<li>5、将其他的点分配给距离其最近的有着更高的局部密度的簇。（Assign each point to the same cluster of its nearest neighbor of higher density）<img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3aayyhkj30vh0cvq6k.jpg" alt="屏幕快照 2017-03-25 下午6.00.14"><br>左图是所有点在二维空间的分布，右图是以$\rho$为横坐标，以$\delta$为纵坐标绘制的决策图。容易发现，1和10两个点的$\rho_i$和$\delta_i$都比较大，作为簇的中心点。26、27、28三个点的$\delta$也比较大，但是$\rho比较小$，所以是异常点。</li>
+<li>3、对每一个点，绘制出局部密度与高局部密度点距离的关系散点图<img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061041.jpg" alt="屏幕快照 2017-03-25 下午5.46.46"></li>
+<li>4、图上的异常点即为簇中心。如图所示，1和10两点的局部密度和高局部密度距离都很大，将其作为簇中心。<img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061051.jpg" alt="屏幕快照 2017-03-25 下午5.58.36"></li>
+<li>5、将其他的点分配给距离其最近的有着更高的局部密度的簇。（Assign each point to the same cluster of its nearest neighbor of higher density）<img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061059.jpg" alt="屏幕快照 2017-03-25 下午6.00.14"><br>左图是所有点在二维空间的分布，右图是以$\rho$为横坐标，以$\delta$为纵坐标绘制的决策图。容易发现，1和10两个点的$\rho_i$和$\delta_i$都比较大，作为簇的中心点。26、27、28三个点的$\delta$也比较大，但是$\rho比较小$，所以是异常点。</li>
 </ul>
 <h3 id="5-4-一些关键点"><a href="#5-4-一些关键点" class="headerlink" title="5.4 一些关键点"></a>5.4 一些关键点</h3><ul>
 <li><p>簇中心的识别</p>
 <ul>
 <li>那些有着比较大的局部密度$\rho_i$和很大的高局部密度$\delta_i$的点被认为是簇的中心；<br>而高局部密度距离$\delta_i$较大但局部密度$\rho_i$较小的点是异常点；<br>确定簇中心之后，其他点按照距离已知簇的中心最近进行分类，也可以按照密度可达的方法进行分类。<br>但是，这里我们在确定聚类中心时，没有定量地分析，而是通过肉眼观察，包含很多的主观因素。在上图中可以分明地用肉眼判断聚类中心，但是有些情况下无法用肉眼来判断。不过，对于那些在决策图中无法用肉眼判断出聚类中心的情形，作者在文中给出了一种确定聚类中心个数的提醒：计算一个将$\rho$值和$\delta$值综合考虑的量<script type="math/tex; mode=display">
-\gamma_i=\rho_i\delta_i</script>显然$\gamma$值越大，越有可能是聚类中心。因此，只需对其降序排列，然后从前往后截取若干个数据点作为聚类中心就可以了。<br>我们把排序后的$\gamma$在坐标平面（下标为横轴，$\gamma$值为纵轴）画出来，由图可见，非聚类中心的$gamma$值比较平滑，而从非聚类中心过渡到聚类中心时$\gamma$有一个明显的跳跃，这个跳跃用肉眼或数值检测应该可以判断出来。作者在文末还提到，对于人工随机生成的数据集，$\gamma$的分布还满足幂次定律，即$log\gamma$，且斜率依赖于数据维度。<img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3abdxcpj30ed0ckaac.jpg" alt="屏幕快照 2017-03-25 下午5.04.17"></li>
+\gamma_i=\rho_i\delta_i</script>显然$\gamma$值越大，越有可能是聚类中心。因此，只需对其降序排列，然后从前往后截取若干个数据点作为聚类中心就可以了。<br>我们把排序后的$\gamma$在坐标平面（下标为横轴，$\gamma$值为纵轴）画出来，由图可见，非聚类中心的$gamma$值比较平滑，而从非聚类中心过渡到聚类中心时$\gamma$有一个明显的跳跃，这个跳跃用肉眼或数值检测应该可以判断出来。作者在文末还提到，对于人工随机生成的数据集，$\gamma$的分布还满足幂次定律，即$log\gamma$，且斜率依赖于数据维度。<img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061108.jpg" alt="屏幕快照 2017-03-25 下午5.04.17"></li>
 </ul>
 </li>
 <li><p>截断距离$d_c$的选择</p>
@@ -433,7 +433,7 @@ var _hmt = _hmt || [];
 </li>
 <li><p>选定簇中心之后</p>
 <ul>
-<li>在聚类分析中, 通常需要确定每个点划分给某个类簇的可靠性. 在该算法中, 可以首先为每个类簇定义一个边界区域(border region), 亦即划分给该类簇但是距离其他类簇的点的距离小于$d_c$的点(这个区域由这样的数据点构成：它们本身属于该Cluster，但在与其距离不超过$d_c$的范围内，存在属于其他Cluster的数据点). 然后为每个类簇找到其边界区域的局部密度最大的点, 令其局部密度为$\rho_h$. 该类簇中所有局部密度大于$\rho_h$的点被认为是类簇核心的一部分(亦即将该点划分给该类簇的可靠性很大), 其余的点被认为是该类簇的光晕(halo), 亦即可以认为是噪音. 图例如下<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3acc6bxj30gn0antai.jpg" alt="屏幕快照 2017-03-25 下午4.11.42"><br>A图为生成数据的概率分布，B、C二图为分别从该分布中生成了4000，1000个点。D,E分别是B,C两组数据的决策图（decision tree），可以看到两组数据都只有五个点有比较大的$\rho_i$和很大的$\delta_i$，这些点作为类簇的中心，在确定了类簇的中心之后，每个点被划分到各个类簇（彩色点），或者划分到类簇光晕（黑色点），F图展示的是随着抽样点数量的增多，聚类的错误率在逐渐下降，说明该算法是鲁棒的。</li>
+<li>在聚类分析中, 通常需要确定每个点划分给某个类簇的可靠性. 在该算法中, 可以首先为每个类簇定义一个边界区域(border region), 亦即划分给该类簇但是距离其他类簇的点的距离小于$d_c$的点(这个区域由这样的数据点构成：它们本身属于该Cluster，但在与其距离不超过$d_c$的范围内，存在属于其他Cluster的数据点). 然后为每个类簇找到其边界区域的局部密度最大的点, 令其局部密度为$\rho_h$. 该类簇中所有局部密度大于$\rho_h$的点被认为是类簇核心的一部分(亦即将该点划分给该类簇的可靠性很大), 其余的点被认为是该类簇的光晕(halo), 亦即可以认为是噪音. 图例如下<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061117.jpg" alt="屏幕快照 2017-03-25 下午4.11.42"><br>A图为生成数据的概率分布，B、C二图为分别从该分布中生成了4000，1000个点。D,E分别是B,C两组数据的决策图（decision tree），可以看到两组数据都只有五个点有比较大的$\rho_i$和很大的$\delta_i$，这些点作为类簇的中心，在确定了类簇的中心之后，每个点被划分到各个类簇（彩色点），或者划分到类簇光晕（黑色点），F图展示的是随着抽样点数量的增多，聚类的错误率在逐渐下降，说明该算法是鲁棒的。</li>
 </ul>
 </li>
 </ul>
@@ -592,7 +592,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -603,7 +603,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -614,7 +614,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

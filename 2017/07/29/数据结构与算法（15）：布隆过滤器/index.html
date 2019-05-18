@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、引入什么情况下需要布隆过滤器？我们先来看几个比较常见的例子：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2e8w3k4j30ai08rgm2.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2e974h4j30qg09kt9q.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.544Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-164926.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-164953.jpg">
+<meta property="og:updated_time" content="2019-05-17T16:50:02.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（15）：布隆过滤器">
 <meta name="twitter:description" content="一、引入什么情况下需要布隆过滤器？我们先来看几个比较常见的例子：">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2e8w3k4j30ai08rgm2.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-164926.jpg">
 
 
 
@@ -415,7 +415,7 @@ var _hmt = _hmt || [];
 <p>有的同学可能会问，哈希表不是效率很高吗？查询效率可以达到O(1)。但是哈希表需要消耗的内存依然很高。使用哈希表存储一亿 个垃圾 email 地址的消耗？哈希表的做法：首先，哈希函数将一个email地址映射成8字节信息指纹；考虑到哈希表存储效率通常小于50%（哈希冲突）；因此消耗的内存：8 <em> 2 </em> 1亿 字节 = 1.6G 内存，普通计算机是无法提供如此大的内存。这个时候，布隆过滤器（Bloom Filter）就应运而生。在继续介绍布隆过滤器的原理时，先讲解下关于哈希函数的预备知识。</p>
 <h3 id="三、哈希函数"><a href="#三、哈希函数" class="headerlink" title="三、哈希函数"></a>三、哈希函数</h3><p>哈希函数的概念是：将任意大小的数据转换成特定大小的数据的函数，转换后的数据称为哈希值或哈希编码。</p>
 <p>一个应用是Hash table（散列表，也叫哈希表），是根据哈希值 (Key value) 而直接进行访问的数据结构。也就是说，它通过把哈希值映射到表中一个位置来访问记录，以加快查找的速度。下面是一个典型的 hash 函数 / 表示意图：</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2e8w3k4j30ai08rgm2.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-164926.jpg" alt=""></p>
 <p>可以明显的看到，原始数据经过哈希函数的映射后称为了一个个的哈希编码，数据得到压缩。哈希函数是实现哈希表和布隆过滤器的基础。</p>
 <p>哈希函数有以下两个特点：</p>
 <ul>
@@ -426,7 +426,7 @@ var _hmt = _hmt || [];
 <p>所以要引入下面的 Bloom Filter。</p>
 <h2 id="四、布隆过滤器（Bloom-Filter）"><a href="#四、布隆过滤器（Bloom-Filter）" class="headerlink" title="四、布隆过滤器（Bloom Filter）"></a>四、布隆过滤器（Bloom Filter）</h2><p>布隆过滤器（英语：Bloom Filter）是1970年由布隆提出的。它实际上是一个很长的二进制向量和一系列随机映射函数。布隆过滤器可以用于检索一个元素是否在一个集合中。它的优点是空间效率和查询时间都远远超过一般的算法，缺点是有一定的误识别率和删除困难。</p>
 <h3 id="4-1-原理"><a href="#4-1-原理" class="headerlink" title="4.1 原理"></a>4.1 原理</h3><p>布隆过滤器（Bloom Filter）的核心实现是一个超大的位数组和几个哈希函数。假设位数组的长度为m，哈希函数的个数为k</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2e974h4j30qg09kt9q.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-164953.jpg" alt=""></p>
 <p>以上图为例，具体的操作流程：假设集合里面有3个元素{x, y, z}，哈希函数的个数为3。首先将位数组进行初始化，将里面每个位都设置位0。</p>
 <p>对于集合里面的每一个元素，将元素依次通过3个哈希函数进行映射，每次映射都会产生一个哈希值，这个值对应位数组上面的一个点，然后将位数组对应的位置标记为1。查询W元素是否存在集合中的时候，同样的方法将W通过哈希映射到位数组上的3个点。如果3个点的其中有一个点不为1，则可以判断该元素一定不存在集合中。反之，如果3个点都为1，则该元素可能存在集合中。</p>
 <p>注意：此处不能判断该元素是否一定存在集合中，可能存在一定的误判率。可以从图中可以看到：假设某个元素通过映射对应下标为4，5，6这3个点。虽然这3个点都为1，但是很明显这3个点是不同元素经过哈希得到的位置，因此这种情况说明元素虽然不在集合中，也可能对应的都是1，这是误判率存在的原因。</p>
@@ -629,7 +629,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -640,7 +640,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -651,7 +651,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

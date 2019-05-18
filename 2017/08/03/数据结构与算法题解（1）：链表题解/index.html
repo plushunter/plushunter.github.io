@@ -94,22 +94,22 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="链表相关题解java实现。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv4zl9xhtj30hx0a2t93.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv4zqzct6j30dv02c0sm.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv4zw9m7zj30hu06x0sw.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv502dzr9j30bm0am74j.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv508gcsfj30gb046jrd.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv50c8n2uj30hx04raa5.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv50flq5ij30i704bglm.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv50lmeldj30au03iwed.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv50qx27oj30aw03a3yd.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv50w1p6tj30i10a50t5.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv511q91pj30i2044wei.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.740Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162115.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162124.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162132.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162140.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162152.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162201.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162207.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162222.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162251.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162310.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162321.jpg">
+<meta property="og:updated_time" content="2019-05-17T16:23:40.533Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法题解（1）：链表题解">
 <meta name="twitter:description" content="链表相关题解java实现。">
-<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv4zl9xhtj30hx0a2t93.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162115.jpg">
 
 
 
@@ -420,7 +420,7 @@ var _hmt = _hmt || [];
 <p>很自然的想法是先走到链表尾端，再从尾端回溯k步。可是我们从链表结点的定义可以看出本题中的链表是单向链表，单向链表的结点只有从前向后的指针而没有从后往前的指针，这种思路行不通。</p>
 <p>既然不能从尾结点开始遍历链表，我们还是把思路回到头结点上来。假设整个链表有n个结点，那么倒数第k个结点就是从头结点开始往后走n-k+1步就可以了。如何得到结点树n？只需要从头开始遍历链表，每经过一个结点，计数器加1就行了。</p>
 <p>也就是说我们需要遍历链表两次，第一次统计出链表中的结点的个数，第二次就能找到倒数第k个结点。但是面试官期待的解法是只需要遍历链表一次。</p>
-<p>为了实现只遍历链表一次就能找到倒数第k个结点，我们可以定义两个指针。第一个指针从链表的头指针开始遍历向前走k-1步，第二个指针保持不动；从第k步开始，第二个指针也开始从链表的头指针开始遍历。由于两个指针的距离保持在k-1，当第一个（走在前面的）指针到达链表的尾结点时，第二个指针（走在后边的）指针正好是倒数第k个结点。<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv4zl9xhtj30hx0a2t93.jpg" alt=""></p>
+<p>为了实现只遍历链表一次就能找到倒数第k个结点，我们可以定义两个指针。第一个指针从链表的头指针开始遍历向前走k-1步，第二个指针保持不动；从第k步开始，第二个指针也开始从链表的头指针开始遍历。由于两个指针的距离保持在k-1，当第一个（走在前面的）指针到达链表的尾结点时，第二个指针（走在后边的）指针正好是倒数第k个结点。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162115.jpg" alt=""></p>
 <p>但是这样写出来的代码不够鲁棒，面试官可以找出三种办法让这段代码崩溃：</p>
 <ul>
 <li>输入的ListHead为空指针。由于代码会试图访问空指针指向的内存，程序崩溃。</li>
@@ -447,7 +447,7 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class ListNode &#123;</div><div class="line">    int val;</div><div class="line">    ListNode next = null;</div><div class="line"></div><div class="line">    ListNode(int val) &#123;</div><div class="line">        this.val = val;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>解决与链表相关的问题总是有大量的指针操作，而指针操作的代码总是容易出错的。</p>
 <p>为了正确地反转一个链表，需要调整链表中指针的方向。为了将调整指针这个复杂的过程分析清楚，可以借助图形来直观分析。在下图所示的链表中，h、i、j是3个相邻的结点。假设经过若干操作，我们已经把结点h之前的指针调整完毕，这些结点的next指向h，此时链表的结果如下所示：</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv4zqzct6j30dv02c0sm.jpg" alt=""><br>其中（a）为一个链表，（b）把i之前的所有结点的next都指向前一个结点，导致链表在结点i、j之间断裂。</p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162124.jpg" alt=""><br>其中（a）为一个链表，（b）把i之前的所有结点的next都指向前一个结点，导致链表在结点i、j之间断裂。</p>
 <p>不难注意到，由于结点i的next指向了它的前一个结点，导致我们无法再链表中遍历到结点j。为了避免链表在结点i处断开，我们需要在调整结点i的next之前把结点j保存下来。</p>
 <p>也就是说我们在调整结点i的next指针时，除了需要知道结点i本身之外，还需要前一个结点h，因为我们需要把结点i的next指向结点h。同时，我们还事先需要保存i的一个结点j，以防止链表断开。因此相应地我们需要定义3个指针，分别指向当前遍历到的结点、它的前一个结点及后一个结点。</p>
 <p>最后我们试着找到反转后链表的头结点。不难分析出反转后链表的头结点是原始链表的尾结点。什么结点是尾结点？自然是next为null的结点。</p>
@@ -462,11 +462,11 @@ var _hmt = _hmt || [];
 <p>python版本</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># -*- coding:utf-8 -*-</span></div><div class="line"><span class="comment"># class ListNode:</span></div><div class="line"><span class="comment">#     def __init__(self, x):</span></div><div class="line"><span class="comment">#         self.val = x</span></div><div class="line"><span class="comment">#         self.next = None</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></div><div class="line">    <span class="comment"># 返回ListNode</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">ReverseList</span><span class="params">(self, pHead)</span>:</span></div><div class="line">        <span class="comment"># write code here</span></div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> pHead <span class="keyword">or</span> <span class="keyword">not</span> pHead.next:</div><div class="line">            <span class="keyword">return</span> pHead          </div><div class="line">        pre = <span class="keyword">None</span>        </div><div class="line">        <span class="keyword">while</span> pHead:</div><div class="line">            next1 = pHead.next</div><div class="line">            pHead.next = pre</div><div class="line">            pre = pHead</div><div class="line">            pHead = next1</div><div class="line">        <span class="keyword">return</span> pre</div></pre></td></tr></table></figure>
-<h2 id="五、合并两个排序的链表（剑17）"><a href="#五、合并两个排序的链表（剑17）" class="headerlink" title="五、合并两个排序的链表（剑17）"></a>五、合并两个排序的链表（剑17）</h2><p>输入两个递增排序的链表，合并这两个链表并使新链表中的结点仍然是按照递增排序的。例如下图中的链表1和链表2，则合并之后的升序链表3如下所示：<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv4zw9m7zj30hu06x0sw.jpg" alt=""></p>
+<h2 id="五、合并两个排序的链表（剑17）"><a href="#五、合并两个排序的链表（剑17）" class="headerlink" title="五、合并两个排序的链表（剑17）"></a>五、合并两个排序的链表（剑17）</h2><p>输入两个递增排序的链表，合并这两个链表并使新链表中的结点仍然是按照递增排序的。例如下图中的链表1和链表2，则合并之后的升序链表3如下所示：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162132.jpg" alt=""></p>
 <p>这是一个经常被各公司采用的面试题。在面试过程中，最容易犯两种错误：一是在写代码之前没有对合并的过程想清楚，最终合并出来的链表要么中间断开了，要么并没有做到递增排序；二是代码在鲁棒性方面存在问题，程序一旦有特殊的输入（如空链表）就会奔溃。<br>首先分析合并两个链表的过程。从合并两个链表的头结点开始。链表1的头结点的值小于链表2的头结点的值，因此链表1的头结点将是合并后链表的头结点。</p>
 <p>继续合并剩余的结点。在两个链表中剩下的结点依然是排序的，因此合并这两个链表的步骤和前面的步骤是一样的。依旧比较两个头结点的值。此时链表2的头结点值小于链表1的头结点的值，因此链表2的头结点的值将是合并剩余结点得到的链表的头结点。把这个结点和前面合并链表时得到的链表的尾结点链接起来。</p>
 <p>当我们得到两个链表中值较小的头结点并把它链接到已经合并的链表之后，两个链表剩余的结点依然是排序的，因此合并的步骤和之前的步骤是一样的。这是典型的递归过程，我们可以定义递归函数完成这一合并过程。（解决这个问题需要大量的指针操作，如没有透彻地分析问题形成清晰的思路，很难写出正确的代码）</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv502dzr9j30bm0am74j.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162140.jpg" alt=""></p>
 <p>接下来解决鲁棒性问题，每当代码试图访问空指针指向的内存时程序就会奔溃，从而导致鲁棒性问题。本题中一旦输入空的链表就会引入空的指针，因此我们要对空链表单独处理。当第一个链表是空链表<br>，也就是它的头结点是一个空指针时，和第二个链表合并的结果就是第二个链表。同样，当输入的第二个链表的头结点是空指针的时候，和第一个链表合并得到的结果就是第一个链表。如果两个链表都为空，合并得到的是一个空链表。（由于有大量的指针操作，如果稍有不慎就会在代码中遗留很多与鲁棒性相关的隐患。建议应聘者在写代码之前全面分析哪些情况会引入空指针，并考虑清楚怎么处理这些空指针。）</p>
 <p>代码如下：</p>
 <blockquote>
@@ -478,7 +478,7 @@ var _hmt = _hmt || [];
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">Merge</span><span class="params">(ListNode list1,ListNode list2)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (list1==<span class="keyword">null</span>) <span class="keyword">return</span> list2;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (list2==<span class="keyword">null</span>) <span class="keyword">return</span> list1;</div><div class="line">        ListNode MergeHead = <span class="keyword">null</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> (list.val&lt;=list2.val)&#123;</div><div class="line">            MergeHead = list1;</div><div class="line">            MergeHead.next = Merge(list1.next,list2);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> </div><div class="line">        	&#123;MergeHead = list2;</div><div class="line">             MergeHead.next = Merge(list1,list2.next);</div><div class="line">             &#125;</div><div class="line">        <span class="keyword">return</span> MergeHead;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="六、复杂链表的复制（剑26）"><a href="#六、复杂链表的复制（剑26）" class="headerlink" title="六、复杂链表的复制（剑26）"></a>六、复杂链表的复制（剑26）</h2><p>输入一个复杂链表（每个节点中有节点值，以及两个指针，一个指向下一个节点，另一个特殊指针指向任意一个节点），返回结果为复制后复杂链表的head。（注意，输出结果中请不要返回参数中的节点引用，否则判题程序会直接返回空）</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv508gcsfj30gb046jrd.jpg" alt=""><br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv50c8n2uj30hx04raa5.jpg" alt=""><br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv50flq5ij30i704bglm.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162152.jpg" alt=""><br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162201.jpg" alt=""><br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162207.jpg" alt=""></p>
 <blockquote>
 <p>java</p>
 </blockquote>
@@ -490,7 +490,7 @@ var _hmt = _hmt || [];
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    TreeNode head = <span class="keyword">null</span>;</div><div class="line">    TreeNode realHead = <span class="keyword">null</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> TreeNode <span class="title">Convert</span><span class="params">(TreeNode pRootOfTree)</span> </span>&#123;</div><div class="line">        ConvertSub(pRootOfTree);</div><div class="line">        <span class="keyword">return</span> realHead<span class="comment">//realHead是每个子树排序后的第一个结点，head是排序后的最后一个结点;</span></div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">ConvertSub</span><span class="params">(TreeNode pRootOfTree)</span> </span>&#123;</div><div class="line">        <span class="comment">//递归中序遍历</span></div><div class="line">        <span class="keyword">if</span>(pRootOfTree==<span class="keyword">null</span>) <span class="keyword">return</span>;</div><div class="line">        ConvertSub(pRootOfTree.left);</div><div class="line">        <span class="keyword">if</span> (head == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="comment">//初始处</span></div><div class="line">            head = pRootOfTree;</div><div class="line">            realHead = pRootOfTree;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">//前两句实现双向，第三句跳到下一个节点。</span></div><div class="line">            head.right = pRootOfTree;</div><div class="line">            pRootOfTree.left = head;</div><div class="line">            head = pRootOfTree;</div><div class="line">        &#125;</div><div class="line">        ConvertSub(pRootOfTree.right);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="八、两个链表的第一个公共结点（剑37）"><a href="#八、两个链表的第一个公共结点（剑37）" class="headerlink" title="八、两个链表的第一个公共结点（剑37）"></a>八、两个链表的第一个公共结点（剑37）</h2><p>输入两个链表找出他们的第一个公共结点。</p>
 <p>面试的时候碰到这道题，很多应聘者的第一个想法就是蛮力法：在第一个链表上顺序遍历每个结点，每遍历到一个结点的时候，在第二个链表上顺序遍历每个结点。若第二个链表上有一个结点和第一个链表上的结点一样，说明两个链表在这个结点上重合，于是就找到了它们的公共结点。如果第一个链表的长度为m，第二个链表的长度为n，显然该方法的时间复杂度是O(mn)。</p>
-<p>通常蛮力法不会是最好的办法，我们接下来试着分析有公共结点的两个链表有哪些特点。从链表结构的定义看出，这两个链表是单向链表。如果他们有公共的结点，那么这两个链表从某一结点开始，他们的next指向同一个结点。但由于是单向链表的结点，每个结点只有一个next，因此从第一个公共结点开始，之后的结点都是重合的，不可能再出现分叉。所以两个有公共结点而部分重合的链表，拓扑形状看起来像一个Y，而不是X。<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv50lmeldj30au03iwed.jpg" alt=""></p>
+<p>通常蛮力法不会是最好的办法，我们接下来试着分析有公共结点的两个链表有哪些特点。从链表结构的定义看出，这两个链表是单向链表。如果他们有公共的结点，那么这两个链表从某一结点开始，他们的next指向同一个结点。但由于是单向链表的结点，每个结点只有一个next，因此从第一个公共结点开始，之后的结点都是重合的，不可能再出现分叉。所以两个有公共结点而部分重合的链表，拓扑形状看起来像一个Y，而不是X。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162222.jpg" alt=""></p>
 <p>经过我们的分析发现，若两个链表有公共结点，那么公共结点出现在两个链表的尾部。如果我们从两个链表的尾部开始往前比较，最后一个相同的结点就是我们要找的结点。我们想到用栈的特点来解决这个问题：分别把两个链表的结点放入两个栈中，这样两个链表的尾结点就位于两个栈的栈顶，接下来比较两个栈顶的结点是否相同。若果相同，则把栈顶弹出接着比较下一个栈顶，直到找到最后一个相同的结点。</p>
 <p>上面需要用到两个辅助栈。若链表的长度分别为m和n，那么空间复杂度是O(m+n)。这种思路的时间复杂度也是O(m+n)。和最开始的蛮力法相比，时间效率得到了提升，相当于是用空间换取时间效率。</p>
 <p>之所以需要用到栈，是因为我们想同时遍历到达两个栈的尾结点。当两个链表的长度不相同时，如果我们从头开始遍历到达尾结点的时间就不一致。其实解决这个问题还有一个更简单的办法：首先遍历两个链表得到他们的长度，就能知道哪个链表比较长，以及长的链表比短的链表多几个结点。在第二次遍历的时候，在较长的链表上先走若干步，接着再同时在两个链表上遍历，找到的第一个相同的结点就是他们的第一个公共结点。</p>
@@ -513,8 +513,8 @@ var _hmt = _hmt || [];
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span></span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">LastRemaining_Solution</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span></span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(n==<span class="number">0</span>||m==<span class="number">0</span>)<span class="keyword">return</span> -<span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> last=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;i++)</div><div class="line">        &#123;</div><div class="line">            last=(last+m)%i;</div><div class="line">        &#125;   </div><div class="line">       <span class="keyword">return</span> last ;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="十、链表中环的入口结点（剑56）"><a href="#十、链表中环的入口结点（剑56）" class="headerlink" title="十、链表中环的入口结点（剑56）"></a>十、链表中环的入口结点（剑56）</h2><p>一个链表中包含环，如何找到环的入口结点？例如在下图的链表中，环的入口结点是结点3。</p>
-<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv50qx27oj30aw03a3yd.jpg" alt=""></p>
-<p>以3为例分析两个指针的移动规律。指针$P_1$和$P_2$在初始化时都指向链表的头结点。由于环中有4个结点，指针$P_1$先在链表上向前移动4步。接下来两个指针以相同的速度在链表上向前移动，直到它们相遇。它们相遇的结点正好是还的入口结点。<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv50w1p6tj30i10a50t5.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162251.jpg" alt=""></p>
+<p>以3为例分析两个指针的移动规律。指针$P_1$和$P_2$在初始化时都指向链表的头结点。由于环中有4个结点，指针$P_1$先在链表上向前移动4步。接下来两个指针以相同的速度在链表上向前移动，直到它们相遇。它们相遇的结点正好是还的入口结点。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162310.jpg" alt=""></p>
 <p>剩下的问题就是如何得到环中结点的数目。我们可以使用一快一慢两个指针。若两个指针相遇，说明链表中有环。两个指针相遇的结点一定是在环中的。可以从这个结点出发，一边继续向前移动一边计数，当再次回到这个结点时，就可以得到环中结点数了<br>实现代码如下：</p>
 <blockquote>
 <p>java版本</p>
@@ -524,7 +524,7 @@ var _hmt = _hmt || [];
 <p>python 版本</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"># -*- coding:utf-8 -*-</div><div class="line"># class ListNode:</div><div class="line">#     def __init__(self, x):</div><div class="line">#         self.val = x</div><div class="line">#         self.next = None</div><div class="line">class Solution:</div><div class="line">    def meetingNode(self,pHead):</div><div class="line">        if not pHead:</div><div class="line">            return None</div><div class="line">        pslow =pHead.next        </div><div class="line">        if not pslow:</div><div class="line">            return None</div><div class="line">        pfast = pslow.next</div><div class="line">        while pfast and pslow:</div><div class="line">            if pslow==pfast:</div><div class="line">                return pfast</div><div class="line">            pslow = pslow.next</div><div class="line">            </div><div class="line">            pfast = pfast.next</div><div class="line">            if pfast:</div><div class="line">                pfast=pfast.next</div><div class="line">        return None </div><div class="line">    def EntryNodeOfLoop(self, pHead):</div><div class="line">        meetingNode = self.meetingNode(pHead)</div><div class="line">        if not meetingNode:</div><div class="line">            return None</div><div class="line">        nodesInLoop = 1</div><div class="line">        p1 = meetingNode</div><div class="line">        while pnext!=meetingNode:</div><div class="line">            p1=pnext</div><div class="line">            nodesInLoop +=1</div><div class="line">        p1 = pHead</div><div class="line">        for i in xrange(0,nodesInLoop):</div><div class="line">            p1=pnext</div><div class="line">        p2=pHead</div><div class="line">        while p1!=p2:</div><div class="line">            p1=pnext</div><div class="line">            p2=p2.next</div><div class="line">        return p1</div></pre></td></tr></table></figure>
-<h2 id="十一、删除链表中重复的结点（剑57）"><a href="#十一、删除链表中重复的结点（剑57）" class="headerlink" title="十一、删除链表中重复的结点（剑57）"></a>十一、删除链表中重复的结点（剑57）</h2><p>在一个排序的链表中，如何删除重复的结点？如在下图中重复结点被删除之后，链表如下图所示：<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv511q91pj30i2044wei.jpg" alt=""></p>
+<h2 id="十一、删除链表中重复的结点（剑57）"><a href="#十一、删除链表中重复的结点（剑57）" class="headerlink" title="十一、删除链表中重复的结点（剑57）"></a>十一、删除链表中重复的结点（剑57）</h2><p>在一个排序的链表中，如何删除重复的结点？如在下图中重复结点被删除之后，链表如下图所示：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-162321.jpg" alt=""></p>
 <p>从头遍历整个链表。如果当前结点的值与下一个节点的值相同，那么它们就是重复的结点，都可以被删除。为了保证删除之后的链表仍然是相连的而没有中间断开，我们要把当前结点的前一个结点preNode和后面值比当前结点的值要大的结点相连。要确保preNode要始终与下一个没有重复的结点连接在一起。</p>
 <p>实现代码如下：</p>
 <blockquote>
@@ -741,7 +741,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -752,7 +752,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -763,7 +763,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

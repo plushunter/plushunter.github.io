@@ -94,17 +94,17 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="期望最大值（Expectation Maximization，简称EM算法）是在概率模型中寻找参数最大似然估计或者最大后验估计的算法，其中概率模型依赖于无法观测的隐藏变量。其主要思想就是通过迭代来建立完整数据的对数似然函数的期望界限，然后最大化不完整数据的对数似然函数。本文将尽可能详尽地描述EM算法的原理。并结合高斯混合模型介绍EM算法是如何求解的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3au3xvgj30bw08lglv.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3awwr69j30j80anq4g.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3axvznej30dx07babk.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3axvznej30dx07babk.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv3b1livzj30co0a4aap.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwvs0lqm4rj30a008l3yi.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.682Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061812.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042358.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042406.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042502.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042511.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042519.jpg">
+<meta property="og:updated_time" content="2019-05-18T06:18:18.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（15）：EM算法">
 <meta name="twitter:description" content="期望最大值（Expectation Maximization，简称EM算法）是在概率模型中寻找参数最大似然估计或者最大后验估计的算法，其中概率模型依赖于无法观测的隐藏变量。其主要思想就是通过迭代来建立完整数据的对数似然函数的期望界限，然后最大化不完整数据的对数似然函数。本文将尽可能详尽地描述EM算法的原理。并结合高斯混合模型介绍EM算法是如何求解的。">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3au3xvgj30bw08lglv.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061812.jpg">
 
 
 
@@ -407,7 +407,7 @@ var _hmt = _hmt || [];
 <li>如果$f$是凹函数，$x$是随机变量，则$E[f(x)]≥f(E[x])$。当$f$是（严格）凹函数当且仅当$-f$是（严格）凸函数。</li>
 </ul>
 <p>通过下面这张图，我们可以加深理解：</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3au3xvgj30bw08lglv.jpg" alt="屏幕快照 2017-03-24 上午12.11.32"></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061812.jpg" alt="屏幕快照 2017-03-24 上午12.11.32"></p>
 <p>上图中，函数$f$是凸函数，$X$是随机变量，有0.5的概率为$a$，有0.5的概率是b（就像抛硬币一样）。$X$的期望值就是a和b的中值了，图中可以看到$E[f(x)]≥f(E[x])$成立。</p>
 <h2 id="三、EM思想"><a href="#三、EM思想" class="headerlink" title="三、EM思想"></a>三、EM思想</h2><h3 id="3-1-极大似然估计"><a href="#3-1-极大似然估计" class="headerlink" title="3.1 极大似然估计"></a>3.1 极大似然估计</h3><p>EM算法推导过程中，会使用到极大似然估计参数。</p>
 <p>极大似然估计是一种概率论在统计学的应用。已知某个随机样本满足某种概率分布，但是其中具体的参数不清楚，参数估计就是通过若干次试验，观察结果，利用结果推出参数的大概值。极大似然估计建立在这样的思想上：已知某个参数能使这个样本出现的概率最大，我们当然不会再去选择其他小概率的样本，所以干脆就把这个参数作为估计的真实值。</p>
@@ -440,7 +440,7 @@ l\left(\theta\right)=\sum_{i=1}^m{\log p\left(x;\theta\right)}=\sum_{i=1}^m{\log
 <p>首先，把（1）式中的$log$函数看成是一个整体，即令$f(x)=log(x)$，因为$(log(x))^”=-1/x^{2}&lt;0$，根据定理可知其为凹函数。</p>
 <p>再根据凹函数的Jensen不等式：$f(E[X])&gt;=E[f(x)]$。</p>
 <p>到这里，我们可以观察到，在式（2）中，当把$log(x)$看成$f(x)$时，后边的</p>
-<script type="math/tex; mode=display">\sum_{z^{\left(i\right)}}{Q_i\left(z^{\left(i\right)}\right)\frac{p\left(x^{\left(i\right)},z^{\left(i\right)};\theta\right)}{Q_i\left(z^{\left(i\right)}\right)}}</script><p>其实就是可以类比为离散型随机变量的期望公式。具体的求解可以参照下图中离散型随机变量的期望公式。<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3awwr69j30j80anq4g.jpg" alt="屏幕快照 2017-03-24 上午11.20.14"></p>
+<script type="math/tex; mode=display">\sum_{z^{\left(i\right)}}{Q_i\left(z^{\left(i\right)}\right)\frac{p\left(x^{\left(i\right)},z^{\left(i\right)};\theta\right)}{Q_i\left(z^{\left(i\right)}\right)}}</script><p>其实就是可以类比为离散型随机变量的期望公式。具体的求解可以参照下图中离散型随机变量的期望公式。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042358.jpg" alt="屏幕快照 2017-03-24 上午11.20.14"></p>
 <p>我们可以把$Q_i^{(z^{(i)})}$看成是相应的概率$p_i$，把</p>
 <script type="math/tex; mode=display">
 \frac{p\left(x^{\left(i\right)},z^{\left(i\right)};\theta\right)}{Q_i\left(z^{\left(i\right)}\right)}</script><p>看作是$z^{(i)}$的函数$g(z)$，根据期望公式$E\left[g\left(x\right)\right]=\sum_{i=1}^{\infty}{g\left(x_i\right)·p_i}$可以得到：</p>
@@ -450,7 +450,7 @@ E\left(\frac{p\left(x^{\left(i\right)},z^{\left(i\right)};\theta\right)}{Q_i\lef
 f\left[E\left(g\left(X\right)\right)\right]=\log\sum_{z^{\left(i\right)}}{Q_i\left(z^{\left(i\right)}\right)\frac{p\left(x^{\left(i\right)},z^{\left(i\right)};\theta\right)}{Q_i\left(z^{\left(i\right)}\right)}}</script><script type="math/tex; mode=display">
 \geqslant E\left[f\left(g\left(X\right)\right)\right]=\sum_{z^{\left(i\right)}}{Q_i\left(z^{\left(i\right)}\right)\log\frac{p\left(x^{\left(i\right)},z^{\left(i\right)};\theta\right)}{Q_i\left(z^{\left(i\right)}\right)}}</script><p>这样我们就得到了式（3）。</p>
 <p>现在我们把式（2）和式（3）的不等式次而成：似然函数$L(\theta)≥J(z,Q)$的形式，其中$z$为隐变量，那么我们可以通过不断地最大化$J$的下界，来使得$L(\theta)$不断提高，最终达到它的最大值。借助下图来解释下这个过程：</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3axvznej30dx07babk.jpg" alt="屏幕快照 2017-03-24 上午11.55.29"></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042406.jpg" alt="屏幕快照 2017-03-24 上午11.55.29"></p>
 <p>首先我们固定$\theta$，调整$Q(z)$使下界（绿色曲线）$J(z,Q)$沿着绿色虚线上升至与$L(\theta)$在此点$\theta$处相等（绿色曲线至蓝色曲线），然后固定$Q(z)$，调整$\theta$使下界$J(z,Q)$达到最大值($\theta {_t}$至$\theta _{t+1}$)，然后再固定$\theta$，调整$Q(z)$…….直到收敛到似然函数$L(\theta)$的最大值处的$\theta^*$</p>
 <p>这里有两个问题：</p>
 <ul>
@@ -490,13 +490,13 @@ l\left(\theta^{\left(t+1\right)}\right)\geqslant\sum_i{\sum_{z^{\left(i\right)}}
 =l\left(\theta^{\left(t\right)}\right)······\textrm{（6）}</script><p>解释第（4）步，得到$\theta^{(t+1)}$时，只是最大化$l(\theta^{(t)})$，也就是$l(\theta^{(t+1)})$的下界，而没有使等式成立，要想使等式成立只有在固定$\theta$，并按E步得到$Q_i$时才能成立。<br>况且根据我们前面得到的下式，对于所有的$Q_i$和$\theta$都成立</p>
 <script type="math/tex; mode=display">
 l\left(\theta^{\left(t\right)}\right)\geqslant\sum_i{\sum_{z^{\left(i\right)}}{Q_i\left(z^{\left(i\right)}\right)\log\frac{p\left(x^{\left(i\right)},z^{\left(i\right)};\theta^{\left(t\right)}\right)}{Q_i\left(z^{\left(i\right)}\right)}}}</script><p>第（5）式利用的M步的定义，M步就是将$\theta^{(t)}$调整到$\theta^{(t+1)}$，使得下界最大化。这样（5）、（6）就都证明成立了。</p>
-<p>再结合之前那个图解释一下这几步推导：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3axvznej30dx07babk.jpg" alt="屏幕快照 2017-03-24 上午11.55.29"></p>
+<p>再结合之前那个图解释一下这几步推导：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042502.jpg" alt="屏幕快照 2017-03-24 上午11.55.29"></p>
 <p>首先（4）对所有的参数都满足，而其等式成立条件只是在固定$\theta$，并调整好$Q$时成立，而第（4）步只是固定$Q$，调整$\theta$，不能保证等式一定成立。对应到图上就是蓝色曲线的峰值与$l(\theta^{(t+1)})$的关系，要使它们相等还必须要固定$\theta$，调整好$Q$；（4）到（5）就是M步的定义，也就是固定$Q$，调整$\theta^{(t)}$至$\theta^{(t+1)}$，对应到图上即为蓝色曲线与红色曲线交点处至蓝色曲线峰值。（5）到（6）是前面E步所保证等式成立条件。也就是说E步会将下界拉到与$l(\theta)$一个特定值（这里为$\theta^{(t)}$）一样的高度，而此时发现下界仍然可以上升，因此经过$M$步后，下界又被拉升，但达不到与$l(\theta)$另外一个特定值（$\theta^{(t+1)}$）一样的高度，之后E步又将下界拉到了与这个特定值一样的高度，循环往复，直到达到最大值。</p>
 <p>这样就证明了$l(\theta)$会单调增加。如果要判断收敛情况，可以这样来做：一种收敛方法是$l(\theta)$不再变化，还有一种就是变化幅度很小，即根据$l(\theta^{(t+1)})=l(\theta^{(t)})$的值来决定。</p>
-<p>从前面的推导中我们知道$l(\theta)≥J(Q,\theta)$，EM也可以看做是$J$的坐标上升法，如下图所示：<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv3b1livzj30co0a4aap.jpg" alt="屏幕快照 2017-03-24 下午2.53.51"></p>
+<p>从前面的推导中我们知道$l(\theta)≥J(Q,\theta)$，EM也可以看做是$J$的坐标上升法，如下图所示：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042511.jpg" alt="屏幕快照 2017-03-24 下午2.53.51"></p>
 <p>图中的直线式迭代优化的路径，可以看到每一步都会向最优值前进一步，而且前进路线是平行于坐标轴的，因为每一步只优化一个变量。<br>这犹如在x-y坐标系中找一个曲线的极值，然而曲线函数不能直接求导，因此什么梯度下降方法就不适用了。但固定一个变量后，另外一个可以通过求导得到，因此可以使用坐标上升法，一次固定一个变量，对另外的求极值，最后逐步逼近极值。对应到EM上，E步：固定θ，优化Q；M步：固定Q，优化θ；交替将极值推向最大。</p>
 <h2 id="五、EM的应用：混合高斯模型"><a href="#五、EM的应用：混合高斯模型" class="headerlink" title="五、EM的应用：混合高斯模型"></a>五、EM的应用：混合高斯模型</h2><p>待补充</p>
-<h2 id="六、EM的应用：EM聚类"><a href="#六、EM的应用：EM聚类" class="headerlink" title="六、EM的应用：EM聚类"></a>六、EM的应用：EM聚类</h2><p>以下的聚类图来自维基百科，可以生动的看出<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwvs0lqm4rj30a008l3yi.jpg" alt=""></p>
+<h2 id="六、EM的应用：EM聚类"><a href="#六、EM的应用：EM聚类" class="headerlink" title="六、EM的应用：EM聚类"></a>六、EM的应用：EM聚类</h2><p>以下的聚类图来自维基百科，可以生动的看出<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042519.jpg" alt=""></p>
 <p>待补充</p>
 <h2 id="七、参考资料"><a href="#七、参考资料" class="headerlink" title="七、参考资料"></a>七、参考资料</h2><p><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006936.html" target="_blank" rel="noopener"><code>The EM Algorithm</code></a><br><a href="http://www.cnblogs.com/jerrylead/archive/2011/04/06/2006924.html" target="_blank" rel="noopener"><code>混合高斯模型和EM算法</code></a><br><a href="http://cs229.stanford.edu/notes/cs229-notes8.pdf" target="_blank" rel="noopener"><code>cs229-notes8</code></a></p>
 
@@ -654,7 +654,7 @@ l\left(\theta^{\left(t\right)}\right)\geqslant\sum_i{\sum_{z^{\left(i\right)}}{Q
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -665,7 +665,7 @@ l\left(\theta^{\left(t\right)}\right)\geqslant\sum_i{\sum_{z^{\left(i\right)}}{Q
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -676,7 +676,7 @@ l\left(\theta^{\left(t\right)}\right)\geqslant\sum_i{\sum_{z^{\left(i\right)}}{Q
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

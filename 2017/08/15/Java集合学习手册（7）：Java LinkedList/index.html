@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、概述LinkedList和ArrayList一样，都实现了List接口，但其内部的数据结构有本质的不同。LinkedList是基于链表实现的（通过名字也能区分开来），所以它的插入和删除操作比ArrayList更加高效。但也是由于其为基于链表的，所以随机访问的效率要比ArrayList差。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv4t7r691j30no0bdgmc.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.614Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-160157.jpg">
+<meta property="og:updated_time" content="2019-05-17T16:02:04.304Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合学习手册（7）：Java LinkedList">
 <meta name="twitter:description" content="一、概述LinkedList和ArrayList一样，都实现了List接口，但其内部的数据结构有本质的不同。LinkedList是基于链表实现的（通过名字也能区分开来），所以它的插入和删除操作比ArrayList更加高效。但也是由于其为基于链表的，所以随机访问的效率要比ArrayList差。">
-<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv4t7r691j30no0bdgmc.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-160157.jpg">
 
 
 
@@ -400,7 +400,7 @@ var _hmt = _hmt || [];
 <p>在LinkedList中除了本身自己的方法外，还提供了一些可以使其作为栈、队列或者双端队列的方法。这些方法可能彼此之间只是名字不同，以使得这些名字在特定的环境中显得更加合适。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">LinkedList&lt;String&gt; list = new LinkedList&lt;String&gt;();</div><div class="line">list.add(&quot;语文: 1&quot;);</div><div class="line">list.add(&quot;数学: 2&quot;);</div><div class="line">list.add(&quot;英语: 3&quot;);</div></pre></td></tr></table></figure>
 <p>结构也相对简单一些，如下图所示：</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv4t7r691j30no0bdgmc.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-160157.jpg" alt=""></p>
 <h2 id="二、数据结构"><a href="#二、数据结构" class="headerlink" title="二、数据结构"></a>二、数据结构</h2><p>LinkedList是基于链表结构实现，所以在类中包含了first和last两个指针(Node)。Node中包含了上一个节点和下一个节点的引用，这样就构成了双向的链表。每个Node只能知道自己的前一个节点和后一个节点，但对于链表来说，这已经足够了。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">transient</span> <span class="keyword">int</span> size = <span class="number">0</span>;</div><div class="line"><span class="keyword">transient</span> Node&lt;E&gt; first; <span class="comment">//链表的头指针</span></div><div class="line"><span class="keyword">transient</span> Node&lt;E&gt; last; <span class="comment">//尾指针</span></div><div class="line"><span class="comment">//存储对象的结构 Node, LinkedList的内部类</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">    E item;</div><div class="line">    Node&lt;E&gt; next; <span class="comment">// 指向下一个节点</span></div><div class="line">    Node&lt;E&gt; prev; <span class="comment">//指向上一个节点</span></div><div class="line"></div><div class="line">    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</div><div class="line">        <span class="keyword">this</span>.item = element;</div><div class="line">        <span class="keyword">this</span>.next = next;</div><div class="line">        <span class="keyword">this</span>.prev = prev;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="三、存储"><a href="#三、存储" class="headerlink" title="三、存储"></a>三、存储</h2><h3 id="3-1-add-E-e"><a href="#3-1-add-E-e" class="headerlink" title="3.1 add(E e)"></a>3.1 add(E e)</h3><p>该方法是在链表的end添加元素，其调用了自己的方法linkLast(E e)。</p>
@@ -568,7 +568,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -579,7 +579,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -590,7 +590,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

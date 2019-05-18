@@ -94,15 +94,15 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="数据结构中有很多树的结构，这里整理了二叉树、二叉查找树、AVL树、红黑树、B树、B+树、trie树的基本概念与操作。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv1c505uhj30eq08r3z7.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv1c5ryd6j30xf07pgmz.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv1c698vjj30i70ar0tx.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv1c769ijj30eu0503z2.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.653Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165514.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165523.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165550.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165559.jpg">
+<meta property="og:updated_time" content="2019-05-17T16:56:08.676Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（3）：二叉树">
 <meta name="twitter:description" content="数据结构中有很多树的结构，这里整理了二叉树、二叉查找树、AVL树、红黑树、B树、B+树、trie树的基本概念与操作。">
-<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv1c505uhj30eq08r3z7.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165514.jpg">
 
 
 
@@ -397,7 +397,7 @@ var _hmt = _hmt || [];
       
         <p>数据结构中有很多树的结构，这里整理了二叉树、二叉查找树、AVL树、红黑树、B树、B+树、trie树的基本概念与操作。</p>
 <a id="more"></a>
-<h2 id="一、二叉树的概念"><a href="#一、二叉树的概念" class="headerlink" title="一、二叉树的概念"></a>一、二叉树的概念</h2><h3 id="1-1-树的基本概念"><a href="#1-1-树的基本概念" class="headerlink" title="1.1 树的基本概念"></a>1.1 树的基本概念</h3><p>树是一种数据结构，它是由n（n&gt;=1）个有限节点组成一个具有层次关系的集合。<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv1c505uhj30eq08r3z7.jpg" alt=""><br>它具有以下特点：</p>
+<h2 id="一、二叉树的概念"><a href="#一、二叉树的概念" class="headerlink" title="一、二叉树的概念"></a>一、二叉树的概念</h2><h3 id="1-1-树的基本概念"><a href="#1-1-树的基本概念" class="headerlink" title="1.1 树的基本概念"></a>1.1 树的基本概念</h3><p>树是一种数据结构，它是由n（n&gt;=1）个有限节点组成一个具有层次关系的集合。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165514.jpg" alt=""><br>它具有以下特点：</p>
 <ul>
 <li>每个节点有零个或多个子节点；</li>
 <li>没有父节点的节点称为根节点；</li>
@@ -415,7 +415,7 @@ var _hmt = _hmt || [];
 <li>无序树：如果树中结点的各子树之间的次序是不重要的，可以交换位置。</li>
 <li>有序树：如果树中结点的各子树之间的次序是重要的, 不可以交换位置。</li>
 <li>森林：0个或多个不相交的树组成。对森林加上一个根，森林即成为树；删去根，树即成为森林。</li>
-<li><h3 id="1-2-二叉树的定义"><a href="#1-2-二叉树的定义" class="headerlink" title="1.2 二叉树的定义"></a>1.2 二叉树的定义</h3>二叉树是每个节点最多有两个子树（不存在度大于2的结点）的树结构。二叉树的子树有左右之分，次序不能颠倒。它有5种基本形态：二叉树可以是空集；根可以有空的左子树或右子树；或者左右子树皆为空。<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv1c5ryd6j30xf07pgmz.jpg" alt=""></li>
+<li><h3 id="1-2-二叉树的定义"><a href="#1-2-二叉树的定义" class="headerlink" title="1.2 二叉树的定义"></a>1.2 二叉树的定义</h3>二叉树是每个节点最多有两个子树（不存在度大于2的结点）的树结构。二叉树的子树有左右之分，次序不能颠倒。它有5种基本形态：二叉树可以是空集；根可以有空的左子树或右子树；或者左右子树皆为空。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165523.jpg" alt=""></li>
 </ul>
 <h3 id="1-3-二叉树的性质"><a href="#1-3-二叉树的性质" class="headerlink" title="1.3 二叉树的性质"></a>1.3 二叉树的性质</h3><h4 id="1-3-1-性质一"><a href="#1-3-1-性质一" class="headerlink" title="1.3.1 性质一"></a>1.3.1 性质一</h4><p>二叉树的第i层至多有$2^{i-1}$个结点；</p>
 <p>证明：下面用”数学归纳法”进行证明。</p>
@@ -435,7 +435,7 @@ var _hmt = _hmt || [];
 <p>此外，只有根不是任何结点的孩子。故二叉树中的结点总数又可表示为等式二。 (等式二) $n=n1+2n_2+1$</p>
 <p>由(等式一)和(等式二)计算得到：n0=n2+1。原命题得证！</p>
 <h3 id="1-4-满二叉树和完全二叉树"><a href="#1-4-满二叉树和完全二叉树" class="headerlink" title="1.4 满二叉树和完全二叉树"></a>1.4 满二叉树和完全二叉树</h3><h4 id="1-4-1-满二叉树"><a href="#1-4-1-满二叉树" class="headerlink" title="1.4.1 满二叉树"></a>1.4.1 满二叉树</h4><p>满二叉树的定义：<br>除最后一层无任何子节点外，每一层上的所有结点都有两个子结点。也可以这样理解，除叶子结点外的所有结点均有两个子结点。节点数达到最大值，所有叶子结点必须在同一层上。</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv1c698vjj30i70ar0tx.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165550.jpg" alt=""></p>
 <p>满二叉树的性质：</p>
 <ol>
 <li>一棵树的深度为h，最大层数为k，深度与最大层数相同，k=h；</li>
@@ -446,7 +446,7 @@ var _hmt = _hmt || [];
 <h4 id="1-4-2-完全二叉树"><a href="#1-4-2-完全二叉树" class="headerlink" title="1.4.2 完全二叉树"></a>1.4.2 完全二叉树</h4><p>定义：一颗二叉树中，只有最小面两层结点的度可以小于2，并且最下一层的叶结点集中在靠左的若干位置上。这样的二叉树称为完全二叉树。</p>
 <p>特点：叶子结点只能出现在最下层和次下层，且最小层的叶子结点集中在树的左部。显然，一颗满二叉树必定是一颗完全二叉树，而完全二叉树未必是满二叉树。</p>
 <p>注意：完全二叉树是效率很高的数据结构，堆是一种完全二叉树或者近似完全二叉树，所以效率极高，像十分常用的排序算法、Dijkstra算法、Prim算法等都要用堆才能优化，二叉排序树的效率也要借助平衡树来提高，而平衡性基于完全二叉树。</p>
-<p><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv1c769ijj30eu0503z2.jpg" alt=""></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165559.jpg" alt=""></p>
 <h2 id="二、二叉树的遍历"><a href="#二、二叉树的遍历" class="headerlink" title="二、二叉树的遍历"></a>二、二叉树的遍历</h2><p>【提问】</p>
 <ol>
 <li>请分别写出并解释二叉树的先序、中序、后续遍历的递归与非递归版本</li>
@@ -641,7 +641,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -652,7 +652,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -663,7 +663,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

@@ -94,16 +94,16 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="本文讲述LR与SVM的异同点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3bctum0j30ls04ljs0.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3bda2syj30ak027dfx.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3bdrn77j30b408sdgr.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwvq9hqtivj30i907974b.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3be8ejyj30hy07jt97.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.692Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042913.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042920.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042929.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042936.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042942.jpg">
+<meta property="og:updated_time" content="2019-05-18T04:29:49.222Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（12）：SVM（6）—SVM与LR的异同">
 <meta name="twitter:description" content="本文讲述LR与SVM的异同点">
-<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3bctum0j30ls04ljs0.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042913.jpg">
 
 
 
@@ -391,9 +391,9 @@ var _hmt = _hmt || [];
 </li>
 </ol>
 <h2 id="二、LR与SVM的不同点"><a href="#二、LR与SVM的不同点" class="headerlink" title="二、LR与SVM的不同点"></a>二、LR与SVM的不同点</h2><p><strong>1.损失函数</strong></p>
-<p>我们先来看一下带松弛变量的 SVM 和正则化的逻辑回归它们的损失函数：<img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3bctum0j30ls04ljs0.jpg" alt="">其中 $g(z)=(1+exp(−z))^{−1}$<br>可以将两者统一起来:<img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv3bda2syj30ak027dfx.jpg" alt=""><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv3bdrn77j30b408sdgr.jpg" alt=""><br>这两个损失函数的目的都是增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。SVM的处理方法是只考虑support vectors，也就是和分类最相关的少数点，去学习分类器。而逻辑回归通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重,两者的根本目的都是一样的。即支持向量机只考虑局部的边界线附近的点，而逻辑回归考虑全局（远离的点对边界线的确定也起作用）。</p>
+<p>我们先来看一下带松弛变量的 SVM 和正则化的逻辑回归它们的损失函数：<img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042913.jpg" alt="">其中 $g(z)=(1+exp(−z))^{−1}$<br>可以将两者统一起来:<img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042920.jpg" alt=""><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042929.jpg" alt=""><br>这两个损失函数的目的都是增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。SVM的处理方法是只考虑support vectors，也就是和分类最相关的少数点，去学习分类器。而逻辑回归通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重,两者的根本目的都是一样的。即支持向量机只考虑局部的边界线附近的点，而逻辑回归考虑全局（远离的点对边界线的确定也起作用）。</p>
 <p>影响SVM决策面的样本点只有少数的支持向量，当在支持向量外添加或减少任何样本点对分类决策面没有任何影响；而在LR中，每个样本点都会影响决策面的结果。用下图进行说明：</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwvq9hqtivj30i907974b.jpg" alt=""><br>支持向量机改变非支持向量样本并不会引起决策面的变化<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv3be8ejyj30hy07jt97.jpg" alt=""><br>逻辑回归中改变任何样本都会引起决策面的变化</p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042936.jpg" alt=""><br>支持向量机改变非支持向量样本并不会引起决策面的变化<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-042942.jpg" alt=""><br>逻辑回归中改变任何样本都会引起决策面的变化</p>
 <p>因此线性SVM不直接依赖于数据分布，分类平面不受一类点影响；LR则受所有数据点的影响，如果数据不同类别strongly unbalance，一般需要先对数据做平衡处理。​</p>
 <p><strong>2.核技巧</strong></p>
 <p>在解决非线性问题时，支持向量机采用核函数的机制，而LR通常不采用核函数的方法。</p>
@@ -562,7 +562,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -573,7 +573,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -584,7 +584,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

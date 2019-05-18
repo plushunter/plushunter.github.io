@@ -94,18 +94,18 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="之前学习了全连接神经网络和卷积神经网络，以及它们的训练与应用。它们都只能单独的去处理单个的输入，且前后的输入之间毫无关系。但是，在一些任务中，我们需要更好的去处理序列的信息，即前后的输入之间存在关系。比如，在理解一整句话的过程中，孤立理解组成这句话的词是不够的，我们需要整体的处理由这些词连接起来的整个序列；当我们处理视频时，我们也不能单独地仅仅分析每一帧，而要分析这些帧连接起来的整个序列。这就引出">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2koz6h3j303q08y3ye.jpg">
-<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2l22qzwj303t08xmx4.jpg">
-<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fwv2lfbfd7j30hp0720t6.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2lqg04kj30hm06emxw.jpg">
-<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fwv2m3lycaj30db0enmzc.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2mcw5brj30cx03wjri.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2mm9a4uj30l007gdgd.jpg">
-<meta property="og:updated_time" content="2019-04-25T15:39:35.639Z">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-062053.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081520.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081545.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081600.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081614.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081629.jpg">
+<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081704.jpg">
+<meta property="og:updated_time" content="2019-05-18T06:20:58.125Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（4）：循环神经网络（RNN）">
 <meta name="twitter:description" content="之前学习了全连接神经网络和卷积神经网络，以及它们的训练与应用。它们都只能单独的去处理单个的输入，且前后的输入之间毫无关系。但是，在一些任务中，我们需要更好的去处理序列的信息，即前后的输入之间存在关系。比如，在理解一整句话的过程中，孤立理解组成这句话的词是不够的，我们需要整体的处理由这些词连接起来的整个序列；当我们处理视频时，我们也不能单独地仅仅分析每一帧，而要分析这些帧连接起来的整个序列。这就引出">
-<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2koz6h3j303q08y3ye.jpg">
+<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-062053.jpg">
 
 
 
@@ -415,8 +415,8 @@ var _hmt = _hmt || [];
 <p>如果用2-Gram进行建模，那么电脑在预测时，只会看到前面的“了”，然后，电脑会在语料库中，搜索“了”后面最有可能的一个词。不管最后电脑选的是不是“我”，这个模型看起来并不是那么靠谱，因为“了”前面的一大堆实际上丝毫没起作用。如果是3-Gram模型呢，会搜索“批评了”后面最有可能的词，看齐俩感觉比2-Gram靠谱了不少，但还是远远不够的。因为这句话最关键的信息“我”，远在9个词之前！</p>
 <p>似乎我们可以不断提升N的值，比如4-Gram、9-Gram·······。实际上，这个想法是没有实用性的。在实际应用中最多的是N=3的三元模型，更高阶的模型就很少使用了。主要有两个原因。首先，N元模型的大小（或者说空间复杂度）几乎是N的指数函数，即$O(|V|^N)$，这里$|V|$是一种语言词典的词汇量，一般在几万到几十万个。然后，使用N元模型的速度（或者说时间复杂度）也几乎是一个指数函数，即$O(|V|^{N-1})$。因此N不能太大。当N从1到2，再从2到3时，模型的效果上升显著。而当模型从3到4时，效果的提升就不是很显著了，而资源的耗费增加却非常快，所以，除非是不惜资源为了做到极致，很少有人使用四元以上的模型。Google的罗塞塔翻译系统和语言搜索系统，使用的是四元模型，该模型存储于500台以上的Google服务器中。</p>
 <p>RNN就解决了N-Gram的缺陷，它在理论上可以往前看（往后看）任意多个词。</p>
-<h2 id="二、基本循环神经网络"><a href="#二、基本循环神经网络" class="headerlink" title="二、基本循环神经网络"></a>二、基本循环神经网络</h2><p>开始前，我们先回顾一下，简单的MLP三层神经网络模型：<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2koz6h3j303q08y3ye.jpg" alt="屏幕快照 2017-04-22 下午5.06.05"><br>其中x是一个向量，它表示输入层的值（这里面没有画出来表示神经元节点的圆圈）；s是一个向量，它表示隐藏层的值（这里隐藏层面画了一个节点，你也可以想象这一层其实是多个节点，节点数与向量s的维度相同）；U是输入层到隐藏层的权重矩阵；o也是一个向量，它表示输出层的值；V是隐藏层到输出层的权重矩阵。</p>
-<p>再看下图中一个简单的循环神经网络图，它由输入层、一个隐藏层和一个输出层组成。我们可以看到，循环神经网络的隐藏层的值s不仅仅取决于当前这次的输入x，还取决于上一次隐藏层的值s。权重矩阵W就是隐藏层上一次的值作为这一次的输入的权重。<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fwv2l22qzwj303t08xmx4.jpg" alt="屏幕快照 2017-04-22 下午5.11.21"><br>如果我们把上面的图展开，循环神经网络也可以画成下面这个样子：<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fwv2lfbfd7j30hp0720t6.jpg" alt="屏幕快照 2017-04-22 下午5.22.35"></p>
+<h2 id="二、基本循环神经网络"><a href="#二、基本循环神经网络" class="headerlink" title="二、基本循环神经网络"></a>二、基本循环神经网络</h2><p>开始前，我们先回顾一下，简单的MLP三层神经网络模型：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-062053.jpg" alt="屏幕快照 2017-04-22 下午5.06.05"><br>其中x是一个向量，它表示输入层的值（这里面没有画出来表示神经元节点的圆圈）；s是一个向量，它表示隐藏层的值（这里隐藏层面画了一个节点，你也可以想象这一层其实是多个节点，节点数与向量s的维度相同）；U是输入层到隐藏层的权重矩阵；o也是一个向量，它表示输出层的值；V是隐藏层到输出层的权重矩阵。</p>
+<p>再看下图中一个简单的循环神经网络图，它由输入层、一个隐藏层和一个输出层组成。我们可以看到，循环神经网络的隐藏层的值s不仅仅取决于当前这次的输入x，还取决于上一次隐藏层的值s。权重矩阵W就是隐藏层上一次的值作为这一次的输入的权重。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081520.jpg" alt="屏幕快照 2017-04-22 下午5.11.21"><br>如果我们把上面的图展开，循环神经网络也可以画成下面这个样子：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081545.jpg" alt="屏幕快照 2017-04-22 下午5.22.35"></p>
 <p>现在看起来就清楚不少了，这个网络在t时刻接收到输入$X_t$之后，隐藏层的值是$S_t$，输出值是$o_t$。关键一点是，$s_t$的值不仅仅取决于$X_t$，还取决于$S_{t-1}$。我们可以使用下面的公式来表示循环神经网络的计算方法：</p>
 <script type="math/tex; mode=display">o_t=g(Vs_t)\\s_t=f(Ux_t+Ws_{t-1})</script><p>式1是输出层的计算公式，输出层是一个全连接层，也就是它的每个节点都和隐藏层的每个节点相连。V是输出层的权重矩阵，g是激活函数。式2是隐藏层的计算公式，它是循环层。U是输入x的权重矩阵，W是上一次的值$s_{t-1}$作为这一次的输入的权重矩阵，f是激活函数。</p>
 <p>从上面的公式可以看出，循环层和全连接层的区别就是多了一个权重矩阵W。</p>
@@ -427,7 +427,7 @@ var _hmt = _hmt || [];
 <p>我的手机坏了，我打算____一部新手机。</p>
 </blockquote>
 <p>可以想象，如果我们只看横线前面的词，手机坏了，那么我是打算修一修？换一部新的？还是大哭一场？这些都是无法确定的，但是如果我们也看到了后面的词是“一部新手机”，那么横线上的词填“买”的概率就大很多了。</p>
-<p>而这个在单向循环神经网络是无法建模的，因此我们需要双向循环神经网络，如下图所示：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2lqg04kj30hm06emxw.jpg" alt="屏幕快照 2017-04-22 下午5.54.21"></p>
+<p>而这个在单向循环神经网络是无法建模的，因此我们需要双向循环神经网络，如下图所示：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081600.jpg" alt="屏幕快照 2017-04-22 下午5.54.21"></p>
 <p>我们先考虑$y_2$的计算，从上图可以看出，双向卷积神经网络的隐藏层要保存两个值，一个A参与正向计算，另一个$A’$参与反向计算。最终的输出值$y_2$取决于$A_2$和$A_2’$，其计算方法为：</p>
 <script type="math/tex; mode=display">y_2=g(VA_2+V'A_2')</script><p>$A_2$和$A_2’$则分别计算：</p>
 <script type="math/tex; mode=display">A_2=f(WA_1+Ux_2)</script><script type="math/tex; mode=display">
@@ -436,7 +436,7 @@ A_2'=f(W'A_3'+U'x_2 )</script><p>现在，我们已经可以看出一般的规�
 s_t=f(Ux_t+Ws_{t-1 })</script><script type="math/tex; mode=display">
 s_t'=f(U'x_t+W's_{t+1}')</script><p>从上面三个公式我们可以看到，正向计算和反向计算不共享权重，也就是说$U$和$U’$、$W$和$W’$、$V$和$V’$都是不同的权重矩阵。</p>
 <h2 id="四、深度循环神经网络"><a href="#四、深度循环神经网络" class="headerlink" title="四、深度循环神经网络"></a>四、深度循环神经网络</h2><p>前面我们介绍的循环神经网络只有一个隐藏层，我们当然也可以堆叠两个以上的隐藏层，这样就得到了深度循环神经网络。如下图所示：</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fwv2m3lycaj30db0enmzc.jpg" alt="屏幕快照 2017-04-22 下午6.11.33"></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081614.jpg" alt="屏幕快照 2017-04-22 下午6.11.33"></p>
 <p>我们把第$i$个隐藏层的值表示为$s_t^{(i)}、s_t^{‘(i)}$，则深度循环神经网络的计算方式可以表示为：</p>
 <script type="math/tex; mode=display">o_t=g(V^{(i)}s_t^{(i)}+V^{'(i)}s_t^{'(i)})</script><script type="math/tex; mode=display">
 s_t^{(i)}=f(U^{(i)}s_t^{i-1}+W^{(i)})</script><script type="math/tex; mode=display">
@@ -450,7 +450,7 @@ s_t^{'(1)}=f(U^{'(1)}x_t+W^{'(1)}s_{t+1}')</script><h2 id="五、循环神经网
 <li>4）最后再用随机梯度下降算法更新权重。</li>
 </ul>
 <p>循环层如下图所示：</p>
-<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2mcw5brj30cx03wjri.jpg" alt="屏幕快照 2017-04-22 下午9.01.00"></p>
+<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081629.jpg" alt="屏幕快照 2017-04-22 下午9.01.00"></p>
 <h3 id="5-1-前向计算"><a href="#5-1-前向计算" class="headerlink" title="5.1 前向计算"></a>5.1 前向计算</h3><p>使用前面的式2对循环层进行前向计算：</p>
 <script type="math/tex; mode=display">s_t=f(Ux_t+Ws_{t-1})</script><p>注意，上面的$s_t、x_t、s_{t-1}$都是向量，用黑体字表示；而$U、V$是矩阵，用大写字母表示。向量的下标表示时刻，例如，$s_t$表示在$t$时刻向量$s$的值。</p>
 <p>我们假设输入向量x的维度是$m$，输出向量的维度是$n$，则矩阵$U$的维度是$n×m$，矩阵$W$的维度是$n×n$。下面是上式展开成矩阵的样子，看起来更直观一点：</p>
@@ -523,7 +523,7 @@ a_t^{l-1}=f^{l-1}(net_t^{l-1})</script><p>上式中$net_t^l$是第$l$层神经�
 =\delta_{t}^{l}·U·diag\left[f'^{l-1}\left(net_{t}^{l-1}\right)\right]</script><p>上式就是将误差项传递到上一层算法。</p>
 <h3 id="5-3-权重梯度的计算"><a href="#5-3-权重梯度的计算" class="headerlink" title="5.3 权重梯度的计算"></a>5.3 权重梯度的计算</h3><p>接下来是BPTT算法的最后一步：计算每个权重的梯度。<br>首先我们计算误差函数$E$对权重矩阵$W$的梯度</p>
 <script type="math/tex; mode=display">
-\frac{\partial E}{\partial W}</script><p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fwv2mm9a4uj30l007gdgd.jpg" alt="屏幕快照 2017-04-23 上午11.08.04"></p>
+\frac{\partial E}{\partial W}</script><p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-16-081704.jpg" alt="屏幕快照 2017-04-23 上午11.08.04"></p>
 <p>上图展示了我们到目前为止，在前两步中已经计算得到的量，包括每个时刻$t$循环层的输出值$s_t$，以及误差项$\delta_t$。</p>
 <p>我们只要知道了任意一个时刻的误差项$\delta_t$，以及上一个时刻循环层的输出值$s_{t-1}$，就可以按照下面的公式求出权重矩阵在$t$时刻的梯度：</p>
 <script type="math/tex; mode=display">
@@ -858,7 +858,7 @@ a_t^{l-1}=f^{l-1}(net_t^{l-1})</script><p>上式中$net_t^l$是第$l$层神经�
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">199</span>
+                  <span class="site-state-item-count">198</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -869,7 +869,7 @@ a_t^{l-1}=f^{l-1}(net_t^{l-1})</script><p>上式中$net_t^l$是第$l$层神经�
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -880,7 +880,7 @@ a_t^{l-1}=f^{l-1}(net_t^{l-1})</script><p>上式中$net_t^l$是第$l$层神经�
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">290</span>
+                  <span class="site-state-item-count">284</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
