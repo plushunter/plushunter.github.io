@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/tech-stack/index.html</loc>
+    
+    <lastmod>2019-05-22T14:21:05.865Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/06/14/kaggle%E7%B3%BB%E5%88%97%EF%BC%884%EF%BC%89%EF%BC%9ARental%20Listing%20Inquiries%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9AXGBoost%E8%B0%83%E5%8F%82%E7%BB%8F%E9%AA%8C/</loc>
     
     <lastmod>2019-05-20T03:20:49.076Z</lastmod>
@@ -1405,13 +1412,6 @@
     <loc>http://yoursite.com/on-earth/index.html</loc>
     
     <lastmod>2019-02-13T15:25:50.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tech-stack/index.html</loc>
-    
-    <lastmod>2019-02-13T14:48:54.000Z</lastmod>
     
   </url>
   
