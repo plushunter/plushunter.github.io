@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="三、K-Means算法3.1 原理K-Means算法属于基于划分的聚类算法，对N 维欧氏空间中的点进行聚类，是一种最简单的无监督学习方法。它通过迭代来实现，其基本思想是：每次确定K个类别中心，然后将各个结点归属到与之距离最近的中心点所在的Cluster，然后将类别中心更新为属于各Cluster的所有样本的均值，反复迭代，直至类别中心不再发生变化或变化小于某阈值。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061249.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061259.jpg">
-<meta property="og:updated_time" content="2019-05-18T06:13:04.449Z">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-061249.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-061259.jpg">
+<meta property="og:updated_time" content="2019-05-28T12:03:47.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（11）：聚类（2）—Kmeans">
 <meta name="twitter:description" content="三、K-Means算法3.1 原理K-Means算法属于基于划分的聚类算法，对N 维欧氏空间中的点进行聚类，是一种最简单的无监督学习方法。它通过迭代来实现，其基本思想是：每次确定K个类别中心，然后将各个结点归属到与之距离最近的中心点所在的Cluster，然后将类别中心更新为属于各Cluster的所有样本的均值，反复迭代，直至类别中心不再发生变化或变化小于某阈值。">
-<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061249.jpg">
+<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-061249.jpg">
 
 
 
@@ -395,7 +395,7 @@ var _hmt = _hmt || [];
       
         <h2 id="三、K-Means算法"><a href="#三、K-Means算法" class="headerlink" title="三、K-Means算法"></a>三、K-Means算法</h2><h3 id="3-1-原理"><a href="#3-1-原理" class="headerlink" title="3.1 原理"></a>3.1 原理</h3><p>K-Means算法属于基于划分的聚类算法，对N 维欧氏空间中的点进行聚类，是一种最简单的无监督学习方法。它通过迭代来实现，其基本思想是：每次确定K个类别中心，然后将各个结点归属到与之距离最近的中心点所在的Cluster，然后将类别中心更新为属于各Cluster的所有样本的均值，反复迭代，直至类别中心不再发生变化或变化小于某阈值。</p>
 <a id="more"></a>
-<h3 id="3-2-基本假设"><a href="#3-2-基本假设" class="headerlink" title="3.2 基本假设"></a>3.2 基本假设</h3><p>K-Means聚类需要对数据进行一个基本假设：对于每一个 cluster ，我们可以选出一个中心点 (center) ，使得该 cluster 中的所有的点到该中心点的距离小于到其他 cluster 的中心的距离。虽然实际情况中得到的数据并不能保证总是满足这样的约束，但这通常已经是我们所能达到的最好的结果，而那些误差通常是固有存在的或者问题本身的不可分性造成的。例如下图所示的两个高斯分布，从两个分布中随机地抽取一些数据点出来，混杂到一起，现在要让你将这些混杂在一起的数据点按照它们被生成的那个分布分开来：<img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061249.jpg" alt="屏幕快照 2017-03-25 上午9.30.11"><br>由于这两个分布本身有很大一部分重叠在一起了，例如，对于数据点 2.5 来说，它由两个分布产生的概率都是相等的，你所做的只能是一个猜测；稍微好一点的情况是 2 ，通常我们会将它归类为左边的那个分布，因为概率大一些，然而此时它由右边的分布生成的概率仍然是比较大的，我们仍然有不小的几率会猜错。而整个阴影部分是我们所能达到的最小的猜错的概率，这来自于问题本身的不可分性，无法避免。因此，我们将 k-means 所依赖的这个假设看作是合理的。</p>
+<h3 id="3-2-基本假设"><a href="#3-2-基本假设" class="headerlink" title="3.2 基本假设"></a>3.2 基本假设</h3><p>K-Means聚类需要对数据进行一个基本假设：对于每一个 cluster ，我们可以选出一个中心点 (center) ，使得该 cluster 中的所有的点到该中心点的距离小于到其他 cluster 的中心的距离。虽然实际情况中得到的数据并不能保证总是满足这样的约束，但这通常已经是我们所能达到的最好的结果，而那些误差通常是固有存在的或者问题本身的不可分性造成的。例如下图所示的两个高斯分布，从两个分布中随机地抽取一些数据点出来，混杂到一起，现在要让你将这些混杂在一起的数据点按照它们被生成的那个分布分开来：<img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-061249.jpg" alt="屏幕快照 2017-03-25 上午9.30.11"><br>由于这两个分布本身有很大一部分重叠在一起了，例如，对于数据点 2.5 来说，它由两个分布产生的概率都是相等的，你所做的只能是一个猜测；稍微好一点的情况是 2 ，通常我们会将它归类为左边的那个分布，因为概率大一些，然而此时它由右边的分布生成的概率仍然是比较大的，我们仍然有不小的几率会猜错。而整个阴影部分是我们所能达到的最小的猜错的概率，这来自于问题本身的不可分性，无法避免。因此，我们将 k-means 所依赖的这个假设看作是合理的。</p>
 <h3 id="3-3-算法步骤"><a href="#3-3-算法步骤" class="headerlink" title="3.3 算法步骤"></a>3.3 算法步骤</h3><p>假定输入样本为$S=x_1,x_2,···,x_n$，则算法步骤为：</p>
 <ul>
 <li>1、选择初始的K个类别中心$\mu_1,\mu_2,···,\mu_k$。这个过程通常是针对具体地问题有一些启发式的选取方法，或者大多数情况下采用随机选取的办法。因为K-Means并不能保证全局最优，而是否能收敛到全局最优解其实和初值的选取有很大的关系，所以有时候我们会多次选取初值跑一个K-Means，并取其中最好的一次结果。</li>
@@ -414,7 +414,7 @@ J=\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^K{r_{ij}||x_i-\mu_j||^2}}</script><p>这个
 \mu_j=\frac{\sum_i{r_{ij}x_i}}{\sum_i{r_{ij}}}</script></li>
 </ul>
 <p>$\mu_j$的值是所有$Cluster(j)$中的数据点的平均值。由于每一次迭代都是取到$J$的最小值，因此$J$智慧不断地减小或者保持不变，而不会增加，这保证了K-Means最终或到达一个极小值。虽然K-Means并不能保证总是得到全局最优解，但是对于这样的问题，像K-Means这样复杂度的算法，这样的结果已经是很不错了。</p>
-<h3 id="3-5-算法演练"><a href="#3-5-算法演练" class="headerlink" title="3.5 算法演练"></a>3.5 算法演练</h3><p>下面看一个来自WIKI的实例<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-061259.jpg" alt=""></p>
+<h3 id="3-5-算法演练"><a href="#3-5-算法演练" class="headerlink" title="3.5 算法演练"></a>3.5 算法演练</h3><p>下面看一个来自WIKI的实例<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-061259.jpg" alt=""></p>
 <ul>
 <li>1、随机生成三个初始的中心点（这个中心点不一定是样本点），即图中红、绿、蓝三个小圈；</li>
 <li>2、计算每个样本点与这三个中心店的距离，并将它们归属到离得最近的中心点对应的Cluster。此时图中分成了三个簇，分别是红色、绿色、蓝色部分；</li>
@@ -458,7 +458,7 @@ J=\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^K{r_{ij}||x_i-\mu_j||^2}}</script><p>这个
         <br>
         <div align="center">
         <br>
-        <img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-064307.jpg"/>
+        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-064307.jpg"/>
         </div> 
 
         </div>
@@ -681,9 +681,9 @@ J=\frac{1}{2}\sum_{i=1}^N{\sum_{j=1}^K{r_{ij}||x_i-\mu_j||^2}}</script><p>这个
 
           
           <div id="music163player">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=1334667455&auto=0&height=66">
-            </iframe>
-        </div>
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
 
 
         

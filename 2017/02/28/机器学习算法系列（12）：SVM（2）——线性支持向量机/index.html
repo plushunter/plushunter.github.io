@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="当训练数据近似线性可分时，通过软间隔最大化学习一个线性的分类器，即线性支持向量机，又称为软间隔支持向量机。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-060930.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-060938.jpg">
-<meta property="og:updated_time" content="2019-05-18T06:09:45.513Z">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-060930.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-060938.jpg">
+<meta property="og:updated_time" content="2019-05-28T12:03:47.452Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（12）：SVM（2）—线性支持向量机">
 <meta name="twitter:description" content="当训练数据近似线性可分时，通过软间隔最大化学习一个线性的分类器，即线性支持向量机，又称为软间隔支持向量机。">
-<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-060930.jpg">
+<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-060930.jpg">
 
 
 
@@ -410,7 +410,7 @@ a^*=\left( a_{1}^{*},a_{2}^{*},···,a_{N}^{*} \right) ^T</script><p>然后计�
 w^*=\sum_{i=1}^N{a_{i}^{*}y_ix_i}</script><p>选择$a^<em>$的一个分量$a_i^</em>$适合约束条件$0&lt;a_i&lt;C$,计算</p>
 <script type="math/tex; mode=display">
 b^*=y_j-\sum_{i=1}^N{a_{i}^{*}y_i⟨x_i·x_j ⟩}</script><p>对任一适合条件都可求得一个$b^*$，但是由于原始问题对$b$的求解并不唯一，所以实际计算时可以取在所有符合条件的样本点上的平均值。</p>
-<h3 id="2-2-支持向量"><a href="#2-2-支持向量" class="headerlink" title="2.2 支持向量"></a>2.2 支持向量</h3><p>再现性不可分的情况下，将对偶问题的解中对应于$a_i^*&gt;0$的样本点$(x_i,y_i)$的实例$x_i$称为支持向量（软间隔的支持向量）。如图所示，这时的支持向量要比线性可分时的情况复杂一些。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-060930.jpg" alt=""></p>
+<h3 id="2-2-支持向量"><a href="#2-2-支持向量" class="headerlink" title="2.2 支持向量"></a>2.2 支持向量</h3><p>再现性不可分的情况下，将对偶问题的解中对应于$a_i^*&gt;0$的样本点$(x_i,y_i)$的实例$x_i$称为支持向量（软间隔的支持向量）。如图所示，这时的支持向量要比线性可分时的情况复杂一些。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-060930.jpg" alt=""></p>
 <p>图中，分离超平面由实线表示，间隔边界由虚线表示。正例点由$。$表示，负例点由$×$表示。图中还标出了实例$x_i$到间隔边界的距离$<br>\frac{\xi _i}{||w||}<br>$。</p>
 <p>软间隔的支持向量$x_i$要么在间隔边界上，要么在间隔边界与分离超平面之间，要么在分离超平面误分类一侧。</p>
 <p>若$a_i^*&lt;C$，则$<br>\xi _i=0<br>$，支持向量恰好落在间隔边界上；</p>
@@ -433,7 +433,7 @@ s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script
 <script type="math/tex; mode=display">\underset{w,b}{min }\sum_i^{N}[1-y_i(w·x_i+b)]_++\lambda||w||^2</script><p>先令$[1-y_i(w·x_i+b)]_+=\xi_i$，则$\xi_i≥0$，第二个约束条件成立；由$[1-y_i(w·x_i+b)]_+=\xi_i$，当$1-y_i(w·x_i+b)&gt;0$时，有$y_i(w·x_i+b)=1-\xi_i$;当$1-y_i(w·x_i+b)≤0$时，$\xi_i=0$，有$y_i(w·x_i+b)≥1-\xi_i$，所以第一个约束条件成立。所以两个约束条件都满足，最优化问题可以写作</p>
 <script type="math/tex; mode=display">\underset{w,b}{min}\sum_{i=1}^N\xi_i+\lambda||w||^2</script><p>若取$\lambda =\frac{1}{2C}$则<script type="math/tex">\underset{w,b}{min} \frac{1}{C}(\frac{1}{2} ||w||^2+C\sum_{i=1}^N \xi_i)</script>与原始最优化问题等价。</p>
 <p>合页损失函数图像如图所示，横轴是函数间隔$y(w·x+b)$，纵轴是损失。由于函数形状像一个合页，故名合页损失函数。</p>
-<p>图中还画出了0-1损失函数，可以认为它是一个二类分类问题的真正的损失函数，而合页损失函数是0-1损失函数的上界。由于0-1损失函数不是连续可导的，直接优化其构成的目标函数比较困难，可以认为线性支持向量机是优化由0-1损失函数的上界（合页损失函数）构成的目标函数。这时的上界损失函数又称为代理损失函数（surrogate function）。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-060938.jpg" alt=""><br>图中虚线显示的是感知机的损失函数$[-y_i(w·x_i+b)]_+$。这时当样本点$(x_i,y_i)$被正确分类时，损失是0，否则损失是$-y_i(w·x_i+b)$，相比之下，合页损失函数不仅要分类正确，而且确信度足够高时损失才是0，也就是说，合页损失函数对学习有更高的要求</p>
+<p>图中还画出了0-1损失函数，可以认为它是一个二类分类问题的真正的损失函数，而合页损失函数是0-1损失函数的上界。由于0-1损失函数不是连续可导的，直接优化其构成的目标函数比较困难，可以认为线性支持向量机是优化由0-1损失函数的上界（合页损失函数）构成的目标函数。这时的上界损失函数又称为代理损失函数（surrogate function）。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-060938.jpg" alt=""><br>图中虚线显示的是感知机的损失函数$[-y_i(w·x_i+b)]_+$。这时当样本点$(x_i,y_i)$被正确分类时，损失是0，否则损失是$-y_i(w·x_i+b)$，相比之下，合页损失函数不仅要分类正确，而且确信度足够高时损失才是0，也就是说，合页损失函数对学习有更高的要求</p>
 
       
     </div>
@@ -456,7 +456,7 @@ s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script
         <br>
         <div align="center">
         <br>
-        <img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-064307.jpg"/>
+        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-064307.jpg"/>
         </div> 
 
         </div>
@@ -681,9 +681,9 @@ s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script
 
           
           <div id="music163player">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=1334667455&auto=0&height=66">
-            </iframe>
-        </div>
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
 
 
         

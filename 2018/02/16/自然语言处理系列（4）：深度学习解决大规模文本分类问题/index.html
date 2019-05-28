@@ -94,24 +94,24 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="这篇文章总结了文本分类领域特别是应用深度学习解决文本分类的相关思路、做法和部分实践的经验。转载自知乎清凇撰写的文章用深度学习（CNN RNN Attention）解决大规模文本分类问题 - 综述和实践  业务问题描述：  淘宝商品的一个经典的例子见下图，图中商品的标题是“夏装雪纺条纹短袖t恤女春半袖衣服夏天中长款大码胖mm显瘦上衣夏”。淘宝网后台是通过树形的多层的类目体系管理商品的，覆盖叶子类目数">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094531.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094539.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094551.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094605.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094629.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094639.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094646.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094701.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094710.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094719.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094745.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094753.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094800.jpg">
-<meta property="og:updated_time" content="2019-05-14T09:48:15.860Z">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094531.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094539.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094551.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094605.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094629.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094639.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094646.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094701.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094710.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094719.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094745.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094753.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094800.jpg">
+<meta property="og:updated_time" content="2019-05-28T12:03:47.515Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自然语言处理系列（4）：深度学习解决大规模文本分类问题">
 <meta name="twitter:description" content="这篇文章总结了文本分类领域特别是应用深度学习解决文本分类的相关思路、做法和部分实践的经验。转载自知乎清凇撰写的文章用深度学习（CNN RNN Attention）解决大规模文本分类问题 - 综述和实践  业务问题描述：  淘宝商品的一个经典的例子见下图，图中商品的标题是“夏装雪纺条纹短袖t恤女春半袖衣服夏天中长款大码胖mm显瘦上衣夏”。淘宝网后台是通过树形的多层的类目体系管理商品的，覆盖叶子类目数">
-<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094531.jpg">
+<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094531.jpg">
 
 
 
@@ -410,10 +410,10 @@ var _hmt = _hmt || [];
 </blockquote>
 <p>淘宝商品的一个经典的例子见下图，图中商品的标题是“夏装雪纺条纹短袖t恤女春半袖衣服夏天中长款大码胖mm显瘦上衣夏”。淘宝网后台是通过树形的多层的类目体系管理商品的，覆盖叶子类目数量达上万个，商品量也是10亿量级，我们的任务是根据商品标题预测其所在叶子类目，示例中商品归属的类目为“女装/女士精品&gt;&gt;蕾丝衫/雪纺衫”。很显然，这是一个非常典型的短文本多酚类问题。接下来分别会介绍下文本分类传统的和深度学习的做法，最后简单梳理下实践的经验。</p>
 <a id="more"></a>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094531.jpg" alt=""></p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094531.jpg" alt=""></p>
 <h2 id="一、传统文本分类方法"><a href="#一、传统文本分类方法" class="headerlink" title="一、传统文本分类方法"></a>一、传统文本分类方法</h2><p>文本分类问题算是自然语言处理领域里一个非常经典的问题了，相关研究最早可以追溯到上世纪50年代，当时是通过专家规则（Pattern）进行分类，甚至在80年代初一度发展到利用知识工程监理专家系统，这样做的好处是短平快的解决top问题，但显然天花板非常低，不仅费时费力，覆盖的范围和准确性都非常有限。</p>
 <p>后来伴随着统计学习方法的发展，特别是90年代后互联网在线文本数量增长和机器学习学科的兴起，逐渐形成了一套解决大规模文本分类问题的经典玩法，这个阶段的主要套路是人工特征+浅层分类模型。训练文本分类器过程见下图：</p>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094539.jpg" alt=""></p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094539.jpg" alt=""></p>
 <p>整个文本分类问题就拆分成了特征工程和分类器两部分，玩机器学习的同学对此自然再熟悉不过了。</p>
 <h3 id="1-1-特征工程"><a href="#1-1-特征工程" class="headerlink" title="1.1 特征工程"></a>1.1 特征工程</h3><p>特征工程在机器学习中往往是最耗时耗力的，但却及其的重要。抽象来讲，机器学习问题是把数据转换成信息再提炼到知识的过程，特征是“数据—&gt;信息”的过程，决定了结果的上限，二分类器是“信息—&gt;知识”的过程，则是去逼近这个上限。然而特征工程不同于分类器模型，不具备很强的通用性，往往需要结合对特征任务的理解。</p>
 <p>文本分类问题所在的自然语言处理领域也有其特有的特征处理逻辑，传统文本分类任务大部分工作也在此处。文本特征工程分为文本预处理、特征提取、文本表示三个部分，最终目的是把文本转换成计算机可理解的格式，并封装足够用于分类的信息，即很强的特征表达能力。</p>
@@ -438,17 +438,17 @@ var _hmt = _hmt || [];
 <p>传统做法在文本表示方面除了向量空间模型，还有基于语义的文本表示方法，比如LDA主题模型、LSI/PLS概率潜在语义索引等方法，一般认为这些方法得到的文本表示可以认为文档的深层表示，而Word Embedding文本分布式表示方法则是深度学习方法的重要基础，下文会展现。</p>
 <h3 id="1-2-分类器"><a href="#1-2-分类器" class="headerlink" title="1.2 分类器"></a>1.2 分类器</h3><p>分类器都是统计分类方法了，基本上大部分机器学习方法都在本文分类领域有所应用，比如朴素贝叶斯分类算法、KNN、SVM、最大熵和神经网络等等，传统分类模型不是本文重点，在这里就不展开了。</p>
 <h2 id="二、深度学习文本分类方法"><a href="#二、深度学习文本分类方法" class="headerlink" title="二、深度学习文本分类方法"></a>二、深度学习文本分类方法</h2><p>上文介绍了传统的文本分类做法，传统做法主要问题的文本表示是高维度高稀疏性的，特征表达能力很弱，而且神经网络很不擅长对此类数据的处理；此外需要人工进行特征工程，成本很高。而深度学习最初之所以在图像和语音取到巨大的成功，一个很重要的原因是图像和语音原始数据是连续和稠密的，有局部相关性。应用深度学习解决大规模文本分类问题最重要的是解决文本表示，再利用CNN/RNN等网络结构自动获取特征表达能力，去掉繁杂的人工特征工程，端到端的解决问题。接下来会分别介绍：</p>
-<h3 id="2-1-文本的分布式表示：词向量（Word-Embedding）"><a href="#2-1-文本的分布式表示：词向量（Word-Embedding）" class="headerlink" title="2.1 文本的分布式表示：词向量（Word Embedding）"></a>2.1 文本的分布式表示：词向量（Word Embedding）</h3><p>分布式表示（Distributed Representation）其实Hinton最早在1986年就提出了，基本思想是将没歌词表达成N维稠密、连续的实数向量，与之相对的one-hot encoding向量空间只有一个维度是1，其余都是0。分布式表示最大的优点是具备非常powerful的特征表达能力，比如n维向量每一维k个值，就可以表征$k^n$个概念了。事实上，不管是神经网络的隐层，还是多个潜在变量的概率主题模型，都是应用分布式表示。下图是03年Bengio在<a href="http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf" target="_blank" rel="noopener">A Neural Probabilistic Language Model</a><br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094551.jpg" alt=""></p>
+<h3 id="2-1-文本的分布式表示：词向量（Word-Embedding）"><a href="#2-1-文本的分布式表示：词向量（Word-Embedding）" class="headerlink" title="2.1 文本的分布式表示：词向量（Word Embedding）"></a>2.1 文本的分布式表示：词向量（Word Embedding）</h3><p>分布式表示（Distributed Representation）其实Hinton最早在1986年就提出了，基本思想是将没歌词表达成N维稠密、连续的实数向量，与之相对的one-hot encoding向量空间只有一个维度是1，其余都是0。分布式表示最大的优点是具备非常powerful的特征表达能力，比如n维向量每一维k个值，就可以表征$k^n$个概念了。事实上，不管是神经网络的隐层，还是多个潜在变量的概率主题模型，都是应用分布式表示。下图是03年Bengio在<a href="http://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf" target="_blank" rel="noopener">A Neural Probabilistic Language Model</a><br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094551.jpg" alt=""></p>
 <p>这篇文章提出的神经网络语言模型（NNLM，Neural Probabilistic Language Model），采用的是文本分布式表示，即每个词表示为稠密的实数向量。NNLM模型的目标是构建语言模型：</p>
 <script type="math/tex; mode=display">f(w_t，···，w_{t-n+1})=P(w_t|w_1^{t-1})</script><p>词的分布式表示即词向量（Word Embedding）是训练语言模型的一个附加产物，即图中的Matrix C。</p>
 <p>尽管Hinton 86年就提出了NNLM，词向量真正火起来是google的Mikolov在13年发表的两篇Word2Vec的文章<a href="https://arxiv.org/abs/1301.3781" target="_blank" rel="noopener">Efficient Estimation of Word Representations in Vector Space</a> 和 <a href="https://papers.nips.cc/paper/5021-distributed-representations-of-words-and-phrases-and-their-compositionality.pdf" target="_blank" rel="noopener">Distributed Representations of Words and Phrases and their Compositionality</a> ，更重要的是发布了简单好用的<a href="https://code.google.com/archive/p/word2vec/" target="_blank" rel="noopener">Word2Vec工具包</a>，在语义维度上得到了很好地验证，极大的推动了文本分析的进程。下图是文中提出的CBOW和Skip-Gram两个模型的结构，基本类似于NNLM，不同的是模型去掉了非线性隐层，预测目标不同，CBOW是上下文预测当前词，Skip-Gram则相反。</p>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094605.jpg" alt=""><br>除此之外，提出了Hierarchical Softmax和Negative Sample两个方法，很好地解决了计算有效性，事实上这两个方法都没有严格的理论证明，有一些trick之处，非常的实用主义。详细的过程不再阐述了，有兴趣深入理解Word2Vec的，推荐读读这篇不错的paper：<a href="https://arxiv.org/abs/1411.2738" target="_blank" rel="noopener">word2vec Parameter Learning Explained</a>。额外多提一点，实际上WordVec学习的向量和真正语义还有差距，更多学到的是具备相似上下文的词，比如“good”“bad”相似度也很高，反而是文本分类任务输入有监督的语义能够学到更好的语义表示，有机会后续系统分享下。</p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094605.jpg" alt=""><br>除此之外，提出了Hierarchical Softmax和Negative Sample两个方法，很好地解决了计算有效性，事实上这两个方法都没有严格的理论证明，有一些trick之处，非常的实用主义。详细的过程不再阐述了，有兴趣深入理解Word2Vec的，推荐读读这篇不错的paper：<a href="https://arxiv.org/abs/1411.2738" target="_blank" rel="noopener">word2vec Parameter Learning Explained</a>。额外多提一点，实际上WordVec学习的向量和真正语义还有差距，更多学到的是具备相似上下文的词，比如“good”“bad”相似度也很高，反而是文本分类任务输入有监督的语义能够学到更好的语义表示，有机会后续系统分享下。</p>
 <p>至此，文本的表示通过词向量的表示方法，把文本数据从高维度高稀疏性的神经网络难处理的方式，变成了类似图像、语言的连续稠密数据。深度学习算法本身有很强的数据迁移性，很多之前在图像领域很适用的深度学习算法比如CNN等也可以很好的迁移到文本领域了，下面一小节具体阐述下文本分类邻域深度学习的方法。</p>
-<h3 id="2-2-深度学习文本分类模型"><a href="#2-2-深度学习文本分类模型" class="headerlink" title="2.2 深度学习文本分类模型"></a>2.2 深度学习文本分类模型</h3><h4 id="2-2-1-fastText"><a href="#2-2-1-fastText" class="headerlink" title="2.2.1 fastText"></a>2.2.1 fastText</h4><p>fastText是上文提到的Word2Vec作者Mikolov转战Facebook后16年7月刚发表的一篇论文<a href="https://arxiv.org/pdf/1607.01759v2.pdf" target="_blank" rel="noopener">Bag of Tricks for Efficient Text Classification</a>把fastText放在此处并非因为他是文本分类的主流做法，而是他及其简单，模型图见下：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094629.jpg" alt=""></p>
+<h3 id="2-2-深度学习文本分类模型"><a href="#2-2-深度学习文本分类模型" class="headerlink" title="2.2 深度学习文本分类模型"></a>2.2 深度学习文本分类模型</h3><h4 id="2-2-1-fastText"><a href="#2-2-1-fastText" class="headerlink" title="2.2.1 fastText"></a>2.2.1 fastText</h4><p>fastText是上文提到的Word2Vec作者Mikolov转战Facebook后16年7月刚发表的一篇论文<a href="https://arxiv.org/pdf/1607.01759v2.pdf" target="_blank" rel="noopener">Bag of Tricks for Efficient Text Classification</a>把fastText放在此处并非因为他是文本分类的主流做法，而是他及其简单，模型图见下：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094629.jpg" alt=""></p>
 <p>原理是把句子中所有的词向量进行平均（某种意义上可以理解为只有一个Avg Pooling的特征CNN），然后直接接SoftMax层。其实文章也加入了一些n-gram特征的tric来捕获局部序列信息。文章到没有太多的信息量，算是“水文”吧，带来的思考是文本分类问题是有一些“线性”问题的部分，也就是说不必做过多的非线性转换、特征组合即可捕获很多分类信息，因此有些任务即便简单的模型便可以搞定了。</p>
 <h4 id="2-2-2-TextCNN"><a href="#2-2-2-TextCNN" class="headerlink" title="2.2.2 TextCNN"></a>2.2.2 TextCNN</h4><p>本篇文章的题图选用的就是14年这篇文章提出的TextCNN的结果（见下图）。fastText中的网络结构是完全没有考虑词序信息的，而他用的n-gram特征Trick恰恰说明了局部序列信息的重要意义。<a href="http://colah.github.io/posts/2014-07-Understanding-Convolutions/" target="_blank" rel="noopener">卷积神经网络（CNN Convolutional Neural Network）</a>最初在图像领域取得了巨大成功，CNN原理就不讲了，核心点在于可以捕捉局部相关性，具体到文本分类任务重可以利用CNN来提取句子中类似n-gram的关键信息。</p>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094639.jpg" alt=""></p>
-<p>TextCNN的详细过程原理图见下：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094646.jpg" alt=""></p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094639.jpg" alt=""></p>
+<p>TextCNN的详细过程原理图见下：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094646.jpg" alt=""></p>
 <p>TextCNN详细过程：第一层是图中最左边的7乘5的句子矩阵，每行是词向量，维度=5，这个可以类比为图像中的原始像素点了。然后经过有 filter_size=(2,3,4) 的一维卷积层，每个filter_size 有两个输出 channel。第三层是一个1-max pooling层，这样不同长度句子经过pooling层之后都能变成定长的表示了，最后接一层全连接的 softmax 层，输出每个类别的概率。</p>
 <p><strong>特征</strong>：这里的特征就是词向量，有静态（static）和非静态（non-static）方式。static方式采用比如word2vec预训练的词向量，训练过程不更新词向量，实质上属于迁移学习了，特别是数据量比较小的情况下，采用静态的词向量往往效果不错。non-static则是在训练过程中更新词向量。推荐的方式是 non-static 中的 fine-tunning方式，它是以预训练（pre-train）的word2vec向量初始化词向量，训练过程中调整词向量，能加速收敛，当然如果有充足的训练数据和资源，直接随机初始化词向量效果也是可以的。</p>
 <p><strong>通道（Channels）</strong>：图像中可以利用 (R, G, B) 作为不同channel，而文本的输入的channel通常是不同方式的embedding方式（比如 word2vec或Glove），实践中也有利用静态词向量和fine-tunning词向量作为不同channel的做法。</p>
@@ -460,17 +460,17 @@ var _hmt = _hmt || [];
 <p>虽然前半部分体现情感是正向的，全局文本表达的是偏负面的情感，利用 k-max pooling能够很好捕捉这类信息。</p>
 <h4 id="2-2-3-TextRNN"><a href="#2-2-3-TextRNN" class="headerlink" title="2.2.3 TextRNN"></a>2.2.3 TextRNN</h4><p>尽管TextCNN能够在很多任务里面能有不错的表现，但CNN有个最大问题是固定 filter_size 的视野，一方面无法建模更长的序列信息，另一方面 filter_size 的超参调节也很繁琐。CNN本质是做文本的特征表达工作，而自然语言处理中更常用的是递归神经网络（RNN, Recurrent Neural Network），能够更好的表达上下文信息。具体在文本分类任务中，Bi-directional RNN（实际使用的是双向LSTM）从某种意义上可以理解为可以捕获变长且双向的的 “n-gram” 信息。</p>
 <p>RNN算是在自然语言处理领域非常一个标配网络了，在序列标注/命名体识别/seq2seq模型等很多场景都有应用，<a href="https://www.ijcai.org/Proceedings/16/Papers/408.pdf" target="_blank" rel="noopener">Recurrent Neural Network for Text Classification with Multi-Task Learning</a>文中介绍了RNN用于分类问题的设计，下图LSTM用于网络结构原理示意图，示例中的是利用最后一个词的结果直接接全连接层softmax输出了。</p>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094701.jpg" alt=""></p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094701.jpg" alt=""></p>
 <h4 id="2-2-4-TextRNN-Attention"><a href="#2-2-4-TextRNN-Attention" class="headerlink" title="2.2.4 TextRNN + Attention"></a>2.2.4 TextRNN + Attention</h4><p>CNN和RNN用在文本分类任务中尽管效果显著，但都有一个不足的地方就是不够直观，可解释性不好，特别是在分析badcase时候感受尤其深刻。而注意力（Attention）机制是自然语言处理领域一个常用的建模长时间记忆机制，能够很直观的给出每个词对结果的贡献，基本成了Seq2Seq模型的标配了。实际上文本分类从某种意义上也可以理解为一种特殊的Seq2Seq，所以考虑把Attention机制引入近来，研究了下学术界果然有类似做法。</p>
 <p>Attention机制介绍：详细介绍Attention恐怕需要一小篇文章的篇幅，感兴趣的可参考14年这篇paper <a href="https://arxiv.org/pdf/1409.0473v7.pdf" target="_blank" rel="noopener">NEURAL MACHINE TRANSLATION BY JOINTLY LEARNING TO ALIGN AND TRANSLATE</a>。</p>
-<p>以机器翻译为例简单介绍下，下图中 $x_{t}$ 是源语言的一个词，$y_{t}$ 是目标语言的一个词，机器翻译的任务就是给定源序列得到目标序列。翻译 $y_{t}$ 的过程产生取决于上一个词 $y_{t-1}$ 和源语言的词的表示 $h_{j}$（$x_{j}$ 的 bi-RNN 模型的表示），而每个词所占的权重是不一样的。比如源语言是中文 “我 / 是 / 中国人” 目标语言 “i / am / Chinese”，翻译出“Chinese”时候显然取决于“中国人”，而与“我 / 是”基本无关。下图公式, $\alpha _{ij} $则是翻译英文第 i 个词时，中文第 j 个词的贡献，也就是注意力。显然在翻译“Chinese”时，“中国人”的注意力值非常大。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094710.jpg" alt=""></p>
+<p>以机器翻译为例简单介绍下，下图中 $x_{t}$ 是源语言的一个词，$y_{t}$ 是目标语言的一个词，机器翻译的任务就是给定源序列得到目标序列。翻译 $y_{t}$ 的过程产生取决于上一个词 $y_{t-1}$ 和源语言的词的表示 $h_{j}$（$x_{j}$ 的 bi-RNN 模型的表示），而每个词所占的权重是不一样的。比如源语言是中文 “我 / 是 / 中国人” 目标语言 “i / am / Chinese”，翻译出“Chinese”时候显然取决于“中国人”，而与“我 / 是”基本无关。下图公式, $\alpha _{ij} $则是翻译英文第 i 个词时，中文第 j 个词的贡献，也就是注意力。显然在翻译“Chinese”时，“中国人”的注意力值非常大。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094710.jpg" alt=""></p>
 <p>Attention的核心point是在翻译每个目标词（或 预测商品标题文本所属类别）所用的上下文是不同的，这样的考虑显然是更合理的。</p>
 <h4 id="2-2-5-TextRNN-Attention"><a href="#2-2-5-TextRNN-Attention" class="headerlink" title="2.2.5 TextRNN + Attention"></a>2.2.5 TextRNN + Attention</h4><p>我们参考了这篇文章 <a href="https://www.cs.cmu.edu/~diyiy/docs/naacl16.pdf" target="_blank" rel="noopener">Hierarchical Attention Networks for Document Classification</a>，下图是模型的网络结构图，它一方面用层次化的结构保留了文档的结构，另一方面在word-level和sentence-level。淘宝标题场景只需要 word-level 这一层的 Attention 即可。</p>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094719.jpg" alt=""></p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094719.jpg" alt=""></p>
 <p>加入Attention之后最大的好处自然是能够直观的解释各个句子和词对分类类别的重要性。</p>
 <h4 id="2-2-6-TextRCNN（TextRNN-CNN）"><a href="#2-2-6-TextRCNN（TextRNN-CNN）" class="headerlink" title="2.2.6 TextRCNN（TextRNN + CNN）"></a>2.2.6 TextRCNN（TextRNN + CNN）</h4><p>我们参考的是中科院15年发表在AAAI上的这篇文章 Recurrent Convolutional Neural Networks for Text Classification 的结构：</p>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094745.jpg" alt=""><br>利用前向和后向RNN得到每个词的前向和后向上下文的表示：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094753.jpg" alt=""></p>
-<p>这样词的表示就变成词向量和前向后向上下文向量concat起来的形式了，即：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-14-094800.jpg" alt=""></p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094745.jpg" alt=""><br>利用前向和后向RNN得到每个词的前向和后向上下文的表示：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094753.jpg" alt=""></p>
+<p>这样词的表示就变成词向量和前向后向上下文向量concat起来的形式了，即：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-14-094800.jpg" alt=""></p>
 <p>最后再接跟TextCNN相同卷积层，pooling层即可，唯一不同的是卷积层 filter_size = 1就可以了，不再需要更大 filter_size 获得更大视野，这里词的表示也可以只用双向RNN输出。</p>
 <h2 id="三、一点经验"><a href="#三、一点经验" class="headerlink" title="三、一点经验"></a>三、一点经验</h2><p>理论和实践之间的Gap往往差异巨大，学术paper更关注的是模型架构设计的新颖性等，更重要的是新的思路；而实践最重要的是在落地场景的效果，关注的点和方法都不一样。这部分简单梳理实际做项目过程中的一点经验教训。</p>
 <p>模型显然并不是最重要的：不能否认，好的模型设计对拿到好结果的至关重要，也更是学术关注热点。但实际使用中，模型的工作量占的时间其实相对比较少。虽然再第二部分介绍了5种CNN/RNN及其变体的模型，实际中文本分类任务单纯用CNN已经足以取得很不错的结果了，我们的实验测试RCNN对准确率提升大约1%，并不是十分的显著。最佳实践是先用TextCNN模型把整体任务效果调试到最好，再尝试改进模型。</p>
@@ -507,7 +507,7 @@ var _hmt = _hmt || [];
         <br>
         <div align="center">
         <br>
-        <img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-064307.jpg"/>
+        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-064307.jpg"/>
         </div> 
 
         </div>
@@ -736,9 +736,9 @@ var _hmt = _hmt || [];
 
           
           <div id="music163player">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=1334667455&auto=0&height=66">
-            </iframe>
-        </div>
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
 
 
         

@@ -94,16 +94,16 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、背景随着美团交易规模的逐步增大，积累下来的业务数据和交易数据越来越多，这些数据是美团做为一个团购平台最宝贵的财富。通过对这些数据的分析和挖掘，不仅能给美团业务发展方向提供决策支持，也为业务的迭代指明了方向。目前在美团的团购系统中大量地应用到了机器学习和数据挖掘技术，例如个性化推荐、筛选排序、搜索排序、用户建模等等，为公司创造了巨大的价值。本文主要介绍在美团的推荐与个性化团队实践中的数据清洗与特">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021559.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021619.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021628.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021636.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021645.jpg">
-<meta property="og:updated_time" content="2019-05-18T02:16:57.116Z">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021559.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021619.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021628.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021636.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021645.jpg">
+<meta property="og:updated_time" content="2019-05-28T12:03:47.511Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（40）：机器学习中的数据清洗与特征处理综述">
 <meta name="twitter:description" content="一、背景随着美团交易规模的逐步增大，积累下来的业务数据和交易数据越来越多，这些数据是美团做为一个团购平台最宝贵的财富。通过对这些数据的分析和挖掘，不仅能给美团业务发展方向提供决策支持，也为业务的迭代指明了方向。目前在美团的团购系统中大量地应用到了机器学习和数据挖掘技术，例如个性化推荐、筛选排序、搜索排序、用户建模等等，为公司创造了巨大的价值。本文主要介绍在美团的推荐与个性化团队实践中的数据清洗与特">
-<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021559.jpg">
+<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021559.jpg">
 
 
 
@@ -398,7 +398,7 @@ var _hmt = _hmt || [];
       
         <h2 id="一、背景"><a href="#一、背景" class="headerlink" title="一、背景"></a>一、背景</h2><p>随着美团交易规模的逐步增大，积累下来的业务数据和交易数据越来越多，这些数据是美团做为一个团购平台最宝贵的财富。通过对这些数据的分析和挖掘，不仅能给美团业务发展方向提供决策支持，也为业务的迭代指明了方向。目前在美团的团购系统中大量地应用到了机器学习和数据挖掘技术，例如个性化推荐、筛选排序、搜索排序、用户建模等等，为公司创造了巨大的价值。<br>本文主要介绍在美团的推荐与个性化团队实践中的数据清洗与特征挖掘方法。主要内容已经在内部公开课”机器学习InAction系列”讲过，本博客的内容主要是讲座内容的提炼和总结。</p>
 <a id="more"></a>
-<h2 id="二、综述"><a href="#二、综述" class="headerlink" title="二、综述"></a>二、综述</h2><p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021559.jpg" alt=""><br>如上图所示是一个经典的机器学习问题框架图。数据清洗和特征挖掘的工作是在灰色框中框出的部分，即“数据清洗=&gt;特征，标注数据生成=&gt;模型学习=&gt;模型应用”中的前两个步骤。<br>灰色框中蓝色箭头对应的是离线处理部分。主要工作是</p>
+<h2 id="二、综述"><a href="#二、综述" class="headerlink" title="二、综述"></a>二、综述</h2><p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021559.jpg" alt=""><br>如上图所示是一个经典的机器学习问题框架图。数据清洗和特征挖掘的工作是在灰色框中框出的部分，即“数据清洗=&gt;特征，标注数据生成=&gt;模型学习=&gt;模型应用”中的前两个步骤。<br>灰色框中蓝色箭头对应的是离线处理部分。主要工作是</p>
 <ul>
 <li>从原始数据，如文本、图像或者应用数据中清洗出特征数据和标注数据。</li>
 <li>对清洗出的特征和标注数据进行处理，例如样本采样，样本调权，异常点去除，特征归一化处理，特征变化，特征组合等过程。最终生成的数据主要是供模型训练使用。</li>
@@ -423,7 +423,7 @@ var _hmt = _hmt || [];
 <h2 id="四、特征获取方案"><a href="#四、特征获取方案" class="headerlink" title="四、特征获取方案"></a>四、特征获取方案</h2><p>Ok，在选定好要用的特征之后，我们需要考虑一个问题。就是这些数据从哪可以获取？只有获取了这些数据我们才能用上。否则，提一个不可能获取到的特征，获取不到，提了也是白提。下面就介绍下特征获取方案。</p>
 <ul>
 <li>离线特征获取方案：离线可以使用海量的数据，借助于分布式文件存储平台，例如HDFS等，使用例如MapReduce，Spark等处理工具来处理海量的数据等。</li>
-<li>在线特征获取方案：在线特征比较注重获取数据的延时，由于是在线服务，需要在非常短的时间内获取到相应的数据，对查找性能要求非常高，可以将数据存储在索引、kv存储等。而查找性能与数据的数据量会有矛盾，需要折衷处理，我们使用了特征分层获取方案，如下图所示。<img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021619.jpg" alt="">出于性能考虑。在粗排阶段，使用更基础的特征，数据直接建入索引。精排阶段，再使用一些个性化特征等。</li>
+<li>在线特征获取方案：在线特征比较注重获取数据的延时，由于是在线服务，需要在非常短的时间内获取到相应的数据，对查找性能要求非常高，可以将数据存储在索引、kv存储等。而查找性能与数据的数据量会有矛盾，需要折衷处理，我们使用了特征分层获取方案，如下图所示。<img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021619.jpg" alt="">出于性能考虑。在粗排阶段，使用更基础的特征，数据直接建入索引。精排阶段，再使用一些个性化特征等。</li>
 </ul>
 <h2 id="五、特征与标注数据清洗"><a href="#五、特征与标注数据清洗" class="headerlink" title="五、特征与标注数据清洗"></a>五、特征与标注数据清洗</h2><p>在了解特征数据放在哪儿、怎样获取之后。下一步就是考虑如何处理特征和标注数据了。下面3节都是主要讲的特征和标注处理方法</p>
 <h3 id="5-1-标注数据清洗"><a href="#5-1-标注数据清洗" class="headerlink" title="5.1 标注数据清洗"></a>5.1 标注数据清洗</h3><p>首先介绍下如何清洗特征数据，清洗特征数据方法可以分为离线清洗和在线清洗两种方法。</p>
@@ -468,7 +468,7 @@ var _hmt = _hmt || [];
 </li>
 </ul>
 <h3 id="6-3-特征选择"><a href="#6-3-特征选择" class="headerlink" title="6.3 特征选择"></a>6.3 特征选择</h3><p>特征选择的目标是寻找最优特征子集。特征选择能剔除不相关(irrelevant)或冗余(redundant )的特征，从而达到减少特征个数，提高模型精确度，减少运行时间的目的。另一方面，选取出真正相关的特征简化模型，协助理解数据产生的过程。</p>
-<p>特征选择的一般过程如下图所示：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021628.jpg" alt=""><br>主要分为产生过程，评估过程，停止条件和验证过程。</p>
+<p>特征选择的一般过程如下图所示：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021628.jpg" alt=""><br>主要分为产生过程，评估过程，停止条件和验证过程。</p>
 <h4 id="6-3-1-特征选择-产生过程和生成特征子集方法"><a href="#6-3-1-特征选择-产生过程和生成特征子集方法" class="headerlink" title="6.3.1 特征选择-产生过程和生成特征子集方法"></a>6.3.1 特征选择-产生过程和生成特征子集方法</h4><blockquote>
 <p>完全搜索(Complete)</p>
 </blockquote>
@@ -501,12 +501,12 @@ var _hmt = _hmt || [];
 <ul>
 <li>个人经验，80%的效果由特征带来。下图是随着特征数的增加，最终模型预测值与实际值的相关系数变化。</li>
 </ul>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021636.jpg" alt=""></p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021636.jpg" alt=""></p>
 <ul>
 <li>对于重要的特征进行监控与有效性分析，了解模型所用的特征是否存在问题，当某个特别重要的特征出问题时，需要做好备案，防止灾难性结果。需要建立特征有效性的长效监控机制</li>
 </ul>
 <p>我们对关键特征进行了监控，下面特征监控界面的一个截图。通过监控我们发现有一个特征的覆盖率每天都在下降，与特征数据提供方联系之后，发现特征数据提供方的数据源存在着问题，在修复问题之后，该特征恢复正常并且覆盖率有了较大提升。</p>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-021645.jpg" alt=""></p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021645.jpg" alt=""></p>
 <p>在发现特征出现异常时，我们会及时采取措施，对服务进行降级处理，并联系特征数据的提供方尽快修复。对于特征数据生成过程中缺乏监控的情况也会督促做好监控，在源头解决问题。</p>
 
       
@@ -530,7 +530,7 @@ var _hmt = _hmt || [];
         <br>
         <div align="center">
         <br>
-        <img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-064307.jpg"/>
+        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-064307.jpg"/>
         </div> 
 
         </div>
@@ -753,9 +753,9 @@ var _hmt = _hmt || [];
 
           
           <div id="music163player">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=1334667455&auto=0&height=66">
-            </iframe>
-        </div>
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
 
 
         

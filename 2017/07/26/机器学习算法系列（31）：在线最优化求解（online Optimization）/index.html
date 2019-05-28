@@ -86,67 +86,67 @@
 
 
 
-<meta name="description" content="最优化求解问题可能是我们在工作中遇到的最多的一类问题了：从已有的数据中提炼出最适合的模型参数，从而对未知的数据进行预测。当我们面对高维高数据量的场景时，常见的批量处理的方式已经显得力不从心，需要有在线处理的方法来解决此类问题。本文以模型的稀疏性作为主线，逐一介绍几个在线最优化求解算法，并进行推导，力求讲清楚算法的来龙去脉，以及不同算法之间的区别和联系，达到融会贯通。在各个算法原理介绍之后，都给出该">
+<meta name="description" content="转载自冯扬《在线最优化求解》 最优化求解问题可能是我们在工作中遇到的最多的一类问题了：从已有的数据中提炼出最适合的模型参数，从而对未知的数据进行预测。当我们面对高维高数据量的场景时，常见的批量处理的方式已经显得力不从心，需要有在线处理的方法来解决此类问题。本文以模型的稀疏性作为主线，逐一介绍几个在线最优化求解算法，并进行推导，力求讲清楚算法的来龙去脉，以及不同算法之间的区别和联系，达到融会贯通。在">
 <meta name="keywords" content="online learning,FTRL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习算法系列（31）：在线最优化求解（online Optimization）">
 <meta property="og:url" content="http://yoursite.com/2017/07/26/机器学习算法系列（31）：在线最优化求解（online Optimization）/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="最优化求解问题可能是我们在工作中遇到的最多的一类问题了：从已有的数据中提炼出最适合的模型参数，从而对未知的数据进行预测。当我们面对高维高数据量的场景时，常见的批量处理的方式已经显得力不从心，需要有在线处理的方法来解决此类问题。本文以模型的稀疏性作为主线，逐一介绍几个在线最优化求解算法，并进行推导，力求讲清楚算法的来龙去脉，以及不同算法之间的区别和联系，达到融会贯通。在各个算法原理介绍之后，都给出该">
+<meta property="og:description" content="转载自冯扬《在线最优化求解》 最优化求解问题可能是我们在工作中遇到的最多的一类问题了：从已有的数据中提炼出最适合的模型参数，从而对未知的数据进行预测。当我们面对高维高数据量的场景时，常见的批量处理的方式已经显得力不从心，需要有在线处理的方法来解决此类问题。本文以模型的稀疏性作为主线，逐一介绍几个在线最优化求解算法，并进行推导，力求讲清楚算法的来龙去脉，以及不同算法之间的区别和联系，达到融会贯通。在">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023919.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023930.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023940.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023949.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024045.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024056.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024107.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024120.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024132.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024211.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024222.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024232.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024242.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024251.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024259.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024312.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024324.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024335.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024343.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024351.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024359.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024409.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024424.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024435.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024444.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024456.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024508.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024518.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024525.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024534.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024542.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024553.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024602.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024610.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024628.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024636.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024644.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024656.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024706.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024715.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024729.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024739.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024753.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024805.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024814.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024826.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024836.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024855.jpg">
-<meta property="og:updated_time" content="2019-05-18T02:49:06.948Z">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-023919.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-023930.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-023940.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-023949.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024045.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024056.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024107.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024120.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024132.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024211.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024222.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024232.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024242.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024251.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024259.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024312.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024324.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024335.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024343.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024351.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024359.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024409.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024424.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024435.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024444.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024456.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024508.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024518.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024525.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024534.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024542.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024553.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024602.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024610.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024628.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024636.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024644.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024656.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024706.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024715.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024729.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024739.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024753.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024805.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024814.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024826.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024836.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024855.jpg">
+<meta property="og:updated_time" content="2019-05-28T12:03:47.493Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（31）：在线最优化求解（online Optimization）">
-<meta name="twitter:description" content="最优化求解问题可能是我们在工作中遇到的最多的一类问题了：从已有的数据中提炼出最适合的模型参数，从而对未知的数据进行预测。当我们面对高维高数据量的场景时，常见的批量处理的方式已经显得力不从心，需要有在线处理的方法来解决此类问题。本文以模型的稀疏性作为主线，逐一介绍几个在线最优化求解算法，并进行推导，力求讲清楚算法的来龙去脉，以及不同算法之间的区别和联系，达到融会贯通。在各个算法原理介绍之后，都给出该">
-<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023919.jpg">
+<meta name="twitter:description" content="转载自冯扬《在线最优化求解》 最优化求解问题可能是我们在工作中遇到的最多的一类问题了：从已有的数据中提炼出最适合的模型参数，从而对未知的数据进行预测。当我们面对高维高数据量的场景时，常见的批量处理的方式已经显得力不从心，需要有在线处理的方法来解决此类问题。本文以模型的稀疏性作为主线，逐一介绍几个在线最优化求解算法，并进行推导，力求讲清楚算法的来龙去脉，以及不同算法之间的区别和联系，达到融会贯通。在">
+<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-023919.jpg">
 
 
 
@@ -439,7 +439,8 @@ var _hmt = _hmt || [];
       
 
       
-        <p>最优化求解问题可能是我们在工作中遇到的最多的一类问题了：从已有的数据中提炼出最适合的模型参数，从而对未知的数据进行预测。当我们面对高维高数据量的场景时，常见的批量处理的方式已经显得力不从心，需要有在线处理的方法来解决此类问题。本文以模型的稀疏性作为主线，逐一介绍几个在线最优化求解算法，并进行推导，力求讲清楚算法的来龙去脉，以及不同算法之间的区别和联系，达到融会贯通。在各个算法原理介绍之后，都给出该算法的工程实现伪代码，可以用于实际工作的参考。</p>
+        <p>转载自冯扬《在线最优化求解》</p>
+<p>最优化求解问题可能是我们在工作中遇到的最多的一类问题了：从已有的数据中提炼出最适合的模型参数，从而对未知的数据进行预测。当我们面对高维高数据量的场景时，常见的批量处理的方式已经显得力不从心，需要有在线处理的方法来解决此类问题。本文以模型的稀疏性作为主线，逐一介绍几个在线最优化求解算法，并进行推导，力求讲清楚算法的来龙去脉，以及不同算法之间的区别和联系，达到融会贯通。在各个算法原理介绍之后，都给出该算法的工程实现伪代码，可以用于实际工作的参考。</p>
 <a id="more"></a>
 <h2 id="一、动机与目的"><a href="#一、动机与目的" class="headerlink" title="一、动机与目的"></a>一、动机与目的</h2><p>在实际工作中，无论是工程师、项目经理、产品同学都会经常讨论一类话题：“从线上对比的效果来看，某某特征或因素对xx产品的最终效果有很大的影响。”这类话题本质上说的是通过已有的数据反映出某些特定的因素对结果有很强的正（或负）相关性。而如何定量计算这种相关性？如何得到一套模型参数能够使得效果达到最好？这就是最优化计算要做的事情。</p>
 <p>举一类典型点的例子：在推荐和广告计算中，我们经常会需要对某些值进行预测，例如在一条推荐或广告在曝光之前先预测用户是否会点击（CTR预估），或者是否会由此产生某些转换（RPM预估）。这列问题可以表示为：针对一个输入$X=[x_1,x_2,……x_N]\in R^N$，通过某个函数$h(X)$计算（预测）输出$y\in R$。根据$y$值为连续的还是离散的，预测问题被划分成回归问题（Regression）和分类问题（Classification）。而利用已有的样本数据$\{(X_j,y_j) | j=1,2,3….,M\}$训练$h(X)$的过程往往转换成一个最优化求解的过程。</p>
@@ -453,7 +454,7 @@ var _hmt = _hmt || [];
 <li>高富帅和白富美：只需要知道本文讨论的是一堆好用的求最优解的方法，可以用于分类回归预测的一系列问题，然后吩咐工程师去实践就好了。还可以拿这篇文章嘲笑机器学习的屌丝：看你们弄些啥，累死累活的，挣那么几个钢镚。</li>
 </ol>
 <h2 id="二、预备知识"><a href="#二、预备知识" class="headerlink" title="二、预备知识"></a>二、预备知识</h2><h3 id="2-1-凸函数"><a href="#2-1-凸函数" class="headerlink" title="2.1 凸函数"></a>2.1 凸函数</h3><p>如果$f(X)$是定义在N为向量空间上的实值函数，对于在$f(X)$的定义域$C$上的任意两个点$X_1$和$X_2$，以及任意$[0,1]$之间的值$t$都有：</p>
-<script type="math/tex; mode=display">f(tX_1+(1-t)X_2)≤tf(X_1)+(1-t)f(X_2) \ \ \ ∀𝑋_1,𝑋_2∈𝐶, \ \  0≤𝑡≤1</script><p>则$f(X)$是严格凸函数（Strict Convex），如图一所示，（a）为严格凸函数，（b）为凸函数。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023919.jpg" alt=""></p>
+<script type="math/tex; mode=display">f(tX_1+(1-t)X_2)≤tf(X_1)+(1-t)f(X_2) \ \ \ ∀𝑋_1,𝑋_2∈𝐶, \ \  0≤𝑡≤1</script><p>则$f(X)$是严格凸函数（Strict Convex），如图一所示，（a）为严格凸函数，（b）为凸函数。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-023919.jpg" alt=""></p>
 <h3 id="2-2-拉格朗日乘数法及KKT条件"><a href="#2-2-拉格朗日乘数法及KKT条件" class="headerlink" title="2.2 拉格朗日乘数法及KKT条件"></a>2.2 拉格朗日乘数法及KKT条件</h3><p>通常我们需要求解的最优化问题有如下三类：</p>
 <p>1.无约束优化问题：</p>
 <script type="math/tex; mode=display">X=arg\underset{X}{min} \  f(X)</script><p>含义是求解$X$，使得目标函数$f(X)$最小；<br>2.有等式约束的优化问题：</p>
@@ -467,20 +468,20 @@ var _hmt = _hmt || [];
 <script type="math/tex; mode=display">\frac{\partial}{\partial X}L(X,A,B)=0 \\ H(X)=0 \\ B^TG(X)=0</script><p>其中，$B=[b_1,b_2…b_m]^T\in R^m，G(X)=[g_1(X),g_2(X)…g_m(X)]^T \in R^m$。KKT条件是求解最优值$X^*$的必要条件，要使其成为充分必要条件，还需要$f(X)$为凸函数才行。</p>
 <p>在KKT条件中，$B^TG(X)=0$这个条件最有趣，因为$g_l(X)≤0$,如果要满足这个等式，需要$b_l=0$或者$g_l(X)=0$。在我们后面的推导中会用到这个性质。</p>
 <h3 id="2-3-从Batch到Online"><a href="#2-3-从Batch到Online" class="headerlink" title="2.3 从Batch到Online"></a>2.3 从Batch到Online</h3><p>我们面对的最优化问题都是无约束的最优化问题（有约束最优化问题可以利用拉格朗日乘数法或KKT条件转换成无约束最优化问题），因此我们通常可以将它们描述成：</p>
-<script type="math/tex; mode=display">W=𝑎𝑟𝑔\underset{w}{𝑚𝑖𝑛}\ l(𝑊, 𝑍) \\ 𝑍 = \{(𝑋_𝑗,𝑦_𝑗)|𝑗 = 1,2,...𝑀\}\\𝑦_𝑗 =h(𝑊,𝑋_𝑗)</script><p>这里$Z$为观测样本集合（训练集）；$X_j$是第$j$条阉割版的特征向量；$y_j=h(W,X_j)$为预测值；$h(W,X_j)$为特征向量到预测值的映射函数；$l (𝑊,𝑍) $为最优化求解的目标函数，也称作损失函数，损失函数通常可以分解为各样本损失函数的累加，即$l(𝑊,𝑍) =\sum_{j=1}^{M}l(𝑊,𝑍_𝑗)$;$W$为特征权重，也就是我们需要求解的参数。以线性回归和逻辑回归为例，它们的映射函数和损失函数分别为：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023930.jpg" alt=""><br>在2.1中我们给出了无约束最优化问题解析解的求法。而在我们实际的数值计算中，通常做法是随机给定一个初始的$W^{(0)}$，通过迭代，在每次迭代中计算损失函数在当前$W^{(t)}$的下降方向，并更新$W$,直到损失函数稳定在最小的点。例如著名的梯度下降法（Gradient Descent）就是通过计算损失函数的在当前$W^{(t)}$处的梯度（Gradient），以梯度$\nabla_Wl(W^{(t)},Z)$的反方向作为下降方向更新$W$，如果损失函数是一个非平滑的凸函数（Non-Smooth Convex），在不可导处用次梯度（Subgradient）方向的反方向作为下降方向。算法如下：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023940.jpg" alt=""><br>GD是一种批量处理的方式（Batch），每次更新$W$的时候都要扫描所有的样本以计算一个全局的梯度$\nabla_Wl(W,Z)$</p>
-<p>考虑另一种权重更新策略：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-023949.jpg" alt=""><br>在算法2中，每次迭代仅仅根据单个样本更新权重$W$，这种算法称作随机梯度下降（SGD，Stochastic Gradient Descent）</p>
+<script type="math/tex; mode=display">W=𝑎𝑟𝑔\underset{w}{𝑚𝑖𝑛}\ l(𝑊, 𝑍) \\ 𝑍 = \{(𝑋_𝑗,𝑦_𝑗)|𝑗 = 1,2,...𝑀\}\\𝑦_𝑗 =h(𝑊,𝑋_𝑗)</script><p>这里$Z$为观测样本集合（训练集）；$X_j$是第$j$条阉割版的特征向量；$y_j=h(W,X_j)$为预测值；$h(W,X_j)$为特征向量到预测值的映射函数；$l (𝑊,𝑍) $为最优化求解的目标函数，也称作损失函数，损失函数通常可以分解为各样本损失函数的累加，即$l(𝑊,𝑍) =\sum_{j=1}^{M}l(𝑊,𝑍_𝑗)$;$W$为特征权重，也就是我们需要求解的参数。以线性回归和逻辑回归为例，它们的映射函数和损失函数分别为：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-023930.jpg" alt=""><br>在2.1中我们给出了无约束最优化问题解析解的求法。而在我们实际的数值计算中，通常做法是随机给定一个初始的$W^{(0)}$，通过迭代，在每次迭代中计算损失函数在当前$W^{(t)}$的下降方向，并更新$W$,直到损失函数稳定在最小的点。例如著名的梯度下降法（Gradient Descent）就是通过计算损失函数的在当前$W^{(t)}$处的梯度（Gradient），以梯度$\nabla_Wl(W^{(t)},Z)$的反方向作为下降方向更新$W$，如果损失函数是一个非平滑的凸函数（Non-Smooth Convex），在不可导处用次梯度（Subgradient）方向的反方向作为下降方向。算法如下：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-023940.jpg" alt=""><br>GD是一种批量处理的方式（Batch），每次更新$W$的时候都要扫描所有的样本以计算一个全局的梯度$\nabla_Wl(W,Z)$</p>
+<p>考虑另一种权重更新策略：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-023949.jpg" alt=""><br>在算法2中，每次迭代仅仅根据单个样本更新权重$W$，这种算法称作随机梯度下降（SGD，Stochastic Gradient Descent）</p>
 <p>与 GD 每次扫所有的样本以计算一个全局的梯度相比，SGD 则每次只针对一 个观测到的样本进行更新。通常情况下，SGD 能够比 GD“更快”地令𝑊逼近最优值。当样 本数𝑀特别大的时候，SGD 的优势更加明显，并且由于 SGD 针对观测到的“一条”样本更新 𝑊，很适合进行增量计算，实现梯度下降的 Online 模式(OGD, Online Gradient Descent)。</p>
-<h3 id="2-4-正则化"><a href="#2-4-正则化" class="headerlink" title="2.4 正则化"></a>2.4 正则化</h3><p>正则化(Regularization)的意义本质上是为了避免训练得到的模型过度拟合(overfitting) 训练数据。我们用图 2 来说明什么是过拟合。图 2 是一个局部加权线性回归(Locally weighted linear regression)的训练结果，当学习度为 1 时，相当于进行线性回归，这时候模型与训练样本以及实际曲线拟合得都不够好，模型处于 欠拟合(underfitting)状态;当学习度逐渐增加到 4 的过程中，模型逐渐与实际曲线吻合; 随着学习度继续增加，越来越多的样本直接落到模型曲线上(模型拟合训练数据)，但是模 型却与实际曲线相差越来越大，出现了过拟合。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024045.jpg" alt=""><br>过拟合体现出来的现象就是特征权重𝑊的各个维度的绝对值非常大:一些大正数，一些大负数。这种模型虽然能够很好匹配样本(如图 2 中 Degree = 20 的情况)，但是对新样本做 预测的时候会使得预测值与真实值相差很远。</p>
+<h3 id="2-4-正则化"><a href="#2-4-正则化" class="headerlink" title="2.4 正则化"></a>2.4 正则化</h3><p>正则化(Regularization)的意义本质上是为了避免训练得到的模型过度拟合(overfitting) 训练数据。我们用图 2 来说明什么是过拟合。图 2 是一个局部加权线性回归(Locally weighted linear regression)的训练结果，当学习度为 1 时，相当于进行线性回归，这时候模型与训练样本以及实际曲线拟合得都不够好，模型处于 欠拟合(underfitting)状态;当学习度逐渐增加到 4 的过程中，模型逐渐与实际曲线吻合; 随着学习度继续增加，越来越多的样本直接落到模型曲线上(模型拟合训练数据)，但是模 型却与实际曲线相差越来越大，出现了过拟合。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024045.jpg" alt=""><br>过拟合体现出来的现象就是特征权重𝑊的各个维度的绝对值非常大:一些大正数，一些大负数。这种模型虽然能够很好匹配样本(如图 2 中 Degree = 20 的情况)，但是对新样本做 预测的时候会使得预测值与真实值相差很远。</p>
 <p>为了避免过拟合的情况，我们通常在损失函数的基础上加一个关于特征权重𝑊的限制， 限制它的模不要太大，如果用𝜓(𝑊)表示特征权重𝑊的一种求模计算，那么(2-3-1)转换成:</p>
 <p>为了避免过拟合的情况，我们通常在损失函数的基础上加一个关于特征权重$𝑊$的限制， 限制它的模不要太大，如果用$𝜓(𝑊)$表示特征权重$𝑊$的一种求模计算，那么(2-3-1)转换成:</p>
 <script type="math/tex; mode=display">W=arg \underset {W}{min }l(W,Z) \\ s.t. 𝜓(𝑊)<𝛿</script><p>这个时候我们面对的是一个有约束的最优化问题。根据 KKT 条件，我们知道当选取合适的系数𝜆，那么这个有约束最优化问题等价于如下无约束最优化问题:</p>
-<script type="math/tex; mode=display">W=arg\underset{W}{min}[l(W,Z)+𝜆𝜓(𝑊)]</script><p>其中$𝜓(𝑊)$ 称作正则化因子(Regularizer)，是一个关于$𝑊$求模的函数，我们常用正则化因子有L1和L2正则化:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024056.jpg" alt=""><br>不管是使用L1还是L2正则化，其基本原理都是一样的，即在最小化损失函数$l(𝑊,𝑍)$的同时，还要考虑$𝑊$的模带来的贡献，从而避免$𝑊$的维度上取一些绝对值很大的值。</p>
+<script type="math/tex; mode=display">W=arg\underset{W}{min}[l(W,Z)+𝜆𝜓(𝑊)]</script><p>其中$𝜓(𝑊)$ 称作正则化因子(Regularizer)，是一个关于$𝑊$求模的函数，我们常用正则化因子有L1和L2正则化:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024056.jpg" alt=""><br>不管是使用L1还是L2正则化，其基本原理都是一样的，即在最小化损失函数$l(𝑊,𝑍)$的同时，还要考虑$𝑊$的模带来的贡献，从而避免$𝑊$的维度上取一些绝对值很大的值。</p>
 <p>$L_1$和$L_2$正则化的区别主要有两个:</p>
 <ol>
 <li>L1 正则化在0处不可导，而 L2 正则化可导。好 在无论是 L1 还是 L2 正则化本身都是凸函数，因此在计算 L1 正则化的梯度方向的可以采用次梯度代替;</li>
 <li>在 Batch 模式下，L1 正则化通常产生更加稀疏(Sparse)的模型，𝑊的更 多维度为 0，这些为 0 的维度就代表了不是很相关的维度，从而起到了特征选择(Feature Selection)的目的。</li>
 </ol>
-<p>我们对稀疏性(Sparsity)比较感兴趣。除了特征选择的作用以外，稀疏性可以使得预测计算的复杂度降低。那么为什么 L1 正则化会产生这种稀疏性?通常可以根据文献[9]中的理解，如图 3 所示:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024107.jpg" alt=""></p>
+<p>我们对稀疏性(Sparsity)比较感兴趣。除了特征选择的作用以外，稀疏性可以使得预测计算的复杂度降低。那么为什么 L1 正则化会产生这种稀疏性?通常可以根据文献[9]中的理解，如图 3 所示:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024107.jpg" alt=""></p>
 <p>假如特征维度𝑁 = 2，那么 L1 正则化引入的约束条件是𝑊只能取转置方形中的值(图3-(a)中黑色方框内)，L2正则化对应的是一个圆形区域(图3-(b)中黑色圆形区 域)，图 3 中绿色部分代表损失函数的等高线，等高线与约束区域的首次相交的地方就是最优解。可以看到，由于 L1 正则化的约束区域与坐标轴相交的地方都有“角”出现，等高线更容易在这个“角”上与约束区域相交，导致另一个维度上的权重值为 0;而 L2 正则化则 没有这种性质，因为没有“角”，等高线在坐标轴上与约束区域相交的概率大为减小。这样 从直观上就解释了 L1 正则化更容易产生稀疏性的原因。</p>
 <p>那么在Online模式下呢，不同于 Batch，Online 中每次𝑊的更新并不是沿着全局梯度进行下降，而是沿着某个样本的产生的梯度方向进行下降，整个寻优过程变得像是一个“随机” 查找的过程(SGD 中 Stochastic 的来历)，这样 Online 最优化求解即使采用 L1 正则化的方式， 也很难产生稀疏解。后面介绍的各个在线最优化求解算法中，稀疏性是一个主要的追求目标。</p>
 <h2 id="三、在线最优化求解算法"><a href="#三、在线最优化求解算法" class="headerlink" title="三、在线最优化求解算法"></a>三、在线最优化求解算法</h2><p>在前面我们做了一些热身，下面将针对在线最优化求解介绍一些算法。在 2.4 中介绍了 L1 正则化在 Online 模式下也不能产生较好的稀疏性，而稀疏性对于高维特征向量以及大数 据集又特别的重要。因此，我们沿着 升模型稀疏性的主线进行算法介绍。</p>
@@ -488,25 +489,25 @@ var _hmt = _hmt || [];
 <p>截断梯度法(TG, Truncated Gradient)是由 John Langford，Lihong Li 和 Tong Zhang 在 2009 年 出[10]，实际上是对简单截断的一种改进。下面首先 述一下 L1 正则化和简单截断的方 法，然后我们再来看 TG 对简单截断的改进以及这三种方法在特定条件下的转化。</p>
 <h4 id="3-1-1-L1正则化法"><a href="#3-1-1-L1正则化法" class="headerlink" title="3.1.1 L1正则化法"></a>3.1.1 L1正则化法</h4><p>由于L1正则项在0处不可导，往往会造成平滑的凸优化问题变成非平滑凸优化问题，因此在每次迭代中采用次梯度计算L1正则项的梯度。权重更新方式为：</p>
 <script type="math/tex; mode=display">𝑊^{(𝑡+1)} = 𝑊^𝑡 −𝜂^{(𝑡)}𝐺^{(t)} −𝜂^{(𝑡)}𝜆sgn(𝑊^{(t)})</script><p>注意，这里$𝜆∈R$是一个标量，且$𝜆≥ 0$，为 L1 正则化参数;$sgn(𝑣)$为符号函数，如果$𝑉=[𝑣_1,𝑣_2,…,𝑣_𝑁] ∈R^𝑁$是一个向量，$𝑣_𝑖$是向量的一个维度，那么有$sgn(𝑉)=[sgn(𝑣_1) , sgn(𝑣_2) , … , sgn(𝑣_𝑁)∈R^𝑁$;$𝜂^{(𝑡)}$为学习率，通常将其设置成$1\sqrt{t}$的函数; $𝐺^{(t)}= 𝛻_𝑊l(𝑊^{(𝑡)},𝑍^{(𝑡)})$ 代表了第𝑡次迭代中损失函数的梯度，由于 OGD 每次仅根据观测到的一个样本进行权重更新，因此也不再使用区分样本的下标$𝑗$。</p>
-<h4 id="3-1-2-简单截断法"><a href="#3-1-2-简单截断法" class="headerlink" title="3.1.2 简单截断法"></a>3.1.2 简单截断法</h4><p>以𝑘为窗口，当𝑡/𝑘不为整数时采用标准的 SGD 进行迭代，当𝑡/𝑘为整数时，采用如下权重更新方式:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024120.jpg" alt=""><br>注意，这里面$𝜃∈R$是一个标量，且$𝜃≥0$;如果$𝑉=[𝑣_1, 𝑣_2, … , 𝑣_𝑁] ∈ R^𝑁$是一个向量，$𝑣_𝑖$是向量的一个维度，那么有$𝑇_0(𝑉,𝜃) = [𝑇_0(𝑣_1,𝜃) ,𝑇_0(𝑣_2,𝜃) ,…,𝑇_0(𝑣_𝑁,𝜃)] ∈ R^𝑁$。</p>
-<h4 id="3-1-3-截断梯度法（TG）"><a href="#3-1-3-截断梯度法（TG）" class="headerlink" title="3.1.3 截断梯度法（TG）"></a>3.1.3 截断梯度法（TG）</h4><p>上述的简单截断法被 TG 的作者形容为 too aggressive，因此 TG 在此基础上进行了改进，同样是采用截断的方式，但是比较不那么粗暴。采用相同的方式表示为:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024132.jpg" alt=""></p>
+<h4 id="3-1-2-简单截断法"><a href="#3-1-2-简单截断法" class="headerlink" title="3.1.2 简单截断法"></a>3.1.2 简单截断法</h4><p>以𝑘为窗口，当𝑡/𝑘不为整数时采用标准的 SGD 进行迭代，当𝑡/𝑘为整数时，采用如下权重更新方式:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024120.jpg" alt=""><br>注意，这里面$𝜃∈R$是一个标量，且$𝜃≥0$;如果$𝑉=[𝑣_1, 𝑣_2, … , 𝑣_𝑁] ∈ R^𝑁$是一个向量，$𝑣_𝑖$是向量的一个维度，那么有$𝑇_0(𝑉,𝜃) = [𝑇_0(𝑣_1,𝜃) ,𝑇_0(𝑣_2,𝜃) ,…,𝑇_0(𝑣_𝑁,𝜃)] ∈ R^𝑁$。</p>
+<h4 id="3-1-3-截断梯度法（TG）"><a href="#3-1-3-截断梯度法（TG）" class="headerlink" title="3.1.3 截断梯度法（TG）"></a>3.1.3 截断梯度法（TG）</h4><p>上述的简单截断法被 TG 的作者形容为 too aggressive，因此 TG 在此基础上进行了改进，同样是采用截断的方式，但是比较不那么粗暴。采用相同的方式表示为:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024132.jpg" alt=""></p>
 <p>其中$\lambda^{(t)} \in R$且$\lambda ^{(t)}≥0$。TG同样是以k为窗口，每𝑘步进行一次截断。当$𝑡/𝑘$不为整数时$𝜆(𝑡) = 0$，当$𝑡/𝑘$为整数时$𝜆(𝑡) = 𝑘𝜆$。从公式(3-1-3)可以看出，𝜆和𝜃决定了𝑊的稀疏程度，这 两个值越大，则稀疏性越强。尤其令𝜆 = 𝜃时，只需要通过调节一个参数就能控制稀疏性。</p>
-<p>根据公式（3-1-3），我们很容易写出TG的算法逻辑：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024211.jpg" alt=""></p>
-<h4 id="3-1-4-TG与简单截断以及L1正则化的关系"><a href="#3-1-4-TG与简单截断以及L1正则化的关系" class="headerlink" title="3.1.4 TG与简单截断以及L1正则化的关系"></a>3.1.4 TG与简单截断以及L1正则化的关系</h4><p>简单截断和截断梯度的区别在于采用了不同的截断公式$𝑇_0$和$𝑇_1$，如图 4 所示。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024222.jpg" alt=""><br>为了清晰地进行比较，我们将公式(3-1-3)进行改写， 述特征权重每个维度的更新方式:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024232.jpg" alt=""><br>如果令$\lambda_{TG}^{(t)}=\theta$，截断公式$Trnc(w,\lambda_{TG}^{(t)},\theta)$变成：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024242.jpg" alt=""><br>此时 TG 退化成简单截断法。<br>如果令$\theta =∞$，截断公式$Trnc(w,\lambda_{TG}^{(t)},\theta)$变成：</p>
+<p>根据公式（3-1-3），我们很容易写出TG的算法逻辑：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024211.jpg" alt=""></p>
+<h4 id="3-1-4-TG与简单截断以及L1正则化的关系"><a href="#3-1-4-TG与简单截断以及L1正则化的关系" class="headerlink" title="3.1.4 TG与简单截断以及L1正则化的关系"></a>3.1.4 TG与简单截断以及L1正则化的关系</h4><p>简单截断和截断梯度的区别在于采用了不同的截断公式$𝑇_0$和$𝑇_1$，如图 4 所示。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024222.jpg" alt=""><br>为了清晰地进行比较，我们将公式(3-1-3)进行改写， 述特征权重每个维度的更新方式:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024232.jpg" alt=""><br>如果令$\lambda_{TG}^{(t)}=\theta$，截断公式$Trnc(w,\lambda_{TG}^{(t)},\theta)$变成：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024242.jpg" alt=""><br>此时 TG 退化成简单截断法。<br>如果令$\theta =∞$，截断公式$Trnc(w,\lambda_{TG}^{(t)},\theta)$变成：</p>
 <script type="math/tex; mode=display">
 Trnc\left(w,\lambda_{TG}^{\left(t\right)},\infty\right)=\left\{\begin{array}{l}
     0\ \  if\ |w|\le\lambda_{TG}^{\left(t\right)}\\
     w-\lambda_{TG}^{\left(t\right)}sgn \left(w\right)\  \ otherwise\\
-\end{array}\right.</script><p>如果再令𝑘 = 1，那么特征权重维度更新公式变成<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024251.jpg" alt=""></p>
+\end{array}\right.</script><p>如果再令𝑘 = 1，那么特征权重维度更新公式变成<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024251.jpg" alt=""></p>
 <p>此时 TG 退化成 L1 正则化法。</p>
-<h3 id="3-2-FOBOS"><a href="#3-2-FOBOS" class="headerlink" title="3.2 FOBOS"></a>3.2 FOBOS</h3><h4 id="3-2-1-FOBOS算法原理"><a href="#3-2-1-FOBOS算法原理" class="headerlink" title="3.2.1 FOBOS算法原理"></a>3.2.1 FOBOS算法原理</h4><p>前向后向切分(FOBOS, Forward-Backward Splitting)是由 John Duchi 和 Yoram Singer   出的[11]。从全称上来看，该方法应该叫 FOBAS，但是由于一开始作者管这种方法叫 FOLOS (Forward Looking Subgradients)，为了减少读者的困扰，作者干脆只修改一个字母，叫 FOBOS。<br>在 FOBOS 中，将权重的更新分为两个步骤:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024259.jpg" alt=""><br>前一个步骤实际上是一个标准的梯度下降步骤，后一个步骤可以理解为对梯度下降的结果进行微调。<br>观察第二个步骤，发现对𝑊的微调也分为两部分:(1) 前一部分保证微调发生在梯度下 降结果的附近;(2)后一部分则用于处理正则化，产生稀疏性。</p>
-<p>如果将(3-2-1)中的两个步骤合二为一，即将$𝑊^{(𝑡 +\frac{1}{2})}$的计算代入$𝑊^{(𝑡 +1)}$中，有:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024312.jpg" alt=""><br>令$𝐹(𝑊) =\frac{1}{2}||𝑊 − 𝑊^{(𝑡)} + 𝜂^{(𝑡)}𝐺^{(𝑡)}||^2 + 𝜂^{(𝑡+\frac{1}{2})} Ψ(𝑊)$如果$W^{(t+1)}$存在一个最优解，那么可以推断0向量一定属于$F(W)$的次梯度集合：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024324.jpg" alt=""><br>由于$W^{(t+1)}=arg\underset{W}{min}F(W)$那么有：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024335.jpg" alt=""><br>上式实际上给出了FOBOS中权重更新的另一种形式：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024343.jpg" alt=""><br>我们这里可以看到，$W^{(t+1)}$不仅仅与迭代前的状态$W^{(t)}$有关，而且与迭代后的$Ψ(𝑊^{(𝑡+1)})$有关。可能这就是FOBOS名称的由来。</p>
+<h3 id="3-2-FOBOS"><a href="#3-2-FOBOS" class="headerlink" title="3.2 FOBOS"></a>3.2 FOBOS</h3><h4 id="3-2-1-FOBOS算法原理"><a href="#3-2-1-FOBOS算法原理" class="headerlink" title="3.2.1 FOBOS算法原理"></a>3.2.1 FOBOS算法原理</h4><p>前向后向切分(FOBOS, Forward-Backward Splitting)是由 John Duchi 和 Yoram Singer   出的[11]。从全称上来看，该方法应该叫 FOBAS，但是由于一开始作者管这种方法叫 FOLOS (Forward Looking Subgradients)，为了减少读者的困扰，作者干脆只修改一个字母，叫 FOBOS。<br>在 FOBOS 中，将权重的更新分为两个步骤:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024259.jpg" alt=""><br>前一个步骤实际上是一个标准的梯度下降步骤，后一个步骤可以理解为对梯度下降的结果进行微调。<br>观察第二个步骤，发现对𝑊的微调也分为两部分:(1) 前一部分保证微调发生在梯度下 降结果的附近;(2)后一部分则用于处理正则化，产生稀疏性。</p>
+<p>如果将(3-2-1)中的两个步骤合二为一，即将$𝑊^{(𝑡 +\frac{1}{2})}$的计算代入$𝑊^{(𝑡 +1)}$中，有:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024312.jpg" alt=""><br>令$𝐹(𝑊) =\frac{1}{2}||𝑊 − 𝑊^{(𝑡)} + 𝜂^{(𝑡)}𝐺^{(𝑡)}||^2 + 𝜂^{(𝑡+\frac{1}{2})} Ψ(𝑊)$如果$W^{(t+1)}$存在一个最优解，那么可以推断0向量一定属于$F(W)$的次梯度集合：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024324.jpg" alt=""><br>由于$W^{(t+1)}=arg\underset{W}{min}F(W)$那么有：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024335.jpg" alt=""><br>上式实际上给出了FOBOS中权重更新的另一种形式：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024343.jpg" alt=""><br>我们这里可以看到，$W^{(t+1)}$不仅仅与迭代前的状态$W^{(t)}$有关，而且与迭代后的$Ψ(𝑊^{(𝑡+1)})$有关。可能这就是FOBOS名称的由来。</p>
 <h4 id="3-2-2-L1-FOBOS"><a href="#3-2-2-L1-FOBOS" class="headerlink" title="3.2.2 L1-FOBOS"></a>3.2.2 L1-FOBOS</h4><p>关于 FOBOS 的收敛性和 Regret 就不在此讨论了，详情可参见论文[11]。这里我们来看 看 FOBOS 如何在 L1 正则化下取得比较好的稀疏性。</p>
-<p>在 L1 正则化下，有$Ψ(𝑊)=𝜆||W||_1$.为了简化描述，用向量$𝑉 = [𝑣_1,𝑣_2 …𝑣_𝑁] ∈ R^𝑁$来表示$W^{(t+\frac{1}{2})}$，用标量$\bar{𝜆} ∈ R$来表示$𝜂^{(𝑡+\frac{1}{2})} 𝜆$，并将公式（3-2-1）等号右边按维度展开：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024351.jpg" alt=""><br>我们可以看到，在上式求和公式中的每一项都是大于等于0的，所以公式（3-2-2）可以拆解成对特征权重$W$的每一维度单独求解：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024359.jpg" alt=""><br>首先，假设$𝑤^∗$是$minimize_{w_i}(\frac{1}{2}(w_i-v_i)^2+\bar{\lambda }|w_i|)$的最优解，则有$𝑤^*𝑣_i ≥ 0$，这是因为:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024409.jpg" alt=""><br>既然有$𝑤_𝑖∗𝑣_𝑖 ≥ 0$，那么我们分两种情况$𝑣_𝑖 ≥ 0$和$𝑣_𝑖 &lt; 0$来讨论:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024424.jpg" alt=""><br>综合上面的分析，可以得到在 FOBOS 在 L1 正则化条件下，特征权重的各个维度更新的方式为:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024435.jpg" alt=""><br>其中，$𝑔_𝑖^{(𝑡)}$为梯度$𝐺^{(𝑡)}$ 在维度𝑖上的取值。<br>根据公式(3-2-3)，我们很容易就可以设计出 L1-FOBOS 的算法逻辑:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024444.jpg" alt=""></p>
+<p>在 L1 正则化下，有$Ψ(𝑊)=𝜆||W||_1$.为了简化描述，用向量$𝑉 = [𝑣_1,𝑣_2 …𝑣_𝑁] ∈ R^𝑁$来表示$W^{(t+\frac{1}{2})}$，用标量$\bar{𝜆} ∈ R$来表示$𝜂^{(𝑡+\frac{1}{2})} 𝜆$，并将公式（3-2-1）等号右边按维度展开：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024351.jpg" alt=""><br>我们可以看到，在上式求和公式中的每一项都是大于等于0的，所以公式（3-2-2）可以拆解成对特征权重$W$的每一维度单独求解：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024359.jpg" alt=""><br>首先，假设$𝑤^∗$是$minimize_{w_i}(\frac{1}{2}(w_i-v_i)^2+\bar{\lambda }|w_i|)$的最优解，则有$𝑤^*𝑣_i ≥ 0$，这是因为:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024409.jpg" alt=""><br>既然有$𝑤_𝑖∗𝑣_𝑖 ≥ 0$，那么我们分两种情况$𝑣_𝑖 ≥ 0$和$𝑣_𝑖 &lt; 0$来讨论:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024424.jpg" alt=""><br>综合上面的分析，可以得到在 FOBOS 在 L1 正则化条件下，特征权重的各个维度更新的方式为:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024435.jpg" alt=""><br>其中，$𝑔_𝑖^{(𝑡)}$为梯度$𝐺^{(𝑡)}$ 在维度𝑖上的取值。<br>根据公式(3-2-3)，我们很容易就可以设计出 L1-FOBOS 的算法逻辑:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024444.jpg" alt=""></p>
 <h4 id="3-2-3-L1-FOBOS与TG的关系"><a href="#3-2-3-L1-FOBOS与TG的关系" class="headerlink" title="3.2.3 L1-FOBOS与TG的关系"></a>3.2.3 L1-FOBOS与TG的关系</h4><p>从公式(3-2-3)可以看出，L1-FOBOS 在每次更新𝑊的时候，对𝑊的每个维度都会进行判定，当满足$𝑤_𝑖^{𝑡} − 𝜂^{(𝑡)}𝑔_𝑖^{(𝑡)} − 𝜂^{(𝑡+\frac{1}{2})}𝜆 ≤ 0$ 时对该维度进行“截断”，令$𝑤_𝑖^{(𝑡+1)} = 0$。那么我们怎么去理解这个判定条件呢?如果我们把判定条件写成$𝑤_𝑖^{𝑡} − 𝜂^{(𝑡)}𝑔_𝑖^{(𝑡)} ≤𝜂^{(𝑡+\frac{1}{2})}𝜆 $，那么这个含 义就很清晰了:当一条样本产生的梯度不足以令对应维度上的权重值发生足够大的变化$𝜂^{(𝑡+\frac{1}{2})}𝜆 $，认为在本次更新过程中该维度不够重要，应当令其权重为 0。</p>
-<p>对于 L1-FOBOS 特征权重的各个维度更新公式(3-2-3)，也可以写作如下形式:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024456.jpg" alt=""><br>比较上式与TG的特征权重维度更新公式(3-1-4)，我们发现如果令$𝜃 = ∞，𝑘 = 1，𝜆^{(t)}_{TG}(𝑡) = 𝜂^{(𝑡+\frac{1}{2})}𝜆$,L1-FOBOS 与 TG 完全一致。我们可以认为 L1-FOBOS 是 TG 在特定条件下的特殊形式。</p>
+<p>对于 L1-FOBOS 特征权重的各个维度更新公式(3-2-3)，也可以写作如下形式:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024456.jpg" alt=""><br>比较上式与TG的特征权重维度更新公式(3-1-4)，我们发现如果令$𝜃 = ∞，𝑘 = 1，𝜆^{(t)}_{TG}(𝑡) = 𝜂^{(𝑡+\frac{1}{2})}𝜆$,L1-FOBOS 与 TG 完全一致。我们可以认为 L1-FOBOS 是 TG 在特定条件下的特殊形式。</p>
 <h3 id="3-3-RDA"><a href="#3-3-RDA" class="headerlink" title="3.3 RDA"></a>3.3 RDA</h3><h4 id="3-3-1-RDA算法原理"><a href="#3-3-1-RDA算法原理" class="headerlink" title="3.3.1 RDA算法原理"></a>3.3.1 RDA算法原理</h4><p>不论怎样，简单截断、TG、FOBOS 都还是建立在 SGD 的基础之上的，属于梯度下降类 型的方法，这类型方法的优点就是精度比较高，并且 TG、FOBOS 也都能在稀疏性上得到  升。但是有些其它类型的算法，例如 RDA，是从另一个方面来求解 Online Optimization 并且 更有效地 升了特征权重的稀疏性。</p>
-<p>正则对偶平均(RDA, Regularized Dual Averaging)是微软十年的研究成果，RDA 是 Simple Dual Averaging Scheme 一个扩展，由 Lin Xiao 发表于 2010 年。<br>在 RDA 中，特征权重的更新策略为:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024508.jpg" alt=""></p>
+<p>正则对偶平均(RDA, Regularized Dual Averaging)是微软十年的研究成果，RDA 是 Simple Dual Averaging Scheme 一个扩展，由 Lin Xiao 发表于 2010 年。<br>在 RDA 中，特征权重的更新策略为:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024508.jpg" alt=""></p>
 <p>其中， $&lt;𝐺^{(𝑟)}, 𝑊&gt;$ 表示梯度$𝐺^{(𝑟)}$对𝑊的积分平均值(积分中值);$Ψ(𝑊)$为正则项;$h(𝑊)$为一个辅助的严格凸函数; $\{𝛽^{(𝑡)}|t ≥ 1\}$ 是一个非负且非自减序列。</p>
 <p>本质上，公式（3-3-1）中包含了3个部分：</p>
 <ol>
@@ -515,34 +516,34 @@ Trnc\left(w,\lambda_{TG}^{\left(t\right)},\infty\right)=\left\{\begin{array}{l}
 <li>额外正则项$\frac{\beta ^{(t)}}{t}h(W)$，它是一个严格凸函数</li>
 </ol>
 <h4 id="3-3-2-L1-RDA"><a href="#3-3-2-L1-RDA" class="headerlink" title="3.3.2 L1-RDA"></a>3.3.2 L1-RDA</h4><p>我们下面来看看在 L1 正则化下，RDA 中的特征权重更新具有什么样的形式以及如何产 生稀疏性。</p>
-<p>令$𝛹(𝑊) = 𝜆||𝑊||_1$，并且由于$h(W)$是一个关于𝑊的严格凸函数，不妨令$h(W)=\frac{1}{2}||W||_2^2$， 此外，将非负非自减序列$\{𝛽^{(𝑡)}|t≥1\}$定义为$𝛽^{(𝑡)}=𝛾\sqrt{𝑡}$，将L1正则化代入公式(3-3-1)有:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024518.jpg" alt=""></p>
-<p>针对特征权重的各个维度将其拆解成N个独立的标量最小化问题：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024525.jpg" alt=""></p>
+<p>令$𝛹(𝑊) = 𝜆||𝑊||_1$，并且由于$h(W)$是一个关于𝑊的严格凸函数，不妨令$h(W)=\frac{1}{2}||W||_2^2$， 此外，将非负非自减序列$\{𝛽^{(𝑡)}|t≥1\}$定义为$𝛽^{(𝑡)}=𝛾\sqrt{𝑡}$，将L1正则化代入公式(3-3-1)有:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024518.jpg" alt=""></p>
+<p>针对特征权重的各个维度将其拆解成N个独立的标量最小化问题：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024525.jpg" alt=""></p>
 <p>这里$\lambda&gt;0,\frac{\gamma}{\sqrt{t}}&gt;0;\bar{g_t}^{(t)}=\frac{1}{t}\sum_{r=1}^tg_i^{(r)}$；公式（3-3-3）就是一个无约束的非平滑最优化问题。</p>
-<p>其中第2项$\lambda|w_i|$在$w_i=0$处不可导。假设$w_i^<em>$是其最优解，并且定义$𝜉\in \partial |w_i^</em>|$为$|w_i|$在$w_i^*$的次导数，那么有：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024534.jpg" alt=""><br>如果对公式(3-3-3)求导(求次导数)并等于 0，则有:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024542.jpg" alt=""><br>由于$\lambda&gt;0$，我们针对（3-3-5）分三种情况$|\bar{g_i}^{(t)}|&lt;\lambda,|\bar{g_i}^{(t)}|&gt;\lambda和|\bar{g_i}^{(t)}|&lt;-\lambda$来进行讨论：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024553.jpg" alt=""></p>
-<p>综合上面的分析，可以得到L1-RDA特征权重的各个维度更新方式为：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024602.jpg" alt=""><br>这里我们发现，当某个维度上累积梯度平均值的绝对值$|\bar{g_i}^{(t)}|$小于阈值$\lambda$的时候，改为度权重将被置0，特征权重的稀疏性由此产生。<br>根据公式（3-3-6）,可以设计出L1-RDA的算法逻辑：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024610.jpg" alt=""></p>
+<p>其中第2项$\lambda|w_i|$在$w_i=0$处不可导。假设$w_i^<em>$是其最优解，并且定义$𝜉\in \partial |w_i^</em>|$为$|w_i|$在$w_i^*$的次导数，那么有：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024534.jpg" alt=""><br>如果对公式(3-3-3)求导(求次导数)并等于 0，则有:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024542.jpg" alt=""><br>由于$\lambda&gt;0$，我们针对（3-3-5）分三种情况$|\bar{g_i}^{(t)}|&lt;\lambda,|\bar{g_i}^{(t)}|&gt;\lambda和|\bar{g_i}^{(t)}|&lt;-\lambda$来进行讨论：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024553.jpg" alt=""></p>
+<p>综合上面的分析，可以得到L1-RDA特征权重的各个维度更新方式为：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024602.jpg" alt=""><br>这里我们发现，当某个维度上累积梯度平均值的绝对值$|\bar{g_i}^{(t)}|$小于阈值$\lambda$的时候，改为度权重将被置0，特征权重的稀疏性由此产生。<br>根据公式（3-3-6）,可以设计出L1-RDA的算法逻辑：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024610.jpg" alt=""></p>
 <h4 id="3-3-3-L1-RDA与L1-FOBOS的比较"><a href="#3-3-3-L1-RDA与L1-FOBOS的比较" class="headerlink" title="3.3.3 L1-RDA与L1-FOBOS的比较"></a>3.3.3 L1-RDA与L1-FOBOS的比较</h4><p>在3.2.3中我们看到了L1-FOBOS实际上是TG的一种特殊形式，在L1-FOBOS中，进行“截断”的判定条件是$|w_i^{(t)}-𝜂^{(𝑡)}𝑔_i^{(𝑡)}|≤\lambda_{TG}^{(t)}=𝜂^{(𝑡+\frac{1}{2})}𝜆$，通常会定义𝜂为与$\frac{1}{\sqrt{t}}$正相关的函数$(𝜂 = Θ(\frac{1}{\sqrt{t}})$ ，因此L1-FOBOS的截断阈值为$ Θ(\frac{1}{\sqrt{t}}) \lambda$随着t的增加，这个阈值会逐渐降低。</p>
 <p>相比较而言，从3-3-6可以看出，L1-RDA的截断阈值为$\lambda$，是一个常数，并不随着$t$而变化，因此可以认为$L1-RDA$比$L1-FOBOS$在截断判定上更加aggressive，这种性质使得L1-RDA更容易产生稀疏性；此外，RDA中判定对象是梯度的累加均值$\bar{g_i}^{(t)}$，不同于TG或L1-FOBOS中针对单词梯度计算的结果进行判定，避免了由于某些维度由于训练不足导致截断的问题。并且通过调节$\lambda$一个参数，很容易在精度和稀疏性上进行权衡。</p>
 <h3 id="3-4-FTRL"><a href="#3-4-FTRL" class="headerlink" title="3.4 FTRL"></a>3.4 FTRL</h3><p>在 3.3.3 中我们从原理上定性比较了 L1-FOBOS 和 L1-RDA 在稀疏性上的表现。有实验证 明，L1-FOBOS 这一类基于梯度下降的方法有比较高的精度，但是 L1-RDA 却能在损失一定精 度的情况下产生更好的稀疏性。那么这两者的优点能不能在一个算法上体现出来?这就是 FTRL 要解决的问题。</p>
 <p>FTRL(Follow the Regularized Leader)是由 Google 的 H. Brendan McMahan 在 2010 年  出的[14]，后来在 2011 年发表了一篇关于 FTRL 和 AOGD、FOBOS、RDA 比较的论文[15]，2013 年又和 Gary Holt, D. Sculley, Michael Young 等人发表了一篇关于 FTRL 工程化实现的论文[16]。</p>
 <p>本节我们首先从形式上将 L1-FOBOS 和 L1-RDA 进行统一，然后介绍从这种统一形式产生 FTRL 算法，以及介绍 FTRL 算法工程化实现的算法逻辑。</p>
-<h4 id="3-4-1-L1-FOBOS和L1-RDA在形式上的统一"><a href="#3-4-1-L1-FOBOS和L1-RDA在形式上的统一" class="headerlink" title="3.4.1 L1-FOBOS和L1-RDA在形式上的统一"></a>3.4.1 L1-FOBOS和L1-RDA在形式上的统一</h4><p>L1-FOBOS在形式上，每次迭代都可以表示为（这里我们令$𝜂^{(𝑡+\frac{1}{2})}= 𝜂^{(𝑡)}= Θ(\frac{1}{\sqrt{𝑡}})$是一个随着t变化的非增正序列)：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024628.jpg" alt=""><br>把两个公式合并到一起，有：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024636.jpg" alt=""><br>通过这个公式很难直接求出$W^{(t+1)}$的解析解，但是我们可以按照维度将其分解为N个独立的最优化步骤：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024644.jpg" alt=""><br>由于$\frac{𝜂^{(t)}}{2}(g_i^{(t)})^2+w_i^{(t)}g_i^{(t)}$与变量$w_i$无关，因此上式可以等价于：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024656.jpg" alt=""><br>再将这N个独立最优化子步骤合并，那么L1-FOBOS可以写作：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024706.jpg" alt=""><br>而对于L1-RDA的公式（3-3-2）,我们可以写作：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024715.jpg" alt=""><br>这里$G^{(1:t)}=\sum^t_{s=1}G^{(s)}$，如果令$\sigma^{(s)}=\frac{1}{𝜂^{(𝑠)}}-\frac{1}{𝜂^{(𝑠-1)}},𝜎^{(1:𝑡)}=\frac{1}{𝜂^{(𝑡)}} $上面两个式子可以写作：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024729.jpg" alt=""><br>需要注意，与论文[15]中的Table 1不同，我们并没有将L1-FOBOS也写成累加梯度的形式。</p>
+<h4 id="3-4-1-L1-FOBOS和L1-RDA在形式上的统一"><a href="#3-4-1-L1-FOBOS和L1-RDA在形式上的统一" class="headerlink" title="3.4.1 L1-FOBOS和L1-RDA在形式上的统一"></a>3.4.1 L1-FOBOS和L1-RDA在形式上的统一</h4><p>L1-FOBOS在形式上，每次迭代都可以表示为（这里我们令$𝜂^{(𝑡+\frac{1}{2})}= 𝜂^{(𝑡)}= Θ(\frac{1}{\sqrt{𝑡}})$是一个随着t变化的非增正序列)：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024628.jpg" alt=""><br>把两个公式合并到一起，有：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024636.jpg" alt=""><br>通过这个公式很难直接求出$W^{(t+1)}$的解析解，但是我们可以按照维度将其分解为N个独立的最优化步骤：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024644.jpg" alt=""><br>由于$\frac{𝜂^{(t)}}{2}(g_i^{(t)})^2+w_i^{(t)}g_i^{(t)}$与变量$w_i$无关，因此上式可以等价于：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024656.jpg" alt=""><br>再将这N个独立最优化子步骤合并，那么L1-FOBOS可以写作：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024706.jpg" alt=""><br>而对于L1-RDA的公式（3-3-2）,我们可以写作：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024715.jpg" alt=""><br>这里$G^{(1:t)}=\sum^t_{s=1}G^{(s)}$，如果令$\sigma^{(s)}=\frac{1}{𝜂^{(𝑠)}}-\frac{1}{𝜂^{(𝑠-1)}},𝜎^{(1:𝑡)}=\frac{1}{𝜂^{(𝑡)}} $上面两个式子可以写作：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024729.jpg" alt=""><br>需要注意，与论文[15]中的Table 1不同，我们并没有将L1-FOBOS也写成累加梯度的形式。</p>
 <p>比较（3-4-1）和（3-4-2）这两个公式，可以看出L1-FOBOS和L1-RDA的区别在于：</p>
 <ol>
 <li>前者计算的是累加梯度以及L1正则项只考虑当前模的贡献，而后者采用了累加的处理方式；</li>
 <li>前者的第三项限制W的变化不能离已迭代过的解太远，而后者则限制W不能离0点太远。</li>
 </ol>
-<h4 id="3-4-2-FTRL算法原理"><a href="#3-4-2-FTRL算法原理" class="headerlink" title="3.4.2 FTRL算法原理"></a>3.4.2 FTRL算法原理</h4><p>FTRL综合考虑了FOBOS和RDA对于正则项和W限制的区别，其特征权重的更新公式为：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024739.jpg" alt=""></p>
+<h4 id="3-4-2-FTRL算法原理"><a href="#3-4-2-FTRL算法原理" class="headerlink" title="3.4.2 FTRL算法原理"></a>3.4.2 FTRL算法原理</h4><p>FTRL综合考虑了FOBOS和RDA对于正则项和W限制的区别，其特征权重的更新公式为：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024739.jpg" alt=""></p>
 <p>注意，公式（3-4-3）中出现了L2正则项$\frac{1}{2}||W||^2_2$在论文[15]的公式中并没有这一项，但是在其2013年发表的FTRL工程化实现的论文[16]却使用了L2正则项。事实上该项的引入并不影响FTRL的稀疏性，后面的推导会显示这一点。L2正则项的引入仅仅相当于对最优化过程多了一个约束，使得结果求解结果更加平滑。</p>
-<p>公式（3-4-3）看上去很复杂，更新权重貌似非常困难的样子，不妨将其进行改写，将最后一项展开，等价于求下面这样一个最优化问题<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024753.jpg" alt=""><br>由于$\frac{1}{2}\sum_{s=1}^t\sigma^{(s)}||W^{(s)}||_2^2$相对于W来说是一个常数，并且令$Z^{(t)}=G^{(1:t)}- \sum_{s=1}^t\sigma^{(s)}W^{(s)}$，上式等价于：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024805.jpg" alt=""><br>针对特征权重的各个维度将其拆解成N个独立的标量最小化问题：<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024814.jpg" alt=""><br>到这里，我们遇到了与（3-3-3）类似的问题，用相同的分析方法可以得到：<img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024826.jpg" alt=""></p>
+<p>公式（3-4-3）看上去很复杂，更新权重貌似非常困难的样子，不妨将其进行改写，将最后一项展开，等价于求下面这样一个最优化问题<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024753.jpg" alt=""><br>由于$\frac{1}{2}\sum_{s=1}^t\sigma^{(s)}||W^{(s)}||_2^2$相对于W来说是一个常数，并且令$Z^{(t)}=G^{(1:t)}- \sum_{s=1}^t\sigma^{(s)}W^{(s)}$，上式等价于：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024805.jpg" alt=""><br>针对特征权重的各个维度将其拆解成N个独立的标量最小化问题：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024814.jpg" alt=""><br>到这里，我们遇到了与（3-3-3）类似的问题，用相同的分析方法可以得到：<img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024826.jpg" alt=""></p>
 <p>从（3-4-4）可以看出，引入L2正则化并没有对FTRL结果的稀疏性产生任何影响。</p>
 <h4 id="3-4-3-Per-Coordinate-Learning-Rates"><a href="#3-4-3-Per-Coordinate-Learning-Rates" class="headerlink" title="3.4.3 Per-Coordinate Learning Rates"></a>3.4.3 Per-Coordinate Learning Rates</h4><p>前面介绍了FTRL的基本推导，但是这里还有一个问题是一直没有被讨论到的：关于学习率$𝜂^{(𝑡)}$的选择和计算。事实上在FTRL中，每个维度上的学习率都是单独考虑的（Per-Coordinate Learning Rates）。</p>
 <p>在一个标准的OGD里面使用的是一个全局的学习率策略$𝜂^{(𝑡)} =\frac{ 1}{\sqrt{𝑡}}$，这个策略保证了学习率是一个正的非增长序列，对于每一个特征维度都是一样的。</p>
 <p>考虑特征维度的变化率：如果特征1比特征2的变化更快，那么在维度1上的学习率应该下降地更快。我们很容易就可以想到可以用某个维度上的梯度分量来反映这种变化率。在FTRL中，维度i上的学习率是这样计算的：</p>
 <script type="math/tex; mode=display">𝜂_𝑖^{(𝑡)}=\frac{𝛼}{𝛽 + \sqrt{\sum_𝑡^{𝑠 = 1} (𝑔_𝑖^{( 𝑠 )})^ 2}}</script><p>由于$\sigma^{(1:t)}=\frac{1}{𝜂^{(𝑡)}}$，所以公式（3-4-4）中</p>
 <script type="math/tex; mode=display">\sum_{s=1}^t=\frac{1}{𝜂_i^{(𝑡)}}=\frac{\beta+\sqrt{\sum_t^{s= 1} (g_i ^{(s)})^2}}{a}</script><p>，这里的$\alpha和\beta$是需要输入的参数，(3-4-4)中学习率写成累加的形式，是为了方便理解后面FTRL的迭代计算逻辑。</p>
-<h4 id="3-4-4-FTRL算法逻辑"><a href="#3-4-4-FTRL算法逻辑" class="headerlink" title="3.4.4 FTRL算法逻辑"></a>3.4.4 FTRL算法逻辑</h4><p>到现在为止，我们已经得到了 FTRL 的特征权重维度的更新方法(公式(3-4-4))，每个特征维度的学习率计算方法(公式(3-4-5))，那么很容易写出FTRL的算法逻辑（这里是根据(3-4-4) 和(3-4-5)写的 L1&amp;L2-FTRL 求解最优化的算法逻辑，而论文[16]中 Algorithm 1 给出的是 L1&amp;L2-FTRL 针对 Logistic Regression 的算法逻辑):<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024836.jpg" alt=""><br>FTRL 里面的 4 个参数需要针对具体的问题进行设置，指导性的意见参考论文[16]。</p>
+<h4 id="3-4-4-FTRL算法逻辑"><a href="#3-4-4-FTRL算法逻辑" class="headerlink" title="3.4.4 FTRL算法逻辑"></a>3.4.4 FTRL算法逻辑</h4><p>到现在为止，我们已经得到了 FTRL 的特征权重维度的更新方法(公式(3-4-4))，每个特征维度的学习率计算方法(公式(3-4-5))，那么很容易写出FTRL的算法逻辑（这里是根据(3-4-4) 和(3-4-5)写的 L1&amp;L2-FTRL 求解最优化的算法逻辑，而论文[16]中 Algorithm 1 给出的是 L1&amp;L2-FTRL 针对 Logistic Regression 的算法逻辑):<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024836.jpg" alt=""><br>FTRL 里面的 4 个参数需要针对具体的问题进行设置，指导性的意见参考论文[16]。</p>
 <h2 id="四、结束语"><a href="#四、结束语" class="headerlink" title="四、结束语"></a>四、结束语</h2><p>本文作为在线最优化算法的整理和总结，沿着稀疏性的主线，先后介绍了简单截断法、TG、FOBOS、RDA以及FTRL。从类型上看，简单截断法、TG、FOBOS属于同一类，都是梯度下降类的算法，并且TG在特定条件可以转换成简单截断法和FOBOS；RDA属于简单对偶平均的扩展应用；FTRL可以视作RDA和FOBOS的结合，同时具备二者的有点。目前来看，RDA和FTRL是最好的系数模型Online Learning 的算法。</p>
-<p>谈到高维高数据量的最优化求解，不可避免的要涉及到并行计算的问题。作者之前有篇 博客[4]讨论了 batch 模式下的并行逻辑回归，其实只要修改损失函数，就可以用于其它问题 的最优化求解。另外，对于 Online 下，文献[17]给出了一种很直观的方法:<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-024855.jpg" alt=""><br>对于 Online 模式的并行化计算，一方面可以参考 ParallelSGD 的思路，另一方面也可以 借鉴 batch 模式下对高维向量点乘以及梯度分量并行计算的思路。总之，在理解算法原理的 基础上将计算步骤进行拆解，使得各节点能独自无关地完成计算最后汇总结果即可。</p>
+<p>谈到高维高数据量的最优化求解，不可避免的要涉及到并行计算的问题。作者之前有篇 博客[4]讨论了 batch 模式下的并行逻辑回归，其实只要修改损失函数，就可以用于其它问题 的最优化求解。另外，对于 Online 下，文献[17]给出了一种很直观的方法:<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-024855.jpg" alt=""><br>对于 Online 模式的并行化计算，一方面可以参考 ParallelSGD 的思路，另一方面也可以 借鉴 batch 模式下对高维向量点乘以及梯度分量并行计算的思路。总之，在理解算法原理的 基础上将计算步骤进行拆解，使得各节点能独自无关地完成计算最后汇总结果即可。</p>
 <p>最后，需要指出的是相关论文里面使用的数学符号不尽相同，并且有的论文里面也存在 一定的笔误，但是并不影响我们对其的理解。在本文中尽量采用了统一风格和含义的符号、 变量等，因此在与参考文献中的公式对比的时候会稍有出入。另外，由于笔者的水平有限， 行文中存在的错误难以避免，欢迎大家指正、拍砖。</p>
 <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1] Convex function. <a href="http://en.wikipedia.org/wiki/Convex_function" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Convex_function</a><br>[2] Lagrange multiplier. <a href="http://en.wikipedia.org/wiki/Lagrange_multiplier" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Lagrange_multiplier</a><br>[3] Karush–Kuhn–Tucker conditions. <a href="http://en.wikipedia.org/wiki/Karush-Kuhn-Tucker_conditions" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Karush-Kuhn-Tucker_conditions</a><br>[4] 冯扬. 并行逻辑回归. <a href="http://blog.sina.com.cn/s/blog_6cb8e53d0101oetv.html" target="_blank" rel="noopener">http://blog.sina.com.cn/s/blog_6cb8e53d0101oetv.html</a><br>[5] Gradient. <a href="http://sv.wikipedia.org/wiki/Gradient" target="_blank" rel="noopener">http://sv.wikipedia.org/wiki/Gradient</a><br>[6] Subgradient. <a href="http://sv.wikipedia.org/wiki/Subgradient" target="_blank" rel="noopener">http://sv.wikipedia.org/wiki/Subgradient</a><br>[7] Andrew Ng. CS229 Lecture notes. <a href="http://cs229.stanford.edu/notes/cs229-notes1.pdf" target="_blank" rel="noopener">http://cs229.stanford.edu/notes/cs229-notes1.pdf</a><br>[8] Stochastic Gradient Descent. <a href="http://en.wikipedia.org/wiki/Stochastic_gradient_descent" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Stochastic_gradient_descent</a><br>[9] T. Hastie, R. Tibshirani &amp; J. Friedman. The Elements of Statistical Learning, Second Edition: Data Mining,<br>Inference, and Prediction. Springer Series in Statistics. Springer, 2009<br>[10] John Langford, Lihong Li &amp; Tong Zhang. Sparse Online Learning via Truncated Gradient. Journal of Machine<br>Learning Research, 2009<br>[11] John Duchi &amp; Yoram Singer. Efficient Online and Batch Learning using Forward Backward Splitting. Journal of<br>Machine Learning Research, 2009<br>[12] Lin Xiao. Dual Averaging Methods for Regularized Stochastic Learning and Online Optimization. Journal of<br>Machine Learning Research, 2010<br>[13] Convex Set. <a href="http://en.wikipedia.org/wiki/Convex_set" target="_blank" rel="noopener">http://en.wikipedia.org/wiki/Convex_set</a><br>[14] H. Brendan McMahan &amp; M Streter. Adaptive Bound Optimization for Online Convex Optimization. In COLT,<br>2010<br>[15] H. Brendan McMahan. Follow-the-Regularized-Leader and Mirror Descent: Equivalence Theorems and L1<br>Regularization. In AISTATS, 2011<br>[16] H. Brendan McMahan, Gary Holt, D. Sculley, Michael Young, Dietmar Ebner, Julian Grady, Lan Nie, Todd<br>Phillips, Eugene Davydov, Daniel Golovin, Sharat Chikkerur, Dan Liu, Martin Wattenberg, Arnar Mar Hrafnkelsson, Tom Boulos, Jeremy Kubica, Ad Click Prediction: a View from the Trenches. In ACM SIGKDD, 2013<br>[17] Martin A. Zinkevich, Markus Weimer, Alex Smola &amp; Lihong Li. Parallelized Stochastic Gradient Descent. In NIPS 2010</p>
 
@@ -567,7 +568,7 @@ Trnc\left(w,\lambda_{TG}^{\left(t\right)},\infty\right)=\left\{\begin{array}{l}
         <br>
         <div align="center">
         <br>
-        <img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-064307.jpg"/>
+        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-064307.jpg"/>
         </div> 
 
         </div>
@@ -790,9 +791,9 @@ Trnc\left(w,\lambda_{TG}^{\left(t\right)},\infty\right)=\left\{\begin{array}{l}
 
           
           <div id="music163player">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=1334667455&auto=0&height=66">
-            </iframe>
-        </div>
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
 
 
         

@@ -94,16 +94,16 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="本文转载自美团点评技术团队博客，该文以业界视角介绍了机器学习如何发挥其实际价值。作者胡淏，目前是美团算法工程师，毕业于哥伦比亚大学。先后在携程、支付宝、美团从事算法开发工作。了解风控、基因、旅游、即时物流相关问题的行业领先算法方案与流程。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-041815.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-041822.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-041830.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-041837.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-041844.jpg">
-<meta property="og:updated_time" content="2019-05-18T04:18:50.741Z">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-041815.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-041822.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-041830.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-041837.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-041844.jpg">
+<meta property="og:updated_time" content="2019-05-28T12:03:47.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（20）：机器学习模型优化四要素">
 <meta name="twitter:description" content="本文转载自美团点评技术团队博客，该文以业界视角介绍了机器学习如何发挥其实际价值。作者胡淏，目前是美团算法工程师，毕业于哥伦比亚大学。先后在携程、支付宝、美团从事算法开发工作。了解风控、基因、旅游、即时物流相关问题的行业领先算法方案与流程。">
-<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-18-041815.jpg">
+<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-041815.jpg">
 
 
 
@@ -398,11 +398,11 @@ var _hmt = _hmt || [];
       
         <p>本文转载自<a href="http://tech.meituan.com/machine-learning-model-optimization.html" target="_blank" rel="noopener">美团点评技术团队博客</a>，该文以业界视角介绍了机器学习如何发挥其实际价值。作者胡淏，目前是美团算法工程师，毕业于哥伦比亚大学。先后在携程、支付宝、美团从事算法开发工作。了解风控、基因、旅游、即时物流相关问题的行业领先算法方案与流程。</p>
 <a id="more"></a>
-<h2 id="一、机器学习工程师的知识图谱"><a href="#一、机器学习工程师的知识图谱" class="headerlink" title="一、机器学习工程师的知识图谱"></a>一、机器学习工程师的知识图谱</h2><p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-041815.jpg" alt="image_1bgvc1hi3led5tl1hb0n1i1hh"><br>图1 机器学习工程师的知识图谱</p>
+<h2 id="一、机器学习工程师的知识图谱"><a href="#一、机器学习工程师的知识图谱" class="headerlink" title="一、机器学习工程师的知识图谱"></a>一、机器学习工程师的知识图谱</h2><p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-041815.jpg" alt="image_1bgvc1hi3led5tl1hb0n1i1hh"><br>图1 机器学习工程师的知识图谱</p>
 <p>上图列出了我认为一个成功的机器学习工程师需要关注和积累的点。机器学习实践中，我们平时都在积累自己的“弹药库”：分类、回归、无监督模型、Kaggle上特征变换的黑魔法、样本失衡的处理办法、缺失值填充……这些大概可以归类成模型和特征两个点。我们需要参考成熟的做法、论文，并自己实现，此外还需要多反思自己方法上是否还可以改进。如果模型和特征这俩个点都已经做的很好了，你就拥有了一张绿卡，能跨过在数据相关行业发挥模型技术价值的准入门槛。</p>
 <p>在这个时候，比较关键的一步，就是搞笑的技术变现能力。</p>
 <p>所谓高效，就是解决业务核心问题的专业能力。本文将描述这些专业能力，也就是模型优化的四个要素：模型、数据、特征、业务，还有更重要的，就是他们在模型项目中的优先级。</p>
-<h2 id="二、模型项目推进的四要素"><a href="#二、模型项目推进的四要素" class="headerlink" title="二、模型项目推进的四要素"></a>二、模型项目推进的四要素</h2><p>项目推进过程中，四个要素相互之间的优先级大致是：业务&gt;特征&gt;数据&gt;模型。<br><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-041822.jpg" alt="image_1bgvc94uuh0c1o0sj9d1urb19d2"><br>图2 四要素解决问题细分+优先级</p>
+<h2 id="二、模型项目推进的四要素"><a href="#二、模型项目推进的四要素" class="headerlink" title="二、模型项目推进的四要素"></a>二、模型项目推进的四要素</h2><p>项目推进过程中，四个要素相互之间的优先级大致是：业务&gt;特征&gt;数据&gt;模型。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-041822.jpg" alt="image_1bgvc94uuh0c1o0sj9d1urb19d2"><br>图2 四要素解决问题细分+优先级</p>
 <h3 id="2-1-业务"><a href="#2-1-业务" class="headerlink" title="2.1 业务"></a>2.1 业务</h3><p>一个模型项目有好的技术选型、完备的特征体系、高质量的数据一定是很加分的，不过真正决定项目好与坏还有一个大前提，就是在这个项目的技术目标是否在解决当下核心业务问题。</p>
 <p>业务问题包含两个方面：业务KPI和Deadline。举个例子，业务问题在两周之内降低目前手机丢失带来的支付宝销赃风险。这时如果你的方案是研发手机丢失的核心特征，比如改密是否合理，基本上就死的很惨，因为两周根本完不成，改密合理性也未必是模型优化好的切入点；反之，如果你的方案是和运营同学看bad case，梳理现阶段的作案通用手段，并通过分析上线一个简单模型或者业务规则的补丁，就明智很多。如果上线之后，案件量真掉下来了，就算你的方案准确率很糟糕、方法很low，但你解决了业务问题，这才是最重要的。</p>
 <p>虽然业务目标很关键，不过一般讲，业务运营同学真的不太懂得如何和技术有效的沟通业务目标，比如：</p>
@@ -424,7 +424,7 @@ var _hmt = _hmt || [];
 <p>这两天有位听众微信问我一个很难回答的问题，大概意思是，数据是特征拼起来构成的集合嘛，所以这不是两个要素。从逻辑上面讲，数据的确是一列一列的特征，不过数据与特征在概念层面是不同的：数据是已经采集的信息，特征是以兼容模型、最优化为目标对数据进行加工。就比如通过word2vec将非结构化数据结构化，就是将数据转化为特征的过程。</p>
 <p>所以，我更认为特征工程是基于数据的一个非常精细、刻意的加工过程。从传统的特征转换、交互，到embedding、word2vec、高维分类变量数值化，最终目的都是更好的去利用现有的数据。之前有聊到的将推荐算法引入有监督学习模型优化中的做法，就是在把两个本不可用的高维ID类变量变成可用的数值变量。</p>
 <p>观察到自己和童鞋们在特征工程中会遇到一些普遍问题，比如，特征设计不全面，没有耐心把现有特征做得细致……也整理出来一套方法论，仅供参考：</p>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-041830.jpg" alt="image_1bgvcqct213oq6ingm1v1c1eti13"><br>图3 变量体系、研发流程</p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-041830.jpg" alt="image_1bgvcqct213oq6ingm1v1c1eti13"><br>图3 变量体系、研发流程</p>
 <p>在特征设计的时候，有两个点可以帮助我们把特征想的更全面：</p>
 <ul>
 <li><p><strong>现有的基础数据</strong></p>
@@ -437,9 +437,9 @@ var _hmt = _hmt || [];
 <p>外卖配送时间业务（维度甲：配送的环节，骑手到点、商家出餐、骑手配送、交付用户；维度乙：颗粒度，订单粒度、商家粒度、区域城市粒度；维度丙：配送类型，众包、自营……）。</p>
 <p>反作弊变量体系（维度甲：作弊环节，登录、注册、实名、转账、交易、参与营销活动、改密……；维度乙：作弊介质，账户、设备、IP、WiFi、银行卡……）。</p>
 <p>通过这些维度，你就可以展开一个“二维图”，把现有你可以想到的特征填上去，你一定会发现很多空白，比如下图，那么哪里还是特征设计的盲点就一目了然：</p>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-041837.jpg" alt="image_1bgvcvkkqo0q1kgt15qjdv54jm1g"><br>图4 账户维度在转账、红包方面的特征很少；没有考虑WiFi这个媒介；客满与事件数据没考虑</p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-041837.jpg" alt="image_1bgvcvkkqo0q1kgt15qjdv54jm1g"><br>图4 账户维度在转账、红包方面的特征很少；没有考虑WiFi这个媒介；客满与事件数据没考虑</p>
 <p>数据和特征决定了模型性能的天花板。deep learning当下在图像、语音、机器翻译、自动驾驶等领域非常火，但是 deep learning在生物信息、基因学这个领域就不是热词：这背后是因为在前者，我们已经知道数据从哪里来，怎么采集，这些数据带来的信息基本满足了模型做非常准确的识别；而后者，即便有了上亿个人体碱基构成的基因编码，技术选型还是不能长驱直入——超高的数据采集成本，人后天的行为数据的获取壁垒等一系列的问题，注定当下这个阶段在生物信息领域，人工智能能发出的声音很微弱，更大的舞台留给了生物学、临床医学、统计学。</p>
-<h3 id="2-3-模型"><a href="#2-3-模型" class="headerlink" title="2.3 模型"></a>2.3 模型</h3><p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-041844.jpg" alt="image_1bgvd7gs41k9e1g0s1d016dmdq1t"><br>图5 满房开房的技术选型、特征工程roadmap</p>
+<h3 id="2-3-模型"><a href="#2-3-模型" class="headerlink" title="2.3 模型"></a>2.3 模型</h3><p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-041844.jpg" alt="image_1bgvd7gs41k9e1g0s1d016dmdq1t"><br>图5 满房开房的技术选型、特征工程roadmap</p>
 <p>模型这件事儿，许多时候追求的不仅仅是准确率，通常还有业务这一层更大的约束。如果你在做一些需要强业务可解释的模型，比如定价和反作弊，那实在没必要上一个黑箱模型来为难业务。这时候，统计学习模型就很有用。</p>
 <p>这种情况下，比拼性能的话，我觉得下面这个不等式通常成立：<code>Glmnet&gt;LASSO&gt;=Ridge&gt;LR/Logistic</code>。相比最基本的LR/Logistic，ridge通过正则化约束缓解了LR在过拟合方面的问题，lasso更是通过L1约束做类似变量选择的工作。</p>
 <p>不过两个算法的痛点是很难决定最优的约束强度，Glmnet是Stanford给出的一套非常高效的解决方案。所以目前，我认为线性结构的模型，Glmnet的痛点是最少的，而且在R、Python、Spark上面都开源了。</p>
@@ -468,7 +468,7 @@ var _hmt = _hmt || [];
         <br>
         <div align="center">
         <br>
-        <img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-064307.jpg"/>
+        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-064307.jpg"/>
         </div> 
 
         </div>
@@ -695,9 +695,9 @@ var _hmt = _hmt || [];
 
           
           <div id="music163player">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=1334667455&auto=0&height=66">
-            </iframe>
-        </div>
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
 
 
         

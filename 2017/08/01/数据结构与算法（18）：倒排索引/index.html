@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、倒排索引倒排索引（inverted index），也常被称为反向索引、置入档案或反向档案，是一种索引方法，被用来存储在全文搜索下某个单词在一个文档或一组文档中存储位置的映射。它是文档检索系统中最常用的数据结构。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165132.jpg">
-<meta property="og:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165139.jpg">
-<meta property="og:updated_time" content="2019-05-17T16:51:42.755Z">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165132.jpg">
+<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165139.jpg">
+<meta property="og:updated_time" content="2019-05-28T12:03:47.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（18）：倒排索引">
 <meta name="twitter:description" content="一、倒排索引倒排索引（inverted index），也常被称为反向索引、置入档案或反向档案，是一种索引方法，被用来存储在全文搜索下某个单词在一个文档或一组文档中存储位置的映射。它是文档检索系统中最常用的数据结构。">
-<meta name="twitter:image" content="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165132.jpg">
+<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165132.jpg">
 
 
 
@@ -430,12 +430,12 @@ var _hmt = _hmt || [];
 <p> 对于一个规模很大的文档集合来说，可能包含几十万甚至上百万的不同单词，能否快速定位某个单词，这直接影响搜索时的响应速度，所以需要高效的数据结构来对单词词典进行构建和查找，常用的数据结构包括哈希加链表结构和树形词典结构。</p>
 <h3 id="2-1-哈希加链表"><a href="#2-1-哈希加链表" class="headerlink" title="2.1 哈希加链表"></a>2.1 哈希加链表</h3><p> 这种词典结构主要由两个部分构成：</p>
 <p>主体部分是哈希每个哈希表项保存一个指针，指针指向冲突链表，在冲突链表里，相同哈希值的单词形成链表结构。之所以会有冲突链表，是因为两个不同单词获得相同的哈希值，如果是这样，在哈希方法里被称做是一次冲突，可以将相同哈希值的单词存储在链表里，以供后续查找。</p>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165132.jpg" alt=""></p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165132.jpg" alt=""></p>
 <p>在建立索引的过程中，词典结构也会相应地被构建出来。比如在解析一个新文档的时候，对于某个在文档中出现的单词T，首先利用哈希函数获得其哈希值，之后根据哈希值对应的哈希表项读取其中保存的指针，就找到了对应的冲突链表。如果冲突链表里已经存在这个单词，说明单词在之前解析的文档里已经出现过。如果在冲突链表里没有发现这个单词，说明该单词是首次碰到，则将其加入冲突链表里。通过这种方式，当文档集合内所有文档解析完毕时，相应的词典结构也就建立起来了。</p>
 <p>在响应用户查询请求时，其过程与建立词典类似，不同点在于即使词典里没出现过某个单词，也不会添加到词典内。以图1-7为例，假设用户输入的查询请求为单词3，对这个单词进行哈希，定位到哈希表内的2号槽，从其保留的指针可以获得冲突链表，依次将单词3和冲突链表内的单词比较，发现单词3在冲突链表内，于是找到这个单词，之后可以读出这个单词对应的倒排列表来进行后续的工作，如果没有找到这个单词，说明文档集合内没有任何文档包含单词，则搜索结果为空。</p>
 <h3 id="2-2-树形结构"><a href="#2-2-树形结构" class="headerlink" title="2.2 树形结构"></a>2.2 树形结构</h3><p>B树（或者B+树）是另外一种高效查找结构，图1-8是一个 B树结构示意图。B树与哈希方式查找不同，需要字典项能够按照大小排序（数字或者字符序），而哈希方式则无须数据满足此项要求。</p>
 <p>B树形成了层级查找结构，中间节点用于指出一定顺序范围的词典项目存储在哪个子树中，起到根据词典项比较大小进行导航的作用，最底层的叶子节点存储单词的地址信息，根据这个地址就可以提取出单词字符串。</p>
-<p><img src="http://pqhu874oi.bkt.clouddn.com/2019-05-17-165139.jpg" alt=""></p>
+<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165139.jpg" alt=""></p>
 
       
     </div>
@@ -458,7 +458,7 @@ var _hmt = _hmt || [];
         <br>
         <div align="center">
         <br>
-        <img src="http://pqhu874oi.bkt.clouddn.com/2019-05-18-064307.jpg"/>
+        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-064307.jpg"/>
         </div> 
 
         </div>
@@ -683,9 +683,9 @@ var _hmt = _hmt || [];
 
           
           <div id="music163player">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=1334667455&auto=0&height=66">
-            </iframe>
-        </div>
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
 
 
         
