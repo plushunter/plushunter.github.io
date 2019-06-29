@@ -94,14 +94,14 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、集成学习1.1 定义所谓集成学习（ensemble learning），是指通过构建多个弱学习器，然后结合为一个强学习器来完成分类任务。并相较于弱分类器而言，进一步提升结果的准确率。严格来说，集成学习并不算是一种分类器，而是一种学习器结合的方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021336.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021345.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021355.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.520Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-021336.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-021345.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-021355.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:27.104Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（6）：AdaBoost">
 <meta name="twitter:description" content="一、集成学习1.1 定义所谓集成学习（ensemble learning），是指通过构建多个弱学习器，然后结合为一个强学习器来完成分类任务。并相较于弱分类器而言，进一步提升结果的准确率。严格来说，集成学习并不算是一种分类器，而是一种学习器结合的方法。">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021336.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-021336.jpg">
 
 
 
@@ -396,7 +396,7 @@ var _hmt = _hmt || [];
       
         <h2 id="一、集成学习"><a href="#一、集成学习" class="headerlink" title="一、集成学习"></a>一、集成学习</h2><h3 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h3><p>所谓集成学习（ensemble learning），是指通过构建多个弱学习器，然后结合为一个强学习器来完成分类任务。并相较于弱分类器而言，进一步提升结果的准确率。严格来说，集成学习并不算是一种分类器，而是一种学习器结合的方法。</p>
 <a id="more"></a>
-<p>下图显示了集成学习的整个流程：首次按产生一组“个体学习器”，这些个体学习器可以是同质的（homogeneous）（例如全部是决策树），这一类学习器被称为基学习器（base learner），相应的学习算法称为“基学习算法”；集成也可包含不同类型的个体学习器（例如同时包含决策树和神经网络），这一类学习器被称为“组件学习器”（component learner）。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021336.jpg" alt="屏幕快照 2017-03-30 上午10.25.48"></p>
+<p>下图显示了集成学习的整个流程：首次按产生一组“个体学习器”，这些个体学习器可以是同质的（homogeneous）（例如全部是决策树），这一类学习器被称为基学习器（base learner），相应的学习算法称为“基学习算法”；集成也可包含不同类型的个体学习器（例如同时包含决策树和神经网络），这一类学习器被称为“组件学习器”（component learner）。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-021336.jpg" alt="屏幕快照 2017-03-30 上午10.25.48"></p>
 <p>集成学习通过将多个学习器进行结合，可获得比单一学习器显著优越的泛化性能，它基于这样一种思想：对于一个复杂任务来说，将多个专家的判断进行适当的综合所得出的判断，要比其中任何一个专家单独的判断好，直观一点理解，就是我们平时所说的“三个臭皮匠，顶个诸葛亮”，通过使用多个决策者共同决策一个实例的分类从而提高分类器的泛化能力。</p>
 <h3 id="1-2-集成学习的条件"><a href="#1-2-集成学习的条件" class="headerlink" title="1.2 集成学习的条件"></a>1.2 集成学习的条件</h3><p>当然，这种通过集成学习来提高学习器（这里特指分类器）的整体泛化能力也是有条件的：</p>
 <ul>
@@ -416,7 +416,7 @@ var _hmt = _hmt || [];
 </ul>
 <h2 id="二、AdaBoost算法"><a href="#二、AdaBoost算法" class="headerlink" title="二、AdaBoost算法"></a>二、AdaBoost算法</h2><h3 id="2-1-AdaBoost算法思想"><a href="#2-1-AdaBoost算法思想" class="headerlink" title="2.1 AdaBoost算法思想"></a>2.1 AdaBoost算法思想</h3><p>对于分类问题而言，给定一个训练样本集，求比较粗糙的分类规则（弱分类器）要比求精确地分类规则（强分类器）容易得多。提升算法就是从弱学习算法出发，反复学习，得到一系列弱分类器（又称为基本分类器），然后组合这些弱分类器，构成一个强分类器。大多数的提升方法都是改变训练数据的概率分布（训练数据的权值分布），针对不同的训练数据分布调用弱学习算法学习一系列弱分类器。</p>
 <p>这样，对提升方法来说，有两个问题需要回答：一是在每一轮如果改变训练数据的权值或概率分布；二是如何将弱分类器组合成一个强分类器。对于第一个问题，AdaBoost的做法是，提高那些被前一轮弱分类器错误分类样本的权值，而降低那些被正确分类样本的权值。这样一来，那些没有得到正确分类的数据，由于其权值的加大而受到后一轮的弱分类器的更大关注，于是，分类问题就被一系列的弱分类器“分而治之”。至于第二个问题，即弱分类器的组合，AdaBoost采取加权多数表决的方法。具体地，加大分类误差率小的弱分类器的权值，使其在表决中起较大的作用，减小分类误差率较大的弱分类器的权值，使其在表决中起较小的作用。</p>
-<p>AdaboostBoost的算法的框架如下图所示<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021345.jpg" alt=""><br>具体来说，整个AdaBoost算法包括以下三个步骤：</p>
+<p>AdaboostBoost的算法的框架如下图所示<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-021345.jpg" alt=""><br>具体来说，整个AdaBoost算法包括以下三个步骤：</p>
 <ul>
 <li>1）<strong>初始化训练样本的权值分布。</strong>如果有N个样本，则每一个训练样本最开始时都被赋予相同的权值：$1/N$。</li>
 <li>2）<strong>训练弱分类器。</strong>具体训练过程中，如果某个样本已经被准确地分类，那么在构造下一个训练集中，它的权值就会被降低；相反，如果某个样本点没有被准确地分类，那么它的权值就得到提高。然后，权值更新过的样本被用于训练下一个分类器，整个训练过程如果迭代地进行下去，使得分类器在迭代过程中逐步改进。</li>
@@ -447,7 +447,7 @@ w_{m+1,i}=\left\{\begin{matrix}
 f\left(x\right)=\sum_{m=1}^M{a_mG_m\left(x\right)}</script><p>得到最终分类器$G_{(x)}$</p>
 <script type="math/tex; mode=display">
 G\left(x\right)=sign\left(f\left(x\right)\right)=sign\left(\sum_{m=1}^M{a_mG_m\left(x\right)}\right)</script><p>线性组合$f(x)$实现了$M$个基本分类器的加权表决。系数$a_m$表示了基本分类器$G_m{(x)}$的重要性，这里，所有的$a_m$之和并不为1。$f(x)$的符号决定实例$x$的类，$f(x)$的绝对值表示分类的确信度，利用基本分类器的线性组合构建最终分类器是AdaBoost的另一特点。</p>
-<h3 id="2-3-AdaBoost算法的一个实例"><a href="#2-3-AdaBoost算法的一个实例" class="headerlink" title="2.3 AdaBoost算法的一个实例"></a>2.3 AdaBoost算法的一个实例</h3><p>下图为给定的训练样本，假设$Y\in \{+1,-1\}$，且弱分类器由$x<v$或$x>v$产生（$v$为阈值，目的在于使分类器在训练样本上的分类误差率最低），接下来我们就要使用AdaBoost算法得到一个强分类器。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-021355.jpg" alt="屏幕快照 2017-03-30 下午2.03.20"><br> 首先，初始化训练数据的权值分布，得到：</v$或$x></p>
+<h3 id="2-3-AdaBoost算法的一个实例"><a href="#2-3-AdaBoost算法的一个实例" class="headerlink" title="2.3 AdaBoost算法的一个实例"></a>2.3 AdaBoost算法的一个实例</h3><p>下图为给定的训练样本，假设$Y\in \{+1,-1\}$，且弱分类器由$x<v$或$x>v$产生（$v$为阈值，目的在于使分类器在训练样本上的分类误差率最低），接下来我们就要使用AdaBoost算法得到一个强分类器。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-021355.jpg" alt="屏幕快照 2017-03-30 下午2.03.20"><br> 首先，初始化训练数据的权值分布，得到：</v$或$x></p>
 <script type="math/tex; mode=display">D_1=(w_{11},w_{12},w_{1,10})    ,  w_{1i}=\frac{1}{10},i=1,2,····,10</script><p> 在此基础上，开始M轮迭代。<br> 根据X和Y的对应关系，要把这10个数据分为两类，一类是1，一类是-1，根据数据的特点发现：$（0，1，2，6，7，8）$对应的类是1，$(3,4,5,9)$对于的类是-1，抛开孤独的9不说，$(0,1,2),(3,4,5),(6,7,8)$这是3类不同的数据，分别对应的类是$(1,-1,1)$,直观上推测可知，可以找到对应的数据分界点，比如$2.5、5.5、8.5$，将这几类数据分成两类。</p>
 <p>1.第一次迭代（m=1）:</p>
 <ul>
@@ -600,7 +600,7 @@ f_m\left(x\right)=f_{m-1}\left(x\right)+a_mG_m\left(x\right)</script><p>以及</
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

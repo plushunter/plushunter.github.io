@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="TF-IDF(term frequency=inverse document frequency)是一种用于资讯检索与文本挖掘的常用加权技术。TF-IDF是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。TF-IDF加权的各种形式常备搜索引擎应用，作为文件与用户查询之间相">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-040908.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.477Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040908.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:27.059Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（23）：TF-IDF与余弦相似度">
 <meta name="twitter:description" content="TF-IDF(term frequency=inverse document frequency)是一种用于资讯检索与文本挖掘的常用加权技术。TF-IDF是一种统计方法，用以评估一字词对于一个文件集或一个语料库中的其中一份文件的重要程度。字词的重要性随着它在文件中出现的次数成正比增加，但同时会随着它在语料库中出现的频率成反比下降。TF-IDF加权的各种形式常备搜索引擎应用，作为文件与用户查询之间相">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-040908.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040908.jpg">
 
 
 
@@ -411,7 +411,7 @@ var _hmt = _hmt || [];
 </ul>
 <p>然后</p>
 <script type="math/tex; mode=display">TF-IDF = TF_{i,j}\times IDF _i</script><p>某一特定文件内的高词语频率，以及该词语在整个文件集合中的低文件频率，可以产生出高权重的tf-idf。因此，tf-idf倾向于过滤掉常见的词语，保留重要的词语。</p>
-<h2 id="1-4-应用"><a href="#1-4-应用" class="headerlink" title="1.4 应用"></a>1.4 应用</h2><p>我们通过Google搜索结果数为例，将含有中文“的”结果数15.8亿作为整个语料库大小，计算一些关键词和停用词的TF-IDF值。为了计算简便，假设全文分词后一共500词，则结果如下：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-040908.jpg" alt=""></p>
+<h2 id="1-4-应用"><a href="#1-4-应用" class="headerlink" title="1.4 应用"></a>1.4 应用</h2><p>我们通过Google搜索结果数为例，将含有中文“的”结果数15.8亿作为整个语料库大小，计算一些关键词和停用词的TF-IDF值。为了计算简便，假设全文分词后一共500词，则结果如下：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040908.jpg" alt=""></p>
 <p>TF-IDF的优点是计算简单，利于理解，性价比极高。但是它也有缺陷，首先单纯依据文章中的TF来衡量重要性，忽略了位置信息。如段首，句首一般权重更高；其次，有的文章可能关键词只出现1-2次，但可能通篇都是围绕其进行阐述和解释，所以单纯靠TF仍然不能解决所有的情况。</p>
 <h2 id="二、余弦相似度"><a href="#二、余弦相似度" class="headerlink" title="二、余弦相似度"></a>二、余弦相似度</h2><p>余弦相似性通过测量两个向量的夹角的余弦值来度量它们之间的相似性。0度角的余弦值是1，而其他任何角度的余弦值都不大于1；并且其最小值是-1。从而两个向量之间的角度的余弦值确定两个向量是否大致指向相同的方向。两个向量有相同的指向时，余弦相似度的值为1；两个向量夹角为90°时，余弦相似度的值为0；两个向量指向完全相反的方向时，余弦相似度的值为-1。这结果是与向量的长度无关的，仅仅与向量的指向方向相关。余弦相似度通常用于正空间，因此给出的值为0到1之间。</p>
 <p>注意这上下界对任何维度的向量空间中都适用，而且余弦相似性最常用于高维正空间。例如在信息检索中，每个词项被赋予不同的维度，而一个文档由一个向量表示，其各个维度上的值对应于该词项在文档中出现的频率。余弦相似度因此可以给出两篇文档在其主题方面的相似度。</p>
@@ -453,7 +453,7 @@ var _hmt = _hmt || [];
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

@@ -94,25 +94,25 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="红黑树，即R-B Tree，本文的主要内容包括：红黑树的特性、红黑树的时间复杂度和它的证明，红黑树的时间复杂度和它的证明，红黑树的左旋、右旋、插入、删除等操作">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170929.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170937.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170945.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170953.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171002.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171014.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-061432.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171043.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-061443.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171105.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171116.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171124.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171133.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171140.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.439Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170929.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170937.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170945.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170953.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171002.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171014.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-061432.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171043.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-061443.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171105.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171116.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171124.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171133.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171140.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:27.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（8）：红黑树">
 <meta name="twitter:description" content="红黑树，即R-B Tree，本文的主要内容包括：红黑树的特性、红黑树的时间复杂度和它的证明，红黑树的时间复杂度和它的证明，红黑树的左旋、右旋、插入、删除等操作">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170929.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170929.jpg">
 
 
 
@@ -422,26 +422,26 @@ var _hmt = _hmt || [];
 <p>性质5确保从根到叶子的最长的可能路径不多于最短的可能路径的两倍长，因而，红黑树是相对是接近平衡的二叉树。因为操作比如插入、删除和查找某个值的最坏情况时间都要求与树的高度成比例，这个在高度上的理论上限允许红黑树在最坏情况下都是高效的，而不同于普通的二叉查找树。</p>
 <p>要知道为什么这些性质确保了这个结果，注意到性质4导致了路径不能有两个毗连的红色节点就足够了。最短的可能路径都是黑色节点，最长的可能路径有交替的红色和黑色节点。因为根据性质5所有最长的路径都有相同数目的黑色节点，这就表明了没有路径能多于任何其他路径的两倍长。</p>
 <p>【提问】<br>请解释红黑性，以及为什么每次操作都是稳定O(logn)的复杂度</p>
-<p>下面是一个具体的红黑树的图例：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170929.jpg" alt=""></p>
+<p>下面是一个具体的红黑树的图例：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170929.jpg" alt=""></p>
 <h3 id="1-2-红黑树的应用"><a href="#1-2-红黑树的应用" class="headerlink" title="1.2 红黑树的应用"></a>1.2 红黑树的应用</h3><p>红黑树的应用比较广泛，主要是用它来存储有序的数据，它的时间复杂度是$O(lgn)$，效率非常之高。</p>
 <p>例如，Java集合中的$TreeSet$和$TreeMap$，C++的STL中的Set、Map，以及Linux虚拟内存的管理，都是通过红黑树去实现的。</p>
 <h2 id="二、红黑树的基本操作：左旋和右旋"><a href="#二、红黑树的基本操作：左旋和右旋" class="headerlink" title="二、红黑树的基本操作：左旋和右旋"></a>二、红黑树的基本操作：左旋和右旋</h2><p>红黑树的基本操作是添加、删除。在对红黑树进行添加或删除之后，都会用到旋转方法。为什么呢？道理很简单，添加或删除红黑树中的节点之后，红黑树就发生了变化，可能不满足红黑树的5条性质，也就不再是一颗红黑树了，而是一颗普通的树。而通过旋转，可以使这颗树重新成为红黑树。简单点说，旋转的目的是让树保持红黑树的特性。</p>
 <p>恢复红黑树的性质需要少量(O(logn))的颜色变更(实际是非常快速的)和不超过三次树旋转(对于插入操作是两次)。虽然插入和删除很复杂，但操作时间仍可以保持为O(logn) 次。</p>
 <p>旋转包括两种：左旋 和 右旋。下面分别对它们进行介绍。</p>
-<h3 id="2-1-左旋"><a href="#2-1-左旋" class="headerlink" title="2.1 左旋"></a>2.1 左旋</h3><p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170937.jpg" alt=""><br>对X进行左旋，意味着“将X变成一个左节点”。</p>
+<h3 id="2-1-左旋"><a href="#2-1-左旋" class="headerlink" title="2.1 左旋"></a>2.1 左旋</h3><p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170937.jpg" alt=""><br>对X进行左旋，意味着“将X变成一个左节点”。</p>
 <p>左旋的伪代码《算法导论》：参考上面的示意图和下面的伪代码，理解“红黑树T的节点x进行左旋”是如何进行的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">LEFT-ROTATE(T, x)  </div><div class="line">01  y ← right[x]            // 前提：这里假设x的右孩子为y。下面开始正式操作</div><div class="line">02  right[x] ← left[y]      // 将 “y的左孩子” 设为 “x的右孩子”，即 将β设为x的右孩子</div><div class="line">03  p[left[y]] ← x          // 将 “x” 设为 “y的左孩子的父亲”，即 将β的父亲设为x</div><div class="line">04  p[y] ← p[x]             // 将 “x的父亲” 设为 “y的父亲”</div><div class="line">05  if p[x] = nil[T]       </div><div class="line">06  then root[T] ← y                 // 情况1：如果 “x的父亲” 是空节点，则将y设为根节点</div><div class="line">07  else if x = left[p[x]]  </div><div class="line">08            then left[p[x]] ← y    // 情况2：如果 x是它父节点的左孩子，则将y设为“x的父节点的左孩子”</div><div class="line">09            else right[p[x]] ← y   // 情况3：(x是它父节点的右孩子) 将y设为“x的父节点的右孩子”</div><div class="line">10  left[y] ← x             // 将 “x” 设为 “y的左孩子”</div><div class="line">11  p[x] ← y                // 将 “x的父节点” 设为 “y”</div></pre></td></tr></table></figure>
 <p>理解左旋之后，看看下面更鲜明的例子。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170945.jpg" alt=""></p>
-<h3 id="2-2-右旋"><a href="#2-2-右旋" class="headerlink" title="2.2 右旋"></a>2.2 右旋</h3><p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170953.jpg" alt=""><br>对Y进行右旋，意味着“将Y变成一个右节点”</p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170945.jpg" alt=""></p>
+<h3 id="2-2-右旋"><a href="#2-2-右旋" class="headerlink" title="2.2 右旋"></a>2.2 右旋</h3><p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170953.jpg" alt=""><br>对Y进行右旋，意味着“将Y变成一个右节点”</p>
 <p>右旋的伪代码《算法导论》：参考上面的示意图和下面的伪代码，理解“红黑树T的节点y进行右旋”是如何进行的。 </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">RIGHT-ROTATE(T, y)  </div><div class="line">01  x ← left[y]             // 前提：这里假设y的左孩子为x。下面开始正式操作</div><div class="line">02  left[y] ← right[x]      // 将 “x的右孩子” 设为 “y的左孩子”，即 将β设为y的左孩子</div><div class="line">03  p[right[x]] ← y         // 将 “y” 设为 “x的右孩子的父亲”，即 将β的父亲设为y</div><div class="line">04  p[x] ← p[y]             // 将 “y的父亲” 设为 “x的父亲”</div><div class="line">05  if p[y] = nil[T]       </div><div class="line">06  then root[T] ← x                 // 情况1：如果 “y的父亲” 是空节点，则将x设为根节点</div><div class="line">07  else if y = right[p[y]]  </div><div class="line">08            then right[p[y]] ← x   // 情况2：如果 y是它父节点的右孩子，则将x设为“y的父节点的左孩子”</div><div class="line">09            else left[p[y]] ← x    // 情况3：(y是它父节点的左孩子) 将x设为“y的父节点的左孩子”</div><div class="line">10  right[x] ← y            // 将 “y” 设为 “x的右孩子”</div><div class="line">11  p[y] ← x                // 将 “y的父节点” 设为 “x”</div></pre></td></tr></table></figure>
 <p>理解右旋之后，看看下面一个更鲜明的例子。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171002.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171002.jpg" alt=""></p>
 <p>综上，左旋和右旋是相对的两个概念，原理类似。理解一个也就理解了另一个。</p>
 <p>在实际应用中，若没有彻底理解左旋和右旋，可能会将它们混淆。下面谈谈我对如何区分左旋 和右旋 的理解。</p>
 <h3 id="2-3-区分左旋和右旋"><a href="#2-3-区分左旋和右旋" class="headerlink" title="2.3 区分左旋和右旋"></a>2.3 区分左旋和右旋</h3><p>仔细观察上面”左旋”和”右旋”的示意图。我们能清晰的发现，它们是对称的。无论是左旋还是右旋，被旋转的树，在旋转前是二叉查找树，并且旋转之后仍然是一颗二叉查找树。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171014.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171014.jpg" alt=""></p>
 <p>左旋示例图(以x为节点进行左旋)：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">                              z</div><div class="line">  x                          /                  </div><div class="line"> / \      --(左旋)--&gt;       x</div><div class="line">y   z                      /</div><div class="line">                          y</div></pre></td></tr></table></figure>
 <p>对x进行左旋，意味着，将“x的右孩子”设为“x的父亲节点”；即，将 x变成了一个左节点(x成了为z的左孩子)！。 因此，左旋中的“左”，意味着“被旋转的节点将变成一个左节点”。</p>
@@ -489,7 +489,7 @@ var _hmt = _hmt || [];
 <li>第二种情况说明：被插入的节点的父节点是黑色。处理方法：什么也不需要做。节点被插入后，仍然是红黑树。</li>
 <li>第三种情况说明：被插入的节点的父节点是红色。处理方法：那么，该情况与红黑树的“特性(5)”相冲突。这种情况下，被插入节点是一定存在非空祖父节点的；进一步的讲，被插入节点也一定存在叔叔节点(即使叔叔节点为空，我们也视之为存在，空节点本身就是黑色节点)。理解这点之后，我们依据”叔叔节点的情况”，将这种情况进一步划分为3种情况(Case)。</li>
 </ul>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-061432.jpg" alt=""><br>上面三种情况(Case)处理问题的核心思路都是：将红色的节点移到根节点；然后，将根节点设为黑色。下面对它们详细进行介绍。</p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-061432.jpg" alt=""><br>上面三种情况(Case)处理问题的核心思路都是：将红色的节点移到根节点；然后，将根节点设为黑色。下面对它们详细进行介绍。</p>
 <blockquote>
 <p>Case 1：叔叔是红色</p>
 </blockquote>
@@ -507,7 +507,7 @@ var _hmt = _hmt || [];
 <p>第一，为什么“祖父节点”之前是黑色？这个应该很容易想明白，因为在变换操作之前，该树是红黑树，“父节点”是红色，那么“祖父节点”一定是黑色。 </p>
 <p>第二，为什么将“祖父节点”由“黑色”变成红色，同时，将“叔叔节点”由“红色”变成“黑色”；能解决“包含‘父节点’的分支的黑色节点的总数增加了1”的问题。这个道理也很简单。“包含‘父节点’的分支的黑色节点的总数增加了1” 同时也意味着 “包含‘祖父节点’的分支的黑色节点的总数增加了1”，既然这样，我们通过将“祖父节点”由“黑色”变成“红色”以解决“包含‘祖父节点’的分支的黑色节点的总数增加了1”的问题； 但是，这样处理之后又会引起另一个问题“包含‘叔叔’节点的分支的黑色节点的总数减少了1”，现在我们已知“叔叔节点”是“红色”，将“叔叔节点”设为“黑色”就能解决这个问题。 所以，将“祖父节点”由“黑色”变成红色，同时，将“叔叔节点”由“红色”变成“黑色”；就解决了该问题。</p>
 <p>按照上面的步骤处理之后：当前节点、父节点、叔叔节点之间都不会违背红黑树特性，但祖父节点却不一定。若此时，祖父节点是根节点，直接将祖父节点设为“黑色”，那就完全解决这个问题了；若祖父节点不是根节点，那我们需要将“祖父节点”设为“新的当前节点”，接着对“新的当前节点”进行分析。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171043.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171043.jpg" alt=""></p>
 <blockquote>
 <p>Case 2：叔叔是黑色，且当前节点是右孩子</p>
 </blockquote>
@@ -521,7 +521,7 @@ var _hmt = _hmt || [];
 <p>首先，将“父节点”作为“新的当前节点”；接着，以“新的当前节点”为支点进行左旋。 为了便于理解，我们先说明第(02)步，再说明第(01)步；为了便于说明，我们设置“父节点”的代号为F(Father)，“当前节点”的代号为S(Son)。</p>
 <p>为什么要“以F为支点进行左旋”呢？根据已知条件可知：S是F的右孩子。而之前我们说过，我们处理红黑树的核心思想：将红色的节点移到根节点；然后，将根节点设为黑色。既然是“将红色的节点移到根节点”，那就是说要不断的将破坏红黑树特性的红色节点上移(即向根方向移动)。 而S又是一个右孩子，因此，我们可以通过“左旋”来将S上移！ </p>
 <p>按照上面的步骤(以F为支点进行左旋)处理之后：若S变成了根节点，那么直接将其设为“黑色”，就完全解决问题了；若S不是根节点，那我们需要执行步骤(01)，即“将F设为‘新的当前节点’”。那为什么不继续以S为新的当前节点继续处理，而需要以F为新的当前节点来进行处理呢？这是因为“左旋”之后，F变成了S的“子节点”，即S变成了F的父节点；而我们处理问题的时候，需要从下至上(由叶到根)方向进行处理；也就是说，必须先解决“孩子”的问题，再解决“父亲”的问题；所以，我们执行步骤(01)：将“父节点”作为“新的当前节点”。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-061443.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-061443.jpg" alt=""></p>
 <blockquote>
 <p>Case 3：叔叔是黑色，且当前节点是左孩子</p>
 </blockquote>
@@ -535,7 +535,7 @@ var _hmt = _hmt || [];
 <p>下面谈谈为什么要这样处理。(建议理解的时候，通过下面的图进行对比)</p>
 <p>为了便于说明，我们设置“当前节点”为S(Original Son)，“兄弟节点”为B(Brother)，“叔叔节点”为U(Uncle)，“父节点”为F(Father)，祖父节点为G(Grand-Father)。</p>
 <p>S和F都是红色，违背了红黑树的“特性(4)”，我们可以将F由“红色”变为“黑色”，就解决了“违背‘特性(4)’”的问题；但却引起了其它问题：违背特性(5)，因为将F由红色改为黑色之后，所有经过F的分支的黑色节点的个数增加了1。那我们如何解决“所有经过F的分支的黑色节点的个数增加了1”的问题呢？ 我们可以通过“将G由黑色变成红色”，同时“以G为支点进行右旋”来解决。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171105.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171105.jpg" alt=""></p>
 <p>提示：上面的进行Case 3处理之后，再将节点”120”当作当前节点，就变成了Case 2的情况。</p>
 <h2 id="四、红黑树的基本操作：删除"><a href="#四、红黑树的基本操作：删除" class="headerlink" title="四、红黑树的基本操作：删除"></a>四、红黑树的基本操作：删除</h2><p>将红黑树内的某一个节点删除。需要执行的操作依次是：首先，将红黑树当作一颗二叉查找树，将该节点从二叉查找树中删除；然后，通过”旋转和重新着色”等一系列来修正该树，使之重新成为一棵红黑树。详细描述如下：</p>
 <ul>
@@ -579,7 +579,7 @@ var _hmt = _hmt || [];
 <li>第二种情况说明：x是“黑+黑”节点，且x是根。处理方法：什么都不做，结束。此时红黑树性质全部恢复。</li>
 <li>第三种情况说明：x是“黑+黑”节点，且x不是根。处理方法：这种情况又可以划分为4种子情况。这4种子情况如下表所示：</li>
 </ul>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171116.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171116.jpg" alt=""></p>
 <blockquote>
 <p>Case 1：x是”黑+黑”节点，x的兄弟节点是红色</p>
 </blockquote>
@@ -593,7 +593,7 @@ var _hmt = _hmt || [];
 </ol>
 <p>下面谈谈为什么要这样处理。(建议理解的时候，通过下面的图进行对比)</p>
 <p>这样做的目的是将“Case 1”转换为“Case 2”、“Case 3”或“Case 4”，从而进行进一步的处理。对x的父节点进行左旋；左旋后，为了保持红黑树特性，就需要在左旋前“将x的兄弟节点设为黑色”，同时“将x的父节点设为红色”；左旋后，由于x的兄弟节点发生了变化，需要更新x的兄弟节点，从而进行后续处理。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171124.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171124.jpg" alt=""></p>
 <blockquote>
 <p>Case 3：x是“黑+黑”节点，x的兄弟节点是黑色；x的兄弟节点的左孩子是红色，右孩子是黑色的</p>
 </blockquote>
@@ -607,7 +607,7 @@ var _hmt = _hmt || [];
 </ol>
 <p>下面谈谈为什么要这样处理。(建议理解的时候，通过下面的图进行对比)</p>
 <p>我们处理“Case 3”的目的是为了将“Case 3”进行转换，转换成“Case 4”,从而进行进一步的处理。转换的方式是对x的兄弟节点进行右旋；为了保证右旋后，它仍然是红黑树，就需要在右旋前“将x的兄弟节点的左孩子设为黑色”，同时“将x的兄弟节点设为红色”；右旋后，由于x的兄弟节点发生了变化，需要更新x的兄弟节点，从而进行后续处理。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171133.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171133.jpg" alt=""></p>
 <blockquote>
 <p>Case 4：x是“黑+黑”节点，x的兄弟节点是黑色；x的兄弟节点的右孩子是红色的，x的兄弟节点的左孩子任意颜色</p>
 </blockquote>
@@ -631,7 +631,7 @@ var _hmt = _hmt || [];
 </ul>
 <p>经过，上面的处理之后。红黑树的特性全部得到的满足！接着，我们将x设为根节点，就可以跳出while循环(参考伪代码)；即完成了全部处理。</p>
 <p>至此，我们就完成了Case 4的处理。理解Case 4的核心，是了解如何“去掉当前节点额外的黑色”。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-171140.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-171140.jpg" alt=""></p>
 
       
     </div>
@@ -656,7 +656,7 @@ var _hmt = _hmt || [];
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

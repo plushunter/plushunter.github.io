@@ -94,16 +94,16 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、统计学习1.1 特点统计学习是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测与分析的一门学科。赫尔伯特·西蒙曾对学习定义为：“如果一个系统能够执行某个过程改进它的性能，这就是学习。”按照这一观点，统计学习就是计算机系统通过数据及统计方法提高系统性能的机器学习。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042312.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042324.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042333.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042340.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042348.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.466Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042312.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042324.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042333.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042340.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042348.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:27.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（16）：统计学习概论">
 <meta name="twitter:description" content="一、统计学习1.1 特点统计学习是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测与分析的一门学科。赫尔伯特·西蒙曾对学习定义为：“如果一个系统能够执行某个过程改进它的性能，这就是学习。”按照这一观点，统计学习就是计算机系统通过数据及统计方法提高系统性能的机器学习。">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042312.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042312.jpg">
 
 
 
@@ -474,7 +474,7 @@ R_{emp}\left(\hat{f}\right)=\frac{1}{N_2}\sum_{i=1}^{N_2}{L\left(y_i,\hat{f}\lef
 <h3 id="4-2-过拟合与模型选择"><a href="#4-2-过拟合与模型选择" class="headerlink" title="4.2 过拟合与模型选择"></a>4.2 过拟合与模型选择</h3><p>我们希望选择或学习一个合适的模型。若在空间中存在“真模型”，那我们所选择的模型要与真模型的参数个数相同，所选择的模型的参数向量与真模型的参数向量相近。</p>
 <p>过拟合指的是我们以为追求提高模型对训练数据的预测能力，所选模型的复杂度往往会比真模型更高。即学习时选择的模型所包含的参数过多，以致于出现这一模型对已知数据预测得很好，但对未知数据预测得很差的现象。</p>
 <p>模型选择旨在避免过拟合并提高模型的预测能力，模型选择时，不仅要考虑对已知数据的预测能力，而且还要考虑对未知数据的预测能力。下图描述了训练误差和测试误差与模型的复杂度之间的关系：</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042312.jpg" alt="屏幕快照 2017-03-29 下午3.21.31"></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042312.jpg" alt="屏幕快照 2017-03-29 下午3.21.31"></p>
 <p>当模型复杂度增大时，训练误差会逐渐减小并趋于0；而测试误差会先减小，达到最小值后又增大。当选择的模型复杂度过大时，过拟合现象就会发生。所以要选择复杂度适当的模型，已达到测试误差最小的目的。以此引出正则化与交叉验证。</p>
 <h2 id="五、正则化与交叉验证"><a href="#五、正则化与交叉验证" class="headerlink" title="五、正则化与交叉验证"></a>五、正则化与交叉验证</h2><h3 id="5-1-正则化"><a href="#5-1-正则化" class="headerlink" title="5.1 正则化"></a>5.1 正则化</h3><h3 id="5-1-1-定义"><a href="#5-1-1-定义" class="headerlink" title="5.1.1 定义"></a>5.1.1 定义</h3><p>模型选择的典型方法是正则化（regularzation）。正则化是结构风险最小化策略的实现，是在经验风险上加一个正则化项或罚项。正则化项一般是模型复杂度的单调递增函数，模型越复杂，正则化值就越大。比如，正则化项可以是模型参数向量的范数。它的一般形式如下：</p>
 <script type="math/tex; mode=display">
@@ -513,9 +513,9 @@ P\left(Y|X\right)=\frac{P\left(X,Y\right)}{P\left(X\right)}</script><p>因为模
 </ul>
 <h2 id="八、分类问题"><a href="#八、分类问题" class="headerlink" title="八、分类问题"></a>八、分类问题</h2><h3 id="8-1-定义"><a href="#8-1-定义" class="headerlink" title="8.1 定义"></a>8.1 定义</h3><p>在监督学习中，当输出变量$Y$取有限个离散值时，预测问题便成为分类问题。它从数据中学习一个分类模型或分类决策函数，即学习一个分类器，然后对新的输入进行输出的预测，即进行分类。分为多类分类和二类分类问题。</p>
 <h3 id="8-2-学习过程"><a href="#8-2-学习过程" class="headerlink" title="8.2 学习过程"></a>8.2 学习过程</h3><p>如图所示，分类问题包括学习和分类两个过程。在学习过程中，根据已知的训练数据集利用有效的学习方法学习一个分类器；在分类过程中，利用学习的分类器对新的输入实例进行分类。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042324.jpg" alt="屏幕快照 2017-03-29 下午4.50.21"></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042324.jpg" alt="屏幕快照 2017-03-29 下午4.50.21"></p>
 <h3 id="8-3-分类准确率"><a href="#8-3-分类准确率" class="headerlink" title="8.3 分类准确率"></a>8.3 分类准确率</h3><h3 id="8-3-1-定义"><a href="#8-3-1-定义" class="headerlink" title="8.3.1 定义"></a>8.3.1 定义</h3><p>评价分类器性能的指标一般是分类准确率（accuracy）,即对于给定的测试数据集，分类器正确分类的样本数与总样本数之比。也即损失函数是0-1损失时测试数据集上的准确率。</p>
-<h3 id="8-3-2-常用指标"><a href="#8-3-2-常用指标" class="headerlink" title="8.3.2 常用指标"></a>8.3.2 常用指标</h3><p>通常将关注的类为正类，其他类为负类，分类器在测试数据集上的预测或正确或不正确，4种情况出现的总数分别记作：TP（正类预测为正类数）、FN（正类预测为负类书）、FP（负类预测为正类数）、TN（负类预测为负类数）<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042333.jpg" alt="屏幕快照 2017-03-29 下午5.10.54"></p>
+<h3 id="8-3-2-常用指标"><a href="#8-3-2-常用指标" class="headerlink" title="8.3.2 常用指标"></a>8.3.2 常用指标</h3><p>通常将关注的类为正类，其他类为负类，分类器在测试数据集上的预测或正确或不正确，4种情况出现的总数分别记作：TP（正类预测为正类数）、FN（正类预测为负类书）、FP（负类预测为正类数）、TN（负类预测为负类数）<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042333.jpg" alt="屏幕快照 2017-03-29 下午5.10.54"></p>
 <ul>
 <li>精确率：<script type="math/tex; mode=display">
 P=\frac{TP}{TP+FP}</script><ul>
@@ -531,13 +531,13 @@ F_1=\frac{2TP}{2TP+FP+FN}</script>精确率与召回率都很高时，$F_1$值�
 <li>常见分类统计方法：K近邻、感知机、朴素贝叶斯、决策树、决策列表、逻辑斯谛回归、支持向量机、提升、贝叶斯网络、神经网络Winnow</li>
 <li>应用：银行业务构建客户分类模型，对客户按照贷款风险大小分类；网络非法入侵检测；人脸是否出现的检测；网页分类；文本分类等。</li>
 </ul>
-<h2 id="九、标注问题"><a href="#九、标注问题" class="headerlink" title="九、标注问题"></a>九、标注问题</h2><h3 id="9-1-定义"><a href="#9-1-定义" class="headerlink" title="9.1 定义"></a>9.1 定义</h3><p>标注问题的输入是一个观测序列，输出是一个标记序列或状态序列。它的目的在于学习一个模型，使它能够对观测序列给出标记序列作为预测。标注问题分为学习和标注两个过程：<img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042340.jpg" alt="屏幕快照 2017-03-29 下午5.35.56"></p>
+<h2 id="九、标注问题"><a href="#九、标注问题" class="headerlink" title="九、标注问题"></a>九、标注问题</h2><h3 id="9-1-定义"><a href="#9-1-定义" class="headerlink" title="9.1 定义"></a>9.1 定义</h3><p>标注问题的输入是一个观测序列，输出是一个标记序列或状态序列。它的目的在于学习一个模型，使它能够对观测序列给出标记序列作为预测。标注问题分为学习和标注两个过程：<img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042340.jpg" alt="屏幕快照 2017-03-29 下午5.35.56"></p>
 <h3 id="9-2-应用"><a href="#9-2-应用" class="headerlink" title="9.2 应用"></a>9.2 应用</h3><p>标注常用的统计学习方法有：隐马尔科夫模型、条件随机场</p>
 <p>它在信息抽取、自然语言处理领域被广泛应用。</p>
 <ul>
 <li>自然语言处理的词性标注：给定一个由单词组成的句子，对这个句子中的每一个单词进行词性标注，即对一个单词序列预测其对应的词性标记序列。</li>
 </ul>
-<h2 id="十、回归问题"><a href="#十、回归问题" class="headerlink" title="十、回归问题"></a>十、回归问题</h2><h3 id="10-1-定义"><a href="#10-1-定义" class="headerlink" title="10.1 定义"></a>10.1 定义</h3><p>回归模型表示输入变量和输出变量之间映射的函数，等价于函数拟合：选择一条函数曲线使其很好地拟合已知数据且很好地预测未知数据。可分为一元回归和多元回归，线性回归和非线性回归。它最常用的损失函数为平方损失函数，可以用最小二乘法求解。回归问题分为学习和标注两个过程：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042348.jpg" alt="屏幕快照 2017-03-29 下午5.25.58"></p>
+<h2 id="十、回归问题"><a href="#十、回归问题" class="headerlink" title="十、回归问题"></a>十、回归问题</h2><h3 id="10-1-定义"><a href="#10-1-定义" class="headerlink" title="10.1 定义"></a>10.1 定义</h3><p>回归模型表示输入变量和输出变量之间映射的函数，等价于函数拟合：选择一条函数曲线使其很好地拟合已知数据且很好地预测未知数据。可分为一元回归和多元回归，线性回归和非线性回归。它最常用的损失函数为平方损失函数，可以用最小二乘法求解。回归问题分为学习和标注两个过程：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042348.jpg" alt="屏幕快照 2017-03-29 下午5.25.58"></p>
 <h3 id="10-2-应用"><a href="#10-2-应用" class="headerlink" title="10.2 应用"></a>10.2 应用</h3><p>股价预测：将影响股价的信息视作自变量，将股价视为因变量，将过去的数据作为训练数据，学习一个回归模型，并对未来的股价进行预测。</p>
 
       
@@ -563,7 +563,7 @@ F_1=\frac{2TP}{2TP+FP+FN}</script>精确率与召回率都很高时，$F_1$值�
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

@@ -94,14 +94,14 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="$\chi^2$检验（chi-square test）或称卡方检验，是一种用途较广的假设检验方法，，主要是比较两个及两个以上样本率( 构成比）以及两个分类变量的关联性分析。其根本思想就是在于比较理论频数和实际频数的吻合程度或拟合优度问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-161728.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-161736.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-161745.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.379Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-161728.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-161736.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-161745.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:26.973Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据分析系列（2）：卡方检验">
 <meta name="twitter:description" content="$\chi^2$检验（chi-square test）或称卡方检验，是一种用途较广的假设检验方法，，主要是比较两个及两个以上样本率( 构成比）以及两个分类变量的关联性分析。其根本思想就是在于比较理论频数和实际频数的吻合程度或拟合优度问题。">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-161728.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-161728.jpg">
 
 
 
@@ -397,7 +397,7 @@ var _hmt = _hmt || [];
         <p>$\chi^2$检验（chi-square test）或称卡方检验，是一种用途较广的假设检验方法，，主要是比较两个及两个以上样本率( 构成比）以及两个分类变量的关联性分析。其根本思想就是在于比较理论频数和实际频数的吻合程度或拟合优度问题。</p>
 <a id="more"></a>
 <p>它的发明者卡尔·皮尔逊是一位历史上罕见的百科全书式的学者，研究领域涵盖了生物、历史、宗教、哲学、法律。在文本分类中可以用卡方值做特征选择（降维），也可以用卡方检验做异常用户的检测。</p>
-<h2 id="一、四格表资料的卡方检验"><a href="#一、四格表资料的卡方检验" class="headerlink" title="一、四格表资料的卡方检验"></a>一、四格表资料的卡方检验</h2><p>两组大白鼠在不同致癌剂作用下的发癌率如下表，问两组发癌率有无差别？<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-161728.jpg" alt=""></p>
+<h2 id="一、四格表资料的卡方检验"><a href="#一、四格表资料的卡方检验" class="headerlink" title="一、四格表资料的卡方检验"></a>一、四格表资料的卡方检验</h2><p>两组大白鼠在不同致癌剂作用下的发癌率如下表，问两组发癌率有无差别？<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-161728.jpg" alt=""></p>
 <p>这四格资料表就专称四格表（fourfold table），或称2行2列表（2×2 contingency table）。从该资料算出的两组发癌率分别为73.24%和92.86%，两者的差别可能是抽样误差所致，亦可能是两组发癌率（总体率）确有所不同。这里可通过卡方检验来区别其差异有无统计学意义，检验的基本公式为：</p>
 <script type="math/tex; mode=display">\chi^2=\sum \frac{(A-T)^2}{T}</script><p>式中A为实际数，以上四格表的四个数据就是实际数。T为理论数，是根据检验假设推断出来的；即假设这两组的发癌率本无不同，差别仅是由抽样误差所致。这里可将两组合计发癌率作为理论上的发癌率，即91/113=80.3%，以此为依据便可推算出四格表中相应的四格的理论数。以表1资料为例检验如下。</p>
 <p>检验步骤：</p>
@@ -406,7 +406,7 @@ var _hmt = _hmt || [];
 <li>2）计算理论数（TRC）,计算公式为：<script type="math/tex; mode=display">TRC = \frac{n_r\times n_c}{n}</script>式中$TRC$是表示第R行C列格子的理论数，$n_r$是与理论数同行的合计数，$n_c$是与理论数同列的合计数，$n$为总例数。</li>
 </ul>
 <p>第1行1列： 71×91/113=57.18<br>第1行2列： 71×22/113=13.82<br>第2行1列： 42×91/113=33.82<br>第2行2列： 42×22/113=8.18</p>
-<p>以推算结果，可与原四项实际数并列成下表：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-161736.jpg" alt=""><br>因为上表每行和每列合计数都是固定的，所以只要用TRC式求得其中一项理论数（例如T1.1=57.18），则其余三项理论数都可用同行或同列合计数相减，直接求出。</p>
+<p>以推算结果，可与原四项实际数并列成下表：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-161736.jpg" alt=""><br>因为上表每行和每列合计数都是固定的，所以只要用TRC式求得其中一项理论数（例如T1.1=57.18），则其余三项理论数都可用同行或同列合计数相减，直接求出。</p>
 <ul>
 <li>3）计算卡方值按公式代入<script type="math/tex; mode=display">\chi^2 = \frac{(52-57.18)^2}{57.18}···+ \frac{(3-8.18)^2}{8.18}=6.48</script></li>
 <li>4）查卡方值表求$P$值</li>
@@ -415,7 +415,7 @@ var _hmt = _hmt || [];
 <p>通过实例计算，读者对卡方的基本公式有如下理解：若各理论数与相应实际数相差越小，卡方值越小；如两者相同，则卡方值必为零，而卡方永远为正值。又因为每一对理论数和实际数都加入卡方值中，分组越多，即格子数越多，卡方值也会越大，因而每考虑卡方值大小的意义时同时要考虑到格子数。因此自由度大时，卡方的界值也相应增大。</p>
 <h2 id="二、四格表卡方值的校正"><a href="#二、四格表卡方值的校正" class="headerlink" title="二、四格表卡方值的校正"></a>二、四格表卡方值的校正</h2><p>卡方值表是数理统计根据正态分布中$\chi^2 = \sum (\frac{x_i-\mu }{\sigma})^2$的定义计算出来的。是一种近似。在自由度大于1、理论数皆大于5时，这种近似很好；当自由度为1时，尤其当1＜T＜5，而n＞40时，应用以下校正公式：</p>
 <script type="math/tex; mode=display">\chi^2 = \frac{\sum{(|A-T|-0.5)^2}}{T}</script><p>例2.某医师用甲、乙两疗法治疗小儿单纯性消化不良，结果小表试比较两种疗法效果有无差异？</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-161745.jpg" alt=""><br>从表可见，T1.2和T2.2数值都＜5，且总例数大于40，故宜用校正公式检验。步骤如下：</p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-161745.jpg" alt=""><br>从表可见，T1.2和T2.2数值都＜5，且总例数大于40，故宜用校正公式检验。步骤如下：</p>
 <ul>
 <li><p>1）检验假设：$H_0：π1=π2；H_1：π1≠π2；α=0.05$</p>
 </li>
@@ -464,7 +464,7 @@ var _hmt = _hmt || [];
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

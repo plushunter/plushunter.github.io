@@ -94,18 +94,18 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。介绍线性表的几个基本组成部分：数组、单向链表、双向链表。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165220.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165227.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165234.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165242.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165250.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165258.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165307.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.424Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165220.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165227.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165234.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165242.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165250.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165258.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165307.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:27.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（1）：数组与链表">
 <meta name="twitter:description" content="线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。介绍线性表的几个基本组成部分：数组、单向链表、双向链表。">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165220.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165220.jpg">
 
 
 
@@ -401,21 +401,21 @@ var _hmt = _hmt || [];
         <p>线性表是一种线性结构，它是具有相同类型的n个数据元素组成的优先序列。介绍线性表的几个基本组成部分：数组、单向链表、双向链表。</p>
 <a id="more"></a>
 <h2 id="一、数组"><a href="#一、数组" class="headerlink" title="一、数组"></a>一、数组</h2><p>数组有上界和下界，数组的元素在上下界内是连续的。</p>
-<p>存储10，20，30，40，50的数组的示意图如下：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165220.jpg" alt=""><br>数组的特点是：数据是连续的；随机访问速度块。</p>
+<p>存储10，20，30，40，50的数组的示意图如下：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165220.jpg" alt=""><br>数组的特点是：数据是连续的；随机访问速度块。</p>
 <p>数组中稍微复杂一点的是多维数组和动态数组。对于C语言而言，多维数组本质上也是通过一维数组实现的。至于动态数组，是指数组的容量能动态增长的数组；对于C语言而言，若要提供动态数组，需要手动实现；而对于C++而言，STL提供了Vector；对于Java而言，Collection集合中提供了ArrayList和Vector。</p>
 <p>数组是将元素在内存中连续存放，由于每个元素占用内存相同，可以通过下标迅速访问数组中任何元素。但是如果要在数组中增加一个元素，需要移动大量元素，在内存中空出一个元素的空间，然后将要增加的元素放在其中。同样的道理，如果想删除一个元素，同样需要移动大量元素去填掉被移动的元素。如果应用需要快速访问数据，很少或不插入和删除元素，就应该用数组。</p>
 <h2 id="二、单向链表"><a href="#二、单向链表" class="headerlink" title="二、单向链表"></a>二、单向链表</h2><h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><p>单向链表（单链表）是链表的一种，它由节点组成，每个节点都包含下一个节点的指针。</p>
 <p>单链表的示意图如下：</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165227.jpg" alt=""><br>表头为空，表头的后继节点是“节点10”（数据为10的节点），“节点10”的后继节点是“节点20”（数据为20的结点）……</p>
-<h3 id="2-2-单链表删除节点"><a href="#2-2-单链表删除节点" class="headerlink" title="2.2 单链表删除节点"></a>2.2 单链表删除节点</h3><p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165234.jpg" alt=""><br>删除“节点30”<br>删除之前：“节点20”的后继节点为“节点30”，而“节点30”的后继节点为“节点40”<br>删除之后：“节点20”的后继节点为“节点40”</p>
-<h3 id="2-3-单链表添加节点"><a href="#2-3-单链表添加节点" class="headerlink" title="2.3 单链表添加节点"></a>2.3 单链表添加节点</h3><p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165242.jpg" alt=""><br>在“节点10 ”与“节点20”之间添加“节点15”</p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165227.jpg" alt=""><br>表头为空，表头的后继节点是“节点10”（数据为10的节点），“节点10”的后继节点是“节点20”（数据为20的结点）……</p>
+<h3 id="2-2-单链表删除节点"><a href="#2-2-单链表删除节点" class="headerlink" title="2.2 单链表删除节点"></a>2.2 单链表删除节点</h3><p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165234.jpg" alt=""><br>删除“节点30”<br>删除之前：“节点20”的后继节点为“节点30”，而“节点30”的后继节点为“节点40”<br>删除之后：“节点20”的后继节点为“节点40”</p>
+<h3 id="2-3-单链表添加节点"><a href="#2-3-单链表添加节点" class="headerlink" title="2.3 单链表添加节点"></a>2.3 单链表添加节点</h3><p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165242.jpg" alt=""><br>在“节点10 ”与“节点20”之间添加“节点15”</p>
 <p>添加之前：“节点10”的后继节点为“节点20”<br>添加之后：“节点10”的后继节点为“节点15”，而“节点15”的后继节点为“节点20”。</p>
 <p>单链表的特点是：节点的链接方向是单向的；相对于数组来说，单链表的随机访问速度较慢，但是单链表删除、添加数据的效率很高。</p>
 <h2 id="三、双向链表"><a href="#三、双向链表" class="headerlink" title="三、双向链表"></a>三、双向链表</h2><h3 id="3-1-定义"><a href="#3-1-定义" class="headerlink" title="3.1 定义"></a>3.1 定义</h3><p>双向链表（双链表）是链表的一种。和单链表一样，双链表也是由节点组成，它的每一个数据节点中都有两个指针，分别指向直接后继和直接前驱。所以，从双向链表的任意一个节点开始，都可以很方便地访问它的前驱结点和后继节点。一般我们都构造双向循环链表。</p>
-<p>双链表的示意图如下：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165250.jpg" alt=""><br>表头为空，表头的后继节点为“节点10”（数据为10的结点）；“节点10”的后继节点是“节点20”（数据为10的节点），“节点20”的前继节点是“节点10”；“节点20”的后继节点是“节点30”，“节点30”的前继节点是“节点20”;……；末尾节点的后继节点是表头。</p>
-<h3 id="3-2-双链表删除节点"><a href="#3-2-双链表删除节点" class="headerlink" title="3.2 双链表删除节点"></a>3.2 双链表删除节点</h3><p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165258.jpg" alt=""><br>删除“节点30”</p>
+<p>双链表的示意图如下：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165250.jpg" alt=""><br>表头为空，表头的后继节点为“节点10”（数据为10的结点）；“节点10”的后继节点是“节点20”（数据为10的节点），“节点20”的前继节点是“节点10”；“节点20”的后继节点是“节点30”，“节点30”的前继节点是“节点20”;……；末尾节点的后继节点是表头。</p>
+<h3 id="3-2-双链表删除节点"><a href="#3-2-双链表删除节点" class="headerlink" title="3.2 双链表删除节点"></a>3.2 双链表删除节点</h3><p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165258.jpg" alt=""><br>删除“节点30”</p>
 <p>删除之前：“节点20”的后继节点为“节点30”，“节点30”的前继节点为“节点20”。“节点30”的后继节点为“节点40”，“节点40”的前继节点为“节点30”<br>删除之后：“节点20”的后继节点为“节点40”，“节点40”的前继节点为“节点20”</p>
-<h3 id="3-3-双链表添加节点"><a href="#3-3-双链表添加节点" class="headerlink" title="3.3 双链表添加节点"></a>3.3 双链表添加节点</h3><p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165307.jpg" alt=""><br>在”节点10”与”节点20”之间添加”节点15”<br>添加之前：”节点10”的后继节点为”节点20”，”节点20” 的前继节点为”节点10”。<br>添加之后：”节点10”的后继节点为”节点15”，”节点15” 的前继节点为”节点10”。”节点15”的后继节点为”节点20”，”节点20” 的前继节点为”节点15”。</p>
+<h3 id="3-3-双链表添加节点"><a href="#3-3-双链表添加节点" class="headerlink" title="3.3 双链表添加节点"></a>3.3 双链表添加节点</h3><p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165307.jpg" alt=""><br>在”节点10”与”节点20”之间添加”节点15”<br>添加之前：”节点10”的后继节点为”节点20”，”节点20” 的前继节点为”节点10”。<br>添加之后：”节点10”的后继节点为”节点15”，”节点15” 的前继节点为”节点10”。”节点15”的后继节点为”节点20”，”节点20” 的前继节点为”节点15”。</p>
 <h2 id="四、数组与链表的区别"><a href="#四、数组与链表的区别" class="headerlink" title="四、数组与链表的区别"></a>四、数组与链表的区别</h2><p>数组是将元素在内存中连续存放，由于每个元素占用内存相同，可以通过下标迅速访问数组中任何元素。但是如果要在数组中增加一个元素，需要移动大量元素，在内存中空出一个元素的空间，然后将要增加的元素放在其中。同样的道理，如果想删除一个元素，同样需要移动大量元素去填掉被移动的元素。如果应用需要快速访问数据，很少或不插入和删除元素，就应该用数组。</p>
 <p>链表恰好相反，链表中的元素在内存中不是顺序存储的，而是通过存在元素中的指针联系到一起。比如：上一个元素有个指针指到下一个元素，以此类推，直到最后一个元素。如果要访问链表中一个元素，需要从第一个元素开始，一直找到需要的元素位置。但是增加和删除一个元素对于链表数据结构就非常简单了，只要修改元素中的指针就可以了。如果应用需要经常插入和删除元素你就需要用链表数据结构了。</p>
 <p>C++语言中可以用数组处理一组数据类型相同的数据，但不允许动态定义数组的大小，即在使用数组之前必须确定数组的大小。而在实际应用中，用户使用数组之前有时无法准确确定数组的大小，只能将数组定义成足够大小，这样数组中有些空间可能不被使用，从而造成内存空间的浪费。链表是一种常见的数据组织形式，它采用动态分配内存的形式实现。需要时可以用new分配内存空间，不需要时用delete将已分配的空间释放，不会造成内存空间的浪费。</p>
@@ -461,7 +461,7 @@ var _hmt = _hmt || [];
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

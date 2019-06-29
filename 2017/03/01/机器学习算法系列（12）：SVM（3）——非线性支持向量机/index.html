@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-060840.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.453Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-060840.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:27.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（12）：SVM（3）—非线性支持向量机">
 <meta name="twitter:description" content="当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-060840.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-060840.jpg">
 
 
 
@@ -377,7 +377,7 @@ var _hmt = _hmt || [];
         <p>当输入空间为欧式空间或离散集合、特征空间为希尔伯特空间时，核函数表示将输入从输入空间映射到特征空间得到的特征向量之间的内积。通过使用核函数可以学习非线性支持向量机，等价于隐式地在高维的特征空间中学习线性支持向量机。此为核方法，是比支持向量机更为一般的机器学习方法。</p>
 <a id="more"></a>
 <h2 id="三、非线性支持向量机与核函数"><a href="#三、非线性支持向量机与核函数" class="headerlink" title="三、非线性支持向量机与核函数"></a>三、非线性支持向量机与核函数</h2><h4 id="3-1-核技巧"><a href="#3-1-核技巧" class="headerlink" title="3.1 核技巧"></a>3.1 核技巧</h4><p>前面我们介绍了线性情况下的支持向量机，他通过寻找一个现行的超平面来达到对数据线性分类的目的。不过，由于是线性方法，所以对非线性的数据就没有办法处理了。</p>
-<p>例如图中的两类数据，分别分布为两个圆圈的形状，不论是任何高级的分类器，只要他是线性的，就没有办法处理，SVM也不行。因为这样的数据本身就是线性不可分的。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-060840.jpg" alt="屏幕快照 2017-03-20 上午11.03.17"></p>
+<p>例如图中的两类数据，分别分布为两个圆圈的形状，不论是任何高级的分类器，只要他是线性的，就没有办法处理，SVM也不行。因为这样的数据本身就是线性不可分的。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-060840.jpg" alt="屏幕快照 2017-03-20 上午11.03.17"></p>
 <p>此数据集为两个半径不同的圆圈加上了少量的噪音得到，所以一个理想的分界应该是一个圆圈而不是一条直线。如果用$X_1和X_2$来表示这个二维平面的两个坐标的话，则此方程可以写作</p>
 <script type="math/tex; mode=display">
 a_1X_1+a_2X_{1}^{2}+a_3X_2+a_4X_{2}^{2}+a_5X_1X_2+a_6=0</script><p>注意上面的形式，如果我们构造另外一个无谓的空间，其中五个坐标的值分别为$Z_1=X_1,Z_2=X_1^2,Z_3=X_2,Z_4=X_2^2,Z_5=X_1·X_2$</p>
@@ -450,7 +450,7 @@ f(X)=sign\left( \sum_{i=1}^N{a_{i}^{*}y_iK\left( x_i,x \right)}+b \right)</scrip
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

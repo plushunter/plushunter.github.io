@@ -94,12 +94,12 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、static关键字static 修饰符能够与变量、方法一起使用，表示是“静态”的。静态变量和静态方法能够通过类名来访问，不需要创建一个类的对象来访问该类的静态成员，所以static修饰的成员又称作类变量和类方法。静态变量与实例变量不同，实例变量总是通过对象来访问，因为它们的值在对象和对象之间有所不同。请看下面的例子：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-155711.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.234Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-155711.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:26.735Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java学习笔记（5）：static、final关键字和Object类">
 <meta name="twitter:description" content="一、static关键字static 修饰符能够与变量、方法一起使用，表示是“静态”的。静态变量和静态方法能够通过类名来访问，不需要创建一个类的对象来访问该类的静态成员，所以static修饰的成员又称作类变量和类方法。静态变量与实例变量不同，实例变量总是通过对象来访问，因为它们的值在对象和对象之间有所不同。请看下面的例子：">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-155711.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-155711.jpg">
 
 
 
@@ -402,7 +402,7 @@ var _hmt = _hmt || [];
 <p>运行结果：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">obj1.i=10, obj1.j=20</div><div class="line">obj2.i=10, obj2.j=0</div></pre></td></tr></table></figure>
 <p>注意：静态变量虽然也可以通过对象来访问，但是不被提倡，编译器也会产生警告。</p>
-<p>上面的代码中，i 是静态变量，通过 obj1 改变 i 的值，会影响到 obj2；j 是实例变量，通过 obj1 改变 j 的值，不会影响到 obj2。这是因为 obj1.i 和 obj2.i 指向同一个内存空间，而 obj1.j 和 obj2.j 指向不同的内存空间，请看下图：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-155711.jpg" alt=""></p>
+<p>上面的代码中，i 是静态变量，通过 obj1 改变 i 的值，会影响到 obj2；j 是实例变量，通过 obj1 改变 j 的值，不会影响到 obj2。这是因为 obj1.i 和 obj2.i 指向同一个内存空间，而 obj1.j 和 obj2.j 指向不同的内存空间，请看下图：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-155711.jpg" alt=""></p>
 <p>注意：static 的变量是在类装载的时候就会被初始化。也就是说，只要类被装载，不管你是否使用了这个static 变量，它都会被初始化。</p>
 <p>小结：类变量(class variables)用关键字 static 修饰，在类加载的时候，分配类变量的内存，以后再生成类的实例对象时，将共享这块内存（类变量），任何一个对象对类变量的修改，都会影响其它对象。外部有两种访问方式：通过对象来访问或通过类名来访问。</p>
 <h2 id="1-2-静态方法"><a href="#1-2-静态方法" class="headerlink" title="1.2 静态方法"></a>1.2 静态方法</h2><p>静态方法是一种不能向对象实施操作的方法。例如，Math 类的 pow() 方法就是一个静态方法，语法为 Math.pow(x, a)，用来计算 x 的 a 次幂，在使用时无需创建任何 Math 对象。</p>
@@ -524,7 +524,7 @@ var _hmt = _hmt || [];
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

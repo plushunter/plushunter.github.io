@@ -94,20 +94,20 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、Gradient Descent [Robbins and Monro, 1951, Kiefer et al., 1952]机器学习中，梯度下降法常用来对相应的算法进行训练。常用的梯度下降法包含三种不同的形式，分别是BGD、SGD和MBGD，它们的不同之处在于我们在对目标函数进行梯度更新时所使用的样本量的多少。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090134.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090144.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090156.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090204.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090249.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090303.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090727.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090824.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-061741.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.399Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090134.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090144.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090156.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090204.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090249.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090303.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090727.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090824.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-061741.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:26.989Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（7）：优化算法">
 <meta name="twitter:description" content="一、Gradient Descent [Robbins and Monro, 1951, Kiefer et al., 1952]机器学习中，梯度下降法常用来对相应的算法进行训练。常用的梯度下降法包含三种不同的形式，分别是BGD、SGD和MBGD，它们的不同之处在于我们在对目标函数进行梯度更新时所使用的样本量的多少。">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090134.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090134.jpg">
 
 
 
@@ -406,7 +406,7 @@ var _hmt = _hmt || [];
 <script type="math/tex; mode=display">
 h_{\theta}=\sum_{j=0}^n{\theta_jx_j}</script><p>（即有n个特征）对应的损失函数为</p>
 <script type="math/tex; mode=display">
-L\left(\theta\right)=\frac{1}{2m}\sum_{i=1}^m{\left(h\left(x_i\right)-y_i\right)^2}</script><p>下图即为一个二维参数$\theta _0$和$\theta _1$组对应的损失函数可视化图像：<img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090134.jpg" alt="屏幕快照 2017-05-06 下午4.02.19"></p>
+L\left(\theta\right)=\frac{1}{2m}\sum_{i=1}^m{\left(h\left(x_i\right)-y_i\right)^2}</script><p>下图即为一个二维参数$\theta _0$和$\theta _1$组对应的损失函数可视化图像：<img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090134.jpg" alt="屏幕快照 2017-05-06 下午4.02.19"></p>
 <h3 id="1-1-BGD（Batch-Gradient-Descent）"><a href="#1-1-BGD（Batch-Gradient-Descent）" class="headerlink" title="1.1 BGD（Batch Gradient Descent）"></a>1.1 BGD（Batch Gradient Descent）</h3><p>批量梯度下降法（Batch Gradient Descent，简称BGD）是梯度下降法最原始的形式，它的具体思路是在更新每一参数时都使用所有的样本来进行更新，其数学形式如下：</p>
 <ul>
 <li>1）对上述的损失函数求偏导：<script type="math/tex; mode=display">
@@ -429,7 +429,7 @@ L\left(\theta\right)=\frac{1}{2m}\sum_{i=1}^m{\left(h\left(x_i\right)-y_i\right)
 <li>缺点：准确度下降，并不是全局最优；不易于并行实现。</li>
 </ul>
 <p>从迭代次数上来看，SGD迭代的次数较多，在解空间的搜索过程看起来很盲目。其迭代的收敛曲线示意图表示如下：</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090144.jpg" alt="屏幕快照 2017-05-06 下午4.47.53"></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090144.jpg" alt="屏幕快照 2017-05-06 下午4.47.53"></p>
 <h3 id="1-3-MBGD（Mini-batch-Gradient-Descent）"><a href="#1-3-MBGD（Mini-batch-Gradient-Descent）" class="headerlink" title="1.3 MBGD（Mini-batch Gradient Descent）"></a>1.3 MBGD（Mini-batch Gradient Descent）</h3><p>从上述的两种梯度下降法可以看出，其各自均有优缺点，那么能否在两种方法的性能之间取得一个折中呢？即，算法的训练过程比较快，而且也要保证最终参数训练的准确率，而这正是小批量梯度下降法（Mini-batch Gradient Descent，简称MBGD）的初衷。</p>
 <p>下面的伪代码中，我们每轮迭代的mini-batches设置为50：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(nb_epochs):</div><div class="line">  np.random.shuffle(data)</div><div class="line">  <span class="keyword">for</span> batch <span class="keyword">in</span> get_batches(data, batch_size=<span class="number">50</span>):</div><div class="line">    params_grad = evaluate_gradient(loss_function, batch, params)</div><div class="line">    params = params - learning_rate * params_grad</div></pre></td></tr></table></figure>
@@ -446,14 +446,14 @@ v_t=\gamma v_{t-1}+\eta\nabla_{\theta}J\left(\theta\right)</script><script type=
 \theta =\theta -v_t</script><p>我们用物理上的动能势能转换来理解它。即物体在这一时刻的动能=物体在上一时刻的动能+上一时刻的势能差。由于有阻力和转换时的损失，所以两者都乘以一个系数。</p>
 <p>就像一个小球从坡上向下滚，当前的速度取决于上一时刻的速度和势能的改变量。</p>
 <p>这样在更新参数时，除了考虑到梯度以外，还考虑了上一时刻参数的历史变更幅度。例如，参数上一次更新幅度较大，并且梯度也较大，那么在更新时是不是得更加猛烈一些了。这样的启发式算法，从直观感知上确实有道理。</p>
-<p>下面两张图直观的展示了Momentum算法，其中绿色箭头表示上一时刻参数的变更幅度，红色箭头表示梯度，两者向量叠加即得到蓝色箭头即真实的更新幅度。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090156.jpg" alt=""><br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090204.jpg" alt=""></p>
+<p>下面两张图直观的展示了Momentum算法，其中绿色箭头表示上一时刻参数的变更幅度，红色箭头表示梯度，两者向量叠加即得到蓝色箭头即真实的更新幅度。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090156.jpg" alt=""><br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090204.jpg" alt=""></p>
 <h2 id="三、NAG（Nesterov-accelerated-gradient）-Nesterov-1983"><a href="#三、NAG（Nesterov-accelerated-gradient）-Nesterov-1983" class="headerlink" title="三、NAG（Nesterov accelerated gradient） [Nesterov, 1983]"></a>三、NAG（Nesterov accelerated gradient） [Nesterov, 1983]</h2><p>还是以上面小球的例子来看，momentum方式下小球完全是盲目被动的方式滚下的。这样有个缺点就是在邻近最优点附近是控制不住速度的。我们希望小球可以预判后面的“地形”，要是后面地形还是很陡峭，那就继续坚定不移地大胆走下去，不然的话就减缓速度。</p>
 <p>当然，小球自己也不知道真正要走到哪里，这里以</p>
 <script type="math/tex; mode=display">\theta - \gamma v_{t-1}</script><p>作为下一个位置的近似，将动量的公式更改为：</p>
 <script type="math/tex; mode=display">
 v_t=\gamma v_{t-1}+\eta\nabla_{\theta}J\left(\theta - \gamma v_{t-1}\right)</script><script type="math/tex; mode=display">
 \theta =\theta -v_t</script><p>相比于动量方式考虑的是上一时刻的动能和当前点的梯度，而NAG考虑的是上一时刻的梯度和近似下一点的梯度，这使得它可以先往前探探路，然后慎重前进。</p>
-<p>Hinton的slides是这样给出的：<img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090249.jpg" alt="屏幕快照 2017-05-06 下午5.29.11"><br>其中两个blue vectors分别理解为梯度和动能，两个向量和即为momentum方式的作用结果。</p>
+<p>Hinton的slides是这样给出的：<img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090249.jpg" alt="屏幕快照 2017-05-06 下午5.29.11"><br>其中两个blue vectors分别理解为梯度和动能，两个向量和即为momentum方式的作用结果。</p>
 <p>而靠左边的brown vector是动能，可以看出它那条blue vector是平行的，但它预测了下一阶段的梯度是red vector，因此向量和就是green vector，即NAG方式的作用结果。</p>
 <p>momentum项和nesterov项都是为了使梯度更新更加灵活，对不同情况有针对性。但是，人工设置一些学习率总还是有些生硬，接下来介绍几种自适应学习率的方法</p>
 <h2 id="四、学习率退火"><a href="#四、学习率退火" class="headerlink" title="四、学习率退火"></a>四、学习率退火</h2><p>训练深度网络的时候，可以让学习率随着时间退火。因为如果学习率很高，系统的动能就过大，参数向量就会无规律地变动，无法稳定到损失函数更深更窄的部分去。对学习率衰减的时机把握很有技巧：如果慢慢减小，可能在很长时间内只能浪费计算资源然后看着它混沌地跳动，实际进展很少；但如果快速地减少，系统可能过快地失去能量，不能到达原本可以到达的最好位置。通常，实现学习率退火有三种方式：</p>
@@ -480,7 +480,7 @@ g_{t,i}=\nabla_{\theta}J\left(\theta_j\right)</script><p>参数的更新的一�
 </ul>
 <h3 id="5-2-RMSprop-Hinton"><a href="#5-2-RMSprop-Hinton" class="headerlink" title="5.2 RMSprop [Hinton]"></a>5.2 RMSprop [Hinton]</h3><p>RMSprop是一个没有公开发表的适应性学习率方法，它是Hinton在他的课上提出的一种自适应学习速率方法。有趣的是，每个使用这个方法的人在他们的论文中都引用自Geoff Hinton的Coursera课程的<a href="http://www.cs.toronto.edu/~tijmen/csc321/slides/lecture_slides_lec6.pdf" target="_blank" rel="noopener">第六课的第29页PPT</a>。它用了一种很简单的方式修改了Adagrad方法，让它不过于激进而过早停止学习。具体说来就是，它使用了一个梯度平方的滑动平均，仍然是基于梯度的大小来对每个权重的学习率进行修改，效果不错。但是和Adagrad不同的是，其更新不会让学习率单调变小。</p>
 <p>下图展示了RMSprop的计算过程，其中$\alpha$是一个超参数，常用的值是[0.9,0.99,0.999]：</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090303.jpg" alt="屏幕快照 2017-05-11 下午11.40.54"></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090303.jpg" alt="屏幕快照 2017-05-11 下午11.40.54"></p>
 <h3 id="5-3-Adadelta-Zeiler-2012"><a href="#5-3-Adadelta-Zeiler-2012" class="headerlink" title="5.3 Adadelta [Zeiler, 2012]"></a>5.3 Adadelta [Zeiler, 2012]</h3><p>Adadelta是Adagrad的一种扩展，以缓解Adagrad学习速率单调递减问题的算法。Adadelta不是对过去所有时刻的梯度平方进行累加，而是将累加时刻限制在窗口大小为的$w$区间。</p>
 <p>但梯度累加没有采用简单的存储前$w$个时刻的梯度平方，而是递归地定义为过去所有时刻梯度平方的decaying average$E[g^2]_t$。$t$时刻的running average仅仅依赖于之前average和当前的梯度：</p>
 <script type="math/tex; mode=display">
@@ -500,11 +500,11 @@ E\left[g^2\right]_t=\gamma E\left[g^2\right]_{t-1}+\left(1-\gamma\right)g_{t}^{2
 \hat{m}=\frac{m}{1-\beta_{1}^{t}}</script><script type="math/tex; mode=display">
 \hat{v}=\frac{v}{1-\beta_{2}^{t}}</script><p>然后使用上述项和Adadelta和RMSprop一样进行参数更新，可以得到Adam的更新规则：</p>
 <script type="math/tex; mode=display">
-\theta_{t+1}=\theta_t-\frac{\eta}{\sqrt{\hat{v}+\epsilon}}\hat{m}</script><p>Adam的完整更新过程如下图所示，其中它推荐默认设置$\alpha=0.001,\beta_1=0.9,\beta_2=0.999,\epsilon=10^{-8}$，在实际操作中，推荐将Adam作为默认的算法，一般而言跑起来比RMSProp要好一些。但也可以试试SGD+Nesterov动量。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090727.jpg" alt=""></p>
+\theta_{t+1}=\theta_t-\frac{\eta}{\sqrt{\hat{v}+\epsilon}}\hat{m}</script><p>Adam的完整更新过程如下图所示，其中它推荐默认设置$\alpha=0.001,\beta_1=0.9,\beta_2=0.999,\epsilon=10^{-8}$，在实际操作中，推荐将Adam作为默认的算法，一般而言跑起来比RMSProp要好一些。但也可以试试SGD+Nesterov动量。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090727.jpg" alt=""></p>
 <h2 id="六、算法可视化"><a href="#六、算法可视化" class="headerlink" title="六、算法可视化"></a>六、算法可视化</h2><p>下面两幅动画让我们直观感受一些优化算法的优化过程。</p>
-<p>在第一幅动图中，我们看到他们随着时间推移在损失表面的轮廓（contours of a loss surface）的移动。注意到Adagrad、Adadelta和RMSprop几乎立刻转向正确的方向并快速收敛，但是Momentum和NAG被引导偏离了轨道。这让我们感觉就像看滚下山的小球。然而，由于NAG拥有通过远眺所提高的警惕，它能够修正他的轨迹并转向极小值。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-15-090824.jpg" alt=""></p>
+<p>在第一幅动图中，我们看到他们随着时间推移在损失表面的轮廓（contours of a loss surface）的移动。注意到Adagrad、Adadelta和RMSprop几乎立刻转向正确的方向并快速收敛，但是Momentum和NAG被引导偏离了轨道。这让我们感觉就像看滚下山的小球。然而，由于NAG拥有通过远眺所提高的警惕，它能够修正他的轨迹并转向极小值。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-15-090824.jpg" alt=""></p>
 <p>第二幅动图中为各种算法在saddle point（鞍点）上的表现。所谓saddle point也就是某个维度是positive slope，其他维度为negative lope。前文中我们已经提及了它给SGD所带来的困难。注意到SGD、Momentum和NAG很难打破对称，虽然后两者最后还是逃离了saddle point。然而Adagrad, RMSprop, and Adadelta迅速地沿着negative slope下滑。 </p>
-<p> <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-061741.jpg" alt="opt2"></p>
+<p> <img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-061741.jpg" alt="opt2"></p>
 <h2 id="七、二阶方法"><a href="#七、二阶方法" class="headerlink" title="七、二阶方法"></a>七、二阶方法</h2><p>在深度网络背景下，第二类常用的最优化方法是基于牛顿法的，其迭代如下：</p>
 <script type="math/tex; mode=display">\displaystyle x\leftarrow x-[Hf(x)]^{-1}\nabla f(x)</script><p>这里$Hf(x)$是Hessian矩阵，它是函数的二阶偏导数的平方矩阵。$\nabla f(x)$是梯度向量，这和梯度下降中一样。直观理解上，Hessian矩阵描述了损失函数的局部曲率，从而使得可以进行更高效的参数更新。具体来说，就是乘以Hessian转置矩阵可以让最优化过程在曲率小的时候大步前进，在曲率大的时候小步前进。需要重点注意的是，在这个公式中是没有学习率这个超参数的，这相较于一阶方法是一个巨大的优势。</p>
 <p>然而上述更新方法很难运用到实际的深度学习应用中去，这是因为计算（以及求逆）Hessian矩阵操作非常耗费时间和空间。举例来说，假设一个有一百万个参数的神经网络，其Hessian矩阵大小就是[1,000,000 x 1,000,000]，将占用将近3,725GB的内存。这样，各种各样的拟-牛顿法就被发明出来用于近似转置Hessian矩阵。在这些方法中最流行的是L-BFGS，L-BFGS使用随时间的梯度中的信息来隐式地近似（也就是说整个矩阵是从来没有被计算的）。</p>
@@ -535,7 +535,7 @@ E\left[g^2\right]_t=\gamma E\left[g^2\right]_{t-1}+\left(1-\gamma\right)g_{t}^{2
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="基于邻域的算法是推荐系统中最基本的算法，在学术界和业界都有广泛研究与应用。它分为两大类，一类是基于用户的协同过滤算法，另一类是基于物品的协同过滤算法。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042624.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042639.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.460Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042624.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042639.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:27.041Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（13）：推荐系统（2）—基于领域的协同过滤">
 <meta name="twitter:description" content="基于邻域的算法是推荐系统中最基本的算法，在学术界和业界都有广泛研究与应用。它分为两大类，一类是基于用户的协同过滤算法，另一类是基于物品的协同过滤算法。">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042624.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042624.jpg">
 
 
 
@@ -411,7 +411,7 @@ w_{uv}=\frac{|N\left(u\right)\cap N\left(v\right)|}{\sqrt{|N\left(u\right)||N\le
 <li><p>2）找到这个集合中的用户喜欢的，且目标用户没有听说过的物品推荐给目标用户。</p>
 </li>
 </ul>
-<h3 id="1-2-离线算法评测"><a href="#1-2-离线算法评测" class="headerlink" title="1.2 离线算法评测"></a>1.2 离线算法评测</h3><p>书中通过MovieLens数据集上的离线试验来测评算法的性能。UserCF只有一个重要参数K，即为每个用户选出K个和他兴趣最相似的用户，然后推荐那K个用户感兴趣的物品。下图为选择不同的K值时算法的性能。<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042624.jpg" alt="屏幕快照 2017-03-28 上午10.44.16"><br>逐一分析各个指标：</p>
+<h3 id="1-2-离线算法评测"><a href="#1-2-离线算法评测" class="headerlink" title="1.2 离线算法评测"></a>1.2 离线算法评测</h3><p>书中通过MovieLens数据集上的离线试验来测评算法的性能。UserCF只有一个重要参数K，即为每个用户选出K个和他兴趣最相似的用户，然后推荐那K个用户感兴趣的物品。下图为选择不同的K值时算法的性能。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042624.jpg" alt="屏幕快照 2017-03-28 上午10.44.16"><br>逐一分析各个指标：</p>
 <ul>
 <li>准确率和召回率：准确率、召回率与K不成线性关系，在此数据集中，K=80左右会获得比较高的准确率和召回率。选择合适的K对获得高的推荐系统精要比较重要，但对K值不是很敏感，保持在一定区域内即可。</li>
 <li>流行度：K越大则UserCF推荐结果就越热门，流行度就越高。因为K决定了UserCFA给你做推荐时参考多少和你兴趣相似的其他用户的兴趣，如果K越大，参考的人越多，结果就越来越趋近于全局热门的物品。</li>
@@ -429,7 +429,7 @@ w_{uv}=\frac{\sum_{i\in N\left(u\right)\cap N\left(v\right)}{\frac{1}{\log\left(
 <li>2）很难对推荐结果作出解释</li>
 </ul>
 <p>所以，亚马逊提出了基于物品的协同过滤算法。它给用户推荐那些和他们之前喜欢的物品相似的物品，主要通过分析用户的行为记录计算物品之间的相似度，它认为物品A和物品B具有很大的相似度是因为喜欢物品A的用户大都也喜欢物品B，它也可以利用用户的历史行为给推荐结果提供解释。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-18-042639.jpg" alt=""><br>同样，我们对比物品A、物品B、物品C的特征向量（以用户对该物品的喜好程度为特征），发现物品A和物品C很像，就把用品C推荐给喜欢物品A的用户C。</p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042639.jpg" alt=""><br>同样，我们对比物品A、物品B、物品C的特征向量（以用户对该物品的喜好程度为特征），发现物品A和物品C很像，就把用品C推荐给喜欢物品A的用户C。</p>
 <p>ItemCF主要包括两个步骤：</p>
 <ul>
 <li>1）计算物品之间的相似度</li>
@@ -466,7 +466,7 @@ w_{ij}=\frac{|N\left(i\right)\cap N\left(j\right)|}{\sqrt{|N\left(i\right)||N\le
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

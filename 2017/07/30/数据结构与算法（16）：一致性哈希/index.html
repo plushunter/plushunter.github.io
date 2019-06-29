@@ -94,18 +94,18 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一致性哈希算法在1997年由麻省理工学院提出的一种分布式哈希（DHT）实现算法，设计目标是为了解决因特网中的热点(Hot spot)问题，初衷和CARP十分类似。一致性哈希修正了CARP使用的简单哈希算法带来的问题，使得分布式哈希（DHT）可以在P2P环境中真正得到应用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165007.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165019.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165029.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165040.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165046.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165055.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165105.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.417Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165007.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165019.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165029.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165040.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165046.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165055.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165105.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:27.004Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（16）：一致性哈希">
 <meta name="twitter:description" content="一致性哈希算法在1997年由麻省理工学院提出的一种分布式哈希（DHT）实现算法，设计目标是为了解决因特网中的热点(Hot spot)问题，初衷和CARP十分类似。一致性哈希修正了CARP使用的简单哈希算法带来的问题，使得分布式哈希（DHT）可以在P2P环境中真正得到应用。">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165007.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165007.jpg">
 
 
 
@@ -413,28 +413,28 @@ var _hmt = _hmt || [];
 <p>然后考虑以下情况：</p>
 <p>由于流量增大，需要增加一台cache，共5个cache。这时，映射公式就变成Hash(object) % 5。<br>有一个cache服务器down掉，变成3个cache。这时，映射公式就变成Hash(object) % 3。<br>可见，无论新增还是减少节点，都会改变映射公式，而由于映射公式改变，几乎所有的object都会被映射到新的cache中，这意味着一时间所有的缓存全部失效。 大量的数据请求落在app层甚至是db层上，这样严重的违反了单调性原则,这对服务器的影响当然是灾难性的。</p>
 <p>接下来主要讲解一下一致性哈希算法是如何设计的：</p>
-<h2 id="二、一致性Hash算法"><a href="#二、一致性Hash算法" class="headerlink" title="二、一致性Hash算法"></a>二、一致性Hash算法</h2><h3 id="2-1-环形Hash空间"><a href="#2-1-环形Hash空间" class="headerlink" title="2.1 环形Hash空间"></a>2.1 环形Hash空间</h3><p>按照常用的hash算法来将对应的key哈希到一个具有2^32次方个桶的空间中，即$0至 (2^{32})-1$的数字空间中。现在我们可以将这些数字头尾相连，想象成一个闭合的环形。如下图<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165007.jpg" alt=""></p>
+<h2 id="二、一致性Hash算法"><a href="#二、一致性Hash算法" class="headerlink" title="二、一致性Hash算法"></a>二、一致性Hash算法</h2><h3 id="2-1-环形Hash空间"><a href="#2-1-环形Hash空间" class="headerlink" title="2.1 环形Hash空间"></a>2.1 环形Hash空间</h3><p>按照常用的hash算法来将对应的key哈希到一个具有2^32次方个桶的空间中，即$0至 (2^{32})-1$的数字空间中。现在我们可以将这些数字头尾相连，想象成一个闭合的环形。如下图<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165007.jpg" alt=""></p>
 <h3 id="2-2-数据映射"><a href="#2-2-数据映射" class="headerlink" title="2.2 数据映射"></a>2.2 数据映射</h3><p>现在我们将object1、object2、object3、object4四个对象通过特定的Hash函数计算出对应的key值，然后散列到Hash环上。如下图：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Hash(object1) = key1；</div><div class="line">Hash(object2) = key2；</div><div class="line">Hash(object3) = key3；</div><div class="line">Hash(object4) = key4；</div></pre></td></tr></table></figure>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165019.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165019.jpg" alt=""></p>
 <h3 id="2-3-机器映射"><a href="#2-3-机器映射" class="headerlink" title="2.3 机器映射"></a>2.3 机器映射</h3><p>在采用一致性哈希算法的分布式集群中将新的机器加入，其原理是通过使用与对象存储一样的Hash算法将机器也映射到环中（一般情况下对机器的hash计算是采用机器的IP或者机器唯一的别名作为输入值），然后以顺时针的方向计算，将所有对象存储到离自己最近的机器中。</p>
 <p>假设现在有NODE1，NODE2，NODE3三台机器，通过Hash算法得到对应的KEY值，映射到环中，其示意图如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Hash(NODE1) = KEY1;</div><div class="line">Hash(NODE2) = KEY2;</div><div class="line">Hash(NODE3) = KEY3;</div></pre></td></tr></table></figure>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165029.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165029.jpg" alt=""></p>
 <p>通过上图可以看出对象与机器处于同一哈希空间中，这样按顺时针转动object1存储到了NODE1中，object3存储到了NODE2中，object2、object4存储到了NODE3中。在这样的部署环境中，hash环是不会变更的，因此，通过算出对象的hash值就能快速的定位到对应的机器中，这样就能找到对象真正的存储位置了。</p>
 <h3 id="2-4-机器的删除与添加"><a href="#2-4-机器的删除与添加" class="headerlink" title="2.4 机器的删除与添加"></a>2.4 机器的删除与添加</h3><p>普通hash求余算法最为不妥的地方就是在有机器的添加或者删除之后会照成大量的对象存储位置失效，这样就大大的不满足单调性了。下面来分析一下一致性哈希算法是如何处理的。</p>
-<h4 id="2-4-1-节点（机器）的删除"><a href="#2-4-1-节点（机器）的删除" class="headerlink" title="2.4.1 节点（机器）的删除"></a>2.4.1 节点（机器）的删除</h4><p>以上面的分布为例，如果NODE2出现故障被删除了，那么按照顺时针迁移的方法，object3将会被迁移到NODE3中，这样仅仅是object3的映射位置发生了变化，其它的对象没有任何的改动。如下图：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165040.jpg" alt=""></p>
+<h4 id="2-4-1-节点（机器）的删除"><a href="#2-4-1-节点（机器）的删除" class="headerlink" title="2.4.1 节点（机器）的删除"></a>2.4.1 节点（机器）的删除</h4><p>以上面的分布为例，如果NODE2出现故障被删除了，那么按照顺时针迁移的方法，object3将会被迁移到NODE3中，这样仅仅是object3的映射位置发生了变化，其它的对象没有任何的改动。如下图：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165040.jpg" alt=""></p>
 <h4 id="2-4-2-节点（机器）的添加"><a href="#2-4-2-节点（机器）的添加" class="headerlink" title="2.4.2 节点（机器）的添加"></a>2.4.2 节点（机器）的添加</h4><p>如果往集群中添加一个新的节点NODE4，通过对应的哈希算法得到KEY4，并映射到环中，如下图：</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165046.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165046.jpg" alt=""></p>
 <p>通过按顺时针迁移的规则，那么object2被迁移到了NODE4中，其它对象还保持这原有的存储位置。通过对节点的添加和删除的分析，一致性哈希算法在保持了单调性的同时，还是数据的迁移达到了最小，这样的算法对分布式集群来说是非常合适的，避免了大量数据迁移，减小了服务器的的压力。</p>
 <h3 id="2-5-平衡性"><a href="#2-5-平衡性" class="headerlink" title="2.5 平衡性"></a>2.5 平衡性</h3><p>根据上面的图解分析，一致性哈希算法满足了单调性和负载均衡的特性以及一般hash算法的分散性，但这还并不能当做其被广泛应用的原由，因为还缺少了平衡性。下面将分析一致性哈希算法是如何满足平衡性的。hash算法是不保证平衡的，如上面只部署了NODE1和NODE3的情况（NODE2被删除的图），object1存储到了NODE1中，而object2、object3、object4都存储到了NODE3中，这样就照成了非常不平衡的状态。</p>
 <h3 id="2-6-虚拟节点"><a href="#2-6-虚拟节点" class="headerlink" title="2.6 虚拟节点"></a>2.6 虚拟节点</h3><p>其实，理论上，只要cache足够多，每个cache在圆环上就会足够分散。但是在真实场景里，cache服务器只会有很少，所以，在一致性哈希算法中，为了尽可能的满足平衡性，其引入了虚拟节点的概念。</p>
 <p>“虚拟节点”（ virtual node ）是实际节点（机器）在 hash 空间的复制品（ replica ），一实际个节点（机器）对应了若干个“虚拟节点”，这个对应个数也成为“复制个数”，“虚拟节点”在 hash 空间中以hash值排列。</p>
 <p>以上面只部署了NODE1和NODE3的情况（NODE2被删除的图）为例，之前的对象在机器上的分布很不均衡，现在我们以2个副本（复制个数）为例，这样整个hash环中就存在了4个虚拟节点，最后对象映射的关系图如下：</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165055.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165055.jpg" alt=""></p>
 <p>根据上图可知对象的映射关系：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">object1-&gt;NODE1-1，object2-&gt;NODE1-2，object3-&gt;NODE3-2，object4-&gt;NODE3-1</div></pre></td></tr></table></figure>
-<p>通过虚拟节点的引入，对象的分布就比较均衡了。那么在实际操作中，正真的对象查询是如何工作的呢？对象从hash到虚拟节点到实际节点的转换如下图：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-165105.jpg" alt=""></p>
+<p>通过虚拟节点的引入，对象的分布就比较均衡了。那么在实际操作中，正真的对象查询是如何工作的呢？对象从hash到虚拟节点到实际节点的转换如下图：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165105.jpg" alt=""></p>
 <p>“虚拟节点”的hash计算可以采用对应节点的IP地址加数字后缀的方式。例如假设NODE1的IP地址为192.168.1.100。引入“虚拟节点”前，计算 cache A 的 hash 值：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Hash(“192.168.1.100”);</div></pre></td></tr></table></figure>
 <p>引入“虚拟节点”后，计算“虚拟节”点NODE1-1和NODE1-2的hash值：</p>
@@ -463,7 +463,7 @@ var _hmt = _hmt || [];
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

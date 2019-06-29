@@ -94,14 +94,14 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="上一节我们对数据集进行了初步的探索，并将其可视化，对数据有了初步的了解。这样我们有了之前数据探索的基础之后，就有了对其建模的基础feature，结合目标变量，即可进行模型训练了。我们使用交叉验证的方法来判断线下的实验结果，也就是把训练集分成两部分，一部分是训练集，用来训练分类器，另一部分是验证集，用来计算损失评估模型的好坏。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-160806.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-160811.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-160825.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.266Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-160806.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-160811.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-160825.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:26.783Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kaggle系列（3）：Rental Listing Inquiries（二）：XGBoost">
 <meta name="twitter:description" content="上一节我们对数据集进行了初步的探索，并将其可视化，对数据有了初步的了解。这样我们有了之前数据探索的基础之后，就有了对其建模的基础feature，结合目标变量，即可进行模型训练了。我们使用交叉验证的方法来判断线下的实验结果，也就是把训练集分成两部分，一部分是训练集，用来训练分类器，另一部分是验证集，用来计算损失评估模型的好坏。">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-160806.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-160806.jpg">
 
 
 
@@ -405,7 +405,7 @@ var _hmt = _hmt || [];
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">data_path = <span class="string">'../data/'</span></div><div class="line">train_file = data_path + <span class="string">"train.json"</span></div><div class="line">test_file = data_path +<span class="string">"test.json"</span></div><div class="line">train_df = pd.read_json(train_file)</div><div class="line">test_df = pd.read_json(test_file)</div><div class="line"><span class="keyword">print</span> train_df.shape</div><div class="line"><span class="keyword">print</span> test_df.shape</div><div class="line"></div><div class="line">(<span class="number">49352</span>, <span class="number">15</span>)</div><div class="line">(<span class="number">74659</span>, <span class="number">14</span>)</div></pre></td></tr></table></figure>
 <p>查看一下前两行：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">train_df.head(<span class="number">2</span>)</div></pre></td></tr></table></figure>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-160806.jpg" alt="屏幕快照 2017-06-19 下午4.48.02"><br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-160811.jpg" alt="屏幕快照 2017-06-19 下午4.48.20"></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-160806.jpg" alt="屏幕快照 2017-06-19 下午4.48.02"><br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-160811.jpg" alt="屏幕快照 2017-06-19 下午4.48.20"></p>
 <h2 id="二、特征构建"><a href="#二、特征构建" class="headerlink" title="二、特征构建"></a>二、特征构建</h2><p>我们不需要对数值型数据进行任何的预处理，所以首先建立一个数值型特征的列表，纳入features_to_use</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">features_to_use = [<span class="string">"bathrooms"</span>,<span class="string">"bedrooms"</span>,<span class="string">"latitude"</span>,<span class="string">"longitude"</span>,<span class="string">"price"</span>]</div></pre></td></tr></table></figure>
 <p>现在让我们根据已有的一些特征来构建一些新的特征：</p>
@@ -443,7 +443,7 @@ var _hmt = _hmt || [];
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">preds,model=runXGB(train_X,train_y,test_X,num_rounds=<span class="number">400</span>)</div></pre></td></tr></table></figure>
 <p>把结果按照比赛规定的格式写入csv文件：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">out_df = pd.DataFrame(preds)</div><div class="line">out_df.columns = [<span class="string">"high"</span>, <span class="string">"medium"</span>, <span class="string">"low"</span>]</div><div class="line">out_df[<span class="string">"listing_id"</span>] = test_df.listing_id.values</div><div class="line">out_df.to_csv(<span class="string">"xgb_starter2.csv"</span>, index=<span class="keyword">False</span>)</div></pre></td></tr></table></figure>
-<p>看一下最后的结果：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-160825.jpg" alt="屏幕快照 2017-06-20 上午10.50.42"><br>提交到kaggle上，这样我们整个建模的过程就完成了。</p>
+<p>看一下最后的结果：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-160825.jpg" alt="屏幕快照 2017-06-20 上午10.50.42"><br>提交到kaggle上，这样我们整个建模的过程就完成了。</p>
 <p>接下来两节中，我们重点讲一讲关于XGBoost的调参经验以及使用SK-learn计算TF-IDF。</p>
 
       
@@ -469,7 +469,7 @@ var _hmt = _hmt || [];
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     

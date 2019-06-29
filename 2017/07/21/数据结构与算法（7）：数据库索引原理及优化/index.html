@@ -94,20 +94,20 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="本文以MySQL数据库为研究对象，讨论与数据库索引相关的一些话题。特别需要说明的是，MySQL支持诸多存储引擎，而各种存储引擎对索引的支持也各不相同，因此MySQL数据库支持多种索引类型，如BTree索引，哈希索引，全文索引等等。为了避免混乱，本文将只关注于BTree索引，因为这是平常使用MySQL时主要打交道的索引，至于哈希索引和全文索引本文暂不讨论。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170720.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170752.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170812.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170820.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170828.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170841.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170847.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170856.jpg">
-<meta property="og:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170910.jpg">
-<meta property="og:updated_time" content="2019-05-28T12:03:47.437Z">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170720.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170752.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170812.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170820.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170828.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170841.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170847.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170856.jpg">
+<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170910.jpg">
+<meta property="og:updated_time" content="2019-06-29T07:09:27.018Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（7）：数据库索引原理及优化">
 <meta name="twitter:description" content="本文以MySQL数据库为研究对象，讨论与数据库索引相关的一些话题。特别需要说明的是，MySQL支持诸多存储引擎，而各种存储引擎对索引的支持也各不相同，因此MySQL数据库支持多种索引类型，如BTree索引，哈希索引，全文索引等等。为了避免混乱，本文将只关注于BTree索引，因为这是平常使用MySQL时主要打交道的索引，至于哈希索引和全文索引本文暂不讨论。">
-<meta name="twitter:image" content="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170720.jpg">
+<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170720.jpg">
 
 
 
@@ -410,7 +410,7 @@ var _hmt = _hmt || [];
 <h3 id="1-1-索引的本质"><a href="#1-1-索引的本质" class="headerlink" title="1.1 索引的本质"></a>1.1 索引的本质</h3><p>MySQL官方对索引的定义为：索引（Index）是帮助MySQL高效获取数据的数据结构。提取句子主干，就可以得到索引的本质：索引是数据结构。</p>
 <p>我们知道，数据库查询是数据库的最主要功能之一。我们都希望查询数据的速度能尽可能的快，因此数据库系统的设计者会从查询算法的角度进行优化。最基本的查询算法当然是顺序查找（linear search），这种复杂度为O(n)的算法在数据量很大时显然是糟糕的，好在计算机科学的发展提供了很多更优秀的查找算法，例如二分查找（binary search）、二叉树查找（binary tree search）等。</p>
 <p>如果稍微分析一下会发现，每种查找算法都只能应用于特定的数据结构之上，例如二分查找要求被检索数据有序，而二叉树查找只能应用于二叉查找树上，但是数据本身的组织结构不可能完全满足各种数据结构（例如，理论上不可能同时将两列都按顺序进行组织），所以，在数据之外，数据库系统还维护着满足特定查找算法的数据结构，这些数据结构以某种方式引用（指向）数据，这样就可以在这些数据结构上实现高级查找算法。这种数据结构，就是索引。</p>
-<p>看一个例子：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170720.jpg" alt=""></p>
+<p>看一个例子：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170720.jpg" alt=""></p>
 <p>图1展示了一种可能的索引方式。左边是数据表，一共有两列七条记录，最左边的是数据记录的物理地址（注意逻辑上相邻的记录在磁盘上也并不是一定物理相邻的）。为了加快Col2的查找，可以维护一个右边所示的二叉查找树，每个节点分别包含索引键值和一个指向对应数据记录物理地址的指针，这样就可以运用二叉查找在O(log2n)O(log2n)的复杂度内获取到相应数据。</p>
 <p>虽然这是一个货真价实的索引，但是实际的数据库系统几乎没有使用二叉查找树或其进化品种红黑树（red-black tree）实现的，原因会在下文介绍。</p>
 <h3 id="1-2-B树和B-树"><a href="#1-2-B树和B-树" class="headerlink" title="1.2 B树和B+树"></a>1.2 B树和B+树</h3><p>目前大部分数据库系统及文件系统都采用B-Tree或其变种B+Tree作为索引结构，在本文的下一节会结合存储器原理及计算机存取原理讨论为什么B-Tree和B+Tree在被如此广泛用于索引，这一节先单纯从数据结构角度描述它们。</p>
@@ -434,7 +434,7 @@ var _hmt = _hmt || [];
 </ul>
 <p>此外，在B树中，除非数据已经填满，否则不会增加新的层。也就是说，B树追求层越少越好。</p>
 <p>这样的数据结构，非常有利于减少读取硬盘的次数。假定一个节点可以容纳100个值，那么三层的B树可以容纳100万个数据，但若换成二叉查找树，则需要20层！假定操作系统一次读取一个节点，并且根节点保留在内存中，那么B树在100万个数据中查找目标值，只需要读取两次硬盘。</p>
-<p>如下图为一个M=3的B树示例：<img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170752.jpg" alt=""></p>
+<p>如下图为一个M=3的B树示例：<img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170752.jpg" alt=""></p>
 <h4 id="1-2-2-B-树"><a href="#1-2-2-B-树" class="headerlink" title="1.2.2 B+树"></a>1.2.2 B+树</h4><p>B+树是B树的变体，MySQL普遍使用B+Tree实现其索引结构。也是一种多路搜索树，其定义基本与B-树相同，除了：</p>
 <ul>
 <li>1）非叶子结点的子树指针与关键字个数相同；</li>
@@ -451,12 +451,12 @@ var _hmt = _hmt || [];
 <li>4.更适合文件索引系统。</li>
 </ul>
 <p>一般在数据库系统或文件系统中使用的B+ Tree结构都在经典B+ Tree的基础上进行了优化，增加了顺序访问指针。做这个优化的目的是为了提高区间访问的性能，例如下图中如果要查询key为从18到49的所有数据记录，当找到18后，只需顺着节点和指针顺序遍历就可以一次性访问到所有数据节点，极大提到了区间查询效率。</p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170812.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170812.jpg" alt=""></p>
 <p>【提问】<br>数据库索引用什么建的 ：b+树；解释一下B+树，并说出数据库索引的原理；</p>
 <h2 id="二、计算机组成原理"><a href="#二、计算机组成原理" class="headerlink" title="二、计算机组成原理"></a>二、计算机组成原理</h2><p>上文说过，红黑树等数据结构也可以用来实现索引，但是文件系统及数据库系统普遍采用B-/+Tree作为索引结构，这一节将结合计算机组成原理相关知识讨论B-/+Tree作为索引的理论基础。</p>
 <p>一般来说，索引本身也很大，不可能全部存储在内存中，因此索引往往以索引文件的形式存储的磁盘上。这样的话，索引查找过程中就要产生磁盘I/O消耗，相对于内存存取，I/O存取的消耗要高几个数量级，所以评价一个数据结构作为索引的优劣最重要的指标就是在查找过程中磁盘I/O操作次数的渐进复杂度。换句话说，索引的结构组织要尽量减少查找过程中磁盘I/O的存取次数。下面先介绍内存和磁盘存取原理，然后再结合这些原理分析B-/+Tree作为索引的效率。</p>
 <h3 id="2-1-主存存取原理"><a href="#2-1-主存存取原理" class="headerlink" title="2.1 主存存取原理"></a>2.1 主存存取原理</h3><p>目前计算机使用的主存基本都是随机读写存储器（RAM），现代RAM的结构和存取原理比较复杂，这里本文抛却具体差别，抽象出一个十分简单的存取模型来说明RAM的工作原理。 </p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170820.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170820.jpg" alt=""></p>
 <p>从抽象角度看，主存是一系列的存储单元组成的矩阵，每个存储单元存储固定大小的数据。每个存储单元有唯一的地址，现代主存的编址规则比较复杂，这里将其简化成一个二维地址：通过一个行地址和一个列地址可以唯一定位到一个存储单元。上图展示了一个4 x 4的主存模型。</p>
 <p>主存的存取过程如下：</p>
 <p>当系统需要读取主存时，则将地址信号放到地址总线上传给主存，主存读到地址信号后，解析信号并定位到指定存储单元，然后将此存储单元数据放到数据总线上，供其它部件读取。写主存的过程类似，系统将要写入单元地址和数据分别放在地址总线和数据总线上，主存读取两个总线的内容，做相应的写操作。</p>
@@ -478,21 +478,21 @@ var _hmt = _hmt || [];
 <h3 id="3-1-B-树性能分析"><a href="#3-1-B-树性能分析" class="headerlink" title="3.1 B+树性能分析"></a>3.1 B+树性能分析</h3><p>从上面介绍我们知道，B树的搜索复杂度为O(h)=O(logdN)，所以树的出度d越大，深度h就越小，I/O的次数就越少。B+Tree恰恰可以增加出度d的宽度，因为每个节点大小为一个页大小，所以出度的上限取决于节点内key和data的大小：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dmax=floor(pagesize/(keysize+datasize+pointsize))//floor表示向下取整</div></pre></td></tr></table></figure>
 <p>由于B+Tree内节点去掉了data域，因此可以拥有更大的出度，从而拥有更好的性能。</p>
-<h3 id="3-2-B-树查找过程"><a href="#3-2-B-树查找过程" class="headerlink" title="3.2 B+树查找过程"></a>3.2 B+树查找过程</h3><p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170828.jpg" alt=""></p>
+<h3 id="3-2-B-树查找过程"><a href="#3-2-B-树查找过程" class="headerlink" title="3.2 B+树查找过程"></a>3.2 B+树查找过程</h3><p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170828.jpg" alt=""></p>
 <p>B-树和B+树查找过程基本一致。如上图所示，如果要查找数据项29，那么首先会把磁盘块1由磁盘加载到内存，此时发生一次IO，在内存中用二分查找确定29在17和35之间，锁定磁盘块1的P2指针，内存时间因为非常短（相比磁盘的IO）可以忽略不计，通过磁盘块1的P2指针的磁盘地址把磁盘块3由磁盘加载到内存，发生第二次IO，29在26和30之间，锁定磁盘块3的P2指针，通过指针加载磁盘块8到内存，发生第三次IO，同时内存中做二分查找找到29，结束查询，总计三次IO。真实的情况是，3层的b+树可以表示上百万的数据，如果上百万的数据查找只需要三次IO，性能提高将是巨大的，如果没有索引，每个数据项都要发生一次IO，那么总共需要百万次的IO，显然成本非常非常高。</p>
 <p>这一章从理论角度讨论了与索引相关的数据结构与算法问题，下一章将讨论B+Tree是如何具体实现为MySQL中索引，同时将结合MyISAM和InnDB存储引擎介绍非聚集索引和聚集索引两种不同的索引实现形式。</p>
 <h2 id="四、MySQL索引实现"><a href="#四、MySQL索引实现" class="headerlink" title="四、MySQL索引实现"></a>四、MySQL索引实现</h2><p>在MySQL中，索引属于存储引擎级别的概念，不同存储引擎对索引的实现方式是不同的，本文主要讨论MyISAM和InnoDB两个存储引擎的索引实现方式。</p>
 <h3 id="4-1-MyISAM索引实现"><a href="#4-1-MyISAM索引实现" class="headerlink" title="4.1 MyISAM索引实现"></a>4.1 MyISAM索引实现</h3><p>MyISAM引擎使用B+Tree作为索引结构，叶节点的data域存放的是数据记录的地址。下图是MyISAM索引的原理图： </p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170841.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170841.jpg" alt=""></p>
 <p>这里设表一共有三列，假设我们以Col1为主键，则上图是一个MyISAM表的主索引（Primary key）示意。可以看出MyISAM的索引文件仅仅保存数据记录的地址。在MyISAM中，主索引和辅助索引（Secondary key）在结构上没有任何区别，只是主索引要求key是唯一的，而辅助索引的key可以重复。如果我们在Col2上建立一个辅助索引，则此索引的结构如下图所示： </p>
-<p><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170847.jpg" alt=""></p>
+<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170847.jpg" alt=""></p>
 <p>同样也是一颗B+Tree，data域保存数据记录的地址。因此，MyISAM中索引检索的算法为首先按照B+Tree搜索算法搜索索引，如果指定的Key存在，则取出其data域的值，然后以data域的值为地址，读取相应数据记录。 </p>
 <p>MyISAM的索引方式也叫做“非聚集”的，之所以这么称呼是为了与InnoDB的聚集索引区分。</p>
 <h3 id="4-2-InnoDB索引实现"><a href="#4-2-InnoDB索引实现" class="headerlink" title="4.2 InnoDB索引实现"></a>4.2 InnoDB索引实现</h3><p>虽然InnoDB也使用B+Tree作为索引结构，但具体实现方式却与MyISAM截然不同。</p>
 <p>第一个重大区别是InnoDB的数据文件本身就是索引文件。从上文知道，MyISAM索引文件和数据文件是分离的，索引文件仅保存数据记录的地址。而在InnoDB中，表数据文件本身就是按B+Tree组织的一个索引结构，这棵树的叶节点data域保存了完整的数据记录。这个索引的key是数据表的主键，因此InnoDB表数据文件本身就是主索引。</p>
-<p> <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170856.jpg" alt=""></p>
+<p> <img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170856.jpg" alt=""></p>
 <p>上图是InnoDB主索引（同时也是数据文件）的示意图，可以看到叶节点包含了完整的数据记录。这种索引叫做聚集索引。因为InnoDB的数据文件本身要按主键聚集，所以InnoDB要求表必须有主键（MyISAM可以没有），如果没有显式指定，则MySQL系统会自动选择一个可以唯一标识数据记录的列作为主键，如果不存在这种列，则MySQL自动为InnoDB表生成一个隐含字段作为主键，这个字段长度为6个字节，类型为长整形。</p>
-<p>第二个与MyISAM索引的不同是InnoDB的辅助索引data域存储相应记录主键的值而不是地址。换句话说，InnoDB的所有辅助索引都引用主键作为data域。例如，下图为定义在Col3上的一个辅助索引：<br><img src="http://ps7ltd8cr.bkt.clouddn.com/2019-05-17-170910.jpg" alt=""></p>
+<p>第二个与MyISAM索引的不同是InnoDB的辅助索引data域存储相应记录主键的值而不是地址。换句话说，InnoDB的所有辅助索引都引用主键作为data域。例如，下图为定义在Col3上的一个辅助索引：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-170910.jpg" alt=""></p>
 <p>这里以英文字符的ASCII码作为比较准则。聚集索引这种实现方式使得按主键的搜索十分高效，但是辅助索引搜索需要检索两遍索引：首先检索辅助索引获得主键，然后用主键到主索引中检索获得记录。</p>
 <p>了解不同存储引擎的索引实现方式对于正确使用和优化索引都非常有帮助，例如知道了InnoDB的索引实现后，就很容易明白为什么不建议使用过长的字段作为主键，因为所有辅助索引都引用主索引，过长的主索引会令辅助索引变得过大。</p>
 <p>再例如，用非单调的字段作为主键在InnoDB中不是个好主意，因为InnoDB数据文件本身是一颗B+Tree，非单调的主键会造成在插入新记录时数据文件为了维持B+Tree的特性而频繁的分裂调整，十分低效，而使用自增字段作为主键则是一个很好的选择。</p>
@@ -571,7 +571,7 @@ var _hmt = _hmt || [];
  </div> 
         <div align="center">
         <br>
-        <img src="http://ps7ltd8cr.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
+        <img src="http://ptuaevgcl.bkt.clouddn.com/2019-06-19-statunion-1.png"/>
         </div> 
         </div>
     
