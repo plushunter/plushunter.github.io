@@ -94,16 +94,16 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="这篇文章翻译自A Convolutional Neural Network for Modelling Sentences 准确地表达句子的能力是语言理解的核心。我们描述了一个被称为动态卷积神经网络(DCNN)的卷积结构，我们采用的是句子的语义模型。该网络使用动态k-Max池，一个通过线性序列的全局池操作。该网络处理不同长度的输入句子，并在句子中归纳出一个特征图，可以明确地捕捉短和长期的关系。该网">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-14-092931.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-14-092951.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-14-093006.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-14-093020.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-14-093029.jpg">
-<meta property="og:updated_time" content="2019-06-29T07:09:27.113Z">
+<meta property="og:image" content="http://yoursite.com/2018/03/25/自然语言处理系列（9）：DCNN/assets/5d381753e14a616548.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/25/自然语言处理系列（9）：DCNN/assets/2019-05-14-092951.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/25/自然语言处理系列（9）：DCNN/assets/2019-05-14-093006.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/25/自然语言处理系列（9）：DCNN/assets/2019-05-14-093020.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/25/自然语言处理系列（9）：DCNN/assets/2019-05-14-093029.jpg">
+<meta property="og:updated_time" content="2019-07-27T06:27:31.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自然语言处理系列（9）：DCNN">
 <meta name="twitter:description" content="这篇文章翻译自A Convolutional Neural Network for Modelling Sentences 准确地表达句子的能力是语言理解的核心。我们描述了一个被称为动态卷积神经网络(DCNN)的卷积结构，我们采用的是句子的语义模型。该网络使用动态k-Max池，一个通过线性序列的全局池操作。该网络处理不同长度的输入句子，并在句子中归纳出一个特征图，可以明确地捕捉短和长期的关系。该网">
-<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-14-092931.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/25/自然语言处理系列（9）：DCNN/assets/5d381753e14a616548.jpg">
 
 
 
@@ -411,7 +411,7 @@ var _hmt = _hmt || [];
 <h3 id="2-1-Related-Neural-Sentence-Models"><a href="#2-1-Related-Neural-Sentence-Models" class="headerlink" title="2.1 Related Neural Sentence Models"></a>2.1 Related Neural Sentence Models</h3><p>各种各样的神经网络语言模型已经被提出。基本句型模型的一般类型是神经网络词汇(NBoW)模型。这些通常包括一个投影层，将单词、子字单元或n-grams映射到高维的嵌入。然后将组件与操作(如求和)组合在一起。所产生的组合向量通过一个或多个全连接层进行分类。</p>
 <p>采用外部解析树提供的更一般结构的模型是递归神经网络 (RecNN) (Pollack, 1990; Ku ̈chler and Goller, 1996; Socher et al., 2011; Hermann and Blunsom, 2013)。在树的每个节点上，节点的左右子节点都由一个经典层组合起来。该层的权值在树的所有节点上共享。在顶部节点计算的层给出了这个句子的表示。递归神经网络(RNN)是递归网络的一种特殊情况，它所遵循的结构是一个简单的线性链(Gers and Schmidhuber, 2001; Mikolov et al., 2011)。RNN主要作为一种语言模型，但也可以被看作是一个线性结构的句子模型。在最后一个单词中计算的层代表这个句子。最后，基于卷积运算和TDNN架构，进一步构建了一类神经语句模型 (Collobert and Weston, 2008; Kalchbrenner and Blunsom, 2013b)。这些模型中使用的某些概念是DCNN的核心，接下来我们将描述它们。</p>
 <h3 id="2-2-Convolution"><a href="#2-2-Convolution" class="headerlink" title="2.2 Convolution"></a>2.2 Convolution</h3><p>一维卷积是一个权重向量$m\in R^m$和一个被视为序列的输入向量$s\in R^s$之间的运算。向量m是卷积的滤波器。具体地说，我们认为s是输入语句，$s_i$是与句子中第i个单词相关的单一特征值。一维卷积背后的思想是在句子中求每个m-gram与向量m的点积，从而获得另一个序列$c$：</p>
-<script type="math/tex; mode=display">c_j = m^T s_{j−m+1:j}\qquad (1)</script><p>根据j的取值范围，公式1给出了两种类型的卷积。窄卷积要求$s≥m$，序列$c\in R^{s-m+1}$的j的范围是$m$到$s$。宽卷积对s或m没有大小要求，序列$c\in R^{s-m+1}$的索引j的范围是1到$s+m-1$。超出范围($i<1或者i>s$)的输入值$s_i$会被设为零，狭义卷积的结果是广义卷积结果的子序列。两种一维卷积在图2中得到了说明。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-14-092931.jpg" alt=""></1或者i></p>
+<script type="math/tex; mode=display">c_j = m^T s_{j−m+1:j}\qquad (1)</script><p>根据j的取值范围，公式1给出了两种类型的卷积。窄卷积要求$s≥m$，序列$c\in R^{s-m+1}$的j的范围是$m$到$s$。宽卷积对s或m没有大小要求，序列$c\in R^{s-m+1}$的索引j的范围是1到$s+m-1$。超出范围($i<1或者i>s$)的输入值$s_i$会被设为零，狭义卷积的结果是广义卷积结果的子序列。两种一维卷积在图2中得到了说明。<br><img src="assets/5d381753e14a616548.jpg" alt=""></1或者i></p>
 <p>过滤器m中训练的权重相当于一个语言特征检测器，它学习对一个特定的n-gram进行编码，这些n-grams为大小n≤m,m是滤波器的宽度。在一个宽的卷积中应用权重m比在一个窄的卷积中应用它们有一些优势。一个宽卷积可以确保过滤器中的所有权重达到整个句子，包括边缘的单词。当m被设置为相对较大的值(比如8或10)时，这是非常重要的。此外，宽卷积保证了滤波器m对输入语句的应用总是产生一个有效的非空结果c，独立于宽度m和句子长度s。我们接下来描述一个TDNN的经典卷积层。</p>
 <h3 id="2-3-Time-Delay-Neural-Networks"><a href="#2-3-Time-Delay-Neural-Networks" class="headerlink" title="2.3 Time-Delay Neural Networks"></a>2.3 Time-Delay Neural Networks</h3><p>TDNN将一系列的输入序列与一组权重m进行卷积。在语音识别的TDNN (Waibel et al.， 1990)中，序列s被视为具有时间维度，而卷积应用于时间维度。每一个$s_j$往往不只是一个单一的值，而是一个d个数字组成的向量，因此$s\in R^{d×s}$。同样,m是一个大小为d×m权重矩阵。每一行m与相应的s行卷积，卷积通常是窄类型的。将生成的序列c作为输入到下一层，可以叠加多个卷积层。</p>
 <p>Max-TDNN句子模型是基于TDNN的体系结构 (Collobert and Weston, 2008)。在模型中，窄卷积被应用到句子矩阵s上，其中每一列对应句子中的一个词的特征向量$w_i\in R^d$</p>
@@ -419,7 +419,7 @@ var _hmt = _hmt || [];
 <script type="math/tex; mode=display">{ C }_{ max }=\begin{bmatrix} max({ c }_{ 1,: }) \\ ··· \\ max({ c }_{ d,: }) \end{bmatrix}\qquad (3)</script><p>目标是捕捉最相关的特性，即对于生成的矩阵c的d行中的每一个具有最高值的特性。然后将固定大小的向量cmax作为输入，用全连接层进行分类。</p>
 <p>Max-TDNN模型有许多可取的特性。它对句子中单词的顺序很敏感，它不依赖于外部语言特定的特性，如依赖关系或选区解析树。它对句子中每个单词的信号都有很大程度的统一的重要性，除了边缘上的单词，在计算窄卷积时次数更少。但该模型也有一些局限性。特征检测器的范围仅限于权重的跨度m。增加m或叠加多卷积层的窄类型使特征检测器的范围更大。与此同时，它也加剧了对句子边缘的忽视，增加了卷积所需要的输入语句的最小规格s。由于这个原因，高阶和远程特性检测器不能很容易地并入模型中。最大池操作也有一些缺点。它无法区分一个行中的相关特性是否只发生一次或多次，它会忘记特征发生的顺序。更普遍的是,池因子的减少信号矩阵的对应于s−m + 1。即使是对于中等的s，池因子也可能是过量的。下一节的目的是在保留优势的同时解决这些限制。</p>
 <h2 id="3-Convolutional-Neural-Networks-with-Dynamic-k-Max-Pooling"><a href="#3-Convolutional-Neural-Networks-with-Dynamic-k-Max-Pooling" class="headerlink" title="3 Convolutional Neural Networks with Dynamic k-Max Pooling"></a>3 Convolutional Neural Networks with Dynamic k-Max Pooling</h2><p>我们使用一个卷积结构来建模句子，它通过动态的k-max池来交替使用宽卷积层和动态池层。在网络中，中间层特征图的宽度取决于输入句子的长度。所得到的体系结构是动态卷积神经网络。图3表示一个DCNN。我们开始详细描述这个网络。</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-14-092951.jpg" alt=""></p>
+<p><img src="assets/2019-05-14-092951.jpg" alt=""></p>
 <h3 id="3-1-Wide-Convolution"><a href="#3-1-Wide-Convolution" class="headerlink" title="3.1 Wide Convolution"></a>3.1 Wide Convolution</h3><p>给定一个输入句子，获得DCNN的第一层，其中，我们得到每个句子的每个词的词嵌入表示$w_i\in R^d$，然后构造一个句子矩阵$s\in R^{d×s}$，如（2）式所示。嵌入的值$w_i$是在训练期间优化的参数。网络中的卷积层是通过对权值矩阵$m$和下一层的激活矩阵进行卷积操作得到的。例如，第二层是通过将卷积应用到句子矩阵s本身来获得的。维度d和滤波器宽度m是网络的超参数。我们让这些操作是一维宽卷积，如第2.2节所述。由此产生的矩阵c的维度为$d×(s + m−1)$</p>
 <h3 id="3-2-k-Max-Pooling"><a href="#3-2-k-Max-Pooling" class="headerlink" title="3.2 k-Max Pooling"></a>3.2 k-Max Pooling</h3><p>接下来我们描述的是一个池化操作，它是在Max-TDNN语言模型中的关于时间维度的最大池化操作的一般化，不同于用于目标检测的卷积网络中使用的局部最大池化操作 (LeCun et al., 1998)。给定一个值k，和一个长度为$p$的序列$p\in R^p$ (p&gt;k)，$k-max pooling$选择了一个由向量p中最大的数值组成的子序列$p_{max}^k$。$p^k_{max}$中值的顺序对应于它们在p中的原始顺序。</p>
 <p>k-max池操作使得选出在p中的k个最活跃特征成为可能，它们位于一些不同的位置。它保留了特征的顺序，但对它们的特定位置不敏感。它还可以更精细地分辨出在p中，特征被高度激活的次数，以及在p上的特征变化的被高度激活的状况。将k-max池运算符应用于最顶层卷积层后的网络中。这保证了全连接层的输入独立于输入句子的长度。但是，正如我们接下来看到的，在中间卷积层中，池参数k不是固定的，而是动态选择的，以便能够平滑地提取更高阶和更长的特性。</p>
@@ -447,7 +447,7 @@ var _hmt = _hmt || [];
 <p>实验结果</p>
 </blockquote>
 <p>在三个数据集上进行了实验，分别是(1)电影评论数据集上的情感识别，(2)TREC问题分类，以及(3)Twitter数据集上的情感识别。结果如下图：</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-14-093006.jpg" alt=""><br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-14-093020.jpg" alt=""><br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-14-093029.jpg" alt=""></p>
+<p><img src="assets/2019-05-14-093006.jpg" alt=""><br><img src="assets/2019-05-14-093020.jpg" alt=""><br><img src="assets/2019-05-14-093029.jpg" alt=""></p>
 <p>可以看出，DCNN的性能非常好，几乎不逊色于传统的模型；而且，DCNN的好处在于不需要任何的先验信息输入，也不需要构造非常复杂的人工特征。</p>
 <h2 id="6-Conclusion"><a href="#6-Conclusion" class="headerlink" title="6 Conclusion"></a>6 Conclusion</h2><p>我们描述了一个动态的卷积神经网络，它使用动态k-max池化运算符作为非线性的子采样函数。网络所引起的特征图能够捕获不同大小的单词关系。该网络在问题和情绪分类上获得了很高的性能，而不需要由解析器或其他资源提供外部特性。</p>
 

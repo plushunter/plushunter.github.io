@@ -94,18 +94,18 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、Introduction常用的分类算法一般假设不同类的比例是均衡的，现实生活中经常遇到不平衡的数据集，比如广告点击预测（点击转化率一般都很小）、商品推荐（推荐的商品被购买的比例很低）、信用卡欺诈检测等等。 对于不平衡数据集，一般的分类算法都倾向于将样本划分到多数类，体现在模型整体的准确率很高。 但对于极不均衡的分类问题，比如仅有1%的人是坏人，99%的人是好人，最简单的分类模型就是将所有人都划">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042200.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042208.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042223.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042236.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042243.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042250.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042258.jpg">
-<meta property="og:updated_time" content="2019-06-29T07:09:27.048Z">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/机器学习算法系列（17）：非平衡数据处理/assets/2019-05-18-042200.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/机器学习算法系列（17）：非平衡数据处理/assets/2019-05-18-042208.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/机器学习算法系列（17）：非平衡数据处理/assets/2019-05-18-042223.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/机器学习算法系列（17）：非平衡数据处理/assets/2019-05-18-042236.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/机器学习算法系列（17）：非平衡数据处理/assets/2019-05-18-042243.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/机器学习算法系列（17）：非平衡数据处理/assets/2019-05-18-042250.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/04/18/机器学习算法系列（17）：非平衡数据处理/assets/2019-05-18-042258.jpg">
+<meta property="og:updated_time" content="2019-07-27T06:27:13.828Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（17）：非平衡数据处理">
 <meta name="twitter:description" content="一、Introduction常用的分类算法一般假设不同类的比例是均衡的，现实生活中经常遇到不平衡的数据集，比如广告点击预测（点击转化率一般都很小）、商品推荐（推荐的商品被购买的比例很低）、信用卡欺诈检测等等。 对于不平衡数据集，一般的分类算法都倾向于将样本划分到多数类，体现在模型整体的准确率很高。 但对于极不均衡的分类问题，比如仅有1%的人是坏人，99%的人是好人，最简单的分类模型就是将所有人都划">
-<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042200.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2017/04/18/机器学习算法系列（17）：非平衡数据处理/assets/2019-05-18-042200.jpg">
 
 
 
@@ -423,10 +423,10 @@ var _hmt = _hmt || [];
 <li>2）根据样本不平衡比例设置一个采样比例以确定采样倍率N，对于每一个少数类样本$x_i$，从其K近邻中随机选择若干个样本，<br>假设选择的近邻为$\tilde{x}$；</li>
 <li>3）对于每一个随机选出的近邻$\tilde{x}$，分别与原样本按照如下的公式构建新的样本:$x_{new}=x+rand\left(0,1\right)\times\left(\tilde{x}-x\right)$</li>
 </ul>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042200.jpg" alt="屏幕快照 2017-04-19 上午10.01.40"> </p>
+<p><img src="assets/2019-05-18-042200.jpg" alt="屏幕快照 2017-04-19 上午10.01.40"> </p>
 <h3 id="2-3-Borderline-SMOTE算法"><a href="#2-3-Borderline-SMOTE算法" class="headerlink" title="2.3 Borderline-SMOTE算法"></a>2.3 Borderline-SMOTE算法</h3><p>原始的SMOTE算法对所有的少数类样本都是一视同仁的，但实际建模过程中发现那些处于边界位置的样本更容易被错分，因此利用边界位置的样本信息产生新样本可以给模型带来更大的提升。Borderline-SMOTE便是将原始SMOTE算法和边界信息算法结合的算法。算法流程如下：</p>
 <p> 1.首先，对于每个$x_{i}\subset S_{min}$确定一系列K-近邻样本集，称该数据集为$S_{i-kNN}$，且$S_{i-kNN}\subset S$；<br> 2.然后，对每个样本$x_{i}$，判断出最近邻样本集中属于多数类样本的个数，即：|$S_{i-kNN}\cap S_{maj}$|；<br> 3.最后，选择满足下面不等式的$x_{i}$:$\frac{k}{2}$&lt;|$S_{i-kNN} \cap S_{maj}$|&lt;$k$,将其加入危险集$DANGER$，</p>
-<p>对危险集中的每一个样本点（最容易被错分的样本），采用普通的$SMOTE$算法生成新的少数类样本。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042208.jpg" alt="屏幕快照 2017-04-19 上午10.02.36"></p>
+<p>对危险集中的每一个样本点（最容易被错分的样本），采用普通的$SMOTE$算法生成新的少数类样本。<br><img src="assets/2019-05-18-042208.jpg" alt="屏幕快照 2017-04-19 上午10.02.36"></p>
 <h2 id="三、欠采样"><a href="#三、欠采样" class="headerlink" title="三、欠采样"></a>三、欠采样</h2><h3 id="3-1-随机欠采样"><a href="#3-1-随机欠采样" class="headerlink" title="3.1 随机欠采样"></a>3.1 随机欠采样</h3><p>减少多数类样本数量最简单的方法便是随机剔除多数类样本，可以事先设置多数类与少数类最终的数量比例，在保留少数类样本不变的情况下，根据比例随机选择多数类样本。</p>
 <ul>
 <li><p>1）首先我们从$S_{maj}$中随机选取一些多数类样本$E$</p>
@@ -438,7 +438,7 @@ var _hmt = _hmt || [];
 <h3 id="3-2-Tomek-Links方法"><a href="#3-2-Tomek-Links方法" class="headerlink" title="3.2 Tomek Links方法"></a>3.2 Tomek Links方法</h3><p>定义：Tomek links被定义为相反类最近邻样本之间的一对连接。</p>
 <p>符号约定：给定一个样本对$\left(x_i,x_j\right)$，其中$x_{i}$ $\in$ $S_{maj}$，$x_{j}$ $\in$ $S_{min}$，记$d\left(x_i,x_j\right)$是样本$x_i$和$x_j$之间的距离</p>
 <p>公式表示：如果不存在任何样本$x_k$，使得$d\left( x_i,x_k \right)$ &lt;$d\left( x_i,x_j \right)$ ，那么样本对$\left(x_i,x_j\right)$被称为Tomek Links</p>
-<p>使用这种方法，如果两个样本来自Tomek Links，那么他们中的一个样本要么是噪声要么它们都在两类的边界上。所以Tomek Links一般有两种用途：在欠采样中：将Tomek Links中属于是多数类的样本剔除；在数据清洗中，将Tomek Links中的两个样本都剔除。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042223.jpg" alt="屏幕快照 2017-04-19 上午10.07.11"></p>
+<p>使用这种方法，如果两个样本来自Tomek Links，那么他们中的一个样本要么是噪声要么它们都在两类的边界上。所以Tomek Links一般有两种用途：在欠采样中：将Tomek Links中属于是多数类的样本剔除；在数据清洗中，将Tomek Links中的两个样本都剔除。<br><img src="assets/2019-05-18-042223.jpg" alt="屏幕快照 2017-04-19 上午10.07.11"></p>
 <h3 id="3-3-NearMiss方法"><a href="#3-3-NearMiss方法" class="headerlink" title="3.3 NearMiss方法"></a>3.3 NearMiss方法</h3><p>NearMiss方法是利用距离远近剔除多数类样本的一类方法，实际操作中也是借助KNN，总结起来有以下几类：</p>
 <ul>
 <li>1）NearMiss-1：在多数类样本中选择与最近的三个少数类样本的平均距离最小的样本</li>
@@ -450,16 +450,16 @@ var _hmt = _hmt || [];
 <p>NearMiss-3方法则会使得每一个少数类样本附近都有足够多的多数类样本，显然这会使得模型的精确度高、召回率低。</p>
 <p>实验结果表明得到NearMiss-2的不均衡分类性能最优。</p>
 <h2 id="四、Informed-Understanding"><a href="#四、Informed-Understanding" class="headerlink" title="四、Informed Understanding"></a>四、Informed Understanding</h2><p>Informed欠抽样算法可以解决传统随机欠采样造成的数据信息丢失问题，且表现出较好的不均衡数据分类性能。其中有一些集成（ensemble）的想法，主要有两种方法，分别是EasyEnsemble算法和BalanceCascade算法。</p>
-<h3 id="4-1-EasyEnsemble算法"><a href="#4-1-EasyEnsemble算法" class="headerlink" title="4.1 EasyEnsemble算法"></a>4.1 EasyEnsemble算法</h3><p>它把数据划分为两部分，分别是多数类样本和少数类样本，对于多数类样本$S_{maj}$，通过$n$次有放回抽样生成$n$份子集，少数类样本$S_{min}$分别和这$n$份样本合并训练AdaBoost分类器，这样可以得到$n$个模型，最终的模型采用加权多数表决的方法，加大分类误差率小的弱分类器的权值，使其在表决中起较大的作用，减小分类误差率小的弱分类器的权值，使其在表决中起较小的作用。这里假设多数类样本为N，少数类样本为P，算法流程如下：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042236.jpg" alt="屏幕快照 2017-04-19 上午10.07.45"></p>
+<h3 id="4-1-EasyEnsemble算法"><a href="#4-1-EasyEnsemble算法" class="headerlink" title="4.1 EasyEnsemble算法"></a>4.1 EasyEnsemble算法</h3><p>它把数据划分为两部分，分别是多数类样本和少数类样本，对于多数类样本$S_{maj}$，通过$n$次有放回抽样生成$n$份子集，少数类样本$S_{min}$分别和这$n$份样本合并训练AdaBoost分类器，这样可以得到$n$个模型，最终的模型采用加权多数表决的方法，加大分类误差率小的弱分类器的权值，使其在表决中起较大的作用，减小分类误差率小的弱分类器的权值，使其在表决中起较小的作用。这里假设多数类样本为N，少数类样本为P，算法流程如下：<br><img src="assets/2019-05-18-042236.jpg" alt="屏幕快照 2017-04-19 上午10.07.45"></p>
 <p>EasyEnsemble的想法是多次随机欠抽样，尽可能全面地涵盖所有信息，算法特点是利用boosting减小偏差（Adaboost）、bagging减小方差（集成分类器）。实际应用的时候也可以尝试选用不同的分类器来提高分类的效果。</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042243.jpg" alt="屏幕快照 2017-04-19 上午10.08.08"></p>
-<h3 id="4-2-BalanceCascade算法"><a href="#4-2-BalanceCascade算法" class="headerlink" title="4.2 BalanceCascade算法"></a>4.2 BalanceCascade算法</h3><p>EasyEnsemble算法训练的子过程是独立的，BalanceCascade则是一种级联算法，这种级联的思想在图像识别中用途非常广泛。算法流程如下：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042250.jpg" alt="屏幕快照 2017-04-19 上午10.08.28"></p>
+<p><img src="assets/2019-05-18-042243.jpg" alt="屏幕快照 2017-04-19 上午10.08.08"></p>
+<h3 id="4-2-BalanceCascade算法"><a href="#4-2-BalanceCascade算法" class="headerlink" title="4.2 BalanceCascade算法"></a>4.2 BalanceCascade算法</h3><p>EasyEnsemble算法训练的子过程是独立的，BalanceCascade则是一种级联算法，这种级联的思想在图像识别中用途非常广泛。算法流程如下：<br><img src="assets/2019-05-18-042250.jpg" alt="屏幕快照 2017-04-19 上午10.08.28"></p>
 <p>BalanceCascade算法得到的是一个级联分类器，将若干个强分类器由简单到复杂排列，只有和少数类样本特征比较接近的才有可能输入到后面的分类器，比如边界点，因此能更充分地利用多数类样本的信息，一定程度上解决随机欠采样的信息丢失问题。</p>
 <h2 id="五、综合采样"><a href="#五、综合采样" class="headerlink" title="五、综合采样"></a>五、综合采样</h2><p>目前为止我们使用的重采样方法几乎都是只针对某一类样本：对多数类样本欠采样，对少数类样本过采样。也有人提出将欠采样和过采样综合的方法，解决样本类别分布不平衡和过拟合问题，本部分介绍其中的SMOTE+Tomek Links和SMOTE+ENN。</p>
 <h3 id="5-1-SMOTE-Tomek-Links"><a href="#5-1-SMOTE-Tomek-Links" class="headerlink" title="5.1 SMOTE+Tomek Links"></a>5.1 SMOTE+Tomek Links</h3><p>SMOTE+Tomek Links方法的算法流程非常简单：<br> 1.利用SMOTE方法生成新的少数类样本，得到扩充后的数据集T<br> 2.剔除T中的Tomek Links对</p>
 <p>普通的SMOTE方法生成的少数类样本是通过线性插值得到的，在平衡类别分布的同时也扩张了少数类的样本空间，产生的问题是可能原本属于多数类样本的空间被少数类“入侵”，容易造成模型的过拟合。</p>
 <p>Tomek Links对寻找的是那种噪声点或者边界点，可以很好地解决“入侵”的问题，下图红色加号为SMOTE产生的少数类样本，可以看到，红色样本“入侵”到原本属于多数类样本的空间，这种噪声数据问题可以通过Tomek Links很好地解决。</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-042258.jpg" alt="屏幕快照 2017-04-19 上午10.08.56"></p>
+<p><img src="assets/2019-05-18-042258.jpg" alt="屏幕快照 2017-04-19 上午10.08.56"></p>
 <p>由于第一步SMOTE方法已经很好地平衡了类别分布，因此在使用Tomek Links对的时候考虑剔除所有的Tomek Links对。</p>
 <h3 id="5-2-SMOTE-ENN"><a href="#5-2-SMOTE-ENN" class="headerlink" title="5.2 SMOTE+ENN"></a>5.2 SMOTE+ENN</h3><p>SMOTE+ENN方法和SMOTE+Tomek Links方法的想法和过程都是很类似的：</p>
 <ul>

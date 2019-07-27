@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="对文本进行处理在数据科学实践中必不可少的一环，业界的文本数据往往杂乱无章，而且数量及其庞大，当我们需要对文本进行片段匹配时，就要求我们利用计算机来批量地在文本中检索某种模式。正则表达式（Regular Expression）就是可以进行文本匹配的一种高级模式，它是一些由字符和特殊符号组成的字符串，它可以按照某种模式匹配一系列有相似特征的字符串。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-062125.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-062135.jpg">
-<meta property="og:updated_time" content="2019-06-29T07:09:26.790Z">
+<meta property="og:image" content="http://yoursite.com/2018/01/19/python编程系列（1）：正则表达式/assets/5d3baa7672c2a25494.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/01/19/python编程系列（1）：正则表达式/assets/5d3baa8472c0c46552.jpg">
+<meta property="og:updated_time" content="2019-07-27T06:26:53.535Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python编程系列（1）：正则表达式">
 <meta name="twitter:description" content="对文本进行处理在数据科学实践中必不可少的一环，业界的文本数据往往杂乱无章，而且数量及其庞大，当我们需要对文本进行片段匹配时，就要求我们利用计算机来批量地在文本中检索某种模式。正则表达式（Regular Expression）就是可以进行文本匹配的一种高级模式，它是一些由字符和特殊符号组成的字符串，它可以按照某种模式匹配一系列有相似特征的字符串。">
-<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-062125.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2018/01/19/python编程系列（1）：正则表达式/assets/5d3baa7672c2a25494.jpg">
 
 
 
@@ -396,7 +396,7 @@ var _hmt = _hmt || [];
         <p>对文本进行处理在数据科学实践中必不可少的一环，业界的文本数据往往杂乱无章，而且数量及其庞大，当我们需要对文本进行片段匹配时，就要求我们利用计算机来批量地在文本中检索某种模式。正则表达式（Regular Expression）就是可以进行文本匹配的一种高级模式，它是一些由字符和特殊符号组成的字符串，它可以按照某种模式匹配一系列有相似特征的字符串。</p>
 <a id="more"></a>
 <p>最简单的正则表达式就是普通字符串，它仅仅可以匹配其自身。比如正则表达式“python”只可以匹配字符串“python”。正则表达式的强大之处在于特殊符号的应用，特殊符号定义了字符集合、子组匹配以及模式的重复次数。正是这些特殊符号使得一个正则表达式可以匹配字符串集合而不只是一个字符串。</p>
-<h2 id="一、元字符"><a href="#一、元字符" class="headerlink" title="一、元字符"></a>一、元字符</h2><p>下图列出了Python支持的正则表达式元字符和语法：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-062125.jpg" alt=""></p>
+<h2 id="一、元字符"><a href="#一、元字符" class="headerlink" title="一、元字符"></a>一、元字符</h2><p>下图列出了Python支持的正则表达式元字符和语法：<br><img src="assets/5d3baa7672c2a25494.jpg" alt=""></p>
 <h3 id="1-1-择一匹配符号“-”"><a href="#1-1-择一匹配符号“-”" class="headerlink" title="1.1 择一匹配符号“|”"></a>1.1 择一匹配符号“|”</h3><p>表示从多个模式中选择一个，用于分割不同的正则表达式，可以匹配不止一个字符串，等同于逻辑“或”。例如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bat | bet | bit    # 可以匹配字符串bat或者bet或者bit</div></pre></td></tr></table></figure>
 <h3 id="1-2-任意字符匹配符号“-”"><a href="#1-2-任意字符匹配符号“-”" class="headerlink" title="1.2 任意字符匹配符号“.”"></a>1.2 任意字符匹配符号“.”</h3><p>“.”号可以匹配除了换行符以为的任何字符（Python正则表达式有一个编译标记[S或DOTALL]能够使“.”匹配换行符），要匹配“.”号自身，必须使用反斜线转译符号“.”。例如：</p>
@@ -418,7 +418,7 @@ var _hmt = _hmt || [];
 <h3 id="1-10-扩展表示法"><a href="#1-10-扩展表示法" class="headerlink" title="1.10 扩展表示法"></a>1.10 扩展表示法</h3><p>可以参考上面表格的讲解结合下面的例子就能懂了：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">Windows(?=95|98|NT|2000)  #能匹配“Windows2000”中的“Windows”，但不能匹配“Windows3.1”中的“Windows”</div><div class="line">Windows(?!95|98|NT|2000)  #能匹配“Windows3.1”中的“Windows”，但不能匹配“Windows2000”中的“Windows”</div><div class="line">(?&lt;=95|98|NT|2000)Windows  #能匹配“2000Windows”中的“Windows”，但不能匹配“3.1Windows”中的“Windows”</div><div class="line">(?&lt;!95|98|NT|2000)Windows  #能匹配“3.1Windows”中的“Windows”，但不能匹配“2000Windows”中的“Windows”</div><div class="line">industr(?:y|ies)  #就是一个比“industry|industries”更简略的表达式</div><div class="line"> </div><div class="line">(?:\w+\.)*  #以点结尾的字符串，如google.</div><div class="line">(?#comment)  #不做匹配，只做注释</div><div class="line">(?=.com)  #一个字符串后面跟着.com才做匹配</div><div class="line">(?!.net)  #一个字符串后面跟的不是.net才做匹配</div><div class="line">(?&lt;=800-)  #字符串前面出现800-才做匹配</div><div class="line">(?&lt;!192\.168\.)  # 字符串前面不是192.168。才做匹配，过滤掉一类ip地址</div><div class="line">(?(1)y|x)  #如果匹配组1（\1）存在，就与y匹配，否则就与x匹配</div></pre></td></tr></table></figure>
 <h2 id="二、re模块"><a href="#二、re模块" class="headerlink" title="二、re模块"></a>二、re模块</h2><p>Python语言中使用re模块的方法支持正则表达式。这里列出re模块常见的函数以方便查询（后面会介绍主要的函数使用方法）</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-062135.jpg" alt=""></p>
+<p><img src="assets/5d3baa8472c0c46552.jpg" alt=""></p>
 <p>下面将分开解释上面的部分函数：</p>
 <h3 id="2-1-使用match-和search-匹配字符串，使用group-查看结果"><a href="#2-1-使用match-和search-匹配字符串，使用group-查看结果" class="headerlink" title="2.1 使用match()和search()匹配字符串，使用group()查看结果"></a>2.1 使用match()和search()匹配字符串，使用group()查看结果</h3><p>re.match() :从字符串开始的位置匹配，成功返回匹配的对象，失败返回None<br>re.search(): 扫描整个字符串来进行匹配，成功返回匹配的对象，失败返回None</p>
 <blockquote>

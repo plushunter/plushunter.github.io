@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、引入随着信息爆炸时代的来临，互联网上充斥着着大量的近重复信息，有效地识别它们是一个很有意义的课题。例如，对于搜索引擎的爬虫系统来说，收录重复的网页是毫无意义的，只会造成存储和计算资源的浪费；同时，展示重复的信息对于用户来说也并不是最好的体验。造成网页近重复的可能原因主要包括：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165114.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165122.jpg">
-<meta property="og:updated_time" content="2019-06-29T07:09:27.005Z">
+<meta property="og:image" content="http://yoursite.com/2017/08/01/数据结构与算法（17）：simhash/assets/2019-05-17-165114.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/08/01/数据结构与算法（17）：simhash/assets/2019-05-17-165122.jpg">
+<meta property="og:updated_time" content="2019-07-27T06:27:05.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（17）：simhash">
 <meta name="twitter:description" content="一、引入随着信息爆炸时代的来临，互联网上充斥着着大量的近重复信息，有效地识别它们是一个很有意义的课题。例如，对于搜索引擎的爬虫系统来说，收录重复的网页是毫无意义的，只会造成存储和计算资源的浪费；同时，展示重复的信息对于用户来说也并不是最好的体验。造成网页近重复的可能原因主要包括：">
-<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165114.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2017/08/01/数据结构与算法（17）：simhash/assets/2019-05-17-165114.jpg">
 
 
 
@@ -403,7 +403,7 @@ var _hmt = _hmt || [];
 <li>少量修改</li>
 </ul>
 <p>一个简化的爬虫系统架构如下图所示：</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165114.jpg" alt=""></p>
+<p><img src="assets/2019-05-17-165114.jpg" alt=""></p>
 <p>事实上，传统比较两个文本相似性的方法，大多是将文本分词之后，转化为特征向量距离的度量，比如常见的欧氏距离、海明距离或者余弦角度等等。两两比较固然能很好地适应，但这种方法的一个最大的缺点就是，无法将其扩展到海量数据。例如，试想像Google那种收录了数以几十亿互联网信息的大型搜索引擎，每天都会通过爬虫的方式为自己的索引库新增的数百万网页，如果待收录每一条数据都去和网页库里面的每条记录算一下余弦角度，其计算量是相当恐怖的。 </p>
 <p>我们考虑采用为每一个web文档通过hash的方式生成一个指纹（fingerprint）。传统的加密式hash，比如md5，其设计的目的是为了让整个分布尽可能地均匀，输入内容哪怕只有轻微变化，hash就会发生很大地变化。我们理想当中的哈希函数，需要对几乎相同的输入内容，产生相同或者相近的hashcode，换句话说，hashcode的相似程度要能直接反映输入内容的相似程度。很明显，前面所说的md5等传统hash无法满足我们的需求。 </p>
 <h2 id="二、simhash的原理"><a href="#二、simhash的原理" class="headerlink" title="二、simhash的原理"></a>二、simhash的原理</h2><p>simhash是locality sensitive hash（局部敏感哈希）的一种，最早由Moses Charikar在《similarity estimation techniques from rounding algorithms》一文中提出。Google就是基于此算法实现网页文件查重的。simhash算法的主要思想是降维，将高维的特征向量映射成一个f-bit的指纹(fingerprint)，通过比较两篇文章的f-bit指纹的Hamming Distance来确定文章是否重复或者高度近似。我们假设有以下三段文本：</p>
@@ -418,7 +418,7 @@ var _hmt = _hmt || [];
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">irb(main):003:0&gt; p1.simhash </div><div class="line">=&gt; 851459198 </div><div class="line">00110010110000000011110001111110 </div><div class="line">irb(main):004:0&gt; p2.simhash </div><div class="line">=&gt; 847263864 </div><div class="line">00110010100000000011100001111000 </div><div class="line">irb(main):002:0&gt; p3.simhash </div><div class="line">=&gt; 984968088 </div><div class="line">00111010101101010110101110011000</div></pre></td></tr></table></figure>
 <p>海明距离的定义，为两个二进制串中不同位的数量。上述三个文本的simhash结果，其两两之间的海明距离为(p1,p2)=4，(p1,p3)=16以及(p2,p3)=12。事实上，这正好符合文本之间的相似度，p1和p2间的相似度要远大于与p3的。 </p>
 <p>如何实现这种hash算法呢？图解如下：</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-165122.jpg" alt=""></p>
+<p><img src="assets/2019-05-17-165122.jpg" alt=""></p>
 <p>算法过程大概如下：</p>
 <ol>
 <li>将Doc进行关键词抽取(其中包括分词和计算权重)，抽取出n个(关键词，权重)对， 即图中的<code>(feature, weight)</code>们。 记为 <code>feature_weight_pairs = [fw1, fw2 … fwn]</code>，其中 <code>fwn = (feature_n,weight_n</code>)。</li>

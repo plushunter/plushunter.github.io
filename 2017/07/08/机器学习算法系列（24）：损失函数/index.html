@@ -94,15 +94,15 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子： \theta^* = argmin_\theta \frac{1}{N">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040837.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040844.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040850.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040858.jpg">
-<meta property="og:updated_time" content="2019-06-29T07:09:27.061Z">
+<meta property="og:image" content="http://yoursite.com/2017/07/08/机器学习算法系列（24）：损失函数/assets/2019-05-18-040837.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/08/机器学习算法系列（24）：损失函数/assets/2019-05-18-040844.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/08/机器学习算法系列（24）：损失函数/assets/2019-05-18-040850.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/08/机器学习算法系列（24）：损失函数/assets/2019-05-18-040858.jpg">
+<meta property="og:updated_time" content="2019-07-27T06:27:16.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（24）：机器学习中的损失函数">
 <meta name="twitter:description" content="损失函数（loss function）是用来估量模型的预测值f(x)与真实值$Y$不一致的程度，它是一个非负实数值函数，通常使用$L(Y,f(x))$来表示，损失函数越小，模型的鲁棒性就越好。损失函数是经验风险函数的核心部分，也是结构风险函数的重要组成部分。模型的结构风险函数包括了经验风险项和正则项，通常可以表示成如下的式子： \theta^* = argmin_\theta \frac{1}{N">
-<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040837.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/08/机器学习算法系列（24）：损失函数/assets/2019-05-18-040837.jpg">
 
 
 
@@ -441,9 +441,9 @@ s.t.\ \ y_i\left( w·x_i+b \right) \geqslant 1-\xi _i\ ,\ i=1,2,···,N</script
 <script type="math/tex; mode=display">\underset{w,b}{min}\sum_{i=1}^N\xi_i+\lambda||w||^2</script><p>若取$\lambda =\frac{1}{2C}$则</p>
 <script type="math/tex; mode=display">\underset{w,b}{min} \frac{1}{C}(\frac{1}{2} ||w||^2+C\sum_{i=1}^N \xi_i)</script><p>与原始最优化问题等价。</p>
 <p>合页损失函数图像如图所示，横轴是函数间隔$y(w·x+b)$，纵轴是损失。由于函数形状像一个合页，故名合页损失函数。</p>
-<p>图中还画出了0-1损失函数，可以认为它是一个二类分类问题的真正的损失函数，而合页损失函数是0-1损失函数的上界。由于0-1损失函数不是连续可导的，直接优化其构成的目标函数比较困难，可以认为线性支持向量机是优化由0-1损失函数的上界（合页损失函数）构成的目标函数。这时的上界损失函数又称为代理损失函数（surrogate function）。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040837.jpg" alt=""><br>图中虚线显示的是感知机的损失函数$[-y_i(w·x_i+b)]_+$。这时当样本点$(x_i,y_i)$被正确分类时，损失是0，否则损失是$-y_i(w·x_i+b)$，相比之下，合页损失函数不仅要分类正确，而且确信度足够高时损失才是0，也就是说，合页损失函数对学习有更高的要求</p>
-<h3 id="4-2-逻辑斯谛回归和SVM的损失函数对比"><a href="#4-2-逻辑斯谛回归和SVM的损失函数对比" class="headerlink" title="4.2 逻辑斯谛回归和SVM的损失函数对比"></a>4.2 逻辑斯谛回归和SVM的损失函数对比</h3><p>我们先来看一下带松弛变量的 SVM 和正则化的逻辑回归它们的损失函数：<img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040844.jpg" alt="">其中 $g(z)=(1+exp(−z))^{−1}$<br>可以将两者统一起来:</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040850.jpg" alt=""><br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040858.jpg" alt=""><br>这两个损失函数的目的都是增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。SVM的处理方法是只考虑support vectors，也就是和分类最相关的少数点，去学习分类器。而逻辑回归通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重,两者的根本目的都是一样的。</p>
+<p>图中还画出了0-1损失函数，可以认为它是一个二类分类问题的真正的损失函数，而合页损失函数是0-1损失函数的上界。由于0-1损失函数不是连续可导的，直接优化其构成的目标函数比较困难，可以认为线性支持向量机是优化由0-1损失函数的上界（合页损失函数）构成的目标函数。这时的上界损失函数又称为代理损失函数（surrogate function）。<br><img src="assets/2019-05-18-040837.jpg" alt=""><br>图中虚线显示的是感知机的损失函数$[-y_i(w·x_i+b)]_+$。这时当样本点$(x_i,y_i)$被正确分类时，损失是0，否则损失是$-y_i(w·x_i+b)$，相比之下，合页损失函数不仅要分类正确，而且确信度足够高时损失才是0，也就是说，合页损失函数对学习有更高的要求</p>
+<h3 id="4-2-逻辑斯谛回归和SVM的损失函数对比"><a href="#4-2-逻辑斯谛回归和SVM的损失函数对比" class="headerlink" title="4.2 逻辑斯谛回归和SVM的损失函数对比"></a>4.2 逻辑斯谛回归和SVM的损失函数对比</h3><p>我们先来看一下带松弛变量的 SVM 和正则化的逻辑回归它们的损失函数：<img src="assets/2019-05-18-040844.jpg" alt="">其中 $g(z)=(1+exp(−z))^{−1}$<br>可以将两者统一起来:</p>
+<p><img src="assets/2019-05-18-040850.jpg" alt=""><br><img src="assets/2019-05-18-040858.jpg" alt=""><br>这两个损失函数的目的都是增加对分类影响较大的数据点的权重，减少与分类关系较小的数据点的权重。SVM的处理方法是只考虑support vectors，也就是和分类最相关的少数点，去学习分类器。而逻辑回归通过非线性映射，大大减小了离分类平面较远的点的权重，相对提升了与分类最相关的数据点的权重,两者的根本目的都是一样的。</p>
 <p>svm考虑局部（支持向量），而logistic回归考虑全局，就像大学里的辅导员和教师间的区别。</p>
 <p>辅导员关心的是挂科边缘的人，常常找他们谈话，告诫他们一定得好好学习，不要浪费大好青春，挂科了会拿不到毕业证、学位证等等，相反，对于那些相对优秀或者良好的学生，他们却很少去问，因为辅导员相信他们一定会按部就班的做好分内的事；而大学里的教师却不是这样的，他们关心的是班里的整体情况，大家是不是基本都理解了，平均分怎么样，至于某个人的分数是59还是61，他们倒不是很在意。</p>
 <p>总结：</p>

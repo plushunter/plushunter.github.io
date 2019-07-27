@@ -94,18 +94,18 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、简述MapReduce最早是由Google提出的分布式数据处理模型，随后受到了业内的广泛关注，并被大量应用到各种商业场景中。比如：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023608.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023615.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023625.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023634.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023715.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023806.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023813.jpg">
-<meta property="og:updated_time" content="2019-06-29T07:09:27.080Z">
+<meta property="og:image" content="http://yoursite.com/2017/07/27/机器学习算法系列（32）：MapReduce执行流程详解/assets/2019-05-18-023608.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/27/机器学习算法系列（32）：MapReduce执行流程详解/assets/2019-05-18-023615.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/27/机器学习算法系列（32）：MapReduce执行流程详解/assets/2019-05-18-023625.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/27/机器学习算法系列（32）：MapReduce执行流程详解/assets/2019-05-18-023634.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/27/机器学习算法系列（32）：MapReduce执行流程详解/assets/2019-05-18-023715.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/27/机器学习算法系列（32）：MapReduce执行流程详解/assets/2019-05-18-023806.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/27/机器学习算法系列（32）：MapReduce执行流程详解/assets/2019-05-18-023813.jpg">
+<meta property="og:updated_time" content="2019-07-27T06:27:18.707Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（32）：MapReduce执行流程详解">
 <meta name="twitter:description" content="一、简述MapReduce最早是由Google提出的分布式数据处理模型，随后受到了业内的广泛关注，并被大量应用到各种商业场景中。比如：">
-<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023608.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/27/机器学习算法系列（32）：MapReduce执行流程详解/assets/2019-05-18-023608.jpg">
 
 
 
@@ -410,11 +410,11 @@ var _hmt = _hmt || [];
 <li>广告推荐：用户点击（CTR)和购买行为（CVR）预测。</li>
 </ul>
 <p>一个Map/Reduce作业（job）通常会把输入的数据（input file）且分为若干个独立的数据块（splits），然后由map任务（task）以完全并行的方式处理它们。Map/Reduce框架会对map的输出做一个Shuffle操作，Suffle操作后的结果会输入给reduce任务。整个Map/Reduce框架负责任务的调度和监控，以及重新执行已经失败的任务。</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023608.jpg" alt=""></p>
-<p>Map/Reduce计算集群由一个单独的JobTracker（master）和每个集群节点一个TaskTracker（slave）共同组成。JobTracker负责调度构成一个作业的所有任务，这些任务会被分派到不同的TaskTracker上去执行，JobTRacker会去监控它们的执行、重新执行已经失败的任务。而TaskTracker仅负责执行由JobTracker指派的任务。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023615.jpg" alt=""></p>
+<p><img src="assets/2019-05-18-023608.jpg" alt=""></p>
+<p>Map/Reduce计算集群由一个单独的JobTracker（master）和每个集群节点一个TaskTracker（slave）共同组成。JobTracker负责调度构成一个作业的所有任务，这些任务会被分派到不同的TaskTracker上去执行，JobTRacker会去监控它们的执行、重新执行已经失败的任务。而TaskTracker仅负责执行由JobTracker指派的任务。<br><img src="assets/2019-05-18-023615.jpg" alt=""></p>
 <p>本文将按照map/reduce执行流程中各个任务的时间顺序详细叙述map/reduce的各个任务模块，包括：输入分片（input split）、map阶段、combiner阶段、shuffle阶段和reduce阶段。下图是一个不错的执行流程图：</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023625.jpg" alt=""></p>
-<h2 id="二、作业的提交与监控"><a href="#二、作业的提交与监控" class="headerlink" title="二、作业的提交与监控"></a>二、作业的提交与监控</h2><p>JobClient是用户提交的作业与JobTracker交互的主要接口。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023634.jpg" alt=""></p>
+<p><img src="assets/2019-05-18-023625.jpg" alt=""></p>
+<h2 id="二、作业的提交与监控"><a href="#二、作业的提交与监控" class="headerlink" title="二、作业的提交与监控"></a>二、作业的提交与监控</h2><p>JobClient是用户提交的作业与JobTracker交互的主要接口。<br><img src="assets/2019-05-18-023634.jpg" alt=""></p>
 <p>JobClient提交作业的过程如下：</p>
 <ol>
 <li>map/reduce程序通过runJob()方法新建一个JobClient实例;</li>
@@ -433,7 +433,7 @@ var _hmt = _hmt || [];
 <li>把输入文件切分成多个逻辑InputSplit实例， 一个InputSplit将会被分配给一个独立的Map任务。</li>
 <li>提供RecordReader实现，这个RecordReader从逻辑InputSplit中获得输入记录（”K-V对”），这些记录将由Map任务处理。</li>
 </ol>
-<p>InputFormat有如下几种:<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023715.jpg" alt=""></p>
+<p>InputFormat有如下几种:<br><img src="assets/2019-05-18-023715.jpg" alt=""></p>
 <blockquote>
 <p>TextInputFormat:</p>
 </blockquote>
@@ -525,8 +525,8 @@ var _hmt = _hmt || [];
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Lisa　　1</div><div class="line">My　　   2</div><div class="line">My　　　　2</div><div class="line">name　　1</div><div class="line">name　　1</div><div class="line">Pivotal   1</div><div class="line">Tony　　  1</div></pre></td></tr></table></figure>
 <h3 id="3-4-Redeuce阶段"><a href="#3-4-Redeuce阶段" class="headerlink" title="3.4 Redeuce阶段"></a>3.4 Redeuce阶段</h3><p>reduce阶段对数据进行归约处理。键相等的键值对会调用一次reduce方法。经过这一阶段，数据量会减少。归约后的数据输出到本地文件中。本阶段默认是没有的，需要用户自己增加这一阶段的代码。</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023806.jpg" alt=""></p>
-<h2 id="四、实例说明"><a href="#四、实例说明" class="headerlink" title="四、实例说明"></a>四、实例说明</h2><p>下面将以WordCount为例，解释MapReduce各个阶段的概念。 假设存在一个文本a.txt，文本内每行是一个数字，我们要统计每个数字出现的次数。文本内的数字称为Word，数字出现的次数称为Count。如果MaxCompute Mapreduce完成这一功能，需要经历下图描述的几个步骤：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-023813.jpg" alt=""></p>
+<p><img src="assets/2019-05-18-023806.jpg" alt=""></p>
+<h2 id="四、实例说明"><a href="#四、实例说明" class="headerlink" title="四、实例说明"></a>四、实例说明</h2><p>下面将以WordCount为例，解释MapReduce各个阶段的概念。 假设存在一个文本a.txt，文本内每行是一个数字，我们要统计每个数字出现的次数。文本内的数字称为Word，数字出现的次数称为Count。如果MaxCompute Mapreduce完成这一功能，需要经历下图描述的几个步骤：<br><img src="assets/2019-05-18-023813.jpg" alt=""></p>
 <ol>
 <li>首先对文本进行分片，将每片内的数据作为单个Map Worker的输入；</li>
 <li>Map处理输入，每获取一个数字，将数字的Count设置为1，并将此<word, count="">对输出，此时以Word作为输出数据的Key；<br>在Shuffle阶段前期，首先对每个Map Worker的输出，按照Key值，即Word值排序。排序后进行Combine操作，即将Key值(Word值)相同的Count累加，构成一个新的<word, count="">对。此过程被称为合并排序；</word,></word,></li>

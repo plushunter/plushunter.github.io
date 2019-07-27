@@ -94,14 +94,14 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、基本概念查找（Search）就是根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素（或记录）。在计算机应用中，查找是常用的基本运算，例如编译程序中符号表的查找。先说明几个概念：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-164137.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-164231.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-164240.jpg">
-<meta property="og:updated_time" content="2019-06-29T07:09:26.995Z">
+<meta property="og:image" content="http://yoursite.com/2017/07/24/数据结构与算法（10）：查找/assets/2019-05-17-164137.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/24/数据结构与算法（10）：查找/assets/2019-05-17-164231.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/24/数据结构与算法（10）：查找/assets/2019-05-17-164240.jpg">
+<meta property="og:updated_time" content="2019-07-27T06:27:02.508Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（10）：查找">
 <meta name="twitter:description" content="一、基本概念查找（Search）就是根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素（或记录）。在计算机应用中，查找是常用的基本运算，例如编译程序中符号表的查找。先说明几个概念：">
-<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-164137.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/24/数据结构与算法（10）：查找/assets/2019-05-17-164137.jpg">
 
 
 
@@ -447,7 +447,7 @@ var _hmt = _hmt || [];
 <p>黄金比例又称为黄金分割，是指事物各部分间一定的数学比例关系，即将整体一分为二，较大部分与较小部分之比等于整体与较大部分之比，其比值约为1：0.618。</p>
 <p>0.618倍公认为是最具有审美意义的比例数字，这个数值的作用不仅仅体现在诸如绘画、雕塑、音乐、建筑等艺术领域，而且在管理、工程设计等方面有着不可忽视的作用。因此被称为黄金分割。</p>
 <p>大家记不记得斐波那契数列：1，1，2，3，5，8，13，21，34，55，89……（从第三个数开始，后面每一个数都是前两个数的和）。然后我们会发现，随着斐波那契数列的递增，前后两个数的比值会越来越接近0.618，利用这个特性，我们就可以将黄金比例运用到查找技术中。</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-164137.jpg" alt=""></p>
+<p><img src="assets/2019-05-17-164137.jpg" alt=""></p>
 <p><strong>基本思想：</strong>也是二分查找的一种提升算法，通过运用黄金比例的概念在数列中选择查找点进行查找，提高查找效率。同样地，斐波那契查找也属于一种有序查找算法。</p>
 <p>相对于折半查找，一般将待比较的key值与第mid=（low+high）/2位置的元素进行比较，比较结果分为三种情况：</p>
 <ol>
@@ -477,14 +477,14 @@ var _hmt = _hmt || [];
 <ul>
 <li>稠密索引：</li>
 </ul>
-<p>指的是在线性索引中，为数据集合中的每个记录都建立一个索引项。<img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-164231.jpg" alt="">这其实就相当于给无序的集合，建立了一张有序的线性表，其索引项一定是按照关键码进行有序的排列。这也相当于把查找过程中需要的排序工作给提前做了。</p>
+<p>指的是在线性索引中，为数据集合中的每个记录都建立一个索引项。<img src="assets/2019-05-17-164231.jpg" alt="">这其实就相当于给无序的集合，建立了一张有序的线性表，其索引项一定是按照关键码进行有序的排列。这也相当于把查找过程中需要的排序工作给提前做了。</p>
 <ul>
 <li>分块索引：</li>
 </ul>
 <p>分块查找又称索引顺序查找，是顺序查找的一种改进方法。</p>
 <p>算法思想：将n个数据元素“按块有序”划分为m块（m&lt;n）。每一块中的结点不必有序，但块与块之间必须“按块有序”；即第一块中人艺元素的关键字都必须小于第2块中任一元素的关键字；而第二块中任一元素又都必须小于第三块中的任一元素，……</p>
 <p>算法流程：<br>首先选取各块中的最大关键字构成一个索引表；查找分为两个部分：先对索引表进行二分查找或顺序查找，以确定待查记录在哪一块中；然后，在已确定的块中用顺序法进行查找。</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-17-164240.jpg" alt="">这其实是有序查找和无序查找的一种中间状态或者说妥协状态。因为数据量过大，建立完整的稠密索引耗时耗力，占用资源过多；但如果不做任何排序或索引，那么遍历的查找也无法接受，只能这种，做一定程度的排序或索引。分块索引的效率比遍历查找的$O(n)$要高一些，但与二分查找的$O(logn)$还是要差不少。</p>
+<p><img src="assets/2019-05-17-164240.jpg" alt="">这其实是有序查找和无序查找的一种中间状态或者说妥协状态。因为数据量过大，建立完整的稠密索引耗时耗力，占用资源过多；但如果不做任何排序或索引，那么遍历的查找也无法接受，只能这种，做一定程度的排序或索引。分块索引的效率比遍历查找的$O(n)$要高一些，但与二分查找的$O(logn)$还是要差不少。</p>
 <ul>
 <li>倒排索引：<br>不是由记录来确定属性值，而是由属性值来确定记录的位置，这种被称为倒排索引。其中记录号表存储具有相同关键字的所有记录的地址或引用（可以是指向记录的指针或该记录的主关键字）。倒排索引是最基础的搜索引擎技术。</li>
 </ul>

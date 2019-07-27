@@ -94,20 +94,20 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="PCA（Principal Component Analysis）是一种常用的数据分析方法。PCA通过线性变换将原始数据变换为一组各维度线性无关的表示，可用于提取数据的主要特征分量，常用于高维数据的降维。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040918.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040925.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040932.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-041005.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-041015.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-062249.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-062257.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-041027.jpg">
-<meta property="og:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-041033.jpg">
-<meta property="og:updated_time" content="2019-06-29T07:09:27.058Z">
+<meta property="og:image" content="http://yoursite.com/2017/07/03/机器学习算法系列（22）：主成分分析/assets/2019-05-18-040918.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/03/机器学习算法系列（22）：主成分分析/assets/2019-05-18-040925.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/03/机器学习算法系列（22）：主成分分析/assets/2019-05-18-040932.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/03/机器学习算法系列（22）：主成分分析/assets/2019-05-18-041005.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/03/机器学习算法系列（22）：主成分分析/assets/2019-05-18-041015.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/03/机器学习算法系列（22）：主成分分析/assets/2019-05-18-062249.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/03/机器学习算法系列（22）：主成分分析/assets/2019-05-18-062257.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/03/机器学习算法系列（22）：主成分分析/assets/2019-05-18-041027.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/07/03/机器学习算法系列（22）：主成分分析/assets/2019-05-18-041033.jpg">
+<meta property="og:updated_time" content="2019-07-27T06:27:15.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（22）：主成分分析">
 <meta name="twitter:description" content="PCA（Principal Component Analysis）是一种常用的数据分析方法。PCA通过线性变换将原始数据变换为一组各维度线性无关的表示，可用于提取数据的主要特征分量，常用于高维数据的降维。">
-<meta name="twitter:image" content="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040918.jpg">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/03/机器学习算法系列（22）：主成分分析/assets/2019-05-18-040918.jpg">
 
 
 
@@ -418,21 +418,21 @@ var _hmt = _hmt || [];
 <h2 id="二、向量的表示及基变换"><a href="#二、向量的表示及基变换" class="headerlink" title="二、向量的表示及基变换"></a>二、向量的表示及基变换</h2><p>既然我们面对的数据被抽象为一组向量，那么下面有必要研究一些向量的数学性质。而这些数学性质将成为后续导出PCA的理论基础。</p>
 <h3 id="2-1-内积与投影"><a href="#2-1-内积与投影" class="headerlink" title="2.1 内积与投影"></a>2.1 内积与投影</h3><p>下面先来看一个高中就学过的向量运算：内积。两个维数相同的向量的内积被定义为：</p>
 <script type="math/tex; mode=display">(a_1,a_2,⋯,a_n)^𝖳⋅(b_1,b_2,⋯,b_n)𝖳=a_1b_1+a_2b_2+⋯+a_nb_n</script><p>内积运算将两个向量映射为一个实数。其计算方式非常容易理解，但是其意义并不明显。下面我们分析内积的几何意义。</p>
-<p>假设A和B是两个n维向量，我们知道n维向量可以等价表示为n维空间中的一条从原点发射的有向线段，为了简单起见我们假设A和B均为二维向量，则$A=(x_1,y_1)$，$B=(x_2,y_2)$。则在二维平面上A和B可以用两条发自原点的有向线段表示，见下图：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040918.jpg" alt=""><br>现在我们从A点向B所在直线引一条垂线。我们知道垂线与B的交点叫做A在B上的投影，再设A与B的夹角是a，则投影的矢量长度为$|A|cos(a)|A|cos(a)$，其中$|A|=\sqrt{x^2_1+y^2_1}$是向量A的模，也就是A线段的标量长度。</p>
+<p>假设A和B是两个n维向量，我们知道n维向量可以等价表示为n维空间中的一条从原点发射的有向线段，为了简单起见我们假设A和B均为二维向量，则$A=(x_1,y_1)$，$B=(x_2,y_2)$。则在二维平面上A和B可以用两条发自原点的有向线段表示，见下图：<br><img src="assets/2019-05-18-040918.jpg" alt=""><br>现在我们从A点向B所在直线引一条垂线。我们知道垂线与B的交点叫做A在B上的投影，再设A与B的夹角是a，则投影的矢量长度为$|A|cos(a)|A|cos(a)$，其中$|A|=\sqrt{x^2_1+y^2_1}$是向量A的模，也就是A线段的标量长度。</p>
 <p>注意这里我们专门区分了矢量长度和标量长度，标量长度总是大于等于0，值就是线段的长度；而矢量长度可能为负，其绝对值是线段长度，而符号取决于其方向与标准方向相同或相反。</p>
 <p>到这里还是看不出内积和这东西有什么关系，不过如果我们将内积表示为另一种我们熟悉的形式：</p>
 <script type="math/tex; mode=display">A⋅B=|A||B|cos(a)</script><p>A与B的内积等于A到B的投影长度乘以B的模。再进一步，如果我们假设B的模为1，即让$|B|=1$，那么就变成了：</p>
 <script type="math/tex; mode=display">A⋅B=|A|cos(a)</script><p>也就是说，设向量B的模为1，则A与B的内积值等于A向B所在直线投影的矢量长度！这就是内积的一种几何解释，也是我们得到的第一个重要结论。</p>
-<h3 id="2-2-基"><a href="#2-2-基" class="headerlink" title="2.2 基"></a>2.2 基</h3><p>下面我们继续在二维空间内讨论向量。上文说过，一个二维向量可以对应二维笛卡尔直角坐标系中从原点出发的一个有向线段。例如下面这个向量：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040925.jpg" alt=""></p>
+<h3 id="2-2-基"><a href="#2-2-基" class="headerlink" title="2.2 基"></a>2.2 基</h3><p>下面我们继续在二维空间内讨论向量。上文说过，一个二维向量可以对应二维笛卡尔直角坐标系中从原点出发的一个有向线段。例如下面这个向量：<br><img src="assets/2019-05-18-040925.jpg" alt=""></p>
 <p>在代数表示方面，我们经常用线段终点的点坐标表示向量，例如上面的向量可以表示为(3,2)，这是我们再熟悉不过的向量表示。</p>
 <p>不过我们常常忽略，只有一个(3,2)本身是不能够精确表示一个向量的。我们仔细看一下，这里的3实际表示的是向量在x轴上的投影值是3，在y轴上的投影值是2。也就是说我们其实隐式引入了一个定义：以x轴和y轴上正方向长度为1的向量为标准。那么一个向量(3,2)实际是说在x轴投影为3而y轴的投影为2。注意投影是一个矢量，所以可以为负。</p>
 <p>更正式的说，向量(x,y)实际上表示线性组合：</p>
-<script type="math/tex; mode=display">x(1,0)^T+y(0,1)^T</script><p>不难证明所有二维向量都可以表示为这样的线性组合。此处（1，0）和（0，1）叫做二维空间中的一组基。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-040932.jpg" alt=""></p>
+<script type="math/tex; mode=display">x(1,0)^T+y(0,1)^T</script><p>不难证明所有二维向量都可以表示为这样的线性组合。此处（1，0）和（0，1）叫做二维空间中的一组基。<br><img src="assets/2019-05-18-040932.jpg" alt=""></p>
 <p>所以，要准确描述向量，首先要确定一组基，然后给出在基所在的各个直线上的投影值，就可以了。只不过我们经常省略第一步，而默认以(1,0)和(0,1)为基。</p>
 <p>我们之所以默认选择$(1,0)$和$(0,1)$为基，当然是比较方便，因为它们分别是x和y轴正方向上的单位向量，因此就使得二维平面上点坐标和向量一一对应，非常方便。但实际上任何两个线性无关的二维向量都可以成为一组基，所谓线性无关在二维平面内可以直观认为是两个不在一条直线上的向量。</p>
 <p>例如，$(1,1)$和$(-1,1)$也可以成为一组基。一般来说，我们希望基的模是1，因为从内积的意义可以看到，如果基的模是1，那么就可以方便的用向量点乘基而直接获得其在新基上的坐标了！实际上，对应任何一个向量我们总可以找到其同方向上模为1的向量，只要让两个分量分别除以模就好了。例如，上面的基可以变为$(\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}})$和$-\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}$。</p>
 <p>现在，我们想获得$(3,2)$在新基上的坐标，即在两个方向上的投影矢量值，那么根据内积的几何意义，我们只要分别计算(3,2)和两个基的内积，不难得到新的坐标为$(\frac{5}{\sqrt{2}},−\frac{1}{\sqrt{2}}$。下图给出了新的基以及(3,2)在新基上坐标值的示意图：</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-041005.jpg" alt=""></p>
+<p><img src="assets/2019-05-18-041005.jpg" alt=""></p>
 <p>另外这里要注意的是，我们列举的例子中基是正交的（即内积为0，或直观说相互垂直），但可以成为一组基的唯一要求就是线性无关，非正交的基也是可以的。不过因为正交基有较好的性质，所以一般使用的基都是正交的。</p>
 <h3 id="2-3-基变换的矩阵表示"><a href="#2-3-基变换的矩阵表示" class="headerlink" title="2.3 基变换的矩阵表示"></a>2.3 基变换的矩阵表示</h3><p>下面我们找一种简便的方式来表示基变换。还是拿上面的例子，想一下，将$(3,2)$变换为新基上的坐标，就是用$(3,2)$与第一个基做内积运算，作为第一个新的坐标分量，然后用(3,2)与第二个基做内积运算，作为第二个新坐标的分量。实际上，我们可以用矩阵相乘的形式简洁的表示这个变换：</p>
 <script type="math/tex; mode=display">
@@ -488,7 +488,7 @@ var _hmt = _hmt || [];
 \left[\begin{matrix}
     -1&        -1&        0&        2&        0\\
     -2&        0&        0&        1&        1\\
-\end{matrix}\right]</script><p>我们可以看下五条数据在平面直角坐标系内的样子：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-041015.jpg" alt=""></p>
+\end{matrix}\right]</script><p>我们可以看下五条数据在平面直角坐标系内的样子：<br><img src="assets/2019-05-18-041015.jpg" alt=""></p>
 <p>现在问题来了：如果我们必须使用一维来表示这些数据，又希望尽量保留原始的信息，你要如何选择？</p>
 <p>通过上一节对基变换的讨论我们知道，这个问题实际上是要在二维平面中选择一个方向，将所有数据都投影到这个方向所在直线上，用投影值表示原始记录。这是一个实际的二维降到一维的问题。</p>
 <p>那么如何选择这个方向（或者说基）才能尽量保留最多的原始信息呢？一种直观的看法是：希望投影后的投影值尽可能分散。</p>
@@ -608,8 +608,8 @@ X=\left[\begin{matrix}
             -2&0&0&1&1\\
 \end{matrix}\right]=\left[\begin{matrix}
             -\frac{3}{\sqrt{2}}&\frac{1}{\sqrt{2}}&0&\frac{3}{\sqrt{2}}&-\frac{1}{2}\\
-\end{matrix}\right]</script><p>降维投影结果如下图：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-062249.jpg" alt=""></p>
-<h2 id="五、理论意义"><a href="#五、理论意义" class="headerlink" title="五、理论意义"></a>五、理论意义</h2><p>PCA将n个特征降维到k个，可以用来进行数据压缩，如果100维的向量最后可以用10维来表示，那么压缩率为90%。同样图像处理领域的KL变换使用PCA做图像压缩。但PCA要保证降维后，还要保证数据的特性损失最小。再看回顾一下PCA的效果。经过PCA处理后，二维数据投影到一维上可以有以下几种情况：<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-062257.jpg" alt=""></p>
+\end{matrix}\right]</script><p>降维投影结果如下图：<br><img src="assets/2019-05-18-062249.jpg" alt=""></p>
+<h2 id="五、理论意义"><a href="#五、理论意义" class="headerlink" title="五、理论意义"></a>五、理论意义</h2><p>PCA将n个特征降维到k个，可以用来进行数据压缩，如果100维的向量最后可以用10维来表示，那么压缩率为90%。同样图像处理领域的KL变换使用PCA做图像压缩。但PCA要保证降维后，还要保证数据的特性损失最小。再看回顾一下PCA的效果。经过PCA处理后，二维数据投影到一维上可以有以下几种情况：<br><img src="assets/2019-05-18-062257.jpg" alt=""></p>
 <p>我们认为左图好，一方面是投影后方差最大，一方面是点到直线的距离平方和最小，而且直线过样本点的中心点。为什么右边的投影效果比较差？直觉是因为坐标轴之间相关，以至于去掉一个坐标轴，就会使得坐标点无法被单独一个坐标轴确定。</p>
 <p>PCA得到的k个坐标轴实际上是k个特征向量，由于协方差矩阵对称，因此k个特征向量正交。</p>
 <p>得到的新的样例矩阵$Y=PX$就是m个样例到k个特征向量的投影，也是这k个特征向量的线性组合。P中e之间是正交的。从矩阵乘法中可以看出，PCA所做的变换是将原始样本点（n维），投影到k个正交的坐标系中去，丢弃其他维度的信息。举个例子，假设宇宙是n维的（霍金说是11维的），我们得到银河系中每个星星的坐标（相对于银河系中心的n维向量），然而我们想用二维坐标去逼近这些样本点，假设算出来的协方差矩阵的特征向量分别是图中的水平和竖直方向，那么我们建议以银河系中心为原点的x和y坐标轴，所有的星星都投影到x和y上，得到下面的图片。然而我们丢弃了每个星星离我们的远近距离等信息。</p>
@@ -617,9 +617,9 @@ X=\left[\begin{matrix}
 <p>因此，PCA也存在一些限制，例如它可以很好的解除线性相关，但是对于高阶相关性就没有办法了，对于存在高阶相关性的数据，可以考虑Kernel PCA，通过Kernel函数将非线性相关转为线性相关，关于这点就不展开讨论了。另外，PCA假设数据各主特征是分布在正交方向上，如果在非正交方向上存在几个方差较大的方向，PCA的效果就大打折扣了。</p>
 <p>PCA技术的一个很大的优点是，它是完全无参数限制的。在PCA的计算过程中完全不需要人为的设定参数或是根据任何经验模型对计算进行干预，最后的结果只与数据相关，与用户是独立的。 </p>
 <p>但是，这一点同时也可以看作是缺点。如果用户对观测对象有一定的先验知识，掌握了数据的一些特征，却无法通过参数化等方法对处理过程进行干预，可能会得不到预期的效果，效率也不高。</p>
-<p><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-041027.jpg" alt=""><br>上图中黑色点表示采样数据，排列成转盘的形状。容易想象，该数据的主元是$(P_1,P_2)$或是旋转角$\theta$。在这里PCA找出的主元将是$(P_1,P_2 )$。但是这显然不是最优和最简化的主元。$(P_1,P_2 )$之间存在着非线性的关系。根据先验的知识可知旋转角$\theta$是最优的主元（类比极坐标）。则在这种情况下，PCA就会失效。但是，如果加入先验的知识，对数据进行某种划归，就可以将数据转化为以$\theta$为线性的空间中。这类根据先验知识对数据预先进行非线性转换的方法就成为kernel-PCA，它扩展了PCA能够处理的问题的范围，又可以结合一些先验约束，是比较流行的方法。</p>
+<p><img src="assets/2019-05-18-041027.jpg" alt=""><br>上图中黑色点表示采样数据，排列成转盘的形状。容易想象，该数据的主元是$(P_1,P_2)$或是旋转角$\theta$。在这里PCA找出的主元将是$(P_1,P_2 )$。但是这显然不是最优和最简化的主元。$(P_1,P_2 )$之间存在着非线性的关系。根据先验的知识可知旋转角$\theta$是最优的主元（类比极坐标）。则在这种情况下，PCA就会失效。但是，如果加入先验的知识，对数据进行某种划归，就可以将数据转化为以$\theta$为线性的空间中。这类根据先验知识对数据预先进行非线性转换的方法就成为kernel-PCA，它扩展了PCA能够处理的问题的范围，又可以结合一些先验约束，是比较流行的方法。</p>
 <p>有时数据的分布并不是满足高斯分布。如图表 5所示，在非高斯分布的情况下，PCA方法得出的主元可能并不是最优的。在寻找主元时不能将方差作为衡量重要性的标准。要根据数据的分布情况选择合适的描述完全分布的变量，然后根据概率分布式</p>
-<script type="math/tex; mode=display">P(y_1,y_2)=P(y_1)P(y_2 )</script><p>来计算两个向量上数据分布的相关性。等价的，保持主元间的正交假设，寻找的主元同样要使$P(y_1,y_2)=0$。这一类方法被称为独立主元分解(ICA)。<br><img src="http://ptuaevgcl.bkt.clouddn.com/2019-05-18-041033.jpg" alt=""><br>数据的分布并不满足高斯分布，呈明显的十字星状。这种情况下，方差最大的方向并不是最优主元方向。另外PCA还可以用于预测矩阵中缺失的元素。</p>
+<script type="math/tex; mode=display">P(y_1,y_2)=P(y_1)P(y_2 )</script><p>来计算两个向量上数据分布的相关性。等价的，保持主元间的正交假设，寻找的主元同样要使$P(y_1,y_2)=0$。这一类方法被称为独立主元分解(ICA)。<br><img src="assets/2019-05-18-041033.jpg" alt=""><br>数据的分布并不满足高斯分布，呈明显的十字星状。这种情况下，方差最大的方向并不是最优主元方向。另外PCA还可以用于预测矩阵中缺失的元素。</p>
 
       
     </div>
