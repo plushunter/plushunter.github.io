@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/about/index.html</loc>
+    
+    <lastmod>2019-08-01T12:43:58.656Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/01/01/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%881%EF%BC%89%EF%BC%9A%E8%AF%BB%E4%B9%A6%E6%B8%85%E5%8D%95/</loc>
     
     <lastmod>2019-08-01T12:35:34.346Z</lastmod>
@@ -1391,13 +1398,6 @@
     <loc>http://yoursite.com/tech-stack/index.html</loc>
     
     <lastmod>2019-07-08T15:30:03.491Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/about/index.html</loc>
-    
-    <lastmod>2019-06-29T07:16:01.286Z</lastmod>
     
   </url>
   
