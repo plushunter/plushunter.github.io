@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、关联分析1.1 引言在数据挖掘与机器学习中，关联规则（Association Rules）是一种较为常用的无监督学习算法，与分类、聚类等算法不同的是，这一类算法的主要目的在于发掘数据内在结构特征之间的关联性。 简单一点来说，就是在大规模的数据集中寻找一些有意义有价值的关系。有了这些关系，一方面，可以帮助我们拓宽对数据及其特征的理解；另一方面，则可以实现推荐系统的构建与应用（例如购物篮分析等）。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/03/08/机器学习算法系列（14）：关联分析/assets/2019-05-18-042529.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/03/08/机器学习算法系列（14）：关联分析/assets/2019-05-18-042539.jpg">
-<meta property="og:updated_time" content="2019-07-27T06:27:13.066Z">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42add76760b96432.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42adeddc79c23726.jpg">
+<meta property="og:updated_time" content="2019-08-01T09:16:38.934Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（14）：关联分析">
 <meta name="twitter:description" content="一、关联分析1.1 引言在数据挖掘与机器学习中，关联规则（Association Rules）是一种较为常用的无监督学习算法，与分类、聚类等算法不同的是，这一类算法的主要目的在于发掘数据内在结构特征之间的关联性。 简单一点来说，就是在大规模的数据集中寻找一些有意义有价值的关系。有了这些关系，一方面，可以帮助我们拓宽对数据及其特征的理解；另一方面，则可以实现推荐系统的构建与应用（例如购物篮分析等）。">
-<meta name="twitter:image" content="http://yoursite.com/2017/03/08/机器学习算法系列（14）：关联分析/assets/2019-05-18-042529.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/01/5d42add76760b96432.jpg">
 
 
 
@@ -401,7 +401,7 @@ var _hmt = _hmt || [];
 <h3 id="1-2-简单关联规则初探"><a href="#1-2-简单关联规则初探" class="headerlink" title="1.2 简单关联规则初探"></a>1.2 简单关联规则初探</h3><p>首先我们需要明确关联分析中的一些基本概念：</p>
 <ul>
 <li>事务：指关联分析中的分析对象，我们可以把它理解成为一种宽泛行为（例如顾客的一次超市购买行为，电脑的使用者的一次网页浏览行为等都可以称之为事务），由事务标识（TID）与项目集合组成。</li>
-<li><p>项集：即事务中的一组项目的集合，单个的项目可以是一种商品、一个网页链接等。假设$X$为项集，$I$为项目全体且$I=\{i_1,i_2,···,i_n\}$，那么项集$X\subseteq I$。进一步的，如果$X$中包含$p$个项目，则称该项集为$p-$项集。<br><img src="assets/2019-05-18-042529.jpg" alt="屏幕快照 2017-04-02 下午6.27.11">以上图为例，这里包含了4个事务，$I$包含了5个项目。对于第一个事务而言，由于$X$包含了三个项目，所以该$X$是一个$3-$项集。<br>明确了基本概念后，接下来学习关联规则的一般表现形式</p>
+<li><p>项集：即事务中的一组项目的集合，单个的项目可以是一种商品、一个网页链接等。假设$X$为项集，$I$为项目全体且$I=\{i_1,i_2,···,i_n\}$，那么项集$X\subseteq I$。进一步的，如果$X$中包含$p$个项目，则称该项集为$p-$项集。<br><img src="https://i.loli.net/2019/08/01/5d42add76760b96432.jpg" alt="2019-05-18-042529.jpg">以上图为例，这里包含了4个事务，$I$包含了5个项目。对于第一个事务而言，由于$X$包含了三个项目，所以该$X$是一个$3-$项集。<br>明确了基本概念后，接下来学习关联规则的一般表现形式</p>
 <script type="math/tex; mode=display">
 X\rightarrow Y\left(S=s\%,C=c\%\right)</script><p>其中：</p>
 </li>
@@ -445,7 +445,7 @@ Lift\left(A\rightarrow B\right)=\frac{Confidence\left(A\rightarrow B\right)}{P\l
 <li>1）产生候选集$C_k$，它是有可能成为频繁项集的项目集合；</li>
 <li>2）修剪候选集$C_k$，即基于$C_k$计算相应的支持度，并依据最小支持度$S_{min}$对候选集$C_k$进行删减，得到新的候选集$C_{k+1}$，如此循环迭代，直到无法产生候选项集为止，这样最后一轮所得到的频繁项集就是Apriori所要求的最大频繁项集。</li>
 </ul>
-<p>接下来我们以一个下例子帮助理解：<img src="assets/2019-05-18-042539.jpg" alt="屏幕快照 2017-04-02 下午10.31.15"><br>假设我们指定的最小支持阀度为0.5（计数≥2）</p>
+<p>接下来我们以一个下例子帮助理解：<img src="https://i.loli.net/2019/08/01/5d42adeddc79c23726.jpg" alt="2019-05-18-042539.jpg"><br>假设我们指定的最小支持阀度为0.5（计数≥2）</p>
 <ul>
 <li>在第一轮迭代过程中，由于$D$的支持度小于0.5（只有0.25），所以没有进入频繁项集，其余均进入频繁项集，定义为$L_1$。</li>
 <li>在第二轮迭代中，候选集$C_2$是$L_1$中所有项目的组合，计算各项目支持度，淘汰$\{A,B\}$和$\{A,E\}$，其余进入频繁项集，定义为$L_2$。</li>

@@ -94,14 +94,14 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="本文转载自美团点评技术团队 FM和FFM模型是最近几年提出的模型，凭借其在数据量比较打并且特征稀疏的情况下，忍让能够得到优秀的性能和效果，屡次在各大公司举办的CTR预估比赛中获得不错的战绩。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/07/13/机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）/assets/2019-05-18-040759.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/07/13/机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）/assets/2019-05-18-040810.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/07/13/机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）/assets/2019-05-18-040818.jpg">
-<meta property="og:updated_time" content="2019-07-27T06:27:16.316Z">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3ee3947638f96251.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42a8e44b76a35389.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3ea1407bf2c78037.jpg">
+<meta property="og:updated_time" content="2019-08-01T08:55:12.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）">
 <meta name="twitter:description" content="本文转载自美团点评技术团队 FM和FFM模型是最近几年提出的模型，凭借其在数据量比较打并且特征稀疏的情况下，忍让能够得到优秀的性能和效果，屡次在各大公司举办的CTR预估比赛中获得不错的战绩。">
-<meta name="twitter:image" content="http://yoursite.com/2017/07/13/机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）/assets/2019-05-18-040759.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/29/5d3ee3947638f96251.jpg">
 
 
 
@@ -493,7 +493,7 @@ var _hmt = _hmt || [];
 <p>本章主要讨论FM和FFM用来学习特征之间的关联。多项式模型是包含特征组合的最直观的模型。在多项式模型中，特征 $x_i$ 和 $x_j$ 的组合采用 $x_i$ 表示，即 $x_i$ 和 $x_j$ 都非零时，组合特征 $x_ix_j$ 才有意义。从对比的角度，本文只讨论二阶多项式模型。模型的表达式如下：</p>
 <script type="math/tex; mode=display">y(x)=w_0+\sum_{i=1}^nw_ix_i+\sum_{i=1}^n\sum_{j=i+1}^nw_{ij}x_ix_j</script><p>其中，$n$代表样本的特征数量，$x_i$是第$i$个特征的值，$w_0、w_i、w_{ij}$是模型的参数。</p>
 <p>从这个公式可以看出，组合特征的参数一共有$\frac{n(n-1)}{2}$个，任意两个参数都是独立的。然而，在数据稀疏性普遍存在的实际应用场景中，二次项参数的训练是很困难的。其原因是，回归模型的参数$w$的学习结果就是从训练样本中计算充分统计量（凡是符合指数族分布的模型都具有此性质），而在这里交叉项的每一个参数$w_{ij}$的学习过程需要大量的$x_i$、$x_j$同时非零的训练样本数据。由于样本数据本来就很稀疏，能够满足“$x_i$和$x_j$都非零”的样本数就会更少。训练样本不充分，学到的参数$w_{ij}$就不是充分统计量结果，导致参数$w_{ij}$不准确，而这会严重影响模型预测的效果（performance）和稳定性。</p>
-<p>那么，如何解决二次项参数的训练问题呢？矩阵分解提供了一种解决思路。在Model-based的协同过滤中，一个rating矩阵可以分解为user矩阵和item矩阵，每个user和item都可以采用一个隐向量表示。比如在下图中的例子，我们把每个user表示成一个二维向量，同时把每个item表示成一个二维向量，两个向量点积就是矩阵中user对item的打分。<img src="assets/2019-05-18-040759.jpg" alt=""></p>
+<p>那么，如何解决二次项参数的训练问题呢？矩阵分解提供了一种解决思路。在Model-based的协同过滤中，一个rating矩阵可以分解为user矩阵和item矩阵，每个user和item都可以采用一个隐向量表示。比如在下图中的例子，我们把每个user表示成一个二维向量，同时把每个item表示成一个二维向量，两个向量点积就是矩阵中user对item的打分。<img src="https://i.loli.net/2019/07/29/5d3ee3947638f96251.jpg" alt=""></p>
 <p>类似地，所有二次项参数 $w_{ij}$可以组成一个对称阵 $W$（为了方便说明FM的由来，对角元素可以设置为正实数），那么这个矩阵就可以分解为 $W=V^TV$，$V$ 的第$ j$列便是第 $j$ 维特征的隐向量。换句话说，每个参数 $w_{ij}=⟨v_i,v_j⟩$，这就是FM模型的核心思想。因此，FM的模型方程为（本文不讨论FM的高阶形式）</p>
 <script type="math/tex; mode=display">y(x)=w_0+\sum _{i=1}^nw_ix_i+\sum_{i=1}^n\sum_{j=i+1}^n⟨vi,vj⟩x_ix_j \  \  \ \   \  \ ···（2）</script><p>其中，$v_i$是第i维特征的隐向量，$⟨⋅,⋅⟩$代表向量点积，计算公式为</p>
 <script type="math/tex; mode=display">⟨v_i,v_j⟩=\sum_{f=1}^kv_{i,f}·v_{j,f}</script><p>隐向量的长度为$k(k&lt;&lt;n)$，包含k个描述特征的因子。<br>具体解读一下这个公式</p>
@@ -664,7 +664,7 @@ var _hmt = _hmt || [];
 </tbody>
 </table>
 </div>
-<p>那么，FFM的组合特征有10项，如下图所示。<img src="assets/2019-05-18-040810.jpg" alt=""></p>
+<p>那么，FFM的组合特征有10项，如下图所示。<img src="https://i.loli.net/2019/08/01/5d42a8e44b76a35389.jpg" alt="2019-05-18-040810.jpg"></p>
 <p>其中，红色表示Field编码，蓝色表示Feature编码，绿色表示样本的组合特征取值（离散化后的结果）。二阶交叉项的系数是通过与Field相关的隐向量的内积得到的。如果单特征有n个，全部做二阶特征组合的话，会有$C^2_n=\frac{n(n−1)}{2}$个。</p>
 <h3 id="2-2-FFM的应用"><a href="#2-2-FFM的应用" class="headerlink" title="2.2 FFM的应用"></a>2.2 FFM的应用</h3><p>在DSP的场景中，FFM主要用来预估站内的CTR和CVR，即一个用户对一个商品的潜在点击率和点击后的转化率。</p>
 <p>CTR和CVR预估模型都是在线下训练，然后用于线上预测。两个模型采用的特征大同小异，主要有三类：用户相关的特征、商品相关的特征、以及用户-商品匹配特征。用户相关的特征包括年龄、性别、职业、兴趣、品类偏好、浏览/购买品类等基本信息，以及用户近期点击量、购买量、消费额等统计信息。商品相关的特征包括所属品类、销量、价格、评分、历史CTR/CVR等信息。用户-商品匹配特征主要有浏览/购买品类匹配、浏览/购买商家匹配、兴趣偏好匹配等几个维度。</p>
@@ -706,7 +706,7 @@ var _hmt = _hmt || [];
 <p>第三，省略零值特征。从FFM模型的表达式可以看出，零值特征对模型完全没有贡献。包含零值特征的一次项和组合项均为零，对于训练模型参数或者目标值预估是没有作用的。因此，可以省去零值特征，提高FFM模型训练和预测的速度，这也是稀疏样本采用FFM的显著优势。</p>
 <h3 id="2-3-FFM实现"><a href="#2-3-FFM实现" class="headerlink" title="2.3 FFM实现"></a>2.3 FFM实现</h3><p>Yu-Chin Juan实现了一个C++版的FFM模型，源码可从Github下载[10]。这个版本的FFM省略了常数项和一次项，模型方程如下。</p>
 <script type="math/tex; mode=display">ϕ(w,x)=∑_{j1,j2∈C_2}⟨w_{j_1,f_2},w_{j_2,f_1}⟩x_{j_1}x_{j_2}</script><p>其中，$C_2$是非零特征的二元组合，$j_1$是特征，属于field $f_1$，$w_{j_1,f_2}$是特征 $j_1$对field $f_2$ 的隐向量。此FFM模型采用logistic loss作为损失函数，和L2惩罚项，因此只能用于二元分类问题。</p>
-<script type="math/tex; mode=display">\underset{w}{min}∑_{i=1}^Llog(1+exp{−y_iϕ(w,x_i)})+\frac{λ}{2}‖w‖2</script><p>其中，$y_i∈{−1,1}$是第 i个样本的label，L是训练样本数量，λ 是惩罚项系数。模型采用SGD优化，优化流程如下。<img src="assets/2019-05-18-040818.jpg" alt=""><br>参考 Algorithm1, 下面简单解释一下FFM的SGD优化过程。<br>算法的输入 tr、va、pa 分别是训练样本集、验证样本集和训练参数设置。</p>
+<script type="math/tex; mode=display">\underset{w}{min}∑_{i=1}^Llog(1+exp{−y_iϕ(w,x_i)})+\frac{λ}{2}‖w‖2</script><p>其中，$y_i∈{−1,1}$是第 i个样本的label，L是训练样本数量，λ 是惩罚项系数。模型采用SGD优化，优化流程如下。<img src="https://i.loli.net/2019/07/29/5d3ea1407bf2c78037.jpg" alt=""><br>参考 Algorithm1, 下面简单解释一下FFM的SGD优化过程。<br>算法的输入 tr、va、pa 分别是训练样本集、验证样本集和训练参数设置。</p>
 <ol>
 <li>根据样本特征数量（tr.ntr.n）、field的个数（tr.mtr.m）和训练参数（papa），生成初始化模型，即随机生成模型的参数；</li>
 <li>如果归一化参数 pa.normpa.norm 为真，计算训练和验证样本的归一化系数，样本i的归一化系数为<script type="math/tex; mode=display">R[i]=\frac{1}{||X[i]||}</script></li>

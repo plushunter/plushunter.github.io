@@ -94,17 +94,16 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、线性回归模型线性回归假设特征和结果满足线性关系。其实线性关系的表达能力非常强大，每个特征对结果的影响强弱可以由前面的参数体现，而且每个特征变量可以首先映射到一个函数，然后再参与线性计算。这样就可以表达特征与结果之间的非线性关系。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/assets/2019-05-18-024927.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/assets/2019-05-18-033155.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/assets/2019-05-18-033207.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/assets/2019-05-18-033221.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/assets/2019-05-18-033230.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/assets/2019-05-18-033253.jpg">
-<meta property="og:updated_time" content="2019-07-27T06:27:17.383Z">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42a65d1280695697.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42a6752665b18665.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42a68a0956338834.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42a69c9df8e97328.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42a6b2c5daf48052.jpg">
+<meta property="og:updated_time" content="2019-08-01T08:45:50.247Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（2）：线性回归">
 <meta name="twitter:description" content="一、线性回归模型线性回归假设特征和结果满足线性关系。其实线性关系的表达能力非常强大，每个特征对结果的影响强弱可以由前面的参数体现，而且每个特征变量可以首先映射到一个函数，然后再参与线性计算。这样就可以表达特征与结果之间的非线性关系。">
-<meta name="twitter:image" content="http://yoursite.com/2017/01/08/机器学习算法系列（2）：线性回归/assets/2019-05-18-024927.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/01/5d42a65d1280695697.jpg">
 
 
 
@@ -462,11 +461,10 @@ J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\ri
 <li>1）首先对$\theta$赋值，这个值可以是随机的，也可是让$\theta$是一个全零的向量；</li>
 <li>2）改变$\theta$的值，使得$J(\theta)$按梯度下降的方向进行减少。</li>
 </ul>
-<p>为了更清楚，给出下面的图：<br><img src="assets/2019-05-18-024927.jpg" alt="屏幕快照 2017-04-04 下午6.02.35"></p>
+<p>为了更清楚，给出下面的图：<br><img src="https://i.loli.net/2019/08/01/5d42a65d1280695697.jpg" alt="2019-05-18-024927-1.jpg"></p>
 <p>这是一个表示参数$\theta$与目标函数$J(\theta)$的关系图，红色的部分是表示$J(\theta)$有比较高的取值，我们需要的是，能够让$J(\theta)$的值尽量的低。也就是深蓝色的部分。$\theta_0$和$\theta_1$表示$\theta$向量的两个维度。</p>
 <p>在上面提到梯度下降法的第一步是给$\theta$一个初值，假设随机给的初值是在图上的十字点。然后我们将$\theta$按照梯度下降的方向进行调整，就会使得$J(\theta)$往更低的方向进行变化，如图所示，算法的结束将是在$\theta$下降到无法继续下降为止。</p>
 <p>当然，可能梯度下降的最终点并非是全局最小点，可能是一个局部最小点，比如下面这张图中描述的就是一个局部最小点，这是我们重新选择了一个初始点得到的，看来我们这个算法会在很大程度上被初始点的选择影响而陷入局部最小点。</p>
-<p><img src="assets/2019-05-18-033155.jpg" alt="屏幕快照 2017-04-04 下午6.03.23"></p>
 <p>下面对于目标函数$J(\theta)$求偏导数：</p>
 <script type="math/tex; mode=display">
 \frac{\partial}{\partial\theta_j}J\left(\theta\right)=\frac{\partial}{\partial\theta_j}\frac{1}{2}\left(h_{\theta}\left(x\right)-y\right)^2</script><script type="math/tex; mode=display">
@@ -483,12 +481,11 @@ J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\ri
     \frac{\partial}{\partial\theta_n}J\\
 \end{array}\right]</script><script type="math/tex; mode=display">
 \theta :=\theta +a\nabla_{\theta}J</script><p>将梯度下降法应用到线性回归有三种方式：批处理梯度下降法、随机梯度下降法。</p>
-<h4 id="3-2-1-批量梯度下降法（BGD）"><a href="#3-2-1-批量梯度下降法（BGD）" class="headerlink" title="3.2.1 批量梯度下降法（BGD）"></a>3.2.1 批量梯度下降法（BGD）</h4><p><img src="assets/2019-05-18-033207.jpg" alt="屏幕快照 2017-04-04 下午6.36.09"></p>
-<p>可以看出，参数$\theta$的值每更新一次都要遍历样本集中的所有的样本，得到新的$\theta_j$，看是否满足阈值要求，若满足，则迭代结束，根据此值就可以得到；否则继续迭代。注意到，虽然梯度下降法易受到极小值的影响，但是一般的线性规划问题只有一个极小值，所以梯度下降法一般可以收敛到全局的最小值。例如，$J$是二次凸函数，则梯度下降法的示意图为：</p>
-<p><img src="assets/2019-05-18-033221.jpg" alt="屏幕快照 2017-04-04 下午6.40.55"></p>
+<h4 id="3-2-1-批量梯度下降法（BGD）"><a href="#3-2-1-批量梯度下降法（BGD）" class="headerlink" title="3.2.1 批量梯度下降法（BGD）"></a>3.2.1 批量梯度下降法（BGD）</h4><p><img src="https://i.loli.net/2019/08/01/5d42a6752665b18665.jpg" alt="2019-05-18-033207.jpg"></p>
+<p>可以看出，参数$\theta$的值每更新一次都要遍历样本集中的所有的样本，得到新的$\theta_j$，看是否满足阈值要求，若满足，则迭代结束，根据此值就可以得到；否则继续迭代。注意到，虽然梯度下降法易受到极小值的影响，但是一般的线性规划问题只有一个极小值，所以梯度下降法一般可以收敛到全局的最小值。例如，$J$是二次凸函数，则梯度下降法的示意图为：<br><img src="https://i.loli.net/2019/08/01/5d42a68a0956338834.jpg" alt="2019-05-18-033221.jpg"></p>
 <p>图中，一圈上表示目标函数的函数值类似于地理上的等高线，从外圈开始逐渐迭代，最终收敛全局最小值。</p>
-<h4 id="3-2-2-随机梯度下降算法（SGD）"><a href="#3-2-2-随机梯度下降算法（SGD）" class="headerlink" title="3.2.2 随机梯度下降算法（SGD）"></a>3.2.2 随机梯度下降算法（SGD）</h4><p><img src="assets/2019-05-18-033230.jpg" alt="屏幕快照 2017-04-04 下午6.43.06"><br>在这个算法中，我们每次更新只用到一个训练样本，若根据当前严格不能进行迭代得到一个，此时会得到一个，有新样本进来之后，在此基础上继续迭代，又得到一组新的和，以此类推。</p>
-<p><img src="assets/2019-05-18-033253.jpg" alt="屏幕快照 2017-04-04 下午6.51.43"><br>批量梯度下降法，每更新一次，需要用到样本集中的所有样本；随机梯度下降法，每更新一次，只用到训练集中的一个训练样本，所以一般来说，随机梯度下降法能更快地使目标函数达到最小值（新样本的加入，随机梯度下降法有可能会使目标函数突然变大，迭代过程中在变小。所以是在全局最小值附近徘徊，但对于实际应用俩说，误差完全能满足要求）。另外，对于批量梯度下降法，如果样本集增加了一些训练样本，就要重新开始迭代。由于以上原因，当训练样本集较大时，一般使用随机梯度下降法。</p>
+<h4 id="3-2-2-随机梯度下降算法（SGD）"><a href="#3-2-2-随机梯度下降算法（SGD）" class="headerlink" title="3.2.2 随机梯度下降算法（SGD）"></a>3.2.2 随机梯度下降算法（SGD）</h4><p><img src="https://i.loli.net/2019/08/01/5d42a69c9df8e97328.jpg" alt="2019-05-18-033230.jpg"><br>在这个算法中，我们每次更新只用到一个训练样本，若根据当前严格不能进行迭代得到一个，此时会得到一个，有新样本进来之后，在此基础上继续迭代，又得到一组新的和，以此类推。</p>
+<p><img src="https://i.loli.net/2019/08/01/5d42a6b2c5daf48052.jpg" alt="2019-05-18-033253.jpg"><br>批量梯度下降法，每更新一次，需要用到样本集中的所有样本；随机梯度下降法，每更新一次，只用到训练集中的一个训练样本，所以一般来说，随机梯度下降法能更快地使目标函数达到最小值（新样本的加入，随机梯度下降法有可能会使目标函数突然变大，迭代过程中在变小。所以是在全局最小值附近徘徊，但对于实际应用俩说，误差完全能满足要求）。另外，对于批量梯度下降法，如果样本集增加了一些训练样本，就要重新开始迭代。由于以上原因，当训练样本集较大时，一般使用随机梯度下降法。</p>
 <h2 id="四、参考资料"><a href="#四、参考资料" class="headerlink" title="四、参考资料"></a>四、参考资料</h2><p><a href="http://www.cnblogs.com/jerrylead/archive/2011/03/05/1971867.html" target="_blank" rel="noopener"><code>对线性回归，logistic回归和一般回归的认识</code></a></p>
 
       

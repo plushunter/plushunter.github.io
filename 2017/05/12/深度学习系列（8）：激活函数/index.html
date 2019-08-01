@@ -94,22 +94,22 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="深度学习的基本原理是基于人工神经网络，信号从一个神经元进入，经过非线性的activation function，传入到下一层神经元；再经过该层神经元的activate function，继续往下传递，如此循环往复，直到输出层。其中的激活函数的主要作用是提供网络的非线性建模能力，使得神经网络有足够的capacity来抓取复杂的pattern，在各个领域取得state-of-the-art的结果。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-085928.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-085938.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-085949.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-085959.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-090008.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-090019.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-090030.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-090039.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-090050.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-090102.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-090112.jpg">
-<meta property="og:updated_time" content="2019-07-27T06:27:27.837Z">
+<meta property="og:image" content="https://i.loli.net/2019/07/30/5d402fd7c94f714784.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/30/5d402fe36ddf786566.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/30/5d402fee8374456090.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/30/5d402ffc21c0529150.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/30/5d403008be08a31384.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/30/5d403015d3e4a18239.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/30/5d4030215e22322825.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/30/5d40302d3661936685.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/30/5d40303d79f4428621.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/30/5d40304844a7f37255.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3dba4fcab7a63697.jpg">
+<meta property="og:updated_time" content="2019-07-30T11:56:01.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习系列（8）：激活函数">
 <meta name="twitter:description" content="深度学习的基本原理是基于人工神经网络，信号从一个神经元进入，经过非线性的activation function，传入到下一层神经元；再经过该层神经元的activate function，继续往下传递，如此循环往复，直到输出层。其中的激活函数的主要作用是提供网络的非线性建模能力，使得神经网络有足够的capacity来抓取复杂的pattern，在各个领域取得state-of-the-art的结果。">
-<meta name="twitter:image" content="http://yoursite.com/2017/05/12/深度学习系列（8）：激活函数/assets/2019-05-15-085928.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/30/5d402fd7c94f714784.jpg">
 
 
 
@@ -417,26 +417,26 @@ var _hmt = _hmt || [];
 <script type="math/tex; mode=display">f'(x)=0,   当|x|>c,c为常数</script><p>同理，应饱和也分为左饱和与右饱和，左侧硬饱和为：</p>
 <script type="math/tex; mode=display">f'(x)=0,   当-x>c, c为正数</script><p>右侧硬饱和为：</p>
 <script type="math/tex; mode=display">f'(x)=0,   当x>c, c为正数</script><h2 id="二、sigmoid"><a href="#二、sigmoid" class="headerlink" title="二、sigmoid"></a>二、sigmoid</h2><p>sigmoid非线性函数的数学公式为：</p>
-<script type="math/tex; mode=display">\sigma\left(x\right)=\frac{1}{1+e^{-x}}</script><p>函数图像及梯度函数图像如下所示：<br><img src="assets/2019-05-15-085928.jpg" alt="屏幕快照 2017-05-12 下午4.14.47"><br>它将输入实数值“挤压”到0-1范围内。更具体地说，很大的负数变成0，很大的正数变成1。它是便于求导的平滑函数，其导数为$\sigma(x)(1-\sigma(x))$，这是它的优点。sigmoid 在定义域内处处可导，且两侧导数逐渐趋近于0，即：$\lim_{x\rightarrow\infty}f’\left(x\right)=0$</p>
+<script type="math/tex; mode=display">\sigma\left(x\right)=\frac{1}{1+e^{-x}}</script><p>函数图像及梯度函数图像如下所示：<br><img src="https://i.loli.net/2019/07/30/5d402fd7c94f714784.jpg" alt=""><br>它将输入实数值“挤压”到0-1范围内。更具体地说，很大的负数变成0，很大的正数变成1。它是便于求导的平滑函数，其导数为$\sigma(x)(1-\sigma(x))$，这是它的优点。sigmoid 在定义域内处处可导，且两侧导数逐渐趋近于0，即：$\lim_{x\rightarrow\infty}f’\left(x\right)=0$</p>
 <p>然而现在sigmoid函数已经不太受欢迎，实际很少使用了，这是因为它有三个主要缺点：</p>
 <ul>
 <li><p>1）梯度消失。Sigmoid 的软饱和性，使得深度神经网络在二三十年里一直难以有效的训练，是阻碍神经网络发展的重要原因。具体地，我们知道优化神经网络的方法是Back Propagation，即导数的反向传递：先计算输出层对应的loss，然后将loss以导数的形式不断向上一层网络传递，修正相应的参数，达到降低loss的目的。sigmoid反向传导的梯度包含了一个f’(x) 因子（sigmoid关于输入的导数），因此一旦输入落入饱和区，f’(x) 就会变得接近于0，导致了向底层传递的梯度也变得非常小。此时，网络参数很难得到有效训练。这种现象被称为梯度消失。一般来说， sigmoid 网络在 5 层之内就会产生梯度消失现象。我们也可以在图中看出原因，主要在于两点：(1) 在上图中容易看出，当$\sigma(x)$中x较大或较小时，导数接近0，而后向传递的数学依据是微积分求导的链式法则，当前层的导数需要之前各层导数的乘积，几个小数的相乘，结果会很接近0 (2) Sigmoid导数的最大值是0.25，这意味着导数在每一层至少会被压缩为原来的1/4，通过两层后被变为1/16，…，通过10层后为1/1048576。请注意这里是“至少”，导数达到最大值这种情况还是很少见的。梯度消失问题至今仍然存在，但被新的优化方法有效缓解了，例如DBN中的分层预训练，Batch Normalization的逐层归一化，Xavier和MSRA权重初始化等代表性技术。</p>
 </li>
-<li><p>2）Sigmoid函数的输出不是Zero-centered的。这个性质并不是我们想要的，因为在神经网络后面层中的神经元得到的数据将不是零中心的。这一情况将影响梯度下降的运作，因为如果输入神经元的数据总是正数(比如在$f=w^Tx+b$中每个元素都x&gt;0),那么关于w的梯度在反向传播的过程中，将会要么全部是正数，要么全部是负数（具体依整个表达式f而定）。这将会导致梯度下降权重更新时出现z字型的下降（如下图所示）。然而，可以看到整个批量的数据的梯度被加起来后，对于权重的最终更新将会有不同的正负，这样就从一定程度上减轻了这个问题。因此，该问题相对于上面的神经元饱和问题来说只是个小麻烦，没有那么严重。<img src="assets/2019-05-15-085938.jpg" alt="屏幕快照 2017-05-12 下午5.07.16"></p>
+<li><p>2）Sigmoid函数的输出不是Zero-centered的。这个性质并不是我们想要的，因为在神经网络后面层中的神经元得到的数据将不是零中心的。这一情况将影响梯度下降的运作，因为如果输入神经元的数据总是正数(比如在$f=w^Tx+b$中每个元素都x&gt;0),那么关于w的梯度在反向传播的过程中，将会要么全部是正数，要么全部是负数（具体依整个表达式f而定）。这将会导致梯度下降权重更新时出现z字型的下降（如下图所示）。然而，可以看到整个批量的数据的梯度被加起来后，对于权重的最终更新将会有不同的正负，这样就从一定程度上减轻了这个问题。因此，该问题相对于上面的神经元饱和问题来说只是个小麻烦，没有那么严重。<img src="https://i.loli.net/2019/07/30/5d402fe36ddf786566.jpg" alt=""></p>
 </li>
 <li><p>3）幂运算相对耗时：相对于前两项，这其实并不是一个大问题，我们目前是具备相应计算能力的，但面对深度学习中庞大的计算量，最好是能省则省。之后我们会看到，在ReLU函数中，需要做的仅仅是一个thresholding，相对于幂运算来讲会快很多。</p>
 </li>
 </ul>
 <h2 id="三、tanh"><a href="#三、tanh" class="headerlink" title="三、tanh"></a>三、tanh</h2><p>tanh非线性函数的数学公式为：</p>
-<script type="math/tex; mode=display">tanh x = \frac{e^x-e^{-x}}{e^x+e^{-x}}</script><p>函数图像及梯度函数图像如下所示：<img src="assets/2019-05-15-085949.jpg" alt="屏幕快照 2017-05-12 下午6.07.46"><br>如上图所示，计算可以知道：$tanh(x)=2sigmoid(2x)-1$，它其实是一个简单放大的sigmoid神经元，和sigmoid神经元一样，也具有软饱和性。但是和sigmoid神经元不同的是，它解决了zero-centered的输出问题，因此，在实际操作中，tanh非线性函数比sigmoid非线性函数更受欢迎。然而，gradient vanishing的问题和幂运算的问题仍然存在。Xavier在文献[]中分析了sigmoid与tanh的饱和现象及特点，具体见原论文。此外，文献[]中提到了tanh网络的收敛速度要比sigmoid块。因为tanh的输出均值比sigmoid更接近0，SGD会更接近natural gradient（一种二次优化技术），从而降低所需的迭代次数。</p>
+<script type="math/tex; mode=display">tanh x = \frac{e^x-e^{-x}}{e^x+e^{-x}}</script><p>函数图像及梯度函数图像如下所示：<img src="https://i.loli.net/2019/07/30/5d402fee8374456090.jpg" alt=""><br>如上图所示，计算可以知道：$tanh(x)=2sigmoid(2x)-1$，它其实是一个简单放大的sigmoid神经元，和sigmoid神经元一样，也具有软饱和性。但是和sigmoid神经元不同的是，它解决了zero-centered的输出问题，因此，在实际操作中，tanh非线性函数比sigmoid非线性函数更受欢迎。然而，gradient vanishing的问题和幂运算的问题仍然存在。Xavier在文献[]中分析了sigmoid与tanh的饱和现象及特点，具体见原论文。此外，文献[]中提到了tanh网络的收敛速度要比sigmoid块。因为tanh的输出均值比sigmoid更接近0，SGD会更接近natural gradient（一种二次优化技术），从而降低所需的迭代次数。</p>
 <h2 id="四、ReLU"><a href="#四、ReLU" class="headerlink" title="四、ReLU"></a>四、ReLU</h2><p>ReLU非线性函数的数学公式为：</p>
-<script type="math/tex; mode=display">ReLU(x)=max(0,x)</script><p>函数图像及梯度函数图像如下所示：<img src="assets/2019-05-15-085959.jpg" alt="屏幕快照 2017-05-12 下午6.32.04"><br>虽然2006年Hinton教授提出通过分层无监督预训练解决深层网络训练困难的问题，但是深度网络的直接监督式训练的最终突破，最主要的原因是新型激活函数ReLU。它有以下几大优点：</p>
+<script type="math/tex; mode=display">ReLU(x)=max(0,x)</script><p>函数图像及梯度函数图像如下所示：<img src="https://i.loli.net/2019/07/30/5d402ffc21c0529150.jpg" alt=""><br>虽然2006年Hinton教授提出通过分层无监督预训练解决深层网络训练困难的问题，但是深度网络的直接监督式训练的最终突破，最主要的原因是新型激活函数ReLU。它有以下几大优点：</p>
 <ul>
 <li>1）解决了gradient vanishing问题：ReLU在$x<0$时硬饱和。由于$x>0$时导数为1，所以，ReLU能够在$x&gt;0$时保持梯度不衰减，从而缓解梯度消失问题。</0$时硬饱和。由于$x></li>
 <li>2）计算速度非常快。对比sigmoid和tanh神经元含有指数运算等耗费计算资源的操作，ReLU可以简单地通过对一个矩阵进行阈值计算得到。</li>
-<li>3）收敛速度非常快。相较于sigmoid和tanh函数，ReLU对于随机梯度下降的收敛有巨大的加速作用。下图是从 Krizhevsky 等的论文中截取的图表，指明使用ReLU比使用tanh的收敛快6倍。<br><img src="assets/2019-05-15-090008.jpg" alt="屏幕快照 2017-05-12 下午6.45.18"></li>
+<li>3）收敛速度非常快。相较于sigmoid和tanh函数，ReLU对于随机梯度下降的收敛有巨大的加速作用。下图是从 Krizhevsky 等的论文中截取的图表，指明使用ReLU比使用tanh的收敛快6倍。<br><img src="https://i.loli.net/2019/07/30/5d403008be08a31384.jpg" alt=""></li>
 <li>4）ReLU另外一个性质是提供神经网络的稀疏表达能力，在Bengio教授的Deep Sparse Rectifier Neural Network[6]一文中被认为是ReLU带来网络性能提升的原因之一。但后来的研究发现稀疏性并非性能提升的必要条件，文献 RReLU [9]也指明了这一点。<ul>
-<li>PReLU[10]、ELU[7]等激活函数不具备这种稀疏性，但都能够提升网络性能。本文作者在文章[8]中给出了一些实验比较结果。首先，在cifar10上采用NIN网络，实验结果为 PReLU &gt; ELU &gt; ReLU，稀疏性并没有带来性能提升。其次，在 ImageNet上采用类似于[11] 中model E的15 层网络，实验结果则是ReLU最好。为了验证是否是稀疏性的影响，以 LReLU [12]为例进一步做了四次实验，负半轴的斜率分别为1，0.5，0.25,  0.1，需要特别说明的是，当负半轴斜率为1时，LReLU退化为线性函数，因此性能损失最大。实验结果展现了斜率大小与网络性能的一致性。综合上述实验可知，ReLU的稀疏性与网络性能之间并不存在绝对正负比关系。<img src="assets/2019-05-15-090019.jpg" alt="屏幕快照 2017-05-12 下午7.41.41"></li>
+<li>PReLU[10]、ELU[7]等激活函数不具备这种稀疏性，但都能够提升网络性能。本文作者在文章[8]中给出了一些实验比较结果。首先，在cifar10上采用NIN网络，实验结果为 PReLU &gt; ELU &gt; ReLU，稀疏性并没有带来性能提升。其次，在 ImageNet上采用类似于[11] 中model E的15 层网络，实验结果则是ReLU最好。为了验证是否是稀疏性的影响，以 LReLU [12]为例进一步做了四次实验，负半轴的斜率分别为1，0.5，0.25,  0.1，需要特别说明的是，当负半轴斜率为1时，LReLU退化为线性函数，因此性能损失最大。实验结果展现了斜率大小与网络性能的一致性。综合上述实验可知，ReLU的稀疏性与网络性能之间并不存在绝对正负比关系。<img src="https://i.loli.net/2019/07/30/5d403015d3e4a18239.jpg" alt=""></li>
 </ul>
 </li>
 </ul>
@@ -447,25 +447,25 @@ var _hmt = _hmt || [];
 </ul>
 <p>尽管存在上述几个问题，ReLU目前仍是最常用的activation function，在搭建人工神经网络的时候推荐优先尝试！</p>
 <h2 id="五、Leaky-ReLU"><a href="#五、Leaky-ReLU" class="headerlink" title="五、Leaky ReLU"></a>五、Leaky ReLU</h2><p>Leaky ReLU非线性函数的数学公式为：</p>
-<script type="math/tex; mode=display">f(x)=max(0.01x,x)</script><p>函数图像及梯度函数图像如下所示：<img src="assets/2019-05-15-090030.jpg" alt="屏幕快照 2017-05-12 下午7.23.31"><br>人们为了解决Dead ReLU Problem，提出了将ReLU的前半段设为0.01x而非0。<br>理论上来说，Leaky ReLU拥有ReLU的所有优点，外加不会有Dead ReLU problem，但是在实际操作中，并没有完全证明Leaky ReLU总是好于ReLU。有些研究者的论文指出这个激活函数表现很不错，但是其效果并不是很稳定。</p>
+<script type="math/tex; mode=display">f(x)=max(0.01x,x)</script><p>函数图像及梯度函数图像如下所示：<img src="https://i.loli.net/2019/07/30/5d4030215e22322825.jpg" alt=""><br>人们为了解决Dead ReLU Problem，提出了将ReLU的前半段设为0.01x而非0。<br>理论上来说，Leaky ReLU拥有ReLU的所有优点，外加不会有Dead ReLU problem，但是在实际操作中，并没有完全证明Leaky ReLU总是好于ReLU。有些研究者的论文指出这个激活函数表现很不错，但是其效果并不是很稳定。</p>
 <h2 id="六、PReLU"><a href="#六、PReLU" class="headerlink" title="六、PReLU"></a>六、PReLU</h2><p>Parametric ReLU非线性函数的数学公式为：</p>
 <script type="math/tex; mode=display">f(x)=max(\alpha x,x)</script><p>PReLU是ReLU和LReLU的改进版本，具有非饱和性。与LReLU相比，PReLU中的负半轴斜率$\alpha$由back propagation学习而非固定。原文献建议初始化$\alpha$为0.25，不采用正则。</p>
 <p>虽然PReLU 引入了额外的参数，但基本不需要担心过拟合。例如，在cifar10+NIN实验中， PReLU比ReLU和ELU多引入了参数，但也展现了更优秀的性能。所以实验中若发现网络性能不好，建议从其他角度寻找原因。</p>
 <p>与ReLU相比，PReLU收敛速度更快。因为PReLU的输出更接近0均值，使得SGD更接近natural gradient。证明过程参见原文[10]。</p>
 <h2 id="七、RReLU"><a href="#七、RReLU" class="headerlink" title="七、RReLU"></a>七、RReLU</h2><p>数学形式与PReLU类似，但RReLU[9]是一种非确定性激活函数，其参数是随机的。这种随机性类似于一种噪声，能够在一定程度上起到正则效果。作者在cifar10/100上观察到了性能提升。</p>
-<p>综上，ReLU家族讲完了，总结如下图：<br><img src="assets/2019-05-15-090039.jpg" alt="屏幕快照 2017-05-12 下午8.56.35"><br>其中表格为在cifar10上采用NIN网络的实验结果。</p>
+<p>综上，ReLU家族讲完了，总结如下图：<br><img src="https://i.loli.net/2019/07/30/5d40302d3661936685.jpg" alt=""><br>其中表格为在cifar10上采用NIN网络的实验结果。</p>
 <h2 id="八、Maxout"><a href="#八、Maxout" class="headerlink" title="八、Maxout"></a>八、Maxout</h2><p>Maxout[13]是ReLU的推广，其发生饱和是一个零测集事件（measure zero event）。正式定义为：</p>
 <script type="math/tex; mode=display">max(w_1^Tx+b_1,w^T_2+b_2,···,w_n^Tx+b_n)</script><p>Maxout网络能够近似任意连续函数，且Maxout是对ReLU和leaky ReLU的一般化归纳，当$w_2,b_2,···,w_n,b_n$为0时，退化为ReLU。其实，Maxout的思想在视觉领域存在已久。例如，在HOG特征里有这么一个过程：计算三个通道的梯度强度，然后在每一个像素位置上，仅取三个通道中梯度强度最大的数值，最终形成一个通道。这其实就是Maxout的一种特例。</p>
 <p>所以Maxout神经元就拥有ReLU单元的所有优点（线性操作和不饱和，能够缓解梯度消失），而没有它的缺点（死亡的ReLU单元）。然而和ReLU对比，它每个神经元的参数数量增加了一倍，这就导致整体参数的数量激增。</p>
 <h2 id="九、ELU"><a href="#九、ELU" class="headerlink" title="九、ELU"></a>九、ELU</h2><p>ELU（Exponential Linear Units）非线性函数的数学公式为：</p>
 <script type="math/tex; mode=display">
-f(x)=max(0,x)+\alpha·min(0,exp(x)-1)</script><p>函数图像及梯度函数图像如下所示：<img src="assets/2019-05-15-090050.jpg" alt="屏幕快照 2017-05-12 下午9.14.25"><br>ELU也是为解决ReLU存在的问题而提出，显然，ELU有ReLU的基本所有优点，并有自身的特点，罗列如下：</p>
+f(x)=max(0,x)+\alpha·min(0,exp(x)-1)</script><p>函数图像及梯度函数图像如下所示：<img src="https://i.loli.net/2019/07/30/5d40303d79f4428621.jpg" alt=""><br>ELU也是为解决ReLU存在的问题而提出，显然，ELU有ReLU的基本所有优点，并有自身的特点，罗列如下：</p>
 <ul>
 <li>1）右侧线性部分使得ELU能够缓解梯度消失，而左侧软饱和能够燃ELU对输入变换或噪声更加鲁棒。</li>
 <li>2）ELU的输出均值接近于零，即zero-centered，所以收敛速度更快。经ELU的作者实验，ELU的收敛性质的确优于ReLU和PReLU。在cifar10上，ELU 网络的loss 降低速度更快；在 ImageNet上，不加 Batch Normalization 30 层以上的 ReLU 网络会无法收敛，PReLU网络在MSRA的Fan-in （caffe ）初始化下会发散，而 ELU 网络在Fan-in/Fan-out下都能收敛 。</li>
 </ul>
 <p>它的一个小问题在于计算量稍大，类似于Leaky ReLU，理论上虽然好于ReLU，但在实际使用中目前并没有好的证据证明ELU总是优于ReLU。</p>
-<h2 id="十、Noisy-Activation-Functions"><a href="#十、Noisy-Activation-Functions" class="headerlink" title="十、Noisy Activation Functions"></a>十、Noisy Activation Functions</h2><p>Bengio教授在ICML2016提出了一种激活策略[1]，可用于多种软饱和激活函数，例如sigmoid和tanh。<br><img src="assets/2019-05-15-090102.jpg" alt="屏幕快照 2017-05-12 下午9.26.38"><br><img src="assets/2019-05-15-090112.jpg" alt=""><br>当激活函数发生饱和时，网络参数还能够在两种动力下继续更新：正则项梯度和噪声梯度。引入适当的噪声能够扩大SGD的参数搜索范围，从而有机会跳出包河区。在激活函数中引入噪声的更早工作可追溯到[5]，但文献[5]的工作并不考虑噪声引入的时间和大小。本篇的特点在于，只在饱和区引入噪声，且噪声量与饱和程度相关（原式与泰勒展开式一次项之差$\delta$）。算法1中g表示sigmoid，用于归一化$\delta$。注意，ReLU的$\delta$恒为0，无法直接加噪声，所以作者把噪声加在了输入上。</p>
+<h2 id="十、Noisy-Activation-Functions"><a href="#十、Noisy-Activation-Functions" class="headerlink" title="十、Noisy Activation Functions"></a>十、Noisy Activation Functions</h2><p>Bengio教授在ICML2016提出了一种激活策略[1]，可用于多种软饱和激活函数，例如sigmoid和tanh。<br><img src="https://i.loli.net/2019/07/30/5d40304844a7f37255.jpg" alt=""><br><img src="https://i.loli.net/2019/07/29/5d3dba4fcab7a63697.jpg" alt=""><br>当激活函数发生饱和时，网络参数还能够在两种动力下继续更新：正则项梯度和噪声梯度。引入适当的噪声能够扩大SGD的参数搜索范围，从而有机会跳出包河区。在激活函数中引入噪声的更早工作可追溯到[5]，但文献[5]的工作并不考虑噪声引入的时间和大小。本篇的特点在于，只在饱和区引入噪声，且噪声量与饱和程度相关（原式与泰勒展开式一次项之差$\delta$）。算法1中g表示sigmoid，用于归一化$\delta$。注意，ReLU的$\delta$恒为0，无法直接加噪声，所以作者把噪声加在了输入上。</p>
 <h2 id="CReLU"><a href="#CReLU" class="headerlink" title="CReLU"></a>CReLU</h2><h2 id="MPELU"><a href="#MPELU" class="headerlink" title="MPELU"></a>MPELU</h2><h2 id="十一、小结"><a href="#十一、小结" class="headerlink" title="十一、小结"></a>十一、小结</h2><p>建议用ReLU非线性函数。但是要注意初始化和learning rate的设置，或许可以监控你的网络中死亡的神经元占的比例。如果单元死亡问题困扰你，就试试Leaky ReLU或者Maxout，不要再用sigmoid了。也可以试试tanh，但是其效果应该不如ReLU或者Maxout。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>[1] Gulcehre, C., et al., Noisy Activation Functions, in ICML 2016. 2016.<br>[2] Glorot, X. and Y. Bengio. Understanding the difficulty of training deep feedforward neural networks. AISTATS 2010.<br>[3]  LeCun, Y., et al., Backpropagation applied to handwritten zip code recognition. Neural computation, 1989. 1(4): p. 541-551.<br>[4] Amari, S.-I., Natural gradient works efficiently in learning. Neural computation, 1998. 10(2): p. 251-276.<br>[5] Nair, V. and G.E. Hinton. Rectified linear units improve Restricted Boltzmann machines. ICML 2010.<br>[6] Glorot, X., A. Bordes, and Y. Bengio. Deep Sparse Rectifier Neural Networks.AISTATS 2011.<br>[7] Djork-Arné Clevert, T.U., Sepp Hochreiter. Fast and Accurate Deep Network Learning by Exponential Linear Units (ELUs). ICLR 2016.<br>[]<br>[9] Xu, B., et al. Empirical Evaluation of Rectified Activations in Convolutional Network. ICML Deep Learning Workshop 2015.<br>[10] He, K., et al. Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification. ICCV 2015.<br>[11] He, K. and J. Sun Convolutional Neural Networks at Constrained Time Cost. CVPR 2015.<br>[12] Maas, A.L., Awni Y. Hannun, and Andrew Y. Ng. Rectifier nonlinearities improve neural network acoustic models. in ICML 2013.<br>[13] Goodfellow, I.J., et al. Maxout Networks.  ICML 2013..</p>
 

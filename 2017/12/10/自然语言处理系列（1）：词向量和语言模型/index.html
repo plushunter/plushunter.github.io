@@ -94,12 +94,10 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="转载自LICSTAR的博客 这篇博客是我看了半年的论文后，自己对Deep Learnimng在NLP领域中应用的理解和总结，在此分享。其中必然有局限性，欢迎各种交流，随便拍。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/12/10/自然语言处理系列（1）：词向量和语言模型/assets/undefined">
-<meta property="og:updated_time" content="2019-07-27T06:27:29.751Z">
+<meta property="og:updated_time" content="2019-08-01T12:32:46.579Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="自然语言处理系列（1）：词向量和语言模型">
 <meta name="twitter:description" content="转载自LICSTAR的博客 这篇博客是我看了半年的论文后，自己对Deep Learnimng在NLP领域中应用的理解和总结，在此分享。其中必然有局限性，欢迎各种交流，随便拍。">
-<meta name="twitter:image" content="http://yoursite.com/2017/12/10/自然语言处理系列（1）：词向量和语言模型/assets/undefined">
 
 
 
@@ -424,7 +422,7 @@ var _hmt = _hmt || [];
 <p>顺便提一句，由于后面要接受煎熬的每篇论文使用的符号差异太大，本博文尝试统一使用Bengio 2003的符号系统（略作简化），以便在各方法之间做对比和分析。</p>
 <h3 id="3-2-Bengio的经典之作"><a href="#3-2-Bengio的经典之作" class="headerlink" title="3.2 Bengio的经典之作"></a>3.2 Bengio的经典之作</h3><p>用神经网络训练语言模型的思想最早由百度IDL的徐伟于2000提出。其论文《Can Artificial Neural Networks Learn Language Model？》提出一种用神经网络构建二元语言模型（即$P(w_t|w_{t-1})$）的方法。文中的基本思路和后续的语言模型的差别已经不大了。</p>
 <p>训练语言模型的最经典之作，要数Bengio等人在2001年发表在NIPS上的文章《A Neural Probabilistic Language Model》。当然现在要看的话，肯定是要看他在2003年投到JMLR上的同名论文了。</p>
-<p>Bengio用了一个三层的神经网络来构建语言模型，同样也是n-gram模型。如图<img src="assets/undefined" alt=""></p>
+<p>Bengio用了一个三层的神经网络来构建语言模型，同样也是n-gram模型。</p>
 <p>图中最下方的$w_{t-n+1}，…，w_{t-2},w_{t-1}$就是前$n-1$个词。现在需要根据这已知的$n-1$个词预测下一个词$w_t$。$C(w)$表示词$w$所对应的词向量，整个模型中使用的是一套唯一的词向量，存在矩阵$C$(一个$|V|×m$的矩阵)中。其中$|V|$表示词表的大小（语料中的总词数），m表示词向量的维度。$w$到$C(w)$的转化就是从矩阵中取出一行。</p>
 <p>网络的第一层（输入层）是将$C(w_{t-n+1})，…，C(w_{t-2}),C(w_{t-1})$这n-1个向量首尾相拼接起来，形成一个$(n-1)m$维的向量，下面记为x。</p>
 <p>网络的第二层（隐藏层）就如同普通的神经网络，直接使用$d+Hx$计算得到。d是一个偏置项。在此之后，使用tanh作为激活函数。</p>

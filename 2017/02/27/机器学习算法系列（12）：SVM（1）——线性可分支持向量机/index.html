@@ -94,14 +94,14 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="当训练数据线性可分时，通过硬间隔最大化，学习一个线性可分支持向量机。 一般地，当训练数据集线性可分时，存在无穷个分离超平面可将两类数据正确分开。感知机利用误分类最小的策略，求得分离超平面，不过这时的解有无穷多个。线性可分支持向量机利用间隔最大化求分离超平面，解是唯一的。也就是它不仅将正负实例点分开，而且对最难分的实例点（离分离超平面最近的点）也有足够大的确信度将它们分开。这样的超平面应该对未知的新">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/02/27/机器学习算法系列（12）：SVM（1）——线性可分支持向量机/assets/2019-05-18-060952.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/02/27/机器学习算法系列（12）：SVM（1）——线性可分支持向量机/assets/2019-05-18-061003.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/02/27/机器学习算法系列（12）：SVM（1）——线性可分支持向量机/assets/2019-05-18-061011.jpg">
-<meta property="og:updated_time" content="2019-07-27T06:27:11.078Z">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42af00661a190277.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42af128e6de86317.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42af226352d41879.jpg">
+<meta property="og:updated_time" content="2019-08-01T09:21:45.097Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（12）：SVM（1）—线性可分支持向量机">
 <meta name="twitter:description" content="当训练数据线性可分时，通过硬间隔最大化，学习一个线性可分支持向量机。 一般地，当训练数据集线性可分时，存在无穷个分离超平面可将两类数据正确分开。感知机利用误分类最小的策略，求得分离超平面，不过这时的解有无穷多个。线性可分支持向量机利用间隔最大化求分离超平面，解是唯一的。也就是它不仅将正负实例点分开，而且对最难分的实例点（离分离超平面最近的点）也有足够大的确信度将它们分开。这样的超平面应该对未知的新">
-<meta name="twitter:image" content="http://yoursite.com/2017/02/27/机器学习算法系列（12）：SVM（1）——线性可分支持向量机/assets/2019-05-18-060952.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/01/5d42af00661a190277.jpg">
 
 
 
@@ -428,7 +428,7 @@ y_i\left( w·x_i+b \right) -1=0</script><p>对$y_i=+1$的实例点，支持向�
 <script type="math/tex; mode=display">
 H_1\mathrm{：}w·x_i+b=1</script><p>对$y_i=-1$的负例点，支持向量在超平面</p>
 <script type="math/tex; mode=display">
-H_2\mathrm{：}w·x_i+b=-1</script><p><img src="assets/2019-05-18-060952.jpg" alt="屏幕快照 2017-03-19 下午2.15.14"></p>
+H_2\mathrm{：}w·x_i+b=-1</script><p><img src="https://i.loli.net/2019/08/01/5d42af00661a190277.jpg" alt="2019-05-18-060952.jpg"></p>
 <p>可以看到两个支撑着中间的长带的超平面，它们到中间的分离超平面的距离相等，为什么一定是相等的呢？，即我们所能得到的最大的几何间隔 $\tilde{\gamma}$ 。而“支撑”这两个超平面的必定会有一些点，试想，如果某超平面没有碰到任意一个点的话，那么我就可以进一步地扩充中间的 gap ，于是这个就不是最大的 margin 了。由于在 $n$ 维向量空间里一个点实际上是和以原点为起点，该点为终点的一个向量是等价的，所以这些“支撑”的点便叫做支持向量。</p>
 <p>注意到$H_1$和$H_2$平行，并且没有实例点落在他们中间。在$H_1$和$H_2$之间形成一条长带，分离超平面与他们平行且位于他们中间。长带的宽度，即$H_1$与$H_2$之间的距离成为间隔<code>margin</code>，间隔依赖于分离超平面的法向量$w$，等于$<br>\frac{2}{||w||}<br>$。$H_1$和$H_2$称为间隔边界。</p>
 <p>在决定分离超平面时只有支持向量起作用，而其他实例点并不起作用。如果移动支持向量将改变所求的解；但是如果在将俄边界以外移动其他实例点，甚至去掉这些点，则解是不会改变的。由于支持向量在确定分离超平面中起着决定性作用，所以将这种分类模型称为支持向量机。支持向量机的个数一般都很少，所以支持向量机由很少的“重要的”训练样本确定。</p>
@@ -493,8 +493,8 @@ b^*=y_j-\sum_{i=1}^N{a_{i}^{*}y_i\left( x_i·x_j \right)}</script></li>
 </ol>
 <p>在线性可分支持向量机中，$w^<em>和b^</em>$只依赖于训练数据中对应于$a_i^<em>&gt;0$的样本点$x_i,y_i$,而其他样本点对$w^</em>和b^<em>$没有影响。我们将训练数据中对应于$a_i^</em>&gt;0$的实例点$<br>x_i\in R^n<br>$称为支持向量。</p>
 <p>对于线性可分问题，上述线性可分支持向量机的学习（硬间隔最大化）算法是完美的。但是，训练数据集线性可分是理想的情形。在现实问题中，训练数据集往往是线性不可分的，即在样本中出现噪声或特异点。此时，有更一般的学习算法。</p>
-<h4 id="1-5-KKT条件"><a href="#1-5-KKT条件" class="headerlink" title="1.5 KKT条件"></a>1.5 KKT条件</h4><p>对于包含等式和不等式约束的一般优化问题<br><img src="assets/2019-05-18-061003.jpg" alt=""><br>KKT条件（$x^*$是最优解的必要条件）为</p>
-<p><img src="assets/2019-05-18-061011.jpg" alt=""><br>上式便称为不等式约束优化问题的KKT（Karush-Kuhn-Tucker）条件.$\mu _{j}$称为KKT乘子，当约束起作用时$\mu_1&gt;0,g_1(x)=0$，当约束不起作用时$\mu_1=0,g_1(x)&lt;0$</p>
+<h4 id="1-5-KKT条件"><a href="#1-5-KKT条件" class="headerlink" title="1.5 KKT条件"></a>1.5 KKT条件</h4><p>对于包含等式和不等式约束的一般优化问题<br><img src="https://i.loli.net/2019/08/01/5d42af128e6de86317.jpg" alt="2019-05-18-061003.jpg"><br>KKT条件（$x^*$是最优解的必要条件）为</p>
+<p><img src="https://i.loli.net/2019/08/01/5d42af226352d41879.jpg" alt="2019-05-18-061011.jpg"><br>上式便称为不等式约束优化问题的KKT（Karush-Kuhn-Tucker）条件.$\mu _{j}$称为KKT乘子，当约束起作用时$\mu_1&gt;0,g_1(x)=0$，当约束不起作用时$\mu_1=0,g_1(x)&lt;0$</p>
 <p>更细致的推导可以看这篇文章：<a href="https://zhuanlan.zhihu.com/p/26514613" target="_blank" rel="noopener">浅谈最优化问题的KKT条件</a></p>
 <p>证明可以将线性可分支持向量机的原始问题和对偶问题等同起来的充分必要条件KKT条件，即得</p>
 <script type="math/tex; mode=display">

@@ -94,17 +94,17 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、栈1.1 栈的定义栈（stack）是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶（top），另一端称为栈底，不含任何数据元素的栈称为空栈。它有以下几个特点：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/07/18/数据结构与算法（2）：栈与队列/assets/2019-05-17-165323.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/07/18/数据结构与算法（2）：栈与队列/assets/2019-05-17-165331.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/07/18/数据结构与算法（2）：栈与队列/assets/2019-05-17-165338.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/07/18/数据结构与算法（2）：栈与队列/assets/2019-05-17-165346.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/07/18/数据结构与算法（2）：栈与队列/assets/2019-05-17-165359.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/07/18/数据结构与算法（2）：栈与队列/assets/2019-05-17-165417.jpg">
-<meta property="og:updated_time" content="2019-07-27T06:27:06.156Z">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3e9f78cce4e18893.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3e8c306781093290.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/28/5d3dbbba5bd0573484.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3ec6dcc682483865.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42d34b1c33726511.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42d38dd0ab892290.jpg">
+<meta property="og:updated_time" content="2019-08-01T11:57:08.897Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法（2）：栈与队列">
 <meta name="twitter:description" content="一、栈1.1 栈的定义栈（stack）是限定仅在表尾进行插入和删除操作的线性表。允许插入和删除的一端称为栈顶（top），另一端称为栈底，不含任何数据元素的栈称为空栈。它有以下几个特点：">
-<meta name="twitter:image" content="http://yoursite.com/2017/07/18/数据结构与算法（2）：栈与队列/assets/2019-05-17-165323.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/29/5d3e9f78cce4e18893.jpg">
 
 
 
@@ -409,13 +409,13 @@ var _hmt = _hmt || [];
 <li>peek：返回栈顶元素</li>
 <li>pop：返回并删除栈顶元素的操作。</li>
 </ul>
-<h3 id="1-2-进栈与出栈"><a href="#1-2-进栈与出栈" class="headerlink" title="1.2 进栈与出栈"></a>1.2 进栈与出栈</h3><p>下图为栈的示例图，栈中的数据依次为：$30=&gt;20=&gt;10$<br><img src="assets/2019-05-17-165323.jpg" alt=""></p>
-<p>下图为出栈的示意图：<br><img src="assets/2019-05-17-165331.jpg" alt=""></p>
+<h3 id="1-2-进栈与出栈"><a href="#1-2-进栈与出栈" class="headerlink" title="1.2 进栈与出栈"></a>1.2 进栈与出栈</h3><p>下图为栈的示例图，栈中的数据依次为：$30=&gt;20=&gt;10$<br><img src="https://i.loli.net/2019/07/29/5d3e9f78cce4e18893.jpg" alt=""></p>
+<p>下图为出栈的示意图：<br><img src="https://i.loli.net/2019/07/29/5d3e8c306781093290.jpg" alt=""></p>
 <ul>
 <li>出栈前：栈顶元素是30。此时，栈中的元素依次是$30 = &gt; 20 =&gt; 10 $</li>
 <li>出栈后：30出栈之后，栈顶元素变成20。此时，栈中的元素依次是 $20 =&gt; 10$</li>
 </ul>
-<p>下图为入栈的示意图：<br><img src="assets/2019-05-17-165338.jpg" alt=""></p>
+<p>下图为入栈的示意图：<br><img src="https://i.loli.net/2019/07/28/5d3dbbba5bd0573484.jpg" alt=""></p>
 <ul>
 <li>入栈前：栈顶元素是20。此时，栈中的元素依次是$20 =&gt; 10 $</li>
 <li>入栈后：40入栈之后，栈顶元素变成40。此时，栈中的元素依次是 $40 =&gt; 20 =&gt; 10$</li>
@@ -425,13 +425,13 @@ var _hmt = _hmt || [];
 <li>队列中数据是按照“先进先出（FIFO，First-In-First-Out）”方式进出队列的。</li>
 <li>队列只允许在“队首”进行删除操作，而在“队尾”进行插入操作。</li>
 </ul>
-<h3 id="2-2-出队列和入队列"><a href="#2-2-出队列和入队列" class="headerlink" title="2.2 出队列和入队列"></a>2.2 出队列和入队列</h3><p>下图为队列的示意图：<br><img src="assets/2019-05-17-165346.jpg" alt=""><br>队列中有10，20，30共3个数据。</p>
-<p>下图为出队列的示意图：<br><img src="assets/2019-05-17-165359.jpg" alt=""></p>
+<h3 id="2-2-出队列和入队列"><a href="#2-2-出队列和入队列" class="headerlink" title="2.2 出队列和入队列"></a>2.2 出队列和入队列</h3><p>下图为队列的示意图：<br><img src="https://i.loli.net/2019/07/29/5d3ec6dcc682483865.jpg" alt=""><br>队列中有10，20，30共3个数据。</p>
+<p>下图为出队列的示意图：<br><img src="https://i.loli.net/2019/08/01/5d42d34b1c33726511.jpg" alt="2019-05-17-165359.jpg"></p>
 <ul>
 <li>出队列前：队首是10，队尾是30。</li>
 <li>出队列后：出队列(队首)之后。队首是20，队尾是30。</li>
 </ul>
-<p>下图为入队列的示意图：<br><img src="assets/2019-05-17-165417.jpg" alt=""></p>
+<p>下图为入队列的示意图：<br><img src="https://i.loli.net/2019/08/01/5d42d38dd0ab892290.jpg" alt="2019-05-17-165417-1.jpg"></p>
 <ul>
 <li>入队列前：队首是20，队尾是30。</li>
 <li>入队列后：40入队列(队尾)之后。队首是20，队尾是40。</li>

@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="字符串相关题解java实现">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/08/04/数据结构与算法题解（3）：字符串题解/assets/2019-05-17-162603.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/08/04/数据结构与算法题解（3）：字符串题解/assets/2019-05-17-162612.jpg">
-<meta property="og:updated_time" content="2019-07-27T06:26:58.788Z">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3ec698f018495484.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/30/5d3fa4c794f5464937.jpg">
+<meta property="og:updated_time" content="2019-08-01T12:16:14.694Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法题解（3）：字符串题解">
 <meta name="twitter:description" content="字符串相关题解java实现">
-<meta name="twitter:image" content="http://yoursite.com/2017/08/04/数据结构与算法题解（3）：字符串题解/assets/2019-05-17-162603.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/29/5d3ec698f018495484.jpg">
 
 
 
@@ -397,12 +397,12 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 <h2 id="一、替换空格（剑4）"><a href="#一、替换空格（剑4）" class="headerlink" title="一、替换空格（剑4）"></a>一、替换空格（剑4）</h2><p>请实现一个函数，把字符串中的每个空格替换成”%20”。例如输入“We are happy.”，则输出“We%20are%20happy”</p>
 <p>网络编程中，要把特殊符号转换成服务器可识别的字符。转换的规则是在“%”后面跟上ASCII码的两位十六进制的表示。比如空格的ASCII码是32，即十六进制的0X20，因此空格被替换成“%20”。</p>
-<p>问题1：替换字符串，是在原来的字符串上做替换，还是新开辟一个字符串做替换！<br>问题2：在当前字符串替换，怎么替换才更有效率（不考虑java里现有的replace方法）。从前往后替换，后面的字符要不断往后移动，要多次移动，所以效率低下；从后往前，先计算需要多少空间，然后从后往前移动，则每个字符只为移动一次，这样效率更高一点。<br><img src="assets/2019-05-17-162603.jpg" alt=""></p>
+<p>问题1：替换字符串，是在原来的字符串上做替换，还是新开辟一个字符串做替换！<br>问题2：在当前字符串替换，怎么替换才更有效率（不考虑java里现有的replace方法）。从前往后替换，后面的字符要不断往后移动，要多次移动，所以效率低下；从后往前，先计算需要多少空间，然后从后往前移动，则每个字符只为移动一次，这样效率更高一点。<br><img src="https://i.loli.net/2019/07/29/5d3ec698f018495484.jpg" alt=""></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">replaceSpace</span><span class="params">(StringBuffer str)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> spacenum = <span class="number">0</span>;<span class="comment">//spacenum为计算空格数</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;str.length();i++)&#123;</div><div class="line">            <span class="keyword">if</span>(str.charAt(i)==<span class="string">' '</span>)</div><div class="line">                spacenum++;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> indexold = str.length()-<span class="number">1</span>;<span class="comment">//indexold为为替换前的str下标</span></div><div class="line">        <span class="keyword">int</span> newlength = str.length()+<span class="number">2</span>*spacenum;<span class="comment">//计算空格转换成%20之后的str长度</span></div><div class="line">        <span class="keyword">int</span> indexnew = newlength-<span class="number">1</span>;<span class="comment">//indexold为为把空格替换为%20后的str下标</span></div><div class="line">        str.setLength(newlength);<span class="comment">//使str的长度扩大到转换成%20之后的长度,防止下标越界,setLength方法</span></div><div class="line">        <span class="keyword">for</span>(;indexold&gt;=<span class="number">0</span>&amp;&amp;indexold&lt;newlength;--indexold)&#123;</div><div class="line">            <span class="keyword">if</span>(str.charAt(indexold)==<span class="string">' '</span>)&#123;<span class="comment">//charAt方法</span></div><div class="line">                str.setCharAt(indexnew--,<span class="string">'0'</span>);</div><div class="line">                str.setCharAt(indexnew--,<span class="string">'2'</span>);</div><div class="line">                str.setCharAt(indexnew--,<span class="string">'%'</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                str.setCharAt(indexnew--,str.charAt(indexold));</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> str.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="二、字符串的排列（剑28）"><a href="#二、字符串的排列（剑28）" class="headerlink" title="二、字符串的排列（剑28）"></a>二、字符串的排列（剑28）</h2><p>输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。</p>
 <p>首先我要打印abc的全排列，就是第一步把a 和bc交换（得到bac,cab），这需要一个for循环，循环里面有一个swap，交换之后就相当于不管第一步了，进入下一步递归，所以跟一个递归函数， 完成递归之后把交换的换回来，变成原来的字串</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">abc 为例子：</div><div class="line">1. 固定a, 求后面bc的全排列： abc, acb。 求完后，a 和 b交换； 得到bac,开始第二轮</div><div class="line">2. 固定b, 求后面ac的全排列： bac, bca。 求完后，b 和 c交换； 得到cab,开始第三轮</div><div class="line">3. 固定c, 求后面ba的全排列： cab, cba</div><div class="line"> 即递归树： </div><div class="line">　　　　　str:　　 a    　　　　 b 　　　　　　  c</div><div class="line">　　　　　　 　　ab ac     　　ba bc  　　　     ca cb</div><div class="line">　   　result:     abc acb    　 bac bca　     　   cab cba</div></pre></td></tr></table></figure>
-<p><img src="assets/2019-05-17-162612.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/07/30/5d3fa4c794f5464937.jpg" alt=""></p>
 <blockquote>
 <p>java</p>
 </blockquote>

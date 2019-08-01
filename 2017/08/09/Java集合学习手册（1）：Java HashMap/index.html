@@ -94,13 +94,13 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、概述从本文你可以学习到：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2017/08/09/Java集合学习手册（1）：Java%20HashMap/assets/5d3ba70a2119870362.jpg">
-<meta property="og:image" content="http://yoursite.com/2017/08/09/Java集合学习手册（1）：Java%20HashMap/assets/5d3ba71e7fbb046161.jpg">
-<meta property="og:updated_time" content="2019-07-27T06:26:49.696Z">
+<meta property="og:image" content="https://i.loli.net/2019/08/01/5d42dc14c80e563118.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/07/29/5d3e58699f55484268.jpg">
+<meta property="og:updated_time" content="2019-08-01T12:33:35.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java集合学习手册（1）：Java HashMap">
 <meta name="twitter:description" content="一、概述从本文你可以学习到：">
-<meta name="twitter:image" content="http://yoursite.com/2017/08/09/Java集合学习手册（1）：Java%20HashMap/assets/5d3ba70a2119870362.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/08/01/5d42dc14c80e563118.jpg">
 
 
 
@@ -440,7 +440,7 @@ var _hmt = _hmt || [];
 <p>总结下put的过程：</p>
 <p>当程序试图将一个key-value对放入HashMap中时，程序首先根据该 key 的 hashCode() 返回值决定该 Entry 的存储位置， 该位置就是此对象准备往数组中存放的位置。</p>
 <p>如果该位置没有对象存在，就将此对象直接放进数组当中；如果该位置已经有对象存在了，则顺着此存在的对象的链开始寻找(为了判断是否是否值相同，map不允许<key,value>键值对重复)， 使用 equals方法进行比较，如果对此链上的 key 通过 equals 比较有一个返回 true，新添加 Entry 的 value 将覆盖集合中原有 Entry 的 value，但key不会覆盖；如果对此链上的每个对象的 equals 方法比较都为 false，则将该对象放到数组当中，然后将数组中该位置以前存在的那个对象链接到此对象的后面，即新值存放在数组中，旧值在新值的链表上。</key,value></p>
-<p><img src="assets/5d3ba70a2119870362.jpg" alt=""></p>
+<p><img src="https://i.loli.net/2019/08/01/5d42dc14c80e563118.jpg" alt="5d3ba70a2119870362.jpg"></p>
 <h3 id="3-2-get-方法"><a href="#3-2-get-方法" class="headerlink" title="3.2 get()方法"></a>3.2 get()方法</h3><p>在理解了put之后，get就很简单了。大致思路如下：</p>
 <ol>
 <li>bucket里的第一个节点，直接命中；</li>
@@ -475,7 +475,7 @@ var _hmt = _hmt || [];
 <h2 id="五、resize-方法"><a href="#五、resize-方法" class="headerlink" title="五、resize()方法"></a>五、resize()方法</h2><p>当put时，如果发现目前的bucket占用程度已经超过了Load Factor所希望的比例，那么就会发生resize。在resize的过程，简单的说就是把bucket扩充为2倍，之后重新计算index，把节点再放到新的bucket中。resize的注释是这样描述的：</p>
 <p>&gt;<br>Initializes or doubles table size. If null, allocates in accord with initial capacity target held in field threshold. Otherwise, because we are using power-of-two expansion, the elements from each bin must either stay at same index, or move with a power of two offset in the new table.</p>
 <p>大致意思就是说，当超过限制的时候会resize，然而又因为我们使用的是2次幂的扩展(指长度扩为原来2倍)，所以，元素的位置要么是在原位置，要么是在原位置再移动2次幂的位置。</p>
-<p>怎么理解呢？例如我们从16扩展为32时，元素在重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit(红色)，因此新的index就会发生这样的变化：<br><img src="assets/5d3ba71e7fbb046161.jpg" alt=""></p>
+<p>怎么理解呢？例如我们从16扩展为32时，元素在重新计算hash之后，因为n变为2倍，那么n-1的mask范围在高位多1bit(红色)，因此新的index就会发生这样的变化：<br><img src="https://i.loli.net/2019/07/29/5d3e58699f55484268.jpg" alt=""></p>
 <p>因此，我们在扩充HashMap的时候，不需要重新计算hash，只需要看看原来的hash值新增的那个bit是1还是0就好了，是0的话索引没变，是1的话索引变成“原索引+oldCap”。</p>
 <p>这个设计确实非常的巧妙，既省去了重新计算hash值的时间，而且同时，由于新增的1bit是0还是1可以认为是随机的，因此resize的过程，均匀的把之前的冲突的节点分散到新的bucket了。</p>
 <p>下面是代码的具体实现：</p>
