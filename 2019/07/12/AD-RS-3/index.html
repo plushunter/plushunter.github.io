@@ -1,0 +1,1213 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="定价,维克里拍卖,价格挤压,底价," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在竞价广告中，广告主能否获得某个广告位是由其变现能力也就是eCPM的大小来决定的。在以CPC结算即点击结算的单子中，eCPM即千次展示期望收入的计算公式为:eCPM = \mu *v其中：">
+<meta name="keywords" content="定价,维克里拍卖,价格挤压,底价">
+<meta property="og:type" content="article">
+<meta property="og:title" content="广告&amp;推荐面面观（3）：竞价广告定价策略与实现">
+<meta property="og:url" content="http://yoursite.com/2019/07/12/AD-RS-3/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="在竞价广告中，广告主能否获得某个广告位是由其变现能力也就是eCPM的大小来决定的。在以CPC结算即点击结算的单子中，eCPM即千次展示期望收入的计算公式为:eCPM = \mu *v其中：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/07/12/5d28260ef141287392.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/12/5d28457767d4f88243.png">
+<meta property="og:updated_time" content="2019-08-23T08:39:49.340Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="广告&amp;推荐面面观（3）：竞价广告定价策略与实现">
+<meta name="twitter:description" content="在竞价广告中，广告主能否获得某个广告位是由其变现能力也就是eCPM的大小来决定的。在以CPC结算即点击结算的单子中，eCPM即千次展示期望收入的计算公式为:eCPM = \mu *v其中：">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/12/5d28260ef141287392.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","onmobile":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 广告&推荐面面观（3）：竞价广告定价策略与实现 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
+            
+            林中路
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/12/AD-RS-3/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                广告&推荐面面观（3）：竞价广告定价策略与实现
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-12T20:20:28+08:00">
+                2019-07-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/广告-推荐/" itemprop="url" rel="index">
+                    <span itemprop="name">广告&推荐</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在竞价广告中，广告主能否获得某个广告位是由其变现能力也就是eCPM的大小来决定的。在以CPC结算即点击结算的单子中，eCPM即千次展示期望收入的计算公式为:<script type="math/tex">eCPM = \mu *v</script>其中：</p>
+<a id="more"></a>
+<ul>
+<li>$\mu$ 表示点击率（click rate），是由供给方在媒体侧通过收集广告数据（a）、用户数据（u）、上下文数据（c），使用模型预估用户在当前环境下，对当前广告的点击概率</li>
+<li>$v$ 表示点击价值（click value），是由需求方根据用户在广告主自身站内的行为数据评估出来的一个出价</li>
+</ul>
+<p>但需求方往往不会完全按照其估计的真实点击价值来定价，而往往会以较低的价格寻求套利空间，为了避免这种套利行为，就有了竞价广告的定价策略，通过机制设计来抑制广告主积极调价。这也是本文所关注的。</p>
+<p>假如我们有一组广告，记为集合A，另有一组广告位，记为集合S，那么一次广告竞价过程可以描述为：集合A中的广告通过出价来拍卖集合B中的广告位置，拍卖的依据是广告的eCPM。其中出价是很重要的一环，所以其机制设计就尤为重要，要做到竞价市场收益良好，稳定且公平。</p>
+<h3 id="从拍卖理论说起"><a href="#从拍卖理论说起" class="headerlink" title="从拍卖理论说起"></a>从拍卖理论说起</h3><p>广告位置竞价源自于拍卖理论，看具体的拍卖方式之前先说一个概念，帕累托有效，即拍卖品最终归于支付意愿最高的竞买人之手，支付意愿并不由出价呈现，而是一种买家的心理状态。拍卖方式主要有四种，英国式拍卖、荷兰式拍卖、第一价格密封拍卖、第二价格密封拍卖，如下：</p>
+<ul>
+<li><p>英国式拍卖：</p>
+<ul>
+<li>也叫增价拍卖，指拍卖竞价由低向高依次递增，直到以最高价击槌成交的一种拍卖，拍卖人设定一个保留价格，如果最终的出价低于保留价，则流拍。为了保证竞价收敛，一般会为竞价设定一个终止时间。</li>
+<li>英式拍卖最古老，也是大家接触较多的拍卖方式。在这种拍卖方式中，竞买人要冒一定的风险，他可能会被令人兴奋的竞价过程吸引，出价超出了预估价，这种心理现象称为“赢者诅咒”。</li>
+</ul>
+</li>
+<li><p>荷兰式拍卖：</p>
+<ul>
+<li>与英国式拍卖相反，也称减价拍卖，它是指拍卖竞价由高到低依次递减，直到第一个竞买人应价时击槌成交的一种拍卖。它起源于荷兰的鲜花交易市场，拍卖周期很短，所以对于短期易腐食品，如果蔬、鱼类、鲜花较为适合。</li>
+<li>它克服了英式拍卖中“知道其他买家出价”的缺点，是一种密封式的拍卖方法。竞买人往往坐等观望，企盼价格不断减低，因而现场竞争气氛不够热烈。所以有“无声拍卖”的名声。</li>
+</ul>
+</li>
+<li><p>第一价格密封拍卖：</p>
+<ul>
+<li>每一个买方写下自己的期望价格，买方之间互不知道对方的出价（故称密封拍卖），最后在同一个时间揭晓每个买家的出价，出价最高者获得标的物。</li>
+<li>这种拍卖方式每个买家只出一次价格，一般来讲，买方会出一个低于心理预期的价格，只有在买方足够多的情况下，最终的价格才会更接近物品的真实价值；且由于存在一些暗箱操作，无法真的保证密封性。</li>
+</ul>
+</li>
+<li><p>第二价格密封拍卖：</p>
+<ul>
+<li>也叫维克里拍卖（Vickrey Auction），拍卖过程和第一价格密封拍卖一致，由出价最高的买家获得物品，但他只需要支付所有投标者中的第二高价。在维克里拍卖中，每个买家最优出价策略就是“自己对这个物品价格的估值”，即“诚实才是最优的竞价策略”，因为这种策略的最后的成交价格和买家的出价是相对独立的，中标者对价格没有影响，出标的高低只决定最后是否获得标的，但不决定最终的成交价格。比如竞标一幅画，最终中标人出价是2万元，未中标人中最高价格是1.8万元，所以中标人只需要出1.8万元。</li>
+<li>在这种策略下，买家可以将所有精力放到对物品价值的评估上，而不需要研究其他竞争对手，不需要研究投标策略，不需要进行市场评估。理论上讲，第二价格密封拍卖是一种有效的拍卖机制。但实际中，买家之间合谋，买家与卖家之间合谋的情况经常存在；同时，作为非理性人，其他买家的出价在一定程度上也会影响自己的出价。</li>
+</ul>
+</li>
+</ul>
+<p>维克里拍卖是诺贝尔经济学奖获得者维克里的名字命名的。他在《反投机、拍卖与竞争性密封投标》文中对拍卖理论做了非常开创性的工作，首次运用博弈论来分析拍卖问题, 极富预见性地提出了拍卖理论中的多数关键问题, 从而引导了该理论的基本研究方向。这也是他在1996年获得诺贝尔经济学家奖的重要因素。他在论文中主要证明了以下几个结论：</p>
+<ol>
+<li>英式拍卖中的每个竞买人的占优战略都是保持竞价, 直到价格达到自己的估价为止, 估价最高的竞买人将以大致等于次高估价的价格夺走拍卖品, 这种配置结果显然是帕累托有效的。</li>
+<li>在竞买人对称的荷式拍卖中, 每个竞买人的报价应该严格低于自己的估价, 估价最高的竞买人也必定成为赢家, 因而也是帕累托有效的。但是, 如果竞买人非对称, 荷式拍卖的配置结果很可能是无效率的。</li>
+<li>荷式拍卖与第一价格密封拍卖在战略上是完全等价的, 因为竞买人在两种情形中所面临的局势完全相同。在此基础上,维克里独创性地提出了英式拍卖的密封等价形式第二价格密封拍卖，即维克里拍卖。这种拍卖最显著的特征是每个竞买人的的占优战略都是按其真实支付意愿出价（说真话）, 这种拍卖机制显然是激励相容的。由于拍卖品最终归于支付意愿最高的竞买人之手, 它也是一种具有帕累托效率的配置机制。</li>
+<li>维克里最重要的贡献在于, 他针对竞买人对称的情形证明, 荷式拍卖与英式拍卖所产生的期望价格相同。结合战略等价关系, 这实际上意味着四种标准拍卖机制给卖主带来的平均收入相等。这就是著名的收入等价定理，该定理是整个拍卖理论研究的起点。</li>
+</ol>
+<p>具体的可以研读阅读论文《反投机、拍卖与竞争性密封投标》或者Vijay Krishna的《Auction Theory》了解更多的拍卖理论的细节。互联网广告中常用的的二价定价策略就是从维克多拍卖推广开来的，具体看一下。</p>
+<h3 id="广义第二高价"><a href="#广义第二高价" class="headerlink" title="广义第二高价"></a>广义第二高价</h3><p>广义第二高价（GSP）是互联网广告中运用最广泛的定价方式，像谷歌、百度运用的都是该策略。其原理如下：</p>
+<p>单位置第二高价拍卖</p>
+<ul>
+<li>和拍卖理论中的维克里拍卖一致，指的是在只有一个位置的拍卖中，向赢得该位置的广告主收取其下一位广告主的出价，比如说耐克出10块，阿迪出8块，那么耐克赢得单广告位展示，但最终的定价是8元。</li>
+</ul>
+<p>多位置广义第二高价拍卖</p>
+<ul>
+<li>由单位置二价拍卖推广开来放到搜索广告的多广告位拍卖中，对赢得每一个位置的广告主，都按照他下一位的广告位置出价来收取费用。</li>
+</ul>
+<p>如果最终的单子按照CPM即曝光收费，广义第二高价拍卖可直接应用；</p>
+<p>如果是按照CPC即点击结算，广告主出价是根据点击来的，而竞价是根据eCPM排序的，最终的定价需要进行如下的换算：</p>
+<script type="math/tex; mode=display">q_s = \frac{\mu_{s+1}b_{s+1}}{\mu_s+\Delta}</script><p>也就是根据以下一位的广告位置的eCPM作为分子，以该位置的点击率加上一个很小的$\Delta$作为分母，两者相除得到该位置的定价，具体的计算可以看最后的定价示例。</p>
+<h3 id="VCG定价"><a href="#VCG定价" class="headerlink" title="VCG定价"></a>VCG定价</h3><p>VCG 定价是 Vickrey、Clarke 和 Groves 在研究竞价系统均衡状态时得到的一种理论上较为优越的定价策略。</p>
+<p>其基本思想是：对于赢得了某个位置的广告主，其所付出的成本应该等于他占据这个位置给其他市场参与者带来的价值损害。有点类似于机会成本的概念。</p>
+<p>在这一原则下，VCG的定价策略可以表示为公式：</p>
+<script type="math/tex; mode=display">q_s = \sum_{t>s}(\mu_{t-1}-\mu_t)v_t</script><p>其优点是：</p>
+<ul>
+<li>在VCG定价策略的稳定状态下，每个广告主都找到了自己的最优状态</li>
+<li>相较于其他定价策略，VCG向广告主收取的费用最少</li>
+</ul>
+<p>但VCG并不主流，只有少数的广告厂商如facebook使用，其缺陷如下：</p>
+<ul>
+<li>定价逻辑过于复杂，很难向广告主解释清</li>
+<li>“给其他市场参与者带来的价值损害”的计算很难验证</li>
+</ul>
+<h3 id="市场保留价"><a href="#市场保留价" class="headerlink" title="市场保留价"></a>市场保留价</h3><p>和拍卖过程一直，互联网竞价市场也会设置一个拍卖底价，即市场保留价（Market Reserve Price,MRP），也称底价或起价。这个底价体现在两个方面：</p>
+<ul>
+<li>出价只有在高于底价时才有竞价机会</li>
+<li>若赢得了广告位，根据定价策略计算出的费用低于市场保留价，也需要调整到底价的水平</li>
+</ul>
+<p>如何确定底价：</p>
+<ul>
+<li>竞争较为充分时、广告主深度足够时，底价可以设的高一些</li>
+<li>反之则适当降低</li>
+</ul>
+<p>底价的设置方式：</p>
+<ul>
+<li>整个竞价市场采用同样的保留价格</li>
+<li>根据不同的标的物设置不同的保留价格，一般对竞争激烈的关键词设置较高的MRP，这个也叫动态市场保留价</li>
+</ul>
+<p>底价的基本原理</p>
+<ul>
+<li>根据竞价广告主的eCPM分布，找到一个使得填充率没有明显下降的CPM底价，然年后再根据质量度倒算其CPC底价。</li>
+</ul>
+<p>动态市场保留价</p>
+<ul>
+<li>雅虎搜索关键词动态调价，即对不同的关键词调整不同的起价，对收入的影响达到13%，谷歌也更早推出其动态调价策略</li>
+<li>动态调价与a/u/c都有关，可以做到完全的动态，具体可参考文献<a href="https://web.stanford.edu/~ost/papers/rp.pdf" target="_blank" rel="noopener">Reserve Prices in Internet Advertising Auctions:A Field Experiment∗</a></li>
+</ul>
+<h3 id="价格挤压"><a href="#价格挤压" class="headerlink" title="价格挤压"></a>价格挤压</h3><p>在CPC广告竞价机制设计中，会对eCPM的计算公式 $eCPM = \mu * bid_{CPC}$做一些微调，如下：</p>
+<script type="math/tex; mode=display">eCPM = \mu^{k} * bid_{CPC}</script><p>其中k大于0，k越大，对出价的挤压就越大，故称价格挤压因子。看两种极端情况：</p>
+<ul>
+<li>$k\rightarrow \infty$：只根据点击率排序，不考虑出价的作用</li>
+<li>$k\rightarrow 0$：只根据出价排序</li>
+</ul>
+<p>作用：根据市场情况更主动影响竞价体系朝着需要的方向发展</p>
+<ul>
+<li>若市场上存在大量的出价较高但品质不佳的广告主，则可调高$k$来强调质量和用户反馈的影响，即更多的体现点击率；同时想鼓励广告主提高广告质量和相关性，也可以提高$k$</li>
+<li>若市场竞价激烈程度不足，可降低$k$鼓励竞争，并短期增加营收</li>
+</ul>
+<h3 id="定价示例与算法实现"><a href="#定价示例与算法实现" class="headerlink" title="定价示例与算法实现"></a>定价示例与算法实现</h3><p>目前主流的定价体系综合运用了以上所述的GSP、市场保留价和价格挤压三种策略，下面是一个具体示例：</p>
+<p><img src="https://i.loli.net/2019/07/12/5d28260ef141287392.png" alt=""></p>
+<p>A/B/C/D四个广告竞价，其中底价MRP为0.25元，第一列为广告主出价，第二列为预估的点击率，第三、四、五列分别是$k=1.0/2.5/0.5$时的eCPM排序和最终定价，以第三列为例说一下计算的步骤：</p>
+<p>1、对每一个广告按照给定的挤压因子计算调整后的eCPM</p>
+<script type="math/tex; mode=display">eCPM = \mu^{k} * bid_{CPC}</script><p><img src="https://i.loli.net/2019/07/12/5d28457767d4f88243.png" alt=""><br>所以其eCPM排序为 $A:1,B:2,C:3,D:4$</p>
+<p>2、依据GSP策略计算定价，此处$\Delta$设为0</p>
+<script type="math/tex; mode=display">q_s = \frac{eCPM_{s+1}}{\mu_s+\Delta}</script><p>A的下一排序是B，所以$q_s = \frac{eCPM_B}{\mu_s}= 0.008/0.016 = 0.5$<br>B的下一排序是C：所以$q_s = \frac{eCPM_C}{\mu_s}= 0.003/0.004 = 0.75$<br>C的下一排序是D：所以$q_s = \frac{eCPM_D}{\mu_s}= 0.002/0.01 = 0.2$，因为底价MRP=0.25,故最终的定价为0.25<br>D为最后一个广告，没有下一排序广告，所以按照底价定价为0.25</p>
+<p>整个计算过程比较简单，下面用python实现一下GSP定价的过程。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">class cal_gsp(object):</div><div class="line">    </div><div class="line">    def __init__(self):</div><div class="line">        ## 初始化价格挤压因子和市场保留价</div><div class="line">        self.squash_k = 1</div><div class="line">        self.MRP = 0.25</div><div class="line">        </div><div class="line">    ## 计算加入挤压因子的ecpm</div><div class="line">    def cal_ecpm(self,ad_gsp):   </div><div class="line">        for ad_id,ad_mes in  ad_gsp.items():</div><div class="line">            bid = ad_mes.get(&apos;bid&apos;)</div><div class="line">            if bid&lt;MRP: </div><div class="line">                continue</div><div class="line">            ctr = ad_mes.get(&apos;ctr&apos;)</div><div class="line">            eCPM = (ctr**squash_k) * bid</div><div class="line">            ad_gsp[ad_id][&apos;eCPM&apos;] = eCPM    </div><div class="line">        return ad_gsp</div><div class="line">        </div><div class="line">    ## 按照ecpm排序</div><div class="line">    def get_sorted_ecpm(self,ad_gsp):  </div><div class="line">        return sorted(ad_gsp.items(),key = lambda x: x[1].get(&apos;eCPM&apos;),reverse=True)</div><div class="line"></div><div class="line">    ## 按照gsp策略计算最终的定价</div><div class="line">    def get_gsp(self, ad_gsp,sorted_ad_gsp):</div><div class="line">        for i in range(len(sorted_ad_gsp)):</div><div class="line">            cur_ad = sorted_ad_gsp[i]</div><div class="line">            ad_id = cur_ad[0]</div><div class="line">            if i &lt; len(sorted_ad_gsp)-1:</div><div class="line">                next_ad = sorted_ad_gsp[i+1]</div><div class="line">                price = next_ad[1].get(&apos;eCPM&apos;)/cur_ad[1].get(&apos;ctr&apos;)</div><div class="line">                if  price &lt; MRP:</div><div class="line">                    price = MRP</div><div class="line">                ad_gsp[cur_ad[0]][&apos;gsp&apos;] = price</div><div class="line">            else:</div><div class="line">                ad_gsp[cur_ad[0]][&apos;gsp&apos;] = MRP</div><div class="line">        return ad_gsp</div><div class="line"></div><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    ## 示例</div><div class="line">    ad_gsp = &#123;&apos;A&apos;:&#123;&apos;bid&apos;:0.8,&apos;ctr&apos;:1.6&#125;,&apos;B&apos;:&#123;&apos;bid&apos;:2.0,&apos;ctr&apos;:0.4&#125;,&apos;C&apos;:&#123;&apos;bid&apos;:0.3,&apos;ctr&apos;:1&#125;,&apos;D&apos;:&#123;&apos;bid&apos;:0.4,&apos;ctr&apos;:0.5&#125;&#125;</div><div class="line">    cal_gsp = cal_gsp()</div><div class="line">    ad_gsp = cal_gsp.cal_ecpm(ad_gsp)</div><div class="line">    sorted_ad_gsp = cal_gsp.get_sorted_ecpm(ad_gsp)</div><div class="line">    result = cal_gsp.get_gsp(ad_gsp,sorted_ad_gsp)</div><div class="line">    print(result)</div></pre></td></tr></table></figure>
+<p>参考资料：</p>
+<ul>
+<li><a href="https://book.douban.com/subject/26596778/" target="_blank" rel="noopener">计算广告</a></li>
+<li><a href="https://www.zhihu.com/question/20421934" target="_blank" rel="noopener">知乎问答</a></li>
+</ul>
+<p>定价问题延伸阅读：</p>
+<ul>
+<li>Research Frontier of Real-Time Bidding based Display Advertising </li>
+<li>Budget Constrained Bidding by Model-free Reinforcement Learning in Display Advertising </li>
+<li>Real-Time Bidding with Multi-Agent Reinforcement Learning in Display Advertising </li>
+<li>Real-Time Bidding by Reinforcement Learning in Display Advertising </li>
+<li>Combining Powers of Two Predictors in Optimizing Real-Time Bidding Strategy under Constrained Budget </li>
+<li>Bid-aware Gradient Descent for Unbiased Learning with Censored Data in Display Advertising </li>
+<li>Optimized Cost per Click in Taobao Display Advertising </li>
+<li>Real-Time Bidding Algorithms for Performance-Based Display Ad Allocation </li>
+<li>Deep Reinforcement Learning for Sponsored Search Real-time Bidding </li>
+</ul>
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    <div>
+    
+    	<br>	
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>-----------本文结束<i class="fa fa-paw"></i>
+        感谢您的阅读-----------<br></div>
+        <div><br>  
+        <div align="center">
+        欢迎关注个人公众号【应统联盟】，一起交流学习算法、编程与大数据。
+ </div> 
+        <div align="center">
+        <br>
+        <img src="https://i.loli.net/2019/08/01/5d42de70a873672762.png"/>
+        </div> 
+        </div>
+    
+</div>
+  
+</div>
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/定价/" rel="tag"># 定价</a>
+          
+            <a href="/tags/维克里拍卖/" rel="tag"># 维克里拍卖</a>
+          
+            <a href="/tags/价格挤压/" rel="tag"># 价格挤压</a>
+          
+            <a href="/tags/底价/" rel="tag"># 底价</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/26/Spark-3/" rel="next" title="Spark笔记（3）：集群运行Spark程序实例讲解">
+                <i class="fa fa-chevron-left"></i> Spark笔记（3）：集群运行Spark程序实例讲解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/23/AD-RS-4/" rel="prev" title="广告&推荐面面观（4）：计算广告基础知识">
+                广告&推荐面面观（4）：计算广告基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bc405fb9346cd0b" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">205</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">304</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
+                    
+                      <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/ren-da-ying-tong-hua-qi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+
+          
+          <div id="music163player">
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
+
+
+        
+
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.statunion.cn" title="应统联盟" target="_blank">应统联盟</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ml-union.github.io/about/" title="机器联盟" target="_blank">机器联盟</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+        
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#从拍卖理论说起"><span class="nav-text">从拍卖理论说起</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#广义第二高价"><span class="nav-text">广义第二高价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VCG定价"><span class="nav-text">VCG定价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#市场保留价"><span class="nav-text">市场保留价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#价格挤压"><span class="nav-text">价格挤压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定价示例与算法实现"><span class="nav-text">定价示例与算法实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>

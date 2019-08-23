@@ -1,0 +1,1281 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="驱动器,执行器,spark-submit,YARN," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="之前都是在spark shell上执行，当数据量达到一定程度，我们可以利用Spark的集群模式来运行，增加算力，而且本地小数据量验证成功的代码可以直接放到集群上跑。 这一小节从提交一个集群环境下的Spark Job出发，讨论了在集群运行Spark Job时的配置项，再讲到Spark基础的架构，最后讲解了一下Spark Job性能调试的经验。">
+<meta name="keywords" content="驱动器,执行器,spark-submit,YARN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark笔记（3）：集群运行Spark程序实例讲解">
+<meta property="og:url" content="http://yoursite.com/2019/06/26/Spark-3/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="之前都是在spark shell上执行，当数据量达到一定程度，我们可以利用Spark的集群模式来运行，增加算力，而且本地小数据量验证成功的代码可以直接放到集群上跑。 这一小节从提交一个集群环境下的Spark Job出发，讨论了在集群运行Spark Job时的配置项，再讲到Spark基础的架构，最后讲解了一下Spark Job性能调试的经验。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a6f77f16123968.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a703842d926073.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a7132a71926586.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a72681a6f49678.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a7391504793854.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a744994af94520.png">
+<meta property="og:updated_time" content="2019-08-23T07:12:02.631Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark笔记（3）：集群运行Spark程序实例讲解">
+<meta name="twitter:description" content="之前都是在spark shell上执行，当数据量达到一定程度，我们可以利用Spark的集群模式来运行，增加算力，而且本地小数据量验证成功的代码可以直接放到集群上跑。 这一小节从提交一个集群环境下的Spark Job出发，讨论了在集群运行Spark Job时的配置项，再讲到Spark基础的架构，最后讲解了一下Spark Job性能调试的经验。">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/08/5d22a6f77f16123968.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","onmobile":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> Spark笔记（3）：集群运行Spark程序实例讲解 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
+            
+            林中路
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/26/Spark-3/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spark笔记（3）：集群运行Spark程序实例讲解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-26T20:20:28+08:00">
+                2019-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前都是在spark shell上执行，当数据量达到一定程度，我们可以利用Spark的集群模式来运行，增加算力，而且本地小数据量验证成功的代码可以直接放到集群上跑。</p>
+<p>这一小节从提交一个集群环境下的Spark Job出发，讨论了在集群运行Spark Job时的配置项，再讲到Spark基础的架构，最后讲解了一下Spark Job性能调试的经验。</p>
+<a id="more"></a>
+<h2 id="一、spark-submit应用部署"><a href="#一、spark-submit应用部署" class="headerlink" title="一、spark-submit应用部署"></a>一、spark-submit应用部署</h2><p>Spark使用spark-submit脚本来启动集群部署模式，进入/usr/bin/目录，可以看到一个spark-submit脚本，输入spark-submit —help可以看到一些配置选项介绍，截取一部分如下图：</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22a6f77f16123968.png" alt=""></p>
+<p>以下是一个spark-submit提交scala应用的shell脚本的示例，我们可以看到在主程序job_submit中，我们从控制台传入了四个所需参数，对spark-submit进行了配置，比如class/master/queue等等，以下会逐一讲解，最后我们传入了JAR_FILE及其参数，这是我们的需要执行的打包的scala程序：</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22a703842d926073.png" alt=""></p>
+<p>所以spark-submit的一般格式是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">usr/bin/spark-submit [options] &lt;app jar | python file&gt; [app options]</div><div class="line">usr/bin/spark-submit [选项配置] &lt;程序jar包或者python脚本文件&gt; [程序参数]</div></pre></td></tr></table></figure>
+<p>这里主要讲几个比较常用的配置项：</p>
+<ul>
+<li>— master: 集群的master URL，上面的示例中我们传入了yarn集群</li>
+</ul>
+<p>有以下可以接收的值：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>spark://host:port</td>
+<td>连接到指定端口的Spark独立集群，默认Saprk独立主节点端口为7077,例如spark://23.195.26.187:7077</td>
+</tr>
+<tr>
+<td>mesos://host:port</td>
+<td>连接到指定端口的Mesos集群，默认为5050端口</td>
+</tr>
+<tr>
+<td>yarn</td>
+<td>yarn集群，需设置环境变量HADOOP_CONF_DIR为HADOOP配置目录</td>
+</tr>
+<tr>
+<td>local</td>
+<td>本地模式，使用单核</td>
+</tr>
+<tr>
+<td>local[N]</td>
+<td>本地模式，N个核</td>
+</tr>
+<tr>
+<td>local[*]</td>
+<td>本地模式</td>
+<td>尽可能多的核</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li><p>— class: 运行Java或scala程序时应用的主类，示例中为com.stat.UserAdProfileGenerator</p>
+</li>
+<li><p>— delopy-mode: 选择在客户端client还是在集群cluster启动驱动器</p>
+</li>
+<li><p>— name: 该应用显示在Spark网页用户界面上的名称，示例中未设置该参数</p>
+</li>
+<li><p>— files: 需放到该应用工作目录中的文件列表，我们程序中往往会使用一些数据文件，可以放在这里</p>
+</li>
+<li><p>— py-files: 需添加到PYTHONPATH中的文件列表，可以包含.py/.egg/.zip文件</p>
+</li>
+<li><p>— driver-memory: 驱动器进程使用的内存量，示例为16G</p>
+</li>
+<li><p>— executor-memory: 执行器进程使用的内存量，示例为16G</p>
+</li>
+<li><p>— num-executors: 指定执行器数量，只在yarn集群模式下使用，示例为50个</p>
+</li>
+<li><p>— exectors-cores: 执行器节点的核心数，只在yarn集群模式下使用，示例为1个</p>
+</li>
+</ul>
+<p>以上这些选项主要包括两部分，第一部分为调度的信息，比如master、driver-memory、exectors-cores，这部分和我们的性能调试息息相关，后面会讲到怎么去做调整；第二部分是依赖，比如files、py-files。</p>
+<p>上面出现了一些陌生的概念，比如驱动器、执行器、集群等等，这些都是Spark架构中的概念，分别看一下。</p>
+<h2 id="二、Spark基础架构"><a href="#二、Spark基础架构" class="headerlink" title="二、Spark基础架构"></a>二、Spark基础架构</h2><p>下图为Spark架构组成图，有三个主要组成部分，Driver Program、Cluster Manager和Worker Node。<br><img src="https://i.loli.net/2019/07/08/5d22a7132a71926586.png" alt=""></p>
+<ul>
+<li>Driver Program：驱动器程序，负责中央协调，调度各个分布式工作节点；</li>
+<li>Cluster Manager：集群管理器，控制整个集群，监控worker。自带的集群管理器称为独立集群管理器，也可以运行在Hadoop YARN或者Apache Mesos上；</li>
+<li>Worker Node：工作节点，负责控制计算节点，启动Executor或者Driver。</li>
+<li>Executor：执行器节点，运行在worker node上的一个进程；</li>
+</ul>
+<p>分别具体介绍一下驱动器节点、执行器节点和集群管理器，如下：</p>
+<h4 id="驱动器节点"><a href="#驱动器节点" class="headerlink" title="驱动器节点"></a>驱动器节点</h4><ul>
+<li><p>作用：执行main()方法的进程，比如创建SparkContext、创建RDD、RDD转化和行动操作的代码，当我们启动Spark shell时，就启动了Spark驱动器程序，而当驱动器程序一旦终止，Spark应用也就结束了。</p>
+</li>
+<li><p>职责：</p>
+<ul>
+<li><ol>
+<li>所有的Spark程序不外乎创建RDD，RDD转化操作生成新的RDD，最后行动操作存储RDD的数据，这样就构成了一个有向无环图（DAG）的操作逻辑图，当驱动器节点启动时，Spark把逻辑图转为物理执行计划，即转变为一系列步骤（Stage），每个步骤包含多个任务（Task），这些任务打包后被送到集群进行分布式计算。Task是Spark中最小的工作单元。</li>
+</ol>
+</li>
+<li><ol>
+<li>驱动器节点启动，生成物理执行计划，驱动器程序负责协调各执行器进程之间的各个任务，执行器进程启动后会在驱动器上注册自己，以在驱动器上有每个执行器进程的完整记录，每个执行器节点代表一个能够处理任务和存储RDD数据的进程。Spark会把分配任务给合适的执行器进程，执行器进程会缓存数据，驱动器跟踪数据缓存任务，从而调度之后的任务，尽可能减少数据网络传输。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="执行器节点"><a href="#执行器节点" class="headerlink" title="执行器节点"></a>执行器节点</h4><ul>
+<li>作用：负责在Spark作业中运行任务，任务间相互独立；与Spark任务同时启动，伴随整个生命周期，即使执行器节点发生了异常奔溃，Saprk也可继续执行</li>
+<li>职责：<ul>
+<li><ol>
+<li>负责运行组成Spark应用的任务，并将结果返回给驱动器进程；</li>
+</ol>
+</li>
+<li><ol>
+<li>通过自身的块管理器(Block Manager)为用户程序中要求缓存的RDD提供内存式存储。RDD是直接缓存在执行器进程中的，所以可以在运行时充分利用缓存数据提高运算速度。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="集群管理器"><a href="#集群管理器" class="headerlink" title="集群管理器"></a>集群管理器</h4><ul>
+<li>作用：Spark依赖于集群管理器启动执行器节点，在某些特殊情况下，也会依赖集群管理器来启动驱动器节点。Spark有自带的独立集群管理器，也可以运行在其他外部集群管理器上，如YARN和Mesos等。</li>
+</ul>
+<p>这里主要说一下YARN集群管理器，Yarn（Yet Another Resource Negotiator）是Hadoop的资源管理层，它旨在提供一个通用且灵活的框架来管理Hadoop集群中的计算资源。它也是一种主/从结构，由三个部件组成，分别是：</p>
+<ul>
+<li>Resource Manager (RM)</li>
+<li>Node Manager (NM)</li>
+<li>Application Master (AM)</li>
+</ul>
+<p>想了解这三个组成部分的细节，可以细读这篇文章<a href="https://waltyou.github.io/Hadoop-Yarn/" target="_blank" rel="noopener">Hadoop Yarn的架构</a></p>
+<p>在使用层面，我们看一下如何设置YARN作为集群管理器：</p>
+<ol>
+<li>设置指向HADOOP配置目录的环境变量：找到HADOOP的配置目录，设为环境变量HADOOP_CONF_DIR =&gt; export HADOOP_CONF_DIR = “…”</li>
+<li>使用spark-submit向主节点URL提交作业 =&gt; spark-submit —master yarn ···</li>
+</ol>
+<p>再看一下如何配置资源用量，这个在之前已经提到过了：</p>
+<ul>
+<li>—num -executors :设置执行器节点，默认值为2，一般要提高这个值</li>
+<li>—executor -memory: 设置每个执行器的内存用量</li>
+<li>—executor -cores: 设置每个执行器进程从YARN中占用的核心数目</li>
+<li>—queue：设置队列名称，YARN可以将应用调度到多个队列中</li>
+</ul>
+<p>这里几个参数的调优会在第四小节讲到。</p>
+<p>讲完了spark-summit和架构部分，那如果想在代码层面进行debug，有哪些比较好的方法，下一章节分别介绍一下。</p>
+<h2 id="三、Spark-UI与日志"><a href="#三、Spark-UI与日志" class="headerlink" title="三、Spark UI与日志"></a>三、Spark UI与日志</h2><p>Spark可以通过单机和集群模式来部署代码，单机部署的时候我们可以通过断点调试来修正代码，但集群部署却很难用该方法去调试，但我们可以通过日志分析或者Spark UI界面来进行调试和优化我们的代码。</p>
+<h4 id="Spark-UI"><a href="#Spark-UI" class="headerlink" title="Spark UI"></a>Spark UI</h4><p>Spark UI是呈现Spark应用性能以及其他信息的前端展示页面，</p>
+<p>看一下导航栏，按照数字标注分别是：</p>
+<ol>
+<li>job页面：列出了当前应用的所有任务，以及所有的excutors中action的执行时间、耗时、完成情况；</li>
+<li>Stages：查看应用的所有stage，粒度上要比job更细一些；</li>
+<li>storage：查看应用目前使用了多少缓存，一般由cache persist等操作触发</li>
+<li>environment：展示当前spark所依赖的环境，比如jdk,lib等等</li>
+<li>executors：查看申请使用的内存大小以及shuffle中input和output等数据</li>
+<li>AppName：显示代码中使用setAppName设定应用名字<br><img src="https://i.loli.net/2019/07/08/5d22a72681a6f49678.png" alt=""></li>
+</ol>
+<p>下图为Spark的UI主页面，这里展示了已完成的Job信息，点击Job进入详细页面，分为两部分，一部分是event timeline，另一部分是进行中和完成的job任务。</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22a7391504793854.png" alt=""></p>
+<p>更多页面的详细介绍可以参考这个链接</p>
+<p><a href="https://www.cnblogs.com/xing901022/p/6445254.html" target="_blank" rel="noopener">基于SparkUI性能优化与调试</a></p>
+<h4 id="yarn-logs"><a href="#yarn-logs" class="headerlink" title="yarn logs"></a>yarn logs</h4><p>如果我们没法从UI界面中排查出错原因，这时候只有把driver和executor进程所生成的日志来得到更多的信息，因为日志会详细记录各种异常事件，比如内部警告以及用户代码输出的详细异常信息。</p>
+<p>在YARN模式下，我们可以在控制台输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yarn logs -applicationId &lt;app ID&gt;</div></pre></td></tr></table></figure>
+<p>示例如下：<br><img src="https://i.loli.net/2019/07/08/5d22a744994af94520.png" alt=""></p>
+<p>app ID一般会在程序执行的时候打印到控制台，或者一般把日志重定向到log文件中，在执行过程中用tail -f 查看执行日志，实时监控执行进程。</p>
+<h2 id="四、Spark-性能调优经验"><a href="#四、Spark-性能调优经验" class="headerlink" title="四、Spark 性能调优经验"></a>四、Spark 性能调优经验</h2><h4 id="打印信息"><a href="#打印信息" class="headerlink" title="打印信息"></a>打印信息</h4><p>可以在程序中打印出一些输出信息，数据量很大的时候，做一些take(10)/show(10)/count()这样的action操作，就可以看到一些变量的中间状态了，比如将yarn作为资源管理器时，直接可以在yarn logs中就可以看到这些信息。这对我们调试也是很有帮助的，可以知道我们的程序是否得到了我们想得到的结果。</p>
+<h4 id="并行度调优"><a href="#并行度调优" class="headerlink" title="并行度调优"></a>并行度调优</h4><p>在物理执行期间，RDD会分为多个分区，每个分区存储了全体数据的一个子集，然后Spark会给每个分区的数据创建一个Task，Spark一般会根据其底层的存储系统自动推断出合适的并行度，比如从HDFS读数据会为每个文件区块创建一个分区，从混洗后的RDD派生下来的RDD的并行度保持和父一致。</p>
+<p>并行度会从两方面影响性能：</p>
+<ol>
+<li>并行度过低时，会出现资源限制的情况，可以提高并行度来充分利用更多的计算核心</li>
+<li>并行度过高时，每个分区产生的间接开销累计起来会更大。评价并行度是否过高可以看你的任务是不是在瞬间(毫秒级)完成的，或者任务是不是没有读写任何数据。</li>
+</ol>
+<p>如何调优：</p>
+<ol>
+<li>在数据混洗操作时，对混洗后的RDD指定并行度</li>
+<li>对任何已有的RDD进行重新分区来获取更多或更少的分区数，重新分区可用repartition()，减少分区可用coalesce()，coalesce不会打乱数据，所以比repartition效率高</li>
+</ol>
+<p>以下是一个实例：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">input = sc.textFile(<span class="string">"s3o://···"</span>)</div><div class="line">input.getNumPartitions()</div><div class="line"><span class="number">10000</span></div><div class="line"></div><div class="line">lines = input.filter(<span class="keyword">lambda</span> x: x.startwith(<span class="string">'20190625'</span>))</div><div class="line">lines.getNumPartitions()</div><div class="line"><span class="number">10000</span></div><div class="line"></div><div class="line">lines = lines.coalesce(<span class="number">5</span>).cache()</div><div class="line"><span class="number">4</span></div></pre></td></tr></table></figure>
+<h4 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h4><blockquote>
+<p>1.改变内存比例</p>
+</blockquote>
+<ul>
+<li>RDD存储（60%）：当调用RDD的persist()或cache()方法时，这个RDD分区会被存储到缓存中，Spark会根据spark.storage.memoryFraction限制用来缓存的内存占整个JVM堆空间的比例大小。若超出限制，旧的分区数据会被移出内存。</li>
+<li>数据混洗与聚合缓存区（20%）：当数据进行数据混洗时，Spark会创造一些中间缓存区来存储数据混洗的输出数据。根据spark.shuffle.memoryFraction限定这种缓存区占总内存的比例。</li>
+<li>用户的代码(20%)：spark可以执行任意代码，所以用户的代码可以申请大量内存，它可以访问JVM堆空间中除了分配给RDD存储和数据混洗存储以外的全部空间。</li>
+</ul>
+<blockquote>
+<p>2.改进缓存等级</p>
+</blockquote>
+<ul>
+<li>cache()操作：它以内存优先即MEMORY_ONLY的存储等级持久化数据，分区不够用的话，旧分区会直接删除。需要用到时会再重新算，这样效率会低。一般不太建议直接使用cache，一旦cache的量很大，就会导致内存溢出。</li>
+<li>persist()操作可以持久化级别，比如使用MEMORY_AND_DISK级别调用persist()，内存如果放不下的旧分区会被写入磁盘，当再次需要用到的时候再从磁盘上读取，代价比重算要低，性能也会稳定一些，比如从数据库中读取数据时，重算（即读取）的代价很大，这个时候就很有效</li>
+</ul>
+<h4 id="硬件资源"><a href="#硬件资源" class="headerlink" title="硬件资源"></a>硬件资源</h4><p>硬件资源会很大程度上影响Job的效率，主要有以下几个：</p>
+<ul>
+<li>— executor-memory: executor的内存，各种部署模式都可以，当任务失败，报错信息为sparkContext shutdown时，基本是内存不足导致的。可以尝试调大—excutor-memory参数，但若系统条件受限，无法加大内存，可以局部进行调试，把程序按执行步骤检查问题点。</li>
+<li>— executor-cores: executor的核数，仅在yarn模式下</li>
+<li>— num—executors: executor节点的总数，仅在yarn模式下</li>
+</ul>
+<p>性能调优可以在实践中不断积累经验，以上只是一些参考。如果想了解更多的调优方法，可以访问<a href="https://spark.apache.org/docs/latest/tuning.html" target="_blank" rel="noopener">Tuning Spark</a></p>
+<p>参考资料：</p>
+<p>《Spark大数据分析》</p>
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    <div>
+    
+    	<br>	
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>-----------本文结束<i class="fa fa-paw"></i>
+        感谢您的阅读-----------<br></div>
+        <div><br>  
+        <div align="center">
+        欢迎关注个人公众号【应统联盟】，一起交流学习算法、编程与大数据。
+ </div> 
+        <div align="center">
+        <br>
+        <img src="https://i.loli.net/2019/08/01/5d42de70a873672762.png"/>
+        </div> 
+        </div>
+    
+</div>
+  
+</div>
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/驱动器/" rel="tag"># 驱动器</a>
+          
+            <a href="/tags/执行器/" rel="tag"># 执行器</a>
+          
+            <a href="/tags/spark-submit/" rel="tag"># spark-submit</a>
+          
+            <a href="/tags/YARN/" rel="tag"># YARN</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/22/Spark-2/" rel="next" title="Spark笔记（2）：Pair RDD与数据分区">
+                <i class="fa fa-chevron-left"></i> Spark笔记（2）：Pair RDD与数据分区
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/12/AD-RS-3/" rel="prev" title="广告&推荐面面观（3）：竞价广告定价策略与实现">
+                广告&推荐面面观（3）：竞价广告定价策略与实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bc405fb9346cd0b" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">205</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">304</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
+                    
+                      <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/ren-da-ying-tong-hua-qi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+
+          
+          <div id="music163player">
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
+
+
+        
+
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.statunion.cn" title="应统联盟" target="_blank">应统联盟</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ml-union.github.io/about/" title="机器联盟" target="_blank">机器联盟</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+        
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、spark-submit应用部署"><span class="nav-text">一、spark-submit应用部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Spark基础架构"><span class="nav-text">二、Spark基础架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#驱动器节点"><span class="nav-text">驱动器节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行器节点"><span class="nav-text">执行器节点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集群管理器"><span class="nav-text">集群管理器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Spark-UI与日志"><span class="nav-text">三、Spark UI与日志</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spark-UI"><span class="nav-text">Spark UI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#yarn-logs"><span class="nav-text">yarn logs</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、Spark-性能调优经验"><span class="nav-text">四、Spark 性能调优经验</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#打印信息"><span class="nav-text">打印信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并行度调优"><span class="nav-text">并行度调优</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存管理"><span class="nav-text">内存管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#硬件资源"><span class="nav-text">硬件资源</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>

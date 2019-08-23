@@ -1,0 +1,1330 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="RDD编程,Spark," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Spark笔记系列我们准备以《Spark大数据分析》这本书的总体框架为主线，从RDD编程的核心概念说起，到基本的RDD操作、数据IO、Spark Job，以及Spark SQL、Spark Streaming、Spark MLlib这些Spark组件，结合实例系统的进行讲解，之后会将其延伸开来，争取照顾到Spark的方方面面。">
+<meta name="keywords" content="RDD编程,Spark">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark笔记（1）：RDD编程">
+<meta property="og:url" content="http://yoursite.com/2019/06/19/Spark-1/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="Spark笔记系列我们准备以《Spark大数据分析》这本书的总体框架为主线，从RDD编程的核心概念说起，到基本的RDD操作、数据IO、Spark Job，以及Spark SQL、Spark Streaming、Spark MLlib这些Spark组件，结合实例系统的进行讲解，之后会将其延伸开来，争取照顾到Spark的方方面面。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-23T07:11:58.197Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark笔记（1）：RDD编程">
+<meta name="twitter:description" content="Spark笔记系列我们准备以《Spark大数据分析》这本书的总体框架为主线，从RDD编程的核心概念说起，到基本的RDD操作、数据IO、Spark Job，以及Spark SQL、Spark Streaming、Spark MLlib这些Spark组件，结合实例系统的进行讲解，之后会将其延伸开来，争取照顾到Spark的方方面面。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","onmobile":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> Spark笔记（1）：RDD编程 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
+            
+            林中路
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/Spark-1/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spark笔记（1）：RDD编程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T20:20:28+08:00">
+                2019-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Spark笔记系列我们准备以《Spark大数据分析》这本书的总体框架为主线，从RDD编程的核心概念说起，到基本的RDD操作、数据IO、Spark Job，以及Spark SQL、Spark Streaming、Spark MLlib这些Spark组件，结合实例系统的进行讲解，之后会将其延伸开来，争取照顾到Spark的方方面面。</p>
+<a id="more"></a>
+<p>“Apache Spark is a unified analytics engine for large-scale data processing.”这是来自官网的介绍，Spark是一个用于大数据处理的统一分析引擎，上亿的大数据集在单机上跑一个分析几乎不可能，而在Spark上可以以分钟级别的速度就可以完成，这要归功于其先进的调度程序DAG、查询优化器和物理执行引擎，这几个概念在后边会一一介绍，总而言之就是Spark出乎意料的快。除了性能好，Spark还异常亲民，你可以用Java写、用Scala写、用Python写，同时也支持R、SQL，上手非常简单，用惯了python DataFrame的可以在Spark找到对应的DataFrames库，用惯了SQL的分析员也可以在里头找到SQL，机器学习工程师也照样可以使用MLlib进行建模。</p>
+<p>在Spark中，有一个核心概念叫RDD（Resilient Distributed Dataset），基本所有的操作都是围绕其展开的，所以第一节我们先讲解RDD编程的核心概念和基本操作，当然这之前要先按照官网提供的安装教程进行安装好Spark。如果没有集群，可以先在单机版上练习。</p>
+<!-- more -->
+<h3 id="RDD-核心概念"><a href="#RDD-核心概念" class="headerlink" title="RDD 核心概念"></a>RDD 核心概念</h3><p>Spark中，所有的数据操作归纳起来就三种：</p>
+<ul>
+<li>RDD的创建（create）</li>
+<li>RDD的转化（transformation）</li>
+<li>RDD的行动（action）</li>
+</ul>
+<p>那什么是RDD呢？</p>
+<p>RDD是Resilient Distributed Dataset的简称，首先Dataset意味着RDD是一个数据集，但它与我们常见的数据集格式不同，他是弹性的（Resilient），如何理解弹性，就是在集群上的某一节点失效时可以高效地重建数据集，RDD就像海绵一样有弹性似的，在被挤压之后仍可以恢复完整，即是容错的。</p>
+<p>在容错这一点上，Spark采用了记录数据更新而不是数据检查点的方式，因为数据检查点方式会消耗大量的存储资源，但若更新达到一定的数量，记录数据更新的成本也很高。因此，RDD只支持粗粒度的转化，我们后面会看到RDD都是在大量记录上执行的单个操作。</p>
+<p>而分布式（Distributed）指的是每个RDD都被分为多个分区，这些分区运行在集群中的不同节点上，这样就保证了其负载均衡（多台机器负载）、扩展性强（多台机器扩展）的优点。</p>
+<p>以上这些概念比较抽象，我们来看一个具体的RDD从创建到转化再到行动的实例，从实例出发了解RDD编程:</p>
+<p>假如我们有一个存储在HDFS上的文件，其路径为<code>hdfs:///adalgo/profile/20190615/*</code>，每一行的格式如下所示，\t左边为用户id，\t右边为用户的兴趣分类（单个人没有重复的key），以json格式存储。假设总共有一亿多行这样的数据（id没有重复），我们想要得到的最终结果是每一个类别的人数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[&apos;00000f9d\t&#123;&quot;cat&quot;:&#123;&quot;football&quot;:2,&quot;basketball&quot;:3&#125;]</div></pre></td></tr></table></figure>
+<p>以下是本节作为示例的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">%pyspark</div><div class="line"><span class="keyword">import</span> json</div><div class="line"></div><div class="line"><span class="comment">## 创建</span></div><div class="line">profile =  sc.textFile(<span class="string">"hdfs:///adalgo/profile/20190615/*"</span>)</div><div class="line"></div><div class="line"><span class="comment">## 转化</span></div><div class="line">profile_2 = profile.filter(<span class="keyword">lambda</span> x:len(x.split(<span class="string">'\t'</span>))==<span class="number">2</span>).map(<span class="keyword">lambda</span> x: x.split(<span class="string">'\t'</span>)[<span class="number">1</span>]).map(<span class="keyword">lambda</span> x: json.loads(x)).map(<span class="keyword">lambda</span> x:<span class="string">' '</span>.join(x[<span class="string">'ad_scat'</span>].keys()))</div><div class="line"></div><div class="line"><span class="comment">## 行动</span></div><div class="line">profile_2.take(<span class="number">100</span>)</div><div class="line"></div><div class="line"><span class="comment">## 转化</span></div><div class="line">scat = profile_2.flatMap(<span class="keyword">lambda</span> x:x.split(<span class="string">' '</span>))</div><div class="line">scat_count = ad_scat.map(<span class="keyword">lambda</span> x:(x,<span class="number">1</span>)).reduceByKey(<span class="keyword">lambda</span> x,y: x+y)</div><div class="line">ad_scat_count.toDF().orderBy(<span class="string">"_2"</span>)</div><div class="line"></div><div class="line"><span class="comment">## 行动</span></div><div class="line">scat_count.show(<span class="number">100</span>)</div></pre></td></tr></table></figure>
+<p>接下来我们一边讲解概念，一边解读这段代码。</p>
+<h3 id="RDD-创建"><a href="#RDD-创建" class="headerlink" title="RDD 创建"></a>RDD 创建</h3><p>一般我们可以通过两种方式创建RDD。</p>
+<p>一种是在驱动器程序中并行的对象集合，简单说就是一个我们希望传入的列表或者元组：</p>
+<p>num_rdd = sc.parallelize([1,2,3])</p>
+<p>忽然冒出了一个sc，这是一个什么玩意儿？</p>
+<p>每一个spark程序都是由driver program发起集群并行操作的，当我们启动了spark shell时，就自动创建了一个SparkContext对象，即sc变量，可以用它来创建RDD。</p>
+<p>但这种方式一般就是在平时测试的时候用，在真实生产场景中很少用到，因为这种方式需要将整个数据集先放到driver程序所在的机器的内存中。</p>
+<p>另一种是从外部存储中读取数据，比如HDFS/Amazon S3，具体的会在后面的章节介绍，我们的程序实例中就是从HDFS文件系统读取的数据集：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">user_ad_profile =  sc.textFile(&quot;hdfs:///adalgo/profile/20190615/*&quot;)</div></pre></td></tr></table></figure>
+<p>这样我们就可以接着对这个RDD进行操作了。</p>
+<h3 id="RDD-操作与惰性求值"><a href="#RDD-操作与惰性求值" class="headerlink" title="RDD 操作与惰性求值"></a>RDD 操作与惰性求值</h3><p>RDD有两种操作：转化操作和行动操作。那如何定义转化和行动操作呢？转化操作返回的是一个新的RDD，而行动操作则是返回结果或把结果写入外部系统，触发实际的计算。</p>
+<p>这样说还是有点抽象，看实例中就是一连串的转化操作，首先<code>.filter(lambda x:len(x.split(&#39;\t&#39;))==2)</code>是从<code>user_ad_profile_1</code>中筛选出用<code>\t</code>分隔后长度为2的行，把一些不合法的行也去掉，否则后边就会报错；之后的<code>.map(lambda x: x.split(&#39;\t&#39;)[1])</code>是取出第2个元素，用<code>.map(lambda x: json.loads(x))</code>来加载json格式元素，在最后用<code>.map(lambda x:&#39; &#39;.join(x[&#39;ad_scat&#39;].keys()))</code>取出自字典所有的key返回一个空格分隔的列表，具体的每个函数的作用我们会详细介绍。以上这些操作返回的其实都是经过转化操作作用在各个元素上然后生成一个新的RDD，但并没有执行真正的计算操作。这就是之后会提到的惰性求值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 转化</div><div class="line">profile_2 = profile.filter(lambda x:len(x.split(&apos;\t&apos;))==2).map(lambda x: x.split(&apos;\t&apos;)[1]).map(lambda x: json.loads(x)).map(lambda x:&apos; &apos;.join(x[&apos;ad_scat&apos;].keys()))</div></pre></td></tr></table></figure>
+<p>而行动操作就是会有真正的计算，比如下面<code>.take(100)</code>是从<code>profile_2</code>中返回200个元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 行动</div><div class="line">profile_2.take(100)</div></pre></td></tr></table></figure>
+<p>这里面有一个很重要的概念：惰性求值。比如在函数式编程语言中，表达式往往不在它被绑定到变量之后就立即求值，而是在该值被取用的时候求值，对应到Spark中就是在调用行动操作之前Spark不会开始计算，无论是读取数据还是转化操作，都是如此。</p>
+<p>在执行操作时，Spark会记录下当前执行操作的指令列表：在读取数据时，Spark即使执行了sc.textFile()的操作，也不会真正的读取数据出来，等到行动操作时才会读取。在执行转化操作时，操作也不会立即执行，它只是记录了一个计算操作的指令列表。</p>
+<p>那为何要惰性求值呢？因为如果每经过一次转化操作都触发真正的计算，将会有系统负担，而惰性求值会将多个转化操作合并到一起，抵消不必要的步骤后，在最后必要的时才进行运算，获得性能的提升同时又减轻系统运算负担。</p>
+<p>接下来让我们看一下常见的一些转化操作和行动操作。</p>
+<h3 id="RDD-转化操作"><a href="#RDD-转化操作" class="headerlink" title="RDD 转化操作"></a>RDD 转化操作</h3><ul>
+<li>基本转化操作：以num_rdd = sc.parallelize([‘Hello New World’,’Hello China’])为例</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>目的</th>
+<th>示例</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>map()</td>
+<td>将函数应用于每一个元素中，返回值构成新的RDD</td>
+<td>num_rdd.map(lambda x: x.lower())</td>
+<td>[‘hello new world’,’hello china’]</td>
+</tr>
+<tr>
+<td>flatMap()</td>
+<td>把元素内容铺展开来，将函数作用于所有的元素内容</td>
+<td>num_rdd.flatMap(lambda x: x.split(‘ ‘))</td>
+<td>[‘Hello’,’New’,’World’,’Hello’,’China’]</td>
+</tr>
+<tr>
+<td>filter()</td>
+<td>元素过滤</td>
+<td>num_rdd.map(lambda x:len(x.split(‘ ‘))==2)</td>
+<td>[‘Hello China’]</td>
+</tr>
+<tr>
+<td>distinct()</td>
+<td>去重</td>
+<td>num_rdd.distinct()</td>
+<td>[‘Hello New World’,’Hello China’]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>集合转换操作，以rdd_1=[1,2,3],rdd_2=[3,4,5]为例</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>目的</th>
+<th>示例</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>union()</td>
+<td>合并两个RDD所有元素（不去重）</td>
+<td>rdd1.union(rdd2)</td>
+<td>[1,2,3,3,4,5]</td>
+</tr>
+<tr>
+<td>intersection()</td>
+<td>求两个RDD的交集</td>
+<td>rdd_1.intersection(rdd2)</td>
+<td>[3]</td>
+</tr>
+<tr>
+<td>substract()</td>
+<td>移除在RDD2中存在的RDD1元素</td>
+<td>rdd_1.substract(rdd2)</td>
+<td>[1,2]</td>
+</tr>
+<tr>
+<td>cartesian()</td>
+<td>求两个RDD的笛卡尔积</td>
+<td>rdd_1.cartesian(rdd2)</td>
+<td>[(1,3),(1,4),(1,5)…(3,5)]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="RDD-行动操作"><a href="#RDD-行动操作" class="headerlink" title="RDD 行动操作"></a>RDD 行动操作</h3><p>基本行动操作，以rdd = [1,2,3,3]为例</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>目的</th>
+<th>示例</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>collect()</td>
+<td>收集并返回RDD中所有元素，往往在单元测试时使用，要求数据可放入单台机器内存</td>
+<td>rdd.collect()</td>
+<td>[1,2,3,3]</td>
+</tr>
+<tr>
+<td>count()</td>
+<td>RDD中元素的个数</td>
+<td>rdd.count()</td>
+<td>4</td>
+</tr>
+<tr>
+<td>countByValue()</td>
+<td>各元素出现的个数</td>
+<td>rdd.countByValue()</td>
+<td>[(1,1),(2,1),(3,2)]</td>
+</tr>
+<tr>
+<td>take(num)</td>
+<td>从RDD中返回前num个元素，用于单元测试和快速调试</td>
+<td>rdd.take(2)</td>
+<td>[1,2]</td>
+</tr>
+<tr>
+<td>top(num)</td>
+<td>返回降序排序最前面的num个元素，</td>
+<td>rdd.take(2)</td>
+<td>[3,3]</td>
+</tr>
+<tr>
+<td>reduce(f)</td>
+<td>并行整合RDD中所有元素，返回一个同一类型元素</td>
+<td>rdd.reduce(lambda x: x+y )</td>
+<td>9</td>
+</tr>
+<tr>
+<td>fold(zeroValue)(f)</td>
+<td>与reduce一样，不过需要提供初始值</td>
+<td>rdd.fold(0)(lambda x,y: x+y )</td>
+<td>9</td>
+</tr>
+<tr>
+<td>aggregate(zeroValue)(seqOp , combOp)</td>
+<td>与reduce相似，不过返回不同类型的元素</td>
+<td>rdd.aggregate((0,0)) (lambda x,y: (x[0] + y, x[1] + 1), lambda x,y: (x[0] + y[0], x[1] + y[1] ))</td>
+<td>[9,4]</td>
+</tr>
+<tr>
+<td>foreach(f)</td>
+<td>给每个元素使用给定的函数，结果不需发回本地</td>
+<td>rdd.foreach(f)</td>
+<td>无</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>其中<code>aggregate</code>和<code>fold</code>函数的理解会稍难一些，可以查阅资料深入了解。</p>
+<h3 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h3><p>上面说到，RDD是惰性求值的，而我们会重复使用同一个RDD，而如果简单的对其调用行动操作，Spark每次都会重算RDD，资源消耗很大。比如加入我们上述说的实例中，有以下的执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">input = sc.parallelize([1,2,3])</div><div class="line">print result.count()</div><div class="line">print result.collect()</div></pre></td></tr></table></figure>
+<p>这就多次计算同一个RDD了，为了避免这种情况，我们可以使用persist()对其持久化存储，而且可以根据需求选择不同的持久化级别，一般内存成分多的速度会快一些，磁盘部分多的速度稍慢一些，如下：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>级别</th>
+<th>使用空间</th>
+<th>CPU时间</th>
+<th>是否在内存中</th>
+<th>是否在磁盘上</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MEMORY_ONLY</td>
+<td>高</td>
+<td>低</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>MEMORY_ONLY_SER</td>
+<td>低</td>
+<td>高</td>
+<td>是</td>
+<td>否</td>
+</tr>
+<tr>
+<td>MEMORY_AND_DISK</td>
+<td>高</td>
+<td>中</td>
+<td>部分</td>
+<td>部分</td>
+</tr>
+<tr>
+<td>MEMORY_AND_DISK_SER</td>
+<td>低</td>
+<td>高</td>
+<td>部分</td>
+<td>部分</td>
+</tr>
+<tr>
+<td>DISK_ONLY</td>
+<td>低</td>
+<td>高</td>
+<td>否</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>比如下面的这个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">input = sc.parallelize([1,2,3])</div><div class="line">result = input.persist(StorageLevel.DISK_ONLY)</div><div class="line">print result.count()</div><div class="line">print result.collect()</div></pre></td></tr></table></figure>
+<p>若想把持久化的RDD从缓存中移除，可以使用unpersist()方法。</p>
+<h3 id="实例讲解"><a href="#实例讲解" class="headerlink" title="实例讲解"></a>实例讲解</h3><p>最后把一开始的实例讲解一下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">%pyspark</div><div class="line"><span class="keyword">import</span> json</div><div class="line"></div><div class="line"><span class="comment">## 创建</span></div><div class="line">profile =  sc.textFile(<span class="string">"hdfs:///adalgo/profile/20190615/*"</span>)</div><div class="line"></div><div class="line"><span class="comment">## 转化</span></div><div class="line">profile_2 = profile.filter(<span class="keyword">lambda</span> x:len(x.split(<span class="string">'\t'</span>))==<span class="number">2</span>).map(<span class="keyword">lambda</span> x: x.split(<span class="string">'\t'</span>)[<span class="number">1</span>]).map(<span class="keyword">lambda</span> x: json.loads(x)).map(<span class="keyword">lambda</span> x:<span class="string">' '</span>.join(x[<span class="string">'ad_scat'</span>].keys()))</div><div class="line"></div><div class="line"><span class="comment">## 行动</span></div><div class="line">profile_2.take(<span class="number">100</span>)</div><div class="line"></div><div class="line"><span class="comment">## 转化</span></div><div class="line">scat = profile_2.flatMap(<span class="keyword">lambda</span> x:x.split(<span class="string">' '</span>))</div><div class="line">scat_count = ad_scat.map(<span class="keyword">lambda</span> x:(x,<span class="number">1</span>)).reduceByKey(<span class="keyword">lambda</span> x,y: x+y)</div><div class="line">ad_scat_count.toDF().orderBy(<span class="string">"_2"</span>)</div><div class="line"></div><div class="line"><span class="comment">## 行动</span></div><div class="line">scat_count.show(<span class="number">100</span>)</div></pre></td></tr></table></figure>
+<p>首先<code>.filter(lambda x:len(x.split(&#39;\t&#39;))==2)</code>是从<code>user_ad_profile_1</code>中筛选出用<code>\t</code>分隔后长度为2的行，把一些不合法的行也去掉，否则后边就会报错；之后的<code>.map(lambda x: x.split(&#39;\t&#39;)[1])</code>是取出第2个元素，用<code>.map(lambda x: json.loads(x))</code>来加载json格式元素，在最后用<code>.map(lambda x:&#39; &#39;.join(x[&#39;ad_scat&#39;].keys()))</code>取出自字典所有的key返回一个空格分隔的列表。</p>
+<p><code>profile_2.flatMap(lambda x:x.split(&#39; &#39;))</code>是把所有单词分割开，铺展开为一个列表；<code>ad_scat.map(lambda x:(x,1))</code>则对单词进行单个计数，即都记为1；<code>reduceByKey(lambda x,y: x+y)</code>是根据单词作为key，对其总计数；<code>.toDF().orderBy(&quot;_2&quot;)</code>则是将其DataFrame化，并按第二列排序，这样就完成了一个简单的单词计数，同时也是各个类别人数计数的功能。</p>
+<p>以上就是Spark RDD中最重要的一些概念讲解，包括RDD的基本概念、创建、转化操作、行动操作与持久化，下一章节我们会继续跟着快速大数据分析一起看一下Spark并行聚合、分组操作，即键值对的操作。</p>
+<p>参考资料：《Spark快速大数据分析》</p>
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    <div>
+    
+    	<br>	
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>-----------本文结束<i class="fa fa-paw"></i>
+        感谢您的阅读-----------<br></div>
+        <div><br>  
+        <div align="center">
+        欢迎关注个人公众号【应统联盟】，一起交流学习算法、编程与大数据。
+ </div> 
+        <div align="center">
+        <br>
+        <img src="https://i.loli.net/2019/08/01/5d42de70a873672762.png"/>
+        </div> 
+        </div>
+    
+</div>
+  
+</div>
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RDD编程/" rel="tag"># RDD编程</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/20/林中路（9）：阿玛蒂亚·森 | 身份与暴力：命运的幻象/" rel="next" title="林中路（9）：阿玛蒂亚·森 | 身份与暴力：命运的幻象">
+                <i class="fa fa-chevron-left"></i> 林中路（9）：阿玛蒂亚·森 | 身份与暴力：命运的幻象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/19/AD-RS-1/" rel="prev" title="广告&推荐面面观（1）：经久不衰的逻辑回归">
+                广告&推荐面面观（1）：经久不衰的逻辑回归 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bc405fb9346cd0b" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">205</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">304</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
+                    
+                      <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/ren-da-ying-tong-hua-qi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+
+          
+          <div id="music163player">
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
+
+
+        
+
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.statunion.cn" title="应统联盟" target="_blank">应统联盟</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ml-union.github.io/about/" title="机器联盟" target="_blank">机器联盟</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+        
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD-核心概念"><span class="nav-text">RDD 核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD-创建"><span class="nav-text">RDD 创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD-操作与惰性求值"><span class="nav-text">RDD 操作与惰性求值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD-转化操作"><span class="nav-text">RDD 转化操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD-行动操作"><span class="nav-text">RDD 行动操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持久化"><span class="nav-text">持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例讲解"><span class="nav-text">实例讲解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>

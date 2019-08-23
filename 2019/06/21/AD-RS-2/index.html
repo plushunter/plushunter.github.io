@@ -1,0 +1,1198 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="MLR,方向导数,OWLQN,广告CTR," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="点击率预估需要解决的超高维度离散特征空间模式识别的问题，它需要算法在做到可以有效发现当前数据规律的同时，还要具有足够的泛化能力去应对线上多变的user-context-content模式，所以到目前为止有许多的CTR模型被应用于实际场景中，诸如LR、DNN、Tree Model、FM/FFM，这些模型都有各自的优势，但也存在缺陷，整理如下：">
+<meta name="keywords" content="MLR,方向导数,OWLQN,广告CTR">
+<meta property="og:type" content="article">
+<meta property="og:title" content="广告&amp;推荐面面观（2）：大规模分片线性模型MLR">
+<meta property="og:url" content="http://yoursite.com/2019/06/21/AD-RS-2/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="点击率预估需要解决的超高维度离散特征空间模式识别的问题，它需要算法在做到可以有效发现当前数据规律的同时，还要具有足够的泛化能力去应对线上多变的user-context-content模式，所以到目前为止有许多的CTR模型被应用于实际场景中，诸如LR、DNN、Tree Model、FM/FFM，这些模型都有各自的优势，但也存在缺陷，整理如下：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a8240bb9f16893.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a8341c61233774.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a840189e687559.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a8496699053190.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a852b328835448.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a85cc46b915170.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a8669652088899.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a87407ba659540.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a87d72d6627796.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22a8875dde484293.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa177890314561.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa2452e7478927.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa33d37af42816.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa3e6896291267.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa4d7e9eb62196.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa5aae69198799.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa65ae1b821217.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa6f08d1859099.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa78df1d128890.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa8337e8d77418.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa8b53c6154792.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa943e43984038.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aa9f5861576320.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aaa85780f47528.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aab26279d28715.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aaba8d41370098.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aacf4fe7f37921.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aad8b940699919.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aae208e0b14276.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aae9e228982941.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aaf35573734105.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22aafe364f363206.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22ab07b9b0b18857.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22ab10cb4dc53585.png">
+<meta property="og:image" content="https://i.loli.net/2019/07/08/5d22ab18dbf8393307.png">
+<meta property="og:updated_time" content="2019-08-23T07:16:55.975Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="广告&amp;推荐面面观（2）：大规模分片线性模型MLR">
+<meta name="twitter:description" content="点击率预估需要解决的超高维度离散特征空间模式识别的问题，它需要算法在做到可以有效发现当前数据规律的同时，还要具有足够的泛化能力去应对线上多变的user-context-content模式，所以到目前为止有许多的CTR模型被应用于实际场景中，诸如LR、DNN、Tree Model、FM/FFM，这些模型都有各自的优势，但也存在缺陷，整理如下：">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/08/5d22a8240bb9f16893.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","onmobile":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+  <title> 广告&推荐面面观（2）：大规模分片线性模型MLR | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
+            
+            林中路
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/21/AD-RS-2/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                广告&推荐面面观（2）：大规模分片线性模型MLR
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-21T20:20:28+08:00">
+                2019-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/广告-推荐/" itemprop="url" rel="index">
+                    <span itemprop="name">广告&推荐</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>点击率预估需要解决的超高维度离散特征空间模式识别的问题，它需要算法在做到可以有效发现当前数据规律的同时，还要具有足够的泛化能力去应对线上多变的user-context-content模式，所以到目前为止有许多的CTR模型被应用于实际场景中，诸如LR、DNN、Tree Model、FM/FFM，这些模型都有各自的优势，但也存在缺陷，整理如下：</p>
+<a id="more"></a>
+<p><img src="https://i.loli.net/2019/07/08/5d22a8240bb9f16893.png" alt=""></p>
+<h2 id="一、动机"><a href="#一、动机" class="headerlink" title="一、动机"></a>一、动机</h2><p>阿里妈妈在2011年提出了MLR模型，全称Large Scale Piecewise Linear Model (LS-PLM)，大规模分片线性模型，背后的思想就是根据领域知识先验将整个空间划分为多个区域，每个区域由一个特定的线性模型来拟合，区域之间平滑连接，当区域达到一定的数量，即可拟合任意复杂的非线性模式。MLR可以看做是LR模型的推广，从线性过渡到非线性，同时省去了大量的人工特征工程，可以端到端训练。</p>
+<h2 id="二、模型"><a href="#二、模型" class="headerlink" title="二、模型"></a>二、模型</h2><p>上面讲到MLR通过先验领域知识划分空间为局部区域，然后每个区域拟合线性模型，可使用如下判别公式来刻画：</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22a8341c61233774.png" alt=""></p>
+<p>其中$\sigma$代表领域先验，决定空间划分（dividing function），$\eta$代表每个局部区域的分类预测模型（fitting function），函数$g$保证模型输出符合概率定义。</p>
+<p>在实际中，使用softmax函数作为dividing function，使用sigmoid函数作为fitting function，以及规定$g(x)=x$，则判别函数可改写为如下：<br><img src="https://i.loli.net/2019/07/08/5d22a840189e687559.png" alt=""></p>
+<p>由（2）可知，该模型包含$2m$个参数，论文中使用了$L_{2,1}$正则和$L_1$正则，其中$L_{2,1}$对参数分组范数约束结构化稀疏，压缩$2m$个参数逼近零值，$L_1$则进一步产生稀疏性，使得模型兼具可解释性和泛化能力。</p>
+<p>目标函数如下：</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22a8496699053190.png" alt=""></p>
+<p>但是，引入$L_{2,1}$和$L_1$正则项之后，得到了非凸非平滑的目标函数，因为不是处处可导，所以没法用传统的梯度下降算法或者EM算法来优化，但又因为运算的效率与存储对在线预测来说很关键，模型稀疏性就必须要纳入，所以文章论文针对这个问题提出一个大规模非凸问题的优化求解方法，即利用LBFGS算法框架来根据方向导数找到最快下降方向进行参数更新，此外团队实现了一个大规模分布式系统来支持模型的高效并行训练，以下会一一介绍。</p>
+<h2 id="三、优化"><a href="#三、优化" class="headerlink" title="三、优化"></a>三、优化</h2><h3 id="3-1-方向导数"><a href="#3-1-方向导数" class="headerlink" title="3.1 方向导数"></a>3.1 方向导数</h3><p>上面说到，目标函数非凸非光滑，无法使用导数，作者退而使用方向导数，顾名思义，方向导数就是某个方向上的导数，而且在每一个方向上都是有导数的，梯度与方向导数的关系就是在梯度方向上的方向导数最大。如下图所示，紫色箭头表示某一方向，在这个方向上的函数的方向导数如黑色实线所示</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22a852b328835448.png" alt=""><br>对于一个存在梯度的函数$f(x,y)$来说，其具有一阶连续偏导数，即可微，这就意味着函数$f(x,y)$在一个点$(x_0,y_0)$处的所有方向导数在一个平面上。如下图所示，红色平面即为所有方向导数所构成的平面<br><img src="https://i.loli.net/2019/07/08/5d22a85cc46b915170.png" alt=""></p>
+<p>作者在附录A证明了在方向$d$上的方向导数$f^{‘}(\Theta;d)$是一定存在的，附录B求出了目标函数(4)的方向导数，我们依次看一下：</p>
+<h4 id="证明与求解"><a href="#证明与求解" class="headerlink" title="证明与求解"></a>证明与求解</h4><p>首先证明（4）式方向导数一定存在：</p>
+<p>首先$f^{‘}(\Theta;d)$可以展开为三部分，分别是损失函数、$L_{2,1} $罚函数、$L_{1}$罚函数在$\Theta$处的偏导。<br><img src="https://i.loli.net/2019/07/08/5d22a8669652088899.png" alt=""><br>对于第一部分，可以直接求导：<br><img src="https://i.loli.net/2019/07/08/5d22a87407ba659540.png" alt=""></p>
+<p>第二部分$L_{2,1} $在$||\Theta_i·||_{2,1}≠0$时，其偏导存在<br><img src="https://i.loli.net/2019/07/08/5d22a87d72d6627796.png" alt=""><br>而当$||\Theta_i·||_{2,1}= 0$时，则意味着参数矩阵的行参数$\Theta_{ij}=0,1≤j≤2m$，其方向导数为：<br><img src="https://i.loli.net/2019/07/08/5d22a8875dde484293.png" alt=""></p>
+<p>将以上两种情况整合到一起：<br><img src="https://i.loli.net/2019/07/08/5d22aa177890314561.png" alt=""><br>类似地，对于$L_{1}$罚函数，其导数可以表示为：<br><img src="https://i.loli.net/2019/07/08/5d22aa2452e7478927.png" alt=""><br>至此，我们证明了三个部分对于任意的$\Theta$和方向$d$，$f^{‘}(\Theta;d)$一定存在。<br><img src="https://i.loli.net/2019/07/08/5d22aa33d37af42816.png" alt=""></p>
+<p>然后求解方向导数：</p>
+<p>将问题转化为不等式约束优化问题:<br><img src="https://i.loli.net/2019/07/08/5d22aa3e6896291267.png" alt=""><br>采用拉格朗日乘数法求解，其中$\mu$为拉格朗日乘子：<br><img src="https://i.loli.net/2019/07/08/5d22aa4d7e9eb62196.png" alt=""><br>求函数$L(d,\mu)$对$d$的偏导,令为零，可分为三种情况,过程略，最终求解得到如下：</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22aa5aae69198799.png" alt=""></p>
+<p>其中：<br><img src="https://i.loli.net/2019/07/08/5d22aa65ae1b821217.png" alt=""></p>
+<p>至此我们得到了方向导数，接下里的问题就是如何利用方向导数来更新参数，文中使用LBFGS框架，并采取了类似于OWLQN算法的做法，接下来介绍一下论文是如何优化的。</p>
+<h3 id="3-2-LBFGS"><a href="#3-2-LBFGS" class="headerlink" title="3.2 LBFGS"></a>3.2 LBFGS</h3><p>大多数的数值优化算法都是迭代式的，优化的目的就是希望参数序列收敛于$x^*$，从而使$f(x)$最优化。</p>
+<p>在牛顿法中使用二阶泰勒展开来近似目标函数：<br><img src="https://i.loli.net/2019/07/08/5d22aa6f08d1859099.png" alt=""></p>
+<p>令$g_n$表示$f$在$x_n$处的梯度，$H_n$表示目标函数$f$在$x_n$处的Hessian矩阵，简化$f(x+\Delta x)$=$h_n(\Delta x)$<br><img src="https://i.loli.net/2019/07/08/5d22aa78df1d128890.png" alt=""><br>求导令其为零，得到的$\Delta x$都是他的局部极值点，若$f$是凸函数，则$H$为正定矩阵，则此时局部最优即为全局最优。</p>
+<p>得到如下更新式：<br><img src="https://i.loli.net/2019/07/08/5d22aa8337e8d77418.png" alt=""></p>
+<p>其中步长$a$可采用line search的方法，比如backtracking line search方法，即选用逐渐递减的步长。</p>
+<p>其迭代算法伪代码如下：</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22aa8b53c6154792.png" alt=""></p>
+<p>但实践中，模型参数都是超高维度的，根本无法计算Hessian矩阵及其逆，BFGS就是为了解决这个问题，他使用了一种QuasiUpdate的策略生成$H_n^{-1}$的近似，伪代码如下：</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22aa943e43984038.png" alt=""></p>
+<p>其中$\{s_k\}$与$\{y_k\}$保存的是输入和梯度的变化量，即$s_k = x_k-x_{k-1}$，$y_k = g_k-g_{k-1}$,初值$H_0^{-1}$选取任意对称的正定矩阵。：</p>
+<p>具体的QuasiUpdate那一步的推导略复杂，略过，最终BFGS的迭代伪代码如下：</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22aa9f5861576320.png" alt=""><br>其中 $\rho_n = (y_n^Ts_n)^{-1}$</p>
+<p>只要给定方向d，该算法可以直接计算出$H_n^{-1}$，却不需要求出$H_n^{-1}$。</p>
+<p>LBFGS是对BFGS的改进，因为BFGS拟牛顿虽然无需计算海森矩阵，但仍然需要保存每次迭代的$s_n$与$y_n$的历史值。内存负担依然很重，L-BFGS是limited BFGS的缩写，简单地只使用最近的m个$s_n$与$y_n$记录值，以此来近似计算$H_n^{-1}g_n$</p>
+<p>在BFGS的迭代过程中，需要使用梯度信息，但因为我们的目标函数有$L_1$正则和$L_{2,1}$正则项，不是处处可导的，这时候OWLQN就上场了</p>
+<h3 id="3-3-OWLQN"><a href="#3-3-OWLQN" class="headerlink" title="3.3 OWLQN"></a>3.3 OWLQN</h3><p>OWLQN算法在LBFGS框架下针对非凸非平滑函数优化主要做出了两点改进：</p>
+<p>1、在不可导处用次梯度取代梯度</p>
+<p>当模型参数不为零时，此时可导，按一般方法计算即可；当模型参数为零时，此时不可导，正则项的左偏导数为${ \partial  }_{ i }^{ - }f(x)$，右偏导数${ \partial  }_{ i }^{ + }f(x)$。</p>
+<p>如何确定在零的位置的时候用左导数还是右导数呢？做法是防止象限穿越，通俗的讲就是在负象限的时候减去正值，在正象限的时候减去负值（加上正值）</p>
+<p>2、在line search的时候做象限约束</p>
+<p>当参数不在零点时，line search保持在参数所在象限内搜索；当参数在零点时，参数在次梯度约束的象限内进行line search</p>
+<p>以下公式可以描述以上两点改进</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22aaa85780f47528.png" alt=""></p>
+<h3 id="3-4-MLR的优化算法"><a href="#3-4-MLR的优化算法" class="headerlink" title="3.4 MLR的优化算法"></a>3.4 MLR的优化算法</h3><p>MLR中使用的优化算法是从OWLQN改进过来的，主要有三个地方的变化：</p>
+<ol>
+<li>MLR使用方向导数来优化目标函数，而不是OWLQN的次梯度</li>
+<li>MLR对更新方向p进行了象限约束：非正定时直接用方向导数作为搜索方向，否则要进行象限约束在方向导数所在象限内。<br><img src="https://i.loli.net/2019/07/08/5d22aab26279d28715.png" alt=""></li>
+<li>线性搜索的象限约束不同，当MLR参数不在零点时，line search保持在参数所在象限内搜索，在零点时，参数在方向导数约束的象限内进行line search<br><img src="https://i.loli.net/2019/07/08/5d22aaba8d41370098.png" alt=""></li>
+</ol>
+<p>给定更新方向，MLR使用了 backtracking line search方法找到合适的步长$\alpha$，其迭代更新公式如下：<br><img src="https://i.loli.net/2019/07/08/5d22aacf4fe7f37921.png" alt=""></p>
+<p>MLR最终的优化算法伪代码如下：</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22aad8b940699919.png" alt=""></p>
+<h2 id="四、分布式"><a href="#四、分布式" class="headerlink" title="四、分布式"></a>四、分布式</h2><h3 id="4-1-参数服务器"><a href="#4-1-参数服务器" class="headerlink" title="4.1 参数服务器"></a>4.1 参数服务器</h3><p><img src="https://i.loli.net/2019/07/08/5d22aae208e0b14276.png" alt=""></p>
+<h3 id="4-2-Common-Feature-Trick"><a href="#4-2-Common-Feature-Trick" class="headerlink" title="4.2 Common Feature Trick"></a>4.2 Common Feature Trick</h3><p>用户在一次浏览的过程中遇到多个广告，每个广告都会支持组成一条样本，这样会导致很多特征重复使用，比如用户的人口统计特征，用户基于历史行为的兴趣偏好等，为了解决重复计算的问题，文中提出在向量内积的过程中分成两部分：</p>
+<p><img src="https://i.loli.net/2019/07/08/5d22aae9e228982941.png" alt=""><br>从这个事实出发，训练就可以下列三个Trick：</p>
+<ol>
+<li>训练过程中把有common Feature的样本放在一组，且仅仅保存一次以节省内存</li>
+<li>优化参数时，Common Feature的只更新一次损失函数</li>
+</ol>
+<p>最终效果如下，内存开销减少65%，时间开销减少91%，效果很明显：<br><img src="https://i.loli.net/2019/07/08/5d22aaf35573734105.png" alt=""></p>
+<h2 id="五、高级特性"><a href="#五、高级特性" class="headerlink" title="五、高级特性"></a>五、高级特性</h2><p>在阿里妈妈团队写的MLR分享文章里面，提及了以下几点MLR的高级特性：</p>
+<ol>
+<li>领域知识先验，这个分别体现在上文说到的dividing function和fitting function，他是基于领域的先验知识来设定dividing function和fitting function，比方说以用户的特征设计分片函数，以广告的特征设计拟合函数，这是基于不同人群具有聚类特性，同一类人群对广告有类似的偏好这样一个前提，此外这样的结构先验也有助于缩小解空间，更容易收敛!<img src="https://i.loli.net/2019/07/08/5d22aafe364f363206.png" alt=""></li>
+<li>加入线性偏置，因为特征的差异导致点击率天然存在一些差异，比如说位置和资源位，所以在损失函数中加入如公式所示的线性偏置，实践中对位置bias信息的建模，获得了4%的RPM提升效果。<br><img src="https://i.loli.net/2019/07/08/5d22ab07b9b0b18857.png" alt=""></li>
+<li><p>模型级联，与LR模型级联式联合训练，实践中发现一些强feature配置成级联模式有助于提高模型的收敛性，比如以统计反馈类特征构建第一层模型，它的输出(如下图中的FBCtr)级联到第二级大规模稀疏ID特征体系中去，这样能够有助于获得更好的提升效果。<br><img src="https://i.loli.net/2019/07/08/5d22ab10cb4dc53585.png" alt=""></p>
+</li>
+<li><p>增量训练。实践证明，MLR通过结构先验进行pretrain，然后再增量进行全空间参数寻优训练，会获得进一步的效果提升。同时增量训练模式下模型达到收敛的步数更小，收敛更为稳定。在我们的实际应用中，增量训练带来的RPM增益达到了3%。<img src="https://i.loli.net/2019/07/08/5d22ab18dbf8393307.png" alt=""></p>
+</li>
+</ol>
+<h2 id="六、业务现状"><a href="#六、业务现状" class="headerlink" title="六、业务现状"></a>六、业务现状</h2><p>阿里妈妈团队主要将MLR主要应用于定向广告的CTR预估和定向广告的Learning to Match：</p>
+<p>对于定向广告CTR，他们将用户画像特征、用户历史行为特征、广告画像特征组成2亿为的embedding向量，直接放到MLR模型中训练，并且采用了线性偏置、领域知识先验、增量训练的高级特征，提升了CTR预估的精度。</p>
+<p>Learning to Match，即基于用户的人口属性、历史行为等信息来猜测用户可能感兴趣的广告集合，一般会使用规则匹配和协同过滤来做召回模块，阿里妈妈研发了基于MLR的learning to match算法框架，首先基于用户的行为历史来学习用户个性化兴趣，召回候选集，MLR框架很容易融合将不同的特征源、标签体系，省去交叉组合的成本，灵活性很高。</p>
+<p>参考资料：</p>
+<ol>
+<li><a href="https://arxiv.org/pdf/1704.05194.pdf" target="_blank" rel="noopener">Learning Piece-wise Linear Models from Large Scale Data for Ad Click Prediction</a></li>
+<li><a href="http://www.hankcs.com/ml/l-bfgs.html" target="_blank" rel="noopener">数值优化：理解L-BFGS算法</a></li>
+</ol>
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    <div>
+    
+    	<br>	
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>-----------本文结束<i class="fa fa-paw"></i>
+        感谢您的阅读-----------<br></div>
+        <div><br>  
+        <div align="center">
+        欢迎关注个人公众号【应统联盟】，一起交流学习算法、编程与大数据。
+ </div> 
+        <div align="center">
+        <br>
+        <img src="https://i.loli.net/2019/08/01/5d42de70a873672762.png"/>
+        </div> 
+        </div>
+    
+</div>
+  
+</div>
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MLR/" rel="tag"># MLR</a>
+          
+            <a href="/tags/方向导数/" rel="tag"># 方向导数</a>
+          
+            <a href="/tags/OWLQN/" rel="tag"># OWLQN</a>
+          
+            <a href="/tags/广告CTR/" rel="tag"># 广告CTR</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/19/AD-RS-1/" rel="next" title="广告&推荐面面观（1）：经久不衰的逻辑回归">
+                <i class="fa fa-chevron-left"></i> 广告&推荐面面观（1）：经久不衰的逻辑回归
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/22/Spark-2/" rel="prev" title="Spark笔记（2）：Pair RDD与数据分区">
+                Spark笔记（2）：Pair RDD与数据分区 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bc405fb9346cd0b" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">205</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">304</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
+                    
+                      <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/ren-da-ying-tong-hua-qi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+
+          
+          <div id="music163player">
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
+
+
+        
+
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.statunion.cn" title="应统联盟" target="_blank">应统联盟</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ml-union.github.io/about/" title="机器联盟" target="_blank">机器联盟</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+        
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、动机"><span class="nav-text">一、动机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、模型"><span class="nav-text">二、模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、优化"><span class="nav-text">三、优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-方向导数"><span class="nav-text">3.1 方向导数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#证明与求解"><span class="nav-text">证明与求解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-LBFGS"><span class="nav-text">3.2 LBFGS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-OWLQN"><span class="nav-text">3.3 OWLQN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-MLR的优化算法"><span class="nav-text">3.4 MLR的优化算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、分布式"><span class="nav-text">四、分布式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-参数服务器"><span class="nav-text">4.1 参数服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-Common-Feature-Trick"><span class="nav-text">4.2 Common Feature Trick</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、高级特性"><span class="nav-text">五、高级特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、业务现状"><span class="nav-text">六、业务现状</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>
