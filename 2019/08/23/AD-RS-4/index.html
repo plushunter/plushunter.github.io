@@ -95,7 +95,7 @@
 <meta property="og:description" content="在互联网商业模式中，如果把商业化产品比作是船体，其核心作用是作为流量与变现的载体，那么数据就是引擎，没有数据的指引，商业模式就会很低效，机器学习作为数据提高效率的机器，则充当了这艘船的船长的地位。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2019/08/14/qDgvwbW8lVZzNQy.png">
-<meta property="og:updated_time" content="2019-08-23T07:11:14.464Z">
+<meta property="og:updated_time" content="2019-08-28T08:05:36.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="广告&amp;推荐面面观（4）：计算广告基础知识">
 <meta name="twitter:description" content="在互联网商业模式中，如果把商业化产品比作是船体，其核心作用是作为流量与变现的载体，那么数据就是引擎，没有数据的指引，商业模式就会很低效，机器学习作为数据提高效率的机器，则充当了这艘船的船长的地位。">
@@ -359,17 +359,6 @@ var _hmt = _hmt || [];
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/广告-推荐/" itemprop="url" rel="index">
-                    <span itemprop="name">广告&推荐</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -450,6 +439,87 @@ var _hmt = _hmt || [];
 <p>基于竞价机制和精准人群定向这两个核心功能，在线广告分化出【广告网络 ad NetWork ADN】它批量运营媒体的广告位资源，按人群或上下文标签售卖给需求方，并用竞价的方式决定流量分配。ADN使得大量中小互联网媒体有了切实可行的变现手段。</p>
 <p>【开放实时竞价交易模式】<br>将拍卖的过程由广告主预先出价，变成每次展示时实时出价。只要把广告展示的上下文页面URL以及访客的用户标识等信息传给需求方，让需求方按自己的人群定义来挑选流量，这就是实时竞价，于是市场上出现了大量聚合各媒体的剩余流量并采用实时竞价方式为他们变现的产品形态 【广告交易平台（ad Exchange,ADX）】</p>
 <p>通过实时竞价的方式，按照定制化的人群标签购买广告，这样的产品叫做【需求方平台（Demand Side Platform,DSP）】，这样的广告采买方式也被叫做【程序化交易】</p>
+<h3 id="广告有效性原理"><a href="#广告有效性原理" class="headerlink" title="广告有效性原理"></a>广告有效性原理</h3><p>一则广告的信息接收过程分为【选择】=&gt;【解释】=&gt;【态度】，进一步分解为【曝光】=&gt;【关注】=&gt;【理解】=&gt;【接受】=&gt;【保持】=&gt;【决策】六个子过程。</p>
+<p>1.【曝光】：广告物理上展现出来的过程，没有太多可用技术优化的空间，在实践中曝光的有效性对最终结果的影响往往高于其他技术性因素，即”位置为王“。互联网广告中，位置的影响更显著，因此，从算法上消除由此带来的点击率预估偏差就很重要。</p>
+<p>【关注】：受众从物理上接触到广告到意识上注意到它的过程。曝光并不意味着用户实际有效的关注。如何提高关注阶段效率：</p>
+<ul>
+<li>尽量不要打断用户的任务，这是上下文广告投送的原理基础，也是当今讨论原生广告产品的出发点之一。当用户明确辨识出某个固定不变的广告位，且不再认为它与自己当前浏览网页的任务有关联时，他会下意识屏蔽其中的内容。</li>
+<li>明确传达向用户推送此广告的原因，这是受众定向创意广告优化的重要方向。</li>
+<li>内容符合用户的兴趣或需求，是行为定向的原理基础。</li>
+</ul>
+<p>【理解】：用户关注到了广告的内容并不意味着他一定能够理解广告传达的信息。理解阶段的原则：</p>
+<ol>
+<li>广告内容要在用户能理解的具体兴趣范围内，这就要求精准的受众定向</li>
+<li>注意设定与关注程度相匹配的理解门槛，对于互联网广告，由于用户的关注程度很低，应该强调一个主要诉求以吸引用户注意力。</li>
+</ol>
+<p>【接受】：理解并不代表认可，让合适的广告出现在合适的媒体上，此即广告安全问题</p>
+<p>【保持】：对于不仅仅追求短期转化的广告商希望广告传达的信息给用户留下长久的记忆。</p>
+<p>【决策】：成功广告的最终作用是带来用户的转化行为，虽然已经离开了广告的业务范围，但好的广告能够为转化率的提高做好铺垫。</p>
+<p>越靠前的阶段，其效果的改善对点击率的贡献越大；越靠后的阶段，其效果的改善对转化率的贡献越大。</p>
+<h3 id="计算广告的核心问题"><a href="#计算广告的核心问题" class="headerlink" title="计算广告的核心问题"></a>计算广告的核心问题</h3><h4 id="eCPM"><a href="#eCPM" class="headerlink" title="eCPM"></a>eCPM</h4><p>在一次广告展示产生后，后续会有【点击】【打开落地页】【转化】这几步操作。分别对应几个重要指标：</p>
+<p>【点击率】：广告点击与广告展现的比率<br>【到达率】：落地页成功打开次数与点击次数的比例<br>【转化率】：转化次数与到达次数的比例</p>
+<p>按照媒体网站和广告主网站上的行为段对回报r进行分解：</p>
+<p>$eCPM = r(a,u,c) = \mu(a,u,c)· v(a,u,c )$</p>
+<p>其中</p>
+<ul>
+<li>$\mu$为点击率，描述的是发生在媒体上的行为</li>
+<li>$v$为点击价值（click value），是发生在广告主网站上的行为</li>
+</ul>
+<p>两部分乘积定量表示某次或若干次展示的期望CPM值，也即eCPM，是最关键的定量评估收益指标。</p>
+<h4 id="结算方式"><a href="#结算方式" class="headerlink" title="结算方式"></a>结算方式</h4><p>根据eCPM的分解决定哪部分是由谁来估计是广告市场各种击飞模式产生的根本原因，也是广告市场中商业逻辑与产品架构衔接的关键一环。</p>
+<ul>
+<li><p>CPM模式：按千次展示结算，一般由需求方根据其市场策略与预算控制流量的单价并按CPM方式结算是比较合理的交易模式。在大部分互联网品牌广告中，特别是视频广告中，CPM是主流的结算方式。</p>
+</li>
+<li><p>CPC结算：按点击结算，点击率由供给方完成，供给方通过收集大量用户行为数据可相对准确估计点击率；点击价值由需求方估计，因为转化效果是广告站内的行为，他们自己的数据分析体系也就能更准确地对其作出评估。CPC结算方式在效果广告具有垄断地位。</p>
+</li>
+<li><p>CPS（sale）/CPA（action）/ROI结算：按照销售订单数、转化行为数或投入产出比来结算，都是按转化付费的变种，需求方只按照最后的转化收益来结算，供给方除了估计点击率还要对点击价值作出估计，这样才能合理地决定流量分配。但这样有两个问题，一是转化行为发生在广告商站内，并非供给方能直接监测和控制，因此无法进行准确的估计和优化；二是实际执行中，存在广告主故意扣单以降低转化率，以低成本赚取大量品牌曝光。对于和广告主利益直接挂钩的需求方广告产品来讲，CPS在一定条件下是可行的；但对于普通的中间市场广告产品来说，CPS并不是一种趋势性的结算方式。在移动应用下载的场景下，由于转化流程统一在Apple Store或Google Play中，且存在较完善的第三方转化监测，因而市场较成熟。</p>
+</li>
+<li><p>CPT（time）结算：针对大品牌广告主特定的广告活动，将某个广告位以独占方式交给某广告主，并按独占的时间段收取费用的方式。不利于受众定向和程序交易，长期来看会有下降的趋势。</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>结算方式</th>
+<th>点击率预估</th>
+<th>点击价值预估</th>
+<th>优缺点</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CPT</td>
+<td>需求方</td>
+<td>需求方</td>
+<td>可以充分发挥橱窗效应，无法利用受众定向技术</td>
+<td>高曝光的品牌广告</td>
+</tr>
+<tr>
+<td>CPM</td>
+<td>需求方</td>
+<td>需求方</td>
+<td>可以利用受众定向选择选择目标人群，合约售卖下，受众定向不能过细</td>
+<td>有受众选择需求的品牌广告、实时竞价广告交易</td>
+</tr>
+<tr>
+<td>CPC</td>
+<td>供给方</td>
+<td>需求方</td>
+<td>可以非常精细地划分受众人群，比较合理的供给方和需求方分工</td>
+<td>竞价广告网络</td>
+</tr>
+<tr>
+<td>CPS/CPA/ROI</td>
+<td>供给方</td>
+<td>供给方</td>
+<td>需求方无任何风险，供给方运营难度较大</td>
+<td>效果类广告联盟、效果类DSP</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>参考资料：《计算广告》</p>
 
       
@@ -784,7 +854,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#广告的定义与目的"><span class="nav-text">广告的定义与目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#互联网广告的形态"><span class="nav-text">互联网广告的形态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在线广告进化路径"><span class="nav-text">在线广告进化路径</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#广告的定义与目的"><span class="nav-text">广告的定义与目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#互联网广告的形态"><span class="nav-text">互联网广告的形态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在线广告进化路径"><span class="nav-text">在线广告进化路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#广告有效性原理"><span class="nav-text">广告有效性原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算广告的核心问题"><span class="nav-text">计算广告的核心问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#eCPM"><span class="nav-text">eCPM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#结算方式"><span class="nav-text">结算方式</span></a></li></ol></li></ol></div>
             
 
           </div>
