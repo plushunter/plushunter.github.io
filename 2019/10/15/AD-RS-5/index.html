@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python,itertools,迭代器," />
+  <meta name="keywords" content="Budget Pacing," />
 
 
 
@@ -86,18 +86,20 @@
 
 
 
-<meta name="description" content="迭代器具有惰性求值（Lazy evaluation）的特性，它的返回值是一个迭代对象，只有在对其进行for循环迭代时才真正的进行计算，这使得我们无需将大文件或者无限集合存储到内存中，而只需不断的进行遍历即可。 python内置的itertools模块包含了一系列用来产生不同类型迭代器的函数或类，这些函数的返回都是一个迭代器，可以使用for循环或者next()来取值。">
-<meta name="keywords" content="python,itertools,迭代器">
+<meta name="description" content="一、Budget Pacing的概念与流派">
+<meta name="keywords" content="Budget Pacing">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python编程系列（4）：itertools">
-<meta property="og:url" content="http://yoursite.com/2018/01/25/python编程系列（4）：itertools/index.html">
+<meta property="og:title" content="计算广告面面观（5）：在线广告的Budget Pacing算法">
+<meta property="og:url" content="http://yoursite.com/2019/10/15/AD-RS-5/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="迭代器具有惰性求值（Lazy evaluation）的特性，它的返回值是一个迭代对象，只有在对其进行for循环迭代时才真正的进行计算，这使得我们无需将大文件或者无限集合存储到内存中，而只需不断的进行遍历即可。 python内置的itertools模块包含了一系列用来产生不同类型迭代器的函数或类，这些函数的返回都是一个迭代器，可以使用for循环或者next()来取值。">
+<meta property="og:description" content="一、Budget Pacing的概念与流派">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-30T10:51:50.820Z">
+<meta property="og:image" content="https://i.loli.net/2019/10/15/dXy4TlYQVw18KGg.png">
+<meta property="og:updated_time" content="2019-10-22T10:34:19.682Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="python编程系列（4）：itertools">
-<meta name="twitter:description" content="迭代器具有惰性求值（Lazy evaluation）的特性，它的返回值是一个迭代对象，只有在对其进行for循环迭代时才真正的进行计算，这使得我们无需将大文件或者无限集合存储到内存中，而只需不断的进行遍历即可。 python内置的itertools模块包含了一系列用来产生不同类型迭代器的函数或类，这些函数的返回都是一个迭代器，可以使用for循环或者next()来取值。">
+<meta name="twitter:title" content="计算广告面面观（5）：在线广告的Budget Pacing算法">
+<meta name="twitter:description" content="一、Budget Pacing的概念与流派">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/15/dXy4TlYQVw18KGg.png">
 
 
 
@@ -131,7 +133,7 @@
 
 <script data-ad-client="ca-pub-6293681360909288" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 
-  <title> python编程系列（4）：itertools | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 计算广告面面观（5）：在线广告的Budget Pacing算法 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -296,7 +298,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/25/python编程系列（4）：itertools/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/15/AD-RS-5/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="狗皮膏药">
@@ -320,7 +322,7 @@ var _hmt = _hmt || [];
             
             
               
-                python编程系列（4）：itertools
+                计算广告面面观（5）：在线广告的Budget Pacing算法
               
             
           </h1>
@@ -333,8 +335,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-01-25T20:20:45+08:00">
-                2018-01-25
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-15T20:20:28+08:00">
+                2019-10-15
               </time>
             
 
@@ -352,8 +354,8 @@ var _hmt = _hmt || [];
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/计算广告/" itemprop="url" rel="index">
+                    <span itemprop="name">计算广告</span>
                   </a>
                 </span>
 
@@ -392,84 +394,10 @@ var _hmt = _hmt || [];
       
 
       
-        <p>迭代器具有惰性求值（Lazy evaluation）的特性，它的返回值是一个迭代对象，只有在对其进行for循环迭代时才真正的进行计算，这使得我们无需将大文件或者无限集合存储到内存中，而只需不断的进行遍历即可。</p>
-<p>python内置的itertools模块包含了一系列用来产生不同类型迭代器的函数或类，这些函数的返回都是一个迭代器，可以使用for循环或者next()来取值。</p>
-<a id="more"></a>
-<p>itertools模块提供的迭代器函数有以下几种类型：</p>
-<ul>
-<li>无限迭代器：生成一个无限序列，比如自然数序列 1、2、3、4、····</li>
-<li>有限迭代器：接受一个或多个序列（sequence）作为参数，进行组合、分组和过滤等；</li>
-<li>组合生成器：序列的排列、组合，求序列的笛卡尔积等；</li>
-</ul>
-<h3 id="一、无限迭代器"><a href="#一、无限迭代器" class="headerlink" title="一、无限迭代器"></a>一、无限迭代器</h3><p>itertools模块提供了三个函数来生成一个无限序列迭代器，分别是：</p>
-<ul>
-<li><p>count(firstval,step=1)</p>
-<ul>
-<li>创建一个从firstval(默认值为0)开始，以step（默认值为1）为步长的无限整数迭代器</li>
-</ul>
-</li>
-<li><p>cycle(iterable)</p>
-<ul>
-<li>对iterable中的元素反复执行循环，返回迭代器</li>
-</ul>
-</li>
-<li><p>repeat(object[,times])</p>
-<ul>
-<li>反复生成object，如果给定times，则重复次数为times，否则为无限。</li>
-</ul>
-</li>
-</ul>
-<h4 id="1-1-count"><a href="#1-1-count" class="headerlink" title="1.1 count"></a>1.1 count</h4><p>count() 接收两个参数，第一个参数指定开始值，默认为 0，第二个参数指定步长，默认为 1：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> itertools</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> itertools.count(<span class="number">4</span>,<span class="number">2</span>):</div><div class="line">    print(i)</div><div class="line">    <span class="keyword">if</span> i&gt;<span class="number">10</span>: <span class="keyword">break</span></div><div class="line"></div><div class="line"><span class="number">4</span></div><div class="line"><span class="number">6</span></div><div class="line"><span class="number">8</span></div><div class="line"><span class="number">10</span></div><div class="line"><span class="number">12</span></div></pre></td></tr></table></figure>
-<h4 id="1-2-cycle"><a href="#1-2-cycle" class="headerlink" title="1.2 cycle"></a>1.2 cycle</h4><p>cycle() 用于对 iterable 中的元素反复执行循环：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">cnt = 0</div><div class="line">for i in itertools.cycle(&apos;hello&apos;):</div><div class="line">    print(i)</div><div class="line">    cnt+=1</div><div class="line">    if cnt%8==0:break</div><div class="line"></div><div class="line">h</div><div class="line">e</div><div class="line">l</div><div class="line">l</div><div class="line">o</div><div class="line">h</div><div class="line">e</div><div class="line">l</div><div class="line">```   </div><div class="line"></div><div class="line">### 1.3 repeat</div><div class="line">repeat() 用于反复生成一个 object：</div></pre></td></tr></table></figure>
-<p>cnt = 0<br>for i in itertools.repeat([1,2,3]):<br>    print(i)<br>    cnt+=1<br>    if cnt%3==0: break</p>
-<p>[1, 2, 3]<br>[1, 2, 3]<br>[1, 2, 3]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">### 二、有限迭代器</div><div class="line">itertools模块提供了多个函数（类），接受一个或多个迭代对象作为参数，对它们进行组合、分组和过滤等：</div><div class="line"></div><div class="line">- chain()</div><div class="line">- compress()</div><div class="line">- groupby()</div><div class="line">- ifilter()</div><div class="line">- ifilterfalse()</div><div class="line">- islice()</div><div class="line">- imap()</div><div class="line">- starmap()</div><div class="line">- tee()</div><div class="line">- takewhile()</div><div class="line">- izip()</div><div class="line">- izip_longest()</div><div class="line"></div><div class="line"></div><div class="line">#### 2.1 chain</div><div class="line"></div><div class="line">chain的使用形式如下：</div></pre></td></tr></table></figure></p>
-<p>chain(iterable1,iterable2,iterable3,···)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">chain接收多个可迭代对象作为参数，将它们连接起来，作为一个新的迭代器返回。</div></pre></td></tr></table></figure></p>
-<p>for i in itertools.chain([1,2,3],[4,5,6]):<br>    print(i)</p>
-<p>1<br>2<br>3<br>4<br>5<br>6<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chain还有一个常见的用法：</div></pre></td></tr></table></figure></p>
-<p>chain.from_iterable(iterable)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">接收一个可迭代对象作为参数，返回一个迭代器：</div></pre></td></tr></table></figure></p>
-<p>it = itertools.chain.from_iterable(‘abc’)<br>it.next()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 2.2 compress</div><div class="line">compress 的使用形式如下：</div></pre></td></tr></table></figure></p>
-<p>compress(data, selectors)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compress 可用于对数据进行筛选，当 selectors 的某个元素为 true 时，则保留 data 对应位置的元素，否则去除：</div></pre></td></tr></table></figure></p>
-<p>list(itertools.compress([1,2,3],[1,0,1]))<br>[1, 3]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 2.3 dropwhile</div><div class="line">dropwhile 的使用形式如下：</div></pre></td></tr></table></figure></p>
-<p>dropwhile(predicate, iterable)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">其中，predicate 是函数，iterable 是可迭代对象。对于 iterable 中的元素，如果 predicate(item) 为 true，则丢弃该元素，否则返回该项及所有后续项。</div></pre></td></tr></table></figure></p>
-<p>list(itertools.dropwhile(lambda x: x&gt;2,[3,4,5,2,3,4,1]))<br>[2, 3, 4, 1]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#### 2.4 groupby</div><div class="line"></div><div class="line">groupby 用于对序列进行分组，它的使用形式如下：</div></pre></td></tr></table></figure></p>
-<p>groupby(iterable[, keyfunc])<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">其中，iterable 是一个可迭代对象，keyfunc 是分组函数，用于对 iterable 的连续项进行分组，如果不指定，则默认对 iterable 中的连续相同项进行分组，返回一个 (key, sub-iterator) 的迭代器。</div></pre></td></tr></table></figure></p>
-<p>for key,value in itertools.groupby(‘aaabbccccss’):<br>    print(key,list(value))</p>
-<p>(‘a’, [‘a’, ‘a’, ‘a’])<br>(‘b’, [‘b’, ‘b’])<br>(‘c’, [‘c’, ‘c’, ‘c’, ‘c’])<br>(‘s’, [‘s’, ‘s’])</p>
-<p>for key,value in itertools.groupby([‘aaa’,’bb’,’cccc’,’ss’],len):<br>    print(key,list(value))</p>
-<p>(3, [‘aaa’])<br>(2, [‘bb’])<br>(4, [‘cccc’])<br>(2, [‘ss’])<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#### 2.5 ifilter</div><div class="line">ifilter 的使用形式如下：</div></pre></td></tr></table></figure></p>
-<p>ifilter(function or None, sequence)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">将 iterable 中 function(item) 为 True 的元素组成一个迭代器返回，如果 function 是 None，则返回 iterable 中所有计算为 True 的项。</div></pre></td></tr></table></figure></p>
-<p>list(itertools.ifilter(lambda x:x<4,range(10))) [0,="" 1,="" 2,="" 3]="" list(itertools.ifilter(none,[1,2,3,0,1,2]))="" [1,="" 3,="" 2]="" <figure="" class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ifilterfalse 的使用形式和 ifilter 类似，作用正好与其相反，它将 iterable 中 function(item) 为 False 的元素组成一个迭代器返回，如果 function 是 None，则返回 iterable 中所有计算为 False 的项。</div></pre></td></tr></table></4,range(10)))></p>
-<p>list(itertools.ifilterfalse(lambda x:x<4,range(10))) [1,="" 2,="" 3,="" 1,="" 2]="" list(itertools.ifilterfalse(none,[1,2,3,0,1,2]))="" [0]="" <figure="" class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 2.6 islice</div><div class="line">islice 是切片选择，它的使用形式如下：</div></pre></td></tr></table></4,range(10)))></p>
-<p>islice(iterable, [start,] stop [, step])<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">其中，iterable 是可迭代对象，start 是开始索引，stop 是结束索引，step 是步长，start 和 step 可选。</div></pre></td></tr></table></figure></p>
-<p>list(itertools.islice(itertools.count(),5))<br>[0, 1, 2, 3, 4]</p>
-<p>list(itertools.islice(itertools.count(),2,10,2))<br>[2, 4, 6, 8]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 2.7 imap</div><div class="line">imap 类似 map 操作，它的使用形式如下：</div></pre></td></tr></table></figure></p>
-<p>imap(func, iter1, iter2, iter3, …)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">imap 返回一个迭代器，元素为$func(i_1, i_2, i_3, ...)，i_1，i_2 $等分别来源于 iter1, iter2</div></pre></td></tr></table></figure></p>
-<p>list(itertools.imap(lambda x,y:x*y,[1,2,3],[2,3,4]))<br>[2, 6, 12]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#### 2.8 tee</div><div class="line">tee 的使用形式如下：</div></pre></td></tr></table></figure></p>
-<p>tee(iterable [,n])<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tee 用于从 iterable 创建 n 个独立的迭代器，以元组的形式返回，n 的默认值是 2。</div></pre></td></tr></table></figure></p>
-<p>a,b,c = itertools.tee(‘asdf’,3)<br>list(a)<br>[‘a’, ‘s’, ‘d’, ‘f’]<br>list(b)<br>[‘a’, ‘s’, ‘d’, ‘f’]<br>a==b<br>False</p>
-<p>itertools.tee(‘asdf’,3)<br>(<itertools.tee at="" 0x7f6bb43608c0="">,<br> <itertools.tee at="" 0x7f6bb4360908="">,<br> <itertools.tee at="" 0x7f6bb43605f0="">)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#### 2.9 takewhile</div><div class="line">takewhile 的使用形式如下：</div></pre></td></tr></table></figure></itertools.tee></itertools.tee></itertools.tee></p>
-<p>takewhile(predicate, iterable)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">其中，predicate 是函数，iterable 是可迭代对象。对于 iterable 中的元素，如果 predicate(item) 为 true，则保留该元素，只要 predicate(item) 为 false，则立即停止迭代。</div></pre></td></tr></table></figure></p>
-<p>list(itertools.takewhile(lambda x:x&gt;3,[4,5,2]))<br>[4, 5]<br>list(itertools.takewhile(lambda x:x&gt;3,[1,4,5,2]))<br>[]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">#### 2.10 izip</div><div class="line">izip 用于将多个可迭代对象对应位置的元素作为一个元组，将所有元组『组成』一个迭代器，并返回。它的使用形式如下：</div></pre></td></tr></table></figure></p>
-<p>izip(iter1, iter2, …, iterN)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果某个可迭代对象不再生成值，则迭代停止。</div></pre></td></tr></table></figure></p>
-<p>for i in itertools.izip([1,2,3],[2,3,4,5]):<br>    print(i)<br>(1, 2)<br>(2, 3)<br>(3, 4)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">izip_longest 跟 izip 类似，但迭代过程会持续到所有可迭代对象的元素都被迭代完。它的形式如下：</div></pre></td></tr></table></figure></p>
-<p>izip_longest(iter1, iter2, …, iterN, [fillvalue=None])<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">如果有指定 fillvalue，则会用其填充缺失的值，否则为 None。</div></pre></td></tr></table></figure></p>
-<p>for i in itertools.izip_longest([1,2,3],[2,3,4,5]):<br>    print(i)<br>(1, 2)<br>(2, 3)<br>(3, 4)<br>(None, 5)</p>
-<p>for i in itertools.izip_longest([1,2,3],[2,3,4,5],fillvalue=0):<br>    print(i)<br>(1, 2)<br>(2, 3)<br>(3, 4)<br>(0, 5)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div><div class="line">### 三、组合生成器</div><div class="line"></div><div class="line">itertools 模块还提供了多个组合生成器函数，用于求序列的排列、组合等：</div><div class="line"></div><div class="line">-  product</div><div class="line">- permutations</div><div class="line">- combinations</div><div class="line">- combinations_with_replacement</div><div class="line"></div><div class="line">#### 3.1 product</div><div class="line">product 用于求多个可迭代对象的笛卡尔积，它跟嵌套的 for 循环等价。它的一般使用形式如下：</div></pre></td></tr></table></figure></p>
-<p>product(iter1, iter2, … iterN, [repeat=1])<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">其中，repeat 是一个关键字参数，用于指定重复生成序列的次数，</div></pre></td></tr></table></figure></p>
-<p>for i in itertools.product(‘ab’,’cd’):<br>    print(i)<br>(‘a’, ‘c’)<br>(‘a’, ‘d’)<br>(‘b’, ‘c’)<br>(‘b’, ‘d’)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 3.2 permutations</div><div class="line">permutations 用于生成一个排列，它的一般使用形式如下：</div></pre></td></tr></table></figure></p>
-<p>permutations(iterable[, r])<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">其中，r 指定生成排列的元素的长度，如果不指定，则默认为可迭代对象的元素长度。</div></pre></td></tr></table></figure></p>
-<p>list(itertools.permutations(‘ad’,2))<br>[(‘a’, ‘d’), (‘d’, ‘a’)]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 3.3 combinations</div><div class="line">combinations 用于求序列的组合，它的使用形式如下：</div><div class="line"></div><div class="line">```	</div><div class="line">combinations(iterable, r)</div></pre></td></tr></table></figure></p>
-<p>其中，r 指定生成组合的元素的长度。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">list(itertools.combinations(&apos;ABC&apos;,2))</div><div class="line">[(&apos;A&apos;, &apos;B&apos;), (&apos;A&apos;, &apos;C&apos;), (&apos;B&apos;, &apos;C&apos;)]</div></pre></td></tr></table></figure>
-<p>combinations_with_replacement 和 combinations 类似，但它生成的组合包含自身元素。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">list(itertools.combinations_with_replacement(&apos;ABC&apos;,2))</div><div class="line">[(&apos;A&apos;, &apos;A&apos;), (&apos;A&apos;, &apos;B&apos;), (&apos;A&apos;, &apos;C&apos;), (&apos;B&apos;, &apos;B&apos;), (&apos;B&apos;, &apos;C&apos;), (&apos;C&apos;, &apos;C&apos;)]</div></pre></td></tr></table></figure>
-<h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
-<li><a href="https://docs.python.org/2/library/itertools.html" target="_blank" rel="noopener">itertools — Functions creating iterators for efficient looping</a></li>
-<li><a href="https://pymotw.com/2/itertools/" target="_blank" rel="noopener">itertools – Iterator functions for efficient looping - Python Module of the Week</a></li>
-</ul>
-
+        <h2 id="一、Budget-Pacing的概念与流派"><a href="#一、Budget-Pacing的概念与流派" class="headerlink" title="一、Budget Pacing的概念与流派"></a>一、Budget Pacing的概念与流派</h2><a id="more"></a>
+<h2 id="二、Probabilistic-throttling"><a href="#二、Probabilistic-throttling" class="headerlink" title="二、Probabilistic throttling"></a>二、Probabilistic throttling</h2><h3 id="2-1-LinkedIn-《Budget-Pacing-for-Targeted-Online-Advertisements-at-LinkedIn》"><a href="#2-1-LinkedIn-《Budget-Pacing-for-Targeted-Online-Advertisements-at-LinkedIn》" class="headerlink" title="2.1 LinkedIn 《Budget Pacing for Targeted Online Advertisements at LinkedIn》"></a>2.1 LinkedIn 《Budget Pacing for Targeted Online Advertisements at LinkedIn》</h3><p>该论文发表于2014年，提出了一种简单有效的Pacing策略，其主要的思想就是在一天时间内，保持 <code>截止到目前的曝光/预测的当天的总曝光</code> 和 <code>截止到目前的预算消耗/当天的总预算</code> 这两者基本一致，看一下公式：</p>
+<p><img src="https://i.loli.net/2019/10/15/dXy4TlYQVw18KGg.png" alt="WeChat62fd249967484027b73373abbc2be929.png"></p>
+<h3 id="2-2-Yahoo-《Smart-Pacing-for-Effective-Online-Ad-Campaign-Optimization》"><a href="#2-2-Yahoo-《Smart-Pacing-for-Effective-Online-Ad-Campaign-Optimization》" class="headerlink" title="2.2 Yahoo 《Smart Pacing for Effective Online Ad Campaign Optimization》"></a>2.2 Yahoo 《Smart Pacing for Effective Online Ad Campaign Optimization》</h3><h2 id="三、Bid-modification"><a href="#三、Bid-modification" class="headerlink" title="三、Bid modification"></a>三、Bid modification</h2>
       
     </div>
 
@@ -533,11 +461,7 @@ var _hmt = _hmt || [];
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
-          
-            <a href="/tags/itertools/" rel="tag"># itertools</a>
-          
-            <a href="/tags/迭代器/" rel="tag"># 迭代器</a>
+            <a href="/tags/Budget-Pacing/" rel="tag"># Budget Pacing</a>
           
         </div>
       
@@ -546,8 +470,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/01/23/读书记（10）：高宣扬讲存在主义（四）/" rel="next" title="读书记（10）：高宣扬讲存在主义（四）">
-                <i class="fa fa-chevron-left"></i> 读书记（10）：高宣扬讲存在主义（四）
+              <a href="/2019/09/10/林中路（10）：绦虫寓言/" rel="next" title="林中路（10）：略萨 | 绦虫寓言">
+                <i class="fa fa-chevron-left"></i> 林中路（10）：略萨 | 绦虫寓言
               </a>
             
           </div>
@@ -555,10 +479,6 @@ var _hmt = _hmt || [];
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/25/读书记（11）：存在主义书单/" rel="prev" title="读书记（11）：存在主义书单">
-                读书记（11）：存在主义书单 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -645,7 +565,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">206</span>
+                  <span class="site-state-item-count">200</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -656,7 +576,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -667,7 +587,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">305</span>
+                  <span class="site-state-item-count">299</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -804,7 +724,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、无限迭代器"><span class="nav-text">一、无限迭代器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-count"><span class="nav-text">1.1 count</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-cycle"><span class="nav-text">1.2 cycle</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考链接"><span class="nav-text">参考链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Budget-Pacing的概念与流派"><span class="nav-text">一、Budget Pacing的概念与流派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、Probabilistic-throttling"><span class="nav-text">二、Probabilistic throttling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-LinkedIn-《Budget-Pacing-for-Targeted-Online-Advertisements-at-LinkedIn》"><span class="nav-text">2.1 LinkedIn 《Budget Pacing for Targeted Online Advertisements at LinkedIn》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Yahoo-《Smart-Pacing-for-Effective-Online-Ad-Campaign-Optimization》"><span class="nav-text">2.2 Yahoo 《Smart Pacing for Effective Online Ad Campaign Optimization》</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、Bid-modification"><span class="nav-text">三、Bid modification</span></a></li></ol></div>
             
 
           </div>
