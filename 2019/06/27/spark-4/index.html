@@ -1,0 +1,1160 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="RDD,转换,行动,持久化,键值对,读写," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="创建 从本地文件系统/分布式文件系统HDFS加载：  12scala &amp;gt; val path = &amp;apos;&amp;apos;scala &amp;gt; val lines = sc.textFile(path)">
+<meta name="keywords" content="RDD,转换,行动,持久化,键值对,读写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spark笔记（4）：RDD编程 Scala版本">
+<meta property="og:url" content="http://yoursite.com/2019/06/27/spark-4/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="创建 从本地文件系统/分布式文件系统HDFS加载：  12scala &amp;gt; val path = &amp;apos;&amp;apos;scala &amp;gt; val lines = sc.textFile(path)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2019/10/31/zhMFWIYOvUE2Km1.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/10/31/sT8kNvXqAQfKrh6.jpg">
+<meta property="og:updated_time" content="2019-11-01T06:18:36.243Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spark笔记（4）：RDD编程 Scala版本">
+<meta name="twitter:description" content="创建 从本地文件系统/分布式文件系统HDFS加载：  12scala &amp;gt; val path = &amp;apos;&amp;apos;scala &amp;gt; val lines = sc.textFile(path)">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/31/zhMFWIYOvUE2Km1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","onmobile":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+
+
+
+
+<script data-ad-client="ca-pub-6293681360909288" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <title> Spark笔记（4）：RDD编程 Scala版本 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-balance-scale"></i> <br />
+            
+            技术栈
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-holzwege">
+          <a href="/holzwege" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tripadvisor"></i> <br />
+            
+            林中路
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            人间事
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/27/spark-4/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="狗皮膏药">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spark笔记（4）：RDD编程 Scala版本
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-27T20:20:28+08:00">
+                2019-06-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spark/" itemprop="url" rel="index">
+                    <span itemprop="name">Spark</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h3><ul>
+<li>从本地文件系统/分布式文件系统HDFS加载：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scala &gt; val path = &apos;&apos;</div><div class="line">scala &gt; val lines = sc.textFile(path)</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<ul>
+<li>通过并行集合（数组）创建</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">val array = Array(1,2,3,4,5)</div><div class="line">val rdd = sc.parallelize(array)</div><div class="line">array: Array[Int] = Array(1, 2, 3, 4, 5)</div><div class="line">rdd: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[1] at parallelize at &lt;console&gt;:29</div><div class="line"></div><div class="line"></div><div class="line">val list = List(1,2,3,4,5)</div><div class="line">val rdd = sc.parallelize(array)</div><div class="line">list: List[Int] = List(1, 2, 3, 4, 5)</div><div class="line">rdd: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[2] at parallelize at &lt;console&gt;:29</div></pre></td></tr></table></figure>
+<h3 id="RDD操作"><a href="#RDD操作" class="headerlink" title="RDD操作"></a>RDD操作</h3><p>惰性机制：整个转换过程只是记录了转换的轨迹，并不会发生真正的计算，只有遇到行动操作时，才会触发“从头到尾”真正的计算。</p>
+<h4 id="转换操作"><a href="#转换操作" class="headerlink" title="转换操作"></a>转换操作</h4><p>惰性求值，遇到行动操作才会触发“从头到尾”的真正的计算</p>
+<ul>
+<li>filter</li>
+<li>map</li>
+<li>flatmap</li>
+<li>groupByKey</li>
+<li>reduceByKey</li>
+</ul>
+<h4 id="行动操作"><a href="#行动操作" class="headerlink" title="行动操作"></a>行动操作</h4><p>真正触发计算的地方。</p>
+<ul>
+<li>count():返回元素个数</li>
+<li>collect():以数组形式返回所有元素</li>
+<li>first():返回第一个元素</li>
+<li>take(n):以数组形式返回前n个元素</li>
+<li>reduce(func):通过函数func（输入两个参数并返回一个值）聚合元素</li>
+<li>foreach(func):将每个元素传递到函数func中运行</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">val rdd = sc.parallelize(Array(1,2,3,4,5,6))</div><div class="line">rdd: org.apache.spark.rdd.RDD[Int] = ParallelCollectionRDD[11] at parallelize at &lt;console&gt;:27</div><div class="line"></div><div class="line">rdd.count()</div><div class="line">res28: Long = 6</div><div class="line"></div><div class="line">rdd.first()</div><div class="line">res29: Int = 1</div><div class="line"></div><div class="line">rdd.take(3)</div><div class="line">res30: Array[Int] = Array(1, 2, 3)</div><div class="line"></div><div class="line">rdd.collect()</div><div class="line">res31: Array[Int] = Array(1, 2, 3, 4, 5, 6)</div><div class="line"></div><div class="line">rdd.reduce((a,b)=&gt;a+b)</div><div class="line">res32: Int = 21</div><div class="line"></div><div class="line">rdd.take(5).foreach(println)</div><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td></tr></table></figure>
+<ul>
+<li>注意：Local模式单机执行时，rdd.foreach(elem=&gt;println(elem))会打印出一个RDD中的所有元素。但在集群模式下，在Worker节点上执行打印语句是输出到Worker节点的stdout中，而不是输出到任务控制节点Driver中，因此，任务控制节点Driver中的stdout是不会显示打印语句的这些输出内容的。为了能够把所有Worker节点上的打印输出信息也显示到Driver中，就需要使用collect()方法。但collect()方法会把各个Worker节点上的所有RDD元素都抓到Driver中，因此，可能会导致Driver所在节点发生内存溢出。</li>
+</ul>
+<ul>
+<li>实例</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">val text = sc.parallelize(List(&quot;hadoop is good&quot;,&quot;spark is fast&quot;,&quot;spark is better&quot;))</div><div class="line">text: org.apache.spark.rdd.RDD[String] = ParallelCollectionRDD[45] at parallelize at &lt;console&gt;:43</div><div class="line"></div><div class="line">text.flatMap(line =&gt; line.split(&quot; &quot;)).map(word=&gt; (word,1)).reduceByKey((a,b)=&gt;a+b).take(10)</div><div class="line">res155: Array[(String, Int)] = Array((is,3), (fast,1), (better,1), (spark,2), (hadoop,1), (good,1))</div></pre></td></tr></table></figure>
+<h3 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h3><p>为避免重复计算产生的开销，可使用persist()方法对RDD标记为持久化。</p>
+<ul>
+<li>persist(MEMORY_ONLY):将RDD作为反序列化的对象存储于JVM中，若内存不足，按照LRU原则（least recently used最近最少使用原则）替换缓存中的内容。</li>
+<li><p>persist(MEMORY_AND_DISK):将RDD作为反序列化的对象存储于JVM中,若内存不足，超出的分区将会被存放在磁盘上。</p>
+</li>
+<li><p>cache()方法，会调用persist(MEMORY_ONLY)</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">val rdd = sc.parallelize(List(&quot;hadoop&quot;,&quot;spark&quot;,&quot;Hive&quot;))</div><div class="line">rdd.cache() // 会调用persist(MEMORY_ONLY)，但是语句执行到这里，不会缓存rdd，因为这时的rdd还没有计算生成</div><div class="line"></div><div class="line">println(rdd.count())// 第一次行动操作，触发一次真正从头到尾的计算，这时上面的rdd.cache()才会被执行，把这个rdd放到缓存中</div><div class="line">println(rdd.collect().mkString(&quot;,&quot;))//第二次行动操作，不需要触发从头到尾的计算，只需要重复使用上面缓存的rdd</div><div class="line"></div><div class="line">rdd.unpersist()</div><div class="line"></div><div class="line">rdd: org.apache.spark.rdd.RDD[String] = ParallelCollectionRDD[27] at parallelize at &lt;console&gt;:27</div><div class="line">res109: rdd.type = ParallelCollectionRDD[27] at parallelize at &lt;console&gt;:27</div><div class="line">3</div><div class="line">hadoop,spark,Hive</div><div class="line">res114: rdd.type = ParallelCollectionRDD[27] at parallelize at &lt;console&gt;:27</div></pre></td></tr></table></figure>
+<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><h4 id="分区的作用："><a href="#分区的作用：" class="headerlink" title="分区的作用："></a>分区的作用：</h4><ul>
+<li>增加并行度：分区可以在不同的工作节点上启动不同的线程进行并行处理</li>
+<li>减少通信开销：分布式系统中，通信代价巨大，控制数据分布以获得最少的网络传输可以极大地提升整体性能</li>
+</ul>
+<p>如下图，当userData表和Events表进行连接时，默认情况下会将两个数据集中的所有key的哈希值都求出来，将哈希值相同的记录传送到同一台机器上，之后在该机器上对所有key相同的记录进行连接操作。这样每次进行连接操作都会有数据混洗的问题，造成很大的网络传输开销。<br><img src="https://i.loli.net/2019/10/31/zhMFWIYOvUE2Km1.jpg" alt="WechatIMG433.jpeg"></p>
+<p>实际上，由于userData这个RDD要比events大很多，可以先对userData进行哈希分区，这样在连接时，只有events表发生了数据混洗产生网络通信，userData是在本地引用的，不会产生网络开销。可以看出，Spark通过数据分区，对于一些特定类型的操作，比如join()/leftOuterJoin()/groupByKey()/reduceByKey()等，可以大大降低网络传输开销。</p>
+<p><img src="https://i.loli.net/2019/10/31/sT8kNvXqAQfKrh6.jpg" alt="WechatIMG435.jpeg"></p>
+<h4 id="分区原则："><a href="#分区原则：" class="headerlink" title="分区原则："></a>分区原则：</h4><p>分区个数尽量等于集群中CPU核心（core）数目。通过spark.default.parallelism配置默认分区数目</p>
+<p>默认分区：</p>
+<ul>
+<li>Local模式：默认是本地CPU数目</li>
+<li>Standalone或YARN模式：在“集群中所有CPU核心数目总和”和“2”取大值</li>
+<li>Mesos模式：默认分区为8</li>
+</ul>
+<h4 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h4><ul>
+<li><p>创建RDD时：sc.textFile(path,partitionNum)，若从HDFS读取文件，分区数为文件分片数。</p>
+</li>
+<li><p>repartition</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">val rdd = sc.parallelize(List(&quot;hadoop&quot;,&quot;spark&quot;,&quot;Hive&quot;))</div><div class="line">rdd: org.apache.spark.rdd.RDD[String] = ParallelCollectionRDD[30] at parallelize at &lt;console&gt;:27</div><div class="line"></div><div class="line">rdd.partitions.size</div><div class="line">res123: Int = 2</div><div class="line"></div><div class="line">rdd.repartition(1).partitions.size</div><div class="line">res124: Int = 1</div></pre></td></tr></table></figure>
+<ul>
+<li>自定义分区</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">import org.apache.spark.HashPartitioner</div><div class="line"></div><div class="line">class MyPartitioner(numParts:Int) extends HashPartitioner(numParts:Int)&#123;</div><div class="line">    override def numPartitions: Int = numParts</div><div class="line">    override def getPartition(key: Any): Int = &#123;key.toString.toInt%10&#125;</div><div class="line">    </div><div class="line">&#125;    </div><div class="line"></div><div class="line">data = sc.textFile(List(1,2,3,4,5,6))</div><div class="line">data.map((_,1)).partitionBy(new MyPartitioner(10)).map((_._1)).take(10)</div></pre></td></tr></table></figure>
+<h3 id="键值对"><a href="#键值对" class="headerlink" title="键值对"></a>键值对</h3><ul>
+<li>reduceByKey()</li>
+<li>groupByKey()</li>
+<li>keys()</li>
+<li>values()</li>
+<li>sortByKey()</li>
+<li>sortBy()</li>
+<li>mapValues()</li>
+<li>join()</li>
+<li>combineBykey()</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">val text = sc.parallelize(Array((&quot;hadoop&quot;,1),(&quot;spark&quot;,1),(&quot;spark&quot;,2),(&quot;hive&quot;,1)))</div><div class="line">text: org.apache.spark.rdd.RDD[(String, Int)] = ParallelCollectionRDD[294] at parallelize at &lt;console&gt;:43</div><div class="line"></div><div class="line">text.reduceByKey(_+_).take(10)</div><div class="line">res521: Array[(String, Int)] = Array((hive,1), (spark,3), (hadoop,1))</div><div class="line"></div><div class="line">text.groupByKey().map(x=&gt;(x._1,x._2.sum)).take(10)</div><div class="line">res522: Array[(String, Int)] = Array((hive,1), (spark,3), (hadoop,1))</div><div class="line"></div><div class="line">text.keys.take(10)</div><div class="line">res523: Array[String] = Array(hadoop, spark, spark, hive)</div><div class="line"></div><div class="line">text.values.take(10)</div><div class="line">res524: Array[Int] = Array(1, 1, 2, 1)</div><div class="line"></div><div class="line">text.sortByKey().take(10)</div><div class="line">res525: Array[(String, Int)] = Array((hadoop,1), (hive,1), (spark,1), (spark,2))</div><div class="line"></div><div class="line">text.reduceByKey((x,y)=&gt;x+y).sortBy(x=&gt;x._2,false).take(10)</div><div class="line">res526: Array[(String, Int)] = Array((spark,3), (hive,1), (hadoop,1))</div><div class="line"></div><div class="line">text.reduceByKey((x,y)=&gt;x+y).mapValues(x=&gt;x+1).take(10)</div><div class="line">res527: Array[(String, Int)] = Array((hive,2), (spark,4), (hadoop,2))</div><div class="line"></div><div class="line">val text2 = sc.parallelize(List((&quot;spark&quot;,&quot;best&quot;)))</div><div class="line">text2: org.apache.spark.rdd.RDD[(String, String)] = ParallelCollectionRDD[311] at parallelize at &lt;console&gt;:44</div><div class="line"></div><div class="line">text.join(text2).take(10)</div><div class="line">res529: Array[(String, (Int, String))] = Array((spark,(1,best)), (spark,(2,best)))</div><div class="line"></div><div class="line">val data = sc.parallelize(List((&quot;c1&quot;,88),(&quot;c2&quot;,99),(&quot;c3&quot;,28),(&quot;c2&quot;,56),(&quot;c1&quot;,58)))</div><div class="line">data: org.apache.spark.rdd.RDD[(String, Int)] = ParallelCollectionRDD[315] at parallelize at &lt;console&gt;:44</div><div class="line"></div><div class="line">data.combineByKey(</div><div class="line">    (x)=&gt;(x,1),</div><div class="line">    (x:(Int,Int),z) =&gt; (x._1+z,x._2+1),</div><div class="line">    (x:(Int,Int),y:(Int,Int)) =&gt; (x._1+y._1,x._2+y._2)</div><div class="line">    ).map(&#123;case (x,y)=&gt;(x,y._1/y._2.toFloat)&#125;).take(10)</div><div class="line">res531: Array[(String, Float)] = Array((c3,28.0), (c1,73.0), (c2,77.5))  </div><div class="line">    </div><div class="line">data.mapValues(x=&gt;(x,1)).reduceByKey((a,b)=&gt;(a._1+b._1,a._2+b._2)).mapValues(x=&gt;x._1/x._2.toFloat).take(10)</div><div class="line">res532: Array[(String, Float)] = Array((c3,28.0), (c1,73.0), (c2,77.5))</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    <div>
+    
+    	<br>	
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>-----------本文结束<i class="fa fa-paw"></i>
+        感谢您的阅读-----------<br></div>
+        <div><br>  
+        <div align="center">
+        欢迎关注个人公众号【应统联盟】，一起交流学习算法、编程与大数据。
+ </div> 
+        <div align="center">
+        <br>
+        <img src="https://i.loli.net/2019/08/01/5d42de70a873672762.png"/>
+        </div> 
+        </div>
+    
+</div>
+  
+</div>
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>感谢打赏，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/img/wechat-reward-image.png" alt="狗皮膏药 WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/img/alipay-reward-image.png" alt="狗皮膏药 Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RDD/" rel="tag"># RDD</a>
+          
+            <a href="/tags/转换/" rel="tag"># 转换</a>
+          
+            <a href="/tags/行动/" rel="tag"># 行动</a>
+          
+            <a href="/tags/持久化/" rel="tag"># 持久化</a>
+          
+            <a href="/tags/键值对/" rel="tag"># 键值对</a>
+          
+            <a href="/tags/读写/" rel="tag"># 读写</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/06/26/Spark-3/" rel="next" title="Spark笔记（3）：集群运行Spark程序实例讲解">
+                <i class="fa fa-chevron-left"></i> Spark笔记（3）：集群运行Spark程序实例讲解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/12/AD-RS-3/" rel="prev" title="计算广告面面观（3）：竞价广告定价策略与实现">
+                计算广告面面观（3）：竞价广告定价策略与实现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bc405fb9346cd0b" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="狗皮膏药" />
+            
+              <p class="site-author-name" itemprop="name">狗皮膏药</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">198</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">300</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/say-sth/" target="_blank" title="絮语">
+                    
+                      <i class="fa fa-fw fa-heartbeat"></i>絮语</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/see-movies/" target="_blank" title="电影">
+                    
+                      <i class="fa fa-fw fa-film"></i>电影</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plushunter.github.io/competitions" target="_blank" title="竞赛">
+                    
+                      <i class="fa fa-fw fa-database"></i>竞赛</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/ren-da-ying-tong-hua-qi/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
+                </span>
+              
+            
+          </div>
+
+
+          
+          <div id="music163player">
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=986476&auto=1&height=66">
+           </iframe>
+          </div>
+
+
+        
+
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+                GREAT BLOG
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://coolshell.cn" title="酷壳" target="_blank">酷壳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.flickering.cn" title="火光摇曳" target="_blank">火光摇曳</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://macshuo.com" title="MacTalk" target="_blank">MacTalk</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.matrix67.com" title="Matrix67" target="_blank">Matrix67</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.statunion.cn" title="应统联盟" target="_blank">应统联盟</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://ml-union.github.io/about/" title="机器联盟" target="_blank">机器联盟</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+
+          
+
+        </div>
+        
+      
+  
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+              </a>
+            </div>
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建"><span class="nav-text">创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RDD操作"><span class="nav-text">RDD操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#转换操作"><span class="nav-text">转换操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#行动操作"><span class="nav-text">行动操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持久化"><span class="nav-text">持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分区"><span class="nav-text">分区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#分区的作用："><span class="nav-text">分区的作用：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分区原则："><span class="nav-text">分区原则：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置"><span class="nav-text">设置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#键值对"><span class="nav-text">键值对</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">狗皮膏药</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+  
+
+  
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+  
+  
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+  
+
+
+</body>
+</html>
