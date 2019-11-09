@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>%2F2019%2F11%2F01%2F2019-11-01%2F</url>
+    <content type="text"><![CDATA[1. 两数之和python12 c++]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[计算广告面面观（5）：在线广告的Budget Pacing算法]]></title>
     <url>%2F2019%2F10%2F15%2FAD-RS-5%2F</url>
     <content type="text"><![CDATA[一、Budget Pacing的概念与流派 二、Probabilistic throttling2.1 LinkedIn 《Budget Pacing for Targeted Online Advertisements at LinkedIn》该论文发表于2014年，提出了一种简单有效的Pacing策略，其主要的思想就是在一天时间内，保持 截止到目前的曝光/预测的当天的总曝光 和 截止到目前的预算消耗/当天的总预算 这两者基本一致，看一下公式： 2.2 Yahoo 《Smart Pacing for Effective Online Ad Campaign Optimization》三、Bid modification]]></content>
