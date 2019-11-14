@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/11/10/2019-11-14/</loc>
+    
+    <lastmod>2019-11-14T08:03:41.989Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/about/index.html</loc>
     
     <lastmod>2019-11-13T08:30:16.044Z</lastmod>
@@ -12,6 +19,13 @@
     <loc>http://yoursite.com/tech-stack/index.html</loc>
     
     <lastmod>2019-11-13T08:29:49.385Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/07/09/spark-6/</loc>
+    
+    <lastmod>2019-11-13T08:25:22.810Z</lastmod>
     
   </url>
   
@@ -33,13 +47,6 @@
     <loc>http://yoursite.com/2019/06/19/Spark-1/</loc>
     
     <lastmod>2019-11-13T08:24:24.745Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2019/07/09/spark-6/</loc>
-    
-    <lastmod>2019-11-13T08:08:45.158Z</lastmod>
     
   </url>
   
