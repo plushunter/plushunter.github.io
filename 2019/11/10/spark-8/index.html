@@ -100,7 +100,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/11/14/DmJp8hL9zZVaMyw.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/11/14/8sawSxDEOUARCNZ.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/11/14/mL7SfG5EpCKXgA1.jpg">
-<meta property="og:updated_time" content="2019-11-14T08:08:02.029Z">
+<meta property="og:updated_time" content="2019-11-18T03:44:15.893Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark笔记（8）：Spark性能优化之数据倾斜处理">
 <meta name="twitter:description" content="前言继《Spark性能优化：开发调优篇》和《Spark性能优化：资源调优篇》讲解了每个Spark开发人员都必须熟知的开发调优与资源调优之后，本文作为《Spark性能优化指南》的高级篇，将深入分析数据倾斜调优与shuffle调优，以解决更加棘手的性能问题。">
@@ -492,7 +492,7 @@ var _hmt = _hmt || [];
 <p><strong>方案实践经验：</strong>曾经开发一个数据需求的时候，发现一个join导致了数据倾斜。优化之前，作业的执行时间大约是60分钟左右；使用该方案优化之后，执行时间缩短到10分钟左右，性能提升了6倍。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">// 首先将其中一个key分布相对较为均匀的RDD膨胀100倍。</div><div class="line">JavaPairRDD&lt;String, Row&gt; expandedRDD = rdd1.flatMapToPair(</div><div class="line">        new PairFlatMapFunction&lt;Tuple2&lt;Long,Row&gt;, String, Row&gt;() &#123;</div><div class="line">            private static final long serialVersionUID = 1L;</div><div class="line">            @Override</div><div class="line">            public Iterable&lt;Tuple2&lt;String, Row&gt;&gt; call(Tuple2&lt;Long, Row&gt; tuple)</div><div class="line">                    throws Exception &#123;</div><div class="line">                List&lt;Tuple2&lt;String, Row&gt;&gt; list = new ArrayList&lt;Tuple2&lt;String, Row&gt;&gt;();</div><div class="line">                for(int i = 0; i &lt; 100; i++) &#123;</div><div class="line">                    list.add(new Tuple2&lt;String, Row&gt;(0 + &quot;_&quot; + tuple._1, tuple._2));</div><div class="line">                &#125;</div><div class="line">                return list;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"> </div><div class="line">// 其次，将另一个有数据倾斜key的RDD，每条数据都打上100以内的随机前缀。</div><div class="line">JavaPairRDD&lt;String, String&gt; mappedRDD = rdd2.mapToPair(</div><div class="line">        new PairFunction&lt;Tuple2&lt;Long,String&gt;, String, String&gt;() &#123;</div><div class="line">            private static final long serialVersionUID = 1L;</div><div class="line">            @Override</div><div class="line">            public Tuple2&lt;String, String&gt; call(Tuple2&lt;Long, String&gt; tuple)</div><div class="line">                    throws Exception &#123;</div><div class="line">                Random random = new Random();</div><div class="line">                int prefix = random.nextInt(100);</div><div class="line">                return new Tuple2&lt;String, String&gt;(prefix + &quot;_&quot; + tuple._1, tuple._2);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"> </div><div class="line">// 将两个处理后的RDD进行join即可。</div><div class="line">JavaPairRDD&lt;String, Tuple2&lt;String, Row&gt;&gt; joinedRDD = mappedRDD.join(expandedRDD);</div></pre></td></tr></table></figure>
 <h4 id="解决方案八：多种方案组合使用"><a href="#解决方案八：多种方案组合使用" class="headerlink" title="解决方案八：多种方案组合使用"></a>解决方案八：多种方案组合使用</h4><p>在实践中发现，很多情况下，如果只是处理较为简单的数据倾斜场景，那么使用上述方案中的某一种基本就可以解决。但是如果要处理一个较为复杂的数据倾斜场景，那么可能需要将多种方案组合起来使用。比如说，我们针对出现了多个数据倾斜环节的Spark作业，可以先运用解决方案一和二，预处理一部分数据，并过滤一部分数据来缓解；其次可以对某些shuffle操作提升并行度，优化其性能；最后还可以针对不同的聚合或join操作，选择一种方案来优化其性能。大家需要对这些方案的思路和原理都透彻理解之后，在实践中根据各种不同的情况，灵活运用多种方案，来解决自己的数据倾斜问题。</p>
-<p>转载自：<a href="http://tech.meituan.com/spark-tuning-basic.html" target="_blank" rel="noopener">【美团技术博客】</a></p>
+<p>转载自：<a href="https://tech.meituan.com/2016/05/12/spark-tuning-pro.html" target="_blank" rel="noopener">【美团技术博客】</a></p>
 
       
     </div>
@@ -553,8 +553,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/15/AD-RS-5/" rel="next" title="计算广告面面观（5）：在线广告的Budget Pacing算法">
-                <i class="fa fa-chevron-left"></i> 计算广告面面观（5）：在线广告的Budget Pacing算法
+              <a href="/2019/10/19/2019-11-15/" rel="next" title="计算广告面面观（6）：CTR预估模型简介之非深度学习篇">
+                <i class="fa fa-chevron-left"></i> 计算广告面面观（6）：CTR预估模型简介之非深度学习篇
               </a>
             
           </div>
@@ -562,6 +562,10 @@ var _hmt = _hmt || [];
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/16/spark-9/" rel="prev" title="Spark笔记（9）：Spark性能优化之shuffle调优">
+                Spark笔记（9）：Spark性能优化之shuffle调优 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -648,7 +652,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">202</span>
+                  <span class="site-state-item-count">204</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -670,7 +674,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">304</span>
+                  <span class="site-state-item-count">306</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

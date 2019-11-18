@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="资源调优,spark性能," />
+  <meta name="keywords" content="spark性能,资源调优," />
 
 
 
@@ -87,7 +87,7 @@
 
 
 <meta name="description" content="在开发完Spark作业之后，就该为作业配置合适的资源了。spark的资源参数，基本都可以在spark-submit命令中作为参数设置。很多spark初学者，通常不知道该设置哪些必要的参数，以及如何设置这些参数，最后只能胡乱设置，甚至压根儿不设置。资源参数设置的不合理，可能会导致没有充分利用集群资源，作业运行会及其缓慢；或者设置的资源过大，队列没有足够的资源来提供，进而导致各种异常。总之，无论哪种情">
-<meta name="keywords" content="资源调优,spark性能">
+<meta name="keywords" content="spark性能,资源调优">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spark笔记（7）：Spark性能优化之资源调优篇">
 <meta property="og:url" content="http://yoursite.com/2019/07/10/spark-7/index.html">
@@ -95,7 +95,7 @@
 <meta property="og:description" content="在开发完Spark作业之后，就该为作业配置合适的资源了。spark的资源参数，基本都可以在spark-submit命令中作为参数设置。很多spark初学者，通常不知道该设置哪些必要的参数，以及如何设置这些参数，最后只能胡乱设置，甚至压根儿不设置。资源参数设置的不合理，可能会导致没有充分利用集群资源，作业运行会及其缓慢；或者设置的资源过大，队列没有足够的资源来提供，进而导致各种异常。总之，无论哪种情">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://tva1.sinaimg.cn/large/006y8mN6ly1g8w92wlvs7j312n0u0jva.jpg">
-<meta property="og:updated_time" content="2019-11-13T07:17:23.874Z">
+<meta property="og:updated_time" content="2019-11-18T03:43:41.806Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spark笔记（7）：Spark性能优化之资源调优篇">
 <meta name="twitter:description" content="在开发完Spark作业之后，就该为作业配置合适的资源了。spark的资源参数，基本都可以在spark-submit命令中作为参数设置。很多spark初学者，通常不知道该设置哪些必要的参数，以及如何设置这些参数，最后只能胡乱设置，甚至压根儿不设置。资源参数设置的不合理，可能会导致没有充分利用集群资源，作业运行会及其缓慢；或者设置的资源过大，队列没有足够的资源来提供，进而导致各种异常。总之，无论哪种情">
@@ -450,7 +450,7 @@ var _hmt = _hmt || [];
 <p>资源参数的调优，没有一个固定的值，需要同学们根据自己的实际情况（包括Spark作业中的shuffle操作数量、RDD持久化操作数量以及spark web ui中显示的作业gc情况），同时参考本篇文章中给出的原理以及调优建议，合理地设置上述参数。</p>
 <h3 id="资源参数参考示例"><a href="#资源参数参考示例" class="headerlink" title="资源参数参考示例"></a>资源参数参考示例</h3><p>以下是一份spark-submit命令的示例，大家可以参考一下，并根据自己的实际情况进行调节：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">./bin/spark-submit \</div><div class="line">  --master yarn-cluster \</div><div class="line">  --num-executors 100 \</div><div class="line">  --executor-memory 6G \</div><div class="line">  --executor-cores 4 \</div><div class="line">  --driver-memory 1G \</div><div class="line">  --conf spark.default.parallelism=1000 \</div><div class="line">  --conf spark.storage.memoryFraction=0.5 \</div><div class="line">  --conf spark.shuffle.memoryFraction=0.3 \</div></pre></td></tr></table></figure>
-<p>转载自：<a href="http://tech.meituan.com/spark-tuning-basic.html" target="_blank" rel="noopener">【美团技术博客】</a></p>
+<p>转载自：<a href="https://tech.meituan.com/2016/04/29/spark-tuning-basic.html" target="_blank" rel="noopener">【美团技术博客】</a></p>
 
       
     </div>
@@ -500,9 +500,9 @@ var _hmt = _hmt || [];
       
         <div class="post-tags">
           
-            <a href="/tags/资源调优/" rel="tag"># 资源调优</a>
-          
             <a href="/tags/spark性能/" rel="tag"># spark性能</a>
+          
+            <a href="/tags/资源调优/" rel="tag"># 资源调优</a>
           
         </div>
       
@@ -610,7 +610,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">202</span>
+                  <span class="site-state-item-count">204</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -632,7 +632,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">304</span>
+                  <span class="site-state-item-count">306</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
