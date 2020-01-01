@@ -94,15 +94,14 @@
 <meta property="og:site_name" content="Free Will">
 <meta property="og:description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://i.loli.net/2019/07/31/5d413f436513732414.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/07/31/5d413f7a60e8932535.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/07/31/5d413f84df0cd89625.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/07/31/5d413f91866d151996.jpg">
-<meta property="og:updated_time" content="2019-07-31T07:13:30.018Z">
+<meta property="og:updated_time" content="2019-12-19T06:28:19.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（3）：逻辑斯谛回归">
 <meta name="twitter:description" content="一、逻辑斯谛分布介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：">
-<meta name="twitter:image" content="https://i.loli.net/2019/07/31/5d413f436513732414.jpg">
+<meta name="twitter:image" content="https://i.loli.net/2019/07/31/5d413f7a60e8932535.jpg">
 
 
 
@@ -400,18 +399,22 @@ var _hmt = _hmt || [];
         <h2 id="一、逻辑斯谛分布"><a href="#一、逻辑斯谛分布" class="headerlink" title="一、逻辑斯谛分布"></a>一、逻辑斯谛分布</h2><p>介绍逻辑斯谛回归模型之前，首先看一个并不常见的概率分布，即逻辑斯谛分布。设$X$是连续随机变量，$X$服从逻辑斯谛分布是指$X$具有下列的分布函数和密度函数：</p>
 <a id="more"></a>
 <script type="math/tex; mode=display">
-F\left(x\right)=P\left(X\le x\right)=\frac{1}{1+e^{-\left(x-\mu\right)/\gamma}}</script><script type="math/tex; mode=display">
-f\left(x\right)=F^,\left(x\right)=\frac{e^{-\left(x-\mu\right)/\gamma}}{\gamma\left(1+e^{-\left(x-\mu\right)/\gamma}\right)^2}</script><p>式中，$\mu$为位置参数，$\gamma&gt;0 $为形状参数。逻辑斯谛的分布的密度函数$f(x)$和分布函数$F(x)$的图形如下图所示。其中分布函数属于逻辑斯谛函数，其图形为一条$S$形曲线。该曲线以点$(\mu,\frac{1}{2})$为中心对称，即满足</p>
+F\left(x\right)=P\left(X\le x\right)=\frac{1}{1+e^{-\left(x-\mu\right)/\gamma}}
+$$</script><p>f\left(x\right)=F^,\left(x\right)=\frac{e^{-\left(x-\mu\right)/\gamma}}{\gamma\left(1+e^{-\left(x-\mu\right)/\gamma}\right)^2}</p>
 <script type="math/tex; mode=display">
-F\left(-x+\mu\right)-\frac{1}{2}=-F\left(x+\mu\right)+\frac{1}{2}</script><p>曲线在中心附近增长较快，在两端增长速度较慢。形状参数$\gamma$的值越小，曲线在中心附近增长得越快。<br><img src="https://i.loli.net/2019/07/31/5d413f436513732414.jpg" alt=""></p>
-<h2 id="二、逻辑斯谛回归模型"><a href="#二、逻辑斯谛回归模型" class="headerlink" title="二、逻辑斯谛回归模型"></a>二、逻辑斯谛回归模型</h2><p>线性回归的应用场合大多是回归分析，一般不用在分类问题上。原因可以概括为以下两个：</p>
-<ul>
-<li>1）回归模型是连续型模型，即预测出的值都是连续值（实数值），非离散值；</li>
-<li>2）预测结果受样本噪声的影响比较大。</li>
-</ul>
-<h3 id="2-1-LR模型表达式"><a href="#2-1-LR模型表达式" class="headerlink" title="2.1 LR模型表达式"></a>2.1 LR模型表达式</h3><p>LR模型表达式为参数化的逻辑斯谛函数（默认参数$\mu=0,\gamma=1$）,即</p>
+式中，$\mu$为位置参数，$\gamma>0 $为形状参数。逻辑斯谛的分布的密度函数$f(x)$和分布函数$F(x)$的图形如下图所示。其中分布函数属于逻辑斯谛函数，其图形为一条$S$形曲线。该曲线以点$(\mu,\frac{1}{2})$为中心对称，即满足</script><p>F\left(-x+\mu\right)-\frac{1}{2}=-F\left(x+\mu\right)+\frac{1}{2}</p>
 <script type="math/tex; mode=display">
-h_{\theta}\left(x\right)=\frac{1}{1+e^{-\theta^Tx}}</script><p>其中$h_\theta{(x)}$作为事件结果$y=1$的概率取值。这里,$x\in R^{n+1},y\in \{1,0\},\theta\in R^{n+1}$是权值向量。其中权值向量$w$中包含偏置项，即$w=(w_0,w_1,···,w_n)，x=(1,x_1,x_2,···,x_n)$</p>
+曲线在中心附近增长较快，在两端增长速度较慢。形状参数$\gamma$的值越小，曲线在中心附近增长得越快。
+![](https://i.loli.net/2019/07/31/5d413f436513732414.jpg)
+## 二、逻辑斯谛回归模型
+线性回归的应用场合大多是回归分析，一般不用在分类问题上。原因可以概括为以下两个：
+
+- 1）回归模型是连续型模型，即预测出的值都是连续值（实数值），非离散值；
+- 2）预测结果受样本噪声的影响比较大。
+
+
+### 2.1 LR模型表达式
+LR模型表达式为参数化的逻辑斯谛函数（默认参数$\mu=0,\gamma=1$）,即</script><p>h_{\theta}\left(x\right)=\frac{1}{1+e^{-\theta^Tx}}$$<br>其中$h_\theta{(x)}$作为事件结果$y=1$的概率取值。这里,$x\in R^{n+1},y\in \{1,0\},\theta\in R^{n+1}$是权值向量。其中权值向量$w$中包含偏置项，即$w=(w_0,w_1,···,w_n)，x=(1,x_1,x_2,···,x_n)$</p>
 <h3 id="2-2-理解LR模型"><a href="#2-2-理解LR模型" class="headerlink" title="2.2 理解LR模型"></a>2.2 理解LR模型</h3><h4 id="2-2-1-对数几率"><a href="#2-2-1-对数几率" class="headerlink" title="2.2.1 对数几率"></a>2.2.1 对数几率</h4><p>一个事件发生的几率（odds）是指该事件发生的概率与该事件不发生的概率的比值。如果事件发生的概率是$p$，那么该事件的几率为$\frac{p}{1-p}$，该事件的对数几率（log odds）或logit函数是：</p>
 <script type="math/tex; mode=display">
 logit\left(p\right)=\log\frac{p}{1-p}</script><p>对LR而言，根据模型表达式可以得到：</p>
@@ -468,6 +471,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
 <p>两者对异常的敏感度也不一样。同样的线性分类情况下，如果异常点较多的话，无法剔除，首先LR，LR中每个样本都是有贡献的，最大似然后会自动压制异常的贡献，SVM+软间隔对异常还是比较敏感，因为其训练只需要支持向量，有效样本本来就不高，一旦被干扰，预测结果难以预料。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://www.cnblogs.com/jerrylead/archive/2011/03/05/1971867.html" target="_blank" rel="noopener">对线性回归，logistic回归和一般回归的认识</a></p>
 <p><a href="https://tech.meituan.com/intro_to_logistic_regression.html" target="_blank" rel="noopener">Logistic Regression 模型简介</a></p>
+<p>500+144+230+530+736+609+242+173+332+147+712+125+104+130+328</p>
 
       
     </div>
@@ -642,7 +646,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">204</span>
+                  <span class="site-state-item-count">207</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -653,7 +657,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -801,7 +805,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、逻辑斯谛分布"><span class="nav-text">一、逻辑斯谛分布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、逻辑斯谛回归模型"><span class="nav-text">二、逻辑斯谛回归模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-LR模型表达式"><span class="nav-text">2.1 LR模型表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-理解LR模型"><span class="nav-text">2.2 理解LR模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-对数几率"><span class="nav-text">2.2.1 对数几率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-函数映射"><span class="nav-text">2.2.2 函数映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-概率解释"><span class="nav-text">2.2.3 概率解释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、模型参数估计"><span class="nav-text">三、模型参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Sigmoid函数"><span class="nav-text">3.1 Sigmoid函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-参数估计推导"><span class="nav-text">3.2 参数估计推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-分类边界"><span class="nav-text">3.3 分类边界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、延伸"><span class="nav-text">四、延伸</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-生成模型与判别模型"><span class="nav-text">4. 1 生成模型与判别模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-多分类"><span class="nav-text">4.2 多分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-应用"><span class="nav-text">4.3 应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-LR与SVM"><span class="nav-text">4.4 LR与SVM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、逻辑斯谛分布"><span class="nav-text">一、逻辑斯谛分布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-理解LR模型"><span class="nav-text">2.2 理解LR模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-对数几率"><span class="nav-text">2.2.1 对数几率</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-函数映射"><span class="nav-text">2.2.2 函数映射</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-概率解释"><span class="nav-text">2.2.3 概率解释</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、模型参数估计"><span class="nav-text">三、模型参数估计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Sigmoid函数"><span class="nav-text">3.1 Sigmoid函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-参数估计推导"><span class="nav-text">3.2 参数估计推导</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-分类边界"><span class="nav-text">3.3 分类边界</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、延伸"><span class="nav-text">四、延伸</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-生成模型与判别模型"><span class="nav-text">4. 1 生成模型与判别模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-多分类"><span class="nav-text">4.2 多分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-应用"><span class="nav-text">4.3 应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-LR与SVM"><span class="nav-text">4.4 LR与SVM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>
@@ -825,7 +829,7 @@ l\left(\theta\right)=\sum_{i=1}^N{\log l\left(\theta\right)}</script><script typ
         <div class="copyright" >
   
   &copy;  2016 - 
-  <span itemprop="copyrightYear">2019</span>
+  <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
