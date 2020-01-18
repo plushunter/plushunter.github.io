@@ -97,7 +97,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/07/29/5d3ee3947638f96251.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/08/01/5d42a8e44b76a35389.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/07/29/5d3ea1407bf2c78037.jpg">
-<meta property="og:updated_time" content="2019-08-01T08:55:12.020Z">
+<meta property="og:updated_time" content="2020-01-04T11:24:28.822Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）">
 <meta name="twitter:description" content="本文转载自美团点评技术团队 FM和FFM模型是最近几年提出的模型，凭借其在数据量比较打并且特征稀疏的情况下，忍让能够得到优秀的性能和效果，屡次在各大公司举办的CTR预估比赛中获得不错的战绩。">
@@ -527,16 +527,12 @@ var _hmt = _hmt || [];
 <td>Hinge/Cross-Entopy损失</td>
 <td>分类时，结果需要做sigmoid变换</td>
 </tr>
-<tr>
-<td>排序</td>
-<td></td>
-</tr>
 </tbody>
 </table>
 </div>
 <p>直观上看，FM的复杂度是$O(kn^2)$，但是，通过下面的等价转换，可以将FM的二次项化简，其复杂度可以优化到$O(kn)$，即：</p>
 <script type="math/tex; mode=display">\sum_{i=1}^n\sum_{j=i+1}^n⟨v_i,v_j⟩x_i,x_j=\frac{1}{2}\sum_{f=1}^k[(\sum_{i=1}^nv_{i,f}x_i)^2-\sum_{i=1}^nv_{i,f}^2x_i^2]</script><p>下面给出详细推导：</p>
-<script type="math/tex; mode=display">\sum_{i=1}^n\sum_{j=i+1}^n⟨v_i,v_j⟩x_ix_j \\ =\frac{1}{2}\sum_{i=1}^n\sum_{f=1}^n⟨v_i,v_j⟩x_ix_j-\frac{1}{2}\sum_{i=1}^n⟨v_i,v_i⟩x_ix_i\\=\frac{1}{2}(\sum_{i=1}^n\sum_{j=1}^n\sum_{f=1}^kv_{i,f}v_{j,f}x_ix_j-\sum_{i=1}^n\sum_{f=1}^kv_{i,f}v_{i,f}x_ix_i)\\=\frac{1}{2}\sum_{f=1}^k[(\sum_{i=1}^nv_{i,f}x_i)·(\sum_{j=1}^nv_{j,f}x_j)-\sum_{i=1}^nv_{i,f}^2x_i^2]\\=\frac{1}{2}\sum_{f=1}^k[(\sum_{i=1}^nv_{i,f}x_i)^2- \sum_{i=1}^nv_{i,f}^2x_i^2]</script><p>解读第一步到第二部，这里用A表示系数矩阵V的上三角元素，B表示对角线上的交叉项系数。由于系数矩阵V是一个对称阵，所以下三角和上三角相等，有下式成立：</p>
+<script type="math/tex; mode=display">\sum_{i=1}^n\sum_{j=i+1}^n⟨v_i,v_j⟩x_ix_j $$$$ =\frac{1}{2}\sum_{i=1}^n\sum_{f=1}^n⟨v_i,v_j⟩x_ix_j-\frac{1}{2}\sum_{i=1}^n⟨v_i,v_i⟩x_ix_i\\=\frac{1}{2}(\sum_{i=1}^n\sum_{j=1}^n\sum_{f=1}^kv_{i,f}v_{j,f}x_ix_j-\sum_{i=1}^n\sum_{f=1}^kv_{i,f}v_{i,f}x_ix_i)\\=\frac{1}{2}\sum_{f=1}^k[(\sum_{i=1}^nv_{i,f}x_i)·(\sum_{j=1}^nv_{j,f}x_j)-\sum_{i=1}^nv_{i,f}^2x_i^2]\\=\frac{1}{2}\sum_{f=1}^k[(\sum_{i=1}^nv_{i,f}x_i)^2- \sum_{i=1}^nv_{i,f}^2x_i^2]</script><p>解读第一步到第二部，这里用A表示系数矩阵V的上三角元素，B表示对角线上的交叉项系数。由于系数矩阵V是一个对称阵，所以下三角和上三角相等，有下式成立：</p>
 <script type="math/tex; mode=display">A=\frac{1}{2}(2A+B)-\frac{1}{2}B</script><p>其中，</p>
 <script type="math/tex; mode=display">A=\sum_{i=1}^n\sum_{j=i+1}^n⟨v_i,v_j⟩x_ix_j,B=\sum_{i=1}^n⟨v_i,v_j⟩x_ix_i</script><p>如果用随机梯度下降（SGD）法学系模型参数。那么模型各个参数的梯度如下：</p>
 <script type="math/tex; mode=display">
@@ -929,7 +925,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">207</span>
+                  <span class="site-state-item-count">208</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -951,7 +947,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">306</span>
+                  <span class="site-state-item-count">308</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
