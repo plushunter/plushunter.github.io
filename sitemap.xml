@@ -2,6 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/tech-stack/index.html</loc>
+    
+    <lastmod>2020-02-19T12:08:22.661Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/see-movies/index.html</loc>
+    
+    <lastmod>2020-02-19T12:08:10.509Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/say-sth/index.html</loc>
+    
+    <lastmod>2020-02-19T12:07:59.910Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/on-earth/index.html</loc>
+    
+    <lastmod>2020-02-19T12:07:49.577Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/holzwege/index.html</loc>
+    
+    <lastmod>2020-02-19T12:07:38.300Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/competitions/index.html</loc>
+    
+    <lastmod>2020-02-19T12:07:31.734Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/about/index.html</loc>
     
     <lastmod>2020-02-18T15:11:15.028Z</lastmod>
@@ -54,41 +96,6 @@
     <loc>http://yoursite.com/on-earth/dear.html</loc>
     
     <lastmod>2019-12-15T05:31:39.772Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/say-sth/index.html</loc>
-    
-    <lastmod>2019-11-30T06:44:44.432Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tech-stack/index.html</loc>
-    
-    <lastmod>2019-11-28T16:51:32.142Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/competitions/index.html</loc>
-    
-    <lastmod>2019-11-28T16:51:13.553Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/holzwege/index.html</loc>
-    
-    <lastmod>2019-11-28T16:51:06.935Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/on-earth/index.html</loc>
-    
-    <lastmod>2019-11-28T16:50:57.313Z</lastmod>
     
   </url>
   
@@ -1503,13 +1510,6 @@
     <loc>http://yoursite.com/2017/07/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%EF%BC%8815%EF%BC%89%EF%BC%9A%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/</loc>
     
     <lastmod>2019-07-30T10:51:50.576Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/see-movies/index.html</loc>
-    
-    <lastmod>2019-01-22T08:43:33.000Z</lastmod>
     
   </url>
   
