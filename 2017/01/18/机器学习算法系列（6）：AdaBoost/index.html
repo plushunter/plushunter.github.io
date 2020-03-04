@@ -945,7 +945,17 @@ f_m\left(x\right)=f_{m-1}\left(x\right)+a_mG_m\left(x\right)</script><p>以及</
 	
     <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
 	
-
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+		    $(document).ready(function() {
+		        var int = setInterval(fixCount, 100);
+		        var busuanziSiteOffset = parseInt(100000);
+		        function fixCount() {
+	                clearInterval(int);
+	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+		        }
+		    });
+		</script>
 	
 	
 
