@@ -783,22 +783,31 @@ var _hmt = _hmt || [];
 	
 	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 		<script>
-		    $(document).ready(function() {
-		        var int = setInterval(fixCount, 10);
-		        var busuanziSiteOffset_uv = parseInt(190422);
-		        var busuanziSiteOffset_pv = parseInt(412128);
-		        function fixCount() {
-	                clearInterval(int);
-	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset_pv);
-	                clearInterval(int);
-	                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + busuanziSiteOffset_uv);
-		        }
-		    });
+		    window.addEventListener('DOMContentLoaded', function() {
+			var intervalTotalViews = setInterval(fixTotalViews, 100);
+			var offsetTotalViews   = parseInt(100000);
+			function fixTotalViews() {
+			    clearInterval(intervalTotalViews);
+			    var el = document.getElementById("busuanzi_value_site_pv");
+			    var value = parseInt(el.innerHTML) + offsetTotalViews;
+			    el.innerHTML = '' + value;
+			}
+
+			});
 		</script>
 	
 	
 
 </div>
+
+
+
+
+
+  
+
+
+
 
 
 
