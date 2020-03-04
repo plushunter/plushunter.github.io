@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://freewill.top/"/>
+  <link href="http://yoursite.com/"/>
   <updated>2020-01-18T10:13:18.551Z</updated>
-  <id>http://freewill.top/</id>
+  <id>http://yoursite.com/</id>
   
   <author>
     <name>Free Will</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Spark笔记（10）：宽依赖与窄依赖</title>
-    <link href="http://freewill.top/2020/01/02/spark-10/"/>
-    <id>http://freewill.top/2020/01/02/spark-10/</id>
+    <link href="http://yoursite.com/2020/01/02/spark-10/"/>
+    <id>http://yoursite.com/2020/01/02/spark-10/</id>
     <published>2020-01-02T12:20:28.000Z</published>
     <updated>2020-01-18T10:13:18.551Z</updated>
     
@@ -31,19 +31,19 @@
     
     </summary>
     
-      <category term="Spark" scheme="http://freewill.top/categories/Spark/"/>
+      <category term="Spark" scheme="http://yoursite.com/categories/Spark/"/>
     
     
-      <category term="宽依赖" scheme="http://freewill.top/tags/%E5%AE%BD%E4%BE%9D%E8%B5%96/"/>
+      <category term="宽依赖" scheme="http://yoursite.com/tags/%E5%AE%BD%E4%BE%9D%E8%B5%96/"/>
     
-      <category term="窄依赖" scheme="http://freewill.top/tags/%E7%AA%84%E4%BE%9D%E8%B5%96/"/>
+      <category term="窄依赖" scheme="http://yoursite.com/tags/%E7%AA%84%E4%BE%9D%E8%B5%96/"/>
     
   </entry>
   
   <entry>
     <title>海德格尔中文出版书籍汇总</title>
-    <link href="http://freewill.top/2020/01/01/Martin-Heidegger-1/"/>
-    <id>http://freewill.top/2020/01/01/Martin-Heidegger-1/</id>
+    <link href="http://yoursite.com/2020/01/01/Martin-Heidegger-1/"/>
+    <id>http://yoursite.com/2020/01/01/Martin-Heidegger-1/</id>
     <published>2020-01-01T12:20:28.000Z</published>
     <updated>2020-01-04T08:24:59.563Z</updated>
     
@@ -236,17 +236,17 @@
     
     </summary>
     
-      <category term="海德格尔" scheme="http://freewill.top/categories/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
+      <category term="海德格尔" scheme="http://yoursite.com/categories/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
     
     
-      <category term="海德格尔" scheme="http://freewill.top/tags/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
+      <category term="海德格尔" scheme="http://yoursite.com/tags/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
     
   </entry>
   
   <entry>
     <title>Spark笔记（9）：Spark性能优化之shuffle调优</title>
-    <link href="http://freewill.top/2019/11/16/spark-9/"/>
-    <id>http://freewill.top/2019/11/16/spark-9/</id>
+    <link href="http://yoursite.com/2019/11/16/spark-9/"/>
+    <id>http://yoursite.com/2019/11/16/spark-9/</id>
     <published>2019-11-16T12:20:28.000Z</published>
     <updated>2019-11-18T04:10:13.086Z</updated>
     
@@ -258,19 +258,19 @@
     
     </summary>
     
-      <category term="Spark" scheme="http://freewill.top/categories/Spark/"/>
+      <category term="Spark" scheme="http://yoursite.com/categories/Spark/"/>
     
     
-      <category term="shuffle" scheme="http://freewill.top/tags/shuffle/"/>
+      <category term="shuffle" scheme="http://yoursite.com/tags/shuffle/"/>
     
-      <category term="spark性能" scheme="http://freewill.top/tags/spark%E6%80%A7%E8%83%BD/"/>
+      <category term="spark性能" scheme="http://yoursite.com/tags/spark%E6%80%A7%E8%83%BD/"/>
     
   </entry>
   
   <entry>
     <title>Spark笔记（8）：Spark性能优化之数据倾斜处理</title>
-    <link href="http://freewill.top/2019/11/10/spark-8/"/>
-    <id>http://freewill.top/2019/11/10/spark-8/</id>
+    <link href="http://yoursite.com/2019/11/10/spark-8/"/>
+    <id>http://yoursite.com/2019/11/10/spark-8/</id>
     <published>2019-11-10T12:20:28.000Z</published>
     <updated>2019-11-18T03:44:15.893Z</updated>
     
@@ -282,19 +282,19 @@
     
     </summary>
     
-      <category term="Spark" scheme="http://freewill.top/categories/Spark/"/>
+      <category term="Spark" scheme="http://yoursite.com/categories/Spark/"/>
     
     
-      <category term="spark性能" scheme="http://freewill.top/tags/spark%E6%80%A7%E8%83%BD/"/>
+      <category term="spark性能" scheme="http://yoursite.com/tags/spark%E6%80%A7%E8%83%BD/"/>
     
-      <category term="数据倾斜" scheme="http://freewill.top/tags/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/"/>
+      <category term="数据倾斜" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%80%BE%E6%96%9C/"/>
     
   </entry>
   
   <entry>
     <title>计算广告面面观（6）：CTR预估模型简介之非深度学习篇</title>
-    <link href="http://freewill.top/2019/10/19/AD-RS-6/"/>
-    <id>http://freewill.top/2019/10/19/AD-RS-6/</id>
+    <link href="http://yoursite.com/2019/10/19/AD-RS-6/"/>
+    <id>http://yoursite.com/2019/10/19/AD-RS-6/</id>
     <published>2019-10-19T12:20:28.000Z</published>
     <updated>2019-11-18T04:10:23.564Z</updated>
     
@@ -306,25 +306,25 @@
     
     </summary>
     
-      <category term="计算广告" scheme="http://freewill.top/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
+      <category term="计算广告" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
     
     
-      <category term="LR" scheme="http://freewill.top/tags/LR/"/>
+      <category term="LR" scheme="http://yoursite.com/tags/LR/"/>
     
-      <category term="LS-PLM" scheme="http://freewill.top/tags/LS-PLM/"/>
+      <category term="LS-PLM" scheme="http://yoursite.com/tags/LS-PLM/"/>
     
-      <category term="GBDT" scheme="http://freewill.top/tags/GBDT/"/>
+      <category term="GBDT" scheme="http://yoursite.com/tags/GBDT/"/>
     
-      <category term="FM" scheme="http://freewill.top/tags/FM/"/>
+      <category term="FM" scheme="http://yoursite.com/tags/FM/"/>
     
-      <category term="FFM" scheme="http://freewill.top/tags/FFM/"/>
+      <category term="FFM" scheme="http://yoursite.com/tags/FFM/"/>
     
   </entry>
   
   <entry>
     <title>计算广告面面观（5）：在线广告的Budget Pacing算法</title>
-    <link href="http://freewill.top/2019/10/15/AD-RS-5/"/>
-    <id>http://freewill.top/2019/10/15/AD-RS-5/</id>
+    <link href="http://yoursite.com/2019/10/15/AD-RS-5/"/>
+    <id>http://yoursite.com/2019/10/15/AD-RS-5/</id>
     <published>2019-10-15T12:20:28.000Z</published>
     <updated>2019-10-22T10:34:19.682Z</updated>
     
@@ -336,17 +336,17 @@
     
     </summary>
     
-      <category term="计算广告" scheme="http://freewill.top/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
+      <category term="计算广告" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
     
     
-      <category term="Budget Pacing" scheme="http://freewill.top/tags/Budget-Pacing/"/>
+      <category term="Budget Pacing" scheme="http://yoursite.com/tags/Budget-Pacing/"/>
     
   </entry>
   
   <entry>
     <title>林中路（10）：略萨 | 绦虫寓言</title>
-    <link href="http://freewill.top/2019/09/10/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%8810%EF%BC%89%EF%BC%9A%E7%BB%A6%E8%99%AB%E5%AF%93%E8%A8%80/"/>
-    <id>http://freewill.top/2019/09/10/林中路（10）：绦虫寓言/</id>
+    <link href="http://yoursite.com/2019/09/10/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%8810%EF%BC%89%EF%BC%9A%E7%BB%A6%E8%99%AB%E5%AF%93%E8%A8%80/"/>
+    <id>http://yoursite.com/2019/09/10/林中路（10）：绦虫寓言/</id>
     <published>2019-09-10T12:20:28.000Z</published>
     <updated>2019-09-10T15:05:11.017Z</updated>
     
@@ -359,17 +359,17 @@
     
     </summary>
     
-      <category term="林中路" scheme="http://freewill.top/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
+      <category term="林中路" scheme="http://yoursite.com/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
     
     
-      <category term="略萨" scheme="http://freewill.top/tags/%E7%95%A5%E8%90%A8/"/>
+      <category term="略萨" scheme="http://yoursite.com/tags/%E7%95%A5%E8%90%A8/"/>
     
   </entry>
   
   <entry>
     <title>计算广告面面观（4）：计算广告基础知识</title>
-    <link href="http://freewill.top/2019/08/23/AD-RS-4/"/>
-    <id>http://freewill.top/2019/08/23/AD-RS-4/</id>
+    <link href="http://yoursite.com/2019/08/23/AD-RS-4/"/>
+    <id>http://yoursite.com/2019/08/23/AD-RS-4/</id>
     <published>2019-08-23T12:20:28.000Z</published>
     <updated>2019-10-15T09:22:37.443Z</updated>
     
@@ -381,23 +381,23 @@
     
     </summary>
     
-      <category term="计算广告" scheme="http://freewill.top/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
+      <category term="计算广告" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
     
     
-      <category term="商业化" scheme="http://freewill.top/tags/%E5%95%86%E4%B8%9A%E5%8C%96/"/>
+      <category term="商业化" scheme="http://yoursite.com/tags/%E5%95%86%E4%B8%9A%E5%8C%96/"/>
     
-      <category term="广告形态" scheme="http://freewill.top/tags/%E5%B9%BF%E5%91%8A%E5%BD%A2%E6%80%81/"/>
+      <category term="广告形态" scheme="http://yoursite.com/tags/%E5%B9%BF%E5%91%8A%E5%BD%A2%E6%80%81/"/>
     
-      <category term="泛广告商业" scheme="http://freewill.top/tags/%E6%B3%9B%E5%B9%BF%E5%91%8A%E5%95%86%E4%B8%9A/"/>
+      <category term="泛广告商业" scheme="http://yoursite.com/tags/%E6%B3%9B%E5%B9%BF%E5%91%8A%E5%95%86%E4%B8%9A/"/>
     
-      <category term="广告交易模式" scheme="http://freewill.top/tags/%E5%B9%BF%E5%91%8A%E4%BA%A4%E6%98%93%E6%A8%A1%E5%BC%8F/"/>
+      <category term="广告交易模式" scheme="http://yoursite.com/tags/%E5%B9%BF%E5%91%8A%E4%BA%A4%E6%98%93%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
     <title>《推荐系统三十六式》笔记（2）：内容推荐</title>
-    <link href="http://freewill.top/2019/07/19/RS-36-2/"/>
-    <id>http://freewill.top/2019/07/19/RS-36-2/</id>
+    <link href="http://yoursite.com/2019/07/19/RS-36-2/"/>
+    <id>http://yoursite.com/2019/07/19/RS-36-2/</id>
     <published>2019-07-19T12:20:28.000Z</published>
     <updated>2020-01-01T15:40:20.612Z</updated>
     
@@ -409,17 +409,17 @@
     
     </summary>
     
-      <category term="推荐系统" scheme="http://freewill.top/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
+      <category term="推荐系统" scheme="http://yoursite.com/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="推荐系统" scheme="http://freewill.top/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
+      <category term="推荐系统" scheme="http://yoursite.com/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
   <entry>
     <title>《推荐系统三十六式》笔记（1）：概念篇</title>
-    <link href="http://freewill.top/2019/07/19/RS-36-1/"/>
-    <id>http://freewill.top/2019/07/19/RS-36-1/</id>
+    <link href="http://yoursite.com/2019/07/19/RS-36-1/"/>
+    <id>http://yoursite.com/2019/07/19/RS-36-1/</id>
     <published>2019-07-19T12:20:28.000Z</published>
     <updated>2020-01-01T15:38:41.637Z</updated>
     
@@ -431,17 +431,17 @@
     
     </summary>
     
-      <category term="推荐系统" scheme="http://freewill.top/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
+      <category term="推荐系统" scheme="http://yoursite.com/categories/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
     
     
-      <category term="推荐系统" scheme="http://freewill.top/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
+      <category term="推荐系统" scheme="http://yoursite.com/tags/%E6%8E%A8%E8%8D%90%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
   <entry>
     <title>计算广告面面观（3）：竞价广告定价策略与实现</title>
-    <link href="http://freewill.top/2019/07/12/AD-RS-3/"/>
-    <id>http://freewill.top/2019/07/12/AD-RS-3/</id>
+    <link href="http://yoursite.com/2019/07/12/AD-RS-3/"/>
+    <id>http://yoursite.com/2019/07/12/AD-RS-3/</id>
     <published>2019-07-12T12:20:28.000Z</published>
     <updated>2019-10-15T09:22:22.179Z</updated>
     
@@ -453,23 +453,23 @@
     
     </summary>
     
-      <category term="计算广告" scheme="http://freewill.top/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
+      <category term="计算广告" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
     
     
-      <category term="定价" scheme="http://freewill.top/tags/%E5%AE%9A%E4%BB%B7/"/>
+      <category term="定价" scheme="http://yoursite.com/tags/%E5%AE%9A%E4%BB%B7/"/>
     
-      <category term="维克里拍卖" scheme="http://freewill.top/tags/%E7%BB%B4%E5%85%8B%E9%87%8C%E6%8B%8D%E5%8D%96/"/>
+      <category term="维克里拍卖" scheme="http://yoursite.com/tags/%E7%BB%B4%E5%85%8B%E9%87%8C%E6%8B%8D%E5%8D%96/"/>
     
-      <category term="价格挤压" scheme="http://freewill.top/tags/%E4%BB%B7%E6%A0%BC%E6%8C%A4%E5%8E%8B/"/>
+      <category term="价格挤压" scheme="http://yoursite.com/tags/%E4%BB%B7%E6%A0%BC%E6%8C%A4%E5%8E%8B/"/>
     
-      <category term="底价" scheme="http://freewill.top/tags/%E5%BA%95%E4%BB%B7/"/>
+      <category term="底价" scheme="http://yoursite.com/tags/%E5%BA%95%E4%BB%B7/"/>
     
   </entry>
   
   <entry>
     <title>Spark笔记（7）：Spark性能优化之资源调优篇</title>
-    <link href="http://freewill.top/2019/07/10/spark-7/"/>
-    <id>http://freewill.top/2019/07/10/spark-7/</id>
+    <link href="http://yoursite.com/2019/07/10/spark-7/"/>
+    <id>http://yoursite.com/2019/07/10/spark-7/</id>
     <published>2019-07-10T12:20:28.000Z</published>
     <updated>2019-11-18T03:43:41.806Z</updated>
     
@@ -481,19 +481,19 @@
     
     </summary>
     
-      <category term="Spark" scheme="http://freewill.top/categories/Spark/"/>
+      <category term="Spark" scheme="http://yoursite.com/categories/Spark/"/>
     
     
-      <category term="spark性能" scheme="http://freewill.top/tags/spark%E6%80%A7%E8%83%BD/"/>
+      <category term="spark性能" scheme="http://yoursite.com/tags/spark%E6%80%A7%E8%83%BD/"/>
     
-      <category term="资源调优" scheme="http://freewill.top/tags/%E8%B5%84%E6%BA%90%E8%B0%83%E4%BC%98/"/>
+      <category term="资源调优" scheme="http://yoursite.com/tags/%E8%B5%84%E6%BA%90%E8%B0%83%E4%BC%98/"/>
     
   </entry>
   
   <entry>
     <title>Spark笔记（6）：Spark性能优化之开发调优篇</title>
-    <link href="http://freewill.top/2019/07/09/spark-6/"/>
-    <id>http://freewill.top/2019/07/09/spark-6/</id>
+    <link href="http://yoursite.com/2019/07/09/spark-6/"/>
+    <id>http://yoursite.com/2019/07/09/spark-6/</id>
     <published>2019-07-09T12:20:28.000Z</published>
     <updated>2019-11-18T03:43:50.430Z</updated>
     
@@ -507,19 +507,19 @@
     
     </summary>
     
-      <category term="Spark" scheme="http://freewill.top/categories/Spark/"/>
+      <category term="Spark" scheme="http://yoursite.com/categories/Spark/"/>
     
     
-      <category term="spark性能" scheme="http://freewill.top/tags/spark%E6%80%A7%E8%83%BD/"/>
+      <category term="spark性能" scheme="http://yoursite.com/tags/spark%E6%80%A7%E8%83%BD/"/>
     
-      <category term="开发调优" scheme="http://freewill.top/tags/%E5%BC%80%E5%8F%91%E8%B0%83%E4%BC%98/"/>
+      <category term="开发调优" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E8%B0%83%E4%BC%98/"/>
     
   </entry>
   
   <entry>
     <title>Spark笔记（5）：Spark SQL</title>
-    <link href="http://freewill.top/2019/06/28/spark-5/"/>
-    <id>http://freewill.top/2019/06/28/spark-5/</id>
+    <link href="http://yoursite.com/2019/06/28/spark-5/"/>
+    <id>http://yoursite.com/2019/06/28/spark-5/</id>
     <published>2019-06-28T12:20:28.000Z</published>
     <updated>2019-11-13T03:02:00.759Z</updated>
     
@@ -531,17 +531,17 @@
     
     </summary>
     
-      <category term="Spark" scheme="http://freewill.top/categories/Spark/"/>
+      <category term="Spark" scheme="http://yoursite.com/categories/Spark/"/>
     
     
-      <category term="DataFrame" scheme="http://freewill.top/tags/DataFrame/"/>
+      <category term="DataFrame" scheme="http://yoursite.com/tags/DataFrame/"/>
     
   </entry>
   
   <entry>
     <title>Spark笔记（4）：RDD编程 Scala版本</title>
-    <link href="http://freewill.top/2019/06/27/spark-4/"/>
-    <id>http://freewill.top/2019/06/27/spark-4/</id>
+    <link href="http://yoursite.com/2019/06/27/spark-4/"/>
+    <id>http://yoursite.com/2019/06/27/spark-4/</id>
     <published>2019-06-27T12:20:28.000Z</published>
     <updated>2019-11-01T06:18:36.243Z</updated>
     
@@ -556,27 +556,27 @@
     
     </summary>
     
-      <category term="Spark" scheme="http://freewill.top/categories/Spark/"/>
+      <category term="Spark" scheme="http://yoursite.com/categories/Spark/"/>
     
     
-      <category term="RDD" scheme="http://freewill.top/tags/RDD/"/>
+      <category term="RDD" scheme="http://yoursite.com/tags/RDD/"/>
     
-      <category term="转换" scheme="http://freewill.top/tags/%E8%BD%AC%E6%8D%A2/"/>
+      <category term="转换" scheme="http://yoursite.com/tags/%E8%BD%AC%E6%8D%A2/"/>
     
-      <category term="行动" scheme="http://freewill.top/tags/%E8%A1%8C%E5%8A%A8/"/>
+      <category term="行动" scheme="http://yoursite.com/tags/%E8%A1%8C%E5%8A%A8/"/>
     
-      <category term="持久化" scheme="http://freewill.top/tags/%E6%8C%81%E4%B9%85%E5%8C%96/"/>
+      <category term="持久化" scheme="http://yoursite.com/tags/%E6%8C%81%E4%B9%85%E5%8C%96/"/>
     
-      <category term="键值对" scheme="http://freewill.top/tags/%E9%94%AE%E5%80%BC%E5%AF%B9/"/>
+      <category term="键值对" scheme="http://yoursite.com/tags/%E9%94%AE%E5%80%BC%E5%AF%B9/"/>
     
-      <category term="读写" scheme="http://freewill.top/tags/%E8%AF%BB%E5%86%99/"/>
+      <category term="读写" scheme="http://yoursite.com/tags/%E8%AF%BB%E5%86%99/"/>
     
   </entry>
   
   <entry>
     <title>Spark笔记（3）：集群运行Spark程序实例讲解</title>
-    <link href="http://freewill.top/2019/06/26/Spark-3/"/>
-    <id>http://freewill.top/2019/06/26/Spark-3/</id>
+    <link href="http://yoursite.com/2019/06/26/Spark-3/"/>
+    <id>http://yoursite.com/2019/06/26/Spark-3/</id>
     <published>2019-06-26T12:20:28.000Z</published>
     <updated>2019-11-13T08:24:34.264Z</updated>
     
@@ -589,23 +589,23 @@
     
     </summary>
     
-      <category term="Spark" scheme="http://freewill.top/categories/Spark/"/>
+      <category term="Spark" scheme="http://yoursite.com/categories/Spark/"/>
     
     
-      <category term="驱动器" scheme="http://freewill.top/tags/%E9%A9%B1%E5%8A%A8%E5%99%A8/"/>
+      <category term="驱动器" scheme="http://yoursite.com/tags/%E9%A9%B1%E5%8A%A8%E5%99%A8/"/>
     
-      <category term="执行器" scheme="http://freewill.top/tags/%E6%89%A7%E8%A1%8C%E5%99%A8/"/>
+      <category term="执行器" scheme="http://yoursite.com/tags/%E6%89%A7%E8%A1%8C%E5%99%A8/"/>
     
-      <category term="spark-submit" scheme="http://freewill.top/tags/spark-submit/"/>
+      <category term="spark-submit" scheme="http://yoursite.com/tags/spark-submit/"/>
     
-      <category term="YARN" scheme="http://freewill.top/tags/YARN/"/>
+      <category term="YARN" scheme="http://yoursite.com/tags/YARN/"/>
     
   </entry>
   
   <entry>
     <title>Spark笔记（2）：Pair RDD与数据分区</title>
-    <link href="http://freewill.top/2019/06/22/Spark-2/"/>
-    <id>http://freewill.top/2019/06/22/Spark-2/</id>
+    <link href="http://yoursite.com/2019/06/22/Spark-2/"/>
+    <id>http://yoursite.com/2019/06/22/Spark-2/</id>
     <published>2019-06-22T12:20:28.000Z</published>
     <updated>2019-11-13T08:24:30.124Z</updated>
     
@@ -618,19 +618,19 @@
     
     </summary>
     
-      <category term="Spark" scheme="http://freewill.top/categories/Spark/"/>
+      <category term="Spark" scheme="http://yoursite.com/categories/Spark/"/>
     
     
-      <category term="Pair RDD" scheme="http://freewill.top/tags/Pair-RDD/"/>
+      <category term="Pair RDD" scheme="http://yoursite.com/tags/Pair-RDD/"/>
     
-      <category term="数据分区" scheme="http://freewill.top/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA/"/>
+      <category term="数据分区" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E5%8C%BA/"/>
     
   </entry>
   
   <entry>
     <title>计算广告面面观（2）：大规模分片线性模型MLR</title>
-    <link href="http://freewill.top/2019/06/21/AD-RS-2/"/>
-    <id>http://freewill.top/2019/06/21/AD-RS-2/</id>
+    <link href="http://yoursite.com/2019/06/21/AD-RS-2/"/>
+    <id>http://yoursite.com/2019/06/21/AD-RS-2/</id>
     <published>2019-06-21T12:20:28.000Z</published>
     <updated>2019-10-15T09:22:07.647Z</updated>
     
@@ -642,23 +642,23 @@
     
     </summary>
     
-      <category term="计算广告" scheme="http://freewill.top/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
+      <category term="计算广告" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
     
     
-      <category term="MLR" scheme="http://freewill.top/tags/MLR/"/>
+      <category term="MLR" scheme="http://yoursite.com/tags/MLR/"/>
     
-      <category term="方向导数" scheme="http://freewill.top/tags/%E6%96%B9%E5%90%91%E5%AF%BC%E6%95%B0/"/>
+      <category term="方向导数" scheme="http://yoursite.com/tags/%E6%96%B9%E5%90%91%E5%AF%BC%E6%95%B0/"/>
     
-      <category term="OWLQN" scheme="http://freewill.top/tags/OWLQN/"/>
+      <category term="OWLQN" scheme="http://yoursite.com/tags/OWLQN/"/>
     
-      <category term="广告CTR" scheme="http://freewill.top/tags/%E5%B9%BF%E5%91%8ACTR/"/>
+      <category term="广告CTR" scheme="http://yoursite.com/tags/%E5%B9%BF%E5%91%8ACTR/"/>
     
   </entry>
   
   <entry>
     <title>Redis笔记（2）</title>
-    <link href="http://freewill.top/2019/06/19/2020-02-24/"/>
-    <id>http://freewill.top/2019/06/19/2020-02-24/</id>
+    <link href="http://yoursite.com/2019/06/19/2020-02-24/"/>
+    <id>http://yoursite.com/2019/06/19/2020-02-24/</id>
     <published>2019-06-19T12:20:28.000Z</published>
     <updated>2020-02-25T02:56:13.349Z</updated>
     
@@ -673,17 +673,17 @@
     
     </summary>
     
-      <category term="数据库" scheme="http://freewill.top/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="Redis" scheme="http://freewill.top/tags/Redis/"/>
+      <category term="Redis" scheme="http://yoursite.com/tags/Redis/"/>
     
   </entry>
   
   <entry>
     <title>计算广告面面观（1）：经久不衰的逻辑回归</title>
-    <link href="http://freewill.top/2019/06/19/AD-RS-1/"/>
-    <id>http://freewill.top/2019/06/19/AD-RS-1/</id>
+    <link href="http://yoursite.com/2019/06/19/AD-RS-1/"/>
+    <id>http://yoursite.com/2019/06/19/AD-RS-1/</id>
     <published>2019-06-19T12:20:28.000Z</published>
     <updated>2019-10-15T09:21:47.563Z</updated>
     
@@ -695,19 +695,19 @@
     
     </summary>
     
-      <category term="计算广告" scheme="http://freewill.top/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
+      <category term="计算广告" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
     
     
-      <category term="LR" scheme="http://freewill.top/tags/LR/"/>
+      <category term="LR" scheme="http://yoursite.com/tags/LR/"/>
     
-      <category term="计算广告" scheme="http://freewill.top/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
+      <category term="计算广告" scheme="http://yoursite.com/tags/%E8%AE%A1%E7%AE%97%E5%B9%BF%E5%91%8A/"/>
     
   </entry>
   
   <entry>
     <title>Redis笔记（1）</title>
-    <link href="http://freewill.top/2019/06/19/Redis-1/"/>
-    <id>http://freewill.top/2019/06/19/Redis-1/</id>
+    <link href="http://yoursite.com/2019/06/19/Redis-1/"/>
+    <id>http://yoursite.com/2019/06/19/Redis-1/</id>
     <published>2019-06-19T12:20:28.000Z</published>
     <updated>2020-02-24T11:53:40.481Z</updated>
     
@@ -719,17 +719,17 @@
     
     </summary>
     
-      <category term="数据库" scheme="http://freewill.top/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="Redis" scheme="http://freewill.top/tags/Redis/"/>
+      <category term="Redis" scheme="http://yoursite.com/tags/Redis/"/>
     
   </entry>
   
   <entry>
     <title>Spark笔记（1）：RDD编程</title>
-    <link href="http://freewill.top/2019/06/19/Spark-1/"/>
-    <id>http://freewill.top/2019/06/19/Spark-1/</id>
+    <link href="http://yoursite.com/2019/06/19/Spark-1/"/>
+    <id>http://yoursite.com/2019/06/19/Spark-1/</id>
     <published>2019-06-19T12:20:28.000Z</published>
     <updated>2019-11-13T08:24:24.745Z</updated>
     
@@ -741,19 +741,19 @@
     
     </summary>
     
-      <category term="Spark" scheme="http://freewill.top/categories/Spark/"/>
+      <category term="Spark" scheme="http://yoursite.com/categories/Spark/"/>
     
     
-      <category term="RDD编程" scheme="http://freewill.top/tags/RDD%E7%BC%96%E7%A8%8B/"/>
+      <category term="RDD编程" scheme="http://yoursite.com/tags/RDD%E7%BC%96%E7%A8%8B/"/>
     
-      <category term="Spark" scheme="http://freewill.top/tags/Spark/"/>
+      <category term="Spark" scheme="http://yoursite.com/tags/Spark/"/>
     
   </entry>
   
   <entry>
     <title>林中路（9）：阿玛蒂亚·森 | 身份与暴力：命运的幻象</title>
-    <link href="http://freewill.top/2019/04/20/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%889%EF%BC%89%EF%BC%9A%E9%98%BF%E7%8E%9B%E8%92%82%E4%BA%9A%C2%B7%E6%A3%AE%20%7C%20%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%9A%B4%E5%8A%9B%EF%BC%9A%E5%91%BD%E8%BF%90%E7%9A%84%E5%B9%BB%E8%B1%A1/"/>
-    <id>http://freewill.top/2019/04/20/林中路（9）：阿玛蒂亚·森 | 身份与暴力：命运的幻象/</id>
+    <link href="http://yoursite.com/2019/04/20/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%889%EF%BC%89%EF%BC%9A%E9%98%BF%E7%8E%9B%E8%92%82%E4%BA%9A%C2%B7%E6%A3%AE%20%7C%20%E8%BA%AB%E4%BB%BD%E4%B8%8E%E6%9A%B4%E5%8A%9B%EF%BC%9A%E5%91%BD%E8%BF%90%E7%9A%84%E5%B9%BB%E8%B1%A1/"/>
+    <id>http://yoursite.com/2019/04/20/林中路（9）：阿玛蒂亚·森 | 身份与暴力：命运的幻象/</id>
     <published>2019-04-20T12:20:28.000Z</published>
     <updated>2019-07-30T10:51:50.622Z</updated>
     
@@ -765,17 +765,17 @@
     
     </summary>
     
-      <category term="林中路" scheme="http://freewill.top/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
+      <category term="林中路" scheme="http://yoursite.com/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
     
     
-      <category term="阿玛蒂亚·森" scheme="http://freewill.top/tags/%E9%98%BF%E7%8E%9B%E8%92%82%E4%BA%9A%C2%B7%E6%A3%AE/"/>
+      <category term="阿玛蒂亚·森" scheme="http://yoursite.com/tags/%E9%98%BF%E7%8E%9B%E8%92%82%E4%BA%9A%C2%B7%E6%A3%AE/"/>
     
   </entry>
   
   <entry>
     <title>林中路（8）：德鲁克 | 管理自己</title>
-    <link href="http://freewill.top/2019/04/14/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%888%EF%BC%89%EF%BC%9A%E5%BE%B7%E9%B2%81%E5%85%8B%20%20%E7%AE%A1%E7%90%86%E8%87%AA%E5%B7%B1/"/>
-    <id>http://freewill.top/2019/04/14/林中路（8）：德鲁克  管理自己/</id>
+    <link href="http://yoursite.com/2019/04/14/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%888%EF%BC%89%EF%BC%9A%E5%BE%B7%E9%B2%81%E5%85%8B%20%20%E7%AE%A1%E7%90%86%E8%87%AA%E5%B7%B1/"/>
+    <id>http://yoursite.com/2019/04/14/林中路（8）：德鲁克  管理自己/</id>
     <published>2019-04-14T12:20:28.000Z</published>
     <updated>2019-07-30T10:51:51.043Z</updated>
     
@@ -788,17 +788,17 @@
     
     </summary>
     
-      <category term="林中路" scheme="http://freewill.top/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
+      <category term="林中路" scheme="http://yoursite.com/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
     
     
-      <category term="德鲁克" scheme="http://freewill.top/tags/%E5%BE%B7%E9%B2%81%E5%85%8B/"/>
+      <category term="德鲁克" scheme="http://yoursite.com/tags/%E5%BE%B7%E9%B2%81%E5%85%8B/"/>
     
   </entry>
   
   <entry>
     <title>林中路（7）：朱苏力 | 《自由秩序原理》读书笔记</title>
-    <link href="http://freewill.top/2019/02/17/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%887%EF%BC%89%EF%BC%9A%E6%9C%B1%E8%8B%8F%E5%8A%9B%20%E3%80%8A%E8%87%AA%E7%94%B1%E7%A7%A9%E5%BA%8F%E5%8E%9F%E7%90%86%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    <id>http://freewill.top/2019/02/17/林中路（7）：朱苏力 《自由秩序原理》读书笔记/</id>
+    <link href="http://yoursite.com/2019/02/17/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%887%EF%BC%89%EF%BC%9A%E6%9C%B1%E8%8B%8F%E5%8A%9B%20%E3%80%8A%E8%87%AA%E7%94%B1%E7%A7%A9%E5%BA%8F%E5%8E%9F%E7%90%86%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    <id>http://yoursite.com/2019/02/17/林中路（7）：朱苏力 《自由秩序原理》读书笔记/</id>
     <published>2019-02-17T12:20:28.000Z</published>
     <updated>2019-07-30T10:51:50.714Z</updated>
     
@@ -811,21 +811,21 @@
     
     </summary>
     
-      <category term="林中路" scheme="http://freewill.top/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
+      <category term="林中路" scheme="http://yoursite.com/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
     
     
-      <category term="自由" scheme="http://freewill.top/tags/%E8%87%AA%E7%94%B1/"/>
+      <category term="自由" scheme="http://yoursite.com/tags/%E8%87%AA%E7%94%B1/"/>
     
-      <category term="法治" scheme="http://freewill.top/tags/%E6%B3%95%E6%B2%BB/"/>
+      <category term="法治" scheme="http://yoursite.com/tags/%E6%B3%95%E6%B2%BB/"/>
     
-      <category term="哈耶克" scheme="http://freewill.top/tags/%E5%93%88%E8%80%B6%E5%85%8B/"/>
+      <category term="哈耶克" scheme="http://yoursite.com/tags/%E5%93%88%E8%80%B6%E5%85%8B/"/>
     
   </entry>
   
   <entry>
     <title>林中路（6）：哈耶克著作集</title>
-    <link href="http://freewill.top/2019/02/16/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%886%EF%BC%89%EF%BC%9A%E5%93%88%E8%80%B6%E5%85%8B%E8%91%97%E4%BD%9C%E9%9B%86/"/>
-    <id>http://freewill.top/2019/02/16/林中路（6）：哈耶克著作集/</id>
+    <link href="http://yoursite.com/2019/02/16/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%886%EF%BC%89%EF%BC%9A%E5%93%88%E8%80%B6%E5%85%8B%E8%91%97%E4%BD%9C%E9%9B%86/"/>
+    <id>http://yoursite.com/2019/02/16/林中路（6）：哈耶克著作集/</id>
     <published>2019-02-16T12:20:28.000Z</published>
     <updated>2019-07-30T10:51:50.708Z</updated>
     
@@ -950,21 +950,21 @@
     
     </summary>
     
-      <category term="林中路" scheme="http://freewill.top/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
+      <category term="林中路" scheme="http://yoursite.com/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
     
     
-      <category term="自由" scheme="http://freewill.top/tags/%E8%87%AA%E7%94%B1/"/>
+      <category term="自由" scheme="http://yoursite.com/tags/%E8%87%AA%E7%94%B1/"/>
     
-      <category term="法治" scheme="http://freewill.top/tags/%E6%B3%95%E6%B2%BB/"/>
+      <category term="法治" scheme="http://yoursite.com/tags/%E6%B3%95%E6%B2%BB/"/>
     
-      <category term="哈耶克" scheme="http://freewill.top/tags/%E5%93%88%E8%80%B6%E5%85%8B/"/>
+      <category term="哈耶克" scheme="http://yoursite.com/tags/%E5%93%88%E8%80%B6%E5%85%8B/"/>
     
   </entry>
   
   <entry>
     <title>林中路（5）：陆建德 | 回忆中的“新乐音”</title>
-    <link href="http://freewill.top/2019/02/15/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%885%EF%BC%89%EF%BC%9A%E9%99%86%E5%BB%BA%E5%BE%B7%20%E5%9B%9E%E5%BF%86%E4%B8%AD%E7%9A%84%E2%80%9C%E6%96%B0%E4%B9%90%E9%9F%B3%E2%80%9D/"/>
-    <id>http://freewill.top/2019/02/15/林中路（5）：陆建德 回忆中的“新乐音”/</id>
+    <link href="http://yoursite.com/2019/02/15/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%885%EF%BC%89%EF%BC%9A%E9%99%86%E5%BB%BA%E5%BE%B7%20%E5%9B%9E%E5%BF%86%E4%B8%AD%E7%9A%84%E2%80%9C%E6%96%B0%E4%B9%90%E9%9F%B3%E2%80%9D/"/>
+    <id>http://yoursite.com/2019/02/15/林中路（5）：陆建德 回忆中的“新乐音”/</id>
     <published>2019-02-15T12:20:28.000Z</published>
     <updated>2019-07-30T10:51:50.969Z</updated>
     
@@ -977,21 +977,21 @@
     
     </summary>
     
-      <category term="林中路" scheme="http://freewill.top/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
+      <category term="林中路" scheme="http://yoursite.com/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
     
     
-      <category term="回忆" scheme="http://freewill.top/tags/%E5%9B%9E%E5%BF%86/"/>
+      <category term="回忆" scheme="http://yoursite.com/tags/%E5%9B%9E%E5%BF%86/"/>
     
-      <category term="个人历史" scheme="http://freewill.top/tags/%E4%B8%AA%E4%BA%BA%E5%8E%86%E5%8F%B2/"/>
+      <category term="个人历史" scheme="http://yoursite.com/tags/%E4%B8%AA%E4%BA%BA%E5%8E%86%E5%8F%B2/"/>
     
-      <category term="自我" scheme="http://freewill.top/tags/%E8%87%AA%E6%88%91/"/>
+      <category term="自我" scheme="http://yoursite.com/tags/%E8%87%AA%E6%88%91/"/>
     
   </entry>
   
   <entry>
     <title>林中路（4）：宗白华 | 歌德之人生启示</title>
-    <link href="http://freewill.top/2019/02/10/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%884%EF%BC%89%EF%BC%9A%E5%AE%97%E7%99%BD%E5%8D%8E%20%E6%AD%8C%E5%BE%B7%E4%B9%8B%E4%BA%BA%E7%94%9F%E5%90%AF%E7%A4%BA/"/>
-    <id>http://freewill.top/2019/02/10/林中路（4）：宗白华 歌德之人生启示/</id>
+    <link href="http://yoursite.com/2019/02/10/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%884%EF%BC%89%EF%BC%9A%E5%AE%97%E7%99%BD%E5%8D%8E%20%E6%AD%8C%E5%BE%B7%E4%B9%8B%E4%BA%BA%E7%94%9F%E5%90%AF%E7%A4%BA/"/>
+    <id>http://yoursite.com/2019/02/10/林中路（4）：宗白华 歌德之人生启示/</id>
     <published>2019-02-10T12:20:28.000Z</published>
     <updated>2019-07-30T10:51:50.748Z</updated>
     
@@ -1004,15 +1004,15 @@
     
     </summary>
     
-      <category term="林中路" scheme="http://freewill.top/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
+      <category term="林中路" scheme="http://yoursite.com/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
     
     
   </entry>
   
   <entry>
     <title>林中路（3）：齐美尔 | 大城市与精神生活</title>
-    <link href="http://freewill.top/2019/01/27/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%883%EF%BC%89%EF%BC%9A%E9%BD%90%E7%BE%8E%E5%B0%94%20%E5%A4%A7%E5%9F%8E%E5%B8%82%E4%B8%8E%E7%B2%BE%E7%A5%9E%E7%94%9F%E6%B4%BB/"/>
-    <id>http://freewill.top/2019/01/27/林中路（3）：齐美尔 大城市与精神生活/</id>
+    <link href="http://yoursite.com/2019/01/27/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%883%EF%BC%89%EF%BC%9A%E9%BD%90%E7%BE%8E%E5%B0%94%20%E5%A4%A7%E5%9F%8E%E5%B8%82%E4%B8%8E%E7%B2%BE%E7%A5%9E%E7%94%9F%E6%B4%BB/"/>
+    <id>http://yoursite.com/2019/01/27/林中路（3）：齐美尔 大城市与精神生活/</id>
     <published>2019-01-27T12:20:28.000Z</published>
     <updated>2019-07-30T10:51:50.907Z</updated>
     
@@ -1025,21 +1025,21 @@
     
     </summary>
     
-      <category term="林中路" scheme="http://freewill.top/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
+      <category term="林中路" scheme="http://yoursite.com/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
     
     
-      <category term="精神紧张" scheme="http://freewill.top/tags/%E7%B2%BE%E7%A5%9E%E7%B4%A7%E5%BC%A0/"/>
+      <category term="精神紧张" scheme="http://yoursite.com/tags/%E7%B2%BE%E7%A5%9E%E7%B4%A7%E5%BC%A0/"/>
     
-      <category term="主体文化" scheme="http://freewill.top/tags/%E4%B8%BB%E4%BD%93%E6%96%87%E5%8C%96/"/>
+      <category term="主体文化" scheme="http://yoursite.com/tags/%E4%B8%BB%E4%BD%93%E6%96%87%E5%8C%96/"/>
     
-      <category term="客体文化" scheme="http://freewill.top/tags/%E5%AE%A2%E4%BD%93%E6%96%87%E5%8C%96/"/>
+      <category term="客体文化" scheme="http://yoursite.com/tags/%E5%AE%A2%E4%BD%93%E6%96%87%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>林中路（2）：杨祖陶 | 康德哲学体系问题</title>
-    <link href="http://freewill.top/2019/01/22/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%882%EF%BC%89%EF%BC%9A%E6%9D%A8%E7%A5%96%E9%99%B6%20%E5%BA%B7%E5%BE%B7%E5%93%B2%E5%AD%A6%E4%BD%93%E7%B3%BB%E9%97%AE%E9%A2%98/"/>
-    <id>http://freewill.top/2019/01/22/林中路（2）：杨祖陶 康德哲学体系问题/</id>
+    <link href="http://yoursite.com/2019/01/22/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%882%EF%BC%89%EF%BC%9A%E6%9D%A8%E7%A5%96%E9%99%B6%20%E5%BA%B7%E5%BE%B7%E5%93%B2%E5%AD%A6%E4%BD%93%E7%B3%BB%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2019/01/22/林中路（2）：杨祖陶 康德哲学体系问题/</id>
     <published>2019-01-22T13:20:28.000Z</published>
     <updated>2019-07-30T10:51:50.858Z</updated>
     
@@ -1051,17 +1051,17 @@
     
     </summary>
     
-      <category term="林中路" scheme="http://freewill.top/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
+      <category term="林中路" scheme="http://yoursite.com/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
     
     
-      <category term="康德" scheme="http://freewill.top/tags/%E5%BA%B7%E5%BE%B7/"/>
+      <category term="康德" scheme="http://yoursite.com/tags/%E5%BA%B7%E5%BE%B7/"/>
     
   </entry>
   
   <entry>
     <title>林中路（1）：康德 | 答复这个问题：“什么是启蒙运动？”</title>
-    <link href="http://freewill.top/2019/01/22/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%881%EF%BC%89%EF%BC%9A%E5%BA%B7%E5%BE%B7%20%E7%AD%94%E5%A4%8D%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9A%E2%80%9C%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%AF%E8%92%99%E8%BF%90%E5%8A%A8%EF%BC%9F%E2%80%9D/"/>
-    <id>http://freewill.top/2019/01/22/林中路（1）：康德 答复这个问题：“什么是启蒙运动？”/</id>
+    <link href="http://yoursite.com/2019/01/22/%E6%9E%97%E4%B8%AD%E8%B7%AF%EF%BC%881%EF%BC%89%EF%BC%9A%E5%BA%B7%E5%BE%B7%20%E7%AD%94%E5%A4%8D%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%9A%E2%80%9C%E4%BB%80%E4%B9%88%E6%98%AF%E5%90%AF%E8%92%99%E8%BF%90%E5%8A%A8%EF%BC%9F%E2%80%9D/"/>
+    <id>http://yoursite.com/2019/01/22/林中路（1）：康德 答复这个问题：“什么是启蒙运动？”/</id>
     <published>2019-01-22T12:20:28.000Z</published>
     <updated>2019-07-30T10:51:50.922Z</updated>
     
@@ -1073,21 +1073,21 @@
     
     </summary>
     
-      <category term="林中路" scheme="http://freewill.top/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
+      <category term="林中路" scheme="http://yoursite.com/categories/%E6%9E%97%E4%B8%AD%E8%B7%AF/"/>
     
     
-      <category term="启蒙运动" scheme="http://freewill.top/tags/%E5%90%AF%E8%92%99%E8%BF%90%E5%8A%A8/"/>
+      <category term="启蒙运动" scheme="http://yoursite.com/tags/%E5%90%AF%E8%92%99%E8%BF%90%E5%8A%A8/"/>
     
-      <category term="公开运用理智" scheme="http://freewill.top/tags/%E5%85%AC%E5%BC%80%E8%BF%90%E7%94%A8%E7%90%86%E6%99%BA/"/>
+      <category term="公开运用理智" scheme="http://yoursite.com/tags/%E5%85%AC%E5%BC%80%E8%BF%90%E7%94%A8%E7%90%86%E6%99%BA/"/>
     
-      <category term="脱离不成熟状态" scheme="http://freewill.top/tags/%E8%84%B1%E7%A6%BB%E4%B8%8D%E6%88%90%E7%86%9F%E7%8A%B6%E6%80%81/"/>
+      <category term="脱离不成熟状态" scheme="http://yoursite.com/tags/%E8%84%B1%E7%A6%BB%E4%B8%8D%E6%88%90%E7%86%9F%E7%8A%B6%E6%80%81/"/>
     
   </entry>
   
   <entry>
     <title>人大应统部落（4）：2019年中国人民大学应用统计专业课真题与解析</title>
-    <link href="http://freewill.top/2018/12/24/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD%EF%BC%884%EF%BC%89%EF%BC%9A2019%E5%B9%B4%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E5%A4%A7%E5%AD%A6%E5%BA%94%E7%94%A8%E7%BB%9F%E8%AE%A1%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%9C%9F%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/"/>
-    <id>http://freewill.top/2018/12/24/人大应统部落（4）：2019年中国人民大学应用统计专业课真题与解析/</id>
+    <link href="http://yoursite.com/2018/12/24/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD%EF%BC%884%EF%BC%89%EF%BC%9A2019%E5%B9%B4%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E5%A4%A7%E5%AD%A6%E5%BA%94%E7%94%A8%E7%BB%9F%E8%AE%A1%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%9C%9F%E9%A2%98%E4%B8%8E%E8%A7%A3%E6%9E%90/"/>
+    <id>http://yoursite.com/2018/12/24/人大应统部落（4）：2019年中国人民大学应用统计专业课真题与解析/</id>
     <published>2018-12-24T02:19:10.000Z</published>
     <updated>2019-11-18T08:27:46.099Z</updated>
     
@@ -1106,19 +1106,19 @@
     
     </summary>
     
-      <category term="人大应统部落" scheme="http://freewill.top/categories/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD/"/>
+      <category term="人大应统部落" scheme="http://yoursite.com/categories/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD/"/>
     
     
-      <category term="人大应统" scheme="http://freewill.top/tags/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F/"/>
+      <category term="人大应统" scheme="http://yoursite.com/tags/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F/"/>
     
-      <category term="考研真题" scheme="http://freewill.top/tags/%E8%80%83%E7%A0%94%E7%9C%9F%E9%A2%98/"/>
+      <category term="考研真题" scheme="http://yoursite.com/tags/%E8%80%83%E7%A0%94%E7%9C%9F%E9%A2%98/"/>
     
   </entry>
   
   <entry>
     <title>增长黑客（3）：如何用增长黑客思维从0到1做一个公众号？</title>
-    <link href="http://freewill.top/2018/11/25/%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%EF%BC%883%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E6%80%9D%E7%BB%B4%E4%BB%8E0%E5%88%B01%E5%81%9A%E4%B8%80%E4%B8%AA%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%9F/"/>
-    <id>http://freewill.top/2018/11/25/增长黑客（3）：如何用增长黑客思维从0到1做一个公众号？/</id>
+    <link href="http://yoursite.com/2018/11/25/%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%EF%BC%883%EF%BC%89%EF%BC%9A%E5%A6%82%E4%BD%95%E7%94%A8%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E6%80%9D%E7%BB%B4%E4%BB%8E0%E5%88%B01%E5%81%9A%E4%B8%80%E4%B8%AA%E5%85%AC%E4%BC%97%E5%8F%B7%EF%BC%9F/"/>
+    <id>http://yoursite.com/2018/11/25/增长黑客（3）：如何用增长黑客思维从0到1做一个公众号？/</id>
     <published>2018-11-25T15:14:45.000Z</published>
     <updated>2019-08-01T12:30:46.135Z</updated>
     
@@ -1138,22 +1138,22 @@
     </summary>
     
     
-      <category term="拌网策略" scheme="http://freewill.top/tags/%E6%8B%8C%E7%BD%91%E7%AD%96%E7%95%A5/"/>
+      <category term="拌网策略" scheme="http://yoursite.com/tags/%E6%8B%8C%E7%BD%91%E7%AD%96%E7%95%A5/"/>
     
-      <category term="用户分层" scheme="http://freewill.top/tags/%E7%94%A8%E6%88%B7%E5%88%86%E5%B1%82/"/>
+      <category term="用户分层" scheme="http://yoursite.com/tags/%E7%94%A8%E6%88%B7%E5%88%86%E5%B1%82/"/>
     
-      <category term="用户生命周期" scheme="http://freewill.top/tags/%E7%94%A8%E6%88%B7%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+      <category term="用户生命周期" scheme="http://yoursite.com/tags/%E7%94%A8%E6%88%B7%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
     
-      <category term="交叉销售" scheme="http://freewill.top/tags/%E4%BA%A4%E5%8F%89%E9%94%80%E5%94%AE/"/>
+      <category term="交叉销售" scheme="http://yoursite.com/tags/%E4%BA%A4%E5%8F%89%E9%94%80%E5%94%AE/"/>
     
-      <category term="A/B测试" scheme="http://freewill.top/tags/A-B%E6%B5%8B%E8%AF%95/"/>
+      <category term="A/B测试" scheme="http://yoursite.com/tags/A-B%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>增长黑客（2）：10个月时间，CMO如何挽救这家破产的电商巨头？</title>
-    <link href="http://freewill.top/2018/11/24/%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%EF%BC%882%EF%BC%89%EF%BC%9A10%E4%B8%AA%E6%9C%88%E6%97%B6%E9%97%B4%EF%BC%8CCMO%E5%A6%82%E4%BD%95%E6%8C%BD%E6%95%91%E8%BF%99%E5%AE%B6%E7%A0%B4%E4%BA%A7%E7%9A%84%E7%94%B5%E5%95%86%E5%B7%A8%E5%A4%B4%EF%BC%9F/"/>
-    <id>http://freewill.top/2018/11/24/增长黑客（2）：10个月时间，CMO如何挽救这家破产的电商巨头？/</id>
+    <link href="http://yoursite.com/2018/11/24/%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%EF%BC%882%EF%BC%89%EF%BC%9A10%E4%B8%AA%E6%9C%88%E6%97%B6%E9%97%B4%EF%BC%8CCMO%E5%A6%82%E4%BD%95%E6%8C%BD%E6%95%91%E8%BF%99%E5%AE%B6%E7%A0%B4%E4%BA%A7%E7%9A%84%E7%94%B5%E5%95%86%E5%B7%A8%E5%A4%B4%EF%BC%9F/"/>
+    <id>http://yoursite.com/2018/11/24/增长黑客（2）：10个月时间，CMO如何挽救这家破产的电商巨头？/</id>
     <published>2018-11-24T15:14:45.000Z</published>
     <updated>2019-08-01T12:31:49.525Z</updated>
     
@@ -1167,22 +1167,22 @@
     </summary>
     
     
-      <category term="拌网策略" scheme="http://freewill.top/tags/%E6%8B%8C%E7%BD%91%E7%AD%96%E7%95%A5/"/>
+      <category term="拌网策略" scheme="http://yoursite.com/tags/%E6%8B%8C%E7%BD%91%E7%AD%96%E7%95%A5/"/>
     
-      <category term="用户分层" scheme="http://freewill.top/tags/%E7%94%A8%E6%88%B7%E5%88%86%E5%B1%82/"/>
+      <category term="用户分层" scheme="http://yoursite.com/tags/%E7%94%A8%E6%88%B7%E5%88%86%E5%B1%82/"/>
     
-      <category term="用户生命周期" scheme="http://freewill.top/tags/%E7%94%A8%E6%88%B7%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
+      <category term="用户生命周期" scheme="http://yoursite.com/tags/%E7%94%A8%E6%88%B7%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/"/>
     
-      <category term="交叉销售" scheme="http://freewill.top/tags/%E4%BA%A4%E5%8F%89%E9%94%80%E5%94%AE/"/>
+      <category term="交叉销售" scheme="http://yoursite.com/tags/%E4%BA%A4%E5%8F%89%E9%94%80%E5%94%AE/"/>
     
-      <category term="A/B测试" scheme="http://freewill.top/tags/A-B%E6%B5%8B%E8%AF%95/"/>
+      <category term="A/B测试" scheme="http://yoursite.com/tags/A-B%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
   <entry>
     <title>增长黑客（1）：Google关键词挖掘细分市场实战案例</title>
-    <link href="http://freewill.top/2018/11/23/%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%EF%BC%881%EF%BC%89%EF%BC%9AGoogle%E5%85%B3%E9%94%AE%E8%AF%8D%E6%8C%96%E6%8E%98%E7%BB%86%E5%88%86%E5%B8%82%E5%9C%BA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B/"/>
-    <id>http://freewill.top/2018/11/23/增长黑客（1）：Google关键词挖掘细分市场实战案例/</id>
+    <link href="http://yoursite.com/2018/11/23/%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%EF%BC%881%EF%BC%89%EF%BC%9AGoogle%E5%85%B3%E9%94%AE%E8%AF%8D%E6%8C%96%E6%8E%98%E7%BB%86%E5%88%86%E5%B8%82%E5%9C%BA%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B/"/>
+    <id>http://yoursite.com/2018/11/23/增长黑客（1）：Google关键词挖掘细分市场实战案例/</id>
     <published>2018-11-23T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:51.038Z</updated>
     
@@ -1198,14 +1198,14 @@
     </summary>
     
     
-      <category term="增长黑客" scheme="http://freewill.top/tags/%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2/"/>
+      <category term="增长黑客" scheme="http://yoursite.com/tags/%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2/"/>
     
   </entry>
   
   <entry>
     <title>数据分析系列（6）：常用的HIVE函数</title>
-    <link href="http://freewill.top/2018/08/26/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%B3%BB%E5%88%97%EF%BC%886%EF%BC%89%EF%BC%9A%E5%B8%B8%E7%94%A8%E7%9A%84HIVE%E5%87%BD%E6%95%B0/"/>
-    <id>http://freewill.top/2018/08/26/数据分析系列（6）：常用的HIVE函数/</id>
+    <link href="http://yoursite.com/2018/08/26/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%B3%BB%E5%88%97%EF%BC%886%EF%BC%89%EF%BC%9A%E5%B8%B8%E7%94%A8%E7%9A%84HIVE%E5%87%BD%E6%95%B0/"/>
+    <id>http://yoursite.com/2018/08/26/数据分析系列（6）：常用的HIVE函数/</id>
     <published>2018-08-26T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.912Z</updated>
     
@@ -1217,17 +1217,17 @@
     
     </summary>
     
-      <category term="数据分析" scheme="http://freewill.top/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="数据分析" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     
-      <category term="HIVE" scheme="http://freewill.top/tags/HIVE/"/>
+      <category term="HIVE" scheme="http://yoursite.com/tags/HIVE/"/>
     
   </entry>
   
   <entry>
     <title>数据分析系列（5）：窗口函数</title>
-    <link href="http://freewill.top/2018/08/25/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%B3%BB%E5%88%97%EF%BC%885%EF%BC%89%EF%BC%9A%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0/"/>
-    <id>http://freewill.top/2018/08/25/数据分析系列（5）：窗口函数/</id>
+    <link href="http://yoursite.com/2018/08/25/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%B3%BB%E5%88%97%EF%BC%885%EF%BC%89%EF%BC%9A%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0/"/>
+    <id>http://yoursite.com/2018/08/25/数据分析系列（5）：窗口函数/</id>
     <published>2018-08-25T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.695Z</updated>
     
@@ -1245,25 +1245,25 @@
     
     </summary>
     
-      <category term="数据分析" scheme="http://freewill.top/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="数据分析" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     
-      <category term="row_number( ) over( )" scheme="http://freewill.top/tags/row-number-over/"/>
+      <category term="row_number( ) over( )" scheme="http://yoursite.com/tags/row-number-over/"/>
     
-      <category term="rank() over()" scheme="http://freewill.top/tags/rank-over/"/>
+      <category term="rank() over()" scheme="http://yoursite.com/tags/rank-over/"/>
     
-      <category term="dense_rank() over()" scheme="http://freewill.top/tags/dense-rank-over/"/>
+      <category term="dense_rank() over()" scheme="http://yoursite.com/tags/dense-rank-over/"/>
     
-      <category term="distinct" scheme="http://freewill.top/tags/distinct/"/>
+      <category term="distinct" scheme="http://yoursite.com/tags/distinct/"/>
     
-      <category term="窗口函数" scheme="http://freewill.top/tags/%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0/"/>
+      <category term="窗口函数" scheme="http://yoursite.com/tags/%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0/"/>
     
   </entry>
   
   <entry>
     <title>数据分析系列（4）：基于ARMA模型的资金渠道流入流出预测</title>
-    <link href="http://freewill.top/2018/05/23/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%B3%BB%E5%88%97%EF%BC%884%EF%BC%89%EF%BC%9A%E5%9F%BA%E4%BA%8EARMA%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%B5%84%E9%87%91%E6%B8%A0%E9%81%93%E6%B5%81%E5%85%A5%E6%B5%81%E5%87%BA%E9%A2%84%E6%B5%8B/"/>
-    <id>http://freewill.top/2018/05/23/数据分析系列（4）：基于ARMA模型的资金渠道流入流出预测/</id>
+    <link href="http://yoursite.com/2018/05/23/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E7%B3%BB%E5%88%97%EF%BC%884%EF%BC%89%EF%BC%9A%E5%9F%BA%E4%BA%8EARMA%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%B5%84%E9%87%91%E6%B8%A0%E9%81%93%E6%B5%81%E5%85%A5%E6%B5%81%E5%87%BA%E9%A2%84%E6%B5%8B/"/>
+    <id>http://yoursite.com/2018/05/23/数据分析系列（4）：基于ARMA模型的资金渠道流入流出预测/</id>
     <published>2018-05-23T15:14:45.000Z</published>
     <updated>2019-08-01T12:29:30.568Z</updated>
     
@@ -1275,19 +1275,19 @@
     
     </summary>
     
-      <category term="数据分析" scheme="http://freewill.top/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="数据分析" scheme="http://yoursite.com/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
     
-      <category term="时间序列" scheme="http://freewill.top/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
+      <category term="时间序列" scheme="http://yoursite.com/tags/%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97/"/>
     
-      <category term="ARMA" scheme="http://freewill.top/tags/ARMA/"/>
+      <category term="ARMA" scheme="http://yoursite.com/tags/ARMA/"/>
     
   </entry>
   
   <entry>
     <title>自然语言处理系列（10）：自然语言处理的发展与趋势</title>
-    <link href="http://freewill.top/2018/05/02/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%8810%EF%BC%89%EF%BC%9A%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%9A%84%E5%8F%91%E5%B1%95%E4%B8%8E%E8%B6%8B%E5%8A%BF/"/>
-    <id>http://freewill.top/2018/05/02/自然语言处理系列（10）：自然语言处理的发展与趋势/</id>
+    <link href="http://yoursite.com/2018/05/02/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%8810%EF%BC%89%EF%BC%9A%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%9A%84%E5%8F%91%E5%B1%95%E4%B8%8E%E8%B6%8B%E5%8A%BF/"/>
+    <id>http://yoursite.com/2018/05/02/自然语言处理系列（10）：自然语言处理的发展与趋势/</id>
     <published>2018-05-02T15:14:45.000Z</published>
     <updated>2019-07-30T11:49:54.093Z</updated>
     
@@ -1301,21 +1301,21 @@
     
     </summary>
     
-      <category term="自然语言处理" scheme="http://freewill.top/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+      <category term="自然语言处理" scheme="http://yoursite.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="word2vec" scheme="http://freewill.top/tags/word2vec/"/>
+      <category term="word2vec" scheme="http://yoursite.com/tags/word2vec/"/>
     
-      <category term="NLP" scheme="http://freewill.top/tags/NLP/"/>
+      <category term="NLP" scheme="http://yoursite.com/tags/NLP/"/>
     
-      <category term="Sentiment Analysis" scheme="http://freewill.top/tags/Sentiment-Analysis/"/>
+      <category term="Sentiment Analysis" scheme="http://yoursite.com/tags/Sentiment-Analysis/"/>
     
   </entry>
   
   <entry>
     <title>深度学习系列（13）：QCon北京2018 深度学习分享总结</title>
-    <link href="http://freewill.top/2018/04/24/2018-04-24/"/>
-    <id>http://freewill.top/2018/04/24/2018-04-24/</id>
+    <link href="http://yoursite.com/2018/04/24/2018-04-24/"/>
+    <id>http://yoursite.com/2018/04/24/2018-04-24/</id>
     <published>2018-04-24T13:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.902Z</updated>
     
@@ -1328,37 +1328,37 @@
     
     </summary>
     
-      <category term="深度学习" scheme="http://freewill.top/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+      <category term="深度学习" scheme="http://yoursite.com/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="自然语言处理" scheme="http://freewill.top/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+      <category term="自然语言处理" scheme="http://yoursite.com/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
-      <category term="视频推荐" scheme="http://freewill.top/tags/%E8%A7%86%E9%A2%91%E6%8E%A8%E8%8D%90/"/>
+      <category term="视频推荐" scheme="http://yoursite.com/tags/%E8%A7%86%E9%A2%91%E6%8E%A8%E8%8D%90/"/>
     
-      <category term="视频搜索" scheme="http://freewill.top/tags/%E8%A7%86%E9%A2%91%E6%90%9C%E7%B4%A2/"/>
+      <category term="视频搜索" scheme="http://yoursite.com/tags/%E8%A7%86%E9%A2%91%E6%90%9C%E7%B4%A2/"/>
     
-      <category term="语义匹配" scheme="http://freewill.top/tags/%E8%AF%AD%E4%B9%89%E5%8C%B9%E9%85%8D/"/>
+      <category term="语义匹配" scheme="http://yoursite.com/tags/%E8%AF%AD%E4%B9%89%E5%8C%B9%E9%85%8D/"/>
     
-      <category term="广告投放" scheme="http://freewill.top/tags/%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE/"/>
+      <category term="广告投放" scheme="http://yoursite.com/tags/%E5%B9%BF%E5%91%8A%E6%8A%95%E6%94%BE/"/>
     
-      <category term="风险控制" scheme="http://freewill.top/tags/%E9%A3%8E%E9%99%A9%E6%8E%A7%E5%88%B6/"/>
+      <category term="风险控制" scheme="http://yoursite.com/tags/%E9%A3%8E%E9%99%A9%E6%8E%A7%E5%88%B6/"/>
     
-      <category term="信息流排序" scheme="http://freewill.top/tags/%E4%BF%A1%E6%81%AF%E6%B5%81%E6%8E%92%E5%BA%8F/"/>
+      <category term="信息流排序" scheme="http://yoursite.com/tags/%E4%BF%A1%E6%81%AF%E6%B5%81%E6%8E%92%E5%BA%8F/"/>
     
-      <category term="对话机器人" scheme="http://freewill.top/tags/%E5%AF%B9%E8%AF%9D%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
+      <category term="对话机器人" scheme="http://yoursite.com/tags/%E5%AF%B9%E8%AF%9D%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
     
-      <category term="机器视觉" scheme="http://freewill.top/tags/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89/"/>
+      <category term="机器视觉" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E8%A7%86%E8%A7%89/"/>
     
-      <category term="公共安全" scheme="http://freewill.top/tags/%E5%85%AC%E5%85%B1%E5%AE%89%E5%85%A8/"/>
+      <category term="公共安全" scheme="http://yoursite.com/tags/%E5%85%AC%E5%85%B1%E5%AE%89%E5%85%A8/"/>
     
-      <category term="个性化推荐" scheme="http://freewill.top/tags/%E4%B8%AA%E6%80%A7%E5%8C%96%E6%8E%A8%E8%8D%90/"/>
+      <category term="个性化推荐" scheme="http://yoursite.com/tags/%E4%B8%AA%E6%80%A7%E5%8C%96%E6%8E%A8%E8%8D%90/"/>
     
   </entry>
   
   <entry>
     <title>人大应统部落（3）：2018年中国人民大学应用统计专业课真题与解析</title>
-    <link href="http://freewill.top/2018/04/05/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD%EF%BC%883%EF%BC%89%EF%BC%9A2018%E5%B9%B4%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%94%A8%E7%BB%9F%E8%AE%A1%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%9C%9F%E9%A2%98%E5%8F%8A%E8%A7%A3%E6%9E%90/"/>
-    <id>http://freewill.top/2018/04/05/人大应统部落（3）：2018年人大应用统计专业课真题及解析/</id>
+    <link href="http://yoursite.com/2018/04/05/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD%EF%BC%883%EF%BC%89%EF%BC%9A2018%E5%B9%B4%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%94%A8%E7%BB%9F%E8%AE%A1%E4%B8%93%E4%B8%9A%E8%AF%BE%E7%9C%9F%E9%A2%98%E5%8F%8A%E8%A7%A3%E6%9E%90/"/>
+    <id>http://yoursite.com/2018/04/05/人大应统部落（3）：2018年人大应用统计专业课真题及解析/</id>
     <published>2018-04-05T02:19:10.000Z</published>
     <updated>2019-11-18T08:29:54.952Z</updated>
     
@@ -1377,19 +1377,19 @@
     
     </summary>
     
-      <category term="人大应统部落" scheme="http://freewill.top/categories/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD/"/>
+      <category term="人大应统部落" scheme="http://yoursite.com/categories/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD/"/>
     
     
-      <category term="人大应统" scheme="http://freewill.top/tags/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F/"/>
+      <category term="人大应统" scheme="http://yoursite.com/tags/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F/"/>
     
-      <category term="考研真题" scheme="http://freewill.top/tags/%E8%80%83%E7%A0%94%E7%9C%9F%E9%A2%98/"/>
+      <category term="考研真题" scheme="http://yoursite.com/tags/%E8%80%83%E7%A0%94%E7%9C%9F%E9%A2%98/"/>
     
   </entry>
   
   <entry>
     <title>人大应统部落（2）：2018年人大应统专业硕士经验贴合集</title>
-    <link href="http://freewill.top/2018/04/04/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD%EF%BC%882%EF%BC%89%EF%BC%9A2018%E7%BA%A7%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E5%A4%A7%E5%AD%A6%E5%BA%94%E7%94%A8%E7%BB%9F%E8%AE%A1%E4%B8%93%E4%B8%9A%E7%A1%95%E5%A3%AB%E7%BB%8F%E9%AA%8C%E8%B4%B4%E5%90%88%E9%9B%86/"/>
-    <id>http://freewill.top/2018/04/04/人大应统部落（2）：2018级中国人民大学应用统计专业硕士经验贴合集/</id>
+    <link href="http://yoursite.com/2018/04/04/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD%EF%BC%882%EF%BC%89%EF%BC%9A2018%E7%BA%A7%E4%B8%AD%E5%9B%BD%E4%BA%BA%E6%B0%91%E5%A4%A7%E5%AD%A6%E5%BA%94%E7%94%A8%E7%BB%9F%E8%AE%A1%E4%B8%93%E4%B8%9A%E7%A1%95%E5%A3%AB%E7%BB%8F%E9%AA%8C%E8%B4%B4%E5%90%88%E9%9B%86/"/>
+    <id>http://yoursite.com/2018/04/04/人大应统部落（2）：2018级中国人民大学应用统计专业硕士经验贴合集/</id>
     <published>2018-04-04T15:14:45.000Z</published>
     <updated>2019-11-18T08:28:07.858Z</updated>
     
@@ -1407,17 +1407,17 @@
     
     </summary>
     
-      <category term="人大应统部落" scheme="http://freewill.top/categories/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD/"/>
+      <category term="人大应统部落" scheme="http://yoursite.com/categories/%E4%BA%BA%E5%A4%A7%E5%BA%94%E7%BB%9F%E9%83%A8%E8%90%BD/"/>
     
     
-      <category term="考研" scheme="http://freewill.top/tags/%E8%80%83%E7%A0%94/"/>
+      <category term="考研" scheme="http://yoursite.com/tags/%E8%80%83%E7%A0%94/"/>
     
   </entry>
   
   <entry>
     <title>自然语言处理系列（9）：DCNN</title>
-    <link href="http://freewill.top/2018/03/25/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%889%EF%BC%89%EF%BC%9ADCNN/"/>
-    <id>http://freewill.top/2018/03/25/自然语言处理系列（9）：DCNN/</id>
+    <link href="http://yoursite.com/2018/03/25/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%889%EF%BC%89%EF%BC%9ADCNN/"/>
+    <id>http://yoursite.com/2018/03/25/自然语言处理系列（9）：DCNN/</id>
     <published>2018-03-25T15:14:45.000Z</published>
     <updated>2019-07-30T11:45:53.818Z</updated>
     
@@ -1430,19 +1430,19 @@
     
     </summary>
     
-      <category term="自然语言处理" scheme="http://freewill.top/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+      <category term="自然语言处理" scheme="http://yoursite.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="word2vec" scheme="http://freewill.top/tags/word2vec/"/>
+      <category term="word2vec" scheme="http://yoursite.com/tags/word2vec/"/>
     
-      <category term="DCNN" scheme="http://freewill.top/tags/DCNN/"/>
+      <category term="DCNN" scheme="http://yoursite.com/tags/DCNN/"/>
     
   </entry>
   
   <entry>
     <title>自然语言处理系列（8）：RCNN</title>
-    <link href="http://freewill.top/2018/03/08/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%888%EF%BC%89%EF%BC%9ARCNN/"/>
-    <id>http://freewill.top/2018/03/08/自然语言处理系列（8）：RCNN/</id>
+    <link href="http://yoursite.com/2018/03/08/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%888%EF%BC%89%EF%BC%9ARCNN/"/>
+    <id>http://yoursite.com/2018/03/08/自然语言处理系列（8）：RCNN/</id>
     <published>2018-03-08T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.611Z</updated>
     
@@ -1455,23 +1455,23 @@
     
     </summary>
     
-      <category term="自然语言处理" scheme="http://freewill.top/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+      <category term="自然语言处理" scheme="http://yoursite.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="CNN" scheme="http://freewill.top/tags/CNN/"/>
+      <category term="CNN" scheme="http://yoursite.com/tags/CNN/"/>
     
-      <category term="word2vec" scheme="http://freewill.top/tags/word2vec/"/>
+      <category term="word2vec" scheme="http://yoursite.com/tags/word2vec/"/>
     
-      <category term="RCNN" scheme="http://freewill.top/tags/RCNN/"/>
+      <category term="RCNN" scheme="http://yoursite.com/tags/RCNN/"/>
     
-      <category term="LSTM" scheme="http://freewill.top/tags/LSTM/"/>
+      <category term="LSTM" scheme="http://yoursite.com/tags/LSTM/"/>
     
   </entry>
   
   <entry>
     <title>日知录（5）：认知偏误列表</title>
-    <link href="http://freewill.top/2018/03/02/%E6%97%A5%E7%9F%A5%E5%BD%95%EF%BC%885%EF%BC%89%EF%BC%9A%E8%AE%A4%E7%9F%A5%E5%81%8F%E8%AF%AF%E5%88%97%E8%A1%A8/"/>
-    <id>http://freewill.top/2018/03/02/日知录（5）：认知偏误列表/</id>
+    <link href="http://yoursite.com/2018/03/02/%E6%97%A5%E7%9F%A5%E5%BD%95%EF%BC%885%EF%BC%89%EF%BC%9A%E8%AE%A4%E7%9F%A5%E5%81%8F%E8%AF%AF%E5%88%97%E8%A1%A8/"/>
+    <id>http://yoursite.com/2018/03/02/日知录（5）：认知偏误列表/</id>
     <published>2018-03-02T15:14:45.000Z</published>
     <updated>2019-08-01T09:28:45.014Z</updated>
     
@@ -1483,21 +1483,21 @@
     
     </summary>
     
-      <category term="日知录" scheme="http://freewill.top/categories/%E6%97%A5%E7%9F%A5%E5%BD%95/"/>
+      <category term="日知录" scheme="http://yoursite.com/categories/%E6%97%A5%E7%9F%A5%E5%BD%95/"/>
     
     
-      <category term="行为经济学" scheme="http://freewill.top/tags/%E8%A1%8C%E4%B8%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+      <category term="行为经济学" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
     
-      <category term="认知偏误" scheme="http://freewill.top/tags/%E8%AE%A4%E7%9F%A5%E5%81%8F%E8%AF%AF/"/>
+      <category term="认知偏误" scheme="http://yoursite.com/tags/%E8%AE%A4%E7%9F%A5%E5%81%8F%E8%AF%AF/"/>
     
-      <category term="Cognitive biases" scheme="http://freewill.top/tags/Cognitive-biases/"/>
+      <category term="Cognitive biases" scheme="http://yoursite.com/tags/Cognitive-biases/"/>
     
   </entry>
   
   <entry>
     <title>自然语言处理系列（7）：TextCNN调参技巧</title>
-    <link href="http://freewill.top/2018/02/26/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%887%EF%BC%89%EF%BC%9ATextCNN%E8%B0%83%E5%8F%82%E6%8A%80%E5%B7%A7/"/>
-    <id>http://freewill.top/2018/02/26/自然语言处理系列（7）：TextCNN调参技巧/</id>
+    <link href="http://yoursite.com/2018/02/26/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%887%EF%BC%89%EF%BC%9ATextCNN%E8%B0%83%E5%8F%82%E6%8A%80%E5%B7%A7/"/>
+    <id>http://yoursite.com/2018/02/26/自然语言处理系列（7）：TextCNN调参技巧/</id>
     <published>2018-02-26T15:14:45.000Z</published>
     <updated>2019-07-30T11:47:10.917Z</updated>
     
@@ -1510,25 +1510,25 @@
     
     </summary>
     
-      <category term="自然语言处理" scheme="http://freewill.top/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+      <category term="自然语言处理" scheme="http://yoursite.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="static" scheme="http://freewill.top/tags/static/"/>
+      <category term="static" scheme="http://yoursite.com/tags/static/"/>
     
-      <category term="word2vec" scheme="http://freewill.top/tags/word2vec/"/>
+      <category term="word2vec" scheme="http://yoursite.com/tags/word2vec/"/>
     
-      <category term="TextCNN" scheme="http://freewill.top/tags/TextCNN/"/>
+      <category term="TextCNN" scheme="http://yoursite.com/tags/TextCNN/"/>
     
-      <category term="Dropout" scheme="http://freewill.top/tags/Dropout/"/>
+      <category term="Dropout" scheme="http://yoursite.com/tags/Dropout/"/>
     
-      <category term="non-static" scheme="http://freewill.top/tags/non-static/"/>
+      <category term="non-static" scheme="http://yoursite.com/tags/non-static/"/>
     
   </entry>
   
   <entry>
     <title>自然语言处理系列（6）：TextCNN</title>
-    <link href="http://freewill.top/2018/02/24/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%886%EF%BC%89%EF%BC%9ATextCNN/"/>
-    <id>http://freewill.top/2018/02/24/自然语言处理系列（6）：TextCNN/</id>
+    <link href="http://yoursite.com/2018/02/24/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%886%EF%BC%89%EF%BC%9ATextCNN/"/>
+    <id>http://yoursite.com/2018/02/24/自然语言处理系列（6）：TextCNN/</id>
     <published>2018-02-24T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.585Z</updated>
     
@@ -1541,25 +1541,25 @@
     
     </summary>
     
-      <category term="自然语言处理" scheme="http://freewill.top/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+      <category term="自然语言处理" scheme="http://yoursite.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="static" scheme="http://freewill.top/tags/static/"/>
+      <category term="static" scheme="http://yoursite.com/tags/static/"/>
     
-      <category term="word2vec" scheme="http://freewill.top/tags/word2vec/"/>
+      <category term="word2vec" scheme="http://yoursite.com/tags/word2vec/"/>
     
-      <category term="TextCNN" scheme="http://freewill.top/tags/TextCNN/"/>
+      <category term="TextCNN" scheme="http://yoursite.com/tags/TextCNN/"/>
     
-      <category term="Dropout" scheme="http://freewill.top/tags/Dropout/"/>
+      <category term="Dropout" scheme="http://yoursite.com/tags/Dropout/"/>
     
-      <category term="non-static" scheme="http://freewill.top/tags/non-static/"/>
+      <category term="non-static" scheme="http://yoursite.com/tags/non-static/"/>
     
   </entry>
   
   <entry>
     <title>自然语言处理系列（5）：FastText</title>
-    <link href="http://freewill.top/2018/02/20/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%885%EF%BC%89%EF%BC%9AFastText/"/>
-    <id>http://freewill.top/2018/02/20/自然语言处理系列（5）：FastText/</id>
+    <link href="http://yoursite.com/2018/02/20/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%885%EF%BC%89%EF%BC%9AFastText/"/>
+    <id>http://yoursite.com/2018/02/20/自然语言处理系列（5）：FastText/</id>
     <published>2018-02-20T15:14:45.000Z</published>
     <updated>2019-07-30T11:47:42.131Z</updated>
     
@@ -1572,19 +1572,19 @@
     
     </summary>
     
-      <category term="自然语言处理" scheme="http://freewill.top/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+      <category term="自然语言处理" scheme="http://yoursite.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="word2vec" scheme="http://freewill.top/tags/word2vec/"/>
+      <category term="word2vec" scheme="http://yoursite.com/tags/word2vec/"/>
     
-      <category term="FastText" scheme="http://freewill.top/tags/FastText/"/>
+      <category term="FastText" scheme="http://yoursite.com/tags/FastText/"/>
     
   </entry>
   
   <entry>
     <title>读书记（21）：维特根斯坦论语言的限度（7）—— 哲学的意义</title>
-    <link href="http://freewill.top/2018/02/17/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8821%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%887%EF%BC%89%E2%80%94%E2%80%94%20%E5%93%B2%E5%AD%A6%E7%9A%84%E6%84%8F%E4%B9%89/"/>
-    <id>http://freewill.top/2018/02/17/读书记（21）：维特根斯坦论语言的限度（7）—— 哲学的意义/</id>
+    <link href="http://yoursite.com/2018/02/17/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8821%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%887%EF%BC%89%E2%80%94%E2%80%94%20%E5%93%B2%E5%AD%A6%E7%9A%84%E6%84%8F%E4%B9%89/"/>
+    <id>http://yoursite.com/2018/02/17/读书记（21）：维特根斯坦论语言的限度（7）—— 哲学的意义/</id>
     <published>2018-02-17T14:20:45.000Z</published>
     <updated>2019-07-30T11:43:32.719Z</updated>
     
@@ -1596,21 +1596,21 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="维特根斯坦" scheme="http://freewill.top/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
+      <category term="维特根斯坦" scheme="http://yoursite.com/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
     
-      <category term="语言哲学" scheme="http://freewill.top/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
+      <category term="语言哲学" scheme="http://yoursite.com/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
     
-      <category term="逻辑哲学论" scheme="http://freewill.top/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
+      <category term="逻辑哲学论" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
     
   </entry>
   
   <entry>
     <title>自然语言处理系列（4）：深度学习解决大规模文本分类问题</title>
-    <link href="http://freewill.top/2018/02/16/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%A7%A3%E5%86%B3%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98/"/>
-    <id>http://freewill.top/2018/02/16/自然语言处理系列（4）：深度学习解决大规模文本分类问题/</id>
+    <link href="http://yoursite.com/2018/02/16/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E8%A7%A3%E5%86%B3%E5%A4%A7%E8%A7%84%E6%A8%A1%E6%96%87%E6%9C%AC%E5%88%86%E7%B1%BB%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2018/02/16/自然语言处理系列（4）：深度学习解决大规模文本分类问题/</id>
     <published>2018-02-16T15:14:45.000Z</published>
     <updated>2019-07-30T11:48:43.725Z</updated>
     
@@ -1626,25 +1626,25 @@
     
     </summary>
     
-      <category term="自然语言处理" scheme="http://freewill.top/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+      <category term="自然语言处理" scheme="http://yoursite.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="TextCNN" scheme="http://freewill.top/tags/TextCNN/"/>
+      <category term="TextCNN" scheme="http://yoursite.com/tags/TextCNN/"/>
     
-      <category term="fastText" scheme="http://freewill.top/tags/fastText/"/>
+      <category term="fastText" scheme="http://yoursite.com/tags/fastText/"/>
     
-      <category term="TextRNN" scheme="http://freewill.top/tags/TextRNN/"/>
+      <category term="TextRNN" scheme="http://yoursite.com/tags/TextRNN/"/>
     
-      <category term="Attention" scheme="http://freewill.top/tags/Attention/"/>
+      <category term="Attention" scheme="http://yoursite.com/tags/Attention/"/>
     
-      <category term="TextRCNN" scheme="http://freewill.top/tags/TextRCNN/"/>
+      <category term="TextRCNN" scheme="http://yoursite.com/tags/TextRCNN/"/>
     
   </entry>
   
   <entry>
     <title>读书记（20）：维特根斯坦论语言的限度（6）—— 维特根斯坦与罗素</title>
-    <link href="http://freewill.top/2018/02/16/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8820%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%886%EF%BC%89%E2%80%94%E2%80%94%20%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E4%B8%8E%E7%BD%97%E7%B4%A0/"/>
-    <id>http://freewill.top/2018/02/16/读书记（20）：维特根斯坦论语言的限度（6）—— 维特根斯坦与罗素/</id>
+    <link href="http://yoursite.com/2018/02/16/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8820%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%886%EF%BC%89%E2%80%94%E2%80%94%20%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E4%B8%8E%E7%BD%97%E7%B4%A0/"/>
+    <id>http://yoursite.com/2018/02/16/读书记（20）：维特根斯坦论语言的限度（6）—— 维特根斯坦与罗素/</id>
     <published>2018-02-16T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:51.011Z</updated>
     
@@ -1656,21 +1656,21 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="维特根斯坦" scheme="http://freewill.top/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
+      <category term="维特根斯坦" scheme="http://yoursite.com/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
     
-      <category term="语言哲学" scheme="http://freewill.top/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
+      <category term="语言哲学" scheme="http://yoursite.com/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
     
-      <category term="逻辑哲学论" scheme="http://freewill.top/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
+      <category term="逻辑哲学论" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
     
   </entry>
   
   <entry>
     <title>读书记（19）：维特根斯坦论语言的限度（5）—— 尘世生活</title>
-    <link href="http://freewill.top/2018/02/15/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8819%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20%E5%B0%98%E4%B8%96%E7%94%9F%E6%B4%BB/"/>
-    <id>http://freewill.top/2018/02/15/读书记（19）：维特根斯坦论语言的限度（5）—— 尘世生活/</id>
+    <link href="http://yoursite.com/2018/02/15/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8819%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%885%EF%BC%89%E2%80%94%E2%80%94%20%E5%B0%98%E4%B8%96%E7%94%9F%E6%B4%BB/"/>
+    <id>http://yoursite.com/2018/02/15/读书记（19）：维特根斯坦论语言的限度（5）—— 尘世生活/</id>
     <published>2018-02-15T15:20:45.000Z</published>
     <updated>2019-07-30T11:43:53.803Z</updated>
     
@@ -1682,21 +1682,21 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="维特根斯坦" scheme="http://freewill.top/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
+      <category term="维特根斯坦" scheme="http://yoursite.com/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
     
-      <category term="语言哲学" scheme="http://freewill.top/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
+      <category term="语言哲学" scheme="http://yoursite.com/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
     
-      <category term="逻辑哲学论" scheme="http://freewill.top/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
+      <category term="逻辑哲学论" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
     
   </entry>
   
   <entry>
     <title>自然语言处理系列（3）：中文维基语料词向量训练</title>
-    <link href="http://freewill.top/2018/02/15/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%883%EF%BC%89%EF%BC%9A%E4%B8%AD%E6%96%87%E7%BB%B4%E5%9F%BA%E8%AF%AD%E6%96%99%E8%AF%8D%E5%90%91%E9%87%8F%E8%AE%AD%E7%BB%83/"/>
-    <id>http://freewill.top/2018/02/15/自然语言处理系列（3）：中文维基语料词向量训练/</id>
+    <link href="http://yoursite.com/2018/02/15/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%883%EF%BC%89%EF%BC%9A%E4%B8%AD%E6%96%87%E7%BB%B4%E5%9F%BA%E8%AF%AD%E6%96%99%E8%AF%8D%E5%90%91%E9%87%8F%E8%AE%AD%E7%BB%83/"/>
+    <id>http://yoursite.com/2018/02/15/自然语言处理系列（3）：中文维基语料词向量训练/</id>
     <published>2018-02-15T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.760Z</updated>
     
@@ -1708,25 +1708,25 @@
     
     </summary>
     
-      <category term="自然语言处理" scheme="http://freewill.top/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+      <category term="自然语言处理" scheme="http://yoursite.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="词向量" scheme="http://freewill.top/tags/%E8%AF%8D%E5%90%91%E9%87%8F/"/>
+      <category term="词向量" scheme="http://yoursite.com/tags/%E8%AF%8D%E5%90%91%E9%87%8F/"/>
     
-      <category term="Skip-gram" scheme="http://freewill.top/tags/Skip-gram/"/>
+      <category term="Skip-gram" scheme="http://yoursite.com/tags/Skip-gram/"/>
     
-      <category term="CBOW" scheme="http://freewill.top/tags/CBOW/"/>
+      <category term="CBOW" scheme="http://yoursite.com/tags/CBOW/"/>
     
-      <category term="Wiki" scheme="http://freewill.top/tags/Wiki/"/>
+      <category term="Wiki" scheme="http://yoursite.com/tags/Wiki/"/>
     
-      <category term="jieba" scheme="http://freewill.top/tags/jieba/"/>
+      <category term="jieba" scheme="http://yoursite.com/tags/jieba/"/>
     
   </entry>
   
   <entry>
     <title>自然语言处理系列（2）：Word2Vec</title>
-    <link href="http://freewill.top/2018/02/14/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%882%EF%BC%89%EF%BC%9AWord2Vec/"/>
-    <id>http://freewill.top/2018/02/14/自然语言处理系列（2）：Word2Vec/</id>
+    <link href="http://yoursite.com/2018/02/14/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%882%EF%BC%89%EF%BC%9AWord2Vec/"/>
+    <id>http://yoursite.com/2018/02/14/自然语言处理系列（2）：Word2Vec/</id>
     <published>2018-02-14T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.750Z</updated>
     
@@ -1741,17 +1741,17 @@
     
     </summary>
     
-      <category term="自然语言处理" scheme="http://freewill.top/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+      <category term="自然语言处理" scheme="http://yoursite.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="word2vec" scheme="http://freewill.top/tags/word2vec/"/>
+      <category term="word2vec" scheme="http://yoursite.com/tags/word2vec/"/>
     
   </entry>
   
   <entry>
     <title>读书记（18）：维特根斯坦论语言的限度（4）—— 语法与联系</title>
-    <link href="http://freewill.top/2018/02/14/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8818%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94%20%E8%AF%AD%E6%B3%95%E4%B8%8E%E8%81%94%E7%B3%BB/"/>
-    <id>http://freewill.top/2018/02/14/读书记（18）：维特根斯坦论语言的限度（4）—— 语法与联系/</id>
+    <link href="http://yoursite.com/2018/02/14/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8818%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%884%EF%BC%89%E2%80%94%E2%80%94%20%E8%AF%AD%E6%B3%95%E4%B8%8E%E8%81%94%E7%B3%BB/"/>
+    <id>http://yoursite.com/2018/02/14/读书记（18）：维特根斯坦论语言的限度（4）—— 语法与联系/</id>
     <published>2018-02-14T12:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.600Z</updated>
     
@@ -1763,21 +1763,21 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="维特根斯坦" scheme="http://freewill.top/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
+      <category term="维特根斯坦" scheme="http://yoursite.com/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
     
-      <category term="语言哲学" scheme="http://freewill.top/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
+      <category term="语言哲学" scheme="http://yoursite.com/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
     
-      <category term="逻辑哲学论" scheme="http://freewill.top/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
+      <category term="逻辑哲学论" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
     
   </entry>
   
   <entry>
     <title>读书记（17）：维特根斯坦论语言的限度（3）—— 语言背后的基础</title>
-    <link href="http://freewill.top/2018/02/13/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8817%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%883%EF%BC%89%E2%80%94%E2%80%94%20%E8%AF%AD%E8%A8%80%E8%83%8C%E5%90%8E%E7%9A%84%E5%9F%BA%E7%A1%80/"/>
-    <id>http://freewill.top/2018/02/13/读书记（17）：维特根斯坦论语言的限度（3）—— 语言背后的基础/</id>
+    <link href="http://yoursite.com/2018/02/13/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8817%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%883%EF%BC%89%E2%80%94%E2%80%94%20%E8%AF%AD%E8%A8%80%E8%83%8C%E5%90%8E%E7%9A%84%E5%9F%BA%E7%A1%80/"/>
+    <id>http://yoursite.com/2018/02/13/读书记（17）：维特根斯坦论语言的限度（3）—— 语言背后的基础/</id>
     <published>2018-02-13T15:20:45.000Z</published>
     <updated>2019-07-30T10:51:51.018Z</updated>
     
@@ -1789,21 +1789,21 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="维特根斯坦" scheme="http://freewill.top/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
+      <category term="维特根斯坦" scheme="http://yoursite.com/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
     
-      <category term="语言哲学" scheme="http://freewill.top/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
+      <category term="语言哲学" scheme="http://yoursite.com/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
     
-      <category term="逻辑哲学论" scheme="http://freewill.top/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
+      <category term="逻辑哲学论" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
     
   </entry>
   
   <entry>
     <title>读书记（16）：维特根斯坦论语言的限度（2）—— 语言的边界</title>
-    <link href="http://freewill.top/2018/02/12/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8816%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%20%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BE%B9%E7%95%8C/"/>
-    <id>http://freewill.top/2018/02/12/读书记（16）：维特根斯坦论语言的限度（2）—— 语言的边界/</id>
+    <link href="http://yoursite.com/2018/02/12/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8816%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%882%EF%BC%89%E2%80%94%E2%80%94%20%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BE%B9%E7%95%8C/"/>
+    <id>http://yoursite.com/2018/02/12/读书记（16）：维特根斯坦论语言的限度（2）—— 语言的边界/</id>
     <published>2018-02-12T15:20:45.000Z</published>
     <updated>2019-07-30T11:44:27.812Z</updated>
     
@@ -1815,21 +1815,21 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="维特根斯坦" scheme="http://freewill.top/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
+      <category term="维特根斯坦" scheme="http://yoursite.com/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
     
-      <category term="语言哲学" scheme="http://freewill.top/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
+      <category term="语言哲学" scheme="http://yoursite.com/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
     
-      <category term="逻辑哲学论" scheme="http://freewill.top/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
+      <category term="逻辑哲学论" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
     
   </entry>
   
   <entry>
     <title>读书记（15）：维特根斯坦论语言的限度（1）—— 语言的限度</title>
-    <link href="http://freewill.top/2018/02/11/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8815%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%881%EF%BC%89%E2%80%94%E2%80%94%20%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6/"/>
-    <id>http://freewill.top/2018/02/11/读书记（15）：维特根斯坦论语言的限度（1）—— 语言的限度/</id>
+    <link href="http://yoursite.com/2018/02/11/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8815%EF%BC%89%EF%BC%9A%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6%E8%AE%BA%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6%EF%BC%881%EF%BC%89%E2%80%94%E2%80%94%20%E8%AF%AD%E8%A8%80%E7%9A%84%E9%99%90%E5%BA%A6/"/>
+    <id>http://yoursite.com/2018/02/11/读书记（15）：维特根斯坦论语言的限度（1）—— 语言的限度/</id>
     <published>2018-02-11T14:20:45.000Z</published>
     <updated>2019-07-30T11:44:46.286Z</updated>
     
@@ -1841,21 +1841,21 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="维特根斯坦" scheme="http://freewill.top/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
+      <category term="维特根斯坦" scheme="http://yoursite.com/tags/%E7%BB%B4%E7%89%B9%E6%A0%B9%E6%96%AF%E5%9D%A6/"/>
     
-      <category term="语言哲学" scheme="http://freewill.top/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
+      <category term="语言哲学" scheme="http://yoursite.com/tags/%E8%AF%AD%E8%A8%80%E5%93%B2%E5%AD%A6/"/>
     
-      <category term="逻辑哲学论" scheme="http://freewill.top/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
+      <category term="逻辑哲学论" scheme="http://yoursite.com/tags/%E9%80%BB%E8%BE%91%E5%93%B2%E5%AD%A6%E8%AE%BA/"/>
     
   </entry>
   
   <entry>
     <title>读书记（14）：康德《纯粹理性批判》句读（1）——  第一版序</title>
-    <link href="http://freewill.top/2018/02/10/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8814%EF%BC%89%EF%BC%9A%E5%BA%B7%E5%BE%B7%E3%80%8A%E7%BA%AF%E7%B2%B9%E7%90%86%E6%80%A7%E6%89%B9%E5%88%A4%E3%80%8B%E5%8F%A5%E8%AF%BB%EF%BC%881%EF%BC%89%E2%80%94%E2%80%94%20%20%E7%AC%AC%E4%B8%80%E7%89%88%E5%BA%8F/"/>
-    <id>http://freewill.top/2018/02/10/读书记（14）：康德《纯粹理性批判》句读（1）——  第一版序/</id>
+    <link href="http://yoursite.com/2018/02/10/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8814%EF%BC%89%EF%BC%9A%E5%BA%B7%E5%BE%B7%E3%80%8A%E7%BA%AF%E7%B2%B9%E7%90%86%E6%80%A7%E6%89%B9%E5%88%A4%E3%80%8B%E5%8F%A5%E8%AF%BB%EF%BC%881%EF%BC%89%E2%80%94%E2%80%94%20%20%E7%AC%AC%E4%B8%80%E7%89%88%E5%BA%8F/"/>
+    <id>http://yoursite.com/2018/02/10/读书记（14）：康德《纯粹理性批判》句读（1）——  第一版序/</id>
     <published>2018-02-10T14:20:45.000Z</published>
     <updated>2019-08-02T02:31:02.649Z</updated>
     
@@ -1867,19 +1867,19 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="康德" scheme="http://freewill.top/tags/%E5%BA%B7%E5%BE%B7/"/>
+      <category term="康德" scheme="http://yoursite.com/tags/%E5%BA%B7%E5%BE%B7/"/>
     
-      <category term="纯粹理性批判" scheme="http://freewill.top/tags/%E7%BA%AF%E7%B2%B9%E7%90%86%E6%80%A7%E6%89%B9%E5%88%A4/"/>
+      <category term="纯粹理性批判" scheme="http://yoursite.com/tags/%E7%BA%AF%E7%B2%B9%E7%90%86%E6%80%A7%E6%89%B9%E5%88%A4/"/>
     
   </entry>
   
   <entry>
     <title>读书记（13）：《行为经济学讲义：演化论视角》 第二讲</title>
-    <link href="http://freewill.top/2018/02/05/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8813%EF%BC%89%EF%BC%9A%E3%80%8A%E8%A1%8C%E4%B8%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6%E8%AE%B2%E4%B9%89%EF%BC%9A%E6%BC%94%E5%8C%96%E8%AE%BA%E8%A7%86%E8%A7%92%E3%80%8B%20%E7%AC%AC%E4%BA%8C%E8%AE%B2/"/>
-    <id>http://freewill.top/2018/02/05/读书记（13）：《行为经济学讲义：演化论视角》 第二讲/</id>
+    <link href="http://yoursite.com/2018/02/05/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8813%EF%BC%89%EF%BC%9A%E3%80%8A%E8%A1%8C%E4%B8%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6%E8%AE%B2%E4%B9%89%EF%BC%9A%E6%BC%94%E5%8C%96%E8%AE%BA%E8%A7%86%E8%A7%92%E3%80%8B%20%E7%AC%AC%E4%BA%8C%E8%AE%B2/"/>
+    <id>http://yoursite.com/2018/02/05/读书记（13）：《行为经济学讲义：演化论视角》 第二讲/</id>
     <published>2018-02-05T15:14:45.000Z</published>
     <updated>2019-08-02T02:31:01.235Z</updated>
     
@@ -1891,15 +1891,15 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
   </entry>
   
   <entry>
     <title>读书记（12）：《行为经济学讲义：演化论视角》 第一讲</title>
-    <link href="http://freewill.top/2018/01/28/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8812%EF%BC%89%EF%BC%9A%E3%80%8A%E8%A1%8C%E4%B8%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6%E8%AE%B2%E4%B9%89%EF%BC%9A%E6%BC%94%E5%8C%96%E8%AE%BA%E8%A7%86%E8%A7%92%E3%80%8B%20%E7%AC%AC%E4%B8%80%E8%AE%B2/"/>
-    <id>http://freewill.top/2018/01/28/读书记（12）：《行为经济学讲义：演化论视角》 第一讲/</id>
+    <link href="http://yoursite.com/2018/01/28/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8812%EF%BC%89%EF%BC%9A%E3%80%8A%E8%A1%8C%E4%B8%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6%E8%AE%B2%E4%B9%89%EF%BC%9A%E6%BC%94%E5%8C%96%E8%AE%BA%E8%A7%86%E8%A7%92%E3%80%8B%20%E7%AC%AC%E4%B8%80%E8%AE%B2/"/>
+    <id>http://yoursite.com/2018/01/28/读书记（12）：《行为经济学讲义：演化论视角》 第一讲/</id>
     <published>2018-01-28T15:14:45.000Z</published>
     <updated>2019-08-02T02:30:59.539Z</updated>
     
@@ -1911,25 +1911,25 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="行为" scheme="http://freewill.top/tags/%E8%A1%8C%E4%B8%BA/"/>
+      <category term="行为" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA/"/>
     
-      <category term="价值" scheme="http://freewill.top/tags/%E4%BB%B7%E5%80%BC/"/>
+      <category term="价值" scheme="http://yoursite.com/tags/%E4%BB%B7%E5%80%BC/"/>
     
-      <category term="判断" scheme="http://freewill.top/tags/%E5%88%A4%E6%96%AD/"/>
+      <category term="判断" scheme="http://yoursite.com/tags/%E5%88%A4%E6%96%AD/"/>
     
-      <category term="传统" scheme="http://freewill.top/tags/%E4%BC%A0%E7%BB%9F/"/>
+      <category term="传统" scheme="http://yoursite.com/tags/%E4%BC%A0%E7%BB%9F/"/>
     
-      <category term="海纳模型" scheme="http://freewill.top/tags/%E6%B5%B7%E7%BA%B3%E6%A8%A1%E5%9E%8B/"/>
+      <category term="海纳模型" scheme="http://yoursite.com/tags/%E6%B5%B7%E7%BA%B3%E6%A8%A1%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>读书记（11）：存在主义书单</title>
-    <link href="http://freewill.top/2018/01/25/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8811%EF%BC%89%EF%BC%9A%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%E4%B9%A6%E5%8D%95/"/>
-    <id>http://freewill.top/2018/01/25/读书记（11）：存在主义书单/</id>
+    <link href="http://yoursite.com/2018/01/25/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8811%EF%BC%89%EF%BC%9A%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%E4%B9%A6%E5%8D%95/"/>
+    <id>http://yoursite.com/2018/01/25/读书记（11）：存在主义书单/</id>
     <published>2018-01-25T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.788Z</updated>
     
@@ -1941,17 +1941,17 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="存在主义" scheme="http://freewill.top/tags/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89/"/>
+      <category term="存在主义" scheme="http://yoursite.com/tags/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89/"/>
     
   </entry>
   
   <entry>
     <title>读书记（10）：高宣扬讲存在主义（四）</title>
-    <link href="http://freewill.top/2018/01/23/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8810%EF%BC%89%EF%BC%9A%E9%AB%98%E5%AE%A3%E6%89%AC%E8%AE%B2%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%EF%BC%88%E5%9B%9B%EF%BC%89/"/>
-    <id>http://freewill.top/2018/01/23/读书记（10）：高宣扬讲存在主义（四）/</id>
+    <link href="http://yoursite.com/2018/01/23/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%8810%EF%BC%89%EF%BC%9A%E9%AB%98%E5%AE%A3%E6%89%AC%E8%AE%B2%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%EF%BC%88%E5%9B%9B%EF%BC%89/"/>
+    <id>http://yoursite.com/2018/01/23/读书记（10）：高宣扬讲存在主义（四）/</id>
     <published>2018-01-23T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.647Z</updated>
     
@@ -1963,19 +1963,19 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="海德格尔" scheme="http://freewill.top/tags/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
+      <category term="海德格尔" scheme="http://yoursite.com/tags/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
     
-      <category term="存在主义" scheme="http://freewill.top/tags/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89/"/>
+      <category term="存在主义" scheme="http://yoursite.com/tags/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89/"/>
     
   </entry>
   
   <entry>
     <title>读书记（9）：高宣扬讲存在主义（三）</title>
-    <link href="http://freewill.top/2018/01/22/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%889%EF%BC%89%EF%BC%9A%E9%AB%98%E5%AE%A3%E6%89%AC%E8%AE%B2%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%EF%BC%88%E4%B8%89%EF%BC%89/"/>
-    <id>http://freewill.top/2018/01/22/读书记（9）：高宣扬讲存在主义（三）/</id>
+    <link href="http://yoursite.com/2018/01/22/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%889%EF%BC%89%EF%BC%9A%E9%AB%98%E5%AE%A3%E6%89%AC%E8%AE%B2%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%EF%BC%88%E4%B8%89%EF%BC%89/"/>
+    <id>http://yoursite.com/2018/01/22/读书记（9）：高宣扬讲存在主义（三）/</id>
     <published>2018-01-22T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.669Z</updated>
     
@@ -1987,19 +1987,19 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="海德格尔" scheme="http://freewill.top/tags/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
+      <category term="海德格尔" scheme="http://yoursite.com/tags/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
     
-      <category term="存在主义" scheme="http://freewill.top/tags/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89/"/>
+      <category term="存在主义" scheme="http://yoursite.com/tags/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89/"/>
     
   </entry>
   
   <entry>
     <title>读书记（8）：高宣扬讲存在主义（二）</title>
-    <link href="http://freewill.top/2018/01/21/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%888%EF%BC%89%EF%BC%9A%E9%AB%98%E5%AE%A3%E6%89%AC%E8%AE%B2%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
-    <id>http://freewill.top/2018/01/21/读书记（8）：高宣扬讲存在主义（二）/</id>
+    <link href="http://yoursite.com/2018/01/21/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%888%EF%BC%89%EF%BC%9A%E9%AB%98%E5%AE%A3%E6%89%AC%E8%AE%B2%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%EF%BC%88%E4%BA%8C%EF%BC%89/"/>
+    <id>http://yoursite.com/2018/01/21/读书记（8）：高宣扬讲存在主义（二）/</id>
     <published>2018-01-21T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.961Z</updated>
     
@@ -2011,19 +2011,19 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="海德格尔" scheme="http://freewill.top/tags/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
+      <category term="海德格尔" scheme="http://yoursite.com/tags/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
     
-      <category term="存在主义" scheme="http://freewill.top/tags/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89/"/>
+      <category term="存在主义" scheme="http://yoursite.com/tags/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89/"/>
     
   </entry>
   
   <entry>
     <title>读书记（7）：高宣扬讲存在主义（一）</title>
-    <link href="http://freewill.top/2018/01/20/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%887%EF%BC%89%EF%BC%9A%E9%AB%98%E5%AE%A3%E6%89%AC%E8%AE%B2%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%EF%BC%88%E4%B8%80%EF%BC%89/"/>
-    <id>http://freewill.top/2018/01/20/读书记（7）：高宣扬讲存在主义（一）/</id>
+    <link href="http://yoursite.com/2018/01/20/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%887%EF%BC%89%EF%BC%9A%E9%AB%98%E5%AE%A3%E6%89%AC%E8%AE%B2%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://yoursite.com/2018/01/20/读书记（7）：高宣扬讲存在主义（一）/</id>
     <published>2018-01-20T14:20:45.000Z</published>
     <updated>2019-08-02T02:29:11.685Z</updated>
     
@@ -2035,19 +2035,19 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="海德格尔" scheme="http://freewill.top/tags/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
+      <category term="海德格尔" scheme="http://yoursite.com/tags/%E6%B5%B7%E5%BE%B7%E6%A0%BC%E5%B0%94/"/>
     
-      <category term="存在主义" scheme="http://freewill.top/tags/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89/"/>
+      <category term="存在主义" scheme="http://yoursite.com/tags/%E5%AD%98%E5%9C%A8%E4%B8%BB%E4%B9%89/"/>
     
   </entry>
   
   <entry>
     <title>python编程系列（2）：JSON</title>
-    <link href="http://freewill.top/2018/01/20/python%E7%BC%96%E7%A8%8B%E7%B3%BB%E5%88%97%EF%BC%882%EF%BC%89%EF%BC%9AJSON/"/>
-    <id>http://freewill.top/2018/01/20/python编程系列（2）：JSON/</id>
+    <link href="http://yoursite.com/2018/01/20/python%E7%BC%96%E7%A8%8B%E7%B3%BB%E5%88%97%EF%BC%882%EF%BC%89%EF%BC%9AJSON/"/>
+    <id>http://yoursite.com/2018/01/20/python编程系列（2）：JSON/</id>
     <published>2018-01-20T12:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.645Z</updated>
     
@@ -2059,17 +2059,17 @@
     
     </summary>
     
-      <category term="Python" scheme="http://freewill.top/categories/Python/"/>
+      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
     
     
-      <category term="JSON" scheme="http://freewill.top/tags/JSON/"/>
+      <category term="JSON" scheme="http://yoursite.com/tags/JSON/"/>
     
   </entry>
   
   <entry>
     <title>python编程系列（1）：正则表达式</title>
-    <link href="http://freewill.top/2018/01/19/python%E7%BC%96%E7%A8%8B%E7%B3%BB%E5%88%97%EF%BC%881%EF%BC%89%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    <id>http://freewill.top/2018/01/19/python编程系列（1）：正则表达式/</id>
+    <link href="http://yoursite.com/2018/01/19/python%E7%BC%96%E7%A8%8B%E7%B3%BB%E5%88%97%EF%BC%881%EF%BC%89%EF%BC%9A%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>http://yoursite.com/2018/01/19/python编程系列（1）：正则表达式/</id>
     <published>2018-01-19T12:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.616Z</updated>
     
@@ -2081,21 +2081,21 @@
     
     </summary>
     
-      <category term="Python" scheme="http://freewill.top/categories/Python/"/>
+      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
     
     
-      <category term="python" scheme="http://freewill.top/tags/python/"/>
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
-      <category term="re" scheme="http://freewill.top/tags/re/"/>
+      <category term="re" scheme="http://yoursite.com/tags/re/"/>
     
-      <category term="正则表达式" scheme="http://freewill.top/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+      <category term="正则表达式" scheme="http://yoursite.com/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
     <title>读书记（6）：西方哲学前沿~新古典自由主义的破冰之旅</title>
-    <link href="http://freewill.top/2018/01/17/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%886%EF%BC%89%EF%BC%9A%E8%A5%BF%E6%96%B9%E5%93%B2%E5%AD%A6%E5%89%8D%E6%B2%BF%20%E2%80%94%E2%80%94%20%E6%96%B0%E5%8F%A4%E5%85%B8%E8%87%AA%E7%94%B1%E4%B8%BB%E4%B9%89%E7%9A%84%E7%A0%B4%E5%86%B0%E4%B9%8B%E6%97%85/"/>
-    <id>http://freewill.top/2018/01/17/读书记（6）：西方哲学前沿 —— 新古典自由主义的破冰之旅/</id>
+    <link href="http://yoursite.com/2018/01/17/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%886%EF%BC%89%EF%BC%9A%E8%A5%BF%E6%96%B9%E5%93%B2%E5%AD%A6%E5%89%8D%E6%B2%BF%20%E2%80%94%E2%80%94%20%E6%96%B0%E5%8F%A4%E5%85%B8%E8%87%AA%E7%94%B1%E4%B8%BB%E4%B9%89%E7%9A%84%E7%A0%B4%E5%86%B0%E4%B9%8B%E6%97%85/"/>
+    <id>http://yoursite.com/2018/01/17/读书记（6）：西方哲学前沿 —— 新古典自由主义的破冰之旅/</id>
     <published>2018-01-17T12:20:28.000Z</published>
     <updated>2019-07-30T10:51:50.947Z</updated>
     
@@ -2110,29 +2110,29 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="自由" scheme="http://freewill.top/tags/%E8%87%AA%E7%94%B1/"/>
+      <category term="自由" scheme="http://yoursite.com/tags/%E8%87%AA%E7%94%B1/"/>
     
-      <category term="哈耶克" scheme="http://freewill.top/tags/%E5%93%88%E8%80%B6%E5%85%8B/"/>
+      <category term="哈耶克" scheme="http://yoursite.com/tags/%E5%93%88%E8%80%B6%E5%85%8B/"/>
     
-      <category term="新古典自由主义" scheme="http://freewill.top/tags/%E6%96%B0%E5%8F%A4%E5%85%B8%E8%87%AA%E7%94%B1%E4%B8%BB%E4%B9%89/"/>
+      <category term="新古典自由主义" scheme="http://yoursite.com/tags/%E6%96%B0%E5%8F%A4%E5%85%B8%E8%87%AA%E7%94%B1%E4%B8%BB%E4%B9%89/"/>
     
-      <category term="罗尔斯" scheme="http://freewill.top/tags/%E7%BD%97%E5%B0%94%E6%96%AF/"/>
+      <category term="罗尔斯" scheme="http://yoursite.com/tags/%E7%BD%97%E5%B0%94%E6%96%AF/"/>
     
-      <category term="诺齐克" scheme="http://freewill.top/tags/%E8%AF%BA%E9%BD%90%E5%85%8B/"/>
+      <category term="诺齐克" scheme="http://yoursite.com/tags/%E8%AF%BA%E9%BD%90%E5%85%8B/"/>
     
-      <category term="德鲁克" scheme="http://freewill.top/tags/%E5%BE%B7%E9%B2%81%E5%85%8B/"/>
+      <category term="德鲁克" scheme="http://yoursite.com/tags/%E5%BE%B7%E9%B2%81%E5%85%8B/"/>
     
-      <category term="平等" scheme="http://freewill.top/tags/%E5%B9%B3%E7%AD%89/"/>
+      <category term="平等" scheme="http://yoursite.com/tags/%E5%B9%B3%E7%AD%89/"/>
     
   </entry>
   
   <entry>
     <title>读书记（5）：《伯林谈话录》摘</title>
-    <link href="http://freewill.top/2018/01/15/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%885%EF%BC%89%EF%BC%9A%E3%80%8A%E4%BC%AF%E6%9E%97%E8%B0%88%E8%AF%9D%E5%BD%95%E3%80%8B%E6%91%98/"/>
-    <id>http://freewill.top/2018/01/15/读书记（5）：《伯林谈话录》摘/</id>
+    <link href="http://yoursite.com/2018/01/15/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%885%EF%BC%89%EF%BC%9A%E3%80%8A%E4%BC%AF%E6%9E%97%E8%B0%88%E8%AF%9D%E5%BD%95%E3%80%8B%E6%91%98/"/>
+    <id>http://yoursite.com/2018/01/15/读书记（5）：《伯林谈话录》摘/</id>
     <published>2018-01-15T12:20:28.000Z</published>
     <updated>2019-07-30T11:41:35.360Z</updated>
     
@@ -2144,17 +2144,17 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="以赛亚·伯林" scheme="http://freewill.top/tags/%E4%BB%A5%E8%B5%9B%E4%BA%9A%C2%B7%E4%BC%AF%E6%9E%97/"/>
+      <category term="以赛亚·伯林" scheme="http://yoursite.com/tags/%E4%BB%A5%E8%B5%9B%E4%BA%9A%C2%B7%E4%BC%AF%E6%9E%97/"/>
     
   </entry>
   
   <entry>
     <title>读书记（4）：增长黑客的炼成</title>
-    <link href="http://freewill.top/2018/01/13/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E7%9A%84%E7%82%BC%E6%88%90/"/>
-    <id>http://freewill.top/2018/01/13/读书记（4）：增长黑客的炼成/</id>
+    <link href="http://yoursite.com/2018/01/13/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2%E7%9A%84%E7%82%BC%E6%88%90/"/>
+    <id>http://yoursite.com/2018/01/13/读书记（4）：增长黑客的炼成/</id>
     <published>2018-01-13T15:14:45.000Z</published>
     <updated>2019-07-30T10:52:41.719Z</updated>
     
@@ -2166,25 +2166,25 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="增长黑客" scheme="http://freewill.top/tags/%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2/"/>
+      <category term="增长黑客" scheme="http://yoursite.com/tags/%E5%A2%9E%E9%95%BF%E9%BB%91%E5%AE%A2/"/>
     
-      <category term="产品" scheme="http://freewill.top/tags/%E4%BA%A7%E5%93%81/"/>
+      <category term="产品" scheme="http://yoursite.com/tags/%E4%BA%A7%E5%93%81/"/>
     
-      <category term="用户" scheme="http://freewill.top/tags/%E7%94%A8%E6%88%B7/"/>
+      <category term="用户" scheme="http://yoursite.com/tags/%E7%94%A8%E6%88%B7/"/>
     
-      <category term="活跃" scheme="http://freewill.top/tags/%E6%B4%BB%E8%B7%83/"/>
+      <category term="活跃" scheme="http://yoursite.com/tags/%E6%B4%BB%E8%B7%83/"/>
     
-      <category term="留存" scheme="http://freewill.top/tags/%E7%95%99%E5%AD%98/"/>
+      <category term="留存" scheme="http://yoursite.com/tags/%E7%95%99%E5%AD%98/"/>
     
   </entry>
   
   <entry>
     <title>读书记（3）：娱乐时代的疾呼</title>
-    <link href="http://freewill.top/2018/01/11/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%883%EF%BC%89%EF%BC%9A%E5%A8%B1%E4%B9%90%E6%97%B6%E4%BB%A3%E7%9A%84%E7%96%BE%E5%91%BC/"/>
-    <id>http://freewill.top/2018/01/11/读书记（3）：娱乐时代的疾呼/</id>
+    <link href="http://yoursite.com/2018/01/11/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%883%EF%BC%89%EF%BC%9A%E5%A8%B1%E4%B9%90%E6%97%B6%E4%BB%A3%E7%9A%84%E7%96%BE%E5%91%BC/"/>
+    <id>http://yoursite.com/2018/01/11/读书记（3）：娱乐时代的疾呼/</id>
     <published>2018-01-11T14:20:45.000Z</published>
     <updated>2019-07-30T11:42:40.788Z</updated>
     
@@ -2197,19 +2197,19 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="娱乐至死" scheme="http://freewill.top/tags/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB/"/>
+      <category term="娱乐至死" scheme="http://yoursite.com/tags/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB/"/>
     
-      <category term="波兹曼" scheme="http://freewill.top/tags/%E6%B3%A2%E5%85%B9%E6%9B%BC/"/>
+      <category term="波兹曼" scheme="http://yoursite.com/tags/%E6%B3%A2%E5%85%B9%E6%9B%BC/"/>
     
   </entry>
   
   <entry>
     <title>读书记（2）：一七年十二月读书月记</title>
-    <link href="http://freewill.top/2018/01/05/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%882%EF%BC%89%EF%BC%9A%E9%98%85%E8%AF%BB%E6%9C%88%E8%AE%B0%E3%80%902017.12%E3%80%91/"/>
-    <id>http://freewill.top/2018/01/05/读书记（2）：阅读月记【2017.12】/</id>
+    <link href="http://yoursite.com/2018/01/05/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%882%EF%BC%89%EF%BC%9A%E9%98%85%E8%AF%BB%E6%9C%88%E8%AE%B0%E3%80%902017.12%E3%80%91/"/>
+    <id>http://yoursite.com/2018/01/05/读书记（2）：阅读月记【2017.12】/</id>
     <published>2018-01-05T14:20:45.000Z</published>
     <updated>2019-07-30T11:43:02.898Z</updated>
     
@@ -2222,21 +2222,21 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
-      <category term="娱乐至死" scheme="http://freewill.top/tags/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB/"/>
+      <category term="娱乐至死" scheme="http://yoursite.com/tags/%E5%A8%B1%E4%B9%90%E8%87%B3%E6%AD%BB/"/>
     
-      <category term="悉达多" scheme="http://freewill.top/tags/%E6%82%89%E8%BE%BE%E5%A4%9A/"/>
+      <category term="悉达多" scheme="http://yoursite.com/tags/%E6%82%89%E8%BE%BE%E5%A4%9A/"/>
     
-      <category term="人生的污秽" scheme="http://freewill.top/tags/%E4%BA%BA%E7%94%9F%E7%9A%84%E6%B1%A1%E7%A7%BD/"/>
+      <category term="人生的污秽" scheme="http://yoursite.com/tags/%E4%BA%BA%E7%94%9F%E7%9A%84%E6%B1%A1%E7%A7%BD/"/>
     
   </entry>
   
   <entry>
     <title>日知录（4）：启发式认知偏差</title>
-    <link href="http://freewill.top/2018/01/02/%E6%97%A5%E7%9F%A5%E5%BD%95%EF%BC%884%EF%BC%89%EF%BC%9A%E5%90%AF%E5%8F%91%E5%BC%8F%E8%AE%A4%E7%9F%A5%E5%81%8F%E5%B7%AE/"/>
-    <id>http://freewill.top/2018/01/02/日知录（4）：启发式认知偏差/</id>
+    <link href="http://yoursite.com/2018/01/02/%E6%97%A5%E7%9F%A5%E5%BD%95%EF%BC%884%EF%BC%89%EF%BC%9A%E5%90%AF%E5%8F%91%E5%BC%8F%E8%AE%A4%E7%9F%A5%E5%81%8F%E5%B7%AE/"/>
+    <id>http://yoursite.com/2018/01/02/日知录（4）：启发式认知偏差/</id>
     <published>2018-01-02T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.685Z</updated>
     
@@ -2248,23 +2248,23 @@
     
     </summary>
     
-      <category term="日知录" scheme="http://freewill.top/categories/%E6%97%A5%E7%9F%A5%E5%BD%95/"/>
+      <category term="日知录" scheme="http://yoursite.com/categories/%E6%97%A5%E7%9F%A5%E5%BD%95/"/>
     
     
-      <category term="启发式认知偏差" scheme="http://freewill.top/tags/%E5%90%AF%E5%8F%91%E5%BC%8F%E8%AE%A4%E7%9F%A5%E5%81%8F%E5%B7%AE/"/>
+      <category term="启发式认知偏差" scheme="http://yoursite.com/tags/%E5%90%AF%E5%8F%91%E5%BC%8F%E8%AE%A4%E7%9F%A5%E5%81%8F%E5%B7%AE/"/>
     
-      <category term="代表性启发法" scheme="http://freewill.top/tags/%E4%BB%A3%E8%A1%A8%E6%80%A7%E5%90%AF%E5%8F%91%E6%B3%95/"/>
+      <category term="代表性启发法" scheme="http://yoursite.com/tags/%E4%BB%A3%E8%A1%A8%E6%80%A7%E5%90%AF%E5%8F%91%E6%B3%95/"/>
     
-      <category term="可得性启发法" scheme="http://freewill.top/tags/%E5%8F%AF%E5%BE%97%E6%80%A7%E5%90%AF%E5%8F%91%E6%B3%95/"/>
+      <category term="可得性启发法" scheme="http://yoursite.com/tags/%E5%8F%AF%E5%BE%97%E6%80%A7%E5%90%AF%E5%8F%91%E6%B3%95/"/>
     
-      <category term="锚定与调整启发法" scheme="http://freewill.top/tags/%E9%94%9A%E5%AE%9A%E4%B8%8E%E8%B0%83%E6%95%B4%E5%90%AF%E5%8F%91%E6%B3%95/"/>
+      <category term="锚定与调整启发法" scheme="http://yoursite.com/tags/%E9%94%9A%E5%AE%9A%E4%B8%8E%E8%B0%83%E6%95%B4%E5%90%AF%E5%8F%91%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>读书记（1）：读书清单</title>
-    <link href="http://freewill.top/2018/01/01/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%881%EF%BC%89%EF%BC%9A%E8%AF%BB%E4%B9%A6%E6%B8%85%E5%8D%95/"/>
-    <id>http://freewill.top/2018/01/01/读书记（1）：读书清单/</id>
+    <link href="http://yoursite.com/2018/01/01/%E8%AF%BB%E4%B9%A6%E8%AE%B0%EF%BC%881%EF%BC%89%EF%BC%9A%E8%AF%BB%E4%B9%A6%E6%B8%85%E5%8D%95/"/>
+    <id>http://yoursite.com/2018/01/01/读书记（1）：读书清单/</id>
     <published>2018-01-01T12:20:28.000Z</published>
     <updated>2019-08-01T12:35:34.346Z</updated>
     
@@ -2277,15 +2277,15 @@
     
     </summary>
     
-      <category term="读书记" scheme="http://freewill.top/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
+      <category term="读书记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E8%AE%B0/"/>
     
     
   </entry>
   
   <entry>
     <title>日知录（3）：心理账户</title>
-    <link href="http://freewill.top/2017/12/12/%E6%97%A5%E7%9F%A5%E5%BD%95%EF%BC%883%EF%BC%89%EF%BC%9A%E5%BF%83%E7%90%86%E8%B4%A6%E6%88%B7/"/>
-    <id>http://freewill.top/2017/12/12/日知录（3）：心理账户/</id>
+    <link href="http://yoursite.com/2017/12/12/%E6%97%A5%E7%9F%A5%E5%BD%95%EF%BC%883%EF%BC%89%EF%BC%9A%E5%BF%83%E7%90%86%E8%B4%A6%E6%88%B7/"/>
+    <id>http://yoursite.com/2017/12/12/日知录（3）：心理账户/</id>
     <published>2017-12-12T15:14:45.000Z</published>
     <updated>2019-08-01T09:29:17.729Z</updated>
     
@@ -2297,23 +2297,23 @@
     
     </summary>
     
-      <category term="日知录" scheme="http://freewill.top/categories/%E6%97%A5%E7%9F%A5%E5%BD%95/"/>
+      <category term="日知录" scheme="http://yoursite.com/categories/%E6%97%A5%E7%9F%A5%E5%BD%95/"/>
     
     
-      <category term="心理账户" scheme="http://freewill.top/tags/%E5%BF%83%E7%90%86%E8%B4%A6%E6%88%B7/"/>
+      <category term="心理账户" scheme="http://yoursite.com/tags/%E5%BF%83%E7%90%86%E8%B4%A6%E6%88%B7/"/>
     
-      <category term="卡尼曼" scheme="http://freewill.top/tags/%E5%8D%A1%E5%B0%BC%E6%9B%BC/"/>
+      <category term="卡尼曼" scheme="http://yoursite.com/tags/%E5%8D%A1%E5%B0%BC%E6%9B%BC/"/>
     
-      <category term="行为经济学" scheme="http://freewill.top/tags/%E8%A1%8C%E4%B8%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+      <category term="行为经济学" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
     
-      <category term="理查德·萨勒" scheme="http://freewill.top/tags/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E8%90%A8%E5%8B%92/"/>
+      <category term="理查德·萨勒" scheme="http://yoursite.com/tags/%E7%90%86%E6%9F%A5%E5%BE%B7%C2%B7%E8%90%A8%E5%8B%92/"/>
     
   </entry>
   
   <entry>
     <title>日知录（2）：前景理论</title>
-    <link href="http://freewill.top/2017/12/10/%E6%97%A5%E7%9F%A5%E5%BD%95%EF%BC%882%EF%BC%89%EF%BC%9A%E5%89%8D%E6%99%AF%E7%90%86%E8%AE%BA/"/>
-    <id>http://freewill.top/2017/12/10/日知录（2）：前景理论/</id>
+    <link href="http://yoursite.com/2017/12/10/%E6%97%A5%E7%9F%A5%E5%BD%95%EF%BC%882%EF%BC%89%EF%BC%9A%E5%89%8D%E6%99%AF%E7%90%86%E8%AE%BA/"/>
+    <id>http://yoursite.com/2017/12/10/日知录（2）：前景理论/</id>
     <published>2017-12-10T15:14:45.000Z</published>
     <updated>2019-08-01T09:29:49.222Z</updated>
     
@@ -2325,21 +2325,21 @@
     
     </summary>
     
-      <category term="日知录" scheme="http://freewill.top/categories/%E6%97%A5%E7%9F%A5%E5%BD%95/"/>
+      <category term="日知录" scheme="http://yoursite.com/categories/%E6%97%A5%E7%9F%A5%E5%BD%95/"/>
     
     
-      <category term="卡尼曼" scheme="http://freewill.top/tags/%E5%8D%A1%E5%B0%BC%E6%9B%BC/"/>
+      <category term="卡尼曼" scheme="http://yoursite.com/tags/%E5%8D%A1%E5%B0%BC%E6%9B%BC/"/>
     
-      <category term="行为经济学" scheme="http://freewill.top/tags/%E8%A1%8C%E4%B8%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
+      <category term="行为经济学" scheme="http://yoursite.com/tags/%E8%A1%8C%E4%B8%BA%E7%BB%8F%E6%B5%8E%E5%AD%A6/"/>
     
-      <category term="前景理论" scheme="http://freewill.top/tags/%E5%89%8D%E6%99%AF%E7%90%86%E8%AE%BA/"/>
+      <category term="前景理论" scheme="http://yoursite.com/tags/%E5%89%8D%E6%99%AF%E7%90%86%E8%AE%BA/"/>
     
   </entry>
   
   <entry>
     <title>自然语言处理系列（1）：词向量和语言模型</title>
-    <link href="http://freewill.top/2017/12/10/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%881%EF%BC%89%EF%BC%9A%E8%AF%8D%E5%90%91%E9%87%8F%E5%92%8C%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
-    <id>http://freewill.top/2017/12/10/自然语言处理系列（1）：词向量和语言模型/</id>
+    <link href="http://yoursite.com/2017/12/10/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E7%B3%BB%E5%88%97%EF%BC%881%EF%BC%89%EF%BC%9A%E8%AF%8D%E5%90%91%E9%87%8F%E5%92%8C%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B/"/>
+    <id>http://yoursite.com/2017/12/10/自然语言处理系列（1）：词向量和语言模型/</id>
     <published>2017-12-10T15:14:45.000Z</published>
     <updated>2019-08-01T12:32:46.579Z</updated>
     
@@ -2352,21 +2352,21 @@
     
     </summary>
     
-      <category term="自然语言处理" scheme="http://freewill.top/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
+      <category term="自然语言处理" scheme="http://yoursite.com/categories/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86/"/>
     
     
-      <category term="word2vec" scheme="http://freewill.top/tags/word2vec/"/>
+      <category term="word2vec" scheme="http://yoursite.com/tags/word2vec/"/>
     
-      <category term="Skip-gram" scheme="http://freewill.top/tags/Skip-gram/"/>
+      <category term="Skip-gram" scheme="http://yoursite.com/tags/Skip-gram/"/>
     
-      <category term="CBOW" scheme="http://freewill.top/tags/CBOW/"/>
+      <category term="CBOW" scheme="http://yoursite.com/tags/CBOW/"/>
     
   </entry>
   
   <entry>
     <title>日知录（1）：MacTips</title>
-    <link href="http://freewill.top/2017/12/05/%E6%97%A5%E7%9F%A5%E5%BD%95%EF%BC%881%EF%BC%89%EF%BC%9AMacTips%20/"/>
-    <id>http://freewill.top/2017/12/05/日知录（1）：MacTips /</id>
+    <link href="http://yoursite.com/2017/12/05/%E6%97%A5%E7%9F%A5%E5%BD%95%EF%BC%881%EF%BC%89%EF%BC%9AMacTips%20/"/>
+    <id>http://yoursite.com/2017/12/05/日知录（1）：MacTips /</id>
     <published>2017-12-05T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.799Z</updated>
     
@@ -2381,17 +2381,17 @@
     
     </summary>
     
-      <category term="日知录" scheme="http://freewill.top/categories/%E6%97%A5%E7%9F%A5%E5%BD%95/"/>
+      <category term="日知录" scheme="http://yoursite.com/categories/%E6%97%A5%E7%9F%A5%E5%BD%95/"/>
     
     
-      <category term="macbook" scheme="http://freewill.top/tags/macbook/"/>
+      <category term="macbook" scheme="http://yoursite.com/tags/macbook/"/>
     
   </entry>
   
   <entry>
     <title>机器学习算法系列（40）：机器学习中的数据清洗与特征处理综述</title>
-    <link href="http://freewill.top/2017/09/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8840%EF%BC%89%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E4%B8%8E%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E7%BB%BC%E8%BF%B0/"/>
-    <id>http://freewill.top/2017/09/08/机器学习算法系列（40）：机器学习中的数据清洗与特征处理综述/</id>
+    <link href="http://yoursite.com/2017/09/08/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8840%EF%BC%89%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E4%B8%8E%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%E7%BB%BC%E8%BF%B0/"/>
+    <id>http://yoursite.com/2017/09/08/机器学习算法系列（40）：机器学习中的数据清洗与特征处理综述/</id>
     <published>2017-09-08T15:14:45.000Z</published>
     <updated>2019-07-31T07:11:54.923Z</updated>
     
@@ -2403,19 +2403,19 @@
     
     </summary>
     
-      <category term="机器学习" scheme="http://freewill.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://freewill.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="特征处理" scheme="http://freewill.top/tags/%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86/"/>
+      <category term="特征处理" scheme="http://yoursite.com/tags/%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>机器学习算法系列（39）：实例详解机器学习如何解决问题</title>
-    <link href="http://freewill.top/2017/09/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8839%EF%BC%89%EF%BC%9A%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/"/>
-    <id>http://freewill.top/2017/09/07/机器学习算法系列（39）：实例详解机器学习如何解决问题/</id>
+    <link href="http://yoursite.com/2017/09/07/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8839%EF%BC%89%EF%BC%9A%E5%AE%9E%E4%BE%8B%E8%AF%A6%E8%A7%A3%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98/"/>
+    <id>http://yoursite.com/2017/09/07/机器学习算法系列（39）：实例详解机器学习如何解决问题/</id>
     <published>2017-09-07T15:14:45.000Z</published>
     <updated>2019-07-31T07:14:50.053Z</updated>
     
@@ -2427,17 +2427,17 @@
     
     </summary>
     
-      <category term="机器学习" scheme="http://freewill.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://freewill.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>机器学习算法系列（38）：外卖订单量预测异常报警模型实践</title>
-    <link href="http://freewill.top/2017/09/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8838%EF%BC%89%EF%BC%9A%E5%A4%96%E5%8D%96%E8%AE%A2%E5%8D%95%E9%87%8F%E9%A2%84%E6%B5%8B%E5%BC%82%E5%B8%B8%E6%8A%A5%E8%AD%A6%E6%A8%A1%E5%9E%8B%E5%AE%9E%E8%B7%B5/"/>
-    <id>http://freewill.top/2017/09/06/机器学习算法系列（38）：外卖订单量预测异常报警模型实践/</id>
+    <link href="http://yoursite.com/2017/09/06/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8838%EF%BC%89%EF%BC%9A%E5%A4%96%E5%8D%96%E8%AE%A2%E5%8D%95%E9%87%8F%E9%A2%84%E6%B5%8B%E5%BC%82%E5%B8%B8%E6%8A%A5%E8%AD%A6%E6%A8%A1%E5%9E%8B%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://yoursite.com/2017/09/06/机器学习算法系列（38）：外卖订单量预测异常报警模型实践/</id>
     <published>2017-09-06T15:14:45.000Z</published>
     <updated>2019-07-31T07:15:49.102Z</updated>
     
@@ -2449,19 +2449,19 @@
     
     </summary>
     
-      <category term="机器学习" scheme="http://freewill.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://freewill.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="异常检测" scheme="http://freewill.top/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
+      <category term="异常检测" scheme="http://yoursite.com/tags/%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B/"/>
     
   </entry>
   
   <entry>
     <title>机器学习算法系列（37）：外卖O2O的用户画像实践</title>
-    <link href="http://freewill.top/2017/09/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8837%EF%BC%89%EF%BC%9A%E5%A4%96%E5%8D%96O2O%E7%9A%84%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E5%AE%9E%E8%B7%B5/"/>
-    <id>http://freewill.top/2017/09/05/机器学习算法系列（37）：外卖O2O的用户画像实践/</id>
+    <link href="http://yoursite.com/2017/09/05/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8837%EF%BC%89%EF%BC%9A%E5%A4%96%E5%8D%96O2O%E7%9A%84%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://yoursite.com/2017/09/05/机器学习算法系列（37）：外卖O2O的用户画像实践/</id>
     <published>2017-09-05T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.602Z</updated>
     
@@ -2473,19 +2473,19 @@
     
     </summary>
     
-      <category term="机器学习" scheme="http://freewill.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://freewill.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="用户画像" scheme="http://freewill.top/tags/%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F/"/>
+      <category term="用户画像" scheme="http://yoursite.com/tags/%E7%94%A8%E6%88%B7%E7%94%BB%E5%83%8F/"/>
     
   </entry>
   
   <entry>
     <title>机器学习算法系列（36）：GBDT算法原理深入解析</title>
-    <link href="http://freewill.top/2017/09/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8836%EF%BC%89%EF%BC%9AGBDT%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90/"/>
-    <id>http://freewill.top/2017/09/04/机器学习算法系列（36）：GBDT算法原理深入解析/</id>
+    <link href="http://yoursite.com/2017/09/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8836%EF%BC%89%EF%BC%9AGBDT%E7%AE%97%E6%B3%95%E5%8E%9F%E7%90%86%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90/"/>
+    <id>http://yoursite.com/2017/09/04/机器学习算法系列（36）：GBDT算法原理深入解析/</id>
     <published>2017-09-04T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.915Z</updated>
     
@@ -2497,19 +2497,19 @@
     
     </summary>
     
-      <category term="机器学习" scheme="http://freewill.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="GBDT" scheme="http://freewill.top/tags/GBDT/"/>
+      <category term="GBDT" scheme="http://yoursite.com/tags/GBDT/"/>
     
-      <category term="机器学习" scheme="http://freewill.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>机器学习算法系列（35）：使用Sklearn进行集成学习（实践）</title>
-    <link href="http://freewill.top/2017/09/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8835%EF%BC%89%EF%BC%9A%E4%BD%BF%E7%94%A8Sklearn%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%AE%9E%E8%B7%B5%EF%BC%89/"/>
-    <id>http://freewill.top/2017/09/03/机器学习算法系列（35）：使用Sklearn进行集成学习（实践）/</id>
+    <link href="http://yoursite.com/2017/09/03/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8835%EF%BC%89%EF%BC%9A%E4%BD%BF%E7%94%A8Sklearn%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%EF%BC%88%E5%AE%9E%E8%B7%B5%EF%BC%89/"/>
+    <id>http://yoursite.com/2017/09/03/机器学习算法系列（35）：使用Sklearn进行集成学习（实践）/</id>
     <published>2017-09-03T15:14:45.000Z</published>
     <updated>2019-07-30T10:51:50.701Z</updated>
     
@@ -2521,19 +2521,19 @@
     
     </summary>
     
-      <category term="机器学习" scheme="http://freewill.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://freewill.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="集成学习" scheme="http://freewill.top/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+      <category term="集成学习" scheme="http://yoursite.com/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>机器学习算法系列（34）：使用Sklearn进行集成学习（理论）</title>
-    <link href="http://freewill.top/2017/09/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8834%EF%BC%89%EF%BC%9A%E4%BD%BF%E7%94%A8Sklearn%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%EF%BC%88%E7%90%86%E8%AE%BA%EF%BC%89/"/>
-    <id>http://freewill.top/2017/09/02/机器学习算法系列（34）：使用Sklearn进行集成学习（理论）/</id>
+    <link href="http://yoursite.com/2017/09/02/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8834%EF%BC%89%EF%BC%9A%E4%BD%BF%E7%94%A8Sklearn%E8%BF%9B%E8%A1%8C%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0%EF%BC%88%E7%90%86%E8%AE%BA%EF%BC%89/"/>
+    <id>http://yoursite.com/2017/09/02/机器学习算法系列（34）：使用Sklearn进行集成学习（理论）/</id>
     <published>2017-09-02T15:14:45.000Z</published>
     <updated>2019-07-31T07:19:23.373Z</updated>
     
@@ -2546,21 +2546,21 @@
     
     </summary>
     
-      <category term="机器学习" scheme="http://freewill.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://freewill.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="Scikit-Learn" scheme="http://freewill.top/tags/Scikit-Learn/"/>
+      <category term="Scikit-Learn" scheme="http://yoursite.com/tags/Scikit-Learn/"/>
     
-      <category term="集成学习" scheme="http://freewill.top/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
+      <category term="集成学习" scheme="http://yoursite.com/tags/%E9%9B%86%E6%88%90%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
     <title>机器学习算法系列（33）：特征处理（Feature Processing）</title>
-    <link href="http://freewill.top/2017/08/31/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8833%EF%BC%89%EF%BC%9A%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%EF%BC%88Feature%20Processing%EF%BC%89/"/>
-    <id>http://freewill.top/2017/08/31/机器学习算法系列（33）：特征处理（Feature Processing）/</id>
+    <link href="http://yoursite.com/2017/08/31/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95%E7%B3%BB%E5%88%97%EF%BC%8833%EF%BC%89%EF%BC%9A%E7%89%B9%E5%BE%81%E5%A4%84%E7%90%86%EF%BC%88Feature%20Processing%EF%BC%89/"/>
+    <id>http://yoursite.com/2017/08/31/机器学习算法系列（33）：特征处理（Feature Processing）/</id>
     <published>2017-08-31T15:14:45.000Z</published>
     <updated>2019-07-31T07:19:56.356Z</updated>
     
@@ -2572,19 +2572,19 @@
     
     </summary>
     
-      <category term="机器学习" scheme="http://freewill.top/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="机器学习" scheme="http://freewill.top/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+      <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="特征工程" scheme="http://freewill.top/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/"/>
+      <category term="特征工程" scheme="http://yoursite.com/tags/%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（12）：单例模式</title>
-    <link href="http://freewill.top/2017/08/30/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8812%EF%BC%89%EF%BC%9A%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://freewill.top/2017/08/30/Java学习笔记（12）：单例模式/</id>
+    <link href="http://yoursite.com/2017/08/30/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8812%EF%BC%89%EF%BC%9A%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://yoursite.com/2017/08/30/Java学习笔记（12）：单例模式/</id>
     <published>2017-08-30T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.800Z</updated>
     
@@ -2596,19 +2596,19 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="单例模式" scheme="http://freewill.top/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
+      <category term="单例模式" scheme="http://yoursite.com/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（11）：进程与线程</title>
-    <link href="http://freewill.top/2017/08/30/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8811%EF%BC%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
-    <id>http://freewill.top/2017/08/30/Java学习笔记（11）：进程与线程/</id>
+    <link href="http://yoursite.com/2017/08/30/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8811%EF%BC%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/"/>
+    <id>http://yoursite.com/2017/08/30/Java学习笔记（11）：进程与线程/</id>
     <published>2017-08-30T13:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.722Z</updated>
     
@@ -2620,19 +2620,19 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="操作系统基础" scheme="http://freewill.top/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
+      <category term="操作系统基础" scheme="http://yoursite.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（10）：QA</title>
-    <link href="http://freewill.top/2017/08/30/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8810%EF%BC%89%EF%BC%9AQA/"/>
-    <id>http://freewill.top/2017/08/30/Java学习笔记（10）：QA/</id>
+    <link href="http://yoursite.com/2017/08/30/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8810%EF%BC%89%EF%BC%9AQA/"/>
+    <id>http://yoursite.com/2017/08/30/Java学习笔记（10）：QA/</id>
     <published>2017-08-30T12:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.662Z</updated>
     
@@ -2644,19 +2644,19 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="QA" scheme="http://freewill.top/tags/QA/"/>
+      <category term="QA" scheme="http://yoursite.com/tags/QA/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（9）：内部类、抽象类、接口</title>
-    <link href="http://freewill.top/2017/08/28/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89%EF%BC%9A%E5%86%85%E9%83%A8%E7%B1%BB%E3%80%81%E6%8A%BD%E8%B1%A1%E7%B1%BB%E3%80%81%E6%8E%A5%E5%8F%A3/"/>
-    <id>http://freewill.top/2017/08/28/Java学习笔记（9）：内部类、抽象类、接口/</id>
+    <link href="http://yoursite.com/2017/08/28/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%889%EF%BC%89%EF%BC%9A%E5%86%85%E9%83%A8%E7%B1%BB%E3%80%81%E6%8A%BD%E8%B1%A1%E7%B1%BB%E3%80%81%E6%8E%A5%E5%8F%A3/"/>
+    <id>http://yoursite.com/2017/08/28/Java学习笔记（9）：内部类、抽象类、接口/</id>
     <published>2017-08-28T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.720Z</updated>
     
@@ -2668,23 +2668,23 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="内部类" scheme="http://freewill.top/tags/%E5%86%85%E9%83%A8%E7%B1%BB/"/>
+      <category term="内部类" scheme="http://yoursite.com/tags/%E5%86%85%E9%83%A8%E7%B1%BB/"/>
     
-      <category term="抽象类" scheme="http://freewill.top/tags/%E6%8A%BD%E8%B1%A1%E7%B1%BB/"/>
+      <category term="抽象类" scheme="http://yoursite.com/tags/%E6%8A%BD%E8%B1%A1%E7%B1%BB/"/>
     
-      <category term="接口" scheme="http://freewill.top/tags/%E6%8E%A5%E5%8F%A3/"/>
+      <category term="接口" scheme="http://yoursite.com/tags/%E6%8E%A5%E5%8F%A3/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（8）：常用库类、向量与哈希</title>
-    <link href="http://freewill.top/2017/08/27/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89%EF%BC%9A%E5%B8%B8%E7%94%A8%E5%BA%93%E7%B1%BB%E3%80%81%E5%90%91%E9%87%8F%E4%B8%8E%E5%93%88%E5%B8%8C/"/>
-    <id>http://freewill.top/2017/08/27/Java学习笔记（8）：常用库类、向量与哈希/</id>
+    <link href="http://yoursite.com/2017/08/27/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89%EF%BC%9A%E5%B8%B8%E7%94%A8%E5%BA%93%E7%B1%BB%E3%80%81%E5%90%91%E9%87%8F%E4%B8%8E%E5%93%88%E5%B8%8C/"/>
+    <id>http://yoursite.com/2017/08/27/Java学习笔记（8）：常用库类、向量与哈希/</id>
     <published>2017-08-27T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.764Z</updated>
     
@@ -2696,19 +2696,19 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="常用库类" scheme="http://freewill.top/tags/%E5%B8%B8%E7%94%A8%E5%BA%93%E7%B1%BB/"/>
+      <category term="常用库类" scheme="http://yoursite.com/tags/%E5%B8%B8%E7%94%A8%E5%BA%93%E7%B1%BB/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（7）：深入理解java异常处理机制</title>
-    <link href="http://freewill.top/2017/08/26/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/"/>
-    <id>http://freewill.top/2017/08/26/Java学习笔记（7）：深入理解java异常处理机制/</id>
+    <link href="http://yoursite.com/2017/08/26/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%887%EF%BC%89%EF%BC%9A%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%9C%BA%E5%88%B6/"/>
+    <id>http://yoursite.com/2017/08/26/Java学习笔记（7）：深入理解java异常处理机制/</id>
     <published>2017-08-26T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.605Z</updated>
     
@@ -2720,19 +2720,19 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="异常处理" scheme="http://freewill.top/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
+      <category term="异常处理" scheme="http://yoursite.com/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（6）：异常处理</title>
-    <link href="http://freewill.top/2017/08/25/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89%EF%BC%9A%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
-    <id>http://freewill.top/2017/08/25/Java学习笔记（6）：异常处理/</id>
+    <link href="http://yoursite.com/2017/08/25/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%886%EF%BC%89%EF%BC%9A%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
+    <id>http://yoursite.com/2017/08/25/Java学习笔记（6）：异常处理/</id>
     <published>2017-08-25T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.996Z</updated>
     
@@ -2744,19 +2744,19 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="异常处理" scheme="http://freewill.top/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
+      <category term="异常处理" scheme="http://yoursite.com/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（5）：static、final关键字和Object类</title>
-    <link href="http://freewill.top/2017/08/24/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89%EF%BC%9Astatic%E3%80%81final%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8CObject%E7%B1%BB/"/>
-    <id>http://freewill.top/2017/08/24/Java学习笔记（5）：static、final关键字和Object类/</id>
+    <link href="http://yoursite.com/2017/08/24/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89%EF%BC%9Astatic%E3%80%81final%E5%85%B3%E9%94%AE%E5%AD%97%E5%92%8CObject%E7%B1%BB/"/>
+    <id>http://yoursite.com/2017/08/24/Java学习笔记（5）：static、final关键字和Object类/</id>
     <published>2017-08-24T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.808Z</updated>
     
@@ -2768,23 +2768,23 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="static" scheme="http://freewill.top/tags/static/"/>
+      <category term="static" scheme="http://yoursite.com/tags/static/"/>
     
-      <category term="final" scheme="http://freewill.top/tags/final/"/>
+      <category term="final" scheme="http://yoursite.com/tags/final/"/>
     
-      <category term="Object" scheme="http://freewill.top/tags/Object/"/>
+      <category term="Object" scheme="http://yoursite.com/tags/Object/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（4）：多态</title>
-    <link href="http://freewill.top/2017/08/23/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E5%A4%9A%E6%80%81/"/>
-    <id>http://freewill.top/2017/08/23/Java学习笔记（4）：多态/</id>
+    <link href="http://yoursite.com/2017/08/23/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E5%A4%9A%E6%80%81/"/>
+    <id>http://yoursite.com/2017/08/23/Java学习笔记（4）：多态/</id>
     <published>2017-08-23T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.987Z</updated>
     
@@ -2796,19 +2796,19 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="多态" scheme="http://freewill.top/tags/%E5%A4%9A%E6%80%81/"/>
+      <category term="多态" scheme="http://yoursite.com/tags/%E5%A4%9A%E6%80%81/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（3）：继承、覆盖、重载</title>
-    <link href="http://freewill.top/2017/08/22/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%EF%BC%9A%E7%BB%A7%E6%89%BF/"/>
-    <id>http://freewill.top/2017/08/22/Java学习笔记（3）：继承/</id>
+    <link href="http://yoursite.com/2017/08/22/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%EF%BC%9A%E7%BB%A7%E6%89%BF/"/>
+    <id>http://yoursite.com/2017/08/22/Java学习笔记（3）：继承/</id>
     <published>2017-08-22T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.658Z</updated>
     
@@ -2820,19 +2820,19 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="继承" scheme="http://freewill.top/tags/%E7%BB%A7%E6%89%BF/"/>
+      <category term="继承" scheme="http://yoursite.com/tags/%E7%BB%A7%E6%89%BF/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（2）：类与对象</title>
-    <link href="http://freewill.top/2017/08/21/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%EF%BC%9A%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"/>
-    <id>http://freewill.top/2017/08/21/Java学习笔记（2）：类与对象/</id>
+    <link href="http://yoursite.com/2017/08/21/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%EF%BC%9A%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1/"/>
+    <id>http://yoursite.com/2017/08/21/Java学习笔记（2）：类与对象/</id>
     <published>2017-08-21T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.989Z</updated>
     
@@ -2844,19 +2844,19 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="类" scheme="http://freewill.top/tags/%E7%B1%BB/"/>
+      <category term="类" scheme="http://yoursite.com/tags/%E7%B1%BB/"/>
     
   </entry>
   
   <entry>
     <title>Java学习笔记（1）：语法基础</title>
-    <link href="http://freewill.top/2017/08/20/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/"/>
-    <id>http://freewill.top/2017/08/20/Java学习笔记（1）：语法基础/</id>
+    <link href="http://yoursite.com/2017/08/20/Java%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%EF%BC%9A%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/"/>
+    <id>http://yoursite.com/2017/08/20/Java学习笔记（1）：语法基础/</id>
     <published>2017-08-20T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.944Z</updated>
     
@@ -2868,17 +2868,17 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
   </entry>
   
   <entry>
     <title>Java集合学习手册（11）：Java HashMap源码全剖析</title>
-    <link href="http://freewill.top/2017/08/19/Java%E9%9B%86%E5%90%88%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C%EF%BC%8811%EF%BC%89%EF%BC%9AJava%20HashMap%E6%BA%90%E7%A0%81%E5%85%A8%E5%89%96%E6%9E%90/"/>
-    <id>http://freewill.top/2017/08/19/Java集合学习手册（11）：Java HashMap源码全剖析/</id>
+    <link href="http://yoursite.com/2017/08/19/Java%E9%9B%86%E5%90%88%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C%EF%BC%8811%EF%BC%89%EF%BC%9AJava%20HashMap%E6%BA%90%E7%A0%81%E5%85%A8%E5%89%96%E6%9E%90/"/>
+    <id>http://yoursite.com/2017/08/19/Java集合学习手册（11）：Java HashMap源码全剖析/</id>
     <published>2017-08-19T14:20:45.000Z</published>
     <updated>2019-07-30T10:51:50.673Z</updated>
     
@@ -2890,14 +2890,14 @@
     
     </summary>
     
-      <category term="Java" scheme="http://freewill.top/categories/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
-      <category term="数据结构" scheme="http://freewill.top/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="Java" scheme="http://freewill.top/tags/Java/"/>
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
     
-      <category term="HashMap" scheme="http://freewill.top/tags/HashMap/"/>
+      <category term="HashMap" scheme="http://yoursite.com/tags/HashMap/"/>
     
   </entry>
   
