@@ -1076,10 +1076,12 @@ a_t^{l-1}=f^{l-1}(net_t^{l-1})</script><p>上式中$net_t^l$是第$l$层神经�
 		<script>
 		    $(document).ready(function() {
 		        var int = setInterval(fixCount, 100);
-		        var busuanziSiteOffset = parseInt(100000);
+		        var busuanziSiteOffset_uv = parseInt(190422);
+		        var busuanziSiteOffset_pv = parseInt(412128);
 		        function fixCount() {
 	                clearInterval(int);
-	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset_pv);
+	                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + busuanziSiteOffset_uv);
 		        }
 		    });
 		</script>

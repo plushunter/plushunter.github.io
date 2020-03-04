@@ -912,10 +912,12 @@ F_1=\frac{2TP}{2TP+FP+FN}</script>精确率与召回率都很高时，$F_1$值�
 		<script>
 		    $(document).ready(function() {
 		        var int = setInterval(fixCount, 100);
-		        var busuanziSiteOffset = parseInt(100000);
+		        var busuanziSiteOffset_uv = parseInt(190422);
+		        var busuanziSiteOffset_pv = parseInt(412128);
 		        function fixCount() {
 	                clearInterval(int);
-	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset_pv);
+	                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + busuanziSiteOffset_uv);
 		        }
 		    });
 		</script>

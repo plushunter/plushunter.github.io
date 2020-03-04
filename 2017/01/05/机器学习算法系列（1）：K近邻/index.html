@@ -830,10 +830,12 @@ d\left( x,y \right) =\sqrt{\sum_{i=1}^n{\left( \frac{x_i-y_i}{s} \right) ^2}}</s
 		<script>
 		    $(document).ready(function() {
 		        var int = setInterval(fixCount, 100);
-		        var busuanziSiteOffset = parseInt(100000);
+		        var busuanziSiteOffset_uv = parseInt(190422);
+		        var busuanziSiteOffset_pv = parseInt(412128);
 		        function fixCount() {
 	                clearInterval(int);
-	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset_pv);
+	                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + busuanziSiteOffset_uv);
 		        }
 		    });
 		</script>

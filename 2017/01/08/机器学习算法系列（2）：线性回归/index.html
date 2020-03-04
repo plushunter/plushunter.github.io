@@ -860,10 +860,12 @@ J\left(\theta\right)=\frac{1}{2}\sum_{i=1}^m{\left(h_{\theta}\left(x^{\left(i\ri
 		<script>
 		    $(document).ready(function() {
 		        var int = setInterval(fixCount, 100);
-		        var busuanziSiteOffset = parseInt(100000);
+		        var busuanziSiteOffset_uv = parseInt(190422);
+		        var busuanziSiteOffset_pv = parseInt(412128);
 		        function fixCount() {
 	                clearInterval(int);
-	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset_pv);
+	                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + busuanziSiteOffset_uv);
 		        }
 		    });
 		</script>
