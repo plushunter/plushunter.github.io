@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2019/06/19/2020-02-24/</loc>
+    
+    <lastmod>2020-02-25T02:56:13.349Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2019/06/19/Redis-1/</loc>
+    
+    <lastmod>2020-02-24T11:53:40.481Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tech-stack/index.html</loc>
     
-    <lastmod>2020-02-19T12:08:22.661Z</lastmod>
+    <lastmod>2020-02-19T12:47:22.954Z</lastmod>
     
   </url>
   

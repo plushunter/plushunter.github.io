@@ -1463,6 +1463,161 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/2020-02-24/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Free Will">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2019/06/19/2020-02-24/" itemprop="url">
+                  Redis笔记（2）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T20:20:28+08:00">
+                2019-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Redis-命令"><a href="#Redis-命令" class="headerlink" title="Redis 命令"></a>Redis 命令</h3><p>Redis 命令用于在 Redis 服务上执行操作，我们使用 Redis 服务自带的 redis-cli 客户端来发送命令，最新版的 redis-cli 会有命令提示功能，比较方便。</p>
+<p>启动 redis-cli 客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ redis-cli</div></pre></td></tr></table></figure>
+<p>范例</p>
+<p>下面的范例演示了如何启动 redis 客户端，并发送 ping 命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ redis-cli</div><div class="line">127.0.0.1:6379&gt;</div><div class="line">127.0.0.1:6379&gt; PING</div><div class="line">PONG</div></pre></td></tr></table></figure>
+<p>PING 命令用于检测 Redis 服务是否启动</p>
+<p>使用 redis-cli 在远程 Redis 服务上执行命令<br>启动远程 redis-cli 语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ redis-cli -h host -p port -a password</div></pre></td></tr></table></figure>
+<p>下面的范例演示了如何连接到主机为 192.168.1.100，端口为 6379 ，密码为 123456 的 Redis 服务上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">192.168.1.100&gt;</div><div class="line">192.168.1.100&gt; PING</div><div class="line">PONG</div></pre></td></tr></table></figure>
+<h3 id="Redis-键-key-命令"><a href="#Redis-键-key-命令" class="headerlink" title="Redis 键(key) 命令"></a>Redis 键(key) 命令</h3><p>Redis 键相关的命令用于管理 redis 的键，Redis 键命令的基本语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; COMMAND KEY_NAME</div></pre></td></tr></table></figure>
+<p>范例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; set site plushunter.github.io</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; del site</div><div class="line">(integer) 1</div></pre></td></tr></table></figure>
+<p>DEL 是一个命令，用来删除一个键 site<br>如果键被删除成功，命令执行后输出 (integer) 1 ，否则将输出 (integer) 0</p>
+<h4 id="Redis-keys-命令"><a href="#Redis-keys-命令" class="headerlink" title="Redis keys 命令"></a>Redis keys 命令</h4>
+          
+        
+      
+    </div>
+
+
+    <div>
+      
+    </div>
+<div>
+  
+</div>
+    <div>
+      
+
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+      
+
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/AD-RS-1/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1599,151 +1754,6 @@ var _hmt = _hmt || [];
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/Spark-1/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Free Will">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/img/v.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Free Will">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2019/06/19/Spark-1/" itemprop="url">
-                  Spark笔记（1）：RDD编程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T20:20:28+08:00">
-                2019-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spark/" itemprop="url" rel="index">
-                    <span itemprop="name">Spark</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Spark笔记系列我们准备以《Spark大数据分析》这本书的总体框架为主线，从RDD编程的核心概念说起，到基本的RDD操作、数据IO、Spark Job，以及Spark SQL、Spark Streaming、Spark MLlib这些Spark组件，结合实例系统的进行讲解，之后会将其延伸开来，争取照顾到Spark的方方面面。</p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2019/06/19/Spark-1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-
-    <div>
-      
-    </div>
-<div>
-  
-</div>
-    <div>
-      
-
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-      
-
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1800,7 +1810,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">208</span>
+                  <span class="site-state-item-count">210</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1811,7 +1821,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1822,7 +1832,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">308</span>
+                  <span class="site-state-item-count">309</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
