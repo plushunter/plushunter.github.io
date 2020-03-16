@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="推荐系统," />
+  <meta name="keywords" content="Redis," />
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="一、什么是推荐系统？维基百科：它是一种信息过滤系统，手段是预测用户（User）对物品（Item）的评分和偏好。">
-<meta name="keywords" content="推荐系统">
+<meta name="description" content="Redis 命令Redis 命令用于在 Redis 服务上执行操作，我们使用 Redis 服务自带的 redis-cli 客户端来发送命令，最新版的 redis-cli 会有命令提示功能，比较方便。">
+<meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《推荐系统三十六式》笔记（1）：概念篇">
-<meta property="og:url" content="http://yoursite.com/2019/07/19/RS-36-1/index.html">
+<meta property="og:title" content="Redis笔记（2）">
+<meta property="og:url" content="http://yoursite.com/2019/06/19/Redis-2/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="一、什么是推荐系统？维基百科：它是一种信息过滤系统，手段是预测用户（User）对物品（Item）的评分和偏好。">
+<meta property="og:description" content="Redis 命令Redis 命令用于在 Redis 服务上执行操作，我们使用 Redis 服务自带的 redis-cli 客户端来发送命令，最新版的 redis-cli 会有命令提示功能，比较方便。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-01T15:38:41.637Z">
+<meta property="og:updated_time" content="2020-03-16T08:37:39.503Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《推荐系统三十六式》笔记（1）：概念篇">
-<meta name="twitter:description" content="一、什么是推荐系统？维基百科：它是一种信息过滤系统，手段是预测用户（User）对物品（Item）的评分和偏好。">
+<meta name="twitter:title" content="Redis笔记（2）">
+<meta name="twitter:description" content="Redis 命令Redis 命令用于在 Redis 服务上执行操作，我们使用 Redis 服务自带的 redis-cli 客户端来发送命令，最新版的 redis-cli 会有命令提示功能，比较方便。">
 
 
 
@@ -133,7 +133,7 @@
 
 
 
-  <title> 《推荐系统三十六式》笔记（1）：概念篇 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Redis笔记（2） | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -298,7 +298,7 @@ var _hmt = _hmt || [];
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/19/RS-36-1/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/Redis-2/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Free Will">
@@ -322,7 +322,7 @@ var _hmt = _hmt || [];
             
             
               
-                《推荐系统三十六式》笔记（1）：概念篇
+                Redis笔记（2）
               
             
           </h1>
@@ -335,8 +335,8 @@ var _hmt = _hmt || [];
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-19T20:20:28+08:00">
-                2019-07-19
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T20:20:28+08:00">
+                2019-06-19
               </time>
             
 
@@ -354,8 +354,8 @@ var _hmt = _hmt || [];
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/推荐系统/" itemprop="url" rel="index">
-                    <span itemprop="name">推荐系统</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -394,80 +394,24 @@ var _hmt = _hmt || [];
       
 
       
-        <h2 id="一、什么是推荐系统？"><a href="#一、什么是推荐系统？" class="headerlink" title="一、什么是推荐系统？"></a>一、什么是推荐系统？</h2><p>维基百科：它是一种信息过滤系统，手段是预测用户（User）对物品（Item）的评分和偏好。</p>
+        <h3 id="Redis-命令"><a href="#Redis-命令" class="headerlink" title="Redis 命令"></a>Redis 命令</h3><p>Redis 命令用于在 Redis 服务上执行操作，我们使用 Redis 服务自带的 redis-cli 客户端来发送命令，最新版的 redis-cli 会有命令提示功能，比较方便。</p>
 <a id="more"></a>
-<p>重新定义</p>
-<ul>
-<li><p>它能做什么？</p>
-<ul>
-<li>推荐系统可以把那些最终会在用户（User）和物品（Item）之间产生的连接提前找出来</li>
-</ul>
-</li>
-<li><p>连接的关键定义：</p>
-<ul>
-<li>世界的发展趋势是万物倾向于建立越来越多的连接；</li>
-<li>人是这一切趋势的意义所在，为人建立连接是要义；</li>
-<li>根据已有的连接预测和人有关的连接，就是推荐系统；</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">人 &amp; 人   ===&gt; 社交产品  用户建立的社交关系 -&gt; 提前找出潜在的社交</div><div class="line">人 &amp; 商品 ===&gt; 电商产品: 用户历史浏览点击购买 -&gt; 提前找出潜在会购买的</div><div class="line">人 &amp; 资讯 ===&gt; 信息流产品：用户过去的点击阅读 -&gt; 提前找出潜在会点击阅读的</div></pre></td></tr></table></figure>
-<ul>
-<li>它需要什么？</li>
-</ul>
-<p>推荐系统需要已经存在的连接，从已有的连接去预测未来的连接</p>
-<ul>
-<li>怎么做？</li>
-</ul>
-<p>预测用户评分和偏好；对应个性化推荐和编辑推荐</p>
-<h2 id="二、你需要推荐系统吗？"><a href="#二、你需要推荐系统吗？" class="headerlink" title="二、你需要推荐系统吗？"></a>二、你需要推荐系统吗？</h2><p>考虑两点：</p>
-<ul>
-<li>产品的目的：若连接越多越好，则需要推荐系统；工具型的就不需要；工具-&gt;社交</li>
-<li>产品的现状：用户少，连接就少，可以一对一应付，就不需要推荐系统；用户多，但回访留存很少，连接不密集，需要提高用户的活跃度才可用推荐系统</li>
-</ul>
-<p>指标解释：</p>
-<script type="math/tex; mode=display">\frac{\Delta connection}{\Delta user × \Delta item}</script><p>分子是一定时间内增加的连接数，分母是增加的活跃用户数和增加的有效物品数。</p>
-<p>如果增加的连接数主要靠增加的活跃用户数和增加的物品数贡献，则该值会较小，不适合加入推荐系统；</p>
-<p>如果增加的连接数和新增活跃用户和物品关系不大，那说明连接数已经有自发生长的趋势了，适合加入推荐系统加速这一过程。</p>
-<h2 id="三、推荐系统的问题模式"><a href="#三、推荐系统的问题模式" class="headerlink" title="三、推荐系统的问题模式"></a>三、推荐系统的问题模式</h2><h3 id="评分预测"><a href="#评分预测" class="headerlink" title="评分预测"></a>评分预测</h3><p>预测一个用户对每一个物品会打多少分（显式反馈），找出那些他可能会打高分，但是还没发生连接的物品；常见于各种点评类产品，如书影音的点评；</p>
-<p>存在的问题：</p>
-<ul>
-<li>数据不易收集，我刚才说过，用户给出评分意味着他已经完成了前面所有的漏斗环节；</li>
-<li>数据质量不能保证，伪造评分数据门槛低，同时真实的评分数据又处在转化漏斗最后一环，门槛高；</li>
-<li>评分的分布不稳定，整体评分在不同时期会差别很大，个人评分在不同时期标准不同，人和人之间的标准差别很大。</li>
-</ul>
-<h3 id="行为预测"><a href="#行为预测" class="headerlink" title="行为预测"></a>行为预测</h3><p>显式反馈数据少，隐式反馈数据多得多，只要用户来了，就会有各种行为数据产生，从登录刷新，到购买收藏，都是用户行为，这类数据是用户们在自觉自愿的情况下产生的；</p>
-<p>行为预测即利用隐式反馈数据预测隐式反馈的发生概率；直接预测用户行为即CTR预估，就是 Click Through Rate，即“点击率”。把每一个推荐给用户的物品按照“会否点击”二分类，构建分类模型，预估其中一种分类的概率。</p>
-<p>行为预测的优势：</p>
-<ol>
-<li>数据比显式反馈更加稠密，显式数据会消耗用户更多的注意力</li>
-<li>隐式反馈更代表用户的真实想法</li>
-<li>隐式反馈常常和模型的目标函数关联更密切，如CTR预估关注的是点击这个隐式反馈</li>
-</ol>
-<p>用户给出较高评分的先决条件是用户要有“评分”的行为，所以行为预测解决的是推荐系统的 80% 问题，评分预测解决的是最后那 20% 的问题</p>
-<h2 id="四、推荐系统的顽疾"><a href="#四、推荐系统的顽疾" class="headerlink" title="四、推荐系统的顽疾"></a>四、推荐系统的顽疾</h2><p>下面几个推荐系统的问题还没有很好的通用解决方案，并且不容易被重视</p>
-<ul>
-<li>冷启动问题：新用户或者不活跃用户，以及新物品或展示次数较少的物品，由于缺乏相关数据，如何解决他们的冷启动问题。</li>
-<li>探索与利用问题:即EE问题（Exploit  Explore），Exploit 意为“开采”，对用户身上已经探明的兴趣加以利用，Explore 意为“探索”，探明用户身上还不知道的兴趣。大部分给他推荐感兴趣的，小部分去试探新的兴趣，如同一边收割长好的韭菜，一边播种新的韭菜。</li>
-<li>安全问题：推荐系统攻击问题，会影响：给出不靠谱的推荐结果，影响用户体验并最终影响品牌形象；收集了不靠谱的脏数据，这个影响会一直持续留存在产品中，很难完全消除；损失了产品的商业利益，这个是直接的经济损失。</li>
-</ul>
-<h2 id="五、推荐系统的关键元素"><a href="#五、推荐系统的关键元素" class="headerlink" title="五、推荐系统的关键元素"></a>五、推荐系统的关键元素</h2><p>开发一个推荐系统产品，有这么四个关键的元素需要注意，重要性依次递减，比例为4：3：2：1</p>
-<ul>
-<li>UI 和 UE : 人机交互设计和用户体验设计; 用户的体验、产品视觉审美、交互逻辑很大程度会决定用户是否会继续使用</li>
-<li>数据：是推荐系统的食材，巧妇难为无米之炊；UI、UE、数据是一个产品的基石</li>
-<li>领域知识：电商、音乐、新闻各领域的普适规律，对于推荐系统的效果提升非常有用</li>
-<li>算法：算法的作用没有你想象的那么大，但也一定不是可有可无</li>
-</ul>
-<h2 id="六、目标思维和不确定性思维"><a href="#六、目标思维和不确定性思维" class="headerlink" title="六、目标思维和不确定性思维"></a>六、目标思维和不确定性思维</h2><p>推荐系统这种信息过滤系统，追求的是指标的增长，背后思想强调是目标和不确定性：我们并不能很确定地模拟每个人将会看到什么，也不能很好地复现一些操作过程，充满了不确定性，但是在推荐系统未动的情形下，目标先行则是常识。</p>
-<p>目标思维：量化目标，才可以自发寻找优化方案，不停留在感觉推荐很精准或不准确的玄学层面</p>
-<p>不确定性思维：不用因果逻辑严丝合缝地提前推演，而是用概率的眼光去看结果。</p>
-<ul>
-<li>绝大多数推荐算法都是概率算法，因此本身就无法保证得到确切结果，只是概率上得到好的效果；</li>
-<li>推荐系统追求的是目标的增长，而不是一城一池的得失；</li>
-<li>如果去花时间为了一个 Case 而增加补丁，那么付出的成本和得到的收益将大打折扣；</li>
-<li>本身出现意外的推荐也是有益的，可以探索用户的新兴趣；</li>
-</ul>
-
+<p>启动 redis-cli 客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ redis-cli</div></pre></td></tr></table></figure>
+<p>范例</p>
+<p>下面的范例演示了如何启动 redis 客户端，并发送 ping 命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ redis-cli</div><div class="line">127.0.0.1:6379&gt;</div><div class="line">127.0.0.1:6379&gt; PING</div><div class="line">PONG</div></pre></td></tr></table></figure>
+<p>PING 命令用于检测 Redis 服务是否启动</p>
+<p>使用 redis-cli 在远程 Redis 服务上执行命令<br>启动远程 redis-cli 语法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ redis-cli -h host -p port -a password</div></pre></td></tr></table></figure>
+<p>下面的范例演示了如何连接到主机为 192.168.1.100，端口为 6379 ，密码为 123456 的 Redis 服务上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">192.168.1.100&gt;</div><div class="line">192.168.1.100&gt; PING</div><div class="line">PONG</div></pre></td></tr></table></figure>
+<h3 id="Redis-键-key-命令"><a href="#Redis-键-key-命令" class="headerlink" title="Redis 键(key) 命令"></a>Redis 键(key) 命令</h3><p>Redis 键相关的命令用于管理 redis 的键，Redis 键命令的基本语法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; COMMAND KEY_NAME</div></pre></td></tr></table></figure>
+<p>范例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">127.0.0.1:6379&gt; set site plushunter.github.io</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; del site</div><div class="line">(integer) 1</div></pre></td></tr></table></figure>
+<p>DEL 是一个命令，用来删除一个键 site<br>如果键被删除成功，命令执行后输出 (integer) 1 ，否则将输出 (integer) 0</p>
+<h4 id="Redis-keys-命令"><a href="#Redis-keys-命令" class="headerlink" title="Redis keys 命令"></a>Redis keys 命令</h4>
       
     </div>
 
@@ -510,7 +454,7 @@ var _hmt = _hmt || [];
       
         <div class="post-tags">
           
-            <a href="/tags/推荐系统/" rel="tag"># 推荐系统</a>
+            <a href="/tags/Redis/" rel="tag"># Redis</a>
           
         </div>
       
@@ -519,8 +463,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/19/RS-36-2/" rel="next" title="《推荐系统三十六式》笔记（2）：内容推荐">
-                <i class="fa fa-chevron-left"></i> 《推荐系统三十六式》笔记（2）：内容推荐
+              <a href="/2019/06/19/AD-RS-1/" rel="next" title="计算广告面面观（1）：经久不衰的逻辑回归">
+                <i class="fa fa-chevron-left"></i> 计算广告面面观（1）：经久不衰的逻辑回归
               </a>
             
           </div>
@@ -529,8 +473,8 @@ var _hmt = _hmt || [];
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/23/AD-RS-4/" rel="prev" title="计算广告面面观（4）：计算广告基础知识">
-                计算广告面面观（4）：计算广告基础知识 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/06/21/AD-RS-2/" rel="prev" title="计算广告面面观（2）：大规模分片线性模型MLR">
+                计算广告面面观（2）：大规模分片线性模型MLR <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -618,7 +562,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">210</span>
+                  <span class="site-state-item-count">206</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -629,7 +573,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -640,7 +584,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">309</span>
+                  <span class="site-state-item-count">306</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -785,7 +729,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、什么是推荐系统？"><span class="nav-text">一、什么是推荐系统？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、你需要推荐系统吗？"><span class="nav-text">二、你需要推荐系统吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、推荐系统的问题模式"><span class="nav-text">三、推荐系统的问题模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#评分预测"><span class="nav-text">评分预测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行为预测"><span class="nav-text">行为预测</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、推荐系统的顽疾"><span class="nav-text">四、推荐系统的顽疾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、推荐系统的关键元素"><span class="nav-text">五、推荐系统的关键元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、目标思维和不确定性思维"><span class="nav-text">六、目标思维和不确定性思维</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-命令"><span class="nav-text">Redis 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Redis-键-key-命令"><span class="nav-text">Redis 键(key) 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Redis-keys-命令"><span class="nav-text">Redis keys 命令</span></a></li></ol></li></ol></div>
             
 
           </div>
