@@ -1165,15 +1165,15 @@ pre .javascript .function {
 }
 @media (max-width: 1080px) {
   .posts-expand {
-    margin: 0 20px;
+    margin: 0 50px;
   }
   .post-body pre,
   .post-body .highlight {
-    padding: 10px;
+    padding: 20px;
   }
   .post-body pre .gutter pre,
   .post-body .highlight .gutter pre {
-    padding-right: 10px;
+    padding-right: 20px;
   }
 }
 @media (min-width: 992px) {
@@ -1186,7 +1186,7 @@ pre .javascript .function {
 .posts-expand .post-body h4,
 .posts-expand .post-body h5,
 .posts-expand .post-body h6 {
-  padding-top: 10px;
+  padding-top: 20px;
 }
 .posts-expand .post-body h2 .header-anchor,
 .posts-expand .post-body h3 .header-anchor,
@@ -1223,7 +1223,7 @@ pre .javascript .function {
   border: 1px solid #ddd;
 }
 .posts-expand .fancybox img {
-  margin: 0 auto;
+  margin: 20 auto;
 }
 @media (max-width: 767px) {
   .posts-collapse {
@@ -1706,7 +1706,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #2137f0;
+  background: #ff217f;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2610,7 +2610,7 @@ hr {
   display: none;
 }
 .posts-expand {
-  padding-top: 0;
+  padding-top: 10px;
 }
 .posts-expand .post-title,
 .posts-expand .post-meta {
@@ -2629,7 +2629,7 @@ hr {
   margin-top: 120px;
 }
 .posts-expand .post:first-child {
-  margin-top: 0;
+  margin-top: 10px;
 }
 .posts-expand .post-meta {
   margin-top: 5px;
@@ -2695,6 +2695,10 @@ hr {
 }
 .post-more-link a:hover {
   border-bottom-color: #222;
+}
+.posts-expand .post {
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .links-of-blogroll-inline .links-of-blogroll-item {
   display: inline-block;
