@@ -2,6 +2,55 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/about/index.html</loc>
+    
+    <lastmod>2020-03-24T14:13:38.980Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/competitions/index.html</loc>
+    
+    <lastmod>2020-03-24T14:13:27.377Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tech-stack/index.html</loc>
+    
+    <lastmod>2020-03-24T14:13:17.076Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/see-movies/index.html</loc>
+    
+    <lastmod>2020-03-24T14:13:10.177Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/say-sth/index.html</loc>
+    
+    <lastmod>2020-03-24T14:13:04.478Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/on-earth/index.html</loc>
+    
+    <lastmod>2020-03-24T14:12:53.335Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/holzwege/index.html</loc>
+    
+    <lastmod>2020-03-24T14:11:46.315Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/01/10/%E7%AC%91%E5%BF%98%E5%BD%95%EF%BC%885%EF%BC%89%EF%BC%9A%E7%A6%BB%E5%88%AB/</loc>
     
     <lastmod>2020-03-16T08:41:09.187Z</lastmod>
@@ -19,55 +68,6 @@
     <loc>http://yoursite.com/2019/06/19/Redis-2/</loc>
     
     <lastmod>2020-03-16T08:37:39.503Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/tech-stack/index.html</loc>
-    
-    <lastmod>2020-02-19T12:47:22.954Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/see-movies/index.html</loc>
-    
-    <lastmod>2020-02-19T12:08:10.509Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/say-sth/index.html</loc>
-    
-    <lastmod>2020-02-19T12:07:59.910Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/on-earth/index.html</loc>
-    
-    <lastmod>2020-02-19T12:07:49.577Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/holzwege/index.html</loc>
-    
-    <lastmod>2020-02-19T12:07:38.300Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/competitions/index.html</loc>
-    
-    <lastmod>2020-02-19T12:07:31.734Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/about/index.html</loc>
-    
-    <lastmod>2020-02-18T15:11:15.028Z</lastmod>
     
   </url>
   
