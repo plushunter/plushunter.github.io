@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="LR,LS-PLM,GBDT,FM,FFM," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -86,18 +86,16 @@
 
 
 
-<meta name="description" content="本文主要介绍 CTR 预估中常用的一些模型，主要是非深度学习模型，包括 LR、GBDT+LR、FM/FFM、MLR。每个模型会简单介绍其原理、论文出处以及其一些开源实现。">
-<meta name="keywords" content="LR,LS-PLM,GBDT,FM,FFM">
-<meta property="og:type" content="article">
-<meta property="og:title" content="计算广告面面观（6）：CTR预估模型简介之非深度学习篇">
-<meta property="og:url" content="http://yoursite.com/2019/10/19/AD-RS-6/index.html">
+<meta name="description" content="人类被赋予了一种工作，那就是精神的成长">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Free Will">
+<meta property="og:url" content="http://yoursite.com/tags/搜索广告/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="本文主要介绍 CTR 预估中常用的一些模型，主要是非深度学习模型，包括 LR、GBDT+LR、FM/FFM、MLR。每个模型会简单介绍其原理、论文出处以及其一些开源实现。">
+<meta property="og:description" content="人类被赋予了一种工作，那就是精神的成长">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-11-18T04:10:23.564Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="计算广告面面观（6）：CTR预估模型简介之非深度学习篇">
-<meta name="twitter:description" content="本文主要介绍 CTR 预估中常用的一些模型，主要是非深度学习模型，包括 LR、GBDT+LR、FM/FFM、MLR。每个模型会简单介绍其原理、论文出处以及其一些开源实现。">
+<meta name="twitter:title" content="Free Will">
+<meta name="twitter:description" content="人类被赋予了一种工作，那就是精神的成长">
 
 
 
@@ -133,7 +131,7 @@
 
 
 
-  <title> 计算广告面面观（6）：CTR预估模型简介之非深度学习篇 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 标签: 搜索广告 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -165,7 +163,7 @@ var _hmt = _hmt || [];
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -288,243 +286,46 @@ var _hmt = _hmt || [];
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/19/AD-RS-6/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Free Will">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/img/v.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Free Will">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                计算广告面面观（6）：CTR预估模型简介之非深度学习篇
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-19T20:20:28+08:00">
-                2019-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/计算广告/" itemprop="url" rel="index">
-                    <span itemprop="name">计算广告</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-            <span class="post-meta-divider">|</span>
-            <span class="page-pv"><i class="fa fa-eye"></i>
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>本文主要介绍 CTR 预估中常用的一些模型，主要是非深度学习模型，包括 LR、GBDT+LR、FM/FFM、MLR。每个模型会简单介绍其原理、论文出处以及其一些开源实现。</p>
-<a id="more"></a>
-<h3 id="一、LR-Logistic-Regerssion"><a href="#一、LR-Logistic-Regerssion" class="headerlink" title="一、LR(Logistic Regerssion)"></a>一、LR(Logistic Regerssion)</h3><p>LR + 海量人工特征 是业界流传已久的做法，这个方法由于简单、可解释性强，因此在工业界得到广泛应用，但是这种做法依赖于特征工程的有效性，也就是需要对具体的业务场景有深刻的认识才能提取出好的特征。</p>
-<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>LR是一个很简单的线性模型，其输出的值可认为是事件发生$(y=1)$的概率，即输出值如下式所示:</p>
-<script type="math/tex; mode=display">h(x)=p(y=1|x)=σ(w^Tx+b)</script><p>其中$w$为模型参数，$x$为提取的样本特征，两者均为向量，$b$是偏置项。$σ$为$sigmoid$函数，即 $σ(x)=1/(1+e^{−x})$</p>
-<p>有了事件发生的概率，则事件不发生的概率为$p(y=0|x)=1−h(x)$,将这两个概率通过如下一条公式表示为</p>
-<script type="math/tex; mode=display">p(y|x)=h(x)^y(1−h(x))^{1−y}</script><p>有了这个概率值，则给定 n 个样本，便可通过极大似然估计来估算模型参数，即目标函数为</p>
-<script type="math/tex; mode=display">max∏_{i=1}^np(y_i|x_i)</script><p>通常我们还会对概率取 log，同时添加负号将 max 改成min，则可将目标函数改写成如下的形式</p>
-<script type="math/tex; mode=display">min−∑_{i=1}^ny_ilogh(xi)+(1−y_i)log(1−h(x_i))</script><p>上面的损失函数也叫作log loss，实际上多分类的cross entropy也同以通过极大似然估计推导出来。</p>
-<p>有了损失函数，便可通过优化算法来求出最优的参数，由于这是个无约束的最优化问题，可选用的方法很多，最常用的就是gradient descent，除此之外，另外还有基于二阶导数的牛顿法系列，适用于分布式中的 ADMM，以及由 Google 在论文<a href="https://static.googleusercontent.com/media/research.google.com/zh-CN//pubs/archive/41159.pdf" target="_blank" rel="noopener">Ad Click Prediction: a View from the Trenches</a> 中提出的 FTRL 算法，目前也是业界普遍采用的方法，该算法具有online learning 和稀疏性的良好特性，online learning 指的是其更新方式与 SGD(stochastic gradient descent) 相似，稀疏性指的是该算法能够解决带非光滑的L1正则项的优化问题。由于这里这篇文章主要讲述各种 CTR 预估模型，因此这里不对优化算法做展开了。</p>
-<p>上面提到了 L1 正则项，就是在原来的损失函数基础上加上了$C∑^m_{i=1}|w_i|$ 这一项, 表示各个参数的绝对值的和乘上常数C；加上这一项后能够使得最终的求解出来的参数中大部分的$|w_i|$为0，这也是稀疏性的名称来源。稀疏性使得模型的复杂度下降，缓解了过拟合的问题，同时具有有特征筛选的能力。因为 LR 模型可以理解为对各个特征进行加权求和，如果某些特征的权重即$w_i$为0，则可认为这些特征的重要性不高。在CTR预估中输入的是海量人工特征，因此添加 L1 正则化就更有必要了。</p>
-<p>由于L1正则项不再是处处光滑可导的函数，因此在优化损失函数时。原来的gradient descent不能够直接使用，而是要通过subgradient的方法或前面提到的FTRL算法进行优化。</p>
-<p>上面涵盖了LR模型的基本原理。而在CTR预估中，应用LR模型的重点在于特征工程。LR模型适用于高维稀疏特征。对于categorical特征，可以通过one-hot编码使其变得高纬且稀疏。而对于continious特征，可以先通过区间划分为categorica特征再进行one-hot编码。同时还需要进行特征的组合/交叉，以获取更有效的特征。</p>
-<p>一些问题</p>
-<p>上面介绍过程中有一些结论我们直接就使用了，下面对于上面提到的某些结论做出一些解释</p>
-<ol>
-<li>$LR$的输出为什么可以被当做是概率值？</li>
-</ol>
-<p>这部分涉及到广义线性模型$(GLM，Generalized linear model)$的知识，这里略过复杂的推导，直接给出结论。简单来说，LR 实际上是一个广义线性模型，其假设是二分类中$(y|x,θ)$服从伯努利分布(二项分布)，即给定输入样本$x$和模型参数$θ$, 事件是否发生服从伯努利分布。假设伯努利分布的参数 ϕ ，则 ϕ 可作为点击率。通过 广义线性模型的推导，能够推出$ϕ$ 的表示形式如下</p>
-<script type="math/tex; mode=display">ϕ=1/(1+e^{−η})</script><p>从上面的式子可知，$LR$中的$sigmoid$函数并不是凭空来的，而式子中的$η$也被称为连接函数（Link function), 是确定一个$GLM$的重要部分，在$LR$中为简单的线性加权。</p>
-<p>另外，如果将输出值与真实值的误差的分布假设为高斯分布，那么从 GLM 可推导出 Linear Regression，关于 GLM 详细的推导可参考这篇文章<a href="https://www.cnblogs.com/dreamvibe/p/4259460.html" target="_blank" rel="noopener">广义线性模型（GLM）</a>。</p>
-<ol>
-<li><p>为什么 L1 正则项能够带来稀疏性？</p>
-</li>
-<li><p>连续特征为什么需要离散化？</p>
-</li>
-</ol>
-<p>参考这个问题：<a href="https://www.zhihu.com/question/31989952/answer/54184582" target="_blank" rel="noopener">连续特征的离散化：在什么情况下将连续的特征离散化之后可以获得更好的效果？</a></p>
-<p>离散化后有以下几个好处：</p>
-<p>1) 稀疏向量内积乘法运算速度快，计算结果方便存储<br>2) 离散化后的特征对异常数据有很强的鲁棒性：比如一个特征是年龄&gt;30是1，否则0。如果特征没有离散化，一个异常数据“年龄300岁”会给模型造成很大的干扰；<br>3) 逻辑回归属于广义线性模型，表达能力受限；单变量离散化为N个后，可以通过 one-hot 编码为每个变量设置单独的权重，相当于为模型引入了非线性，能够提升模型表达能力，加大拟合；<br>4) 离散化后可以进行特征交叉，由M+N个变量变为M*N个变量，进一步引入非线性，提升表达能力；<br>5) 特征离散化后，模型会更稳定，比如如果对用户年龄离散化，20-30作为一个区间，不会因为一个用户年龄长了一岁就变成一个完全不同的人。当然处于区间相邻处的样本会刚好相反，所以怎么划分区间要取决于具体的场景</p>
-<ol>
-<li>为什么要对 categorical 特征做 One-hot 编码后再输入 LR？</li>
-</ol>
-<p>参考这篇文章<a href="http://www.jiehuozhe.com/article/3" target="_blank" rel="noopener">One-Hot编码与哑变量</a>，简单来说，就是LR建模时，要求特征具有线性关系，而实际应用中很少有满足这个假设关系的，因此LR模型效果很难达到应用要求。但是通过对离散特征进行 one-hot 编码，LR 可以为某个特征中所有可能的值设置一个权重，这样就能够更准确的建模，也就能够获得更精准的模型。而 one-hot 编码后特征实际上也是做了一个 min-max 归一化，能够克服不同特征的量纲差异，同时使模型收敛更快。</p>
-
-      
+  <div id="posts" class="posts-collapse">
+    <div class="collection-title">
+      <h2 >
+        搜索广告
+        <small>标签</small>
+      </h2>
     </div>
 
-
-    <div>
-      
-        
-
-      
-    </div>
-<div>
-  
-    <div>
     
-     <br> 
-        <div style="text-align:center;color: #ccc;font-size:18px;"><br>   本文结束    <i class="fa fa-paw"></i>
-             欢迎关注我的个人公众号  <br></div>
-        <div><br>  
-        <div align="center">
-       
- </div> 
-        <div align="center">
-
-        <img src="https://i.loli.net/2020/03/24/brJSo7tThuNn29A.png"/>
-        </div> 
-        </div>
-    
-</div>
-  
-</div>
-    <div>
       
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
         
+            <a class="post-title-link" href="/2020/03/28/AD-RS-5/" itemprop="url">
+              
+                <span itemprop="name">计算广告面面观（5）：DSSN</span>
+              
+            </a>
+        
+      </h1>
 
-      
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2020-03-28T20:20:28+08:00"
+              content="2020-03-28" >
+          03-28
+        </time>
+      </div>
 
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/LR/" rel="tag"># LR</a>
-          
-            <a href="/tags/LS-PLM/" rel="tag"># LS-PLM</a>
-          
-            <a href="/tags/GBDT/" rel="tag"># GBDT</a>
-          
-            <a href="/tags/FM/" rel="tag"># FM</a>
-          
-            <a href="/tags/FFM/" rel="tag"># FFM</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2019/10/15/AD-RS-5/" rel="next" title="计算广告面面观（5）：在线广告的Budget Pacing算法">
-                <i class="fa fa-chevron-left"></i> 计算广告面面观（5）：在线广告的Budget Pacing算法
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/11/10/spark-8/" rel="prev" title="Spark笔记（8）：Spark性能优化之数据倾斜处理">
-                Spark笔记（8）：Spark性能优化之数据倾斜处理 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-      
-
-    </footer>
+    </header>
   </article>
 
 
-
-    <div class="post-spread">
-      
-        <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<div class="addthis_inline_share_toolbox">
-  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bc405fb9346cd0b" async = "async" ></script>
-</div>
-
-      
-    </div>
+    
   </div>
+
+  
 
 
           </div>
@@ -532,10 +333,6 @@ var _hmt = _hmt || [];
 
 
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
         
@@ -558,17 +355,8 @@ var _hmt = _hmt || [];
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -587,7 +375,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">206</span>
+                  <span class="site-state-item-count">205</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -609,7 +397,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">306</span>
+                  <span class="site-state-item-count">307</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -709,23 +497,6 @@ var _hmt = _hmt || [];
           
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、LR-Logistic-Regerssion"><span class="nav-text">一、LR(Logistic Regerssion)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-text">原理</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-
-        </section>
-      <!--/noindex-->
       
 
 
@@ -850,10 +621,6 @@ var _hmt = _hmt || [];
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
-
-
 
   
 

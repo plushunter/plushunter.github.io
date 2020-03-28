@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="搜索广告,DSSN,Word hash," />
 
 
 
@@ -86,16 +86,28 @@
 
 
 
-<meta name="description" content="人类被赋予了一种工作，那就是精神的成长">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Free Will">
-<meta property="og:url" content="http://yoursite.com/archives/2019/10/index.html">
+<meta name="description" content="在搜索广告的场景中，query 和 document 使用不同的单词、同一个单词的不同形态（如：缩写、时态、单复数）来表达同一个概念。如果简单的通过文本的单词匹配来计算 query 和 document 的相似性，则效果不好。 一种解决方式是：利用潜在语义模型latent semantic model （如：LSA），将 query 和 document 都降维到低维语义空间，然后根据二者在低维空">
+<meta name="keywords" content="搜索广告,DSSN,Word hash">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算广告面面观（5）：DSSN">
+<meta property="og:url" content="http://yoursite.com/2020/03/28/AD-RS-5/index.html">
 <meta property="og:site_name" content="Free Will">
-<meta property="og:description" content="人类被赋予了一种工作，那就是精神的成长">
+<meta property="og:description" content="在搜索广告的场景中，query 和 document 使用不同的单词、同一个单词的不同形态（如：缩写、时态、单复数）来表达同一个概念。如果简单的通过文本的单词匹配来计算 query 和 document 的相似性，则效果不好。 一种解决方式是：利用潜在语义模型latent semantic model （如：LSA），将 query 和 document 都降维到低维语义空间，然后根据二者在低维空">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2020/03/28/DhOaCjgLnsTi98b.png">
+<meta property="og:image" content="https://i.loli.net/2020/03/28/XmBOfNEiQkcGRPt.png">
+<meta property="og:image" content="https://i.loli.net/2020/03/28/zxlQ8YfmURSZtB1.png">
+<meta property="og:image" content="https://i.loli.net/2020/03/28/7nX2Uj3KdAGaL6Q.png">
+<meta property="og:image" content="https://i.loli.net/2020/03/28/A5NgVmr6YklEDMo.png">
+<meta property="og:image" content="https://i.loli.net/2020/03/28/DREcG67ygb3Xhxu.png">
+<meta property="og:image" content="https://i.loli.net/2020/03/28/moCUfYaKGqsBQ89.png">
+<meta property="og:image" content="https://i.loli.net/2020/03/28/RW3UcdbzDNtTxqI.png">
+<meta property="og:image" content="https://i.loli.net/2020/03/28/2ropXBVjxgInhat.png">
+<meta property="og:updated_time" content="2020-03-28T07:45:18.222Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Free Will">
-<meta name="twitter:description" content="人类被赋予了一种工作，那就是精神的成长">
+<meta name="twitter:title" content="计算广告面面观（5）：DSSN">
+<meta name="twitter:description" content="在搜索广告的场景中，query 和 document 使用不同的单词、同一个单词的不同形态（如：缩写、时态、单复数）来表达同一个概念。如果简单的通过文本的单词匹配来计算 query 和 document 的相似性，则效果不好。 一种解决方式是：利用潜在语义模型latent semantic model （如：LSA），将 query 和 document 都降维到低维语义空间，然后根据二者在低维空">
+<meta name="twitter:image" content="https://i.loli.net/2020/03/28/DhOaCjgLnsTi98b.png">
 
 
 
@@ -131,7 +143,7 @@
 
 
 
-  <title> 归档 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 计算广告面面观（5）：DSSN | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -163,7 +175,7 @@ var _hmt = _hmt || [];
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -286,102 +298,285 @@ var _hmt = _hmt || [];
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-       
-        
-      太棒了! 目前共计 206 篇日志。 Stay Hungry, Stay Foolish !
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2019">2019</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/19/AD-RS-6/" itemprop="url">
-              
-                <span itemprop="name">计算广告面面观（6）：CTR预估模型简介之非深度学习篇</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-10-19T20:20:28+08:00"
-              content="2019-10-19" >
-          10-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2019/10/15/AD-RS-5/" itemprop="url">
-              
-                <span itemprop="name">计算广告面面观（5）：在线广告的Budget Pacing算法</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-10-15T20:20:28+08:00"
-              content="2019-10-15" >
-          10-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/28/AD-RS-5/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Free Will">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                计算广告面面观（5）：DSSN
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-03-28T20:20:28+08:00">
+                2020-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算广告/" itemprop="url" rel="index">
+                    <span itemprop="name">计算广告</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在搜索广告的场景中，query 和 document 使用不同的单词、同一个单词的不同形态（如：缩写、时态、单复数）来表达同一个概念。如果简单的通过文本的单词匹配来计算 query 和 document 的相似性，则效果不好。</p>
+<p>一种解决方式是：利用潜在语义模型latent semantic model （如：LSA），将 query 和 document 都降维到低维语义空间，然后根据二者在低维空间的距离来计算二者相似度。</p>
+<a id="more"></a>
+<p>论文 “Learning Deep Structured Semantic Models for Web Search using Clickthrough Data” 提出 Deep Structured Semantic Model:DSSM 模型，该模型也是将 query 和 document 降维到公共的低维空间。在该低维空间中，query 和 document 的相似性也是通过二者的距离来衡量。</p>
+<p>其中LSA 的低维空间是通过无监督学习，利用单词的共现规律来训练；而DSSM的低维空间是通过有监督学习，利用 (query,document) pair 对的点击规律来训练。最终实验表明：DSSM 模型要优于 LSA 模型。</p>
+<p>为解决搜索广告中词汇量大的问题（即：词汇表过于庞大），DSSN模型采用了 word hash 技术。</p>
+<h3 id="一、模型"><a href="#一、模型" class="headerlink" title="一、模型"></a>一、模型</h3><p>DSSM 模型将原始的文本特征映射到低维的语义空间。</p>
+<p>首先将 query 和 document 表示为词频向量，该向量由每个单词出现的词频组成。如：query = 苹果手机 / 价格， document = Iphone / Xs / 最低 / 售价 / 11399 / 元 / Iphone / X / 价格  / 6999 元 。</p>
+<p>构建词汇表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">苹果手机 Iphone x Xs 价格 最低 售价 6999 11399 元</div></pre></td></tr></table></figure>
+<p>则得到 query 向量和 document 向量为：</p>
+<p><img src="https://i.loli.net/2020/03/28/DhOaCjgLnsTi98b.png" alt=""></p>
+<p>然后将$\overrightarrow { q } $和 $\overrightarrow { d } $ 映射到低维语义空间，得到 query 语义向量  和 document 语义向量  。</p>
+<p>计算$\overrightarrow { { y }_{ q } } $和 $\overrightarrow { { y }_{ d } } $ 的相似度：<br><img src="https://i.loli.net/2020/03/28/XmBOfNEiQkcGRPt.png" alt=""></p>
+<p>给定 query i ，计算所有document 与它的相似度，并截取 top K 个 document 即可得到排序结果：</p>
+<p><img src="https://i.loli.net/2020/03/28/zxlQ8YfmURSZtB1.png" alt=""></p>
+<p>其中$L_i$是 query i 的排序结果（根据相似度降序排列），$D_i$是所有与 query i 有关的文档。</p>
+<p><img src="https://i.loli.net/2020/03/28/7nX2Uj3KdAGaL6Q.png" alt=""></p>
+<blockquote>
+<p>隐藏层的处理：</p>
+</blockquote>
+<p>假设输入向量为$\overrightarrow { x }$，输出向量为 $\overrightarrow { y }$ ，网络一共有$L$层。对于 query，输入就是$\overrightarrow { q }$，输出就是$\overrightarrow { y_q}$ ；对于 document，输入就是$\overrightarrow { d }$ ，输出就是 $\overrightarrow { y_d }$</p>
+<p>第$l$层的隐向量为：</p>
+<p><img src="https://i.loli.net/2020/03/28/A5NgVmr6YklEDMo.png" alt=""></p>
+<p>其中：$\sigma(·)$为激活函数。论文（2013年）采用 tanh 激活函数，但是现在推荐 relu 激活函数。$W_i$,$\overrightarrow { b_i }$为待学习的网络参数。</p>
+<blockquote>
+<p>训练过程</p>
+</blockquote>
+<p>给定 query $\overrightarrow { q }$ 和 document $\overrightarrow { d }$ ，用户点击该文档的概率为：</p>
+<p><img src="https://i.loli.net/2020/03/28/DREcG67ygb3Xhxu.png" alt=""></p>
+<p>其中$\gamma$为平滑因子，它是一个超参数，需要根据验证集来执行超参数搜索；$D$是候选的文档集合。</p>
+<p>实际应用中，给定一对点击样本$(\overrightarrow { q },\overrightarrow { d }^+)$，我们从曝光但是未点击的文档中随机选择K篇文档作为负样本$(\overrightarrow { q },\overrightarrow { d_k }^-),k=1,2,···,K$  ，则$D =\{\overrightarrow { d^+ },\overrightarrow { d_1 }^-,\overrightarrow { d_2 }^-···\overrightarrow { d_K }^-\}$</p>
+<p>论文中选择K=4，并且论文表示：K不同的负采样策略对结果没有显著影响。</p>
+<p>模型训练的目标是：最大化点击样本的对数似然：</p>
+<p><img src="https://i.loli.net/2020/03/28/moCUfYaKGqsBQ89.png" alt=""></p>
+<p>然后基于随机梯度下降优化算法来求解该最优化问题。</p>
+<p>注意：这里并没有计算负样本的概率$p(\overrightarrow { d_k }^-|\overrightarrow { q })$，负样本的信息在计算概率$p(\overrightarrow { d_k }^+|\overrightarrow { q })$时被使用。</p>
+<h3 id="二、word-hash"><a href="#二、word-hash" class="headerlink" title="二、word hash"></a>二、word hash</h3><p>在将 query/document 的文本转化为输入向量的过程中，输入向量的维度等于词表的大小。由于实际 web search 任务中的词汇表非常庞大，这导致 DSSM 网络的输入层的参数太多，模型难以训练。</p>
+<p>假设词汇表有50万，经过 embedding 之后的维度为300维，则输入层权重为<br>$W\in R^{50w·300}$万，一共1.5亿参数。为解决该问题，DSSM 模型在第一层引入 word hash 技术。该层是一个线性映射，虽然参数非常多，但是这些参数不需要更新和学习。</p>
+<p>word hash 技术用于降低输入向量的维度。给定一个单词，如：good，word hash 的步骤为：</p>
+<ol>
+<li>首先添加开始标记、结束标记：#good#</li>
+<li>然后将其分解为字符级的 n-gram 格式：#go,goo,ood,od# （n=3 时）</li>
+<li>最后将文本中的单词 good 用一组 char-level n-gram 替代。</li>
+</ol>
+<p>虽然英语词汇的数量可以是无限的（可以出现大量的、新的合成词），但是英语（或其它类似语言）的字符n-gram 数量通常是有限的。因此word hash 能够大幅降低词汇表的大小。</p>
+<p>50万规模的词汇表经过 word hash 之后降低到3万规模，这使得输入层的参数降低到 900万（假设 embedding 维度为 300 维）。相比较于原始的1.5亿，参数降低到原始数量的 1/16 。</p>
+<p>除此之外，word-hash 技术还有以下优点：</p>
+<ol>
+<li>它能够将同一个单词的不同形态变化映射到 char-level n-gram 空间中彼此接近的点。</li>
+<li>它能够有效缓解 out-of-vocabulary:OOV 问题。在推断期间，虽然有些词汇未出现在训练集中（未登陆词），但是当拆解未 char-level n-gram 之后，每个 n-gram 都在训练集中出现过。</li>
+<li>从单词到 char-level n-gram 的映射关系是固定的线性映射，不需要学习。</li>
+</ol>
+<p>char-level n-gram 可以视作 word 的一个简单的 representation，而 word-hash 技术就是得到这个 representation 。</p>
+<p>word-hash 一个潜在的问题是冲突 collision：两个不同的单词可能具有相同的 char-level n-gram 表示。下表中统计了两个词汇表中的冲突统计信息。可以看到，当采用 3-gram 表示时，冲突的占比小于千分之一。</p>
+<p><img src="https://i.loli.net/2020/03/28/RW3UcdbzDNtTxqI.png" alt=""></p>
+<h3 id="三、实验"><a href="#三、实验" class="headerlink" title="三、实验"></a>三、实验</h3><p>论文实现的 DSSM 模型，包含四层：</p>
+<ol>
+<li>第一层为 word hash 层，它将 word 映射为 char-level 3-gram 。其映射规则是固定的，不需要学习参数。</li>
+<li>第二层、第三层为中间层，每层输出为 300维。</li>
+<li>最后一层为输出层，输出 128维向量。</li>
+</ol>
+<p>权重初始化：权重通过在$\left[ -\sqrt { \frac { 6 }{ { fan }_{ in }+fan_{ out } }  } ,\sqrt { \frac { 6 }{ { fan }_{ in }+fan_{ out } }  } , \right] $之间均匀分布的随机变量来初始化。其中$ { fan }_{ in }$,$ { fan }_{ out }$  表示输入单元数量和输出单元数量。</p>
+<p>模型通过 mini-batch 随机梯度下降法优化，每个 batch 包含 1024个样本，一共训练 20 个 epoch 。</p>
+<p>模型原始词汇表为 50万（即：保留常见的50万词汇），经过 word hash 之后降低到 3万。</p>
+<p>实验数据集：数据集是从商业搜索引擎的 1年 query 日志文件中采样的 16510 个 query，平均每个 query 有 15 个相关的 document。</p>
+<p>每对 (query,document) 都有人工标注的标签。标签一共5个等级 0-4，0 表示无关，4 表示最相关。</p>
+<p>DSSM 模型和其它模型的比较结果如图所示，其中模型的评估指标为 NDCG 。</p>
+<p><img src="https://i.loli.net/2020/03/28/2ropXBVjxgInhat.png" alt=""></p>
+<p>9~12 行给出了不同的 DSSM 变化：</p>
+<p>DNN：没有采用 word-hash 的 DSSM 。它和第六行的DAE 结构相同，但是DAE 采用无监督学习训练，而DNN 采用有监督学习训练。为了能够训练DNN 模型，我们采用4万规模的词汇表（即：保留常见的4万词汇）。</p>
+<p>L-WH linear：线性的 word hash 模型。在经过 word hash 之后，直接连接到输出层，且输出层不采用任何非线性函数。因此整个模型都是线性的。</p>
+<p>L-WH non-linear：非线性的 word hash 模型。在经过 word hash 之后，直接连接到输出层，但是输出层采用非线性函数。</p>
+<p>L-WH DNN：标准的 DSSM 模型。</p>
+<p>结论：</p>
+<ol>
+<li>从 DNN 和 DAE 的比较结果发现：监督学习普遍比无监督学习效果好</li>
+<li>word hash 允许我们使用更大规模的词汇表。如 L-WH-DNN 采用 50万规模的词汇表，而 DNN 采用 4万规模的词汇表，但是 L-WH-DNN 的模型参数反而更少。词汇表越小，则未登陆词越多，这导致文本被丢弃的信息越多。模型的效果越差。因此 word hash 技术既可以减少模型参数，又能提升模型效果。</li>
+<li>深层网络强于浅层网络。<ul>
+<li>无监督学习： LSA 可以看作浅层网络。深层网络的 DAE 效果强于浅层网络 LSA 。</li>
+<li>监督学习：L-WH non-linear 可以视为 L-WH DNN 的浅层版本，实验结果表明后者效果更好。</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    <div>
+    
+     <br> 
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>   本文结束    <i class="fa fa-paw"></i>
+             欢迎关注我的个人公众号  <br></div>
+        <div><br>  
+        <div align="center">
+       
+ </div> 
+        <div align="center">
+
+        <img src="https://i.loli.net/2020/03/24/brJSo7tThuNn29A.png"/>
+        </div> 
+        </div>
+    
+</div>
+  
+</div>
+    <div>
+      
+        
+
+      
+
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/搜索广告/" rel="tag"># 搜索广告</a>
+          
+            <a href="/tags/DSSN/" rel="tag"># DSSN</a>
+          
+            <a href="/tags/Word-hash/" rel="tag"># Word hash</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/02/spark-10/" rel="next" title="Spark笔记（10）：宽依赖与窄依赖">
+                <i class="fa fa-chevron-left"></i> Spark笔记（10）：宽依赖与窄依赖
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bc405fb9346cd0b" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -389,6 +584,10 @@ var _hmt = _hmt || [];
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -411,8 +610,17 @@ var _hmt = _hmt || [];
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -431,7 +639,7 @@ var _hmt = _hmt || [];
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">206</span>
+                  <span class="site-state-item-count">205</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -453,7 +661,7 @@ var _hmt = _hmt || [];
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">306</span>
+                  <span class="site-state-item-count">307</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -553,6 +761,23 @@ var _hmt = _hmt || [];
           
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、模型"><span class="nav-text">一、模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、word-hash"><span class="nav-text">二、word hash</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、实验"><span class="nav-text">三、实验</span></a></li></ol></div>
+            
+
+          </div>
+
+        </section>
+      <!--/noindex-->
       
 
 
@@ -677,11 +902,9 @@ var _hmt = _hmt || [];
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
 
 
   
