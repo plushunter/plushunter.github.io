@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-28T13:30:40.451Z</updated>
+  <updated>2020-03-28T08:09:29.032Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,32 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>德扑笔记（1）：德扑中的数学</title>
-    <link href="http://yoursite.com/2020/06/28/%E5%BE%B7%E6%89%91%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89/"/>
-    <id>http://yoursite.com/2020/06/28/德扑笔记（1）/</id>
-    <published>2020-06-28T12:20:28.000Z</published>
-    <updated>2020-10-28T13:30:40.451Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="永远讨论不完的主题-位置"><a href="#永远讨论不完的主题-位置" class="headerlink" title="永远讨论不完的主题 - 位置"></a>永远讨论不完的主题 - 位置</h3><p>位置越靠后，位置越好</p><p>小盲，大盲，枪口，枪口+1，枪口+2，低劫持位，高劫持位，关煞位，庄家<br><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gk5d4lczyuj30g607sweq.jpg" alt=""></p><p>Butten的位置优势</p><ul><li>可以看完前面所有人的决定，再做决定</li><li>前面牌力不强的时候，后位更容易诈唬</li><li>后位强牌加注，看起来会更像是诈唬</li><li>前位是强牌，后位是更强牌，能赢更多</li></ul><p>翻牌前第一个加注的人叫open，或者叫起raise，后面的人在这个基础上再加注，就叫做3-bet，我们可以认为大盲是第一个bet,起raise的人是第二个bet,再加注的人是第三个bet，持续下注是c-bet。位置好，玩的激进一点，位置差，玩的保守一些。</p><p>起手牌大致分类</p><p><img src="https://tva1.sinaimg.cn/large/0081Kckwly1gk1cn2v2r0j31640ssk10.jpg" alt=""></p><ul><li>o表示offsuited，不同花；s表示suited，同花</li><li>A小同花和A小不同花策略很不一样，A小等同花，连张同花第一目标是顺子，然后才是顺子</li><li>小对子唯一的目标是中对子，根据牌面的潮湿程度选择快打慢打</li><li>limp：跟注大盲就可以入池</li><li>price in：赔率非常好，任何两张牌都可以入池</li><li>大牌一定要赶人，只留一家或者两家，赢小也比输大好</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;永远讨论不完的主题-位置&quot;&gt;&lt;a href=&quot;#永远讨论不完的主题-位置&quot; class=&quot;headerlink&quot; title=&quot;永远讨论不完的主题 - 位置&quot;&gt;&lt;/a&gt;永远讨论不完的主题 - 位置&lt;/h3&gt;&lt;p&gt;位置越靠后，位置越好&lt;/p&gt;
-&lt;p&gt;小盲，大盲，枪口
-      
-    
-    </summary>
-    
-      <category term="德州扑克" scheme="http://yoursite.com/categories/%E5%BE%B7%E5%B7%9E%E6%89%91%E5%85%8B/"/>
-    
-    
-      <category term="德州扑克" scheme="http://yoursite.com/tags/%E5%BE%B7%E5%B7%9E%E6%89%91%E5%85%8B/"/>
-    
-  </entry>
   
   <entry>
     <title>计算广告面面观（5）：DSSN模型</title>
@@ -2893,6 +2867,34 @@
     <summary type="html">
     
       &lt;h1 id=&quot;一、概念&quot;&gt;&lt;a href=&quot;#一、概念&quot; class=&quot;headerlink&quot; title=&quot;一、概念&quot;&gt;&lt;/a&gt;一、概念&lt;/h1&gt;&lt;h2 id=&quot;1-1-什么是集合？&quot;&gt;&lt;a href=&quot;#1-1-什么是集合？&quot; class=&quot;headerlink&quot; title=&quot;1.1 什么是集合？&quot;&gt;&lt;/a&gt;1.1 什么是集合？&lt;/h2&gt;&lt;p&gt;Java官方的入门文档是这样描述集合的：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+      <category term="Java集合" scheme="http://yoursite.com/tags/Java%E9%9B%86%E5%90%88/"/>
+    
+      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="LinkedList" scheme="http://yoursite.com/tags/LinkedList/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java集合学习手册（7）：Java LinkedList</title>
+    <link href="http://yoursite.com/2017/08/15/Java%E9%9B%86%E5%90%88%E5%AD%A6%E4%B9%A0%E6%89%8B%E5%86%8C%EF%BC%887%EF%BC%89%EF%BC%9AJava%20LinkedList/"/>
+    <id>http://yoursite.com/2017/08/15/Java集合学习手册（7）：Java LinkedList/</id>
+    <published>2017-08-15T14:20:45.000Z</published>
+    <updated>2019-07-30T10:51:50.694Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>LinkedList和ArrayList一样，都实现了List接口，但其内部的数据结构有本质的不同。LinkedList是基于链表实现的（通过名字也能区分开来），所以它的插入和删除操作比ArrayList更加高效。但也是由于其为基于链表的，所以随机访问的效率要比ArrayList差。</p><a id="more"></a><p>看一下LinkedList的类的定义：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public class LinkedList&lt;E&gt;</div><div class="line">    extends AbstractSequentialList&lt;E&gt;</div><div class="line">    implements List&lt;E&gt;, Deque&lt;E&gt;, Cloneable, java.io.Serializable</div><div class="line">&#123;&#125;</div></pre></td></tr></table></figure><p>LinkedList继承自AbstractSequenceList，实现了List、Deque、Cloneable、java.io.Serializable接口。AbstractSequenceList提供了List接口骨干性的实现以减少实现List接口的复杂度，Deque接口定义了双端队列的操作。</p><p>在LinkedList中除了本身自己的方法外，还提供了一些可以使其作为栈、队列或者双端队列的方法。这些方法可能彼此之间只是名字不同，以使得这些名字在特定的环境中显得更加合适。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">LinkedList&lt;String&gt; list = new LinkedList&lt;String&gt;();</div><div class="line">list.add(&quot;语文: 1&quot;);</div><div class="line">list.add(&quot;数学: 2&quot;);</div><div class="line">list.add(&quot;英语: 3&quot;);</div></pre></td></tr></table></figure><p>结构也相对简单一些，如下图所示：</p><p><img src="https://i.loli.net/2019/07/30/5d4010379775b30030.jpg" alt=""></p><h2 id="二、数据结构"><a href="#二、数据结构" class="headerlink" title="二、数据结构"></a>二、数据结构</h2><p>LinkedList是基于链表结构实现，所以在类中包含了first和last两个指针(Node)。Node中包含了上一个节点和下一个节点的引用，这样就构成了双向的链表。每个Node只能知道自己的前一个节点和后一个节点，但对于链表来说，这已经足够了。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">transient</span> <span class="keyword">int</span> size = <span class="number">0</span>;</div><div class="line"><span class="keyword">transient</span> Node&lt;E&gt; first; <span class="comment">//链表的头指针</span></div><div class="line"><span class="keyword">transient</span> Node&lt;E&gt; last; <span class="comment">//尾指针</span></div><div class="line"><span class="comment">//存储对象的结构 Node, LinkedList的内部类</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span>&lt;<span class="title">E</span>&gt; </span>&#123;</div><div class="line">    E item;</div><div class="line">    Node&lt;E&gt; next; <span class="comment">// 指向下一个节点</span></div><div class="line">    Node&lt;E&gt; prev; <span class="comment">//指向上一个节点</span></div><div class="line"></div><div class="line">    Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;</div><div class="line">        <span class="keyword">this</span>.item = element;</div><div class="line">        <span class="keyword">this</span>.next = next;</div><div class="line">        <span class="keyword">this</span>.prev = prev;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><h2 id="三、存储"><a href="#三、存储" class="headerlink" title="三、存储"></a>三、存储</h2><h3 id="3-1-add-E-e"><a href="#3-1-add-E-e" class="headerlink" title="3.1 add(E e)"></a>3.1 add(E e)</h3><p>该方法是在链表的end添加元素，其调用了自己的方法linkLast(E e)。</p><p>该方法首先将last的Node引用指向了一个新的Node(l)，然后根据l新建了一个newNode，其中的元素就为要添加的e；而后，我们让last指向了newNode。接下来是自身进行维护该链表。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">     * Appends the specified element to the end of this list.</div><div class="line">     *</div><div class="line">     * &lt;p&gt;This method is equivalent to &#123;@link #addLast&#125;.</div><div class="line">     *</div><div class="line">     * @param e element to be appended to this list</div><div class="line">     * @return &#123;@code true&#125; (as specified by &#123;@link Collection#add&#125;)</div><div class="line">     */</div><div class="line">public boolean add(E e) &#123;</div><div class="line">    linkLast(e);</div><div class="line">    return true;</div><div class="line">&#125;</div><div class="line">/**</div><div class="line">* Links e as last element.</div><div class="line">*/</div><div class="line">void linkLast(E e) &#123;</div><div class="line">    final Node&lt;E&gt; l = last;</div><div class="line">    final Node&lt;E&gt; newNode = new Node&lt;&gt;(l, e, null);</div><div class="line">    last = newNode;</div><div class="line">    if (l == null)</div><div class="line">        first = newNode;</div><div class="line">    else</div><div class="line">        l.next = newNode;</div><div class="line">    size++;</div><div class="line">    modCount++;</div><div class="line">&#125;</div></pre></td></tr></table></figure><h3 id="3-2-add-int-index-E-element"><a href="#3-2-add-int-index-E-element" class="headerlink" title="3.2 add(int index, E element)"></a>3.2 add(int index, E element)</h3><p>该方法是在指定index位置插入元素。如果index位置正好等于size，则调用linkLast(element)将其插入末尾；否则调用 linkBefore(element, node(index))方法进行插入。该方法的实现在下面，大家可以自己仔细的分析一下。（分析链表的时候最好能够边画图边分析）</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">    * Inserts the specified element at the specified position in this list.</div><div class="line">    * Shifts the element currently at that position (if any) and any</div><div class="line">    * subsequent elements to the right (adds one to their indices).</div><div class="line">    *</div><div class="line">    * @param index index at which the specified element is to be inserted</div><div class="line">    * @param element element to be inserted</div><div class="line">    * @throws IndexOutOfBoundsException &#123;@inheritDoc&#125;</div><div class="line">    */</div><div class="line">   public void add(int index, E element) &#123;</div><div class="line">       checkPositionIndex(index);</div><div class="line"></div><div class="line">       if (index == size)</div><div class="line">           linkLast(element);</div><div class="line">       else</div><div class="line">           linkBefore(element, node(index));</div><div class="line">   &#125;</div><div class="line">   /**</div><div class="line">        * Inserts element e before non-null Node succ.</div><div class="line">        */</div><div class="line">       void linkBefore(E e, Node&lt;E&gt; succ) &#123;</div><div class="line">           // assert succ != null;</div><div class="line">           final Node&lt;E&gt; pred = succ.prev;</div><div class="line">           final Node&lt;E&gt; newNode = new Node&lt;&gt;(pred, e, succ);</div><div class="line">           succ.prev = newNode;</div><div class="line">           if (pred == null)</div><div class="line">               first = newNode;</div><div class="line">           else</div><div class="line">               pred.next = newNode;</div><div class="line">           size++;</div><div class="line">           modCount++;</div><div class="line">       &#125;</div></pre></td></tr></table></figure><p>LinkedList的方法实在是太多，在这没法一一举例分析。但很多方法其实都只是在调用别的方法而已，所以建议大家将其几个最核心的添加的方法搞懂就可以了，比如linkBefore、linkLast。其本质也就是链表之间的删除添加等。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;一、概述&quot;&gt;&lt;a href=&quot;#一、概述&quot; class=&quot;headerlink&quot; title=&quot;一、概述&quot;&gt;&lt;/a&gt;一、概述&lt;/h2&gt;&lt;p&gt;LinkedList和ArrayList一样，都实现了List接口，但其内部的数据结构有本质的不同。LinkedList是基于链表实现的（通过名字也能区分开来），所以它的插入和删除操作比ArrayList更加高效。但也是由于其为基于链表的，所以随机访问的效率要比ArrayList差。&lt;/p&gt;
     
     </summary>
     
