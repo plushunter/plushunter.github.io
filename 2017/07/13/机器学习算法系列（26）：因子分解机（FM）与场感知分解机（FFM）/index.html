@@ -97,7 +97,7 @@
 <meta property="og:image" content="https://i.loli.net/2019/07/29/5d3ee3947638f96251.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/08/01/5d42a8e44b76a35389.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/07/29/5d3ea1407bf2c78037.jpg">
-<meta property="og:updated_time" content="2020-01-04T11:24:28.822Z">
+<meta property="og:updated_time" content="2021-08-13T08:12:06.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法系列（26）：因子分解机（FM）与场感知分解机（FFM）">
 <meta name="twitter:description" content="本文转载自美团点评技术团队 FM和FFM模型是最近几年提出的模型，凭借其在数据量比较打并且特征稀疏的情况下，忍让能够得到优秀的性能和效果，屡次在各大公司举办的CTR预估比赛中获得不错的战绩。">
@@ -534,7 +534,7 @@ var _hmt = _hmt || [];
     x_i\underset{j=1}{\overset{n}{\varSigma}}v_{j,f}x_j-v_{i,f}x_{i}^{2},\ if\ \theta\ is\ v_{i,f}\left(\textrm{交叉项}\right)\\
 \end{array}\right.</script><p>其中，$v_{j,f}$是隐向量$v_j$的第f个元素。</p>
 <p>由于$\underset{j=1}{\overset{n}{\varSigma}}v_{j,f}x_j$只与f有关，在参数迭代过程中，只需要计算第一次所有f的$\underset{j=1}{\overset{n}{\varSigma}}v_{j,f}x_j$，就能够方便地得到所有$v_{i,f}$的梯度。显然，计算所有f的$\underset{j=1}{\overset{n}{\varSigma}}v_{j,f}x_j$的复杂度是$O(kn)$；已知$\underset{j=1}{\overset{n}{\varSigma}}v_{j,f}x_j$时，计算每个参数梯度的复杂度是$O(n)$；得到梯度后，更新每个参数的复杂度是$O(1)$；模型参数一共有$nk+n+1$个。因此，FM参数训练的时间复杂度为$O(kn )$</p>
-<h3 id="1-2-FM的优势"><a href="#1-2-FM的优势" class="headerlink" title="1.2 FM的优势"></a>1.2 FM的优势</h3><p>综上可知，FM算法可以再线性时间内完成模型训练，以及对新样本作出预测，所以说FM是一个非常高效的模型。FM模型的核心作用可以概括为以下三个：</p>
+<h3 id="1-2-FM的优势"><a href="#1-2-FM的优势" class="headerlink" title="1.2 FM的优势"></a>1.2 FM的优势</h3><p>综上可知，FM算法可以在线性时间内完成模型训练，以及对新样本作出预测，所以说FM是一个非常高效的模型。FM模型的核心作用可以概括为以下三个：</p>
 <ul>
 <li>1）FM降低了交叉项参数学习不充分的影响：one-hot编码后的样本数据非常稀疏，组合特征更是如此。为了解决交叉项参数学习不充分、导致模型有偏或不稳定的问题。作者借鉴矩阵分解的思路：每一维特征用k维的隐向量表示，交叉项的参数$w_ij$用对应特征隐向量的内积表示，即$⟨v_i,v_j⟩$。这样参数学习由之前学习交叉项参数$w_{ij}$的过程，转变为学习$n$个单特征对应k维隐向量的过程。很明显，单特征参数（k维隐向量$v_i$）的学习要比交叉项参数$w_{ij}$学习的更加充分。示例说明：<br>假如有10w条训练样本，其中出现女性特征的样本数为3w，出现男性特征的样本数为7w，出现汽车特征的样本数为2000，出现化妆品的样本数为1000。特征共现的样本数如下：</li>
 </ul>
@@ -1369,7 +1369,13 @@ var _hmt = _hmt || [];
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
 })();
-</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+</script>
+
+
+  
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":200,"height":400,"hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"log":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config("");
 </script>
@@ -1386,11 +1392,5 @@ var _hmt = _hmt || [];
 <script type="text/javascript" src="custom_mathjax_source">
 </script>
 <!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
-
-
-  
-
-
-</body>
+<!-- hexo-inject:end --></body>
 </html>
