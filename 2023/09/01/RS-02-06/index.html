@@ -1,0 +1,1279 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="双塔模型的结构下面开始讲双塔模型的结构。我们先来看用户的特征，我们知道用户ID还能从用户填写的资料和用户行为中获取很多特征，包括离散特征和连续特征。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系统 | 召回06：双塔模型">
+<meta property="og:url" content="http://yoursite.com/2023/09/01/RS-02-06/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="双塔模型的结构下面开始讲双塔模型的结构。我们先来看用户的特征，我们知道用户ID还能从用户填写的资料和用户行为中获取很多特征，包括离散特征和连续特征。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb8q4akcj315o0nkaaw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb8wzbmej314s0nqdgp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb93pqkmj31340ngq3s.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb9dsad0j311g0m6my2.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb9rl9rqj310k0gmjry.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrba2xke6j313q0not9o.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbabug8gj312a0laq3t.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbbabgy7j313q0liwfd.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbbhyhw6j31040jc0td.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbbqfb5jj31540n2t9k.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbc399scj30zg0iudgo.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbcebnfxj31240nmab3.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbcl499hj31jx0u0mzd.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbcsm48zj31sg0msq3z.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbd27491j31mk0u0abk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbdipnf5j31ig0o40u6.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbdqt80bj31fg0u0wgq.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbdzoclij31jq0u040n.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbfywrvmj31hm0u0di4.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbhapkipj31h10u00us.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbhl4zkaj31ht0u040e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbhtdelbj31dk0o2dgw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbi1dq8gj31b50u0mz0.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbi8qo0lj31l10u0tbh.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbitbkesj31j80u0wg4.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbj1rg75j30ne0dcgm1.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbjec1djj30kn08t3yt.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbjlps4gj30lu0asdg8.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbjtfxdoj30ko09kwer.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbk0kminj30k909tq3c.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbk9h5mwj30kl0bd74q.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbkj18tij30mj0c774d.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbkr5p2tj30n80c5jrk.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbkx0brjj30nc0bamx8.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbqpqzznj30la0a5jrs.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbl9ugvbj30kr0aeq36.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbm88k7rj30k609sq37.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbmmzhwzj30ky0bdt93.jpg">
+<meta property="og:updated_time" content="2023-09-10T03:26:54.382Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系统 | 召回06：双塔模型">
+<meta name="twitter:description" content="双塔模型的结构下面开始讲双塔模型的结构。我们先来看用户的特征，我们知道用户ID还能从用户填写的资料和用户行为中获取很多特征，包括离散特征和连续特征。">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb8q4akcj315o0nkaaw.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","onmobile":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script data-ad-client="ca-pub-6293681360909288" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+
+
+
+
+
+
+  <title> 推荐系统 | 召回06：双塔模型 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            人间
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-whisper">
+          <a href="/whisper" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            絮语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/09/01/RS-02-06/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Free Will">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                推荐系统 | 召回06：双塔模型
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-09-01T20:20:08+08:00">
+                2023-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/推荐系统/" itemprop="url" rel="index">
+                    <span itemprop="name">推荐系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="双塔模型的结构"><a href="#双塔模型的结构" class="headerlink" title="双塔模型的结构"></a>双塔模型的结构</h2><p>下面开始讲双塔模型的结构。我们先来看用户的特征，我们知道用户ID还能从用户填写的资料和用户行为中获取很多特征，包括离散特征和连续特征。</p>
+<a id="more"></a>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb8q4akcj315o0nkaaw.jpg" alt=""><br>所有这些特征不能直接输入神经网络，而是要先做一些处理，比如用embedding层把用户ID映射到一个向量。跟之前我们讲过的离散特征的做法相同，用户还有很多离散特征，比如所在城市感兴趣的话题等等。用embedding层把用户的离散特征映射成向量。</p>
+<p>对于每个离散特征，用单独一个embedding层得到一个向量，比如用户所在城市，用一个embedding层，用户感兴趣的话题，用另一个embedding层</p>
+<p>对于性别这样类别数量很少的离散特征，直接用one hot编码就行，可以不做embedding。</p>
+<p>用户还有很多连续特征，比如年龄、活跃程度、消费金额等等。</p>
+<p>不同类型的连续特征有不同的处理方法，最简单的是做归一化，让特征均值是零，标准差是一。有些长尾分布的连续特征需要特殊处理，比如取log，比如做分桶。</p>
+<p>做完特征处理，得到很多特征向量，把这些向量都拼起来输入神经网络。神经网络可以是简单的全连接网络，也可以是更复杂的结构，比如深度交叉网络。神经网络输出一个向量，这个向量就是对用户的表征。做召回用到这个向量，</p>
+<p>同理，物品的特征也是用类似的方法处理。用embedding层处理物品ID和其他离散特征，用归一化取对数或者分桶等方法处理物品的连续特征，把得到的特征输入一个神经网络。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb8wzbmej314s0nqdgp.jpg" alt=""></p>
+<h2 id="双塔模型"><a href="#双塔模型" class="headerlink" title="双塔模型"></a>双塔模型</h2><p>下面这样的模型就叫双塔模型，</p>
+<p><strong>尤其要注意：</strong>本模型直接拿用户表征rep和物品表征rep去融合，史称后端特征融合模型！！这是召回的用法，绝对不能提前concat再灌入神经网络又去映射一个打分rate（那是精排的做法！）</p>
+<p>左边的塔提取用户的特征，右边的它提取物品的特征，跟矩阵补充模型相比，双塔模型的不同之处就在于使用了ID 之外的多种特征，作为双塔的输入，两个塔各输出一个向量记作a和b，两个向量的内积就是模型最终的输出rate，它即预估用户对物品的兴趣。现在更常用的输出方法是余弦相似度。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb93pqkmj31340ngq3s.jpg" alt=""></p>
+<p>两个塔的输出，分别记作向量a和b，余弦相似度意思是两个向量夹角的余弦值，它等于向量内积除以a的二范数，再除以b的二范数，其实就相当于先对两个向量做归因化，然后再求内积余弦，相似度的大小介于负一到正一之间。</p>
+<h2 id="双塔模型的训练方法"><a href="#双塔模型的训练方法" class="headerlink" title="双塔模型的训练方法"></a>双塔模型的训练方法</h2><p>第一种是pointwise训练，独立看待每个正样本和负样本，做简单的二元分类训练模型，把正样本、负样本组成一个数据集。在数据集上做随机梯度下降训练双塔模型。</p>
+<p>第二种训练双塔模型的方式是parawise，每次取一个正样本，一个负样本组成一个二元组。损失函数用triplely hing loss或者triple logistic loss。可以参考下面这篇Facebook发的论文。《Jui-Ting Huang et al. Embedding-based Retrieval in Facebook Search. InKDD, 2020.》</p>
+<p>第三种训练双塔模型的方式是listwise，每次取一个正样本和多个负样本组成一个list。训练方式类似于多元分类，参考下面的文献二，这是Youtube发的论文，《Xinyang Yi et al. Sampling-Bias-Corrected Neural Modeling for Large Corpus Item Recommendations. In RecSys, 2019.》训练的时候要用到正样本和负样本。</p>
+<h2 id="正负样本选择"><a href="#正负样本选择" class="headerlink" title="正负样本选择"></a>正负样本选择</h2><p>正样本很简单，就是用户点击过的物品，用户点击过一个物品，就说明用户对这个物品感兴趣，负样本的意思是用户不感兴趣的。</p>
+<p>那么显然，在实践中负样本的选择是比较讲究的，有几种看起来比较合理的负样本：</p>
+<ul>
+<li>比如没有被召回的</li>
+<li>召回了，但是被粗排，精排淘汰的</li>
+<li>还有曝光了，但是用户没有点击的</li>
+</ul>
+<p>该用哪种？下一篇文章我们再详细讲解如何选择正负样本，感兴趣的话，可以自己阅读刚才提到的两篇论文，论文讲解了Facebook Youtube如何选择正负样本，我们小红书基本是照着做的，再加一些自己的小技巧，取得了很好的效果。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb9dsad0j311g0m6my2.jpg" alt=""></p>
+<h2 id="三种训练双塔模型的方式"><a href="#三种训练双塔模型的方式" class="headerlink" title="三种训练双塔模型的方式"></a>三种训练双塔模型的方式</h2><h3 id="Pointwise训练"><a href="#Pointwise训练" class="headerlink" title="Pointwise训练"></a>Pointwise训练</h3><p>第一种是pointwise训练，pointwise是最简单的训练方式，我们把召回看作简单的二元分类任务，</p>
+<p>正样本意思是历史记录显示用户对物品感兴趣，对于正样本，我们要鼓励向量a和b的cos相似度接近+1；负样本的意思是用户对物品不感兴趣，对于负样本，我们要鼓励向量a和b的cos相似度接近-1</p>
+<p>这就是个很典型的二元分类问题。如果做pointwise训练，可以把正负样本的数量控制在1 : 2或者1 : 3。我也不知道为什么，但是互联网大厂的人都这么做，这算是业内的经验。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb9rl9rqj310k0gmjry.jpg" alt=""></p>
+<h3 id="Pairwise训练"><a href="#Pairwise训练" class="headerlink" title="Pairwise训练"></a>Pairwise训练</h3><p>第二种训练双塔模型的方式是pair wise，做训练的时候，每一组的输入是一个三元组，包括一个用户ID和两个物品ID。</p>
+<p>左边的物品是这样的，就是用户感兴趣的物品。右边的物品是负样本，是用户不感兴趣的物品，把用户的特征和物品的特征各自做变换，然后输入神经网络，最终输出三个向量，用户的特征向量记作a，两个物品的特征，向量记作B加和B减两个物品，</p>
+<p>特征变换映射物品的embedding结构是相同的，里面的embedding层和全连接层都用一样的参数</p>
+<p>分别计算用户对两个物品的兴趣，用户对正样本的兴趣是向量a和向量b加的余弦相似度，这个值越大越好，最好是接近+1。</p>
+<p>用户对负样本的兴趣是向量a和向量b减的余弦相似度，这个值越接近-1越好。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrba2xke6j313q0not9o.jpg" alt=""></p>
+<p>做pair wise训练的基本想法是让用户对正样本的兴趣尽量大，对负样本的兴趣尽量小。也就是让向量a和b加的运行相似度大于向量a和b减的余弦相似度，而且两者之差越大越好。</p>
+<p>我们来推导一下损失函数，我们希望看到用户对正样本的兴趣很大，而对负样本的兴趣很小，最好是前者比后者大M这么多。</p>
+<p>这个M是个超参数，需要调，比如设置成1，如果前者比后者大了M，那么就没有损失，否则如果用户对正样本的兴趣不够大，没有比负样本的兴趣大M这么多，就会有损失。损失等于cos（a，b减）加上M，再减去cos（a，b加）这个loss是正数，需要让它降到0才行。这样就推导出了triple hinge loss。</p>
+<p>如果熟悉孪生网络sign is network，应该见过这种损失函数。训练的时候每个训练样本都是个三元组，向量a是用户的表征，B加和B减分别是物品正样本和负样本的表征。</p>
+<p>我们希望损失函数越小越好，训练的过程就是对损失函数求最小化，用梯度更新双塔神经网络的参数。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbabug8gj312a0laq3t.jpg" alt=""></p>
+<p>Triplely hinge loss只是一种损失函数，还有别的损失函数起到同样的作用。</p>
+<p>triplet logistic loss是这样定义的，其实就是把logistic函数作用到这一项最小化，Logistic函数会鼓励这一项尽量小，也就是让$cos(a,b^-)$尽量小，让$cos(a,b^+)$尽量大，跟上面的Triplely hinge loss道理是一样的，都是让用户对正样本的兴趣分数尽量高，用户对负样本的兴趣分数尽量低。这里的sigma是个大于零的超参数控制损失函数的形状，Sigma需要手动设置。</p>
+<p>我们已经推导出了Triplely hinge loss和Triplely logistic loss，可以通过最小化这样的损失函数来训练双塔模型。训练样本都是三元组，其中一个用户，一个正样本物品，还有一个负样本物品。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbbabgy7j313q0liwfd.jpg" alt=""></p>
+<h3 id="Listwise训练"><a href="#Listwise训练" class="headerlink" title="Listwise训练"></a>Listwise训练</h3><p>第三种训练双塔模型的方式是list wise。做list wise训练的时候，每次取一个正样本和很多负样本，需要一个用户把它的特征向量记作a。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbbhyhw6j31040jc0td.jpg" alt=""><br>取一个正样本，意思是历史记录显示用户喜欢这个物品，把这个物品的特征向量记作B加，还需要取N个负样本，把它们的特征向量去做B1减到BN减。<br>做训练的时候要鼓励a和正样本b+的余弦相似度尽量大，鼓励a和负样本bn-的余弦相似度尽量小。</p>
+<p>下面我演示一下list wise训练具体怎么做。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbbqfb5jj31540n2t9k.jpg" alt=""></p>
+<p>向量a和$b^+$的余弦相似度是个介于负一到正一之间的实数，意思是用户对正样本物品兴趣的预估分数。这个分数越大越好，最好是接近正一，其余的cos相似度对应负样本，它们是用户对N个负样本兴趣的预估分数，这N个分数越小越好，最好是接近负一，把这N个负样本的分，和正样本的分，全部输入soft max激活函数【它就是将整体归一化为0–1的函数】，激活函数输出N+1个分数，这些分数都介于零到一之间，最左边的分数S加对应正样本，我们希望这个分数越大越好，最好是能接近1。右边的N个分数对应负样本，我们希望这些分数越小越好，最好都接近零。</p>
+<p>上图中，$y+=1$是正样本的标签，意思是鼓励$S+$接近1，负样本的标签是$Y_1^-$到$Y_N^-$，把它们都设置成0，意思是鼓励$S_1^-$到$S_N^-$都接近0，我们用Y和S的交叉熵作为损失函数。</p>
+<p>训练的时候，最小化交叉熵，意思是鼓励soft max，输出的预测值S，尽可能接近标签Y，其实交叉商就等于负的log s加【上面公式】</p>
+<p>训练的时候最小化交叉商也就是最大化S加，这就等价于最大化正样本的余弦相似度，最小化负样本的余弦相似度。</p>
+<p>三种训练方法的本质都是让用户和正样本物品的余弦相似度大，而用户跟负样本的余弦相似度小。</p>
+<p>我已经讲完了双塔模型和三种训练方式，最后总结一下这本文讲过的内容，</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>双塔模型，顾名思义有两个塔，一个用户塔，一个物品塔，两个塔各输出一个向量，向量的余线相似度就是对兴趣的预估值，这个值越大，用户就越有可能对物品感兴趣。</p>
+<p>有三种训练双塔模型的方式：</p>
+<p>一种是pointwise，每次用一个用户和一个物品，物品可以是正样本也可以是负样本，</p>
+<p>第二种训练方式是pair wise，每次取一个用户一个这样本物品，一个负样本物品，训练的目标是最小化Triplely hinge loss和Triplely logistic loss，也就是让正样本的余弦相似度尽量大，与负样本余弦相似度尽量小。</p>
+<p>第三种训练方法是list wise，每次取一个用户，一个正样本物品，很多个负样本物品，训练的时候用soft max激活函数，用交叉熵损失函数训练，也是鼓励正样本余弦相似度尽量大，负样本余弦相似度尽量小。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbc399scj30zg0iudgo.jpg" alt=""></p>
+<ul>
+<li>召回是后端特征融合，而精排是前端特征融合</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbcebnfxj31240nmab3.jpg" alt=""></p>
+<p>在结束之前，我们讨论一种错误的召回模型的设计，大家一看到这种结构就应该知道这是粗排或者精排的模型，而不是召回的模型，这种模型没办法应用到召回。下面这块结构跟双塔模型是一样的，都是分别提取用户和物品的特征，得到两个特征向量，但是上层的结构就不一样了，这里直接把两个向量做concat。然后输入一个神经网络，神经网络可以有很多层，这种神经网络结构属于前期融合。在进入全连接层之前就把特征向量拼起来了。</p>
+<p>看一下精排模型图中的神经网络，神经网络最终输出一个实数作为预估分数，表示用户对物品的兴趣，把两个特征向量拼起来输入神经网络，这种前期融合的模型不适用于召回。</p>
+<p>这种前期融合的神经网络结构跟前面讲的双塔模型有很大区别，双塔模型属于后期融合，两个塔在最终输出相似度的时候才融合起来，前面压根没用神经网络去输出相似度，假如把这种精排的模型用于召回，就必须把所有物品的特征都挨个输入模型，预估用户对所有物品的兴趣。</p>
+<p>假设一共有1亿个物品，每给用户做一次召回，就要把这个模型跑1亿次，这种计算量显然不可行。如果用这种模型，就没办法用近似最近邻查找来加速计算。这种模型通常用于精排排序，即从几千个候选物品中选出几百个，计算量不会太大。</p>
+<p>以后大家一看到这种前期融合的模型，就要明白这是排序模型，不是召回模型。召回只能用双塔那样的后期融合模型。</p>
+<p>okay，今天讲解了双塔模型的神经网络结构和三种训练的方式。做训练的时候需要选择正负样本，这部分内容下文我再详细给你说。</p>
+<h2 id="选对正负样本的作用大于改进模型结构"><a href="#选对正负样本的作用大于改进模型结构" class="headerlink" title="选对正负样本的作用大于改进模型结构"></a>选对正负样本的作用大于改进模型结构</h2><p>双塔模型需要用到正样本和负样本，选对正负样本的作用大于改进模型结构。</p>
+<p>首先来讨论如何选择正样本，正样本比较好选：</p>
+<p>如果物品给用户曝光之后，用户有点击行为，就说明用户对物品感兴趣，把用户和物品二元组作为正样本。</p>
+<p>但是选取正样本的时候有个问题需要解决，大家应该听说过二八法则，就是少部分物品占据了大部分点。正样本是有点击的物品，所以正样本大多属于热门物品，拿过多的热门物品作为正样本，会对冷门物品不公平，这样会让热门物品更热，冷门物品更冷。</p>
+<p>解决方案是对冷门物品做过采样，或者对热门物品做降采样。过采样的英文是up sampling，意思是让一个样本出现多次。降采样的英文是down sampling，意思是抛弃一些样本。</p>
+<p>比如一定概率抛弃热门物品，抛弃的概率与样本点击次数正相关。一会细说<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbcl499hj31jx0u0mzd.jpg" alt=""><br>前面咱们讲过，推荐系统的链路分为召回、粗排、精排、重排，稍后要用到这里。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbcsm48zj31sg0msq3z.jpg" alt=""></p>
+<p>再简单回顾一下，召回是从物品的数据库中快速取回一些物品，比如小红书有上亿篇笔记，用几十条召回通道各取回一两百篇笔记，一共取回几千篇笔记，然后用粗排和精排给召回的笔记逐一打分，保留分数最高的笔记，最后一步是重排，这一步主要是做多样性采样，还会用很多规则做调整，最终有几十篇笔记被选中曝光给用户。</p>
+<h2 id="负样本咋搞？"><a href="#负样本咋搞？" class="headerlink" title="负样本咋搞？"></a>负样本咋搞？</h2><p>下面我们讨论怎样选取训练双塔模型的负样本，负样本就是用户不感兴趣的物品，也就是链路上每一步被淘汰的物品，召回模块儿从几亿物品中选出几千个。被召回的物品只是极少数，这些没被召回的几亿个物品可以看作是负样本。</p>
+<p>粗排和精排，从几千个召回的物品中选出几百个，也就是说几千个物品会被这一步淘汰，最终有几十个物品曝光给用户，这些没有被曝光给用户的就是负样本。</p>
+<p>当然了，不是每个曝光的物品都会被点击，曝光了，但是用户没有点击的也可以视作是负样本。</p>
+<p>不过一定要小心，这仨不能同时用于某一个阶段：比如曝光未点击的千万不能用于召回！一会给你说为啥！<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbd27491j31mk0u0abk.jpg" alt=""></p>
+<p>接下来我们分别讨论这三类负样本</p>
+<h3 id="简单负样本"><a href="#简单负样本" class="headerlink" title="简单负样本"></a>简单负样本</h3><p>首先是简单负样本：简单负样本是未被召回的物品，这种物品通常是用户不感兴趣的，几亿个物品里面只有几千个被召回，也就是说几乎所有的物品都没有被召回，那么未被召回的物品跟全体物品基本上是一回事儿，所以直接在全体物品中做随机抽样就可以了。抽到的物品作为负样本。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbdipnf5j31ig0o40u6.jpg" alt=""></p>
+<h4 id="全局均匀抽样or非均匀抽样"><a href="#全局均匀抽样or非均匀抽样" class="headerlink" title="全局均匀抽样or非均匀抽样"></a>全局均匀抽样or非均匀抽样</h4><p>当然，问题在于怎样做抽样？是均匀抽样还是非均匀抽样？</p>
+<p>均匀抽样的坏处是对冷门物品不公平。前面讨论过二八法则，少部分物品占据了大部分点击，这会导致这样本大多是热门物品。</p>
+<p>如果在全体笔记中做均匀抽样生成负样本，那么负样本大多是冷门物品，总拿热门物品做正样本，冷门物品做负样本，对冷门物品会不公平，这样会让热门物品更热，冷门物品更冷，</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbdqt80bj31fg0u0wgq.jpg" alt=""><br>所以负样本抽样要随机非均匀。这样可以打压热门物品抽样的概率与热门程度正相关，热门物品成为负样本的概率大。物品的热门程度可以用它的点击次数来衡量。可以这样做，抽样每个物品的抽样概率正比于它点击次数的0.75次方。0.75是个经验值。</p>
+<p>刚才介绍的简单负样本是从全体物品中抽的。</p>
+<h4 id="batch内负样本"><a href="#batch内负样本" class="headerlink" title="batch内负样本"></a>batch内负样本</h4><p>下面我介绍另一种简单负样本，叫做batch内负样本。</p>
+<p>图中是一个batch内的样本，左边是用户，右边是物品，中间的箭头表示用户点击过的物品。</p>
+<p>图中任意一个样本都是正样本，比方说第二个用户点击过第二个物品，这就说明用户对物品感兴趣。这个二元组是个正样本。</p>
+<p>什么是batch内负样本？这里举个例子，第一个用户跟第二个物品可以组成一个负样本。第一个用户跟第三个物品也可以组成一个负样本，设一个batch内有N个正样本，那么一个用户跟N-1个物品可以组成负样本，所以这个batch内一共有$N×(N-1)$个负样本，这些都属于简单负样本。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbdzoclij31jq0u040n.jpg" alt=""></p>
+<p>对于第一个用户来说，第二个物品就相当于是从全体物品中随机抽样的第一个用户大概率不会喜欢第二个物品。</p>
+<p>batch内负样本存在一个问题，我来分析一下，图中这些二元组都是通过点击行为选取的，第一个用户和第一个物品之所以成为一个正样本，原因是用户点击了物品，所以一个物品出现在batch内的概率正比于它的点击次数，也就是它的热门程度。</p>
+<p>这样就会有个问题，前面讨论了物品成为简单负样本的概率应该是正比于点击次数的0.75次方，但是在这里我们做batch内负采样，物品成为负样本的概率正比于它点击次数的1次方，有点过大了。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbfywrvmj31hm0u0di4.jpg" alt=""></p>
+<p>重复一遍，抽样概率本应该正比于点击次数的0.75次方，但这里实际上是1次方。</p>
+<p>也就是说，任何物品成为负样本的概率过大，一个物品成为负样本的概率越大，模型对这个物品打压就会越狠，对负样本应该打压，但这里打压的太狠了。这样会造成偏差。这篇Youtube论文讲了如何修正偏差，《Xinyang Yi et al. Sampling-Bias-Corrected Neural Modeling for Large Corpus Item Recommendations. In RecSys, 2019.》</p>
+<p>我们在小红书照着做了，确实拿到了收益。</p>
+<p>我具体讲一下如何修正偏差。我们把物品$i$被抽到的概率记作$p_i$，它正比于物品$i$的点击次数，反映出物品的热门程度。</p>
+<p>双塔模型通常用余弦相似度预估用户对物品I的兴趣分数rate，Cos中的a是用户的特征向量，bi是物品i的特征向量，训练的时候要鼓励正样本的余弦相似度尽量大，鼓励负样本的余弦相似度尽量小。</p>
+<p>根据Youtube论文的建议，训练双塔模型的时候，应该把$cos(a,b_i)$调整为$cos(a,b_i)-log(p_i)$，这样可以纠偏，人为地把这个负样本的概率减掉，避免过分打压热门的物品，</p>
+<p>训练结束之后在线上做召回的时候，还是用原本的余弦相似度$cos(a,b_i)$，线上召回的时候不用做这种调整，不用减 $log(p_i)$。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbhapkipj31h10u00us.jpg" alt=""></p>
+<p>刚才我讲了两种简单负样本，一种是从全体物品中做随机抽样生成负样本，另一种是在batch内生成负样本。</p>
+<h3 id="困难负样本"><a href="#困难负样本" class="headerlink" title="困难负样本"></a>困难负样本</h3><p>接下来我要介绍困难负样本，困难负样本是被排序淘汰的物品，比如物品被召回，但是被粗排淘汰，比方说召回5000个物品进入粗排，粗排按照分数做截断，只保留前500个，那么被淘汰的4500个物品都可以被视作困难负样本。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbhl4zkaj31ht0u040e.jpg" alt=""><br>为什么被粗排淘汰的物品叫做困难负样本？</p>
+<p>这些物品被召回，说明他们跟用户兴趣多少有些关系，被粗排淘汰说明用户对物品的兴趣不够强，所以分成了负样本。被正负样本做二元分类的话，这些困难负样本容易被分错，容易被错误的判定为正样本。</p>
+<p>更困难的样本是通过了粗排，但是在精牌中分数排名靠后的物品，比方说精牌给500物品打分，排名在后300的物品都算是极度困难的负样本。能够通过粗排进入精排，说明物品已经比较符合用户兴趣了，但未必是用户最感兴趣的，所以在精排中排名靠后的物品可以被视为极度困难负样本训练。</p>
+<p>双塔模型其实是个二元分类任务，让模型区分正负样本，</p>
+<p>把全体物品作为简单负样本，分类准确率会很高，因为他们明显跟用户兴趣不符。</p>
+<p>被粗排淘汰的物品也是负样本，但他们多少跟用户兴趣有些相关，所以比较困难，分类准确率会稍微低一些。</p>
+<p>精排分数靠后的物品也可以视作是负样本，这些物品跟正样本有些相似，所以他们很容易被判定为正样本，对他们做分类非常困难。</p>
+<p>工业界比较常用的做法是把简单负样本与困难负样本混合起来作为训练数据。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbhtdelbj31dk0o2dgw.jpg" alt=""><br>比如50%是简单负样本，就是从全体物品中随机非均匀抽样出来的，<br>另外50%是困难负样本，也就是从粗排和精排淘汰的物品中随机抽样出来的。</p>
+<h3 id="错误的负样本"><a href="#错误的负样本" class="headerlink" title="错误的负样本"></a>错误的负样本</h3><p>前面解释了简单负样本和困难负样本，最后讨论一种常见的错误，很多人以为可以把曝光但是没有点击的物品作为负样本。其实这是错误的，如果你训练双塔模型的时候，用一些这样的负样本，效果肯定会变差，工业界的人紧踩过这个雷，把这个作为教训。我再解释一遍，这种错误的负样本是什么意思，看一下这张图：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbi1dq8gj31b50u0mz0.jpg" alt=""></p>
+<p>物品1–80这些都是重排之后曝光给用户的物品。既然都曝光给用户了，这所有80个都认为是用户很感兴趣的了，你咋能做召回的负样本呢？通过一些技术手段，我们得知用户只看了前五个物品曝光了。也就是说前五个物品曝光给了用户，第6到80物品没有曝光，在曝光的物品里面，第一个和第五个被用户点击，其余三个物品没有被用户点击，有人觉得可以把这三个物品当做负样本，因为他们有曝光，但是没有点击。</p>
+<p>我再强调一遍，这种想法是错误的，训练召回模型 不能用这样的负样本，<br>原因我稍后解释，这种负样本不是给训练召回模型用的。而是给训练排序模型用的。</p>
+<p>训练排序模型的时候确实要用这种曝光但是没有点击的物品作为负样本。我解释一下选择负样本的原理。召回的目的是快速找到用户可能感兴趣的物品，凡是用户可能感兴趣的全都取回来，然后再交给后面的排序模型逐一做甄别。召回模型的任务是区分用户不感兴趣的物品和可能能感兴趣的物品，<br>而不是区分比较感兴趣的物品和非常感兴趣的物品，这是排序干的事，这就是选择负样本的基本思路。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbi8qo0lj31l10u0tbh.jpg" alt=""><br>可以把全体物品当做负样本，把它们叫做简单负样本，这些物品绝大多数都是用户根本不感兴趣的，双塔模型很容易区分，这些负样本被召回，然后被粗排精排淘汰的叫做困难负样本，这些物品能被召回，说明他们跟用户的兴趣有一定的相关性，被排序模型过滤掉，说明用户对这些物品的兴趣不够强，他们可以作为排序模型的负样本，这样的负样本跟正样本有点像，做分类的时候比较难以区分，所以算是困难负样本</p>
+<p>有曝光但是没有点击的物品看起来可以作为负样本，但其实不能，只要用了这种负样本，双塔模型的效果肯定会变差，</p>
+<p>为什么？</p>
+<p>一个物品能够通过精牌模型的甄别，最终曝光给用户，说明物品已经非常匹配用户的兴趣点了，每次给用户展示几十个物品，用户不可能每个物品都点击，而曝光了没有点击不代表不感兴趣，可能只是用户对别的物品更感兴趣就点击了别的，或者是用户感兴趣，只是碰巧没有点击</p>
+<p>曝光但是没有点击的物品已经算是非常匹配的了，甚至可以拿来做召回的正样本，不应该把曝光但是没有点击的物品作为召回的负样本，记住这一点。</p>
+<p>再说一遍！！！</p>
+<p>召回的目的是区分不感兴趣的和比较感兴趣的，<br>而排序才是区分比较感兴趣的和非常感兴趣的。</p>
+<p>这类负样本只适用于训练排序模型，但不适用于训练召回模型。</p>
+<p>这是工业界的共识，是通过反复做实验得出的结论。</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>最后总结一下本文的内容，详细讲解了如何选择正负样本，正样本意思是曝光而且有点击的用户物品二元组。</p>
+<p>简单负样本有两种，一种是从全体物品中做随机抽样，另一种是batch内负样本。</p>
+<p>困难负样本是被召回但是被排序淘汰的物品。这些物品跟正样本比较像，做分类会有困难，所以叫做困难负样本。</p>
+<p>我们还讨论了一种错误的做法，就是拿曝光但是未点击的物品作为召回的负样本，这种负样本只能用于排序，不能用于召回。</p>
+<p>这样子的话，你就明白了负样本的本质了吧，不同的阶段负样本不同，排序的负样本可以作为召回的正样本<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbitbkesj31j80u0wg4.jpg" alt=""></p>
+<h2 id="双塔模型的线上召回"><a href="#双塔模型的线上召回" class="headerlink" title="双塔模型的线上召回"></a>双塔模型的线上召回</h2><p>今儿个我们继续学习双塔模型，主要内容是双塔模型的线上召回和更新，在训练好双塔模型之后，就可以把模型部署到线上做召回。比如在用户刷小红书的时候，快速找到这个用户可能感兴趣的一两百篇笔记，下面的内容就是双塔模型怎样做召回这是训练好的两个塔，他们分别提取用户特征和物品特征。</p>
+<p>在训练好模型之后，在开始线上服务之前，先用右边的物品塔提取物品的特征，把物品特征向量记作b，小红书有几亿篇笔记，那么就得到几亿个向量b，把物品特征向量–物品ID这样的二元组保存到Oracle或者MySQL这样的向量数据库。</p>
+<p>至于左边的用户塔，处理方式完全不一样，不要事先计算和存储用户向量，而是当用户发起推荐请求的时候，调用神经网络在线上线算一个特征向量a，然后把向量a作为query去数据库中做检索查找最近邻，</p>
+<p>也就是跟向量a相似度（余弦先相似度就是兴趣rate评分）最高的K个红色向量，每个红色向量对应一篇笔记。K近邻查找一共召回了K篇笔记，作为这条召回通道的结果返回。</p>
+<p>我已经讲完了双塔模型的召回，我再总结一遍，训练好双塔模型之后，在开始线上服务之前，先要做离线存储，用神经网络计算每个物品的特征向量B，把这几亿个物品向量存入向量数据库，比如⽐如Milvus、Faiss、HnswLib这样的开源系统。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbj1rg75j30ne0dcgm1.jpg" alt=""></p>
+<p>向量数据库会建立索引，前面的文章我就讲过建索引就是把向量空间划分成很多区域，每个区域用一个向量表示，这样可以加速最近邻查找。在向量数据库建好索引之后，可以开始做线上召回。比如一个用户刷小红书的时候，双塔模型召回通道可以返回用户可能感兴趣的K个物品。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbjec1djj30kn08t3yt.jpg" alt=""></p>
+<p>用户发起推荐请求，我们知道用户ID和用户画像，把这些信息输入用户塔神经网络算出用户向量a，然后在向量数据库中做最近邻查找，把用户的特征向量a作为query，调用Milvus、Faiss、HnswLib这种向量数据库做近似最近邻查找，数据库返回与用户向量a余弦相似度最大的K物品作为召回的结果。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbjlps4gj30lu0asdg8.jpg" alt=""><br>接下来，这些物品会跟其他的等召回通道的结果融合，然后经过排序最终展示给用户。</p>
+<p>我已经讲完了召回的内容，请大家思考一个问题，在开始线上召回之前，我们先要把物品向量B存储到向量数据库，但是我们不存储用户向量a，而是在线上用神经网络现算用户向量a。为什么要区别对待物品向量和用户向量？</p>
+<p>道理是这样的，每做一次召回，只用到一个用户向量a，而要用到几亿个物品向量B，拿神经网络现算一个用户向量，计算量不大，算的起。但是几亿个物品向量显然是算不起的，所以我们不得不离线算好物品向量。</p>
+<p>那么，能不能把几亿个用户向量也事先算好，把几亿个向量存储起来，进一步减少线上的计算负担？这样做当然可以，推荐团队早期基础很弱的时候通常会这样做，这样工程实现很简单，但这样不利于推荐的效果。</p>
+<p>因为用户的兴趣点是动态变化的，所以应该在线上实时计算用户向量，而不是事先计算好存起来。事先存储用户向量效果不好，但事先存储物品向量是OK的，这是因为物品的特征相对比较稳定，短期内不会发生变化。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbjtfxdoj30ko09kwer.jpg" alt=""></p>
+<h2 id="模型更新：全量更新和增量更新"><a href="#模型更新：全量更新和增量更新" class="headerlink" title="模型更新：全量更新和增量更新"></a>模型更新：全量更新和增量更新</h2><p>刚才介绍的线上召回，在实践中还会更复杂一些，会涉及到模型的全量更新和增量更新。全量更新，意思是在每天凌晨用前一天的数据训练模型，比方说在今天凌晨就用昨天的数据训练模型。注意，是在昨天模型参数的基础上做训练，而不是重新随机初始化。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbk0kminj30k909tq3c.jpg" alt=""></p>
+<p>把昨天一天的数据打包成tf record的文件，在昨天模型参数的基础上做训练，把昨天的数据过一遍，每条数据只用一次，也就是训练只做one episode，训练完成之后发布新的用户塔神经网络，用户塔的作用是在线上实时计算用户向量。</p>
+<p>作为召回的query还要发布新的物品向量，这几个向量存入向量数据库，向量数据库会重新建索引，然后可以在线上做最近邻查找。</p>
+<p>全量更新的实现相对比较容易，对数据流和整个系统的要求不高。全量更新不需要实时的数据流，对生成训练数据的速度没有要求，延迟一两个小时也没有关系，只需要把每天的数据落表在凌晨做个批处理，把数据打包成tf record格式的文件就可以了。</p>
+<p>全量更新对系统的要求也很低，每天做一次全量更新，所以只需要把神经网络和物品向量，每天发布一次就够了。</p>
+<p>与全量更新相对的是增量更新，也就是做online learning，更新模型参数，每隔几十分钟就把新的模型参数给发布出去。</p>
+<p>为什么要做增量更新？这是因为用户的兴趣随时会发生变化，举个例子，早上刷小红书的时候看到几篇有意思的笔记，也就是说我产生了新的兴趣点。我在中午刷新小红书，小红书能不能根据我新的兴趣点做推荐？</p>
+<p>如果模型是做天级别的全量更新肯定是不行的，想要让模型在用户行为发生几小时之内就做出反应，模型需要做到小时级别的增量更新。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbk9h5mwj30kl0bd74q.jpg" alt=""></p>
+<p>增量更新对数据流的要求很高，需要实时收集线上的数据，并且对数据做流式处理，实时生成训练模型用的tf record文件。然后对模型做online learning做梯度下降，更新ID embedding的参数，也就是说从早到晚训练数据文件不断生成，不断做梯度下降更新模型的embedding层</p>
+<p>注意，Online learning 不更新神经网络其他部分的参数，全连接层的参数都是锁住的，不做增量更新，只更新embedding的参数，只有做全量更新的时候才会更新全连接层。</p>
+<p>至于为什么只更新embedding层参数，不更新全链接层参数，主要是出于工程实现的考量，道理一两句话也解释不清楚。</p>
+<p>对模型更新之后，再把算出的用户ID embedding给发布出去，用户的ID embedding是一个哈希表的形式，<br>给定用户ID可以查出ID embedding向量，发布用户ID embedding的目的是为了线上计算用户的特征向量，最新的用户ID embedding可以捕捉到用户的最新的兴趣点，对推荐很有帮助。</p>
+<p>发布用户ID embedding，这个过程会有延迟，在我们小红书刚上线online learning的时候，这个过程会有小时级的延迟，通过对系统做优化，延迟可以降低到几十分钟甚至更短。也就是说，用户在小红书上产生行为，几十分钟之后，他的用户向量就会被更新。他再次刷新小红书的时候，双塔模型会考虑到他最新的兴趣。</p>
+<h2 id="图示全量更新和增量更新"><a href="#图示全量更新和增量更新" class="headerlink" title="图示全量更新和增量更新"></a>图示全量更新和增量更新</h2><p>在我们小红书模型既要做全量更新，也要做增量更新，我画个图演示一下，</p>
+<p>这些是前天一天积累的数据，到了昨天凌晨的时候，我们把前天的数据打包成tf record的文件，要基于前天凌晨全量训练出来的模型做训练，也就是说昨天凌晨模型初始化的时候，参数用的是前天凌晨全量训练出的模型，而不是随机初始化。然后我们拿前天积累的数据来训练模型，要把前天的数据做random shuffle打乱。然后做随机梯度下降，只训练1 epoch，也就是说每条数据只过一遍。</p>
+<p>接下来需要基于这个全量训练出来的模型做分钟级别的增量更新。从昨天凌晨到今天凌晨，不停做online learning，每隔几十分钟发布一次模型，刷新线上的用户塔的顶层参数，<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbkj18tij30mj0c774d.jpg" alt=""></p>
+<p>在昨天我们又就积累了一天的数据，到了今天凌晨又该做一次全量更新。今天凌晨的全量更新是基于昨天凌晨全量训练出来的模型，而不是用下面增量训练出的模型。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbkr5p2tj30n80c5jrk.jpg" alt=""></p>
+<p>在完成这次全量训练之后，下面增量训练出的模型就可以扔掉了，然后再基于今天凌晨全量训练出的模型，做分钟级别的增量更新，从今天凌晨到明天凌晨，不停做online learning，每隔几十分钟发布一次模型。</p>
+<p>大家思考一个问题，能不能只做增量更新，不做全量更新？<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbkx0brjj30nc0bamx8.jpg" alt=""></p>
+<p>什么意思？就是去掉上面的全量更新，接着昨天的增量更新训练，继续把增量更新给做下去。这样只做增量更新，当然比既要做增量也要做全量简单工程实现会更容易，训练消耗的机器资源也更少。</p>
+<p>我们同时把两种都试过，发现只做增量的话效果不好，最好还是既要做全量，也要做增量。</p>
+<p>为什么只做增量更新效果不好？如果你只看一个小时的数据，它是有偏的，它的统计值跟全天的数据差别很大</p>
+<p>为什么有偏？在不同的时间段，用户的行为是不一样的，比如中午和傍晚的数据明显会不一致，如果你只看五分钟的数据，那么偏差就更大了，它跟全天数据的统计值差别巨大，我们做全量训练的时候要随机排列数据，也就是randen shuffle，这样就是为了消除偏差。全量更新是在random shuffle过的数据上做，而增量更新删掉数据，从早到晚的顺序做训练，同样使用一天的数据。</p>
+<p>这两种排列数据的方式会导致训练的效果有差别，把数据按照从早到晚的时间顺序排列，效果不如把数据随机打乱。所以全量训练的效果比增量训练更好。</p>
+<p>这就是为什么我们既要做增量训练，也要做全量训练，全量训练的模型更好，而增量训练可以实时捕捉用户的兴趣。</p>
+<p>以实时捕捉用户的兴趣。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbqpqzznj30la0a5jrs.jpg" alt=""></p>
+<h2 id="总结-2"><a href="#总结-2" class="headerlink" title="总结"></a>总结</h2><p>刚刚我们详细讲解了双塔模型，最后总结一下，双塔模型，顾名思义有两个塔，一个用户塔，一个物品塔，两个塔各输出一个向量，两个向量的余弦值就是对兴趣的预估，这个值越大，用户就越有可能对物品感兴趣。</p>
+<p>越有可能对物品感兴趣。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbl9ugvbj30kr0aeq36.jpg" alt=""></p>
+<p>前面的课介绍了三种训练双塔模型的方式，分别是point wise，pair wise， list wise。做训练的时候要用到正负样本，正样本是用户点击过的物品，负样本稍微复杂一些，简单负样本是全体物品，是从全体物品中做随机抽样，困难负样本是被排序淘汰的物品。</p>
+<p>做完训练，把物品塔输出的物品向量存储到向量数据库里面，供线上做最近邻查找</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbm88k7rj30k609sq37.jpg" alt=""></p>
+<p>用做线上召回的时候拿到用户ID和用户画像，调用训练好的用户塔神经网络现算用户的向量a，然后把用户向量a作为query，查询物品的向量数据库，找到余弦相似度最大的K物品向量，返回这K物品ID作为召回结果，模型需要定期做全量更新和实时做增量更新，</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrbmmzhwzj30ky0bdt93.jpg" alt=""></p>
+<p>全量更新，意思是在今天凌晨用昨天的数据训练整个神经网络做1epoch随机梯度下降，也就是每条数据只用一遍。</p>
+<p>增量更新，意思是用最近产生的数据训练神经网络，训练的时候只更新embedding层，锁住全连接层不更新</p>
+<p>现在先进的推荐系统都会结合全量更新和增量更新。每天做全量更新，实时做增量更新，每隔几十分钟要发布最近的用户embedding，供用户他在线上计算用户向量用。这样的好处是可以捕捉到用户最新的兴趣点</p>
+<p>从双塔模型的原理，到线上召回的过程，我已经讲得很清楚很明了。最近这几篇文章我想你应该都熟悉了。</p>
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    <div style='float:left'>
+    
+     <br> 
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>    <i class="fa fa-paw"></i>  应统联盟 
+             
+       
+        </div> 
+        <div align="center">
+<br>
+        <img src="https://tva1.sinaimg.cn/large/008i3skNly1gtjl4r1u7ij60oa0oadhp02.jpg" height="270" width="270"/>
+        </div> <br>
+        <div style="text-align:center;color: #ccc;font-size:16px;">  连接十万名应统专业同学 <br></div>
+
+    
+</div>
+
+<div style='float:right'>
+    
+     <br> 
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>     <i class="fa fa-paw"></i>  阿药算法
+             
+       
+        </div> 
+        <div align="center">
+<br>
+        <img src="https://tva1.sinaimg.cn/large/008i3skNly1gtjl70lmvbj60p60pa0vj02.jpg" height="270" width="270"/>
+        </div> <br>
+        <div style="text-align:center;color: #ccc;font-size:16px;">  打通算法面试任督二脉  <br></div>
+<br> 
+    
+</div>
+
+  
+</div>
+    <div>
+      
+        
+
+      
+
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/09/01/RS-02-03/" rel="next" title="推荐系统 | 召回03：UserCF">
+                <i class="fa fa-chevron-left"></i> 推荐系统 | 召回03：UserCF
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bc405fb9346cd0b" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="Free Will" />
+            
+              <p class="site-author-name" itemprop="name">Free Will</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">213</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">308</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+
+
+
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+        <div id="music163player">
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1060910&auto=1&height=66"></iframe>
+          </div>
+
+        
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+
+                我的自媒体
+
+              <ul class="links-of-blogroll-list">
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="http://www.statunion.cn" title="应统联盟" target="_blank">应统联盟</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="http://ml-union.cn" title="阿药算法" target="_blank">阿药算法</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="https://readdementor.github.io/" title="纸间城邦" target="_blank">纸间城邦</a>
+                  </li>
+                
+              </ul>
+            </div>
+
+          
+
+
+          
+
+        </div>
+
+
+        
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-paper-plane"></i>
+
+                推荐的自媒体
+
+              <ul class="links-of-blogroll-list">
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+              </ul>
+            </div>
+
+          
+
+
+          
+
+        </div>
+
+        
+        
+      
+  
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#双塔模型的结构"><span class="nav-text">双塔模型的结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双塔模型"><span class="nav-text">双塔模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双塔模型的训练方法"><span class="nav-text">双塔模型的训练方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正负样本选择"><span class="nav-text">正负样本选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三种训练双塔模型的方式"><span class="nav-text">三种训练双塔模型的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pointwise训练"><span class="nav-text">Pointwise训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pairwise训练"><span class="nav-text">Pairwise训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Listwise训练"><span class="nav-text">Listwise训练</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选对正负样本的作用大于改进模型结构"><span class="nav-text">选对正负样本的作用大于改进模型结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负样本咋搞？"><span class="nav-text">负样本咋搞？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单负样本"><span class="nav-text">简单负样本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#全局均匀抽样or非均匀抽样"><span class="nav-text">全局均匀抽样or非均匀抽样</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#batch内负样本"><span class="nav-text">batch内负样本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#困难负样本"><span class="nav-text">困难负样本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误的负样本"><span class="nav-text">错误的负样本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-1"><span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双塔模型的线上召回"><span class="nav-text">双塔模型的线上召回</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模型更新：全量更新和增量更新"><span class="nav-text">模型更新：全量更新和增量更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图示全量更新和增量更新"><span class="nav-text">图示全量更新和增量更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结-2"><span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+
+        </section>
+      <!--/noindex-->
+      
+
+
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Free Will</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+	
+
+	
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+		    $(document).ready(function() {
+		        var int = setInterval(fixCount, 100);
+		        var busuanziSiteOffset_uv = parseInt(0);
+		        var busuanziSiteOffset_pv = parseInt(0);
+		        function fixCount() {
+	                clearInterval(int);
+	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset_pv);
+	                clearInterval(int);
+	                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + busuanziSiteOffset_uv);
+		        }
+		    });
+		</script>
+	
+	
+
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300,"hOffset":0,"vOffset":-50},"mobile":{"show":true,"scale":0.8},"log":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end --></body>
+</html>

@@ -1,0 +1,1105 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="小红书的推荐系统如果大家没有用过小红书，不妨安装一个小红书app，这样方便一起学习相关背景。 打开小红书，按默认进入发现页面，这个页面展示推荐系统分发给你的内容，这个页面展示的内容叫做笔记，都是由用户自己创作的（UGC），我们把用户创作内容展示给其他用户，形成陌生人社交的社区。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系统 | 概要01：推荐系统的基本概念">
+<meta property="og:url" content="http://yoursite.com/2023/09/01/RS-01-01/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="小红书的推荐系统如果大家没有用过小红书，不妨安装一个小红书app，这样方便一起学习相关背景。 打开小红书，按默认进入发现页面，这个页面展示推荐系统分发给你的内容，这个页面展示的内容叫做笔记，都是由用户自己创作的（UGC），我们把用户创作内容展示给其他用户，形成陌生人社交的社区。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq87i8aqoj31bk0qs0yw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq8b1qwfbj31bo0qwq5j.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq8dxjinhj31b60qi76r.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq8e6k9dxj31a20p8wg9.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq8ee6odnj31a40o4gnm.jpg">
+<meta property="og:updated_time" content="2023-09-09T05:33:06.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系统 | 概要01：推荐系统的基本概念">
+<meta name="twitter:description" content="小红书的推荐系统如果大家没有用过小红书，不妨安装一个小红书app，这样方便一起学习相关背景。 打开小红书，按默认进入发现页面，这个页面展示推荐系统分发给你的内容，这个页面展示的内容叫做笔记，都是由用户自己创作的（UGC），我们把用户创作内容展示给其他用户，形成陌生人社交的社区。">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq87i8aqoj31bk0qs0yw.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","onmobile":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script data-ad-client="ca-pub-6293681360909288" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+
+
+
+
+
+
+  <title> 推荐系统 | 概要01：推荐系统的基本概念 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            人间
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-whisper">
+          <a href="/whisper" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            絮语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/09/01/RS-01-01/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Free Will">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                推荐系统 | 概要01：推荐系统的基本概念
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-09-01T20:20:00+08:00">
+                2023-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/推荐系统/" itemprop="url" rel="index">
+                    <span itemprop="name">推荐系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="小红书的推荐系统"><a href="#小红书的推荐系统" class="headerlink" title="小红书的推荐系统"></a>小红书的推荐系统</h2><p>如果大家没有用过小红书，不妨安装一个小红书app，这样方便一起学习相关背景。</p>
+<p>打开小红书，按默认进入发现页面，这个页面展示推荐系统分发给你的内容，这个页面展示的内容叫做笔记，都是由用户自己创作的（UGC），我们把用户创作内容展示给其他用户，形成陌生人社交的社区。</p>
+<a id="more"></a>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq87i8aqoj31bk0qs0yw.jpg" alt=""></p>
+<p>在页面上看到的笔记都是推荐系统给你看的推荐内容，根据自己过去的点击、点赞、收藏、转发、评论的行为给你推荐，你可能感兴趣的内容笔记，比如我回国之前经常看机票的隔离酒店内容，推荐系统就会给你推荐这方面的。</p>
+<p>系统把一篇笔记展示给用户，这叫做曝光（impression）。假如用户对这篇笔记感兴趣，会点击它，然后进入这篇笔记。</p>
+<p>如果用户在这篇笔记上停留几秒，就意味着用户不是手滑，而是真的对这篇笔记感兴趣，这被算作一次有效点击。有效点击就意味着用户对笔记感兴趣，这被算作一次有效点击。有效点击就意味着用户对笔记感兴趣，这将被视为推荐系统的一个信号。</p>
+<p>接下来用户可能会向下滑动阅读这篇笔记，如果滑动到底，更能说明用户对这篇笔记感兴趣。滑动到底也是推荐系统的一个依据。如果用户足够喜欢这篇笔记，可能还会点赞、收藏、转发。</p>
+<p>下面的红心是点赞，红星旁边的五角星是收藏，最下面的箭头是转发，用户还可以读评论。</p>
+<h2 id="转化流程"><a href="#转化流程" class="headerlink" title="转化流程"></a>转化流程</h2><p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq8b1qwfbj31bo0qwq5j.jpg" alt=""><br>推荐系统决定给用户曝光什么内容，用户自己决定是否点击进去，点击进去是否会滑到底、评论、点赞、收藏，不同的网站，都会有不同的转化流程，跟产品的设计有关。算法工程师应该熟悉自己公司的产品，这对设计特征和模型会有帮助。对于绝大多数的公司的产品，前两步都是曝光和点击，比如YouTube、淘宝、快手、知乎都是这种设计，但是抖音不太一样，抖音没有曝光和点击，用户下滑，你只能看到一个视频，点击之后用户会做这几个动作，包括滑动到底、点赞、收藏、转发，这些动作意味着用户对笔记感兴趣，这些动作都可以作为推荐系统用的信号推荐依据。</p>
+<p>在滑动到底之后，用户可以评论，正面和中心的评论，对社区的氛围很有好处，所以留评论也作为推荐系统的一个信号。</p>
+<h2 id="消费指标"><a href="#消费指标" class="headerlink" title="消费指标"></a>消费指标</h2><p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq8dxjinhj31b60qi76r.jpg" alt=""></p>
+<p>作为算法工程师，我们优化推荐系统是为了提升一些业务指标。</p>
+<p>这里列出了几个消费者的指标，这些指标反映出用户对推荐是否满意。</p>
+<p>点击率是一个重要的消费指标，点击率等于点击次数除以曝光次数。举个例子，每天笔记展示得100个用户，其中有20个用户点击了点击，那么点击的点击率就是20%的，点击率越高就说明推荐越精准给用户展示了他感兴趣的内容。</p>
+<p>虽然点击率是重要的消费指标，但也不能把点击率作为唯一的优化目标，否则骗点击的标题就会泛滥。不然页面上到处都是美国人吓尿了，日本人震惊了，或者满屏都是美女图片骗点击。</p>
+<p>其他一些指标也可以反映出用户对笔记的兴趣：</p>
+<ul>
+<li>点赞率=点赞次数/点击次数。举个例子，有100个用户点击进入某篇笔记，其中有十个用户点赞，那么点赞率就是10%。</li>
+<li>收藏率=收藏次数/点击次数</li>
+<li>转发率=转发次数/点击次数</li>
+</ul>
+<p>阅读完成率稍微有点复杂，阅读完成率等于滑动到底次数除以点击次数，再乘以一个归一化的函数。归一化的函数跟笔记长度有关。这是因为笔记越长，完成阅读的比例就越低。如果没有归一化的函数，对长笔记会不公平，通常来说，推荐的笔记越符合用户兴趣，那么点击、点赞的行为就会越多。</p>
+<p>做实验的时候，我们希望看到新的推荐算法能在这些指标上超越原有的算法。我在这里列出的短期消费指标都是有意义的，但可能不是评价推荐系统好坏的根本指标，一味追求这些短期消费指标是不对的。</p>
+<p>举个例子，如果推荐算法只看用户短期兴趣，推很多用户最近感兴趣的内容，会让这些消费指标上涨，但这样的坏处是为竭泽而渔，用户很快被失去兴趣，不再活跃。反过来，尝试一些用户没看过的话题，那么点击率不会上涨，但是会有利于提高用户粘性，留住用户，让用户更活跃。</p>
+<h2 id="北极星指标"><a href="#北极星指标" class="headerlink" title="北极星指标"></a>北极星指标</h2><p>刚才讲的点击率、点赞率之类的指标都是短期的消费指标，不是最重要的指标。衡量推荐系统的好坏，最重要的指标叫做北极星指标，有这样几个北极星指标，用户规模、消费、发布，北极星指标，意思就是最关键的指标，是衡量推荐系统好坏的根本标准。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq8e6k9dxj31a20p8wg9.jpg" alt=""></p>
+<p>在小红书我们就考察这三类北极星指标，</p>
+<p>第一是用户规模，就是和用户数据和月活用户数mau来衡量，比如我是个用户，我今天使用一次小红书或者使用十次小红书，今天都算给小红书贡献了一个dau，但这个月无论我总共登录了一次小红书，还是每天都登录小红书，都算给小红书，这个月贡献了一个MAU。DAU和mau，都跟推荐系统的好坏强相关，推荐系统做得好，用户就会越活跃，DAU和MAU就会越高。</p>
+<p>第二个北极星指标是消费，包括人均使用推荐的时长、人均阅读笔记数量，如果我今天刷了一个小时的小红书推荐，那么我就贡献了一个小时的时长，如果我今天看了20个小时的笔记，那我就贡献了20篇的阅读量。</p>
+<p>推荐做的越好，用户就会越上瘾，使用小红的时长和阅读数量速度越高。这两个指标比点击率、点赞率能反映出推荐做的好不好。</p>
+<p>通常来说，点击率跟时长阅读数量的涨跌是一致的，万一有冲突，要以北极星指标为准。举个例子，把推荐系统的多样性做好，探索对用户的兴趣，使得用户使用时长增长。但是点击率下去了，这完全OK，这样的策略应该上线，北极星指标比点击率更重要。</p>
+<p>还有一个北极星指标是发布，包括发布渗透率和人均发布量，我们希望推荐系统能激励作者发布，这样我们的内容是变大，优质内容池是我们的核心竞争力。</p>
+<p>激励发布通常是由冷启动来负责，后面我会专门讲东西的，到时候再解释发布渗透率和人均发布量。</p>
+<h2 id="实验流程"><a href="#实验流程" class="headerlink" title="实验流程"></a>实验流程</h2><p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq8ee6odnj31a40o4gnm.jpg" alt=""><br>刚才讨论了如何评价推荐系统。算法工程师的工作就是对模型、特征、策略、系统做改进，提升各种指标，推进系统能否最终上线，要拿实验结果来说话。</p>
+<p>实验流程是先做离线实验，表现好的话上线做小流量AB测试，表现好的话加大流量，最终目的是全流量上线。</p>
+<p>第一步是离线实验，用收集的历史数据做训练和测试，离线实验不需要把算法部署到产品中，没有跟用户实际交互，因此离线实验很容易做，不需要占用线上流量，也不会对系统和用户产生负面影响，有很多评价离线实验的指标，后面课程会讲。</p>
+<p>离线实验的结果有参考价值，能大致反映出算法的好坏，但是离线实验并没有线上实验可靠，想最终判断算法的好坏，还是需要做线上实验。</p>
+<p>前面提到的北极星指标都是线上指标，只能通过线上实验获得，做离线实验无法得到这些指标。具体做法是开小流量AB测试，把用户随机分为实验组和对照组，实验组用新策略，对照组用旧策略。对比两者的业务指标，判断新策略是否会显著优于旧策略。如果新策略显著优于旧策略，可以加大流量，最终推广。</p>
+<p>这节课以小红书为例，介绍推荐系统的一些基本概念，后面的课程会用到这些概念。</p>
+<p>下节内容是推荐系统的链路，仍然是一个很广泛的概述，不会讲具体的推荐算法，</p>
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    <div style='float:left'>
+    
+     <br> 
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>    <i class="fa fa-paw"></i>  应统联盟 
+             
+       
+        </div> 
+        <div align="center">
+<br>
+        <img src="https://tva1.sinaimg.cn/large/008i3skNly1gtjl4r1u7ij60oa0oadhp02.jpg" height="270" width="270"/>
+        </div> <br>
+        <div style="text-align:center;color: #ccc;font-size:16px;">  连接十万名应统专业同学 <br></div>
+
+    
+</div>
+
+<div style='float:right'>
+    
+     <br> 
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>     <i class="fa fa-paw"></i>  阿药算法
+             
+       
+        </div> 
+        <div align="center">
+<br>
+        <img src="https://tva1.sinaimg.cn/large/008i3skNly1gtjl70lmvbj60p60pa0vj02.jpg" height="270" width="270"/>
+        </div> <br>
+        <div style="text-align:center;color: #ccc;font-size:16px;">  打通算法面试任督二脉  <br></div>
+<br> 
+    
+</div>
+
+  
+</div>
+    <div>
+      
+        
+
+      
+
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/05/01/poker-230501/" rel="next" title="德州扑克进阶书目列表">
+                <i class="fa fa-chevron-left"></i> 德州扑克进阶书目列表
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/09/01/RS-01-02/" rel="prev" title="推荐系统 | 概要02：推荐系统的基本概念">
+                推荐系统 | 概要02：推荐系统的基本概念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bc405fb9346cd0b" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="Free Will" />
+            
+              <p class="site-author-name" itemprop="name">Free Will</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">213</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">308</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+
+
+
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+        <div id="music163player">
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1060910&auto=1&height=66"></iframe>
+          </div>
+
+        
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+
+                我的自媒体
+
+              <ul class="links-of-blogroll-list">
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="http://www.statunion.cn" title="应统联盟" target="_blank">应统联盟</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="http://ml-union.cn" title="阿药算法" target="_blank">阿药算法</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="https://readdementor.github.io/" title="纸间城邦" target="_blank">纸间城邦</a>
+                  </li>
+                
+              </ul>
+            </div>
+
+          
+
+
+          
+
+        </div>
+
+
+        
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-paper-plane"></i>
+
+                推荐的自媒体
+
+              <ul class="links-of-blogroll-list">
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+              </ul>
+            </div>
+
+          
+
+
+          
+
+        </div>
+
+        
+        
+      
+  
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#小红书的推荐系统"><span class="nav-text">小红书的推荐系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转化流程"><span class="nav-text">转化流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消费指标"><span class="nav-text">消费指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#北极星指标"><span class="nav-text">北极星指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验流程"><span class="nav-text">实验流程</span></a></li></ol></div>
+            
+
+          </div>
+
+        </section>
+      <!--/noindex-->
+      
+
+
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Free Will</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+	
+
+	
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+		    $(document).ready(function() {
+		        var int = setInterval(fixCount, 100);
+		        var busuanziSiteOffset_uv = parseInt(0);
+		        var busuanziSiteOffset_pv = parseInt(0);
+		        function fixCount() {
+	                clearInterval(int);
+	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset_pv);
+	                clearInterval(int);
+	                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + busuanziSiteOffset_uv);
+		        }
+		    });
+		</script>
+	
+	
+
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300,"hOffset":0,"vOffset":-50},"mobile":{"show":true,"scale":0.8},"log":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end --></body>
+</html>

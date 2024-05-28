@@ -1,0 +1,1104 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="推荐系统算法工程师的日常工作就是改进模型和策略，目标是提升推荐系统的业务指标。所有对模型和策略的改进，都需要经过线上AB测试，用实验数据验证模型和策略是否有效。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系统 | 概要03：推荐系统的基本概念">
+<meta property="og:url" content="http://yoursite.com/2023/09/01/RS-01-03/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="推荐系统算法工程师的日常工作就是改进模型和策略，目标是提升推荐系统的业务指标。所有对模型和策略的改进，都需要经过线上AB测试，用实验数据验证模型和策略是否有效。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq93naddrj316g0nq400.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq93u5q8qj314y0nyjsl.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq940pfjtj30xw0m20tp.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq9463iaej314m0kwta5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq94excx8j313e0h2my7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq94l0gj3j314q0mmjs7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq94sptrgj31260lcaav.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq94yshm1j311m0m4403.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq956fl8ij310g0l4wfv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq95dtxeij319g0ooq3q.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq95j39nmj30z80gc0tw.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq95ofm5kj318a0mk752.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq95vdnqrj311i0m075x.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq960pmmgj31760ogdgp.jpg">
+<meta property="og:updated_time" content="2023-09-09T05:15:43.848Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系统 | 概要03：推荐系统的基本概念">
+<meta name="twitter:description" content="推荐系统算法工程师的日常工作就是改进模型和策略，目标是提升推荐系统的业务指标。所有对模型和策略的改进，都需要经过线上AB测试，用实验数据验证模型和策略是否有效。">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq93naddrj316g0nq400.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","onmobile":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script data-ad-client="ca-pub-6293681360909288" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+
+
+
+
+
+
+  <title> 推荐系统 | 概要03：推荐系统的基本概念 | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            人间
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-whisper">
+          <a href="/whisper" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            絮语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/09/01/RS-01-03/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Free Will">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                推荐系统 | 概要03：推荐系统的基本概念
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-09-01T20:20:03+08:00">
+                2023-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/推荐系统/" itemprop="url" rel="index">
+                    <span itemprop="name">推荐系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>推荐系统算法工程师的日常工作就是改进模型和策略，目标是提升推荐系统的业务指标。所有对模型和策略的改进，都需要经过线上AB测试，用实验数据验证模型和策略是否有效。</p>
+<a id="more"></a>
+<h2 id="一、实验组和对照组"><a href="#一、实验组和对照组" class="headerlink" title="一、实验组和对照组"></a>一、实验组和对照组</h2><p>举个例子，召回团队实现一种图神经网络（graph neural network，GNN）召回通道，离线实验的结果看上去非常好，那么下一步就是做线上的小流量AB 测试，看GNN 召回通道对线上业务指标的影响。此外，GNN 的神经网络结构中有一些需要调的参数，比如设置层数” {1, 2, 3}，具体该用几层的GNN，也需要线上的AB测试确定。</p>
+<p>AB 测试对用户做随机分桶，比如分成10 桶，每桶占10% 的流量，取一桶作为对照组，一个或多个桶作为实验组，在上述例子中，有3 个实验组，分别是用1 层、2 层、3层的GNN。统计各组的业务指标，比如DAU、次1 日留存、用户使用推荐时长、曝光笔记数、点击率、点赞率。计算每个实验组与对照组的差（diff），得到3 个diff，反映出新的GNN 召回通道对业务指标的影响。如果有一组实验结果显著正向，则可以扩大它的流量，进一步观测实验的收益。值得注意的是分桶必须要足够均匀，保证各桶所有业务指标都持平。均匀分10 个桶，每个桶中有10% 的用户，并不能保证每个桶的DAU、中低活用户数、留存、消费、曝光次数、点击次数、交互次数都相等（至少精确到万分之一）。假如两个桶的某些核心指标有万分之几的差异，那么A/B 测试测出的diff 是没有意义的。分桶的时候，应当尽量保证各活跃度、人群的分桶是均匀的，避免桶间指标不平。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq93naddrj316g0nq400.jpg" alt=""></p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq93u5q8qj314y0nyjsl.jpg" alt=""></p>
+<h2 id="二、分层实验"><a href="#二、分层实验" class="headerlink" title="二、分层实验"></a>二、分层实验</h2><h3 id="2-1-目的"><a href="#2-1-目的" class="headerlink" title="2.1 目的"></a>2.1 目的</h3><p>分层实验的目的：解决流量不够用的问题</p>
+<p>以小红书这样的信息流产品为例，同时有多个团队做算法、前端界面、信息流广告、运营策略方面的优化，线上需要同时做数十个、甚至上百个AB 测试。假如我们把用户随机分成10 个桶，每个桶有10% 的流量，取1 个桶做对照组，剩下9 个桶作实验组，那么线上最多只能同时开9 个AB 测试，根本无法满足产品迭代的需求。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq940pfjtj30xw0m20tp.jpg" alt=""></p>
+<h3 id="2-2-策略"><a href="#2-2-策略" class="headerlink" title="2.2 策略"></a>2.2 策略</h3><p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq9463iaej314m0kwta5.jpg" alt=""></p>
+<ul>
+<li>同层互斥：避免一个用户同时被两个实验影响</li>
+<li>不同层正交：召回层和粗排层对用户都是随机划分的，召回层的2号桶和粗排层的2号桶几乎没有交集</li>
+<li>一个用户不能同时受到两个召回实验的影响，但可以同时受到召回实验和精排实验的影响</li>
+</ul>
+<h3 id="2-3-举例"><a href="#2-3-举例" class="headerlink" title="2.3 举例"></a>2.3 举例</h3><p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq94excx8j313e0h2my7.jpg" alt=""></p>
+<p>一个召回实验和一个精排实验各自作用在十分之n个用户上，那么有百分之n的用户同时受两个实验的影响</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq94l0gj3j314q0mmjs7.jpg" alt=""></p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq94sptrgj31260lcaav.jpg" alt=""></p>
+<h3 id="2-4-问题"><a href="#2-4-问题" class="headerlink" title="2.4 问题"></a>2.4 问题</h3><p>为什么允许召回和粗排实验同时作用到一位用户（正交），而不允许两个召回实验同时作用到一位用户（互斥）？</p>
+<p>如果两组实验同时作用到一位用户，实验效果可能会相互增强（1 + 1 &gt; 2）或相互抵消（1 + 1 &lt; 2）。两个召回实验相互增强或相互抵消的可能性很大，所以让召回实验互斥。而召回实验与粗排实验通常互不干扰（1 + 1 = 2），所以可以让召回和粗排正交。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq94yshm1j311m0m4403.jpg" alt=""></p>
+<h2 id="三、holdout机制"><a href="#三、holdout机制" class="headerlink" title="三、holdout机制"></a>三、holdout机制</h2><p>holdout桶就是对照组</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq956fl8ij310g0l4wfv.jpg" alt=""></p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq95dtxeij319g0ooq3q.jpg" alt=""></p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq95j39nmj30z80gc0tw.jpg" alt=""></p>
+<h2 id="四、实验推全-amp-反转实验"><a href="#四、实验推全-amp-反转实验" class="headerlink" title="四、实验推全&amp;反转实验"></a>四、实验推全&amp;反转实验</h2><h3 id="4-1-实验推全"><a href="#4-1-实验推全" class="headerlink" title="4.1 实验推全"></a>4.1 实验推全</h3><p>所有的实验都是从小流量开始，如果业务指标的diff 显著正向，则推全实验。举个例子，我们做一个召回通道的实验，取1 个桶作为实验组，1 个桶作为对照组。如果观测到显著正向的业务指标收益，则推全这条召回通道，让它从10% 的用户扩大到90%。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq95ofm5kj318a0mk752.jpg" alt=""></p>
+<h3 id="4-2-反转实验"><a href="#4-2-反转实验" class="headerlink" title="4.2 反转实验"></a>4.2 反转实验</h3><p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq95vdnqrj311i0m075x.jpg" alt=""></p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhq960pmmgj31760ogdgp.jpg" alt=""></p>
+<p>在推全时，新建一层，包括90% 的用户，它与推荐系统的其他层正交。在新层中，保留5% 的用户作为反转桶使用旧策略，其余85% 的用户使用推全的新策略</p>
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    <div style='float:left'>
+    
+     <br> 
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>    <i class="fa fa-paw"></i>  应统联盟 
+             
+       
+        </div> 
+        <div align="center">
+<br>
+        <img src="https://tva1.sinaimg.cn/large/008i3skNly1gtjl4r1u7ij60oa0oadhp02.jpg" height="270" width="270"/>
+        </div> <br>
+        <div style="text-align:center;color: #ccc;font-size:16px;">  连接十万名应统专业同学 <br></div>
+
+    
+</div>
+
+<div style='float:right'>
+    
+     <br> 
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>     <i class="fa fa-paw"></i>  阿药算法
+             
+       
+        </div> 
+        <div align="center">
+<br>
+        <img src="https://tva1.sinaimg.cn/large/008i3skNly1gtjl70lmvbj60p60pa0vj02.jpg" height="270" width="270"/>
+        </div> <br>
+        <div style="text-align:center;color: #ccc;font-size:16px;">  打通算法面试任督二脉  <br></div>
+<br> 
+    
+</div>
+
+  
+</div>
+    <div>
+      
+        
+
+      
+
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/09/01/RS-01-02/" rel="next" title="推荐系统 | 概要02：推荐系统的基本概念">
+                <i class="fa fa-chevron-left"></i> 推荐系统 | 概要02：推荐系统的基本概念
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/09/01/RS-02-01/" rel="prev" title="推荐系统 | 召回01：ItemCF">
+                推荐系统 | 召回01：ItemCF <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bc405fb9346cd0b" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="Free Will" />
+            
+              <p class="site-author-name" itemprop="name">Free Will</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">213</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">308</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+
+
+
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+        <div id="music163player">
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1060910&auto=1&height=66"></iframe>
+          </div>
+
+        
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+
+                我的自媒体
+
+              <ul class="links-of-blogroll-list">
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="http://www.statunion.cn" title="应统联盟" target="_blank">应统联盟</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="http://ml-union.cn" title="阿药算法" target="_blank">阿药算法</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="https://readdementor.github.io/" title="纸间城邦" target="_blank">纸间城邦</a>
+                  </li>
+                
+              </ul>
+            </div>
+
+          
+
+
+          
+
+        </div>
+
+
+        
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-paper-plane"></i>
+
+                推荐的自媒体
+
+              <ul class="links-of-blogroll-list">
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+              </ul>
+            </div>
+
+          
+
+
+          
+
+        </div>
+
+        
+        
+      
+  
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、实验组和对照组"><span class="nav-text">一、实验组和对照组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、分层实验"><span class="nav-text">二、分层实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-目的"><span class="nav-text">2.1 目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-策略"><span class="nav-text">2.2 策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-举例"><span class="nav-text">2.3 举例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-问题"><span class="nav-text">2.4 问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、holdout机制"><span class="nav-text">三、holdout机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、实验推全-amp-反转实验"><span class="nav-text">四、实验推全&amp;反转实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-实验推全"><span class="nav-text">4.1 实验推全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-反转实验"><span class="nav-text">4.2 反转实验</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+
+        </section>
+      <!--/noindex-->
+      
+
+
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Free Will</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+	
+
+	
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+		    $(document).ready(function() {
+		        var int = setInterval(fixCount, 100);
+		        var busuanziSiteOffset_uv = parseInt(0);
+		        var busuanziSiteOffset_pv = parseInt(0);
+		        function fixCount() {
+	                clearInterval(int);
+	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset_pv);
+	                clearInterval(int);
+	                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + busuanziSiteOffset_uv);
+		        }
+		    });
+		</script>
+	
+	
+
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300,"hOffset":0,"vOffset":-50},"mobile":{"show":true,"scale":0.8},"log":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end --></body>
+</html>

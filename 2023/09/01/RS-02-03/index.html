@@ -1,0 +1,1116 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Free Will" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="基于用户的协同过滤（UserCF）学习本文之前，你务必把基于物品的协同过滤搞清楚，然后你才能轻松理解，其实基于用户的协同过滤，两者本质一样 我们继续学习推荐系统链路上的召回环节，本文要讲的方法叫做基于用户的协同过滤，简称user cf，它跟前面介绍的items cf有很多相似之处，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="推荐系统 | 召回03：UserCF">
+<meta property="og:url" content="http://yoursite.com/2023/09/01/RS-02-03/index.html">
+<meta property="og:site_name" content="Free Will">
+<meta property="og:description" content="基于用户的协同过滤（UserCF）学习本文之前，你务必把基于物品的协同过滤搞清楚，然后你才能轻松理解，其实基于用户的协同过滤，两者本质一样 我们继续学习推荐系统链路上的召回环节，本文要讲的方法叫做基于用户的协同过滤，简称user cf，它跟前面介绍的items cf有很多相似之处，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhravaqlecj318y0noq4e.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhravfxyvvj31880p8q46.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhraxw8oxtj316c0mm0tb.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhray7l8wgj314a0mijs5.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb04h9e7j31480kawf8.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb0rbeluj31940p6myy.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb0xjoprj31420k2jsa.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb13z1ezj315w0oy0tv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb1cohvxj31360midh7.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb1jk8a4j313k0kwgmv.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb1q5gfjj314e0jcjsn.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb1wo3nwj31860o8abk.jpg">
+<meta property="og:updated_time" content="2023-09-10T03:23:19.589Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="推荐系统 | 召回03：UserCF">
+<meta name="twitter:description" content="基于用户的协同过滤（UserCF）学习本文之前，你务必把基于物品的协同过滤搞清楚，然后你才能轻松理解，其实基于用户的协同过滤，两者本质一样 我们继续学习推荐系统链路上的召回环节，本文要讲的方法叫做基于用户的协同过滤，简称user cf，它跟前面介绍的items cf有很多相似之处，">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008vOhrAgy1hhravaqlecj318y0noq4e.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"always","onmobile":true},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+<script data-ad-client="ca-pub-6293681360909288" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+
+
+
+
+
+
+
+  <title> 推荐系统 | 召回03：UserCF | Free Will </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?9a21041c6a1d47620a3a748589516274";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Free Will</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tech-stack">
+          <a href="/tech-stack" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-database"></i> <br />
+            
+            技术
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-on-earth">
+          <a href="/on-earth" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            人间
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-whisper">
+          <a href="/whisper" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-empire"></i> <br />
+            
+            絮语
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user-secret"></i> <br />
+            
+            关于我
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜一下
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input" placeholder="search my blog...">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+
+</nav>
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2023/09/01/RS-02-03/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Free Will">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/img/v.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Free Will">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Free Will" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                推荐系统 | 召回03：UserCF
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-09-01T20:20:06+08:00">
+                2023-09-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/推荐系统/" itemprop="url" rel="index">
+                    <span itemprop="name">推荐系统</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基于用户的协同过滤（UserCF）"><a href="#基于用户的协同过滤（UserCF）" class="headerlink" title="基于用户的协同过滤（UserCF）"></a>基于用户的协同过滤（UserCF）</h2><p>学习本文之前，你务必把基于物品的协同过滤搞清楚，然后你才能轻松理解，其实基于用户的协同过滤，两者本质一样</p>
+<p>我们继续学习推荐系统链路上的召回环节，本文要讲的方法叫做基于用户的协同过滤，简称user cf，它跟前面介绍的items cf有很多相似之处，</p>
+<a id="more"></a>
+<p>当时我讲Item cf是基于物品之间的相似性做推荐，而User cf是基于用户之间的相似性做推荐，</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhravaqlecj318y0noq4e.jpg" alt=""></p>
+<p>首先解释user cf的原理，作为小红书的用户，我在小红书的点击、点赞、收藏、转发可以体现出我的兴趣爱好。小红书上至少有几百个跟我兴趣爱好非常相似的网友，虽然我不认识这些网友，但是小红书可以从大数据中挖掘出来。小红书知道我们的兴趣爱好非常相似，今天其中某个跟我兴趣非常相似的网友看了篇笔记，他很感兴趣对笔记点赞转发。</p>
+<p>于是小红书就知道他喜欢这篇笔记，而我还没有看过这篇笔记。那么推荐系统就有可能给我推荐这篇笔记，推荐的理由就是跟我兴趣爱好相似的网友喜欢这篇笔记。</p>
+<p>推荐系统如何找到跟我兴趣非常相似的网友？一种办法是判断两个人感兴趣的笔记有多少重合，每个用户都有一个列表，上面存储的点击、点赞、收藏、转发的笔记ID，对比两个用户的列表，就知道有多大的重合，重合越多，说明两个人的兴趣越相似。</p>
+<p>另一种类似的办法不是看笔记的重合，而是看作者的重合。每个用户都会关注一些作者，对比两个用户关注的作者列表，就知道有多少关注的作者是重合的，关注的作者重合越多，说明两个人的兴趣越相似。</p>
+<h2 id="user-cf具体怎么做？"><a href="#user-cf具体怎么做？" class="headerlink" title="user cf具体怎么做？"></a>user cf具体怎么做？</h2><p>在用user cf做推荐之前，需要先离线算好每两个用户之间的相似度。</p>
+<p>计算相似度的方法稍后再讲。</p>
+<p>在这个例子中，我们想要给左边的用户做推荐，右边是最相似的四个用户，这些分数表示用户之间的相似度，数值越大表示用户越相似。</p>
+<p>最右边是候选物品【这个物品当然是相似用户们看过的】，左边的用户还没有看过这个候选物品。</p>
+<p>我们想要预估左边的用户对右边的候选物品的兴趣有多大？</p>
+<p>历史数据反映了中间这些跟我相似的用户对物品item的兴趣。比如点击、点赞、收藏、转发这四种行为各算一分，不妨设四位用户对候选物品的兴趣分数分别是0，1，3，0，分数越大表示用户对物品越感兴趣，0表示用户没有看过物品或者对物品不感兴趣，</p>
+<p>用下面这个公式来预估用户对候选物品的兴趣，</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhravfxyvvj31880p8q46.jpg" alt=""></p>
+<p>$sim(user,userj)$这一项是左边用户$user$与$user_j$这个用户之间的相似度。我user和其他四个相似度也就是图中左边的分数，0.9，0.7，0.7，0.4，$like(user_j，item)$这一项是第j这个用户对候选物品item的兴趣，也就是图中右边的分数：0，1，3，0。把各个相似度和兴趣分数相乘，再把所有的乘积都加起来，得到总分rate，表示用户对候选物品的兴趣。</p>
+<p>在这个例子中，从左边用户到右边的候选物品有四条路径，所以要计算四个分数，然后把它们相加。计算0.9乘以零，加0.7乘以1，加0.7乘以3，加0.4乘以零，这里的0.9，0.7，0.7，0.4是左边用户与中间四个用户之间的相似度，0，1，3，0表示四个用户对右边候选物品的兴趣，四个分数相加等于2.8，表示左边用户对候选物品的兴趣。【1–5之间的分数，2.8算中下等级别的喜欢程度】</p>
+<p>举个例子，有2000个候选物品，我们逐一计算用户user对候选物品item们的兴趣分数，然后返回其中分数最高的100个物品，就是咱们召回推荐的结果</p>
+<h2 id="求用户相似度"><a href="#求用户相似度" class="headerlink" title="求用户相似度"></a>求用户相似度</h2><p>这里的相似度指的是用户有共同的兴趣点。跟那个物品之间的相似度非常非常像，当时讲物品的相似度就是用户共同的特性，尤其是从喜欢他们的用户交集出发看相似性再看用户也很类似，就看用户都喜欢过哪些物品，看看物品有没有交集？这样就能得到用户的相似度。</p>
+<p>因此，求物品相似度，看喜欢这些物品的用户的状况，反之，求用户相似度，看用户喜欢过的物品的状况。我先举例说明什么样的用户相似或者不相似。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhraxw8oxtj316c0mm0tb.jpg" alt=""></p>
+<p>这个例子中的两个用户不相似，他们喜欢的物品没有重合。</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhray7l8wgj314a0mijs5.jpg" alt=""></p>
+<p>这个例子中的两个用户被判定为相似，这是因为两个用户喜欢的物品重合度非常高，他们的兴趣点相似</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb04h9e7j31480kawf8.jpg" alt=""></p>
+<p>两个用户的相似度是这样计算的，把用户$U_1$喜欢的物品记作集合$J_1$，把用户$U_2$喜欢的物品记作集合$J_2$，把集合$J_1$,$J_2$的交集记作集合$I$,集合大$I$包含两个用户共同喜欢的物品。</p>
+<p>用这个公式计算用户$U_1$,$U_2$的相似度，公式中的分子是集合大I的大小，代表这两个用户共同喜欢的物品的个数，分母是结合$J_1$,$J_2$大小的乘积取根号，这样计算出的相似度是介于零到一之间的数，数值越接近1表示两个用户越相似。</p>
+<h2 id="不足之处"><a href="#不足之处" class="headerlink" title="不足之处"></a>不足之处</h2><p>上面求sim的公式有个不足之处：<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb0rbeluj31940p6myy.jpg" alt=""><br>拿书籍推荐举个例子，哈利波特是非常热门的物品，不论是大学教授还是中学生都喜欢看哈利波特。既然所有人都喜欢看哈利波特，那么哈利波特对于计算用户相似度是没有价值的。越热门的物品越无法反映出用户独特的兴趣，对计算相似度就没有用。反过来，重合的物品越冷门越能反映出用户的兴趣。</p>
+<p>如果两个用户都喜欢deep learning这本书，说明两个人很可能是同行。<br>如果两个用户都喜欢更冷门一些的书，比如深度学习在语音识别中的应用，说明两个人是小同行。</p>
+<p>为了更好的计算用户兴趣的相似度，我们需要降低热门物品的权重，前面计算用户相似度的公式可以等价改写成这种形式，</p>
+<p><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb0xjoprj31420k2jsa.jpg" alt=""><br>这里的分子还是集合I的大小，只不过换了种写法，写成了对一的连加。连加符号中的字母小L是物品的序号，连加中的一是物品的权重，所有物品的权重都相同，不论是冷门还是热门物品，权重都是一。显然这不合理</p>
+<p>刚才我们讨论了物品的重要性，应该跟热门程度相关，越热门的物品权重应该越低，因此，我们把分子中的1换成1除以$log(1+n_l)$<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb13z1ezj315w0oy0tv.jpg" alt=""></p>
+<p>就是标为红色的那一项。公式中的其他部分没有变，1除以$log(1+n_l)$表示物品的权重，$n_l$是喜欢物品$l$的用户数量，反映物品的热门程度。</p>
+<p>喜欢哈利波特的人数很多，$n_l$自然就会很大，物品越热门，$n_l$越大，1除以$log(1+n_l)$就越小，也就是说物品的权重越小。这样一来，哈利波特对相思路的贡献就会很小，同理，而冷门物品的贡献会比较大。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>小结一下前面讲的内容，User cf的基本思想是根据用户的相似度做推荐，<br>如果用户1跟用户2相似，而且用户2喜欢某物品，那么用户1也很可能喜欢这个物品。用user cf做召回的时候，需要预估用户user对物品item的兴趣分数rate，选出分数最高的物品做推荐。<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb1cohvxj31360midh7.jpg" alt="">预估兴趣分数要用这个公式，我们找到跟用户user最相似的若干个用户记作userj，<br>用sim表示两个用户之间的相似度，这个相似度是事先在线下算好的，<br>我们还知道用户userjJ对物品items的兴趣，记作like，<br>把sim和like个数值相乘，然后关于用户J去连加，<br>作为用户user对候选物品items的兴趣分数的预估，</p>
+<p>这个公式需要知道每两个用户之间的相似度，我们会事先计算用户两两之间的相似度并保存起来。我们这样计算两个用户之间的相似度，把每个用户表示为一个稀疏向量，向量每个元素对应一个物品，如果用户对该物品不感兴趣，元素就是零，如果感兴趣，元素就是一或者是一除以物品的热门程度。相似度sim函数就是两个向量夹角的余弦。</p>
+<h2 id="user-cf用于召回的完整流程"><a href="#user-cf用于召回的完整流程" class="headerlink" title="user cf用于召回的完整流程"></a>user cf用于召回的完整流程</h2><p>我已经讲完了user cf的数学原理，最后过一遍user cf用于召回的完整流程。</p>
+<p>为了能在线上做到实时的推荐，系统必须要事先做离线计算，建立两个索引。一个索引是用户到物品索引，记录每个用户最近点击过和交互过的物品ID，以及记录用户对物品的兴趣分数。前面课程讲item cf的时候用到了相同的索引，所以这里我就不细讲了，<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb1jk8a4j313k0kwgmv.jpg" alt=""><br>另一个索引是用户到用户的索引，这跟item cf不同，item cf用的是物品到物品的索引，这里用的是用户到用户的索引，</p>
+<p>当然了，建立索引的方法跟item cf几乎相同，对于每个用户索引它最相似的K个用户，比如K等于十或者100，这个计算量会比较大，有了这个用户到用户的索引之后。</p>
+<p>用户刷小红书之后，系统要给这位用户做推荐，知道用户的ID，利用用户到用户的索引找到最相似的k个用户，取回列表中记录的top k的用户的ID和相似度。</p>
+<p>接下来，我们要利用用户到物品的索引，找到每个用户近期感兴趣的物品，知道这个用户的ID，取回他近期感兴趣的物品。我们把这些物品叫做last n，这些就是用户最近感兴趣的物品的ID和兴趣分数。在这个例子中，n等于2</p>
+<p>用同样的方法，根据用户到物品的索引，找到其他的每个用户近期感兴趣的物品，一共用了k相似用户，每个用户最多有N个感兴趣的物品，因此会取回N乘以k个物品，用前面介绍过的公式计算用户对这N乘以k物品的兴趣分数rate。</p>
+<p>根据算出的兴趣分数rate做排序，返回排在前100的物品，也就是说，从这N乘以K物品中选出100个作为user cf的召回结果。做计算的时候需要用到这些列表中的数值，<br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb1q5gfjj314e0jcjsn.jpg" alt=""><br><img src="https://tva1.sinaimg.cn/large/008vOhrAgy1hhrb1wo3nwj31860o8abk.jpg" alt=""><br>用到上面列表中用户之间的相似度，用到下面列表中用户对物品的兴趣分数，把上面的相似度跟下面的兴趣分数相乘，得到预估的兴趣分数rate。如果取回的物品有重复的就做，去重把分数加起来。用这种方法做召回，在线上做计算的速度非常快</p>
+
+      
+    </div>
+
+
+    <div>
+      
+        
+
+      
+    </div>
+<div>
+  
+    <div style='float:left'>
+    
+     <br> 
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>    <i class="fa fa-paw"></i>  应统联盟 
+             
+       
+        </div> 
+        <div align="center">
+<br>
+        <img src="https://tva1.sinaimg.cn/large/008i3skNly1gtjl4r1u7ij60oa0oadhp02.jpg" height="270" width="270"/>
+        </div> <br>
+        <div style="text-align:center;color: #ccc;font-size:16px;">  连接十万名应统专业同学 <br></div>
+
+    
+</div>
+
+<div style='float:right'>
+    
+     <br> 
+        <div style="text-align:center;color: #ccc;font-size:18px;"><br>     <i class="fa fa-paw"></i>  阿药算法
+             
+       
+        </div> 
+        <div align="center">
+<br>
+        <img src="https://tva1.sinaimg.cn/large/008i3skNly1gtjl70lmvbj60p60pa0vj02.jpg" height="270" width="270"/>
+        </div> <br>
+        <div style="text-align:center;color: #ccc;font-size:16px;">  打通算法面试任督二脉  <br></div>
+<br> 
+    
+</div>
+
+  
+</div>
+    <div>
+      
+        
+
+      
+
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2023/09/01/RS-02-02/" rel="next" title="推荐系统 | 召回02：Swing">
+                <i class="fa fa-chevron-left"></i> 推荐系统 | 召回02：Swing
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2023/09/01/RS-02-06/" rel="prev" title="推荐系统 | 召回06：双塔模型">
+                推荐系统 | 召回06：双塔模型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bc405fb9346cd0b" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/img/v.png"
+                alt="Free Will" />
+            
+              <p class="site-author-name" itemprop="name">Free Will</p>
+              <p class="site-description motion-element" itemprop="description">人类被赋予了一种工作，那就是精神的成长</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">213</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">308</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+
+
+
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+        <div id="music163player">
+           <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=1060910&auto=1&height=66"></iframe>
+          </div>
+
+        
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-anchor"></i>
+
+                我的自媒体
+
+              <ul class="links-of-blogroll-list">
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="http://www.statunion.cn" title="应统联盟" target="_blank">应统联盟</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="http://ml-union.cn" title="阿药算法" target="_blank">阿药算法</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-paw"></i>
+                    <a href="https://readdementor.github.io/" title="纸间城邦" target="_blank">纸间城邦</a>
+                  </li>
+                
+              </ul>
+            </div>
+
+          
+
+
+          
+
+        </div>
+
+
+        
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-paper-plane"></i>
+
+                推荐的自媒体
+
+              <ul class="links-of-blogroll-list">
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://blog.farmostwood.net" title="木遥" target="_blank">木遥</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://mindhacks.cn" title="刘未鹏" target="_blank">刘未鹏</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://freemind.pluskid.org" title="张驰原" target="_blank">张驰原</a>
+                  </li>
+                
+
+                  <li class="links-of-blogroll-item">
+                  <i class="fa fa-address-book"></i>
+                    <a href="http://www.ruanyifeng.com/home.html" title="阮一峰" target="_blank">阮一峰</a>
+                  </li>
+                
+              </ul>
+            </div>
+
+          
+
+
+          
+
+        </div>
+
+        
+        
+      
+  
+          
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于用户的协同过滤（UserCF）"><span class="nav-text">基于用户的协同过滤（UserCF）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#user-cf具体怎么做？"><span class="nav-text">user cf具体怎么做？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求用户相似度"><span class="nav-text">求用户相似度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不足之处"><span class="nav-text">不足之处</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-text">小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#user-cf用于召回的完整流程"><span class="nav-text">user cf用于召回的完整流程</span></a></li></ol></div>
+            
+
+          </div>
+
+        </section>
+      <!--/noindex-->
+      
+
+
+
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Free Will</span>
+</div>
+
+
+
+        
+
+<div class="busuanzi-count">
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+	
+    <span class="site-uv"><i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span>
+	
+
+	
+    <span class="site-pv"><i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+		<script>
+		    $(document).ready(function() {
+		        var int = setInterval(fixCount, 100);
+		        var busuanziSiteOffset_uv = parseInt(0);
+		        var busuanziSiteOffset_pv = parseInt(0);
+		        function fixCount() {
+	                clearInterval(int);
+	                $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset_pv);
+	                clearInterval(int);
+	                $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + busuanziSiteOffset_uv);
+		        }
+		    });
+		</script>
+	
+	
+
+</div>
+
+
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    if (!String.prototype.endsWith) {
+  String.prototype.endsWith = function(searchString, position) {
+      var subjectString = this.toString();
+      if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+        position = subjectString.length;
+      }
+      position -= searchString.length;
+      var lastIndex = subjectString.indexOf(searchString, position);
+      return lastIndex !== -1 && lastIndex === position;
+  };
+}
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"left","width":150,"height":300,"hOffset":0,"vOffset":-50},"mobile":{"show":true,"scale":0.8},"log":false});</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config("");
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="custom_mathjax_source">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end --></body>
+</html>
